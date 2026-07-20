@@ -14,7 +14,7 @@ GitHub Pages로 배포된 학습 대시보드에서 지금까지 배운 내용�
 .
 ├── index.html          # 학습 정리 대시보드 (GitHub Pages 메인 페이지)
 ├── 1.html/              # HTML 실습 파일
-├── 2.css/                # CSS 실습 파일
+├── 2-css/                # CSS 실습 파일
 │   └── css/              # 외부 스타일시트(.css)
 ├── 3.javascript/        # JavaScript 실습 파일
 │   └── js/               # 외부 스크립트(.js)
