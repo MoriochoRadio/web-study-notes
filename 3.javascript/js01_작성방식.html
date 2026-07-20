@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>1.js01_작성방식</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='js/test.js'></script>
+    <script>
+        function embedded() {
+            alert("내부 작성 방식");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>자바스크립트 구성</h1>
+    <dl>
+        <dt onclick="var txt='inline방식입니다.';alert(txt);">CORE</dt>
+        <dd>문법(변수,제어문,클로져등..)</dd>
+        <dd>내장객체(Math,String,Array,Object,Date,RegExp,JSON)</dd>
+        <dt onclick="embedded()">BOM</dt>
+        <dd>객체(Window,Document,History,Navigator,Screen,Location)</dd>
+        <dt onclick="linked()">DOM</dt>
+        <dd>객체(Node,Element,Event)</dd>
+    </dl>
+    <script>
+        console.log("콘솔에 메시지 출력", "값1", "값2", "값3");
+    </script>
+
+</body>
+
+</html>

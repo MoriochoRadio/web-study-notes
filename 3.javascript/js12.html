@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function testDate01() {
+            //오늘에 대한 객체가 생성
+            const date = new Date();//default 생성자
+            const spanDate = document.getElementById("today");
+            spanDate.textContent = date.toLocaleDateString();
+        }
+
+        function testDate02() {
+            const date = new Date();
+            let year = date.getFullYear(); //년도
+            let month = date.getMonth() + 1; //월(0~11월)
+            let day = date.getDate(); //일
+            let week = date.getDay(); //요일(0~6)
+
+            const dayOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+
+            console.log(`오늘날짜:${year}.${month}.${day}.${dayOfWeek[week]}`)
+        }
+
+        function testDate03() {
+            //날짜형식: yyyy-MM-dd hh:mm:ss 이런 포멧임
+            //const date = new Date("2026-07-18");
+            const date = new Date(2026, 7 - 1, 18); //월은 0부터 시작하니까 하나 빼줘야 7월임
+            document.getElementById("specific").textContent = date.toLocaleDateString();
+        }
+
+        function testDate04() {
+            const date = new Date();
+            const inputDate = document.getElementById("dates");
+            inputDate.value = date.toLocaleDateString();
+
+            //입력된 경과일 값을 구하기
+            let inputVal = document.getElementById("inputDate").value;
+            //현재 날짜 + 경과일(입력값:10)
+            //일수 계산: 현재 날짜에 일수값을 구해서 +10을 한뒤 date에 다시 저장
+            //16 + 10 => 26 만약에 36같은게 나오면 다음달로 자동 계산해서 해줌
+            date.setDate(date.getDate() + parseInt(inputVal));
+            //계산된 날짜를 화면에 출력
+            document.getElementById("resultDate").value = date.toLocaleDateString();
+
+        }
+
+        function testDate05() {
+            const nowDate = new Date(); //현재날짜 객체 생성
+            document.getElementById("dates2").value = nowDate.toLocaleDateString();
+
+            //입력한 수료일 날짜 구하기
+            let date = document.getElementById("d_day").value;
+            const afterDate = new Date(date);//종료날짜 객체 생성
+            //오늘날짜 객체 , 수료날짜 객체
+            //시간을 가지고 계산해야 함
+            //getTime() : 단위가 ms
+            //getTime메서드는 1970년 1월1일 기준부터 흘러간 시간을 밀리초 단위로 반환함
+            //console.log(nowDate.getTime());
+            let period = Math.ceil((afterDate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24)); //밀리초를 Day(일) 단위로 변환하려면 저렇게 계산해야함
+            document.getElementById("period").value = period;
+
+
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>오늘 날짜 출력하기</h1>
+    <span id="today"></span><br />
+    <button onclick="testDate01()">오늘날짜</button>
+    <button onclick="testDate02()">오늘날짜(표현방식설정)</button>
+
+    <h1>특정 날짜 출력하기</h1>
+    <span id="specific"></span>
+    <button onclick="testDate03()">특정날짜</button>
+
+    <h1>경과날짜구하기</h1>
+    <label>현재날짜:</label><input type="text" id="dates" readonly="readonly" /><br />
+    <label>경과일:</label><input type="number" id="inputDate" min="1" />일<br />
+    <label>경과후 날짜:</label><input type="text" id="resultDate" readonly="readonly" /><br />
+    <button onclick="testDate04()">경과날짜조회</button>
+
+    <h1>D-Day기능</h1>
+    <label>현재날짜:</label><input type="text" id="dates2" readonly="readonly" /><br />
+    <label>수료일:</label><input type="date" id="d_day" /><br />
+    <label>남은 일수:</label><input type="text" id="period" readonly="readonly" /><br />
+    <button onclick="testDate05()">확인</button>
+</body>
+
+</html>

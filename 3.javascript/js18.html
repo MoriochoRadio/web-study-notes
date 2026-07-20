@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        // ==========================================
+        // [Part 1] 쿠키(Cookie) 테스트 함수 구역
+        // ==========================================
+
+        // [1] 쿠키 추가 버튼을 누르면 작동하는 함수
+        function setCookieTest() {
+            // "user1"이라는 이름으로 "hk1"이라는 값을 '1일 동안' 저장하도록 설정합니다.
+            setCookie("user1", "hk1", 1);
+            alert("user1 쿠키가 성공적으로 추가되었습니다!\n(개발자 도구 Application -> Cookies 탭에서 직접 확인해 보세요!)");
+        }
+
+        // [2] 쿠키 삭제 버튼을 누르면 작동하는 함수
+        function removeCookieTest() {
+            // "user1" 쿠키를 보관함에서 삭제합니다.
+            removeCookie("user1");
+            alert("user1 쿠키가 성공적으로 삭제되었습니다!");
+        }
+
+        // [3] 쿠키값 가져오기 버튼을 누르면 작동하는 함수
+        function getCookieTest() {
+            // "user1" 쿠키가 있는지 확인하고 값을 읽어옵니다.
+            const value = getCookie("user1");
+            if (value) {
+                alert("가져온 쿠키 값: " + value);
+            } else {
+                alert("저장된 쿠키가 없거나 이미 만료되어 사라졌습니다.");
+            }
+        }
+
+        // ==========================================
+        // [Part 2] 핵심 쿠키 헬퍼 함수 구현 구역
+        // ==========================================
+
+        /**
+         * [쿠키를 생성(저장)하는 함수]
+         * @param {string} name - 저장할 쿠키의 이름(Key)
+         * @param {string} value - 저장할 데이터 내용(Value)
+         * @param {number} expires - 유지기간 (일 단위, 예: 1이면 하루 동안 유지)
+         * @param {string} domain - 쿠키가 전송될 도메인 제한 (선택)
+         * @param {string} path - 쿠키를 사용할 수 있는 웹사이트 내의 폴더 경로 (선택)
+         * @param {boolean} secure - HTTPS 보안 통신 환경에서만 쿠키를 전송할지 여부 (선택)
+         */
+        function setCookie(name, value, expires, domain, path, secure) {
+            // 쿠키는 브라우저 내부에서 "이름=값; 옵션=값; 옵션" 형태의 하나의 긴 문자열로 뭉쳐서 저장됩니다.
+            let cookies = "";
+
+            // 1. 이름과 값을 가장 먼저 조립합니다.
+            // 값에 한글이나 특수기호가 있을 때 글자가 깨지는 것을 막기 위해 encodeURIComponent()로 안전하게 변환하여 저장합니다.
+            cookies += name + "=" + window.encodeURIComponent(value);
+
+            // 2. 유효기간(expires)을 설정합니다.
+            if (expires) {
+                // [방법 A] 만료 날짜를 지정하는 'expires' 옵션 (현재 가장 널리 쓰임)
+                const date = new Date(); // 컴퓨터의 현재 날짜와 시간
+                date.setDate(date.getDate() + expires); // 현재 날짜에 설정해 준 일수만큼 더합니다.
+
+                // 브라우저가 알아들을 수 있는 표준 협정 세계시(UTC) 형식 문자열로 변환하여 덧붙입니다.
+                // 이미 앞에 이름=값이 있으므로 구분하기 위해 앞에 세미콜론(;)을 붙여 이어 나갑니다.
+                cookies += ";expires=" + date.toUTCString();
+            }
+
+            // 3. 추가 도메인 및 경로 지정이 있는 경우 덧붙입니다.
+            if (domain) cookies += ";domain=" + domain;
+            if (path) cookies += ";path=" + path;
+
+            // 4. 보안 강화를 위한 secure 속성
+            // secure가 true라면, 정보 유출을 방지하기 위해 오직 HTTPS(암호화된 주소) 통신일 때만 쿠키를 주고받게 지정합니다.
+            if (secure) cookies += ";secure";
+
+            // 5. 조립이 완료된 최종 문자열을 document.cookie에 대입하면 브라우저에 안전하게 저장됩니다.
+            document.cookie = cookies;
+        }
+
+        /**
+         * [저장된 쿠키에서 원하는 데이터 하나만 쏙 골라오는 함수]
+         * @param {string} name - 가져올 쿠키의 이름
+         * @returns {string|null} - 해당 쿠키의 값 (없으면 null 반환)
+         */
+        function getCookie(name) {
+            // document.cookie를 조회하면 설정 정보는 다 제외하고 "이름1=값1; 이름2=값2" 형태로만 보여줍니다.
+            // 각각의 쿠키 조각으로 나누기 위해 세미콜론(;)을 기준으로 잘라내어 배열로 변환합니다.
+            const cookieArray = document.cookie.split(";");
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                // 쿠키 사이에 껴있을 수 있는 좌우의 빈 공백을 trim()으로 깔끔하게 지웁니다. (예: " user1=hk1" ➡️ "user1=hk1")
+                const cookie = cookieArray[i].trim();
+
+                // 만약 현재 검사하는 조각이 "내가찾는이름=" 으로 시작한다면
+                if (cookie.startsWith(name + "=")) {
+                    // "이름=" 문자열의 길이 바로 뒤부터 끝까지 잘라내면 순수한 '값(Value)'만 나옵니다.
+                    const encodedValue = cookie.substring(name.length + 1);
+
+                    // 인코딩해서 저장했던 값을 다시 사람이 읽을 수 있는 한글/원래 문자로 되돌려준 뒤(디코딩) 반환합니다.
+                    return decodeURIComponent(encodedValue);
+                }
+            }
+            return null; // 해당하는 이름의 쿠키를 찾지 못했다면 null을 반환합니다.
+        } // 👈 닫는 중괄호가 빠져서 아래 함수들이 꼬였던 문제를 고쳤습니다!
+
+        /**
+         * [쿠키 삭제 함수]
+         * @param {string} name - 삭제할 쿠키 이름
+         */
+        function removeCookie(name) {
+            // 쿠키를 삭제하는 가장 간단하고 확실한 방법은 만료 기한을 과거 날짜(-1일)로 주어 생성하는 것입니다.
+            // 만료일이 이미 지났으므로 브라우저는 쿠키를 바로 삭제합니다.
+            setCookie(name, "", -1);
+        }
+
+        // [4] 웹 스토리지 사용 버튼을 누르면 작동하는 테스트 함수
+        function webStorageTest() {
+            // ----------------------------------------------------
+            // 1. 세션 스토리지 (Session Storage)
+            // - 수명: 지금 띄워져 있는 "브라우저 탭"을 닫으면 그 즉시 자동 소멸
+            // - 용량: 약 5MB로 쿠키에 비해 엄청나게 큼
+            // ----------------------------------------------------
+            alert("[세션 스토리지 테스트 시작]\n데이터를 저장한 후 확인해 봅니다.");
+            sessionStorage.setItem("id2", "hk2"); // 저장하기 (Key: id2, Value: hk2)
+            
+            const sessionVal = sessionStorage.getItem("id2"); // 읽어오기
+            alert("세션 스토리지에서 읽은 값: " + sessionVal); 
+            
+            // ----------------------------------------------------
+            // 2. 로컬 스토리지 (Local Storage)
+            // - 수명: 컴퓨터나 브라우저를 껐다 켜도 반영구적으로 저장소에 유지됨 (직접 삭제할 때까지)
+            // - 용량: 약 5MB로 세션스토리지와 동일하게 큼
+            // ----------------------------------------------------
+            alert("[로컬 스토리지 테스트 시작]\n데이터를 저장한 후 확인해 봅니다.");
+            localStorage.setItem("id3", "hk3"); // 저장하기 (Key: id3, Value: hk3)
+            
+            const localVal = localStorage.getItem("id3"); // 읽어오기
+            alert("로컬 스토리지에서 읽은 값: " + localVal + "\n(이 데이터는 창을 닫아도 계속 유지됩니다!)");
+
+            // [추가 설명 및 정리용 테스트 코드]
+            // 필요에 따라 아래 코드의 주석을 풀고 테스트해보세요.
+            // sessionStorage.removeItem("id2"); // id2라는 특정 데이터 하나만 삭제
+            // sessionStorage.clear();             // 세션 스토리지 안의 모든 데이터 초기화 삭제
+            // localStorage.removeItem("id3");   // id3이라는 특정 데이터 하나만 삭제
+            // localStorage.clear();               // 로컬 스토리지 안의 모든 데이터 초기화 삭제
+        }
+    </script>
+</head>
+
+<body>
+    <h1>쿠키사용하기</h1>
+    <button onclick="setCookieTest()">쿠키추가</button>
+    <button onclick="removeCookieTest()">쿠키삭제</button>
+    <button onclick="getCookieTest()">쿠키값 가져오기</button>
+    <button onclick="webStorageTest()">웹스토리지 사용하기</button>
+</body>
+
+</html>

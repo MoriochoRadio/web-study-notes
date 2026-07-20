@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        onload = function () {
+            //팝업창을 열어준 부모페이지: window.opener
+            let val = window.opener.document.getElementsByName("val01")[0].value;
+            document.getElementById("val").textContent = val;
+
+            //창닫기
+            document.getElementsByTagName("button")[1].onclick = function () {
+
+                window.self.close(); //self, top, parent 브라우저 창의 계층구조 위치
+
+            }
+
+
+            function childVal() {
+                var val = document.getElementByName("childVal")[0].value;
+                window.opener.document.getElementByName("val02")[0].value = val; //부모창의 val02
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <h1>난 팝업창이야</h1>
+    <span id="val"></span>
+    <input type="text" name="childVal" />
+    <button onclick="childVal()">전달</button>
+    <button>창닫기</button>
+</body>
+
+</html>

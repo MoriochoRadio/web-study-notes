@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        onload = function () {
+            const btnEle = document.querySelectorAll("button");
+
+            //부모요소 찾기
+            btnEle[0].onclick = () => {
+                const child02 = document.querySelectorAll("div > p")[1];
+
+                console.log(child02.tagName);
+                console.log(child02.nodeName);
+
+                const div = child02.parentNode;
+                console.log(div.tagName);
+
+                div.style.backgroundColor = "yellow";
+
+                const divEle = child02.parentElement;
+                console.log(divEle.nodeName);
+            }
+
+            //자식요소 찾기
+            btnEle[1].onclick = () => {
+                const div = document.querySelectorAll("div")[0];
+                //node를 대상으로 할 경우
+                const divCn = div.childNodes;//자식요소 구함
+                console.log(divCn.length); //텍스트노드까지 7개 (줄바꿈 공백까지 다 침)
+
+                //Element를 대상으로 할 경우
+                const divEle = div.children; //자식요소 구함 [p,p,p]
+                console.log(divEle.length);
+                divEle[1].style.backgroundColor = "blue";
+            }
+            //firstChild, lastChild
+            btnEle[2].onclick = () => {
+                const div = document.querySelectorAll("div")[0];
+                //const fci = div.firstChild; //node반환
+                //const lci = div.lastChild; //node반환
+
+                const fci = div.firstElementChild; //element반환
+                const lci = div.lastElementChild; //element 반환
+                console.log(fci.nodeName, lci.nodeName);
+            }
+
+            btnEle[3].onclick = () => {
+                const child02 = document.querySelectorAll("div > p")[1];
+                const preP = child02.previousElementSibling;
+                const nextP = child02.nextElementSibling;
+                console.log(preP.textContent, nextP.textContent)
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <p>child01</p>
+        <p>child02</p>
+        <p>child03</p>
+    </div>
+    <button>부모탐색</button>
+    <button>자식탐색</button>
+    <button>자식탐색2</button>
+    <button>형제탐색</button>
+</body>
+
+</html>

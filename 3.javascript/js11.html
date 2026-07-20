@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        //for문(일반for문)
+        // - 큰 규모의 배열을 실행할때 성능이 좋을 수 있다. (forEach문보다 상대적으로)
+        const array = [1, 2, 3, 4, 5];
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+
+        }
+
+        //향상된 for문: index(x)
+        for (const key in object) {
+            console.log(item);
+        }
+
+        //forEach문: ES5 2009년 코드 간소화, 변수를 잘못 선언해서 실수할 확률도 줄일 수 있다.
+        // for문을 사용할 이유가 없다면 foreach문을 권장한다.
+        array.forEach(function (item, index, arr) {
+            console.log(`${index} : ${item}`);
+        });
+
+        //map(): 해당 배열을 순회하면서 새로운 값을 정의한 배열로 반환
+        //반환된 값들을 바탕으로 새로운 배열을 만드는 메서드
+        const arrayMap = array.map((item) => {
+            let newVal = item + 1;
+            return newVal; //map은 반환값이 꼭 있어야 한다.
+        });
+        //filter(): 조건에 맞는 값들로 배열을 생성
+        //조건에 맞는 요소만 추출
+        const arrayFilter = array.filter((item) => {
+            return item % 2 === 0;//2의 배수들만 골라서 새로운 배열로 생성
+        });
+        console.log(arrayFilter.toString());
+
+        //reduce()
+        //배열 요소들을 1개의 값으로 축약
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

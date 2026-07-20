@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        //선언적함수사용
+        function func01() {
+            console.log("선언적 함수");
+            let val = func01_2(5, 10);
+            console.log("결과값:", val);
+        }
+        function func01_2(a, b) { //파라미터 선언
+            console.log(a, ":", b)
+            return a + b; //a+b의 결과값을 반환한다
+        }
+
+        //익명함수
+        let i = 0; //전역변수
+        const func02 = function () {
+            console.log("익명함수");
+            //setInterval(func,ms)
+            // setInterval(function () {
+            //     console.log(i++)
+            // }, 1000);
+
+            //화살표함수
+            setInterval(() => {
+                console.log(i++);
+            }, 1000);
+
+            // setInterval("test()", 1000); //함수를 문자열로 표현
+            // setInterval(test, 1000); //함수의 이름만 작성
+
+        }
+
+        function test() {
+            console.log(i++);
+        }
+
+        //객체 생성하기
+        //객체 리터럴 방식
+        onload = function () {
+            // [p,p,p,p] 배열로 저장됨
+            var pArray = document.getElementsByClassName("a");
+
+            pArray[0].onClick = () => {
+                console.log("객체리터럴방식")
+
+                const jsonObj = {
+                    subject: "javascript",
+                    credit: 1,
+                    // printout: function () {
+                    //     return jsonObj.subject + "," + jsonObj.credit + "학점"
+                    // }
+                    printout: () => jsonObj.subject + "," + jsonObj.credit + "학점"
+                }
+
+                //객체에 정의된 메서드 사용
+                console.log("메서드 실행", jsonObj.printout())
+
+                //객체의 값 변경하는 경우
+                jsonObj.subject = "JS" //update개념
+                jsonObj["test"] = "value"; //insert개념
+                delete jsonObj["credit"]; //delete개념
+
+                console.log(jsonObj["subject"], jsonObj.credit, jsonObj.test)
+                //클라이언트와 서버 간에 전송시 '{"a":"b","c":"d"...}' -> js객체 변환
+
+                //ES6에서 추가된 새로운 기능
+                //1.화살표함수: 기존 예제 참고
+                //2.구조분해할당
+                //-직접 구조 분해하고 할당하는 코드
+                let subjectLit = jsonObj.subject;
+                let testLit = jsonObj.test;
+
+                //-구조분해할당을 사용하는 방법
+                let { subject, test } = jsonObj;
+                console.log(`${subject}와${test}를 출력합니다.`);
+
+                // - spread 방식 -> 배열에서 확인
+
+
+            }//onclick 객체리터럴 방식 종료
+
+            //2.객체 생성자 함수 방식
+            pArray[1].onclick = () => {
+                const info = new Info();
+                console.log("생성자함수방식:", info.printout(), info.getTest());
+            }
+
+            //info객체 정의
+            //생성자 함수는 화살표함수로 정의 불가능
+            //const Info = () =>{ }
+            // function() 익명함수 등과 구현하는 방식이 다르다.
+            // --> 프로토타입이 없다
+            function Info(subject) {
+                this.subject = subject; //초기화
+                this.credit = 2;
+                this.printout = () => {
+                    return this.subject + "," + this.credit + "학점";
+                }
+                let test = "일반 변수 선언"; //this가 붙으면 전역인데, 이건 외부에서 접근X(은닉화) -> printout()에도 접근X
+                this.getTest = () => test;//내부에서 접근 가능
+            }
+
+            //3.프로토타입 사용하기
+            pArray[2].onclick = function () {
+                const infoA = new Info("database");
+
+                Info.prototype.addFunc = function () {
+                    console.log(`기능추가:${this.subject}`);//this는 Info.prototype
+                }
+
+                const infoB = new Ifo("JAVA");
+
+                infoA.addFunc();
+                infoB.addFunc();
+
+                //이후에 모든 객체들에게 공통적으로 사용할 기능을 추가하고 싶다면
+                //프로토타입으로 정의하면 된다.
+                //같은 메서드를 공유하고 있다.
+                console.log(infoA.addFunc === infoB.addFunc)
+            }
+
+            //4.클로저:상태유지 기법
+            //기존 방식으로 상태유지 구현
+            let count = 0;
+
+            function closureTest1() {
+                count++;
+                console.log(count);
+            }
+
+            pArray[3].onclick = function () {
+                //closureTest1();
+                //closureTest2()(); //계속 실행 끝날때마다 count변수 초기화되어버림
+                //closureTest2_1(); //함수 자체를 반환받아서 변수에 담아서 사용 그래서 count가 유지됨
+            }
+
+            let closureTest2_1 = closureTest2();//함수 자체를 반환받아서 변수에 담아서 사용
+
+            //클로저 함수 만들기
+            function closureTest2() {
+                let count = 0;
+                return function () { //익명함수를 리턴함.이 익명함수가 클로저임
+                    count++;
+                    console.log(count);
+                }
+            }
+
+            //완성형 클로저 함수
+            let closureTest3 = function () {
+                let count = 0;
+                return function () { //익명함수를 리턴함.
+                    count++;
+                    console.log(count);
+                }
+            }(); //함수를 정의하자마자 그 자리에서 즉시 실행시켜서 결과값을 변수에 담는 방식
+            //부모함수를 즉시 실행하기 위함. 바로 자식함수가 반환되면서 closureTest3에 할당
+        }//onload종료
+    </script>
+</head>
+
+<body>
+    <h1>선언적함수</h1>
+    <p>이름이 정의되어 있는 기본적인 함수
+        <button onclick="func01()">확인</button>
+    </p>
+
+    <h1>익명함수</h1>
+    <p>이름이 없는 함수
+        <button onclick="func02()">확인</button>
+    </p>
+    <hr />
+    <h1>자바스크립트 객체 만들기</h1>
+    <p class="a"> 1.객체 리터럴 방식</p>
+    <p class="a"> 2.생성자 함수 방식</p>
+    <p class="a"> 3.프로토타입 사용하기</p>
+    <p class="a"> 4.클로져 사용하기</p>
+</body>
+
+</html>

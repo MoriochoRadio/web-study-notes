@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js17_DOM_create_table.html</title>
+    <script type="text/javascript">
+        function tableVal() {
+            // [1] name 속성을 가진 모든 input 요소들을 다 가져옵니다.
+            // (form 이름이 'formTest'인 폼 내부에 있고, name 속성을 가지고 있는 input 요소들: 아이디, 비밀번호, 주소, 전화번호 입력창)
+            const inputs = document
+                .querySelectorAll("form[name=formTest] input[name]");
+
+            // inputs[0]은 첫 번째 입력창인 '아이디' 입력창입니다. 콘솔창에서 값이 제대로 들어왔는지 테스트해봅니다.
+            console.log(inputs[0].value);
+
+            // [2] 유효성 검사(값이 비어있는지 체크)를 위한 변수들을 선언합니다.
+            let count = 0; // 누락된(입력하지 않은) 입력창의 개수를 세기 위한 변수
+            let msg = "";  // 입력하지 않은 항목 이름들을 모아둘 문자열 변수
+
+            // inputs에 담긴 4개의 입력창을 하나씩 꺼내서(input) 순회하며 검사합니다.
+            inputs.forEach((input) => {
+                // 입력된 값이 null이거나, 빈 칸("")이거나, 정의되지 않은 상태(undefined)라면
+                if (input.value == null || input.value == "" || input.value == undefined) {
+                    count++; // 누락 개수를 1 증가시킵니다.
+                    
+                    // DOM 구조를 거슬러 올라가 누락된 입력창의 이름(제목)을 가져옵니다.
+                    // - input.parentNode: input을 감싸고 있는 부모인 <td> 태그를 가리킴
+                    // - previousElementSibling: <td> 바로 옆에 위치한(이전 형제) <th> 태그를 가리킴
+                    // - textContent: <th> 내부의 텍스트(예: "아이디", "비밀번호" 등)를 가져옴
+                    msg += input.parentNode.previousElementSibling.textContent + " ";
+                }
+            });
+
+            console.log(msg);
+
+            // [3] 현재 회원정보목록(테이블의 tbody 영역)에 등록된 행(줄)의 개수를 구합니다.
+            // - querySelector("#addtr"): id가 "addtr"인 <tbody> 요소를 가져옴
+            // - childElementCount: 그 <tbody> 안에 있는 자식 요소(여기서는 <tr> 태그)들의 개수를 반환함
+            const tbodyTrCount = document.querySelector("#addtr").childElementCount;
+
+            // [4] 누락된 입력창이 1개라도 있다면(count가 0보다 크다면) 경고를 띄웁니다.
+            if (count > 0) {
+                alert(`모두 입력하세요!!(${msg})`);
+            } else {
+                // [5] 누락된 입력 없이 모두 입력했다면, 테이블의 줄 개수를 검사합니다.
+                // 목록이 10개 미만인 경우에만 새로운 행을 추가하도록 제한합니다.
+                if (tbodyTrCount < 10) {
+                    
+                    // a) 테이블에 추가할 새로운 행인 <tr> 요소를 생성합니다. (메모리상에만 생성됨)
+                    const tr = document.createElement("tr"); 
+                    
+                    // b) 입력창의 개수(4개)만큼 반복문을 돌며 각 값을 <td> 셀로 만들어 행에 넣습니다.
+                    for (let i = 0; i < inputs.length; i++) {
+                        const td = document.createElement("td"); // 새로운 <td> 셀을 생성
+                        td.textContent = inputs[i].value;       // <td> 내부에 사용자가 입력한 값을 채워 넣음
+                        tr.appendChild(td);                      // 방금 만든 <td> 셀을 <tr> 행의 자식으로 추가
+                    }
+
+                    // c) 완성된 행(<tr>)을 실제 화면에 보여줄 <tbody>(id가 addtr)에 최종적으로 추가합니다.
+                    document.querySelector("#addtr").appendChild(tr);
+                } else {
+                    // d) 만약 등록된 데이터가 10개 이상이라면 경고창을 띄우고 추가하지 않습니다.
+                    alert("10개까지만 입력 가능합니다.");
+                }
+            }
+
+            // (참고용 주석) 기존 요소를 탐색해서 원하는 요소 내부로 append하면 위치 이동이 된다는 실습 코드 흔적입니다.
+            // 		const caption= 
+            // 		document.querySelectorAll("form[name=formTest] caption")[0];
+            // 		document.body.appendChild(caption);
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formTest">
+        <table border="1">
+            <caption>회원정보입력</caption>
+            <col width="100px">
+            <col width="300px">
+            <tr>
+                <th>아이디</th>
+                <td><input type="text" name="id" /></td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td><input type="password" name="pw" /></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" name="addr" /></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="tel" name="phone" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="추가" onclick="tableVal()" /></td>
+            </tr>
+        </table>
+    </form>
+    <hr />
+    <div id="addTable">
+        <table border="1" id="ctb">
+            <caption>회원정보목록</caption>
+            <col width="100px">
+            <col width="100px">
+            <col width="300px">
+            <col width="200px">
+            <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="addtr"></tbody>
+        </table>
+    </div>
+</body>
+
+</html>

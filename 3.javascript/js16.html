@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function eleCreate() {
+            // 사용할 텍스트 데이터 변수 선언
+            const val = "엘리먼트노드";
+
+            // ==========================================
+            // [방법 1] 정석 조립 방식 (현재 실행됨)
+            // ==========================================
+            // 1. div 태그 생성
+            const div = document.createElement("div"); // <div></div>
+            // 2. style 속성 생성
+            const styleAttr = document.createAttribute("style"); // style=""
+            // 3. text 노드 생성
+            const txt = document.createTextNode(val);
+
+            // 4. 속성에 값 대입 (style="color:red;")
+            styleAttr.nodeValue = "color:red";
+
+            // 5. div 태그에 속성 조립 (<div style="color:red"></div>)
+            div.setAttributeNode(styleAttr);
+            // 6. div 태그에 텍스트 조립 (<div style="color:red">엘리먼트노드</div>)
+            div.appendChild(txt);
+
+            // 7. 완성된 div객체를 main요소(화면)에 추가
+            document.querySelectorAll("#main")[0].appendChild(div);
+
+
+            // ==========================================
+            // [방법 2] innerHTML 백틱 방식 (비교해 보려면 아래 주석을 풀고 방법 1을 주석 처리하세요)
+            // ==========================================
+            /*
+            document.querySelectorAll("#main")[0].innerHTML = `<div>
+                <p style="color:blue;">${val}</p>
+                <p>${val}</p>
+                <p>${val}</p>
+                <p>${val}</p>
+            </div>`;
+            */
+        }
+    </script>
+</head>
+
+<body>
+    <h1>요소 생성하기</h1>
+    <button onclick="eleCreate()">엘리먼트 생성하기</button>
+    <div id="main"></div>
+</body>
+
+</html>

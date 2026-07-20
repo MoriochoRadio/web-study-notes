@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script src='main.js'></script>
+
+    <script>
+        var variable = 10; //전역변수
+
+        function test01() {
+            variable = variable + 5;
+            console.log(variable);
+        }
+
+        function test02() {
+            //지역변수 선언
+            //var 선언: 호이스팅현상 -> undefined
+            console.log(variable);
+            var variable = 10;
+
+        }
+
+        //할당하기(타입)
+        var t1 = 6; //숫자타입
+        console.log(typeof t1);
+        t1 = "문자" //문자열 타입
+        console.log(typeof t1);
+
+        t1 = {
+            key1: 5,
+            key2: "값",
+            key3: function () {
+                console.log("함수객체")
+            }
+        }
+        console.log(typeof t1, t1.key2);
+        // 타입에 명확성 문제...->typescript등장 let va:String = "값"
+
+
+        //재선언의 문제점
+        var a = 5;
+        var a = 10;
+        console.log(a);
+
+        //let은 재선언 문제점 개선
+    </script>
+</head>
+
+<body>
+    <h1>변수의 선언규칙</h1>
+    <p>1.대소문자 구별</p>
+    <p>2.영문자,_,$로 시작할 수 있다.</p>
+    <p>3.영문자,_,$,숫자를 포함할 수 있다.</p>
+    <p>4.예약어는 사용할 수 없다.</p>
+    <h1>변수의 적용범위(Scope)</h1>
+    <p onclick="test01()">1.전역변수</p>
+    <p onclick="test02()">2.지역변수</p>
+    <h1>변수의 선언과 할당</h1>
+    <p>1. var 예약어를 사용해서 선언(전통적인 방식)</p>
+    <p>ECMA Script(ES5에서 사용, ES6에서는 let, const추가)</p>
+    <p>2.값을 할당할때 타입: 변수에 할당하는 값에 따라 타입이 결정</p>
+
+</body>
+
+</html>

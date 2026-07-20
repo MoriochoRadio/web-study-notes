@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script>
+        function searchId() {
+            //id속성이름으로 탐색한 후 배경색을 지정
+            const p = document.getElementById("idTest")
+            console.log(typeof p);
+
+            p.style.backgroundColor = "red";
+            p.style.color = "white";
+            p.textContent = "id로 탐색 가능";
+            p.innerHTML = "<b> 태그 내부 html요소 접근</b>";
+        }
+
+        function searchName() {
+            const inputs = document.getElementsByName("test02");
+            console.log(inputs.length);
+            //[input, input, input]
+            inputs[0].value = "첫번째 요소";
+            inputs[1].value = "두번째 요소";
+            inputs[2].value = "세번째 요소";
+
+            for (let index = 0; index < inputs.length; index++) {
+                inputs[index].style.backgroundColor = "yellow";
+            }
+        }
+
+        function searchTagName() {
+            const spans = document.getElementsByTagName("span");
+            for (let index = 0; index < spans.length; index++) {
+                spans[index].style.backgroundColor = "yellow";
+                spans[index].style.display = "block";
+                spans[index].style.margin = "10px";
+            }
+        }
+
+        function searchQuery() {
+            const spans = document.querySelectorAll("p:last-child > span");
+            spans[0].style.color = "blue";
+
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div>
+
+        <h1>DOM탐색 메서드의 종류</h1>
+        <p>
+            1.getElementById("idName"):태그의 id속성 이름으로 탐색해서 객체로 반환
+            - 반환값은 엘리먼트객체 1개 <button onclick="searchId()">확인</button>
+        </p>
+        <p id="idTest">idTest</p>
+        <p>
+            2.getElementsByName("name속성이름"): form요소에 사용되는 name속성으로 탐색
+            - 반환값은 엘리먼트 여러개(배열형태) <button onclick="searchName()">확인</button>
+            <br />
+            <input type="text" name="test02" />
+            <input type="text" name="test02" />
+            <input type="text" name="test02" />
+        </p>
+        <p>
+            3.getElementsByTagName("tag이름"): 태그 이름으로 탐색
+            - 반환값은 엘리먼트 여러개(배열)<button onclick="searchTagName()">확인</button>
+            <br />
+            <span>tag</span><span>이름</span><span>탐색</span>
+        </p>
+        <p>4.getElementsByClassName("className")</p>
+        <p>
+            5.querySelectorAll("selector표현식"): ~ALL 여러개 반환(배열)
+            <br />
+            querySelector("selector표현식"): 한개 반환
+            <button onclick="searchQuery()">확인</button>
+            <br />
+            <span>selector</span>
+            <span>쿼리</span>
+            <span>탐색</span>
+        </p>
+    </div>
+</body>
+
+</html>

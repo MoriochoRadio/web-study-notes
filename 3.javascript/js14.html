@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <h1>Location객체</h1>
+    <script type="text/javascript">
+        // location.hash: URL의 해시 부분(# 뒤의 식별자)을 가져옵니다. (예: #id=hk)
+        // -> 해시(#): 페이지 내 특정 요소(아이디) 위치로 바로 스크롤 이동하거나, 페이지 새로고침 없이 자바스크립트에서 데이터를 전달할 때 주로 사용합니다.
+        document.write("hash:" + location.hash + "<br/>");
+        
+        // location.search: URL의 쿼리 스트링(? 뒤의 파라미터)을 가져옵니다. (예: ?id=hk)
+        // -> 쿼리 스트링(?): 사용자가 웹 서버에 특정 데이터나 파라미터를 요청할 때 전달하는 경로 뒤의 옵션 문자열입니다. (형식: ?key=value&key2=value2)
+        document.write("search:" + location.search + "<br/>");
+
+        // location.host: 호스트 이름(도메인)과 포트 번호를 함께 가져옵니다. (예: localhost:5500)
+        document.write("host:" + location.host + "<br/>");
+
+        // location.port: URL의 포트 번호를 가져옵니다. (예: 5500)
+        document.write("port:" + location.port + "<br/>");
+
+        // location.pathname: 전체 도메인 뒤의 파일 경로를 가져옵니다. (예: /3.javascript/js14.html)
+        document.write("pathname:" + location.pathname + "<br/>");
+
+        // location.protocol: 웹 프로토콜 규약을 가져옵니다. (예: http:, https:, file:)
+        document.write("protocol:" + location.protocol + "<br/>");
+
+        // location.href: 현재 문서의 전체 URL 주소를 가져오거나 새 주소로 설정합니다.
+        document.write("href:" + location.href + "<br/>");
+    </script>
+
+    <!-- 다른 페이지로 이동하면서 URL 끝에 # 뒤의 데이터(해시 값)를 같이 보냅니다. -->
+    <a href="js14_location.html#id=hk&addr=seoul">요청</a>
+
+    <!-- 클릭 시 name이 'subframe'인 iframe 영역만 지정된 HTML 페이지로 이동시킵니다. -->
+    <button onclick="subframe.location.href='js12_Date객체.html'">이동</button>
+
+    <!-- pre 태그: 줄바꿈과 띄어쓰기를 코드에 적힌 그대로 화면에 표현해 줍니다. -->
+    <pre>
+	location.assign(url); // 지정한 URL로 이동 (뒤로 가기 방문 기록이 남음)
+	location.reload();    // 현재 페이지 새로고침 (F5 기능)
+	location.replace(url); // 지정한 URL로 이동 (현재 방문 기록을 대체하여 뒤로 가기 버튼 비활성화)
+    </pre>
+
+    <!-- 내부에 다른 웹페이지(js13_pop.html)를 삽입하는 액자(프레임) 태그 -->
+    <iframe name="subframe" src="js13_pop.html" height="500px"></iframe>
+</body>
+
+</html>

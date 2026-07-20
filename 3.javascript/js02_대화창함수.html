@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='js/test.js'></script>
+    <script>
+        //확인버튼 제공
+        function alertTest() {
+            alert("단순히 메시지만 출력하는 창");
+        }
+        //확인,취소버튼 제공: 반환값 boolean
+        function confirmTest() {
+            if (confirm("확인버튼을 누르면 true 반환")) {
+                console.log("삭제를 진행합니다");
+            } else {
+                console.log("삭제를 취소합니다");
+            }
+        }
+        //확인,취소버튼 제공 + 내용을 입력받을 수 있는 입력창 제공
+        function promptTest() {
+            var txt = prompt("과목을 선택하세요(1:java,2:DB,3:JS)", "해당번호입력!");
+            console.log("입력한 값:" + txt, typeof txt);
+
+            switch (txt) {
+                case "1": console.log("자바를 선택했습니다."); break;
+                case "2": console.log("데이터베이스를 선택했습니다."); break;
+                case "3": console.log("자바스크립트를 선택했습니다."); break;
+                case null: console.log("취소했습니다"); break;
+                default: console.log("다시 입력"); break;
+            }
+
+            document.getElementById("inputVal").textContent = txt;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+<h1>대화창 함수 사용하기</h1>
+<small>*종류는 <strong>alert(),confirm(),prompt()</strong>가 있다</small>
+
+<p>alert():<button onclick="alertTest();">클릭!</button></p>
+<p>confirm():<button onclick="confirmTest();">클릭!</button></p>
+<p>prompt():<button onclick="promptTest();">클릭!</button>
+    <span id="inputVal"></span>
+</p>
+
+</html>
