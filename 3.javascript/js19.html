@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        /**
+         * [AJAX 학습 포인트]
+         * 1. AJAX(비동기 통신)란? 페이지 새로고침 없이 서버(또는 파일)로부터 데이터를 몰래 가져오는 기술입니다.
+         * 2. XMLHttpRequest: 브라우저가 제공하는 내장 통신 객체입니다.
+         * 3. GET 방식의 데이터 전달: 주소창에 ?key=value 형태로 데이터를 붙여서 목적지(data.json)로 전송합니다.
+         * 4. JSON 파싱: 서버로부터 받아온 데이터는 단순한 '글자(문자열)'이므로, 자바스크립트가 다룰 수 있는 객체/배열로 변환해야 합니다.
+         */
+        function ajaxGet() {
+            // [1] 통신을 담당할 우체부(XMLHttpRequest 객체)를 생성합니다.
+            const xhr = new XMLHttpRequest();
+
+            // [2] 서버로 보낼 파라미터(데이터)를 정의합니다. (Key=Value 형태)
+            // 실제 서버 프로그램이 있다면 이 값을 받아서 알맞은 데이터를 필터링해 줍니다.
+            let params = "num=1&id=hk";
+
+            // [3] 요청을 보낼 준비(설정)를 합니다.
+            // - 첫 번째 인자: 전송 방식 ("GET")
+            // - 두 번째 인자: 요청할 주소 (주소?파라미터 형태인 `js/data.json?num=1&id=hk`로 조립됨)
+            // - 세 번째 인자: 비동기(Async) 통신 여부 (true = 비동기 방식으로 진행)
+            xhr.open("GET", `js/data.json?${params}`, true);
+
+            // [4] 통신 상태가 바뀔 때마다 실행될 감시자(이벤트 리스너)를 등록합니다.
+            // (통신 시작 -> 응답 헤더 받음 -> 다운로드 중 -> 완료 등 단계마다 계속 호출됨)
+            xhr.onreadystatechange = function () {
+                // - xhr.readyState === 4: 데이터를 전부 다 다운로드 받았는지 확인 (4 = 완료)
+                // - xhr.status === 200: 서버 접속 및 요청 결과가 성공인지 확인 (200 = 성공)
+                if (xhr.readyState === 4 && xhr.status == 200) {
+
+                    // [5] 서버가 보낸 순수 문자열 데이터를 자바스크립트 객체/배열로 변환합니다.
+                    // data.json 파일 내용이 대괄호 `[ ... ]`로 묶인 배열 형태이므로, 변수 data는 배열이 됩니다.
+                    let data = JSON.parse(xhr.responseText);
+
+                    // [6] 받아온 데이터를 콘솔에 출력해봅니다. 
+                    // data는 배열이므로 첫 번째 항목에 접근하기 위해 인덱스 [0]을 사용합니다.
+                    console.log(data[0].id, data[0].name);
+
+                    // [7] 화면(HTML)의 특정 영역(#result)에 받아온 회원 정보를 출력합니다.
+                    document.querySelector("#result").innerHTML =
+                        `<p>아이디: ${data[0].id}</p>
+                         <p>이름: ${data[0].name}</p>
+                         <p>주소: ${data[0].addr}</p>`;
+                }
+            }
+
+            // [8] 준비 완료된 요청을 실제로 서버에 전송합니다.
+            xhr.send();
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="ajaxGet()">Get방식</button>
+    <div id="result"></div>
+</body>
+
+</html>
