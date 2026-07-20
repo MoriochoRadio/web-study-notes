@@ -145,7 +145,7 @@
       <span id="updated-badge">마지막 업데이트: 2026-07-20</span>
       <span>HTML 7개 실습</span>
       <span>CSS 13개 실습</span>
-      <span>JavaScript 18개 실습</span>
+      <span>JavaScript 19개 실습</span>
       <span>강의자료 PPT 2건</span>
     </div>
   </div>
@@ -168,7 +168,7 @@
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 실습 파일</div></div>
       <div class="stat-card css"><div class="n">13</div><div class="l">CSS 실습 파일</div></div>
-      <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 실습 파일</div></div>
+      <div class="stat-card js"><div class="n">19</div><div class="l">JavaScript 실습 파일</div></div>
       <div class="stat-card next"><div class="n">5+</div><div class="l">다음 학습 예정 주제</div></div>
     </div>
   </section>
@@ -295,10 +295,12 @@ const jsModules = [
     points:["JS로 table/tr/td를 동적으로 생성"] },
   { title:"Cookie 사용하기", files:[["3.javascript/js18.html","js18"]],
     points:["setCookie/getCookie/removeCookie 직접 구현","Web Storage(session/local)와 Cookie 비교"] },
+  { title:"AJAX(XMLHttpRequest) 통신", files:[["3.javascript/js19.html","js19"],["3.javascript/js/data.json","data.json"]],
+    points:["XMLHttpRequest 객체로 페이지 새로고침 없이 데이터 요청","GET 방식 파라미터 조립(?key=value)과 비동기(async=true) 옵션","onreadystatechange로 통신 상태(readyState/status) 감시","JSON.parse로 응답 문자열을 객체/배열로 변환 후 화면에 출력"] },
 ];
 
 const nextTopics = [
-  { badge:"JS", title:"Ajax & Promise & fetch", desc:"XMLHttpRequest → Promise → fetch API 순서로 비동기 통신 학습, 콜백 지옥 해결과 async/await" },
+  { badge:"JS", title:"Promise & fetch API", desc:"XMLHttpRequest 다음 단계로 Promise 기반 fetch API 학습, 콜백 지옥 해결과 async/await" },
   { badge:"JS", title:"jQuery", desc:"Selector 표현식, 크로스브라우징, script 코드 단순화" },
   { badge:"WEB", title:"React 기초", desc:"컴포넌트, JSX, useState를 활용한 상태 관리" },
   { badge:"CSS", title:"CSS3 심화 효과", desc:"2D Transform(translate/rotate/scale/skew), Transition, Animation(@keyframes), Multi-column" },
