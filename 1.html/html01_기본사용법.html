@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 기초 학습 가이드 & 실시간 Playground</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* CSS Variables for Premium Dark Theme */
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151b2c;
+      --bg-editor: #0e1320;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --secondary: #06b6d4;
+      --accent: #d946ef;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.4);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-title: 'Outfit', var(--font-sans);
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Header Styling */
+    header {
+      background: linear-gradient(135deg, rgba(21, 27, 44, 0.8), rgba(11, 15, 25, 0.8));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    }
+
+    .logo-title {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-info {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .status-badge {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      color: var(--secondary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--secondary);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.9);
+        opacity: 0.6;
+      }
+    }
+
+    /* Main Container Split Layout */
+    .main-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex-grow: 1;
+      height: calc(100vh - 65px);
+    }
+
+    @media (max-width: 1024px) {
+      .main-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow-y: auto;
+      }
+    }
+
+    /* Left Sidebar: Guide and Tutorials */
+    .guide-sidebar {
+      padding: 2rem;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background-color: rgba(15, 23, 42, 0.4);
+    }
+
+    .guide-intro {
+      margin-bottom: 2.5rem;
+    }
+
+    .guide-intro h1 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .guide-intro p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Chapter Cards */
+    .chapter-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .chapter-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .chapter-title {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .chapter-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* Interactive Explanation Highlights */
+    .highlight-box {
+      background: rgba(99, 102, 241, 0.05);
+      border-left: 3px solid var(--primary);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .tag-badge {
+      font-family: var(--font-mono);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* Example Code Display Inside Cards */
+    .example-code-container {
+      background-color: var(--bg-editor);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .example-code-header {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .example-code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    /* Action Buttons in Cards */
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      color: white;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 15px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Right Panel: Interactive Playground */
+    .playground {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      background-color: var(--bg-editor);
+      height: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .playground {
+        height: 600px;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    /* Editor Section */
+    .editor-section {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .panel-header {
+      background-color: rgba(15, 23, 42, 0.6);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .editor-wrapper {
+      display: flex;
+      flex-grow: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Line Numbers styling */
+    .line-numbers {
+      width: 45px;
+      padding: 1rem 0;
+      text-align: right;
+      padding-right: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(11, 15, 25, 0.4);
+      user-select: none;
+      line-height: 1.5;
+      border-right: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .code-textarea {
+      flex-grow: 1;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 1rem;
+      resize: none;
+      line-height: 1.5;
+      tab-size: 2;
+      overflow-y: auto;
+    }
+
+    /* Preview Section */
+    .preview-section {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      color: #1e293b;
+      position: relative;
+    }
+
+    .preview-header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .preview-frame {
+      flex-grow: 1;
+      width: 100%;
+      border: none;
+      background-color: #ffffff;
+    }
+
+    /* Tooltip / Toast alerts for action confirmations */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--primary);
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      transform: translateY(150%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-badge">HTML</div>
+      <div class="logo-title">기초 학습 플레이그라운드</div>
+    </div>
+    <div class="header-info">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>실시간 연동 중</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Split Screen Area -->
+  <main class="main-container">
+
+    <!-- Left Sidebar: Instruction Panels -->
+    <section class="guide-sidebar">
+
+      <div class="guide-intro">
+        <h1>HTML 기초 정복하기 📚</h1>
+        <p>
+          HTML(HyperText Markup Language)은 웹페이지의 뼈대를 만드는 가장 기본적이고 핵심적인 언어입니다.
+          아래의 테마별 핵심 설명을 읽고, 예제를 보며 우측 실시간 에디터에서 직접 실험해 보세요!
+        </p>
+      </div>
+
+      <!-- Chapter 1 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 01</span>
+        <h2 class="chapter-title">HTML 문서의 기본 구조</h2>
+        <p class="chapter-desc">
+          모든 HTML 문서는 구조를 선언하는 기본적인 형식에서 시작합니다.
+          <span class="tag-badge">&lt;!DOCTYPE html&gt;</span>은 현대적인 HTML5 문서를 선언하는 구문입니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>html 태그</strong>: 문서 전체의 시작과 끝을 감쌉니다.<br>
+          • <strong>head 태그</strong>: 메타정보(인코딩, 제목, CSS 링크 등)를 포함합니다.<br>
+          • <strong>body 태그</strong>: 실제 웹 브라우저에 표시되는 주 콘텐츠를 담습니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch1">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;나의 첫 HTML 문서&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;환영합니다!&lt;/h1&gt;
+  &lt;p&gt;기본 구조 학습 중입니다.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch1')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch1')">📋 복사</button>
+        </div>
+      </article>
+
+      <!-- Chapter 2 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 02</span>
+        <h2 class="chapter-title">제목(Heading)과 문단(Paragraph)</h2>
+        <p class="chapter-desc">
+          웹페이지의 텍스트 레이아웃을 작성할 때 제목과 일반 문단은 가장 기본이 되는 요소입니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>h1 ~ h6</strong>: 대제목부터 소제목까지 단계별로 나타냅니다. (숫자가 작을수록 굵고 큽니다)<br>
+          • <strong>p 태그</strong>: 본문을 구성하는 한 단락을 정의하며, 위아래로 약간의 여백이 자동으로 생깁니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch2">&lt;h1&gt;가장 큰 제목 (H1)&lt;/h1&gt;
+&lt;h2&gt;두 번째 제목 (H2)&lt;/h2&gt;
+&lt;h3&gt;세 번째 제목 (H3)&lt;/h3&gt;
+&lt;p&gt;이것은 일반 글씨가 들어가는 문단(Paragraph)입니다.&lt;/p&gt;
+&lt;p&gt;다른 문단을 작성하면 자연스럽게 줄바꿈이 일어납니다.&lt;/p&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch2')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch2')">📋 복사</button>
+        </div>
+      </article>
+
+      <!-- Chapter 3 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 03</span>
+        <h2 class="chapter-title">텍스트 강조 및 스타일링 태그</h2>
+        <p class="chapter-desc">
+          문장 내부의 특정 단어나 구간을 강조하고 서식을 지정하기 위해 사용하는 인라인 태그들입니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>strong 태그</strong>: 굵은 글씨로 중요한 텍스트를 표현합니다.<br>
+          • <strong>em 태그</strong>: 이탤릭체로 비스듬하게 텍스트를 강조합니다.<br>
+          • <strong>mark 태그</strong>: 형광펜을 칠한 것처럼 배경을 노란색으로 강조합니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch3">&lt;p&gt;이 문장에서 &lt;strong&gt;중요한 단어&lt;/strong&gt;는 굵게 나옵니다.&lt;/p&gt;
+&lt;p&gt;그리고 어떤 단어는 &lt;em&gt;이탤릭체로 강조&lt;/em&gt;될 수도 있죠.&lt;/p&gt;
+&lt;p&gt;여기에 &lt;mark&gt;형광펜 효과&lt;/mark&gt;도 칠할 수 있습니다!&lt;/p&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch3')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch3')">📋 복사</button>
+        </div>
+      </article>
+
+      <!-- Chapter 4 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 04</span>
+        <h2 class="chapter-title">링크(Link)와 이미지(Image)</h2>
+        <p class="chapter-desc">
+          웹의 큰 힘은 여러 문서의 링크 연동과 풍부한 미디어를 보여주는 것입니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>a 태그</strong>: 하이퍼링크를 설정합니다. <span class="tag-badge">href</span> 속성에 이동할 주소(URL)를 입력합니다.<br>
+          • <strong>img 태그</strong>: 이미지를 불러옵니다. 종료 태그가 없는 단일 태그로, <span class="tag-badge">src</span>(경로)와 <span
+            class="tag-badge">alt</span>(대체 텍스트) 속성이 필수입니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch4">&lt;h2&gt;유용한 외부 링크&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href="https://www.google.com" target="_blank"&gt;구글 홈페이지로 이동하기&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;이미지 삽입하기&lt;/h2&gt;
+&lt;!-- 귀여운 HTML5 로고 이미지를 불러옵니다 --&gt;
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5 로고" width="120"&gt;
+&lt;p&gt;HTML5 로고 이미지가 위에 정상적으로 표시됩니다.&lt;/p&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch4')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch4')">📋 복사</button>
+        </div>
+      </article>
+
+      <!-- Chapter 5 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 05</span>
+        <h2 class="chapter-title">리스트(List) 만들기</h2>
+        <p class="chapter-desc">
+          콘텐츠를 항목별로 보기 좋게 나열하기 위해 순서가 없는 목록과 순서가 있는 목록을 생성합니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>ul 태그</strong>: 순서가 없는(Unordered) 불릿 포인트 형식의 목록을 선언합니다.<br>
+          • <strong>ol 태그</strong>: 순서가 있는(Ordered) 숫자 번호 매기기 형식의 목록을 선언합니다.<br>
+          • <strong>li 태그</strong>: 각 목록의 항목(List Item)들을 작성할 때 사용합니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch5">&lt;h3&gt;내가 좋아하는 과일 (순서 없음)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;사과&lt;/li&gt;
+  &lt;li&gt;바나나&lt;/li&gt;
+  &lt;li&gt;포도&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;웹 공부 순서 (순서 있음)&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;HTML (구조)&lt;/li&gt;
+  &lt;li&gt;CSS (스타일)&lt;/li&gt;
+  &lt;li&gt;JavaScript (동적 제어)&lt;/li&gt;
+&lt;/ol&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch5')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch5')">📋 복사</button>
+        </div>
+      </article>
+
+      <!-- Chapter 6 -->
+      <article class="chapter-card">
+        <span class="chapter-badge">Chapter 06</span>
+        <h2 class="chapter-title">줄바꿈과 구분선</h2>
+        <p class="chapter-desc">
+          코드 상에서 엔터를 쳐도 브라우저는 자동으로 한 칸의 공백으로만 취급합니다. 실제 렌더링에서 강제 줄바꿈과 영역 분할을 위한 태그들입니다.
+        </p>
+        <div class="highlight-box">
+          • <strong>br 태그</strong>: 강제로 다음 줄로 줄바꿈(Line Break)을 진행합니다. 종료 태그가 없습니다.<br>
+          • <strong>hr 태그</strong>: 영역을 구분하는 가로 수평선(Horizontal Line)을 그어 줍니다.
+        </div>
+        <div class="example-code-container">
+          <div class="example-code-header">예제 코드</div>
+          <pre class="example-code" id="code-ch6">&lt;p&gt;
+  여기서 그냥 엔터를 치면&lt;br&gt;
+  브라우저상에서도 줄바꿈이 보입니다.
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;수평선 아래에 새로운 영역의 텍스트를 작성했습니다.&lt;/p&gt;</pre>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="loadCode('code-ch6')">🚀 코드 적용하기</button>
+          <button class="btn btn-secondary" onclick="copyCode('code-ch6')">📋 복사</button>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Right Sidebar: Interactive Playground -->
+    <section class="playground">
+
+      <!-- Editor Panel -->
+      <div class="editor-section">
+        <div class="panel-header">
+          <div class="panel-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+            <span>📝 HTML 에디터 (수정해 보세요)</span>
+          </div>
+          <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;"
+            onclick="resetEditor()">🔄 리셋</button>
+        </div>
+        <div class="editor-wrapper">
+          <div class="line-numbers" id="line-numbers">
+            1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10
+          </div>
+          <textarea class="code-textarea" id="html-editor" spellcheck="false"
+            placeholder="여기에 HTML 코드를 입력하거나 왼쪽 예제를 적용하세요."></textarea>
+        </div>
+      </div>
+
+      <!-- Preview Panel -->
+      <div class="preview-section">
+        <div class="preview-header">
+          <div class="panel-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <span>🖥️ 실시간 미리보기 (결과 화면)</span>
+          </div>
+        </div>
+        <iframe class="preview-frame" id="preview-iframe"></iframe>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast Notification System -->
+  <div class="toast" id="toast-notify">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    <span id="toast-text">작업이 완료되었습니다.</span>
+  </div>
+
+  <script>
+    // Elements references
+    const htmlEditor = document.getElementById('html-editor');
+    const previewIframe = document.getElementById('preview-iframe');
+    const lineNumbersDiv = document.getElementById('line-numbers');
+    const toastNotify = document.getElementById('toast-notify');
+    const toastText = document.getElementById('toast-text');
+
+    // Default HTML Template on start
+    const defaultHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 { color: #4f46e5; }
+    p { color: #475569; }
+  </style>
+</head>
+<body>
+  <h1>안녕하세요! HTML 학습을 시작해 봅시다. 👋</h1>
+  <p>왼쪽 가이드 카드의 <strong>[🚀 코드 적용하기]</strong> 버튼을 누르면 이 화면에 예제가 들어갑니다.</p>
+  <p>이곳에 자유롭게 코드를 타이핑하고 지워가며 직접 결과를 확인해 보세요!</p>
+</body>
+</html>`;
+
+    // Initialize Page
+    window.addEventListener('DOMContentLoaded', () => {
+      htmlEditor.value = defaultHTML;
+      updatePreview();
+      updateLineNumbers();
+    });
+
+    // Run preview update on input
+    let debounceTimer;
+    htmlEditor.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        updatePreview();
+      }, 150);
+      updateLineNumbers();
+    });
+
+    // Synchronize scroll of line numbers and textarea
+    htmlEditor.addEventListener('scroll', () => {
+      lineNumbersDiv.scrollTop = htmlEditor.scrollTop;
+    });
+
+    // Update real-time preview inside iframe
+    function updatePreview() {
+      const content = htmlEditor.value;
+      const iframeDoc = previewIframe.contentDocument || previewIframe.contentWindow.document;
+      iframeDoc.open();
+      iframeDoc.write(content);
+      iframeDoc.close();
+    }
+
+    // Refresh Line Numbers based on content
+    function updateLineNumbers() {
+      const lines = htmlEditor.value.split('\n');
+      const lineCount = Math.max(lines.length, 1);
+      let numberStr = '';
+      for (let i = 1; i <= lineCount; i++) {
+        numberStr += i + '<br>';
+      }
+      lineNumbersDiv.innerHTML = numberStr;
+    }
+
+    // Load example code to editor
+    function loadCode(elementId) {
+      const targetElement = document.getElementById(elementId);
+      if (!targetElement) return;
+
+      // Decode HTML entities safely to write literal tags to editor
+      const tempElement = document.createElement('textarea');
+      tempElement.innerHTML = targetElement.innerHTML;
+      const literalCode = tempElement.value;
+
+      htmlEditor.value = literalCode;
+      updatePreview();
+      updateLineNumbers();
+      showToast('코드가 편집기에 성공적으로 적용되었습니다! 🚀');
+    }
+
+    // Reset Editor to default state
+    function resetEditor() {
+      if (confirm('작성 중인 내용이 지워지고 초기 가이드 화면으로 돌아갑니다. 계속하시겠습니까?')) {
+        htmlEditor.value = defaultHTML;
+        updatePreview();
+        updateLineNumbers();
+        showToast('편집기가 초기 상태로 초기화되었습니다.');
+      }
+    }
+
+    // Copy example code to clipboard
+    function copyCode(elementId) {
+      const targetElement = document.getElementById(elementId);
+      if (!targetElement) return;
+
+      const tempElement = document.createElement('textarea');
+      tempElement.innerHTML = targetElement.innerHTML;
+      const literalCode = tempElement.value;
+
+      navigator.clipboard.writeText(literalCode).then(() => {
+        showToast('클립보드에 코드가 복사되었습니다! 📋');
+      }).catch(err => {
+        console.error('클립보드 복사 실패:', err);
+      });
+    }
+
+    // Toast notification controller
+    function showToast(message) {
+      toastText.innerText = message;
+      toastNotify.classList.add('show');
+      setTimeout(() => {
+        toastNotify.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+
+</html>

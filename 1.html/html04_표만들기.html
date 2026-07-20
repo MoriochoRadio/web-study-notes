@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 400px;
+        }
+
+        /* div요소를 table요소로 변환하는 설정 */
+        .table {
+            display: table;
+            /*table 태그처럼 보이게 쓸거야*/
+        }
+
+        .tr {
+            display: table-row;
+        }
+
+        .td {
+            display: table-cell;
+            border: 1px solid black;
+            padding: 5px 40px;
+        }
+
+        /*mobile*/
+        @media screen and (max-width:600px) {
+            .table {
+                display: block;
+            }
+
+            .tr {
+                display: block;
+            }
+
+            .td {
+                display: block;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>1.기본 표 만들기</h1>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>월드컵16강일정</td>
+            <td>2026.07.07</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>월드컵 우승은 어느나라가?</td>
+            <td>2026.07.14</td>
+        </tr>
+    </table>
+
+    <h1>2. 표의 다양한 구성 요소를 사용</h1>
+    <table border="1">
+        <caption>표의 제목</caption>
+        <col width="100" />
+        <col width="200" />
+        <col width="100" />
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>월드컵16강일정</td>
+                <td>2026.07.07</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>월드컵 우승은 어느나라가?</td>
+                <td>2026.07.14</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">2026년 북중미 월드컵</td>
+            </tr>
+        </tfoot>
+    </table>
+    <h1>div요소로 표만들기</h1>
+    <div class="table">
+        <div class="tr">
+            <div class="td">1</div>
+            <div class="td">2</div>
+            <div class="td">3</div>
+        </div>
+        <div class="tr">
+            <div class="td">1</div>
+            <div class="td">2</div>
+            <div class="td">3</div>
+        </div>
+        <div class="tr">
+            <div class="td">1</div>
+            <div class="td">2</div>
+            <div class="td">3</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
