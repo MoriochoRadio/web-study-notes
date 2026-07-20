@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <style>
+        #box,
+        p {
+            border: 1px solid black;
+        }
+
+        #box {
+            height: 600px;
+            width: 600px;
+            position: relative;
+            margin-left: 100px;
+        }
+
+        #box>p {
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 40px;
+        }
+
+        .myred {
+            background-color: red;
+            position: absolute;
+            left: 200px;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .myblue {
+            background-color: blue;
+            position: absolute;
+            left: 120px;
+            top: 100px;
+            z-index: 50;
+        }
+
+        .mygreen {
+            background-color: green;
+            position: absolute;
+            left: 280px;
+            top: 100px;
+            z-index: 10;
+        }
+
+        .myred:hover,
+        .myblue:hover,
+        .mygreen:hover {
+            color: white;
+            font-weight: bold;
+            font-size: 50px !important;
+            z-index: 150;
+        }
+
+        /* 메뉴만들기 */
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu_box li {
+            list-style: none;
+        }
+
+        .sub_menu {
+            display: none;
+            width: 150px;
+            position: absolute;
+            left: 120px;
+            top: 2px;
+            background-color: brown;
+        }
+
+        .main_menu>li {
+            position: relative;
+            width: 100px;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: aqua;
+        }
+
+        .main_menu>li:hover>.sub_menu {
+            display: block;
+        }
+
+        .sub_menu>li:hover {
+            cursor: pointer;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>position속성</h1>
+    <div id="box">
+        <p class="myred">red</p>
+        <p class="myblue">blue</p>
+        <p class="mygreen">green</p>
+    </div>
+    <hr />
+
+    <h1>메뉴만들기</h1>
+    <div id="menu_box">
+        <ul class="main_menu">
+            <li>
+                <b>메뉴01</b>
+                <ul class="sub_menu">
+                    <li>서브메뉴01</li>
+                    <li>서브메뉴02</li>
+                    <li>서브메뉴03</li>
+                </ul>
+            </li>
+            <li>
+                <b>메뉴02</b>
+                <ul class="sub_menu">
+                    <li>서브메뉴01</li>
+                    <li>서브메뉴02</li>
+                    <li>서브메뉴03</li>
+                </ul>
+            </li>
+            <li>
+                <b>메뉴03</b>
+                <ul class="sub_menu">
+                    <li>서브메뉴01</li>
+                    <li>서브메뉴02</li>
+                    <li>서브메뉴03</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

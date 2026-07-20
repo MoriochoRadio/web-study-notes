@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+
+    <style>
+        main {
+            border: 1px solid red;
+            width: 1000px;
+            /*위아래 양쪽*/
+            margin: 0 auto;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* reset코드 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 공통 박스 스타일 */
+        .container {
+            background-color: antiquewhite;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px dashed cadetblue;
+        }
+
+        .content-box {
+            width: 300px;
+            height: 200px;
+            background-color: aquamarine;
+            border: 2px solid red;
+            padding: 10px;
+        }
+
+        .border-box {
+            width: 274px;
+            height: 200px;
+            background-color: aquamarine;
+            border: 5px solid red;
+            padding: 20px;
+        }
+
+        /* 패딩 10과 20 이고, 보더가 2와5 이므로 픽셀은 274px가 되어야 맞는다 이유는 
+        40 - 20 , 10 - 4  하면 총 26px이 삭감되어야 맞다.
+        */
+
+        /* box의 width 값 기준 설정 */
+        .content-box,
+        .border-box {
+            box-sizing: border-box;
+        }
+
+        /* 위에서 수작업으로 했던걸 알아서 해주는게 box-sizing: border-box */
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>BOX MODEL</h1>
+        <div class="container">
+            <div class="my-box content-box">
+                BOX1
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="my-box border-box">
+                BOX2
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

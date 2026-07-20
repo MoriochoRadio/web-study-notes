@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexbox 레이아웃 실습 문제</title>
+    <style type="text/css">
+        /* 기본 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f5f6fa;
+        }
+
+        #wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        #content main {
+            flex-grow: 1;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 
+         * [실습 미션] Flexbox를 사용해 아래 요구사항에 맞게 레이아웃을 완성하세요.
+         * 
+         * 1. #wrapper (전체 영역)
+         *    - display: flex를 설정하고 세로(column) 방향으로 배치되도록 하세요.
+         *    - 브라우저 전체 높이를 차지하게 설정하세요. (min-height: 100vh)
+         * 
+         * 2. header (상단 영역)
+         *    - display: flex를 설정하고 로고(.logo)와 로그인 버튼(.login-btn)이 양쪽 끝에 배치되도록 하세요.
+         *    - 로고와 버튼이 세로 중앙에 오도록 하세요.
+         * 
+         * 3. #content (본문 영역)
+         *    - display: flex를 설정하고 자식 요소들(aside, main)이 가로(row) 방향으로 정렬되도록 하세요.
+         *    - 부모의 남는 세로 높이를 다 채우도록 설정하세요. (힌트: flex-grow 사용)
+         * 
+         * 4. #content > main (메인 콘텐츠 영역)
+         *    - 좌우 사이드바를 제외한 남은 가로 공간을 혼자 꽉 채우도록 설정하세요. (힌트: flex-grow 사용)
+         * 
+         * 5. footer (하단 영역)
+         *    - display: flex를 설정하고 저작권 문구가 가로 및 세로 모두 정중앙에 정렬되도록 하세요.
+         */
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <header>
+            <div class="logo">My WebLogo</div>
+            <button class="login-btn">로그인</button>
+        </header>
+
+        <div id="content">
+            <aside class="left">Left Menu</aside>
+            <main>
+                <h2>메인 콘텐츠 영역</h2>
+                <p>여기에 본문 내용이 채워집니다. Flexbox를 사용하면 좌우 사이드바와 본문의 높이가 자동으로 같아집니다.</p>
+            </main>
+            <aside class="right">Banner / Info</aside>
+        </div>
+
+        <footer>
+            <p>© 2026 Flexbox Practice. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>

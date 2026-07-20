@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <style>
+        #box1 {
+            border: 1px solid gray;
+            width: 300px;
+            height: 300px;
+            /* background-color: bisque;
+            background-image: url("asd.jpg"), url("asd.jpg");
+            background-size: 200px 200px, 100px 100px;
+            background-repeat: no-repeat, no-repeat;
+            background-position: 20px 50px, 40px 70px; */
+
+            background: url("asd.jpg") no-repeat 20px 50px / 100px 100px;
+        }
+
+        #box2 {
+            width: 300px;
+            height: 300px;
+            /* background-image: url("asd.jpg");
+            background-size: 300px 300px;
+            opacity: 0.5; */
+            position: relative;
+            z-index: 10;
+        }
+
+        #box2::after {
+            content: "";
+            width: 300px;
+            height: 300px;
+            background-image: url("asd.jpg");
+            background-size: 300px 300px;
+            opacity: 0.5;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>배경속성</h1>
+    <div id="box1"></div>
+    <div id="box2">
+        <p class="c">
+            korea8일 삼성전자 목표주가를 기존 55만원에서 60만원으로 상향 조정했다.
+            투자의견 '매수'를 유지한 김동원 KB증권 리서치본부장은 글로벌 AI
+            투자 확대에 따라 메모리 공급 부족이 2028년까지 이어질 것으로 전망했다.
+
+        </p>
+    </div>
+</body>
+
+</html>
