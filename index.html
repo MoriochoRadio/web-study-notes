@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웹 개발 학습 기록 | 취업아카데미</title>
+<meta name="description" content="취업아카데미 HTML·CSS·JavaScript 실습 학습 정리 대시보드">
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#161922;
+    --panel-2:#1c2029;
+    --border:#272c38;
+    --text:#e7e9ee;
+    --muted:#9aa2b1;
+    --html:#ff8a5c;
+    --css:#5ca8ff;
+    --js:#f7d154;
+    --next:#8f97a8;
+    --accent:#7c9cff;
+    --good:#4ade80;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard","Noto Sans KR",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  header.hero{
+    padding:56px 24px 40px;
+    background:radial-gradient(1200px 500px at 20% -10%, rgba(124,156,255,.18), transparent),
+               radial-gradient(900px 400px at 90% 0%, rgba(255,138,92,.12), transparent);
+    border-bottom:1px solid var(--border);
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--accent);font-weight:600;
+    letter-spacing:.02em;margin-bottom:14px;
+  }
+  h1{font-size:clamp(28px,4vw,40px);margin:0 0 12px;font-weight:800;letter-spacing:-.02em;}
+  .sub{color:var(--muted);font-size:16px;max-width:640px;margin:0 0 26px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);}
+  .meta-row span{
+    background:var(--panel);border:1px solid var(--border);
+    padding:6px 12px;border-radius:999px;
+  }
+  nav.tabs{
+    position:sticky;top:0;z-index:10;
+    background:rgba(15,17,21,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding:10px 20px;}
+  nav.tabs button{
+    appearance:none;border:1px solid transparent;background:transparent;
+    color:var(--muted);font-size:14px;font-weight:600;padding:9px 16px;
+    border-radius:10px;cursor:pointer;white-space:nowrap;
+    transition:.15s;
+  }
+  nav.tabs button:hover{color:var(--text);background:var(--panel);}
+  nav.tabs button.active{color:var(--bg);background:var(--accent);}
+
+  main{padding:40px 0 80px;}
+  .stat-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;margin:0 0 44px;
+  }
+  .stat-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;
+  }
+  .stat-card .n{font-size:28px;font-weight:800;}
+  .stat-card .l{font-size:13px;color:var(--muted);margin-top:2px;}
+  .stat-card.html .n{color:var(--html);}
+  .stat-card.css .n{color:var(--css);}
+  .stat-card.js .n{color:var(--js);}
+  .stat-card.next .n{color:var(--next);}
+
+  section.cat{margin-bottom:56px;}
+  section.cat .cat-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .dot{width:11px;height:11px;border-radius:50%;flex:none;}
+  .dot.html{background:var(--html);} .dot.css{background:var(--css);}
+  .dot.js{background:var(--js);} .dot.next{background:var(--next);}
+  section.cat h2{font-size:22px;margin:0;}
+  section.cat .cat-desc{color:var(--muted);font-size:14px;margin:0 0 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;
+    transition:.15s;
+  }
+  .card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .card .card-title{font-size:15.5px;font-weight:700;}
+  .card ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.3px;display:flex;flex-direction:column;gap:4px;}
+  .card .files{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px;}
+  .card .files a{
+    font-size:12px;background:var(--panel-2);border:1px solid var(--border);
+    padding:4px 9px;border-radius:8px;text-decoration:none;color:var(--muted);
+  }
+  .card .files a:hover{color:var(--text);border-color:var(--accent);}
+
+  .next-card{
+    background:var(--panel);border:1px dashed var(--border);border-radius:14px;
+    padding:16px 18px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .next-card .badge{
+    font-size:11px;font-weight:700;color:var(--bg);background:var(--next);
+    padding:3px 8px;border-radius:6px;flex:none;margin-top:2px;
+  }
+  .next-card b{display:block;margin-bottom:3px;}
+  .next-card span{color:var(--muted);font-size:13.5px;}
+
+  .slides-box{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px;display:flex;flex-wrap:wrap;gap:12px;
+  }
+  .slides-box a{
+    display:flex;align-items:center;gap:10px;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
+    padding:12px 16px;text-decoration:none;font-size:14px;font-weight:600;
+  }
+  .slides-box a:hover{border-color:var(--accent);}
+
+  footer{border-top:1px solid var(--border);padding:32px 0;color:var(--muted);font-size:13px;}
+  .hidden{display:none;}
+
+  @media(max-width:600px){
+    header.hero{padding:40px 16px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">📚 취업아카데미 · WEB 실습 기록</div>
+    <h1>웹 개발 학습 기록</h1>
+    <p class="sub">HTML · CSS · JavaScript 실습 코드와 강의 핵심 개념을 정리한 개인 학습 대시보드입니다. 배운 내용은 계속 업데이트됩니다.</p>
+    <div class="meta-row">
+      <span id="updated-badge">마지막 업데이트: 2026-07-20</span>
+      <span>HTML 7개 실습</span>
+      <span>CSS 13개 실습</span>
+      <span>JavaScript 18개 실습</span>
+      <span>강의자료 PPT 2건</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <button data-target="overview" class="active">개요</button>
+    <button data-target="html">HTML</button>
+    <button data-target="css">CSS</button>
+    <button data-target="js">JavaScript</button>
+    <button data-target="next">다음 학습 예정</button>
+    <button data-target="materials">강의자료</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="overview">
+    <div class="stat-grid">
+      <div class="stat-card html"><div class="n">7</div><div class="l">HTML 실습 파일</div></div>
+      <div class="stat-card css"><div class="n">13</div><div class="l">CSS 실습 파일</div></div>
+      <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 실습 파일</div></div>
+      <div class="stat-card next"><div class="n">5+</div><div class="l">다음 학습 예정 주제</div></div>
+    </div>
+  </section>
+
+  <section id="html-section" class="cat">
+    <div class="cat-head"><span class="dot html"></span><h2>1. HTML</h2></div>
+    <p class="cat-desc">문서 구조, 태그 작성 규칙, 텍스트·목록·표 요소를 중심으로 마크업의 기본기를 다졌습니다.</p>
+    <div class="grid" id="html-grid"></div>
+  </section>
+
+  <section id="css-section" class="cat">
+    <div class="cat-head"><span class="dot css"></span><h2>2. CSS</h2></div>
+    <p class="cat-desc">선택자 12종, 박스 모델, 레이아웃(float/position/flex), 문단·배경 스타일까지 실습으로 익혔습니다.</p>
+    <div class="grid" id="css-grid"></div>
+  </section>
+
+  <section id="js-section" class="cat">
+    <div class="cat-head"><span class="dot js"></span><h2>3. JavaScript</h2></div>
+    <p class="cat-desc">작성 방식부터 변수/타입, DOM 조작, 함수·객체·클로저, ES6 문법, 배열/문자열, 날짜, BOM, Cookie까지 다뤘습니다.</p>
+    <div class="grid" id="js-grid"></div>
+  </section>
+
+  <section id="next-section" class="cat">
+    <div class="cat-head"><span class="dot next"></span><h2>다음 학습 예정</h2></div>
+    <p class="cat-desc">강의자료 목차 기준으로, 아직 실습 파일이 없는 앞으로의 학습 주제입니다.</p>
+    <div class="grid" id="next-grid"></div>
+  </section>
+
+  <section id="materials-section" class="cat">
+    <div class="cat-head"><span class="dot next"></span><h2>강의자료</h2></div>
+    <p class="cat-desc">수업에서 사용한 원본 슬라이드입니다.</p>
+    <div class="slides-box">
+      <a href="slides/UI강의자료_20260629.pptx">📑 UI강의자료 — HTML/CSS/JS/jQuery 개론</a>
+      <a href="slides/JS_개념학습20260710.pptx">📑 JS 개념학습 — JavaScript 기초 20강 정리</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    이 페이지는 <b>Claude</b>와 함께 수동으로 최신화하는 개인 학습 정리 페이지입니다. 새로운 실습을 마칠 때마다 내용을 추가해 나갑니다.
+  </div>
+</footer>
+
+<script>
+// ---------------------------------------------------------------
+// 학습 데이터 — 새 실습을 추가할 땐 아래 배열에 항목만 추가하면 됩니다.
+// ---------------------------------------------------------------
+const htmlModules = [
+  { title:"HTML 기본 사용법", files:[["1.html/html01_기본사용법.html","html01"]],
+    points:["DOCTYPE·html/head/body 문서 기본 구조","태그 작성 8대 규칙(중첩·소문자·닫기·인용부호 등)","텍스트 강조 요소(b, strong, em, i, sub, sup)","이미지(img)·링크(a) 태그와 주요 속성"] },
+  { title:"블록요소 vs 인라인요소", files:[["1.html/html02_블럭요소_인라인요소.html","html02"]],
+    points:["블록요소 특징과 대표 태그(div, p, h1~h6, ul 등)","인라인요소 특징과 대표 태그(a, span, strong, img 등)","블록 안에 인라인은 가능, 반대는 불가한 중첩 규칙"] },
+  { title:"목록(List) 요소", files:[["1.html/html03_목록요소.html","html03"]],
+    points:["ul/ol/li — 순서 없는/있는 목록","dl/dt/dd — 정의형 목록"] },
+  { title:"표(Table) 만들기", files:[["1.html/html04_표만들기.html","html04"]],
+    points:["table/tr/th/td 기본 구조","thead/tbody/tfoot, caption","rowspan/colspan으로 셀 병합"] },
+  { title:"실습 — 인용문·목록·구분선", files:[["1.html/test.html","test"]],
+    points:["q(인용문), hr(구분선), ul(목록)을 조합한 복합 실습"] },
+  { title:"실습 — 인적사항 입력 표", files:[["1.html/test2.html","test2"]],
+    points:["표와 폼 요소를 함께 사용한 인적사항 입력 UI 실습"] },
+  { title:"실습 — 경력사항 표", files:[["1.html/test3.html","test3"]],
+    points:["rowspan/colspan을 활용한 이력서형 표 실습"] },
+];
+
+const cssModules = [
+  { title:"CSS 작성 방식", files:[["2.css/css01_작성방식.html","css01"]],
+    points:["인라인·내부·외부 스타일시트 3가지 작성법","선택자 우선순위: !important > in-line > id > class > type","@import로 외부 스타일 불러오기"] },
+  { title:"Selector(선택자) 표현식", files:[["2.css/css02_selector표현식.html","css02"]],
+    points:["타입·id·class·전체(*) 선택자","자식(>)·인접(+)·하위(공백)·그룹(,) 선택자","속성 선택자 7종( [attr], [attr=v], [attr^=v] 등 )"] },
+  { title:"셀렉터 종합 실습", files:[["2.css/css03.html","css03"]],
+    points:["id/class/전체/자식/인접 선택자를 한 문서에서 종합 실습"] },
+  { title:"폰트(Font)", files:[["2.css/css04_font.html","css04"]],
+    points:["font-family/size/weight/style/variant","line-height, font 축약형"] },
+  { title:"문단 스타일 실습", files:[["2.css/css05.html","css05"]],
+    points:["text-align, text-decoration, text-indent, line-height 등 문단 속성 종합 실습"] },
+  { title:"배경(Background) 속성", files:[["2.css/css06.html","css06"]],
+    points:["background-color/image/repeat/position/attachment","background 축약형"] },
+  { title:"박스 모델(Box Model)", files:[["2.css/css07.html","css07"]],
+    points:["content-padding-border-margin 구조","margin/padding 4방향 지정 및 축약형","margin 병합 현상, margin auto 중앙 정렬"] },
+  { title:"Position 속성 & 메뉴 만들기", files:[["2.css/css08.html","css08"]],
+    points:["static/relative/absolute/fixed 4종 위치 지정","top/right/bottom/left, z-index","position을 활용한 메뉴 레이아웃 실습"] },
+  { title:"Flexbox 레이아웃 실습", files:[["2.css/css09.html","css09"]],
+    points:["display:flex, flex-direction(row/row-reverse/column)","header-content-footer 레이아웃 구성"] },
+  { title:"실습 — 선택자 스타일링", files:[["2.css/test01.html","test01"]], points:["선택자 조합 스타일링 실습"] },
+  { title:"실습 — 종합 스타일링", files:[["2.css/test02.html","test02"]], points:["문서 전반에 CSS를 적용하는 종합 실습"] },
+  { title:"외부 스타일시트 파일", files:[["2.css/css/css02.css","css02.css"],["2.css/css/test.css","test.css"]],
+    points:["link 태그로 불러오는 외부 .css 파일 실습"] },
+];
+
+const jsModules = [
+  { title:"JS 작성방식 & 3대 구성요소", files:[["3.javascript/js01_작성방식.html","js01"]],
+    points:["외부·내부·인라인 작성 방식 3가지 (권장: 외부)","CORE·BOM·DOM 3대 구성요소"] },
+  { title:"대화창 함수", files:[["3.javascript/js02_대화창함수.html","js02"]],
+    points:["alert — 반환값 없음","confirm — true/false 반환","prompt — 입력값/null 반환, switch 분기 처리"] },
+  { title:"변수와 타입", files:[["3.javascript/js03_변수와타입.html","js03"]],
+    points:["var vs let vs const — 스코프·재선언·재할당 비교","var의 호이스팅·재선언 문제","동적 타입 시스템과 typeof"] },
+  { title:"DOM 탐색 메서드", files:[["3.javascript/js04_DOM탐색메서드.html","js04"],["3.javascript/js05.html","js05"]],
+    points:["getElementById 등 6가지 탐색 메서드와 반환 타입","style·textContent·innerHTML 요소 조작"] },
+  { title:"형변환 함수", files:[["3.javascript/js06.html","js06"]],
+    points:["input.value는 항상 string 타입","Number·parseInt·parseFloat·eval 4가지 변환 함수"] },
+  { title:"함수·객체·클로저·ES6", files:[["3.javascript/js07.html","js07"]],
+    points:["선언적·익명·화살표 함수의 차이","객체 리터럴·생성자함수·프로토타입 3가지 방식","클로저 — 정보 은닉과 상태 유지","구조분해할당·템플릿리터럴·spread 등 ES6 핵심 문법"] },
+  { title:"String 객체", files:[["3.javascript/js08.html","js08"]],
+    points:["concat/indexOf/substring/split/trim/match","== vs === 비교 연산자 차이"] },
+  { title:"Array 배열", files:[["3.javascript/js09.html","js09"]],
+    points:["push/pop/sort/join/slice 등 주요 메서드","얕은 복사 vs 깊은 복사, spread 연산자"] },
+  { title:"Lotto 번호 생성기", files:[["3.javascript/js10.html","js10"],["3.javascript/js10_당첨기능.html","당첨기능"],["3.javascript/js10_효과.html","효과"]],
+    points:["Math.random 기반 난수 생성","indexOf 중복 체크 + while 반복","sort/join으로 정렬·출력"] },
+  { title:"Array 반복문 4종 비교", files:[["3.javascript/js11.html","js11"]],
+    points:["for / for-in / forEach", "map / filter / reduce 목적별 선택"] },
+  { title:"Date 객체", files:[["3.javascript/js12.html","js12"]],
+    points:["오늘 날짜 출력, getFullYear/getMonth(+1 주의)","D-Day 계산 (getTime 차이 활용)"] },
+  { title:"팝업창(window)", files:[["3.javascript/js13.html","js13"],["3.javascript/js13_pop.html","pop"]],
+    points:["window.open으로 팝업창 생성","이벤트 객체 e.target 활용"] },
+  { title:"Location 객체", files:[["3.javascript/js14.html","js14"]],
+    points:["location.href/host/pathname/search/hash","assign/reload/replace 이동 메서드"] },
+  { title:"DOM 탐색 속성", files:[["3.javascript/js15.html","js15"]],
+    points:["parentNode/children/형제탐색 등 관계성 선택"] },
+  { title:"DOM 요소 동적 생성", files:[["3.javascript/js16.html","js16"]],
+    points:["createElement/createAttribute/appendChild로 요소 생성"] },
+  { title:"DOM으로 표 동적 생성", files:[["3.javascript/js17.html","js17"]],
+    points:["JS로 table/tr/td를 동적으로 생성"] },
+  { title:"Cookie 사용하기", files:[["3.javascript/js18.html","js18"]],
+    points:["setCookie/getCookie/removeCookie 직접 구현","Web Storage(session/local)와 Cookie 비교"] },
+];
+
+const nextTopics = [
+  { badge:"JS", title:"Ajax & Promise & fetch", desc:"XMLHttpRequest → Promise → fetch API 순서로 비동기 통신 학습, 콜백 지옥 해결과 async/await" },
+  { badge:"JS", title:"jQuery", desc:"Selector 표현식, 크로스브라우징, script 코드 단순화" },
+  { badge:"WEB", title:"React 기초", desc:"컴포넌트, JSX, useState를 활용한 상태 관리" },
+  { badge:"CSS", title:"CSS3 심화 효과", desc:"2D Transform(translate/rotate/scale/skew), Transition, Animation(@keyframes), Multi-column" },
+  { badge:"HTML", title:"시맨틱 태그 실습", desc:"header/nav/section/article/aside/footer를 활용한 실전 레이아웃" },
+  { badge:"HTML", title:"Form 요소 실전 실습", desc:"input 타입별 활용, fieldset/legend, label 접근성" },
+];
+
+function fileLinks(files){
+  return files.map(([path,label]) =>
+    `<a href="${path}" target="_blank" rel="noopener">${label}</a>`).join("");
+}
+
+function renderModules(containerId, modules){
+  const el = document.getElementById(containerId);
+  el.innerHTML = modules.map(m => `
+    <div class="card">
+      <div class="card-title">${m.title}</div>
+      <ul>${(m.points||[]).map(p => `<li>${p}</li>`).join("")}</ul>
+      <div class="files">${fileLinks(m.files)}</div>
+    </div>
+  `).join("");
+}
+
+function renderNext(){
+  const el = document.getElementById("next-grid");
+  el.innerHTML = nextTopics.map(t => `
+    <div class="next-card">
+      <span class="badge">${t.badge}</span>
+      <div><b>${t.title}</b><span>${t.desc}</span></div>
+    </div>
+  `).join("");
+}
+
+renderModules("html-grid", htmlModules);
+renderModules("css-grid", cssModules);
+renderModules("js-grid", jsModules);
+renderNext();
+
+// tab switching
+const sections = {
+  overview: document.getElementById("overview"),
+  html: document.getElementById("html-section"),
+  css: document.getElementById("css-section"),
+  js: document.getElementById("js-section"),
+  next: document.getElementById("next-section"),
+  materials: document.getElementById("materials-section"),
+};
+const buttons = document.querySelectorAll("nav.tabs button");
+function showTab(target){
+  Object.entries(sections).forEach(([key, el]) => {
+    if(target === "overview"){ el.classList.remove("hidden"); return; }
+    el.classList.toggle("hidden", key !== "overview" && key !== target);
+  });
+  buttons.forEach(b => b.classList.toggle("active", b.dataset.target === target));
+  if(target !== "overview") document.getElementById("overview").classList.add("hidden");
+}
+buttons.forEach(b => b.addEventListener("click", () => {
+  showTab(b.dataset.target);
+  window.scrollTo({top:0, behavior:"smooth"});
+}));
+</script>
+</body>
+</html>
