@@ -1,0 +1,9 @@
+# 의존성 설치 결과물 · 빌드 캐시 — 실습 프로젝트(4.react/lessons/*)에서 npm install 시 생성됨
+**/node_modules/
+**/dist/
+**/.vite/
+**/.vite-temp/
+
+# OS 잡파일
+Thumbs.db
+.DS_Store
