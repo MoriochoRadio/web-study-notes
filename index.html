@@ -96,6 +96,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     border-bottom:1px solid var(--border);
   }
   nav.tabs .wrap{max-width:860px;display:flex;gap:4px;flex-wrap:wrap;padding:10px 20px;align-items:center;}
+  .tab-buttons{display:flex;gap:4px;flex-wrap:wrap;min-width:0;}
   nav.tabs button{
     appearance:none;border:1px solid transparent;background:transparent;
     color:var(--muted);font-size:14.5px;font-weight:600;padding:9px 15px;
@@ -140,6 +141,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   .stat-card.react .n{color:var(--react);}
   .stat-card.concepts .n{color:var(--concepts);}
   .stat-card.next .n{color:var(--next);}
+  .stat-card.progress .n{color:var(--good);}
 
   .howto{
     background:var(--panel);border:1px solid var(--border);border-radius:14px;
@@ -244,6 +246,26 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   .note-toggle::before{content:"+ 펼쳐서 공부하기";}
   .note-card:not(.collapsed) .note-toggle::before{content:"− 접기";}
   .note-head:hover .note-toggle{border-color:var(--c,var(--accent));}
+
+  /* ---- 완료 체크 · 링크 복사 (카드 헤더의 항상-보이는 컨트롤) ---- */
+  .note-done{
+    display:inline-flex;align-items:center;gap:5px;flex:none;
+    font-size:12.5px;color:var(--muted);cursor:pointer;-webkit-user-select:none;user-select:none;
+    padding:4px 10px;border:1px solid var(--border);border-radius:8px;background:var(--panel-2);
+  }
+  .note-done input{accent-color:var(--good);cursor:pointer;}
+  .note-done.checked{border-color:var(--good);color:var(--good);}
+  .note-card.is-done .note-num{
+    background:color-mix(in srgb, var(--good) 16%, transparent);color:var(--good);
+  }
+  .link-copy-btn{
+    flex:none;font-size:13px;line-height:1;color:var(--muted);
+    border:1px solid var(--border);border-radius:8px;padding:4px 9px;
+    background:var(--panel-2);cursor:pointer;font-family:inherit;
+  }
+  .link-copy-btn:hover{color:var(--text);border-color:var(--c,var(--accent));}
+  .link-copy-btn.done{color:var(--good);border-color:var(--good);}
+
   /* 접힌 카드: 요약과 '쉽게 말하면'만 남긴다 */
   .note-card.collapsed .note-body > *:not(.note-summary):not(.note-easy){display:none;}
   .note-card.collapsed .note-easy{margin-bottom:0;}
@@ -473,6 +495,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     color:var(--rc, var(--accent));
   }
   .review-num{font-size:12px;font-weight:800;color:var(--muted);}
+  .review-struggle-badge{
+    margin-left:auto;font-size:11px;font-weight:800;color:#e0555a;
+    background:rgba(224,85,90,.12);border-radius:999px;padding:3px 9px;white-space:nowrap;
+  }
   .review-card-title{font-size:18.5px;font-weight:800;margin:0 0 16px;line-height:1.5;}
   .review-easy{
     margin:auto 0;font-size:16.5px;line-height:1.9;color:var(--text);
@@ -515,6 +541,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     header.hero{padding:36px 16px 24px;}
     .note-card{padding:18px 16px 20px;}
     .note-tags{display:none;}
+    /* 탭이 8개로 늘어 좁은 화면에서 줄바꿈되지 않도록 가로 스크롤로 전환 */
+    .tab-buttons{
+      flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;padding-bottom:2px;
+    }
+    .tab-buttons button{flex:none;}
+    .tab-spacer{display:none;}
     #search-box{width:110px;}
     #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
     .review-top{padding:14px 16px;}
@@ -551,14 +584,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
 
 <nav class="tabs">
   <div class="wrap">
-    <button data-target="overview" class="active">개요</button>
-    <button data-target="html">HTML</button>
-    <button data-target="css">CSS</button>
-    <button data-target="js">JavaScript</button>
-    <button data-target="react">React</button>
-    <button data-target="concepts">기초 개념 사전</button>
-    <button data-target="next">다음 학습 예정</button>
-    <button data-target="materials">강의자료</button>
+    <div class="tab-buttons">
+      <button data-target="overview" class="active">개요</button>
+      <button data-target="html">HTML</button>
+      <button data-target="css">CSS</button>
+      <button data-target="js">JavaScript</button>
+      <button data-target="react">React</button>
+      <button data-target="concepts">기초 개념 사전</button>
+      <button data-target="next">다음 학습 예정</button>
+      <button data-target="materials">강의자료</button>
+    </div>
     <span class="tab-spacer"></span>
     <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색">
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
@@ -575,6 +610,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card react"><div class="n">3</div><div class="l">React 단원</div></div>
       <div class="stat-card concepts"><div class="n">19</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">6</div><div class="l">다음 학습 예정 주제</div></div>
+      <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
     </div>
     <div class="howto">
       <h3>📖 이 노트로 복습하는 방법</h3>
@@ -584,6 +620,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
         <li><strong>코드로 보기</strong>의 <span style="color:#1d8f52;font-style:italic;">초록색 설명 주석</span>만 따라 읽어도 코드 흐름이 복습됩니다. 복사 버튼으로 직접 실행해 볼 수도 있어요.</li>
         <li>위쪽 <strong>검색</strong>에 키워드(예: flex, 배열)를 치면 모든 과목에서 해당 카드만 걸러 줍니다. 밤에는 <strong>다크 모드</strong> 버튼으로 화면을 어둡게 바꿀 수 있습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
+        <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
       </ol>
     </div>
   </section>
@@ -4760,6 +4797,7 @@ export default TodoApp
       <span style="flex:1"></span>
       <button class="review-chip" data-count="10" type="button">10장만</button>
       <button class="review-chip active" data-count="0" type="button">전체 장수</button>
+      <button class="review-chip" id="review-reset-stats" type="button" title="'다시 볼래요' 기록을 초기화합니다">기록 초기화</button>
     </div>
   </div>
   <div class="review-stage" id="review-stage"></div>
@@ -4829,22 +4867,97 @@ themeBtn.addEventListener("click", () =>
   applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
 
 // ---- 접이식 카드: 처음엔 요약 + '쉽게 말하면'만 보이게 ----
+const DONE_KEY = "completedCards";
+function loadDoneSet(){
+  try { return new Set(JSON.parse(localStorage.getItem(DONE_KEY) || "[]")); } catch { return new Set(); }
+}
+function saveDoneSet(set){ localStorage.setItem(DONE_KEY, JSON.stringify([...set])); }
+const doneSet = loadDoneSet();
+
+function updateProgressStat(){
+  const total = document.querySelectorAll(".note-card").length;
+  const done = doneSet.size;
+  const nEl = document.getElementById("progress-stat-n");
+  const pctEl = document.getElementById("progress-stat-pct");
+  if (nEl) nEl.textContent = done + "/" + total;
+  if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
+}
+
+// 카드 접기/펼치기 + aria-expanded 갱신을 한 곳에서 처리 (클릭·키보드·해시 이동 공용)
+function setCardCollapsed(card, collapsed){
+  card.classList.toggle("collapsed", collapsed);
+  card.querySelector(".note-head")?.setAttribute("aria-expanded", String(!collapsed));
+}
+
 document.querySelectorAll(".note-card").forEach(card => {
   card.classList.add("collapsed");
   const head = card.querySelector(".note-head");
+  // 키보드 접근성: 마우스 없이 Tab으로 포커스 후 Enter/Space로 펼치고 접을 수 있게
+  head.setAttribute("tabindex", "0");
+  head.setAttribute("role", "button");
+  head.setAttribute("aria-expanded", "false");
+
+  // 완료 체크 — 브라우저에 저장되고, 개요의 '학습 완료 진도' 통계에 반영됨
+  const doneLabel = document.createElement("label");
+  doneLabel.className = "note-done";
+  const doneInput = document.createElement("input");
+  doneInput.type = "checkbox";
+  const doneText = document.createElement("span");
+  doneText.textContent = "완료";
+  doneLabel.append(doneInput, doneText);
+  if (doneSet.has(card.id)) {
+    doneInput.checked = true;
+    card.classList.add("is-done");
+    doneLabel.classList.add("checked");
+  }
+  doneInput.addEventListener("change", () => {
+    if (doneInput.checked) { doneSet.add(card.id); card.classList.add("is-done"); doneLabel.classList.add("checked"); }
+    else { doneSet.delete(card.id); card.classList.remove("is-done"); doneLabel.classList.remove("checked"); }
+    saveDoneSet(doneSet);
+    updateProgressStat();
+  });
+  head.appendChild(doneLabel);
+
+  // 이 카드만의 링크를 복사(다른 사람에게 공유하거나 내가 나중에 바로 찾아오기)
+  const linkBtn = document.createElement("button");
+  linkBtn.type = "button";
+  linkBtn.className = "link-copy-btn";
+  linkBtn.title = "이 카드 링크 복사";
+  linkBtn.textContent = "🔗";
+  linkBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const url = location.origin + location.pathname + "#" + card.id;
+    navigator.clipboard.writeText(url).then(() => {
+      linkBtn.textContent = "✓";
+      linkBtn.classList.add("done");
+      setTimeout(() => { linkBtn.textContent = "🔗"; linkBtn.classList.remove("done"); }, 1500);
+    });
+  });
+  head.appendChild(linkBtn);
+
   const toggle = document.createElement("span");
   toggle.className = "note-toggle";
   head.appendChild(toggle);
+
   head.addEventListener("click", (e) => {
-    if (e.target.closest("a, .copy-btn")) return;
-    card.classList.toggle("collapsed");
+    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done")) return;
+    setCardCollapsed(card, !card.classList.contains("collapsed"));
+  });
+  head.addEventListener("keydown", (e) => {
+    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done")) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setCardCollapsed(card, !card.classList.contains("collapsed"));
+    }
   });
 });
+updateProgressStat();
+
 // 카드 id를 펼치고, 필요하면 해당 탭으로 전환한 뒤 스크롤 이동 (주소창 #해시 + 카드 간 상호 링크 공용)
 function revealCard(id){
   const target = document.getElementById(id);
   if (!target || !target.classList.contains("note-card")) return false;
-  target.classList.remove("collapsed");
+  setCardCollapsed(target, false);
   const secKey = target.closest("section.cat")?.id.replace("-section","");
   if (secKey && sections[secKey]) showTab(secKey);
   target.scrollIntoView({block:"start"});
@@ -4977,6 +5090,25 @@ document.querySelectorAll(".note-code").forEach(box => {
     return a;
   }
 
+  // ---- 카드별 복습 기록(간이 간격 반복) — "다시 볼래요"를 자주 누른 카드를 다음 세션에 더 자주 보여준다 ----
+  const STATS_KEY = "cardReviewStats";
+  function loadCardStats(){
+    try { return JSON.parse(localStorage.getItem(STATS_KEY) || "{}"); } catch { return {}; }
+  }
+  function saveCardStats(stats){ localStorage.setItem(STATS_KEY, JSON.stringify(stats)); }
+  function bumpCardStat(id, result){
+    const stats = loadCardStats();
+    const s = stats[id] || { again: 0, know: 0 };
+    s[result]++;
+    stats[id] = s;
+    saveCardStats(stats);
+  }
+  // 점수가 높을수록 더 자주 틀린 카드 — 0보다 크면 "헷갈리는 카드"로 표시
+  function weaknessScore(stats, id){
+    const s = stats[id];
+    return s ? s.again * 2 - s.know : 0;
+  }
+
   // 화면에 이미 그려진 카드에서 "쉽게 말하면"·"한 줄 요약"만 뽑아 온다
   function collectDeck(subject){
     const out = [];
@@ -5002,7 +5134,15 @@ document.querySelectorAll(".note-code").forEach(box => {
   }
 
   function startSession(pool){
-    deck = pool !== undefined ? pool : shuffled(collectDeck(subjectFilter)).slice(0, countFilter > 0 ? countFilter : undefined);
+    if (pool !== undefined) {
+      deck = pool;
+    } else {
+      // 자주 틀린(weaknessScore가 높은) 카드가 앞쪽에 오도록 정렬 — 같은 점수끼리는 셔플로 다양성 유지
+      const stats = loadCardStats();
+      const sorted = shuffled(collectDeck(subjectFilter))
+        .sort((a, b) => weaknessScore(stats, b.id) - weaknessScore(stats, a.id));
+      deck = countFilter > 0 ? sorted.slice(0, countFilter) : sorted;
+    }
     idx = 0; knownCount = 0; againItems = [];
     renderCard();
   }
@@ -5021,6 +5161,8 @@ document.querySelectorAll(".note-code").forEach(box => {
     if (idx >= deck.length) { renderEnd(); return; }
     const item = deck[idx];
     const pct = deck.length ? Math.round((idx / deck.length) * 100) : 0;
+    const struggleBadge = weaknessScore(loadCardStats(), item.id) > 0
+      ? `<span class="review-struggle-badge">🔥 자주 헷갈리는 카드</span>` : "";
     stage.innerHTML = `
       <div class="review-progress-wrap">
         <div class="review-progress-bar"><div class="review-progress-fill" style="width:${pct}%"></div></div>
@@ -5030,6 +5172,7 @@ document.querySelectorAll(".note-code").forEach(box => {
         <div class="review-card-head">
           <span class="review-badge" style="--rc:var(--${item.subj})">${SUBJ_LABEL[item.subj]}</span>
           <span class="review-num">${item.num}</span>
+          ${struggleBadge}
         </div>
         <h3 class="review-card-title">${item.title}</h3>
         <div class="review-easy">${item.easy}</div>
@@ -5045,11 +5188,11 @@ document.querySelectorAll(".note-code").forEach(box => {
     const cardEl = document.getElementById("review-card-el");
     cardEl.addEventListener("click", () => cardEl.classList.toggle("flipped"));
     document.getElementById("review-btn-again").addEventListener("click", (e) => { e.stopPropagation(); markAgain(item); });
-    document.getElementById("review-btn-know").addEventListener("click", (e) => { e.stopPropagation(); markKnow(); });
+    document.getElementById("review-btn-know").addEventListener("click", (e) => { e.stopPropagation(); markKnow(item); });
   }
 
-  function markAgain(item){ againItems.push(item); idx++; renderCard(); }
-  function markKnow(){ knownCount++; idx++; renderCard(); }
+  function markAgain(item){ bumpCardStat(item.id, "again"); againItems.push(item); idx++; renderCard(); }
+  function markKnow(item){ bumpCardStat(item.id, "know"); knownCount++; idx++; renderCard(); }
 
   function renderEnd(){
     bumpSessionCount();
@@ -5088,6 +5231,14 @@ document.querySelectorAll(".note-code").forEach(box => {
 
   fab.addEventListener("click", openModal);
   closeBtn.addEventListener("click", closeModal);
+
+  const resetStatsBtn = document.getElementById("review-reset-stats");
+  resetStatsBtn.addEventListener("click", () => {
+    localStorage.removeItem(STATS_KEY);
+    const original = resetStatsBtn.textContent;
+    resetStatsBtn.textContent = "초기화됨 ✓";
+    setTimeout(() => { resetStatsBtn.textContent = original; }, 1500);
+  });
 
   filtersBox.querySelectorAll(".review-chip[data-subject]").forEach(chip => {
     chip.addEventListener("click", () => {
