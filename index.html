@@ -575,8 +575,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 3개 단원</span>
-      <span>기초 개념 사전 23개 항목</span>
+      <span>React 4개 단원</span>
+      <span>기초 개념 사전 26개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -607,9 +607,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">3</div><div class="l">React 단원</div></div>
-      <div class="stat-card concepts"><div class="n">23</div><div class="l">기초 개념 사전 항목</div></div>
-      <div class="stat-card next"><div class="n">6</div><div class="l">다음 학습 예정 주제</div></div>
+      <div class="stat-card react"><div class="n">4</div><div class="l">React 단원</div></div>
+      <div class="stat-card concepts"><div class="n">26</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card next"><div class="n">5</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
     </div>
     <div class="howto">
@@ -3814,7 +3814,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, 그리고 useState·이벤트 핸들러·배열 불변성 업데이트·useEffect 실습을 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, 그리고 useRef·useMemo·useCallback·React.memo 성능 최적화 실습을 복습합니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -4163,6 +4163,183 @@ export default TodoApp
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/02_state_events_todo/src/components/Counter.jsx" target="_blank" rel="noopener">Counter.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/02_state_events_todo/src/components/TodoApp.jsx" target="_blank" rel="noopener">TodoApp.jsx</a></div>
   </div>
 </article>
+
+<article class="note-card" id="react-04">
+  <div class="note-head">
+    <span class="note-num">04</span>
+    <h3>성능 훅 3종 — useRef · useMemo · useCallback · React.memo</h3>
+    <div class="note-tags"><span class="tag">useRef</span><span class="tag">useMemo</span><span class="tag">useCallback</span><span class="tag">React.memo</span><span class="tag">렌더링 최적화</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>useRef는 "화면을 다시 그리지 않고" DOM에 직접 접근하거나 값을 보관하는 훅, useMemo는 무거운 계산 결과를 캐싱하는 훅, useCallback은 함수 자체를 캐싱하는 훅이며, 이 둘을 React.memo와 짝지으면 관련 없는 자식 컴포넌트의 불필요한 리렌더링을 막을 수 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>useState는 "고치면 화면을 다시 그려야 하는 칠판"이고, useRef는 "고쳐도 화면엔 안 보이는 뒷메모장"이에요. useMemo는 "어제 계산해 둔 답이 오늘도 똑같으면 다시 계산 안 하고 재활용하기", useCallback은 "매번 새 도장을 파지 않고 같은 도장을 계속 재사용하기"입니다. React.memo는 "자식에게 준 재료(props)가 어제랑 완전히 똑같으면 자식은 그리지 말고 그대로 두기"라는 규칙이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>useRef — 렌더링과 무관한 "손가락"과 "메모장"</h4>
+        <p><code>const inputRef = useRef(null)</code>처럼 만든 다음 JSX에서 <code>&lt;input ref={inputRef} /&gt;</code>로 연결하면, <code>inputRef.current</code>로 실제 <code>&lt;input&gt;</code> DOM 엘리먼트에 직접 접근할 수 있습니다(<code>inputRef.current.focus()</code> 같은 명령형 조작). useRef의 또 다른 용도는 "렌더링을 유발하지 않는 값 보관함"입니다 — <code>renderCount.current += 1</code>처럼 값을 바꿔도 useState와 달리 화면이 다시 그려지지 않습니다. 다만 그 값은 <em>다른 이유(예: setQuery)로</em> 리렌더링이 일어날 때 최신값이 함께 화면에 반영됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>useMemo — 무거운 "계산 결과" 캐싱</h4>
+        <p><code>useMemo(() =&gt; 계산식, [의존성])</code>은 컴포넌트가 리렌더링될 때마다 의존성 배열 값을 확인해서, 이전 렌더링과 값이 똑같으면 계산식을 다시 실행하지 않고 저장해 둔 이전 결과를 그대로 재사용합니다. 예를 들어 주식 목록을 필터링·정렬하는 연산은 종목이 많아질수록 비용이 커지는데, <code>favorites</code>(즐겨찾기)만 바뀌고 <code>filter</code>·<code>sortBy</code>는 그대로라면 굳이 다시 필터링·정렬할 필요가 없습니다 — 콘솔 로그를 넣어보면 별(★)을 눌러도 "재계산!" 로그가 안 찍히는 것으로 확인할 수 있습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>useCallback + React.memo — 자식 리렌더링을 막는 2단 방어</h4>
+        <p>부모 컴포넌트가 리렌더링되면 그 안에서 만든 일반 함수는 매번 "새 함수"로(메모리 주소가 다르게) 다시 생성됩니다. 자식이 <code>React.memo</code>로 감싸져 있어도, props로 받은 함수가 매번 새 것이면 memo는 "props가 바뀌었다"고 오판해 자식을 다시 그립니다. <code>useCallback(fn, [])</code>으로 함수를 캐싱해 주소를 고정하면, memo가 이전 props와 새 props를 비교(얕은 비교)했을 때 함수까지 동일하다고 판단해 리렌더링을 건너뜁니다. 즉 <b>useMemo/useCallback(캐싱)</b>과 <b>React.memo(비교 후 스킵)</b>는 항상 짝을 이뤄야 효과가 있습니다 — 캐싱만 하고 자식을 memo로 감싸지 않으면 자식은 여전히 매번 다시 그려집니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/StockSearch.jsx — useRef</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">import { useState, useRef } from 'react'
+import { STOCKS } from '../data/stocks'
+
+function StockSearch() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+
+  // 용도 ① DOM 접근: 실제 &lt;input&gt; 엘리먼트를 가리키는 '손가락' 변수
+  const inputRef = useRef(null)
+  // 용도 ② 렌더링과 무관한 값 보존: 화면을 다시 그리지 않고 조용히 숫자만 세는 '메모장'
+  const renderCount = useRef(0)
+  renderCount.current += 1 // 리렌더링마다 1씩 증가하지만, 이 증가 자체는 화면을 다시 그리지 않음!
+
+  const handleSearch = (e) =&gt; {
+    const q = e.target.value
+    setQuery(q) // setState이므로 여기서 리렌더링 발생 → renderCount.current도 최신값으로 화면에 반영됨
+    setResults(
+      q.trim()
+        ? STOCKS.filter(
+            (s) =&gt;
+              s.symbol.toLowerCase().includes(q.toLowerCase()) ||
+              s.name.toLowerCase().includes(q.toLowerCase())
+          )
+        : []
+    )
+  }
+
+  const handleClear = () =&gt; {
+    setQuery('')
+    setResults([])
+    inputRef.current.focus() // useState로는 불가능 — .current로 실제 DOM에 직접 접근해 focus() 호출
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;렌더링 횟수: {renderCount.current}&lt;/p&gt;
+      &lt;input ref={inputRef} value={query} onChange={handleSearch} placeholder="종목 검색..." /&gt;
+      &lt;button onClick={handleClear}&gt;지우기&lt;/button&gt;
+      &lt;ul&gt;
+        {results.map((s) =&gt; (
+          &lt;li key={s.id}&gt;{s.symbol} — {s.name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default StockSearch
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/StockList.jsx — useMemo + useCallback</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">import { useState, useMemo, useCallback } from 'react'
+import { STOCKS } from '../data/stocks'
+import StockRow from './StockRow'
+
+function StockList() {
+  const [filter, setFilter] = useState('all')     // 'all' | 'up' | 'down'
+  const [sortBy, setSortBy] = useState('symbol')   // 'symbol' | 'price' | 'change'
+  const [favorites, setFavorites] = useState([])   // 즐겨찾기(★) 등록된 종목 심볼 배열
+
+  // useMemo: filter나 sortBy가 안 바뀌면 아래 필터링·정렬 연산을 건너뛰고 이전 결과를 재사용
+  const processedStocks = useMemo(() =&gt; {
+    console.log('정렬/필터 재계산!') // filter·sortBy는 안 건드리고 별(★)만 눌러보면 이 로그가 안 찍힘!
+    let result = [...STOCKS]
+    if (filter === 'up') result = result.filter((s) =&gt; s.change &gt;= 0)
+    if (filter === 'down') result = result.filter((s) =&gt; s.change &lt; 0)
+    result.sort((a, b) =&gt; {
+      if (sortBy === 'price') return b.price - a.price
+      if (sortBy === 'change') return b.change - a.change
+      return a.symbol.localeCompare(b.symbol)
+    })
+    return result
+  }, [filter, sortBy]) // 의존성 배열 — 이 두 값이 바뀔 때만 위 함수를 다시 실행
+
+  // useCallback: setFavorites만 쓰는 이 함수를 컴포넌트가 다시 그려져도 매번 새로 만들지 않고 고정
+  const toggleFavorite = useCallback((symbol) =&gt; {
+    setFavorites((prev) =&gt;
+      prev.includes(symbol) ? prev.filter((s) =&gt; s !== symbol) : [...prev, symbol]
+    )
+  }, []) // 빈 배열 — 최초 1번 만든 함수를 계속 재사용 (메모리 주소가 안 바뀜)
+
+  return (
+    &lt;div&gt;
+      {/* 필터·정렬 버튼 영역 생략 */}
+      &lt;ul&gt;
+        {processedStocks.map((stock) =&gt; (
+          &lt;StockRow
+            key={stock.id}
+            stock={stock}
+            isFavorite={favorites.includes(stock.symbol)}
+            onToggleFavorite={toggleFavorite}
+          /&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default StockList
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/StockRow.jsx — React.memo</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">import { memo } from 'react'
+
+// memo(...)로 감싸면: 부모(StockList)가 리렌더링돼도 이 컴포넌트는
+// "이전 props와 새 props가 완전히 같으면" 다시 그리지 않고 건너뜀
+const StockRow = memo(function StockRow({ stock, isFavorite, onToggleFavorite }) {
+  // ★을 눌러도 관련 없는 종목들은 이 로그가 안 찍혀야 memo가 제대로 동작하는 것!
+  console.log(`${stock.symbol} 렌더링`)
+
+  return (
+    &lt;li&gt;
+      &lt;button onClick={() =&gt; onToggleFavorite(stock.symbol)}&gt;
+        {isFavorite ? '★' : '☆'}
+      &lt;/button&gt;
+      &lt;strong&gt;{stock.symbol}&lt;/strong&gt; {stock.name} — ${stock.price.toFixed(2)}
+    &lt;/li&gt;
+  )
+})
+
+export default StockRow
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>useRef(초기값)</code>은 <code>.current</code> 속성에 값을 담아두는 상자 — 값이 바뀌어도 화면을 다시 그리지 않는다(useState와 정반대). DOM 엘리먼트에 직접 접근(<code>ref={...}</code>)하거나, 렌더와 무관한 카운터·타이머 id 등을 보관할 때 쓴다.</li>
+        <li><code>useMemo(() =&gt; 계산, [의존성])</code>은 의존성이 안 바뀌면 계산을 건너뛰고 이전 "결과값"을 재사용 — 필터링·정렬처럼 비용이 큰 계산에 적합하다.</li>
+        <li><code>useCallback(fn, [의존성])</code>은 의존성이 안 바뀌면 "함수 자체"를 재사용 — 자식에게 함수를 props로 내려줄 때, 그 자식이 <code>React.memo</code>로 감싸져 있다면 반드시 짝지어 써야 효과가 있다.</li>
+        <li><code>React.memo(컴포넌트)</code>는 이전 props와 새 props를 얕은 비교(<code>===</code>)해서 완전히 같으면 그 컴포넌트의 리렌더링을 건너뛴다 — 객체·배열·함수는 내용이 같아도 매번 새로 만들면 <code>===</code>가 false이므로, useMemo/useCallback으로 "같은 참조"를 유지해 줘야 한다.</li>
+        <li>세 훅 모두 "무조건 빠르다"가 아니라 <b>측정 후 필요한 곳에만</b> 쓰는 최적화 도구 — 남용하면 오히려 캐시 비교 비용만 늘어날 수 있다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>콘솔(F12)을 열어두고 별(★)을 클릭해 보면 세 훅의 효과를 눈으로 확인할 수 있습니다 — <code>useMemo</code>가 있으면 "정렬/필터 재계산!" 로그가 안 찍히고, <code>useCallback</code>+<code>memo</code>가 있으면 클릭한 종목의 "렌더링" 로그만 찍힙니다. 반대로 <code>useMemo</code>나 <code>useCallback</code>을 지워보면 갑자기 모든 종목의 로그가 다시 찍히는 걸 볼 수 있어요 — 눈에 안 보이던 "낭비"를 직접 확인하는 가장 좋은 방법입니다. useRef·useMemo·useCallback의 기초 개념이 헷갈린다면 <a href="#concept-useref">기초 개념 사전 — useRef란?</a>과 <a href="#concept-usememo-usecallback">useMemo·useCallback이란?</a>, <a href="#concept-react-memo">React.memo란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/03_pref_hooks/src/components/StockSearch.jsx" target="_blank" rel="noopener">StockSearch.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/03_pref_hooks/src/components/StockList.jsx" target="_blank" rel="noopener">StockList.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/03_pref_hooks/src/components/StockRow.jsx" target="_blank" rel="noopener">StockRow.jsx</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -4222,6 +4399,18 @@ export default TodoApp
         </div>
         <div class="roadmap-step">
           <span class="step-n">4</span>
+          <div class="step-body">
+            <b>성능 최적화가 궁금하다면</b>
+            <p>react-04에서 다루는 세 훅입니다. useState/useEffect에 익숙해진 다음 보면 이해가 더 쉬워요.</p>
+            <div class="step-links">
+              <a href="#concept-useref">useRef란?</a>
+              <a href="#concept-usememo-usecallback">useMemo·useCallback이란?</a>
+              <a href="#concept-react-memo">React.memo란?</a>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <span class="step-n">5</span>
           <div class="step-body">
             <b>버그를 만났다면 (증상별로 바로 찾기)</b>
             <p>"화면이 멈췄다", "저장한 데이터가 사라졌다", "값이 이상하게 옛날 값 같다" — 증상이 있다면 바로 여기부터 읽으세요.</p>
@@ -4756,13 +4945,110 @@ export default TodoApp
         <li>조건부 로직은 Hook 호출 자체가 아니라 Hook이 반환한 값을 사용하는 코드 안에서 처리한다.</li>
       </ul>
     </div>
-    <div class="note-files">관련: <a href="#react-03">react-03 (useState·useEffect 실습)</a> · 다음 학습 예정(useRef·useMemo·useCallback)</div>
+    <div class="note-files">관련: <a href="#react-03">react-03 (useState·useEffect 실습)</a> · <a href="#react-04">react-04 (useRef·useMemo·useCallback 실습)</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-useref">
+  <div class="note-head">
+    <span class="note-num">20</span>
+    <h3>useRef란?</h3>
+    <div class="note-tags"><span class="tag">useRef</span><span class="tag">DOM 접근</span><span class="tag">렌더링 안 됨</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>useRef(초기값)는 <code>.current</code>에 값을 담아두는 상자를 만드는 훅으로, useState와 달리 값이 바뀌어도 화면을 다시 그리지 않으며, 실제 DOM 엘리먼트에 직접 접근할 때나 렌더링과 무관한 값을 보관할 때 쓴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>useState가 "고치면 선생님이 칠판을 다시 써 주는 값"이라면, useRef는 "내 서랍 속 개인 메모장"이에요. 메모장 내용을 바꿔도 아무도 칠판을 다시 쓰지 않습니다(리렌더링 없음). 다만 서랍 자체는 계속 같은 자리에 있어서(<code>.current</code>), 필요할 때 언제든 열어볼 수 있어요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>용도 ① DOM 접근 — "손가락" 변수</h4>
+        <p><code>const inputRef = useRef(null)</code>로 만든 다음 JSX에서 <code>&lt;input ref={inputRef} /&gt;</code>처럼 연결하면, React가 렌더링 후 실제 DOM 엘리먼트를 <code>inputRef.current</code>에 넣어줍니다. 이후 <code>inputRef.current.focus()</code>처럼 브라우저 DOM API를 직접 호출할 수 있습니다 — <code>value</code>/<code>onChange</code>로 값만 다루는 일반적인 React 방식(선언형)과 달리, "이 엘리먼트에 직접 명령"하는 명령형 코드입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>용도 ② 렌더링과 무관한 값 보존 — "비밀 메모장"</h4>
+        <p>useState의 초기값처럼 <code>useRef(0)</code>로 시작해서 <code>renderCount.current += 1</code>처럼 아무 때나 값을 바꿀 수 있지만, 이 대입 자체는 리렌더링을 일으키지 않습니다. 그래서 "화면에 안 보여도 되지만 기억은 해둬야 하는 값"(예: 이전 값, 타이머 id, 렌더링 횟수 카운터)을 저장할 때 씁니다. 단, 그 값을 화면에 표시하려면 다른 이유로 리렌더링이 일어나야 최신값이 반영됩니다 — <code>renderCount.current</code>만 바꾸고 아무 setState도 안 하면 화면 숫자는 갱신되지 않습니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>useState: 값이 바뀌면 리렌더링 O / useRef: 값이 바뀌어도 리렌더링 X.</li>
+        <li><code>ref={변수}</code>로 JSX 엘리먼트와 연결하면 <code>변수.current</code>로 실제 DOM에 접근(focus, scroll 등 명령형 조작).</li>
+        <li>렌더링과 무관하게 "그냥 기억만 하면 되는 값"을 보관하는 용도로도 쓴다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-04">react-04 StockSearch — 검색창 포커스 &amp; 렌더 횟수</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-usememo-usecallback">
+  <div class="note-head">
+    <span class="note-num">21</span>
+    <h3>useMemo·useCallback이란? — 두 가지 캐싱</h3>
+    <div class="note-tags"><span class="tag">useMemo</span><span class="tag">useCallback</span><span class="tag">캐싱</span><span class="tag">의존성 배열</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>useMemo는 "계산 결과값"을 캐싱하고 useCallback은 "함수 자체"를 캐싱하는 훅으로, 둘 다 의존성 배열에 넣은 값이 안 바뀌면 다시 만들지 않고 이전 것을 그대로 재사용한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>useMemo는 "어제 푼 수학 문제의 답을 적어두고, 문제가 안 바뀌었으면 다시 안 풀고 그 답을 재활용하기"예요. useCallback은 "매번 새 도장을 파지 않고, 같은 도장을 계속 재사용하기"입니다 — 함수도 자바스크립트에서는 값이라서, 컴포넌트가 다시 실행될 때마다 겉보기엔 똑같아도 "새로 만들어진 다른 도장"이 되어버리거든요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>useMemo — 계산 결과 캐싱</h4>
+        <p><code>const 결과 = useMemo(() =&gt; 무거운계산(), [dep1, dep2])</code> 형태로 씁니다. 컴포넌트가 리렌더링될 때마다 dep1·dep2가 이전과 같은지 비교해서, 같으면 함수를 실행하지 않고 저장해 둔 이전 반환값을 그대로 돌려줍니다. 필터링·정렬·합계 계산처럼 "데이터 양이 많아질수록 느려지는 연산"에 주로 씁니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>useCallback — 함수 자체 캐싱</h4>
+        <p><code>const 핸들러 = useCallback((인자) =&gt; {...}, [dep])</code> 형태입니다. useCallback이 없으면 컴포넌트가 리렌더링될 때마다 같은 내용의 함수라도 매번 "새 함수 객체"(다른 메모리 주소)가 만들어집니다. useCallback으로 감싸면 의존성이 안 바뀌는 한 처음 만든 함수 참조를 계속 그대로 돌려줍니다. 이게 중요한 이유는 <a href="#concept-react-memo">React.memo</a>와 함께 쓸 때 드러납니다 — 자세한 건 다음 항목 참고.</p>
+      </div>
+      <div class="concept-block">
+        <h4>둘 다 "공짜 최적화"가 아니다</h4>
+        <p>useMemo/useCallback 자체도 "이전 값과 비교하고 저장해 두는" 작업이라 약간의 비용이 듭니다. 계산이 아주 가볍거나(예: 숫자 하나 더하기) 자식이 <code>React.memo</code>로 감싸져 있지 않다면, 캐싱해도 체감 효과가 거의 없이 코드만 복잡해질 수 있습니다. "무거운 계산"이거나 "memo로 감싼 자식에게 넘기는 함수/객체"일 때 쓰는 것이 정석입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>useMemo(fn, deps): fn의 <b>반환값</b>을 캐싱 — deps가 안 바뀌면 fn을 다시 실행하지 않는다.</li>
+        <li>useCallback(fn, deps): <b>fn 자체(함수 참조)</b>를 캐싱 — deps가 안 바뀌면 항상 같은 함수 객체를 돌려준다.</li>
+        <li>둘 다 "무거운 계산" 또는 "React.memo로 감싼 자식에게 넘기는 값/함수"일 때 쓰는 최적화 도구다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-04">react-04 StockList — 필터·정렬 캐싱 &amp; 즐겨찾기 토글 함수 고정</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-react-memo">
+  <div class="note-head">
+    <span class="note-num">22</span>
+    <h3>React.memo란? — 얕은 비교로 자식 리렌더링 스킵</h3>
+    <div class="note-tags"><span class="tag">React.memo</span><span class="tag">얕은 비교</span><span class="tag">렌더링 스킵</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>React.memo(컴포넌트)로 감싸면, 부모가 리렌더링돼도 이전에 받은 props와 새로 받은 props가 얕은 비교(<code>===</code>) 기준으로 완전히 같을 때 그 컴포넌트의 리렌더링을 건너뛴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>부모가 다시 그려질 때 자식들도 원래는 전부 같이 다시 그려져요. React.memo는 자식 앞에 세워둔 "검문소 문지기"예요 — "지난번이랑 받은 재료(props)가 토씨 하나 안 다르고 완전히 똑같아? 그럼 넌 안 그려도 돼, 통과!"라고 판단해 주는 역할입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>얕은 비교(shallow comparison)란?</h4>
+        <p>React.memo는 각 prop을 <code>===</code>로 비교합니다. 숫자·문자열·불리언 같은 원시값은 값이 같으면 <code>===</code>도 true지만, 객체·배열·함수는 <b>내용이 같아도 참조(메모리 주소)가 다르면</b> <code>===</code>가 false입니다. 예를 들어 <code>{ a: 1 } === { a: 1 }</code>은 false예요 — 서로 다른 상자니까요. 그래서 부모가 리렌더링될 때마다 <code>() =&gt; {...}</code>처럼 매번 새로 만드는 함수를 그대로 props로 내려주면, 내용은 똑같아도 memo는 "달라졌다"고 오판해 리렌더링을 막지 못합니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>왜 useCallback과 짝을 이뤄야 하는가</h4>
+        <p>StockRow를 <code>memo</code>로 감싸도, 부모 StockList가 <code>toggleFavorite</code>를 <code>useCallback</code> 없이 매번 새로 만들어 넘기면 모든 StockRow가 매번 "함수가 바뀌었다"고 인식해 리렌더링됩니다. <code>useCallback(fn, [])</code>으로 함수 참조를 고정해야 비로소 memo가 "이 함수도 지난번과 똑같다"고 판단해 실제로 리렌더링을 스킵합니다. 정리하면 <b>memo(자식 방어막) + useCallback/useMemo(부모가 내려주는 값 고정)</b>가 항상 한 세트입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>React.memo(컴포넌트)는 이전 props와 새 props를 얕은 비교해서 완전히 같으면 리렌더링을 건너뛴다.</li>
+        <li>원시값(숫자·문자열·불리언)은 값이 같으면 통과하지만, 객체·배열·함수는 참조가 달라지면 매번 "바뀐 것"으로 취급된다.</li>
+        <li>그래서 memo로 감싼 자식에게 객체/함수를 props로 넘길 때는 <a href="#concept-usememo-usecallback">useMemo·useCallback</a>으로 참조를 고정해 줘야 효과가 있다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-04">react-04 StockRow — 즐겨찾기 클릭 시 해당 종목만 리렌더링</a></div>
   </div>
 </article>
 
 <article class="note-card" id="concept-strictmode">
   <div class="note-head">
-    <span class="note-num">20</span>
+    <span class="note-num">23</span>
     <h3>React StrictMode란?</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">개발 모드 전용</span><span class="tag">이중 렌더링</span></div>
   </div>
@@ -4791,7 +5077,7 @@ export default TodoApp
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">21</span>
+    <span class="note-num">24</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -4818,7 +5104,7 @@ export default TodoApp
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">22</span>
+    <span class="note-num">25</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -4847,7 +5133,7 @@ export default TodoApp
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">23</span>
+    <span class="note-num">26</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -4925,7 +5211,6 @@ export default TodoApp
 
 <script>
 const nextTopics = [
-  { badge:"REACT", title:"03 · 성능 훅 3종", desc:"useRef(DOM 접근·값 보존), useMemo(계산 캐싱), useCallback(함수 참조 고정)을 콘솔 로그로 관찰" },
   { badge:"REACT", title:"04 · 커스텀 훅", desc:"useDebounce·useInterval·useLocalStorage·useStockData를 만들어 StockDetail에서 레고처럼 조합" },
   { badge:"REACT", title:"05 · memo와 lazy/Suspense", desc:"React.memo로 렌더 스킵, lazy(() => import())로 코드 분할해 초기 로딩 최적화" },
   { badge:"REACT", title:"06 · Context API", desc:"createContext → Provider → useContext 3단계로 prop drilling 제거, 테마·관심목록 전역 공유" },
