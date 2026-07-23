@@ -4854,6 +4854,8 @@ function revealCard(id){
 if (location.hash) {
   setTimeout(() => revealCard(location.hash.slice(1)), 0);
 }
+// 페이지를 새로 열지 않고 해시만 바뀌는 경우(같은 탭에서 다른 #카드id로 재방문 등)도 대응
+window.addEventListener("hashchange", () => revealCard(location.hash.slice(1)));
 // 카드 본문 안에서 다른 카드로 연결된 링크(예: 기초 개념 사전 ↔ 단원 노트)도 같은 방식으로 처리
 document.addEventListener("click", (e) => {
   const a = e.target.closest('a[href^="#"]');
