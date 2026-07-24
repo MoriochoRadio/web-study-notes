@@ -575,8 +575,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 5개 단원</span>
-      <span>기초 개념 사전 27개 항목</span>
+      <span>React 6개 단원</span>
+      <span>기초 개념 사전 28개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -607,8 +607,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">5</div><div class="l">React 단원</div></div>
-      <div class="stat-card concepts"><div class="n">27</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card react"><div class="n">6</div><div class="l">React 단원</div></div>
+      <div class="stat-card concepts"><div class="n">28</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">4</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
     </div>
@@ -3814,7 +3814,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, 그리고 useRef·useMemo·useCallback·React.memo 성능 최적화 실습을 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, 그리고 React.memo·useCallback 비교와 lazy/Suspense 코드 분할 실습을 복습합니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -4700,6 +4700,259 @@ export default function StockDetail() {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/04_custom_hooks/src/hooks/useDebounce.js" target="_blank" rel="noopener">useDebounce.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/04_custom_hooks/src/hooks/useInterval.js" target="_blank" rel="noopener">useInterval.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/04_custom_hooks/src/hooks/useLocalStorage.js" target="_blank" rel="noopener">useLocalStorage.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/04_custom_hooks/src/hooks/useStockData.js" target="_blank" rel="noopener">useStockData.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/04_custom_hooks/src/components/StockDetail.jsx" target="_blank" rel="noopener">StockDetail.jsx</a></div>
   </div>
 </article>
+
+<article class="note-card" id="react-06">
+  <div class="note-head">
+    <span class="note-num">06</span>
+    <h3>React.memo·useCallback 비교 + lazy/Suspense 코드 분할</h3>
+    <div class="note-tags"><span class="tag">React.memo</span><span class="tag">useCallback</span><span class="tag">React.lazy</span><span class="tag">Suspense</span><span class="tag">코드 분할</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>같은 주식 목록을 memo 없는 버전과 memo+useCallback 버전으로 나란히 만들어 리렌더링 스킵 효과를 콘솔 로그로 직접 확인하고, HeavyChart·HeavyReport 두 탭 화면은 React.lazy + Suspense로 감싸 처음 화면을 열 때는 다운로드하지 않고 그 탭을 처음 클릭하는 순간에만 코드를 따로 받아오게(코드 분할) 만든 실습이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>이번 실습은 두 가지를 "눈으로 비교"해 보는 데 초점이 맞춰져 있어요. 하나는 "리렌더링을 막았을 때와 안 막았을 때 콘솔 로그가 어떻게 다르게 찍히는가"(memo), 다른 하나는 "탭을 누르기 전까지는 그 화면의 코드조차 안 받아오다가, 누르는 순간 잠깐 로딩 스피너가 뜨면서 코드를 받아오는 모습"(lazy+Suspense)입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>RowWithoutMemo vs RowWithMemo — 같은 화면을 일부러 두 벌 만든 이유</h4>
+        <p>두 컴포넌트는 렌더링 내용이 완전히 똑같습니다. 차이는 딱 하나, memo로 감쌌는지 여부뿐입니다.</p>
+        <ul>
+          <li><b>function RowWithoutMemo({...})</b> — 일반 컴포넌트. 부모(MemoComparison)가 리렌더링될 때마다 <b>무조건</b> 같이 다시 그려집니다.</li>
+          <li><b>const RowWithMemo = memo(function RowWithMemo({...}))</b> — 똑같은 내용을 <code>memo(...)</code>로 한 겹 감쌈. 부모가 리렌더링돼도 이 컴포넌트가 받는 props(symbol, price, change, onToggle)가 이전과 완전히 같으면 리렌더링을 건너뜁니다.</li>
+          <li><b>console.log(`[memo없음] ${symbol} 렌더링`)</b> / <b>console.log(`[memo있음] ${symbol} 렌더링`)</b> — 눈에 안 보이는 "리렌더링 여부"를 콘솔 로그로 확인할 수 있게 만든 장치. 부모의 "부모 리렌더 유발" 버튼을 누르면 위쪽 로그는 매번 찍히고, 아래쪽 로그는 한 번 찍힌 뒤 더 이상 안 찍힙니다.</li>
+        </ul>
+        <p>비유하면 이건 같은 그림을 그리는 화가 두 명을 나란히 세워둔 것과 같아요 — 한 명(RowWithoutMemo)은 "손님이 왔다"는 소식만 들리면 이유 불문 매번 새로 그리고, 다른 한 명(RowWithMemo)은 "지난번 주문서(props)랑 토씨 하나 안 다르면 그리지 않고 그냥 앉아 있는" 까다로운 화가입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>onToggle을 useCallback으로 감싸지 않으면 memo가 무력화되는 이유</h4>
+        <p>이 실습에서 memo가 실제로 리렌더링을 막아주려면 <code>onToggle</code> 함수의 "포장 방식"이 중요합니다.</p>
+        <ul>
+          <li><b>const onToggle = useCallback((symbol) =&gt; {...}, [])</b> — 의존성 배열이 빈 <code>[]</code>이므로, 컴포넌트가 처음 만들어질 때 딱 한 번 이 함수를 만들고 그 이후로는 <b>같은 함수(같은 메모리 주소)</b>를 계속 재사용합니다.</li>
+          <li><b>만약 useCallback 없이 <code>const onToggle = (symbol) =&gt; {...}</code>로 썼다면</b> — "부모 리렌더 유발" 버튼을 눌러 tick이 바뀔 때마다 onToggle이 <b>매번 새로 만들어진 함수</b>가 됩니다. 함수는 객체와 같은 방식(참조)으로 비교되므로, memo는 "onToggle이 지난번과 달라졌다"고 판단해 RowWithMemo도 어쩔 수 없이 다시 그리게 됩니다.</li>
+          <li><b>결론</b> — <code>memo(자식을 방어)</code> + <code>useCallback(부모가 내려주는 함수의 참조를 고정)</code>은 항상 한 세트로 붙어 다녀야 실제 효과가 납니다. 자세한 원리는 <a href="#concept-react-memo">기초 개념 사전 — React.memo란?</a> 카드를 참고하세요.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>lazy(() =&gt; import('./HeavyChart')) — 처음 화면을 열 때 이 코드는 아직 안 옵니다</h4>
+        <p>App.jsx 맨 위에서 HeavyChart·HeavyReport를 만드는 방식이 평소의 import와 다릅니다.</p>
+        <ul>
+          <li><b>const HeavyChart = lazyWithDelay(() =&gt; import('./components/HeavyChart'))</b> — <code>import('...')</code>처럼 괄호를 붙여 함수처럼 호출하는 <b>동적 import</b>는, 파일 맨 위에 쓰는 평소의 정적 import와 달리 호출되는 그 순간에야 네트워크로 코드를 따로 받아옵니다.</li>
+          <li><b>lazy(...)</b> — 이 동적 import 함수를 리액트에게 "이 컴포넌트는 아직 준비 안 됐을 수 있다"고 알려주는 포장지로 한 번 더 감쌈.</li>
+          <li><b>실제 효과</b> — 사용자가 "⚡ memo 비교" 탭만 보다가 앱을 닫으면, HeavyChart·HeavyReport의 코드는 <b>단 한 번도 네트워크로 받아오지 않습니다</b>. "📈 차트" 탭을 처음 클릭하는 순간에만 비로소 그 코드가 별도 조각(청크)으로 다운로드됩니다.</li>
+        </ul>
+        <p>자세한 동작 순서와 원리는 <a href="#concept-lazy-suspense">기초 개념 사전 — React.lazy + Suspense란?</a> 카드에서 요소별로 정리했습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>lazyWithDelay — 로딩 스피너를 실제로 보이게 만드는 실습용 장치</h4>
+        <p>내 컴퓨터에서 개발 서버로 테스트하면 파일이 이미 디스크에 있어서 다운로드가 너무 빨라 로딩 스피너가 거의 안 보입니다. 그래서 <code>lazy</code>를 바로 쓰지 않고 <code>lazyWithDelay</code>라는 헬퍼로 한 번 더 감쌌습니다 — <code>new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(factory()), 1000))</code>로 "1초 뒤에야 진짜 import를 실행하겠다"는 인위적인 지연을 끼워 넣은 것입니다. 코드 분할이라는 실제 동작 자체에는 영향이 없고, 순전히 "로딩 중" 상태를 눈으로 확인하기 위한 학습용 장치입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>&lt;Suspense fallback={&lt;LoadingSpinner /&gt;}&gt; 하나로 세 탭을 전부 감싼 이유</h4>
+        <p>App.jsx는 <code>Suspense</code> 울타리 하나로 memo 탭까지 포함한 세 탭 전부를 감쌉니다. memo 탭(<code>MemoComparison</code>)은 애초에 lazy로 만들지 않았으므로 항상 즉시 준비돼 있어 fallback이 뜰 일이 없고, chart/report 탭은 lazy 컴포넌트라서 처음 클릭 시에만 fallback(⏳ 로딩 중)이 잠깐 나타났다가 다운로드가 끝나면 자동으로 실제 화면으로 바뀝니다. 하나의 Suspense가 "그 안에 있는 lazy 컴포넌트 중 지금 준비 안 된 게 있으면"만 반응하므로, 이미 준비된 컴포넌트에는 아무 영향이 없습니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/MemoComparison.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 1: React.memo &amp; useCallback 최적화 비교 실습 ──
+// 개념: memo는 props가 같으면 리렌더링을 건너뜀. 단, useCallback으로 함수 참조를 고정해야 memo가 정상 작동함!
+import { useState, memo, useCallback } from 'react'
+
+// ❌ [React.memo 없음] 일반 컴포넌트
+// 부모(MemoComparison)의 상태(tick)가 바뀔 때마다 무조건 자식도 같이 다시 그려짐! (불필요한 리렌더링)
+function RowWithoutMemo({ symbol, price, change, onToggle }) {
+    console.log(`[memo없음] ${symbol} 렌더링`) // 콘솔에 찍히는 로그로 리렌더링 확인 가능
+    const isUp = change &gt;= 0
+    return (
+        &lt;div style={{ padding: '10px', marginBottom: '4px', border: '1px solid #ffcdd2', borderRadius: '6px' }}&gt;
+            &lt;strong&gt;{symbol}&lt;/strong&gt; ${price.toFixed(2)}
+            &lt;span style={{ color: isUp ? 'blue' : 'red', marginLeft: '8px' }}&gt;{isUp ? '+' : ''}{change}%&lt;/span&gt;
+            &lt;button onClick={() =&gt; onToggle(symbol)} style={{ marginLeft: '8px' }}&gt;★&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+
+// ✅ [React.memo 적용] 최적화된 컴포넌트
+// 💡 memo(function ...): 부모가 리렌더링되어도, 전달받는 props(symbol, price, change, onToggle)의 값이 변하지 않았다면 리렌더링을 완전히 막아줌!
+const RowWithMemo = memo(function RowWithMemo({ symbol, price, change, onToggle }) {
+    console.log(`[memo있음] ${symbol} 렌더링`) // props가 변경될 때만 로그가 찍힘!
+    const isUp = change &gt;= 0
+    return (
+        &lt;div style={{ padding: '10px', marginBottom: '4px', border: '1px solid #c8e6c9', borderRadius: '6px' }}&gt;
+            &lt;strong&gt;{symbol}&lt;/strong&gt; ${price.toFixed(2)}
+            &lt;span style={{ color: isUp ? 'blue' : 'red', marginLeft: '8px' }}&gt;{isUp ? '+' : ''}{change}%&lt;/span&gt;
+            &lt;button onClick={() =&gt; onToggle(symbol)} style={{ marginLeft: '8px' }}&gt;★&lt;/button&gt;
+        &lt;/div&gt;
+    )
+})
+
+// 테스트용 더미 주식 목록 데이터
+const stocks = [
+    { symbol: 'AAPL', price: 182.52, change: 1.24 },
+    { symbol: 'TSLA', price: 248.5, change: -2.15 },
+    { symbol: 'MSFT', price: 378.85, change: 0.87 },
+]
+
+export default function MemoComparison() {
+    // 부모의 리렌더링을 강제로 일으키기 위한 단순 숫자를 관리하는 상태
+    const [tick, setTick] = useState(0)
+
+    // ✅ [useCallback] 전달할 함수 메모리 고정
+    // 💡 왜 useCallback으로 감싸야 하나요?
+    // - 감싸지 않으면 부모가 리렌더링될 때마다 onToggle 함수가 새로 생성됩니다.
+    // - 함수 주소가 새로워지면 RowWithMemo는 "onToggle이 바뀌었네?" 하고 memo를 작성했어도 다시 그려지게 됩니다!
+    // - 의존성 배열 []을 비워두면, 컴포넌트가 처음 생성될 때 함수 주소를 고정해 주므로 memo가 정상 작동합니다!
+    const onToggle = useCallback((symbol) =&gt; {
+        console.log('토글:', symbol)
+    }, [])
+
+    return (
+        &lt;div style={{ padding: '1.5rem', maxWidth: '500px' }}&gt;
+            {/* 부모의 상태(tick)를 변경시키는 버튼 */}
+            &lt;div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '1rem' }}&gt;
+                &lt;button onClick={() =&gt; setTick((t) =&gt; t + 1)} style={{ padding: '8px 16px' }}&gt;부모 리렌더 유발 (tick: {tick})&lt;/button&gt;
+                &lt;span style={{ fontSize: '12px', color: '#888' }}&gt;콘솔을 열고 눌러보세요&lt;/span&gt;
+            &lt;/div&gt;
+
+            {/* ❌ memo가 없는 주식 목록 (부모 버튼 누르면 계속 로그가 찍히며 다시 그려짐) */}
+            &lt;h4 style={{ color: '#c62828' }}&gt;❌ React.memo 없음&lt;/h4&gt;
+            {stocks.map((s) =&gt; (
+                &lt;RowWithoutMemo key={s.symbol} {...s} onToggle={onToggle} /&gt;
+            ))}
+
+            {/* ✅ memo + useCallback이 적용된 주식 목록 (부모 버튼 눌러도 로그 안 찍히고 리렌더링 완전히 스킵!) */}
+            &lt;h4 style={{ color: '#2e7d32', marginTop: '1rem' }}&gt;✅ React.memo + useCallback (리렌더링 스킵 완료)&lt;/h4&gt;
+            {stocks.map((s) =&gt; (
+                &lt;RowWithMemo key={s.symbol} {...s} onToggle={onToggle} /&gt;
+            ))}
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/HeavyChart.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2a: lazy로 지연 로딩될 무거운 컴포넌트 ──
+// 💡 [코드 분할 (Code Splitting)]
+// - 처음 웹 사이트에 접속했을 때 사용자가 차트 탭을 안 누를 수도 있습니다.
+// - 굳이 안 보는 차트 코드까지 처음부터 전부 다운로드하면 웹사이트 초기 화면 접속이 늦어집니다!
+// - 이 컴포넌트를 React.lazy()로 감싸두면, 사용자가 '📈 차트' 탭을 처음 누르는 그 순간에만 네트워크를 통해 이 코드가 지연 다운로드됩니다.
+export default function HeavyChart() {
+    return (
+        &lt;div style={{ padding: '1.5rem', border: '1px solid #dbeafe', borderRadius: '8px', background: '#eff6ff' }}&gt;
+            &lt;h3 style={{ marginTop: 0 }}&gt;📈 차트 패널 (무겁다고 가정)&lt;/h3&gt;
+            &lt;p style={{ color: '#555', fontSize: '14px' }}&gt;
+                이 컴포넌트는 lazy로 분할되어, 이 탭을 처음 눌렀을 때만 로드됩니다. (첫 로드 시 Suspense fallback이 잠깐 보임)
+            &lt;/p&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/components/HeavyReport.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2b: lazy로 지연 로딩될 무거운 컴포넌트 (예시 2) ──
+// 💡 HeavyChart와 마찬가지로, 이 리포트 패널 코드는 처음부터 다운받지 않고
+//    '📑 리포트' 탭을 사용자가 클릭하는 순간 독립된 별도의 번들 조각(청크)으로 다운로드됩니다.
+export default function HeavyReport() {
+    return (
+        &lt;div style={{ padding: '1.5rem', border: '1px solid #dcfce7', borderRadius: '8px', background: '#f0fdf4' }}&gt;
+            &lt;h3 style={{ marginTop: 0 }}&gt;📑 리포트 패널 (무겁다고 가정)&lt;/h3&gt;
+            &lt;p style={{ color: '#555', fontSize: '14px' }}&gt;
+                HeavyChart와 마찬가지로 별도 청크로 분리됩니다. 필요할 때만 네트워크로 받아오죠.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/App.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 3: lazy + Suspense 로 코드 분할 &amp; 로딩 처리 ──
+// 개념: lazy(() =&gt; import(...))로 필요할 때 다운로드(코드 분할), Suspense fallback으로 다운로드되는 동안 보여줄 스피너 지정.
+import { lazy, Suspense, useState } from 'react'
+import MemoComparison from './components/MemoComparison'
+
+// 💡 [lazyWithDelay 헬퍼]
+// 원래 lazy는 네트워크가 너무 빠르면 로딩 스피너가 눈 깜빡할 사이에 지나가서 잘 안 보입니다.
+// 실습 시 로딩 스피너(Suspense fallback)를 눈으로 확실히 확인하기 위해 1초 강제 지연시간을 추가한 함수입니다.
+const lazyWithDelay = (factory) =&gt;
+  lazy(() =&gt; new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(factory()), 1000)))
+
+// 💡 [React.lazy (지연 로딩)]
+// - 처음 웹페이지에 들어왔을 때 HeavyChart, HeavyReport의 번들 코드를 다운로드받지 않습니다!
+// - 사용자가 해당 탭을 클릭하는 순간 비로소 네트워크로 지연 다운로드받아 옵니다. (초기 로딩 속도 최적화!)
+const HeavyChart = lazyWithDelay(() =&gt; import('./components/HeavyChart'))
+const HeavyReport = lazyWithDelay(() =&gt; import('./components/HeavyReport'))
+
+// 컴포넌트를 인터넷에서 받아오는 동안 화면에 띄워둘 로딩 표시 UI 컴포넌트
+function LoadingSpinner({ label }) {
+  return &lt;div style={{ padding: '3rem', textAlign: 'center', border: '1px dashed #ddd', borderRadius: '8px', color: '#888' }}&gt;⏳ {label || '로딩 중'}...&lt;/div&gt;
+}
+
+export default function App() {
+  // 현재 선택된 탭 상태 ('memo', 'chart', 'report')
+  const [tab, setTab] = useState('memo')
+
+  // 탭 목록 데이터
+  const tabs = [
+    { id: 'memo', label: '⚡ memo 비교' },
+    { id: 'chart', label: '📈 차트 (lazy)' },
+    { id: 'report', label: '📑 리포트 (lazy)' },
+  ]
+
+  return (
+    &lt;div style={{ maxWidth: '640px', margin: '0 auto', padding: '1.5rem', fontFamily: 'sans-serif' }}&gt;
+      &lt;h1&gt;🧩 React.memo · lazy/Suspense 실습&lt;/h1&gt;
+
+      {/* 탭 버튼 메뉴 영역 */}
+      &lt;div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}&gt;
+        {tabs.map((t) =&gt; (
+          &lt;button key={t.id} onClick={() =&gt; setTab(t.id)} style={{ padding: '8px 16px', borderRadius: '20px', border: '1px solid #ddd', cursor: 'pointer', background: tab === t.id ? '#1a1a18' : '#fff', color: tab === t.id ? '#fff' : '#333' }}&gt;
+            {t.label}
+          &lt;/button&gt;
+        ))}
+      &lt;/div&gt;
+
+      {/* 💡 [&lt;Suspense&gt;] 울타리
+          - 내부에 있는 lazy 컴포넌트(HeavyChart, HeavyReport)가 네트워크로 로드되는 동안
+          - fallback={...} 에 지정된 LoadingSpinner UI를 화면에 대신 띄워줍니다.
+          - 로드가 끝나면 자동으로 본래 컴포넌트를 보여줍니다. */}
+      &lt;Suspense fallback={&lt;LoadingSpinner label={"컴포넌트 로딩"} /&gt;}&gt;
+        {tab === 'memo' &amp;&amp; &lt;MemoComparison /&gt;}
+        {tab === 'chart' &amp;&amp; &lt;HeavyChart /&gt;}
+        {tab === 'report' &amp;&amp; &lt;HeavyReport /&gt;}
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>React.memo(컴포넌트)는 props가 이전과 완전히 같으면 리렌더링을 스킵하지만, 부모가 넘기는 함수를 useCallback으로 참조 고정해 두지 않으면 매번 "함수가 바뀌었다"고 오판해 무력화된다.</li>
+        <li>React.lazy(() =&gt; import('./Foo'))로 감싼 컴포넌트는 처음 화면을 열 때 다운로드되지 않고, 실제로 화면에 나타나야 하는 순간에만 네트워크로 따로 받아온다(코드 분할).</li>
+        <li>&lt;Suspense fallback=&gt;은 그 다운로드가 끝날 때까지 대신 보여줄 로딩 UI를 지정하고, 끝나면 자동으로 실제 컴포넌트로 교체해 준다 — 로딩 state를 직접 관리할 필요가 없다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>콘솔을 열어두고 "부모 리렌더 유발" 버튼을 눌러보면 <code>[memo없음]</code> 로그는 클릭할 때마다 3줄씩 찍히지만 <code>[memo있음]</code> 로그는 최초 1번만 찍히고 더 이상 안 찍힙니다. 네트워크 탭(브라우저 개발자 도구)을 열어두고 "📈 차트"를 처음 눌러보면, 그 순간에야 HeavyChart 관련 청크 파일이 새로 로드되는 것도 확인할 수 있습니다. memo/lazy 문법 자체가 헷갈리면 <a href="#concept-react-memo">기초 개념 사전 — React.memo란?</a>과 <a href="#concept-lazy-suspense">React.lazy + Suspense란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/05_memo_lazy/src/components/MemoComparison.jsx" target="_blank" rel="noopener">MemoComparison.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/05_memo_lazy/src/components/HeavyChart.jsx" target="_blank" rel="noopener">HeavyChart.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/05_memo_lazy/src/components/HeavyReport.jsx" target="_blank" rel="noopener">HeavyReport.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/05_memo_lazy/src/App.jsx" target="_blank" rel="noopener">App.jsx</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -4761,11 +5014,13 @@ export default function StockDetail() {
           <span class="step-n">4</span>
           <div class="step-body">
             <b>성능 최적화가 궁금하다면</b>
-            <p>react-04에서 다루는 세 훅입니다. useState/useEffect에 익숙해진 다음 보면 이해가 더 쉬워요.</p>
+            <p>react-04·react-06에서 다루는 성능 최적화 개념입니다. useState/useEffect에 익숙해진 다음 보면 이해가 더 쉬워요.</p>
             <div class="step-links">
               <a href="#concept-useref">useRef란?</a>
               <a href="#concept-usememo-usecallback">useMemo·useCallback이란?</a>
               <a href="#concept-react-memo">React.memo란?</a>
+              <a href="#concept-custom-hook">커스텀 훅이란?</a>
+              <a href="#concept-lazy-suspense">React.lazy + Suspense란?</a>
             </div>
           </div>
         </div>
@@ -5620,7 +5875,7 @@ export default function StockDetail() {
         <li>그래서 memo로 감싼 자식에게 객체/함수를 props로 넘길 때는 <a href="#concept-usememo-usecallback">useMemo·useCallback</a>으로 참조를 고정해 줘야 효과가 있다.</li>
       </ul>
     </div>
-    <div class="note-files">관련 실습: <a href="#react-04">react-04 StockRow — 즐겨찾기 클릭 시 해당 종목만 리렌더링</a></div>
+    <div class="note-files">관련 실습: <a href="#react-04">react-04 StockRow — 즐겨찾기 클릭 시 해당 종목만 리렌더링</a>, <a href="#react-06">react-06 — memo 있음/없음 비교 실습</a></div>
   </div>
 </article>
 
@@ -5696,11 +5951,69 @@ export default function StockDetail() {
   </div>
 </article>
 
+<article class="note-card" id="concept-lazy-suspense">
+  <div class="note-head">
+    <span class="note-num">25</span>
+    <h3>React.lazy + Suspense란? — 코드 분할로 초기 로딩 줄이기</h3>
+    <div class="note-tags"><span class="tag">React.lazy</span><span class="tag">Suspense</span><span class="tag">코드 분할</span><span class="tag">동적 import</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>React.lazy(() =&gt; import('./Foo'))로 컴포넌트를 감싸면 그 컴포넌트의 코드는 처음 화면을 열 때 받아오지 않고 실제로 화면에 나타나야 하는 순간에만 네트워크로 따로 받아오며(코드 분할), 그 다운로드가 끝날 때까지 대신 보여줄 화면은 &lt;Suspense fallback=&gt;으로 지정한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>보통은 앱을 열자마자 모든 페이지의 코드를 한꺼번에 다 받아옵니다 — 마치 이사할 때 앞으로 볼 일 없을지도 모르는 짐까지 트럭에 전부 싣는 것과 같아요. React.lazy는 "지금 당장 필요한 짐(첫 화면)만 먼저 옮기고, 나머지 방(다른 탭·페이지)은 문을 열 때 그제서야 옮겨온다"는 전략입니다. 그 옮겨오는 잠깐 동안 문 앞에 세워두는 "잠시만요" 팻말이 Suspense의 fallback입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>왜 코드를 나눠 받아야 하는가 — 번들(bundle)이라는 개념</h4>
+        <p>기본적으로 Vite/웹팩 같은 빌드 도구는 <code>import</code>로 연결된 모든 컴포넌트 코드를 <b>파일 하나(번들)</b>로 합쳐서 브라우저에 보냅니다. 이 실습의 HeavyChart·HeavyReport처럼 사용자가 클릭하기 전에는 안 볼 수도 있는 화면까지 처음부터 전부 합쳐서 보내면, 정작 첫 화면(memo 탭)이 뜨는 데까지 걸리는 시간이 쓸데없이 길어집니다. <b>코드 분할(code splitting)</b>은 이 번들을 여러 조각(청크)으로 쪼개, 당장 안 쓰는 조각은 나중에 필요할 때 따로 받아오게 만드는 기법입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>lazy(() =&gt; import('./Foo')) — 괄호 두 겹을 요소별로 뜯어보면</h4>
+        <p>한 줄 안에 "리액트 함수 + 화살표 함수 + 동적 import 함수 호출"이 겹쳐 있어서 헷갈리기 쉬운 문법입니다. 하나씩 분리하면 이렇습니다.</p>
+        <ul>
+          <li><b>lazy( ... )</b> — 리액트가 제공하는 함수. "이 컴포넌트는 코드가 당장 준비돼 있지 않을 수 있다"고 리액트에게 미리 알려주는 포장지 역할.</li>
+          <li><b>() =&gt; import('./HeavyChart')</b> — lazy에게 건네는 화살표 함수. lazy는 이 함수를 <b>미리 실행하지 않고</b> 실제로 그 컴포넌트가 화면에 필요해지는 순간에만 호출합니다.</li>
+          <li><b>import('./HeavyChart')</b> — 파일 맨 위에 쓰는 평소의 <code>import Foo from './Foo'</code>(정적 import)와 달리, 함수처럼 <b>괄호를 붙여 호출하는 동적 import</b>입니다. 호출되는 순간 그 파일의 코드를 네트워크로 따로 요청해서 받아오고, 다 받아오면 그 결과를 담은 <code>Promise</code>를 돌려줍니다.</li>
+          <li><b>const HeavyChart = lazy(...)</b> — 결과로 만들어진 <code>HeavyChart</code>는 진짜 컴포넌트가 아니라, "필요한 순간 코드를 받아와 진짜 컴포넌트로 바꿔치기해 줄 준비가 된 대역 컴포넌트"입니다.</li>
+        </ul>
+        <p>비유하면 정적 import는 "이삿짐을 미리 다 싸서 트럭에 실어두는 것"이고, <code>import('./Foo')</code>(동적 import)는 "필요할 때만 그 방에 가서 짐을 싸 오겠다는 약속표(Promise)를 써 두는 것"과 같아요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>&lt;Suspense fallback={...}&gt;...&lt;/Suspense&gt; — 로딩 중 화면을 대신 보여주는 울타리</h4>
+        <p>lazy로 만든 컴포넌트는 반드시 Suspense로 감싸야 합니다. 각 부분의 역할은 다음과 같습니다.</p>
+        <ul>
+          <li><b>&lt;Suspense&gt;</b> — 리액트가 제공하는 특수 컴포넌트. "이 안에 있는 자식들 중 아직 코드/데이터가 준비 안 된 게 있으면, 대신 fallback을 보여줘라"는 규칙을 가진 울타리.</li>
+          <li><b>fallback={&lt;LoadingSpinner .../&gt;}</b> — 아직 준비가 안 됐을 때 대신 보여줄 UI. 이 실습에서는 "⏳ 로딩 중..." 문구를 가진 컴포넌트.</li>
+          <li><b>{tab === 'chart' &amp;&amp; &lt;HeavyChart /&gt;}</b> — Suspense가 감시하는 진짜 자식. lazy 컴포넌트라서 아직 코드가 안 왔을 수 있음.</li>
+        </ul>
+        <p>동작 순서: ① 사용자가 "📈 차트" 탭을 처음 클릭 → ② HeavyChart의 코드가 아직 다운로드되지 않았음을 Suspense가 감지 → ③ fallback(로딩 스피너)을 화면에 대신 표시 → ④ 다운로드가 끝나면 리액트가 자동으로 fallback을 내리고 실제 HeavyChart로 교체. 개발자가 로딩 상태를 직접 state로 관리할 필요가 없다는 점이 핵심입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>lazyWithDelay 헬퍼 — 실습에서 일부러 1초 늦춘 이유</h4>
+        <p>로컬 개발 서버에서는 파일이 이미 내 컴퓨터 디스크에 있어서 다운로드가 거의 순식간에 끝나버려, 정작 Suspense의 fallback(로딩 스피너)이 눈 깜빡할 사이에 지나가 버립니다. 그래서 실습 코드는 이 함수로 lazy를 한 겹 더 감쌌습니다.</p>
+        <ul>
+          <li><b>lazyWithDelay(factory)</b> — factory 자리에 원래의 <code>() =&gt; import('./Foo')</code>를 그대로 받는 함수.</li>
+          <li><b>new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(factory()), 1000))</b> — "1초(1000ms) 뒤에야 진짜 factory()를 실행해서 그 결과로 약속을 지키겠다"는 새 Promise를 만들어 돌려줌.</li>
+          <li><b>lazy(() =&gt; ...)</b> — 결국 lazy에게 건네지는 건 "즉시 import하는 함수"가 아니라 "1초 기다렸다가 import하는 함수"로 바뀐 것.</li>
+        </ul>
+        <p>즉 코드 분할이라는 실제 동작은 그대로 두고, 실습 중 로딩 스피너를 눈으로 확인할 수 있도록 <b>인위적으로 지연시간만 끼워 넣은 학습용 장치</b>입니다 — 실제 서비스 코드에는 이런 지연을 넣지 않습니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>lazy(() =&gt; import('./Foo'))로 감싼 컴포넌트는 처음 화면에 필요할 때가 아니라, 실제로 화면에 나타나야 하는 순간에만 코드를 따로 받아온다(코드 분할).</li>
+        <li>Suspense는 그 다운로드가 끝날 때까지 fallback UI를 대신 보여주고, 끝나면 자동으로 실제 컴포넌트로 교체해 준다 — 로딩 state를 직접 관리할 필요가 없다.</li>
+        <li>정적 import(파일 맨 위)는 즉시 번들에 포함되고, 동적 import('...')(함수처럼 호출)만 별도 청크로 분리된다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-06">react-06 — React.memo·lazy/Suspense</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">C</span> · 실전에서 만나는 버그와 함정 — 실습하다 막혔다면</h3>
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">25</span>
+    <span class="note-num">26</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -5736,7 +6049,7 @@ export default function StockDetail() {
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">26</span>
+    <span class="note-num">27</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -5774,7 +6087,7 @@ export default function StockDetail() {
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">27</span>
+    <span class="note-num">28</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -5862,7 +6175,6 @@ export default function StockDetail() {
 
 <script>
 const nextTopics = [
-  { badge:"REACT", title:"05 · memo와 lazy/Suspense", desc:"React.memo로 렌더 스킵, lazy(() => import())로 코드 분할해 초기 로딩 최적화" },
   { badge:"REACT", title:"06 · Context API", desc:"createContext → Provider → useContext 3단계로 prop drilling 제거, 테마·관심목록 전역 공유" },
   { badge:"NEXT", title:"07 · Next.js App Router", desc:"폴더 구조 = URL인 파일 기반 라우팅, layout.js·Link·동적 라우트 [id]·await params" },
   { badge:"NEXT", title:"08~13 · 주식 대시보드 앱", desc:"Zustand 전역 상태 → API Routes → persist·async → 서버 컴포넌트 → Tailwind 다크모드 → Recharts·WebSocket으로 하나의 앱을 누적 확장" },
