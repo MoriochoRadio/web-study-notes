@@ -15,8 +15,8 @@ export default function StockDetail() {
     // 1. [useLocalStorage] 사용자가 입력한 종목 코드를 브라우저 저장소에 'lastSymbol' 키로 자동 저장 및 복원 (기본값 'AAPL')
     const [inputSymbol, setInputSymbol] = useLocalStorage('lastSymbol', 'AAPL')
 
-    // 2. [useState] 5초마다 자동 갱신(체크박스)할지 여부를 관리하는 토글 상태 (true / false)
-    const [autoRefresh, setAutoRefresh] = useState(false)
+    // 2. [useLocalStorage] 5초마다 자동 갱신(체크박스)할지 여부를 브라우저 저장소에 'autoRefresh' 키로 자동 저장 및 복원 (기본값 false)
+    const [autoRefresh, setAutoRefresh] = useLocalStorage('autoRefresh', false)
 
     // 3. [useDebounce] 사용자가 타이핑하는 동안에는 기다렸다가 300ms(0.3초) 지연된 안정적인 입력값을 생성
     const debouncedSymbol = useDebounce(inputSymbol, 300)
