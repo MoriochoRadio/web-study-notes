@@ -174,8 +174,30 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   }
   .roadmap-step .step-links a:hover{background:color-mix(in srgb, var(--concepts) 18%, transparent);}
 
-  /* ---- 학습 여정(React 큰 그림): 파일이 어떻게 서로 연결되는지 ---- */
-  #journey-section{--c:var(--react);}
+  /* ---- 학습 여정: 과목별 복습(파일 연결 또는 개념 누적 흐름) ---- */
+  .journey-subtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;}
+  .journey-subtab-btn{
+    appearance:none;border:1px solid var(--border);background:var(--panel-2);
+    color:var(--muted);border-radius:999px;padding:8px 18px;font-size:13.5px;font-weight:700;
+    cursor:pointer;font-family:inherit;
+  }
+  .journey-subtab-btn:hover{color:var(--text);}
+  .journey-subtab-btn.active{background:var(--sc,var(--accent));color:#fff;border-color:var(--sc,var(--accent));}
+  .journey-panel[data-subject="html"]{--c:var(--html);--sc:var(--html);}
+  .journey-panel[data-subject="css"]{--c:var(--css);--sc:var(--css);}
+  .journey-panel[data-subject="js"]{--c:var(--js);--sc:var(--js);}
+  .journey-panel[data-subject="react"]{--c:var(--react);--sc:var(--react);}
+  .journey-subtabs button[data-subject="html"]{--sc:var(--html);}
+  .journey-subtabs button[data-subject="css"]{--sc:var(--css);}
+  .journey-subtabs button[data-subject="js"]{--sc:var(--js);}
+  .journey-subtabs button[data-subject="react"]{--sc:var(--react);}
+  .journey-panel.hidden{display:none;}
+  .journey-placeholder{
+    background:var(--panel);border:1px dashed var(--border);border-radius:14px;
+    padding:26px 24px;text-align:center;
+  }
+  .journey-placeholder h3{margin:0 0 8px;font-size:15.5px;}
+  .journey-placeholder p{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
   .journey-intro{
     background:var(--panel);border:1px solid var(--border);border-radius:14px;
     padding:20px 22px;margin-bottom:28px;box-shadow:var(--shadow);
@@ -657,7 +679,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
       <span>React 8개 단원</span>
-      <span>🧭 학습 여정 8단계</span>
+      <span>🧭 학습 여정 2/4과목</span>
       <span>기초 개념 사전 31개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
@@ -691,7 +713,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
       <div class="stat-card react"><div class="n">8</div><div class="l">React 단원</div></div>
-      <div class="stat-card react"><div class="n">8</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card react"><div class="n">2/4</div><div class="l">🧭 학습 여정 과목</div></div>
       <div class="stat-card concepts"><div class="n">31</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
@@ -703,7 +725,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
         <li>더 알고 싶은 단원은 <strong>펼쳐서 공부하기</strong>를 누르세요. 핵심 개념 → 주석 달린 코드 → 핵심 정리 → TIP 순서로 이어집니다. 각 과목 첫머리의 <strong>단원 목차</strong>를 눌러 바로 이동할 수도 있습니다.</li>
         <li><strong>코드로 보기</strong>의 <span style="color:#1d8f52;font-style:italic;">초록색 설명 주석</span>만 따라 읽어도 코드 흐름이 복습됩니다. 복사 버튼으로 직접 실행해 볼 수도 있어요.</li>
         <li>위쪽 <strong>검색</strong>에 키워드(예: flex, 배열)를 치면 모든 과목에서 해당 카드만 걸러 줍니다. 밤에는 <strong>다크 모드</strong> 버튼으로 화면을 어둡게 바꿀 수 있습니다.</li>
-        <li>React를 진행하다 <strong>"이 파일이 왜 저 파일을 감싸고 있는지" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. react-01부터 08까지, 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지 그림으로 순서대로 정리되어 있습니다.</li>
+        <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML은 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다. (CSS·JS는 준비 중)</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
       </ol>
@@ -5631,17 +5653,235 @@ export default function NotFound() {
   </section>
 
   <section id="journey-section" class="cat">
-    <div class="cat-head"><span class="dot"></span><h2>🧭 학습 여정 — React 큰 그림</h2></div>
-    <p class="cat-desc">react-01부터 08까지, 선생님 커리큘럼 순서 그대로 따라가면서 "이 파일이 왜 저 파일을 부르고, 데이터가 어디서 와서 어디로 가는지"만 그림으로 짚어보는 페이지입니다. 개념 하나하나의 자세한 설명·코드는 각 카드로, 용어 자체가 헷갈리면 기초 개념 사전으로 넘어가면 됩니다.</p>
+    <div class="cat-head"><span class="dot"></span><h2>🧭 학습 여정 — 과목별 복습</h2></div>
+    <p class="cat-desc">과목 탭을 하나씩 넘기며 카드를 볼 땐 이해가 돼도 "그래서 전체 흐름이 뭐지?"는 잘 안 잡힐 수 있습니다. 아래에서 과목을 고르면 그 과목의 레슨을 커리큘럼 순서 그대로, "이전에 뭘 배웠고 이번에 뭐가 새로 추가되는지"만 따라가며 복습할 수 있습니다.</p>
 
+    <div class="journey-subtabs" role="tablist" aria-label="학습 여정 과목 선택">
+      <button class="journey-subtab-btn active" data-subject="html" type="button" role="tab" aria-selected="true">HTML</button>
+      <button class="journey-subtab-btn" data-subject="css" type="button" role="tab" aria-selected="false">CSS</button>
+      <button class="journey-subtab-btn" data-subject="js" type="button" role="tab" aria-selected="false">JavaScript</button>
+      <button class="journey-subtab-btn" data-subject="react" type="button" role="tab" aria-selected="false">React</button>
+    </div>
+
+    <div class="journey-panel" data-subject="html">
     <div class="journey-intro">
-      <h3>💡 이 페이지를 보는 법</h3>
+      <h3>💡 이 탭을 보는 법</h3>
+      <p>HTML 레슨은 React와 달리 레슨마다 <b>독립된 단일 파일</b>이라 "파일이 파일을 부르는" 그림은 그릴 게 없습니다. 대신 여기서는 <b>"이전 레슨에서 배운 태그·개념이 이번 레슨에서 어떻게 다시 쓰이고 확장되는지"</b>를 순서대로 짚습니다. 상자 = 배운 개념 하나, 화살표 = "그걸 가지고 다음에 무엇을 하는지"라는 뜻입니다. 각 단계 끝의 <b>전체 카드 보기</b>를 누르면 그 레슨의 실제 코드와 자세한 설명으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="journey-list">
+
+      <article class="journey-step" id="journey-html-01">
+        <div class="journey-step-head">
+          <span class="journey-num">01</span>
+          <h3>문서의 뼈대 — 아직 태그가 한 겹뿐인 단계</h3>
+          <a class="journey-jump" href="#html-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">모든 게 시작되는 지점입니다. DOCTYPE·html·head·body라는 고정된 뼈대 하나만 외우면 되고, 그 안에 h1~h6·p로 제목과 문단을 넣는 것뿐입니다. 아직 "요소끼리 어떻게 배치되는지"는 등장하지 않습니다 — 이건 바로 다음 단계의 주제입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>DOCTYPE·html</b><span>문서 전체를 감싸는 뼈대</span></div>
+            <div class="flow-arrow">그 안에</div>
+            <div class="flow-box"><b>head</b><span>화면에 안 보이는 메타정보</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">그 안에</div>
+            <div class="flow-box"><b>body</b><span>실제로 그려지는 콘텐츠</span></div>
+            <div class="flow-arrow">제목·문단</div>
+            <div class="flow-box leaf"><b>h1~h6 · p</b><span>숫자가 작을수록 큰 제목</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>DOCTYPE → html → head/body</b> — 이후 모든 HTML 실습 파일이 예외 없이 따르는 고정 순서.</li>
+          <li>head(안 보임)와 body(보임)의 구분은 02단계 이후 "화면에 어떻게 보이는지"를 이야기할 때 계속 전제로 깔립니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-html-02">
+        <div class="journey-step-head">
+          <span class="journey-num">02</span>
+          <h3>블록 vs 인라인 — "화면 배치" 감각의 시작</h3>
+          <a class="journey-jump" href="#html-02">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01단계에서 배운 h1·p·div 같은 태그들이 화면에서 <b>어떻게 자리를 차지하는지</b>가 처음 등장합니다. 이 "block은 줄바꿈되고 가로 폭 전체를, inline은 내용 크기만큼만"이라는 감각은 이후 04단계(표를 div로 흉내내기)에서 CSS로 이 성질 자체를 바꿔볼 때 다시 쓰입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>div·h1·ul·li</b><span>block — 줄바꿈 + 가로 폭 전체</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>span</b><span>inline — 내용 크기만큼, 문장 속에 흐름</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>block 요소는 구조·그룹, inline 요소는 문장 안의 일부를 꾸미는 용도.</li>
+          <li>이 성질은 태그 종류로 고정된 게 아니라 <b>CSS display 속성</b>으로 나중에 바꿀 수 있다는 게 04단계로 이어지는 복선입니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-html-03">
+        <div class="journey-step-head">
+          <span class="journey-num">03</span>
+          <h3>목록 요소 — HTML+CSS+JS가 처음 한 파일에서 만나는 지점</h3>
+          <a class="journey-jump" href="#html-03">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01~02단계는 순수 HTML(+태그 배치 감각)이었다면, 여기서 처음으로 같은 파일 안에 <b>CSS 선택자</b>와 <b>JS 이벤트</b>가 함께 등장합니다. ul&gt;li 중첩 구조(HTML) → 자식 선택자로 숨김(CSS) → 클릭 시 display 토글(JS), 이 세 단계 조합이 06~07단계의 표 실습에서도 "구조를 먼저 만들고 CSS로 다듬는다"는 순서로 반복됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>ul&gt;li</b><span>중첩된 서브메뉴 구조 (HTML)</span></div>
+            <div class="flow-arrow">CSS로</div>
+            <div class="flow-box leaf"><b>li&gt;ul{display:none}</b><span>처음엔 숨김</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">클릭 시 JS로</div>
+            <div class="flow-box leaf"><b>style.display="block"</b><span>querySelectorAll로 찾아 펼침</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>li 안에 ul을 넣으면 중첩(서브) 목록 — 02단계의 block 요소(ul·li)가 겹겹이 쌓인 구조.</li>
+          <li>"구조는 HTML, 초기 상태는 CSS, 상호작용은 JS"라는 3단 조합이 이후 실습 전반의 기본 패턴.</li>
+        </ul>
+        <div class="journey-tip"><b>여기서 감 잡아두면 좋은 것</b> — 화면이 "왜 이렇게 보이는지" 헷갈릴 땐 항상 이 순서(HTML 구조 → CSS 초기 상태 → JS가 뭘 바꾸는지)로 나눠서 하나씩 확인하면 됩니다.</div>
+      </article>
+
+      <article class="journey-step" id="journey-html-04">
+        <div class="journey-step-head">
+          <span class="journey-num">04</span>
+          <h3>표 만들기 — 02단계의 "배치 성질"을 CSS로 다시 쓰는 단계</h3>
+          <a class="journey-jump" href="#html-04">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">table·tr·th/td로 진짜 표를 만드는 것과 별개로, 02단계에서 "block/inline은 태그 종류로 고정"이라고 배웠던 감각이 여기서 뒤집힙니다 — <code>display: table</code> 계열 속성을 주면 div도 표처럼 줄·칸을 맞춰 렌더링됩니다. 이때 처음 등장하는 <code>@media</code>는 06~07단계의 표 실습에는 없는, 04단계만의 반응형 확장입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>table&gt;tr&gt;th/td</b><span>진짜 표 구조</span></div>
+            <div class="flow-arrow">영역 구분</div>
+            <div class="flow-box"><b>thead/tbody/tfoot</b><span>머리글·본문·꼬리글</span></div>
+            <div class="flow-arrow">병합</div>
+            <div class="flow-box leaf"><b>colspan</b><span>가로로 여러 칸 합치기</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box"><b>div</b><span>원래는 그냥 block(02단계)</span></div>
+            <div class="flow-arrow">display:table 계열</div>
+            <div class="flow-box"><b>표처럼 보이는 div</b><span>table-row·table-cell</span></div>
+            <div class="flow-arrow">@media(좁아지면)</div>
+            <div class="flow-box leaf"><b>display:block</b><span>세로로 풀림 (반응형)</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>colspan으로 셀을 가로 병합하는 감각은 06~07단계에서 rowspan과 함께 실전 서식에 그대로 응용됩니다.</li>
+          <li>div로 만든 가짜 표는 접근성 도구에 진짜 표로 인식되지 않으므로, 진짜 데이터 표라면 table을 씁니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-html-05">
+        <div class="journey-step-head">
+          <span class="journey-num">05</span>
+          <h3>인용·목록·구분선 — 표를 잠시 떠나 "의미를 담는 태그"로</h3>
+          <a class="journey-jump" href="#html-05">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">04단계까지는 "구조를 어떻게 짜는가"에 집중했다면, 여기서는 잠깐 표를 떠나 <b>같은 내용도 의미가 다르면 다른 태그를 쓴다</b>는 시맨틱 감각을 다집니다. q(인용)·hr(구분)·address(연락처)는 전부 "이게 뭘 뜻하는지" 브라우저·검색엔진에 알려주는 태그로, 이 감각은 다음 06~07단계에서 표 태그를 고를 때도 이어집니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>q</b><span>짧은 인라인 인용, 따옴표 자동</span></div>
+            <div class="flow-arrow">구간 나눔</div>
+            <div class="flow-box"><b>hr</b><span>수평 구분선</span></div>
+            <div class="flow-arrow">마지막</div>
+            <div class="flow-box leaf"><b>a[target=_blank] · address</b><span>새 탭 링크 + 연락처 의미</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>q는 인라인, blockquote는 블록 — 02단계의 block/inline 구분이 여기서도 태그 선택 기준이 됩니다.</li>
+          <li>"의미가 맞는 태그를 고른다"는 감각은 06~07단계에서 표를 실제 양식(서식)으로 쓸 때도 그대로 적용됩니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-html-06">
+        <div class="journey-step-head">
+          <span class="journey-num">06</span>
+          <h3>인적사항 표 — 04단계의 병합을 실전 서식에 응용</h3>
+          <a class="journey-jump" href="#html-06">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">04단계에서 배운 colspan(가로 병합)에 <b>rowspan(세로 병합)</b>이 더해집니다. 두 병합을 조합하면 사진 칸처럼 여러 줄에 걸친 영역도 표 안에서 자연스럽게 표현할 수 있다는 게 이번 실습의 핵심이고, 이 조합은 다음 07단계에서 한 번 더 확장됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>표 틀 (04단계)</b><span>table&gt;tr&gt;td</span></div>
+            <div class="flow-arrow">세로 병합</div>
+            <div class="flow-box leaf"><b>rowspan="6"</b><span>사진 칸 — 6개 행에 걸침</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">가로 병합</div>
+            <div class="flow-box leaf"><b>colspan="3"</b><span>"(한문)" 넓은 입력칸</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>rowspan="N"은 세로로 N개 행 병합, colspan="N"은 가로로 N개 칸 병합 — 04단계에서 colspan만 봤다면 여기서 rowspan이 짝을 이룹니다.</li>
+          <li>rowspan으로 병합된 셀 아래 행은 그 열의 td를 아예 적지 않아야 표가 어긋나지 않습니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-html-07">
+        <div class="journey-step-head">
+          <span class="journey-num">07</span>
+          <h3>경력사항 표 — 병합 + 클래스 재사용으로 마무리</h3>
+          <a class="journey-jump" href="#html-07">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06단계의 병합 감각에 <b>CSS 클래스로 크기를 통일해 반복 배치</b>하는 실전 패턴이 더해지며 HTML 여정이 마무리됩니다. 좁은 항목 칸(회사명·근무기간)과 넓은 서술 칸을 한 표에 섞고, 같은 표를 3번 반복해도 .qwe·.asd 클래스 덕분에 크기가 흐트러지지 않습니다 — 지금까지 배운 구조(표)·배치(병합)·재사용(클래스)이 한 실습에 모입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>항목 행 (좁은 칸×4)</b><span>회사명·근무기간 등</span></div>
+            <div class="flow-arrow">colspan="3"</div>
+            <div class="flow-box leaf"><b>주요업무</b><span>넓은 입력칸</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">colspan="4"</div>
+            <div class="flow-box"><b>서술 행</b><span>표 전체 너비</span></div>
+            <div class="flow-arrow">.qwe / .asd 클래스</div>
+            <div class="flow-box leaf"><b>3번 반복해도 크기 통일</b><span>회사별 표를 나열</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>colspan 합이 실제 열 개수(4)와 맞는지 항상 검산하는 습관이 표 실습 전체(04·06·07단계)에서 공통으로 중요합니다.</li>
+          <li>여기까지가 HTML 7단계 — 다음은 CSS 여정에서 이 태그들에 본격적으로 스타일을 입히는 과정으로 이어집니다.</li>
+        </ul>
+        <div class="journey-tip"><b>HTML 여정을 마치며</b> — 01(뼈대) → 02(배치) → 03(구조+상호작용) → 04(표+반응형) → 05(시맨틱) → 06~07(병합+재사용) 순서로 감각이 하나씩 쌓였습니다. 헷갈리는 카드가 있으면 이 순서를 되짚어 어느 단계 감각이 빠졌는지 확인해보세요.</div>
+      </article>
+
+    </div>
+    </div>
+
+    <div class="journey-panel hidden" data-subject="css">
+      <div class="journey-placeholder">
+        <h3>🚧 CSS 학습 여정은 준비 중입니다</h3>
+        <p>CSS 12개 레슨의 개념 누적 서사는 곧 채워질 예정입니다. 그 전까지는 위쪽 <b>CSS</b> 탭에서 카드별로 복습해주세요.</p>
+      </div>
+    </div>
+
+    <div class="journey-panel hidden" data-subject="js">
+      <div class="journey-placeholder">
+        <h3>🚧 JavaScript 학습 여정은 준비 중입니다</h3>
+        <p>JavaScript 18개 레슨의 개념 누적 서사는 곧 채워질 예정입니다. 그 전까지는 위쪽 <b>JavaScript</b> 탭에서 카드별로 복습해주세요.</p>
+      </div>
+    </div>
+
+    <div class="journey-panel hidden" data-subject="react">
+    <div class="journey-intro">
+      <h3>💡 이 탭을 보는 법</h3>
       <p>React 카드(위 <b>React</b> 탭)는 단원별로 독립돼 있어서, 하나씩 볼 땐 이해가 돼도 "그래서 전체 그림이 뭐지?"가 잘 안 잡힐 수 있습니다. 여기서는 코드 설명을 반복하지 않고, 오직 <b>"어떤 파일이 어떤 파일과 연결돼 있는가"</b>만 상자와 화살표로 보여줍니다. 상자 = 파일 하나, 화살표 = "데이터를 주거나(props)" 또는 "불러 쓴다(import)"는 뜻입니다. 각 단계 끝의 <b>전체 카드 보기</b>를 누르면 그 단원의 실제 코드와 자세한 설명으로 바로 이동합니다.</p>
     </div>
 
     <div class="journey-list">
 
-      <article class="journey-step" id="journey-01">
+      <article class="journey-step" id="journey-react-01">
         <div class="journey-step-head">
           <span class="journey-num">01</span>
           <h3>React 시작하기 — 파일이 아직 1개뿐인 단계</h3>
@@ -5664,7 +5904,7 @@ export default function NotFound() {
         </ul>
       </article>
 
-      <article class="journey-step" id="journey-02">
+      <article class="journey-step" id="journey-react-02">
         <div class="journey-step-head">
           <span class="journey-num">02</span>
           <h3>JSX·컴포넌트·props — 파일이 2개로 나뉘는 첫 순간</h3>
@@ -5687,7 +5927,7 @@ export default function NotFound() {
         <div class="journey-tip"><b>파일 오가는 순서 팁</b> — 헷갈리면 항상 "데이터를 누가 갖고 있는지(App.jsx)"부터 확인한 다음, 그 데이터가 어떤 이름의 props로 건네지는지 보고, 마지막에 자식 파일(ProfileCard.jsx)로 건너가 그 이름을 그대로 찾으면 됩니다.</div>
       </article>
 
-      <article class="journey-step" id="journey-03">
+      <article class="journey-step" id="journey-react-03">
         <div class="journey-step-head">
           <span class="journey-num">03</span>
           <h3>state와 이벤트 — 서로 모르는 두 형제 파일</h3>
@@ -5715,7 +5955,7 @@ export default function NotFound() {
         </ul>
       </article>
 
-      <article class="journey-step" id="journey-04">
+      <article class="journey-step" id="journey-react-04">
         <div class="journey-step-head">
           <span class="journey-num">04</span>
           <h3>성능 훅 3종 — props가 두 단계를 거쳐가는 첫 사례</h3>
@@ -5745,7 +5985,7 @@ export default function NotFound() {
         </ul>
       </article>
 
-      <article class="journey-step" id="journey-05">
+      <article class="journey-step" id="journey-react-05">
         <div class="journey-step-head">
           <span class="journey-num">05</span>
           <h3>커스텀 훅 4종 — "화면 파일"과 "로직 파일"이 처음 분리됨</h3>
@@ -5774,7 +6014,7 @@ export default function NotFound() {
         <div class="journey-tip"><b>파일 오가는 순서 팁</b> — StockDetail.jsx에서 <code>const [x, setX] = useLocalStorage(...)</code>처럼 호출부를 먼저 보고 "이 훅이 뭘 돌려주는지" 확인한 다음, hooks/useLocalStorage.js로 건너가 내부 구현을 보면 순서가 안 꼬입니다. 내부 구현을 몰라도 "무엇을 받는지"만 알면 StockDetail.jsx는 읽힙니다.</div>
       </article>
 
-      <article class="journey-step" id="journey-06">
+      <article class="journey-step" id="journey-react-06">
         <div class="journey-step-head">
           <span class="journey-num">06</span>
           <h3>memo 비교 + lazy/Suspense — 완전히 다른 두 실습이 한 단원에</h3>
@@ -5802,7 +6042,7 @@ export default function NotFound() {
         </ul>
       </article>
 
-      <article class="journey-step" id="journey-07">
+      <article class="journey-step" id="journey-react-07">
         <div class="journey-step-head">
           <span class="journey-num">07</span>
           <h3>Context API — "감싸다"·"받아오다"가 본격적으로 시작되는 지점</h3>
@@ -5853,7 +6093,7 @@ export default function NotFound() {
         </ul>
       </article>
 
-      <article class="journey-step" id="journey-08">
+      <article class="journey-step" id="journey-react-08">
         <div class="journey-step-head">
           <span class="journey-num">08</span>
           <h3>Next.js App Router — "폴더 구조 = 주소"라는 새 규칙</h3>
@@ -5887,6 +6127,7 @@ export default function NotFound() {
         </ul>
       </article>
 
+    </div>
     </div>
   </section>
 
@@ -7284,6 +7525,20 @@ buttons.forEach(b => b.addEventListener("click", () => {
   showTab(b.dataset.target);
   window.scrollTo({top:0, behavior:"smooth"});
 }));
+
+// 학습 여정 과목별 서브탭
+const journeySubtabBtns = document.querySelectorAll(".journey-subtab-btn");
+function showJourneySubject(subject){
+  document.querySelectorAll(".journey-panel").forEach(el => {
+    el.classList.toggle("hidden", el.dataset.subject !== subject);
+  });
+  journeySubtabBtns.forEach(b => {
+    const active = b.dataset.subject === subject;
+    b.classList.toggle("active", active);
+    b.setAttribute("aria-selected", active ? "true" : "false");
+  });
+}
+journeySubtabBtns.forEach(b => b.addEventListener("click", () => showJourneySubject(b.dataset.subject)));
 
 // ---- 테마 전환 (라이트 기본, 선택은 localStorage에 저장) ----
 const themeBtn = document.getElementById("theme-btn");
