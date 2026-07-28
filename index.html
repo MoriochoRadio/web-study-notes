@@ -174,6 +174,87 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   }
   .roadmap-step .step-links a:hover{background:color-mix(in srgb, var(--concepts) 18%, transparent);}
 
+  /* ---- 학습 여정(React 큰 그림): 파일이 어떻게 서로 연결되는지 ---- */
+  #journey-section{--c:var(--react);}
+  .journey-intro{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px 22px;margin-bottom:28px;box-shadow:var(--shadow);
+  }
+  .journey-intro h3{margin:0 0 8px;font-size:15.5px;}
+  .journey-intro p{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
+  .journey-list{display:flex;flex-direction:column;gap:18px;}
+  .journey-step{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px 24px 22px;box-shadow:var(--shadow);
+    scroll-margin-top:118px;
+  }
+  .journey-step-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
+  .journey-num{
+    font-size:12.5px;font-weight:800;color:#fff;background:var(--c);
+    padding:3px 10px;border-radius:8px;flex:none;
+  }
+  .journey-step-head h3{margin:0;font-size:18px;font-weight:700;flex:1;min-width:200px;}
+  .journey-jump{
+    flex:none;font-size:12.5px;font-weight:700;color:var(--c);
+    border:1px solid var(--border);border-radius:8px;padding:4px 10px;
+    background:var(--panel-2);text-decoration:none;white-space:nowrap;
+  }
+  .journey-jump:hover{border-color:var(--c);}
+  .journey-recap{color:var(--muted);font-size:14px;line-height:1.75;margin:0 0 4px;}
+  .journey-label{font-size:12px;font-weight:800;color:var(--c);letter-spacing:.02em;margin:16px 0 2px;}
+  .journey-points{margin:6px 0 0;padding-left:20px;color:var(--text);font-size:13.5px;line-height:1.85;display:flex;flex-direction:column;gap:5px;}
+  .journey-points b{color:var(--c);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700;}
+  .journey-tip{
+    margin-top:14px;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.7;
+    background:var(--easy-bg);border:1px solid var(--easy-border);color:var(--text);
+  }
+  .journey-tip b{color:var(--easy-label);}
+
+  /* 파일 흐름 다이어그램 (가로 체인 / 가지치기) */
+  .flow-diagram{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:12px;
+    padding:16px;margin:10px 0;display:flex;flex-direction:column;gap:12px;
+  }
+  .flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:2px;}
+  .flow-box{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:9px 13px;font-size:12.5px;line-height:1.5;min-width:110px;
+  }
+  .flow-box b{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;color:var(--c);margin-bottom:2px;}
+  .flow-box span{color:var(--muted);font-size:11.5px;}
+  .flow-box.leaf{border-style:dashed;}
+  .flow-arrow{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    flex:none;padding:0 8px;color:var(--muted);font-size:10.5px;text-align:center;min-width:64px;
+  }
+  .flow-arrow::before{content:"→";font-size:17px;color:var(--c);line-height:1;order:-1;}
+  .flow-branch-label{font-size:11px;color:var(--muted);margin:2px 0 -6px 2px;}
+
+  /* Provider 중첩("감싸기") 다이어그램 */
+  .wrap-diagram{margin:10px 0;}
+  .wrap-box{
+    border:2px solid color-mix(in srgb, var(--c) 45%, var(--border));
+    border-radius:12px;padding:12px;background:color-mix(in srgb, var(--c) 5%, var(--panel-2));
+  }
+  .wrap-box .wrap-label{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;font-weight:700;color:var(--c);margin-bottom:10px;display:block;
+  }
+  .wrap-leaves{display:flex;gap:10px;flex-wrap:wrap;}
+
+  /* 폴더 트리(파일 기반 라우팅) */
+  .tree-diagram{
+    background:var(--panel-2);border:1px solid var(--border);border-radius:12px;
+    padding:14px 18px;margin:10px 0;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+  }
+  .tree-diagram ul{list-style:none;margin:0;padding-left:18px;border-left:1px dashed var(--border);}
+  .tree-diagram > ul{padding-left:0;border-left:none;}
+  .tree-diagram li{margin:6px 0;}
+  .tree-diagram li > .t-name{color:var(--text);}
+  .tree-diagram li > .t-url{color:var(--c);margin-left:8px;font-weight:700;}
+  .tree-diagram li > .t-desc{color:var(--muted);margin-left:8px;font-size:11.5px;font-family:inherit;}
+
   /* ---- 개념 사전 카테고리 구분선 ---- */
   .concept-group-title{
     margin:8px 0 -2px;padding-top:22px;border-top:1px dashed var(--border);
@@ -576,6 +657,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
       <span>React 8개 단원</span>
+      <span>🧭 학습 여정 8단계</span>
       <span>기초 개념 사전 31개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
@@ -590,6 +672,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <button data-target="css">CSS</button>
       <button data-target="js">JavaScript</button>
       <button data-target="react">React</button>
+      <button data-target="journey">🧭 학습 여정</button>
       <button data-target="concepts">기초 개념 사전</button>
       <button data-target="next">다음 학습 예정</button>
       <button data-target="materials">강의자료</button>
@@ -608,6 +691,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
       <div class="stat-card react"><div class="n">8</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">8</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">31</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
@@ -619,6 +703,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
         <li>더 알고 싶은 단원은 <strong>펼쳐서 공부하기</strong>를 누르세요. 핵심 개념 → 주석 달린 코드 → 핵심 정리 → TIP 순서로 이어집니다. 각 과목 첫머리의 <strong>단원 목차</strong>를 눌러 바로 이동할 수도 있습니다.</li>
         <li><strong>코드로 보기</strong>의 <span style="color:#1d8f52;font-style:italic;">초록색 설명 주석</span>만 따라 읽어도 코드 흐름이 복습됩니다. 복사 버튼으로 직접 실행해 볼 수도 있어요.</li>
         <li>위쪽 <strong>검색</strong>에 키워드(예: flex, 배열)를 치면 모든 과목에서 해당 카드만 걸러 줍니다. 밤에는 <strong>다크 모드</strong> 버튼으로 화면을 어둡게 바꿀 수 있습니다.</li>
+        <li>React를 진행하다 <strong>"이 파일이 왜 저 파일을 감싸고 있는지" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. react-01부터 08까지, 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지 그림으로 순서대로 정리되어 있습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
       </ol>
@@ -5545,6 +5630,262 @@ export default function NotFound() {
     </div>
   </section>
 
+  <section id="journey-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>🧭 학습 여정 — React 큰 그림</h2></div>
+    <p class="cat-desc">react-01부터 08까지, 선생님 커리큘럼 순서 그대로 따라가면서 "이 파일이 왜 저 파일을 부르고, 데이터가 어디서 와서 어디로 가는지"만 그림으로 짚어보는 페이지입니다. 개념 하나하나의 자세한 설명·코드는 각 카드로, 용어 자체가 헷갈리면 기초 개념 사전으로 넘어가면 됩니다.</p>
+
+    <div class="journey-intro">
+      <h3>💡 이 페이지를 보는 법</h3>
+      <p>React 카드(위 <b>React</b> 탭)는 단원별로 독립돼 있어서, 하나씩 볼 땐 이해가 돼도 "그래서 전체 그림이 뭐지?"가 잘 안 잡힐 수 있습니다. 여기서는 코드 설명을 반복하지 않고, 오직 <b>"어떤 파일이 어떤 파일과 연결돼 있는가"</b>만 상자와 화살표로 보여줍니다. 상자 = 파일 하나, 화살표 = "데이터를 주거나(props)" 또는 "불러 쓴다(import)"는 뜻입니다. 각 단계 끝의 <b>전체 카드 보기</b>를 누르면 그 단원의 실제 코드와 자세한 설명으로 바로 이동합니다.</p>
+    </div>
+
+    <div class="journey-list">
+
+      <article class="journey-step" id="journey-01">
+        <div class="journey-step-head">
+          <span class="journey-num">01</span>
+          <h3>React 시작하기 — 파일이 아직 1개뿐인 단계</h3>
+          <a class="journey-jump" href="#react-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">아직 "파일 간 이동"이 없는 가장 단순한 상태입니다. index.html의 빈 그릇에 main.jsx가 App.jsx를 딱 한 번 꽂아 넣는 것뿐 — 여기서부터 시작이라고 생각하면 이후 단계가 "파일이 하나씩 늘어나는 과정"으로 보입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>index.html</b><span>&lt;div id="root"&gt; — 빈 그릇</span></div>
+            <div class="flow-arrow">최초 1회 렌더</div>
+            <div class="flow-box"><b>main.jsx</b><span>createRoot(...).render()</span></div>
+            <div class="flow-arrow">화면 내용</div>
+            <div class="flow-box"><b>App.jsx</b><span>지금은 파일이 이거 하나뿐</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>main.jsx</b> — 앱을 "시동 거는" 파일. 브라우저에 딱 한 번만 실행됩니다.</li>
+          <li><b>App.jsx</b> — 실제로 화면에 뭘 보여줄지 담당하는 첫 컴포넌트.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-02">
+        <div class="journey-step-head">
+          <span class="journey-num">02</span>
+          <h3>JSX·컴포넌트·props — 파일이 2개로 나뉘는 첫 순간</h3>
+          <a class="journey-jump" href="#react-02">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">여기서부터 "누가 데이터를 갖고 있고, 누구에게 넘겨주는가"가 처음 등장합니다. 이후 모든 리액트 헷갈림의 근본 패턴이 바로 이 그림입니다 — 데이터를 가진 파일(부모)과, 받아서 표시만 하는 파일(자식).</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>App.jsx</b><span>team 배열(진짜 데이터)의 주인</span></div>
+            <div class="flow-arrow">.map()으로<br>4번 호출, 매번<br>다른 props</div>
+            <div class="flow-box leaf"><b>ProfileCard.jsx</b><span>props로 받은 값만 표시 (×4)</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>App.jsx</b> — team 배열을 <b>소유</b>하고, .map()으로 배열을 돌며 &lt;ProfileCard name={...}/&gt;를 호출.</li>
+          <li><b>props (name, job, emoji...)</b> — App이 ProfileCard에게 "빌려주는" 값. 자식은 절대 못 고치는 읽기 전용.</li>
+          <li><b>ProfileCard.jsx</b> — 스스로 데이터를 만들지 않고, 오직 props로 받은 값만 그리는 "틀(붕어빵 틀)".</li>
+        </ul>
+        <div class="journey-tip"><b>파일 오가는 순서 팁</b> — 헷갈리면 항상 "데이터를 누가 갖고 있는지(App.jsx)"부터 확인한 다음, 그 데이터가 어떤 이름의 props로 건네지는지 보고, 마지막에 자식 파일(ProfileCard.jsx)로 건너가 그 이름을 그대로 찾으면 됩니다.</div>
+      </article>
+
+      <article class="journey-step" id="journey-03">
+        <div class="journey-step-head">
+          <span class="journey-num">03</span>
+          <h3>state와 이벤트 — 서로 모르는 두 형제 파일</h3>
+          <a class="journey-jump" href="#react-03">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">props 다음으로 만나는 건 "자기 자신의 데이터"인 state입니다. Counter.jsx와 TodoApp.jsx는 둘 다 App.jsx의 자식이지만, 서로 import하지도 않고 props도 안 주고받는 완전한 남남입니다 — 이 "형제는 서로 모른다"는 감각이 나중에 07단계(Context)를 이해하는 대조군이 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>App.jsx</b><span>둘을 나란히 렌더링만 함</span></div>
+            <div class="flow-arrow">렌더</div>
+            <div class="flow-box"><b>Counter.jsx</b><span>count state (자기 것)</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">렌더</div>
+            <div class="flow-box"><b>TodoApp.jsx</b><span>todos state (자기 것)</span></div>
+            <div class="flow-arrow">저장</div>
+            <div class="flow-box leaf"><b>localStorage</b><span>useEffect가 todos 바뀔 때마다 자동 저장</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>Counter.jsx / TodoApp.jsx</b> — App.jsx 밑에 나란히 있을 뿐, 서로의 state를 전혀 모르는 독립된 파일.</li>
+          <li><b>useEffect(fn, [todos])</b> — todos가 바뀔 때만 실행돼 localStorage에 자동 저장하는 "부수 효과".</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-04">
+        <div class="journey-step-head">
+          <span class="journey-num">04</span>
+          <h3>성능 훅 3종 — props가 두 단계를 거쳐가는 첫 사례</h3>
+          <a class="journey-jump" href="#react-04">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">파일이 늘어나 데이터 파일(data/stocks.js)까지 더해집니다. App → StockList → StockRow로 props가 두 단계를 거치는 첫 사례라, 02단계보다 한 겹 더 깊게 파일을 오가야 합니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>data/stocks.js</b><span>STOCKS 배열(순수 데이터, 컴포넌트 아님)</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box"><b>StockList.jsx</b><span>.map()으로 종목마다 호출</span></div>
+            <div class="flow-arrow">stock 객체<br>하나씩 props</div>
+            <div class="flow-box leaf"><b>StockRow.jsx</b><span>React.memo — props 그대로면 재렌더 스킵</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box"><b>StockSearch.jsx</b><span>다른 파일과 데이터 교류 없음(독립) · useRef로 자기 input만 접근</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>data/stocks.js</b> — 컴포넌트가 아니라 그냥 배열 하나 export하는 데이터 파일.</li>
+          <li><b>StockRow.jsx</b> — React.memo로 감싸져, 부모가 리렌더돼도 props가 같으면 그대로 있음.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-05">
+        <div class="journey-step-head">
+          <span class="journey-num">05</span>
+          <h3>커스텀 훅 4종 — "화면 파일"과 "로직 파일"이 처음 분리됨</h3>
+          <a class="journey-jump" href="#react-05">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">지금까지 파일은 전부 "화면을 그리는 컴포넌트"였는데, hooks/ 폴더는 처음 등장하는 "화면 없이 값/함수만 돌려주는 파일"입니다. StockDetail.jsx 하나가 이 4개를 동시에 불러와 조립합니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>hooks/useDebounce.js</b><span>값을 리턴</span></div>
+            <div class="flow-arrow">import</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>hooks/useInterval.js</b><span>반환값 없음(효과만)</span></div>
+            <div class="flow-arrow">import</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>hooks/useLocalStorage.js</b><span>[값, 변경함수] 리턴</span></div>
+            <div class="flow-arrow">import</div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>hooks/useStockData.js</b><span>{data, loading, error} 리턴</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box"><b>StockDetail.jsx</b><span>4개를 조립하는 "조립 담당" 컴포넌트</span></div>
+          </div>
+        </div>
+        <div class="journey-tip"><b>파일 오가는 순서 팁</b> — StockDetail.jsx에서 <code>const [x, setX] = useLocalStorage(...)</code>처럼 호출부를 먼저 보고 "이 훅이 뭘 돌려주는지" 확인한 다음, hooks/useLocalStorage.js로 건너가 내부 구현을 보면 순서가 안 꼬입니다. 내부 구현을 몰라도 "무엇을 받는지"만 알면 StockDetail.jsx는 읽힙니다.</div>
+      </article>
+
+      <article class="journey-step" id="journey-06">
+        <div class="journey-step-head">
+          <span class="journey-num">06</span>
+          <h3>memo 비교 + lazy/Suspense — 완전히 다른 두 실습이 한 단원에</h3>
+          <a class="journey-jump" href="#react-06">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">이 단원은 서로 관계없는 두 실습이 같이 있어서 헷갈리기 쉽습니다. 아래 두 줄을 <b>별개</b>로 보세요 — 파일끼리도 서로 안 엮여 있습니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-branch-label">① 리렌더링 비교 (즉시 로드)</div>
+          <div class="flow-row">
+            <div class="flow-box"><b>MemoComparison.jsx</b><span>같은 화면 두 벌 렌더</span></div>
+            <div class="flow-arrow">렌더</div>
+            <div class="flow-box leaf"><b>RowWithoutMemo / RowWithMemo</b><span>같은 파일 안, memo 유무만 다름</span></div>
+          </div>
+          <div class="flow-branch-label">② 코드 분할 (탭 클릭 시점에만 로드)</div>
+          <div class="flow-row">
+            <div class="flow-box"><b>App.jsx</b><span>lazy(() =&gt; import(...))</span></div>
+            <div class="flow-arrow">탭 클릭<br>순간에만</div>
+            <div class="flow-box leaf"><b>HeavyChart.jsx / HeavyReport.jsx</b><span>Suspense가 로딩 중 스피너 표시</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>React.memo</b> — props가 안 바뀌면 재렌더링을 건너뜀(useCallback과 항상 세트).</li>
+          <li><b>lazy + Suspense</b> — 코드 자체를 "필요한 순간"까지 네트워크로 안 받아옴(코드 분할).</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-07">
+        <div class="journey-step-head">
+          <span class="journey-num">07</span>
+          <h3>Context API — "감싸다"·"받아오다"가 본격적으로 시작되는 지점</h3>
+          <a class="journey-jump" href="#react-07">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">context/ 폴더가 새로 생기고 파일이 갑자기 늘어나면서, "이 파일이 저 파일을 감싸고, 거기서 뭘 받아온다"는 표현이 본격적으로 등장합니다 — 지금 헷갈리는 게 자연스러운 지점입니다. 상자 안에 상자로 그리면 "감싼다"는 말이 실제로 눈에 보입니다.</p>
+        <div class="wrap-diagram">
+          <div class="wrap-box">
+            <span class="wrap-label">&lt;ThemeProvider&gt; (context/ThemeContext.jsx)</span>
+            <div class="wrap-box">
+              <span class="wrap-label">&lt;WatchlistProvider&gt; (context/WatchlistContext.jsx)</span>
+              <div class="wrap-leaves">
+                <div class="flow-box leaf"><b>Header.jsx</b><span>useTheme()·useWatchlist()로 직접 꺼내 씀</span></div>
+                <div class="flow-box leaf"><b>StockGrid.jsx</b><span>useTheme()·useWatchlist()로 직접 꺼내 씀</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>App.jsx</b> — Provider로 Header·StockGrid를 겹겹이 "포장"만 함. 데이터를 직접 만지지 않음.</li>
+          <li><b>context/ThemeContext.jsx</b> — "값을 보관하는 곳"(Provider)과 "값을 꺼내는 함수"(useTheme)를 함께 export.</li>
+          <li><b>Header.jsx / StockGrid.jsx</b> — <u>App.jsx가 아니라</u> context 파일에서 직접 useTheme·useWatchlist를 import. props로 안 받고 "직통 라인"으로 꺼내 씀.</li>
+        </ul>
+        <div class="journey-tip"><b>4단계로 쪼개 읽기</b> — ① App.jsx에서 몇 겹으로 감쌌는지 세기 → ② 그 Provider가 어느 context 파일 것인지 확인 → ③ 그 파일 안 useXxx가 뭘 리턴하는지 확인 → ④ Header/StockGrid에서 그 리턴값을 어떻게 쓰는지 확인. 개념 자체가 헷갈리면 <a href="#concept-context-api">기초 개념 사전 — Context API란?</a>도 함께 보세요.</div>
+
+        <div class="journey-label" style="margin-top:20px;">🔧 지금 직접 연습 중인 부분 — SortContext 추가</div>
+        <p class="journey-recap">지금 작업 중인 SortContext.jsx는 위 그림과 <b>완전히 같은 패턴</b>을 세 번째로 반복한 것입니다 — 새로운 개념이 아니라 "겹 하나 더 감싸기"일 뿐입니다.</p>
+        <div class="wrap-diagram">
+          <div class="wrap-box">
+            <span class="wrap-label">&lt;ThemeProvider&gt;</span>
+            <div class="wrap-box">
+              <span class="wrap-label">&lt;WatchlistProvider&gt;</span>
+              <div class="wrap-box">
+                <span class="wrap-label">&lt;SortProvider&gt; (context/SortContext.jsx — 지금 작성 중)</span>
+                <div class="wrap-leaves">
+                  <div class="flow-box leaf"><b>Header.jsx</b><span>useSort() + 정렬 버튼 3개 추가</span></div>
+                  <div class="flow-box leaf"><b>StockGrid.jsx</b><span>useSort() + 정렬 버튼 3개 추가</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="journey-points">
+          <li>createContext(null) → SortProvider({ children }) → useSort() 3단계 구조가 ThemeContext.jsx·WatchlistContext.jsx와 <b>완전히 동일</b>합니다.</li>
+          <li>App.jsx에서는 기존 두 Provider 안쪽에 &lt;SortProvider&gt;를 한 겹 더 감싸기만 하면 됩니다.</li>
+          <li>StockGrid.jsx·Header.jsx 둘 다 <b>const { sortBy, setSortBy } = useSort()</b> 한 줄만 추가하면 바로 쓸 수 있습니다 — 실제로 이번 연습에서는 두 파일 모두에 정렬 버튼을 넣어, "같은 SortContext를 여러 컴포넌트가 동시에 구독"하는 모습까지 확인할 수 있습니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-08">
+        <div class="journey-step-head">
+          <span class="journey-num">08</span>
+          <h3>Next.js App Router — "폴더 구조 = 주소"라는 새 규칙</h3>
+          <a class="journey-jump" href="#react-08">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">지금까지는 "파일 = 컴포넌트"만 알면 됐는데, 여기서부터 "폴더 구조 = URL"이라는 완전히 다른 종류의 규칙이 추가됩니다. 컴포넌트 이해와는 별개의 헷갈림이니, 지금 안 풀리는 게 07단계 때문인지 이 규칙 때문인지 구분해서 보세요.</p>
+        <div class="tree-diagram">
+          <ul>
+            <li><span class="t-name">app/layout.js</span><span class="t-desc">모든 페이지의 공통 틀(헤더·푸터), children 자리만 바뀜</span></li>
+            <li><span class="t-name">app/page.js</span><span class="t-url">→ /</span></li>
+            <li><span class="t-name">app/about/</span>
+              <ul>
+                <li><span class="t-name">page.js</span><span class="t-url">→ /about</span></li>
+                <li><span class="t-name">career/page.js</span><span class="t-url">→ /about/career</span></li>
+              </ul>
+            </li>
+            <li><span class="t-name">app/blog/</span>
+              <ul>
+                <li><span class="t-name">page.js</span><span class="t-url">→ /blog</span></li>
+                <li><span class="t-name">[id]/page.js</span><span class="t-url">→ /blog/1, /blog/2 …</span><span class="t-desc">동적 라우트</span></li>
+                <li><span class="t-name">[id]/not-found.js</span><span class="t-desc">존재하지 않는 id면 notFound()가 이 화면 표시</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>폴더 이름 = URL 조각</b> — 코드로 라우팅을 짜지 않고, 폴더만 만들면 주소가 생김.</li>
+          <li><b>[id]</b> — 대괄호 폴더 하나로 무한한 동적 경로를 처리(글 번호마다 폴더를 만들 필요 없음).</li>
+          <li>서버/클라이언트 컴포넌트 구분이 헷갈리면 <a href="#concept-server-client-component">기초 개념 사전</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
   <section id="concepts-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>기초 개념 사전</h2></div>
     <p class="cat-desc">수업 진도와 상관없이, 자바스크립트·리액트의 핵심 용어와 자주 만나는 버그를 하나씩 독립적으로 찾아볼 수 있는 개인 학습용 사전입니다. 처음이라면 아래 <b>읽는 순서</b>부터 따라가 보세요.</p>
@@ -6921,6 +7262,7 @@ const sections = {
   css: document.getElementById("css-section"),
   js: document.getElementById("js-section"),
   react: document.getElementById("react-section"),
+  journey: document.getElementById("journey-section"),
   concepts: document.getElementById("concepts-section"),
   next: document.getElementById("next-section"),
   materials: document.getElementById("materials-section"),
@@ -7113,6 +7455,7 @@ searchBox.addEventListener("input", () => {
     return;
   }
   sections.overview.classList.add("hidden");
+  sections.journey.classList.add("hidden");
   sections.next.classList.add("hidden");
   sections.materials.classList.add("hidden");
   catKeys.forEach(k => {
