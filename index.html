@@ -674,12 +674,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     <h1>웹 개발 학습 노트</h1>
     <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-07-27</span>
+      <span id="updated-badge">마지막 업데이트: 2026-07-28</span>
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
       <span>React 8개 단원</span>
-      <span>🧭 학습 여정 3/4과목</span>
+      <span>🧭 학습 여정 4/4과목</span>
       <span>기초 개념 사전 31개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
@@ -713,7 +713,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
       <div class="stat-card react"><div class="n">8</div><div class="l">React 단원</div></div>
-      <div class="stat-card react"><div class="n">3/4</div><div class="l">🧭 학습 여정 과목</div></div>
+      <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
       <div class="stat-card concepts"><div class="n">31</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
@@ -725,7 +725,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
         <li>더 알고 싶은 단원은 <strong>펼쳐서 공부하기</strong>를 누르세요. 핵심 개념 → 주석 달린 코드 → 핵심 정리 → TIP 순서로 이어집니다. 각 과목 첫머리의 <strong>단원 목차</strong>를 눌러 바로 이동할 수도 있습니다.</li>
         <li><strong>코드로 보기</strong>의 <span style="color:#1d8f52;font-style:italic;">초록색 설명 주석</span>만 따라 읽어도 코드 흐름이 복습됩니다. 복사 버튼으로 직접 실행해 볼 수도 있어요.</li>
         <li>위쪽 <strong>검색</strong>에 키워드(예: flex, 배열)를 치면 모든 과목에서 해당 카드만 걸러 줍니다. 밤에는 <strong>다크 모드</strong> 버튼으로 화면을 어둡게 바꿀 수 있습니다.</li>
-        <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML·CSS는 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다. (JS는 준비 중)</li>
+        <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML·CSS·JS는 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
       </ol>
@@ -6179,10 +6179,444 @@ export default function NotFound() {
     </div>
 
     <div class="journey-panel hidden" data-subject="js">
-      <div class="journey-placeholder">
-        <h3>🚧 JavaScript 학습 여정은 준비 중입니다</h3>
-        <p>JavaScript 18개 레슨의 개념 누적 서사는 곧 채워질 예정입니다. 그 전까지는 위쪽 <b>JavaScript</b> 탭에서 카드별로 복습해주세요.</p>
-      </div>
+    <div class="journey-intro">
+      <h3>💡 이 탭을 보는 법</h3>
+      <p>JS 레슨도 레슨마다 독립된 단일 파일입니다. JS 첫 레슨(01)에서 배우는 <b>CORE(문법)·BOM(window)·DOM(문서)</b> 3대 구성요소가 이후 17개 레슨을 분류하는 지도 역할을 하므로, 각 단계 recap에서 "이게 어느 축인지"를 함께 짚습니다.</p>
+    </div>
+
+    <div class="journey-list">
+
+      <article class="journey-step" id="journey-js-01">
+        <div class="journey-step-head">
+          <span class="journey-num">01</span>
+          <h3>JS 작성방식 &amp; 3대 구성요소 — 이후 17개 레슨의 지도</h3>
+          <a class="journey-jump" href="#js-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">HTML/CSS와 마찬가지로 "어디에 적을지"(외부/내부/인라인)로 시작하지만, JS는 여기에 언어 자체를 세 축(CORE·BOM·DOM)으로 나누는 지도가 하나 더 얹힙니다. 이후 03·06·07·08~10단계는 CORE, 02·11~13·17단계는 BOM, 04·14~16단계는 DOM에 속한다는 걸 기억해두면 18개 레슨이 흩어져 보이지 않습니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>외부·내부·인라인</b><span>어디에 작성할지(01의 첫 번째 축)</span></div>
+            <div class="flow-arrow">언어 자체는</div>
+            <div class="flow-box leaf"><b>CORE · BOM · DOM</b><span>문법 / window / 문서 — 3대 구성요소</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>실무에서는 유지보수 때문에 외부 파일 방식을 가장 권장 — HTML(01)·CSS(01)와 같은 결론.</li>
+          <li>CORE/BOM/DOM 구분은 이후 모든 레슨을 "이게 언어 문법인지, 창 다루기인지, 문서 조작인지"로 분류하는 기준이 됩니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-02">
+        <div class="journey-step-head">
+          <span class="journey-num">02</span>
+          <h3>대화창 함수 — 첫 BOM, 반환값이 셋 다 다름</h3>
+          <a class="journey-jump" href="#js-02">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01단계 지도에서 첫 BOM(window 관련) 레슨입니다. alert·confirm·prompt는 모두 "사용자와 대화하는 창"이라는 공통점이 있지만 반환값이 없음/true·false/문자열(또는 null)로 전부 다르다는 게 핵심 — 이 "반환값을 확인하라"는 습관은 05단계 형변환, 18단계 AJAX 응답 처리에서도 반복됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>alert()</b><span>반환값 없음, 메시지만</span></div>
+            <div class="flow-arrow"></div>
+            <div class="flow-box"><b>confirm()</b><span>true / false</span></div>
+            <div class="flow-arrow"></div>
+            <div class="flow-box leaf"><b>prompt()</b><span>입력 문자열 / 취소 시 null</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>prompt()의 반환값은 항상 문자열 — 숫자로 쓰려면 05단계의 형변환이 필요합니다.</li>
+          <li>switch문의 case는 값과 타입까지(===) 일치해야 매칭 — 03단계에서 다룰 엄격 비교의 예고편.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-03">
+        <div class="journey-step-head">
+          <span class="journey-num">03</span>
+          <h3>변수와 타입 — 첫 CORE, 스코프·호이스팅·동적 타입</h3>
+          <a class="journey-jump" href="#js-03">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01단계 지도의 CORE(언어 문법) 축이 본격적으로 시작됩니다. var의 호이스팅·재선언 문제를 let·const가 보완한다는 이 스코프 감각은 06단계 클로저(함수가 스코프 변수를 "계속 기억"하는 것)를 이해하는 전제가 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>var</b><span>호이스팅 + 재선언 가능(위험)</span></div>
+            <div class="flow-arrow">보완</div>
+            <div class="flow-box leaf"><b>let(재선언 막음) / const(재할당 막음)</b><span>모두 블록 스코프</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">값을 넣는 순간</div>
+            <div class="flow-box leaf"><b>typeof로 타입 확인</b><span>동적 타입 언어</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>전역변수와 지역변수 이름이 같으면 함수 안에서는 지역변수가 우선 — 호이스팅과 결합하면 undefined 함정이 생김.</li>
+          <li>typeof로 확인하는 "number/string/object" 같은 타입 이름은 05단계 형변환·07단계 String에서 계속 등장합니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-04">
+        <div class="journey-step-head">
+          <span class="journey-num">04</span>
+          <h3>DOM 탐색 메서드 — 첫 DOM, "찾기"</h3>
+          <a class="journey-jump" href="#js-04">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01단계 지도의 DOM(문서 조작) 축이 시작됩니다. id로 찾으면 1개, name·태그·CSS선택자로 찾으면 여러 개(배열형태) 반환된다는 이 구분은 14단계(DOM 탐색 속성)에서 "관계로 찾기"로, 15단계에서 "아예 새로 만들기"로 계속 확장됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>getElementById</b><span>1개만 반환</span></div>
+            <div class="flow-arrow">여러 개는</div>
+            <div class="flow-box"><b>getElementsByName/TagName</b><span>HTMLCollection</span></div>
+            <div class="flow-arrow">가장 유연</div>
+            <div class="flow-box leaf"><b>querySelectorAll</b><span>CSS 선택자 그대로 사용</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>여러 개를 반환하는 메서드는 진짜 배열이 아닌 HTMLCollection이라 map/filter를 바로 못 쓰고 for문으로 순회해야 함.</li>
+          <li>textContent는 순수 텍스트만, innerHTML은 태그까지 해석 — 사용자 입력엔 textContent가 안전(15단계에서 다시 다룸).</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-05">
+        <div class="journey-step-head">
+          <span class="journey-num">05</span>
+          <h3>형변환 함수 — 04의 "input.value는 항상 문자열" 문제를 해결</h3>
+          <a class="journey-jump" href="#js-05">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">04단계에서 DOM으로 찾아온 input의 값은 항상 문자열입니다. 이 문제를 Number·parseInt·parseFloat로 해결하는 게 이번 단계인데, 03단계의 "동적 타입" 개념이 실전에서 왜 계산 실수(<code>"1234"+20</code>이 <code>"123420"</code>이 되는 문제)로 이어지는지를 처음 직접 겪는 레슨입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>04의 input.value</b><span>항상 문자열</span></div>
+            <div class="flow-arrow">Number / parseInt / parseFloat</div>
+            <div class="flow-box leaf"><b>숫자로 형변환 후 계산</b><span>eval()은 강력하지만 보안상 지양</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>parseInt/parseFloat는 앞쪽에 숫자가 아닌 문자가 섞여 있어도 앞부분 숫자만 해석함.</li>
+          <li>onclick="fn(id)"처럼 태그의 id를 그대로 넘기면 DOM 엘리먼트 객체 자체가 전달됨 — 04단계 탐색과 연결되는 실무 패턴.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-06">
+        <div class="journey-step-head">
+          <span class="journey-num">06</span>
+          <h3>함수·객체·클로저·ES6 — 03의 스코프가 "기억하는 함수"로 확장</h3>
+          <a class="journey-jump" href="#js-06">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">이 단원은 CORE의 핵심을 총정리합니다. 클로저는 03단계의 스코프 개념을 "함수가 자기 생성 당시의 변수를 계속 기억한다"는 것으로 확장한 것이고, 여기서 배우는 생성자 함수·프로토타입은 09단계 Lotto 실습에서, 스프레드/구조분해할당은 08단계 배열에서 바로 재사용됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>함수 3형태</b><span>선언적·익명·화살표(this 안 만듦)</span></div>
+            <div class="flow-arrow">객체 만들기</div>
+            <div class="flow-box leaf"><b>리터럴 / 생성자(new+this) / 프로토타입</b><span>09단계에서 재사용</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">함수가 스코프를 기억하면</div>
+            <div class="flow-box leaf"><b>클로저</b><span>상태를 계속 유지(03단계 스코프의 확장)</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>화살표 함수는 자신의 this를 만들지 않고 바깥 this를 그대로 씀 — 생성자 함수 안 메서드로 쓰면 유용.</li>
+          <li>구조분해할당·템플릿 리터럴 같은 ES6 문법은 07단계 String, 08단계 Array 코드에서 계속 등장.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-07">
+        <div class="journey-step-head">
+          <span class="journey-num">07</span>
+          <h3>String 객체 — 05의 형변환 반대편, 03의 ===가 문자열에도</h3>
+          <a class="journey-jump" href="#js-07">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">05단계가 문자열→숫자였다면, 여기선 문자열 자체를 다루는 도구(합치기·비교·찾기·자르기)를 정리합니다. 03단계의 == vs === 구분이 리터럴 문자열과 <code>new String()</code> 객체 비교에서 왜 중요한지 실전 예제로 확인합니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>+ / concat / 템플릿 리터럴</b><span>합치기(06단계 ES6 문법 재사용)</span></div>
+            <div class="flow-arrow">위치 찾기</div>
+            <div class="flow-box"><b>indexOf / lastIndexOf</b><span>없으면 -1</span></div>
+            <div class="flow-arrow">잘라내고 나누기</div>
+            <div class="flow-box leaf"><b>substring / split / trim</b><span>원본은 안 바뀌고 새 값 반환</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>==는 타입 자동 변환 후 값만 비교, ===는 타입까지 같아야 참 — 리터럴과 new String()은 값은 같아도 타입이 달라 === false.</li>
+          <li>match(정규표현식)으로 패턴 검사 가능 — 다음 08단계 배열에도 비슷한 "조건으로 걸러내기" 감각이 이어짐(filter).</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-08">
+        <div class="journey-step-head">
+          <span class="journey-num">08</span>
+          <h3>Array 배열 — 06의 스프레드가 "복사 방식"으로 재등장</h3>
+          <a class="journey-jump" href="#js-08">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06단계에서 배운 스프레드 연산자(<code>...</code>)가 여기서 "깊은 복사"라는 구체적 쓰임으로 재등장합니다. 단순 대입(얕은 복사, 주소만 공유)과의 차이를 이해하는 게 이번 핵심이며, 이 배열 감각은 바로 다음 09단계 Lotto 실습의 재료가 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>const cc = aa (단순 대입)</b><span>얕은 복사 — 주소만 공유, 원본도 바뀜</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">반면</div>
+            <div class="flow-box leaf"><b>slice() / [...ee] (06의 스프레드)</b><span>깊은 복사 — 원본 보호</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>sort()는 기본이 사전식이라 숫자 정렬엔 (a,b)=&gt;a-b 비교함수가 필요 — 09단계 Lotto 정렬에 그대로 쓰임.</li>
+          <li>...val처럼 매개변수에 붙이면 rest 파라미터(가변 인자를 배열로 수집) — 스프레드와 짝을 이루는 ES6 문법.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-09">
+        <div class="journey-step-head">
+          <span class="journey-num">09</span>
+          <h3>Lotto 번호 생성기 — 06+08+04가 만나는 첫 종합 실습</h3>
+          <a class="journey-jump" href="#js-09">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06단계의 생성자 함수, 08단계의 배열 메서드(push·includes·sort·spread), 04단계의 DOM 조작이 하나의 실습에서 처음으로 결합됩니다. "각 단계에서 따로 배운 도구를 실전에서 조합한다"는 이 경험은 16단계(DOM으로 표 동적 생성)에서 한 번 더 반복됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>06의 생성자 함수</b><span>this.balls=[] + makeBall()</span></div>
+            <div class="flow-arrow">+08의 배열</div>
+            <div class="flow-box"><b>includes로 중복 검사</b><span>push/sort/spread로 정리</span></div>
+            <div class="flow-arrow">+04의 DOM</div>
+            <div class="flow-box leaf"><b>결과를 span에 출력</b><span>createElement로 표 행 생성</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>Math.floor(Math.random()*45)+1 공식으로 1~45 정수 난수 생성 — random()은 0 이상 1 미만 실수만 반환한다는 게 전제.</li>
+          <li>createElement/createTextNode/appendChild로 innerHTML 없이 표 행을 직접 조립 — 15단계에서 이 방식을 정식으로 다룸.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-10">
+        <div class="journey-step-head">
+          <span class="journey-num">10</span>
+          <h3>Array 반복문 4종 비교 — 08~09에서 쓴 반복을 정리</h3>
+          <a class="journey-jump" href="#js-10">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">08~09단계 코드에서 이미 for문과 forEach를 써봤는데, 여기서 그 차이를 map·filter까지 포함해 정식으로 비교합니다. "map은 가공(같은 길이의 새 배열), filter는 선별(조건에 맞는 것만)"이라는 반환값 차이가 핵심이며, 이 감각은 16단계의 forEach 폼 검증에서 그대로 쓰입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>for / forEach</b><span>단순 반복, 반환값 없음</span></div>
+            <div class="flow-arrow">map은</div>
+            <div class="flow-box"><b>가공</b><span>콜백의 return으로 같은 길이의 새 배열</span></div>
+            <div class="flow-arrow">filter는</div>
+            <div class="flow-box leaf"><b>선별</b><span>조건이 true인 것만 남긴 새 배열</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>for문은 index를 직접 다뤄 실수 위험은 있지만 대용량 배열에서 성능이 유리.</li>
+          <li>for-in문은 배열보다 객체의 key를 순회할 때 사용 — 06단계 객체 리터럴과 연결됩니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-11">
+        <div class="journey-step-head">
+          <span class="journey-num">11</span>
+          <h3>Date 객체 — 새로운 내장 객체, 월은 0부터</h3>
+          <a class="journey-jump" href="#js-11">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">지금까지의 흐름과는 독립적으로 새 내장 객체가 등장합니다. getMonth()가 1월을 0으로 취급한다는 함정과, getTime()이 반환하는 밀리초 값으로 날짜 차이를 계산하는 원리(D-Day)를 다룹니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>new Date()</b><span>인자 없으면 현재 시각</span></div>
+            <div class="flow-arrow">월은 0부터라</div>
+            <div class="flow-box"><b>getMonth()+1</b><span>표시할 땐 항상 +1</span></div>
+            <div class="flow-arrow">getTime() 차이로</div>
+            <div class="flow-box leaf"><b>날짜 차이 계산</b><span>밀리초÷(1000×60×60×24)=일수</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>setDate(date.getDate()+n)처럼 날짜를 더하면 월말/월초를 넘어가는 계산도 자동 처리됨.</li>
+          <li>D-Day 계산 원리(getTime 차이)는 17단계 쿠키의 만료일(expires) 계산에도 같은 방식으로 쓰입니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-12">
+        <div class="journey-step-head">
+          <span class="journey-num">12</span>
+          <h3>팝업창(window) — 02의 대화창과 다른 "진짜 창" 다루기 + e.target 정식 등장</h3>
+          <a class="journey-jump" href="#js-12">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">02단계가 alert/confirm 같은 "간이 대화창"이었다면, 여기선 window.open()으로 진짜 새 브라우저 창을 엽니다. 그리고 이벤트 핸들러의 <code>e.target</code>(실제 이벤트가 발생한 요소)이 여기서 처음 정식으로 다뤄지는데, 이 개념은 16단계 폼 검증의 이벤트 처리에서도 전제로 깔립니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>window.open(url, title, options)</b><span>새 창(팝업) 열기</span></div>
+            <div class="flow-arrow">자식 창은</div>
+            <div class="flow-box leaf"><b>window.opener</b><span>부모 창 document에 접근</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">이벤트 핸들러의</div>
+            <div class="flow-box leaf"><b>e.target</b><span>실제 이벤트가 발생한 요소</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>options 문자열(width/height/top/left)로 팝업 크기·위치 지정.</li>
+          <li>브라우저 팝업 차단 때문에 window.open은 실제 클릭 이벤트 안에서 호출돼야 열림.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-13">
+        <div class="journey-step-head">
+          <span class="journey-num">13</span>
+          <h3>Location 객체 — 12의 window와 짝을 이루는 BOM</h3>
+          <a class="journey-jump" href="#js-13">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">12단계가 "다른 창을 여는 것"이었다면, location은 "현재 문서의 주소 자체를 다루는 것"입니다. 같은 BOM 축이지만 역할이 다르다는 걸 짚어두면 헷갈리지 않습니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>protocol / host / pathname</b><span>URL을 조각으로 읽기</span></div>
+            <div class="flow-arrow">쿼리·해시는</div>
+            <div class="flow-box"><b>search(서버 전달) / hash(클라이언트 전용)</b><span></span></div>
+            <div class="flow-arrow">이동은</div>
+            <div class="flow-box leaf"><b>href/assign(기록 남음) vs replace(기록 대체)</b><span></span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>search(쿼리스트링)는 서버로 전달, hash는 서버로 전송되지 않고 브라우저 안에서만 사용.</li>
+          <li>iframe의 name 속성을 이용하면 iframe이름.location.href로 특정 프레임만 이동시킬 수 있음.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-14">
+        <div class="journey-step-head">
+          <span class="journey-num">14</span>
+          <h3>DOM 탐색 속성 — 04의 "찾기"에서 "관계로 이동"으로</h3>
+          <a class="journey-jump" href="#js-14">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">04단계가 id·class·태그로 요소를 "검색"했다면, 여기선 이미 찾은 요소에서 부모·자식·형제로 "이동"합니다. Node(텍스트 노드 포함) vs Element(태그만)의 구분이 핵심이며, 이 감각은 16단계에서 라벨을 자동으로 찾아내는 실전 코드로 바로 이어집니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>parentNode/childNodes (Node)</b><span>공백·줄바꿈 텍스트 노드까지 셈</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">반면</div>
+            <div class="flow-box leaf"><b>parentElement/children (Element)</b><span>태그만 걸러냄 — 실무엔 이쪽이 안전</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>같은 div라도 childNodes.length(7)와 children.length(3)가 다를 수 있음 — 텍스트 노드 포함 여부 차이.</li>
+          <li>previousElementSibling/nextElementSibling(형제 탐색)은 16단계에서 "라벨 자동 찾기"에 실전 활용됩니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-15">
+        <div class="journey-step-head">
+          <span class="journey-num">15</span>
+          <h3>DOM 요소 동적 생성 — 04+14로 찾던 걸 이번엔 직접 만듦</h3>
+          <a class="journey-jump" href="#js-15">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">04·14단계가 이미 있는 요소를 찾는 것이었다면, 이제 <b>없던 요소를 새로 만드는</b> 단계입니다. 09단계 Lotto 실습에서 미리 살짝 써봤던 createElement/appendChild 조합을 여기서 정식으로 배우고, 다음 16단계에서 표 전체를 만드는 실전으로 확장됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>createElement + createTextNode</b><span>태그·텍스트 노드를 각각 생성</span></div>
+            <div class="flow-arrow">조립 후</div>
+            <div class="flow-box leaf"><b>appendChild로 부모에 붙여야</b><span>비로소 화면에 나타남</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">대안으로</div>
+            <div class="flow-box leaf"><b>innerHTML + 템플릿 리터럴</b><span>짧지만 파싱 비용·XSS 위험</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>createAttribute+setAttributeNode로 속성도 동적으로 붙일 수 있음.</li>
+          <li>사용자 입력값을 그대로 넣을 땐 innerHTML보다 createElement/textContent가 안전(04단계 XSS 언급과 연결).</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-16">
+        <div class="journey-step-head">
+          <span class="journey-num">16</span>
+          <h3>DOM으로 표 동적 생성 — 15+14+10이 만나는 실전 종합</h3>
+          <a class="journey-jump" href="#js-16">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">15단계의 createElement 조립, 14단계의 previousElementSibling(라벨 자동 탐색), 10단계의 forEach(폼 검증)가 한 실습에서 모두 결합됩니다. 09단계 Lotto와 마찬가지로 "각 단계 도구를 실전에서 조합"하는 패턴이며, React를 배우면(학습 여정의 React 탭) <code>.map()</code> 리스트 렌더링으로 같은 아이디어를 다시 만나게 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>10의 forEach로 검증</b><span>빈 입력값 확인</span></div>
+            <div class="flow-arrow">14의 previousElementSibling으로</div>
+            <div class="flow-box"><b>라벨 자동 탐색</b><span>"아이디" 같은 th 텍스트</span></div>
+            <div class="flow-arrow">15의 createElement로</div>
+            <div class="flow-box leaf"><b>tr·td 조립 → tbody에 추가</b><span>childElementCount로 최대 10개 제한</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>querySelectorAll+forEach 조합으로 여러 입력창의 값을 한 번에 검증.</li>
+          <li>childElementCount로 등록 개수를 세어 제한하는 비즈니스 로직 — 실전에서 자주 쓰이는 패턴.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-17">
+        <div class="journey-step-head">
+          <span class="journey-num">17</span>
+          <h3>Cookie 사용하기 — 03의 "변수"와 대비되는 영속 저장</h3>
+          <a class="journey-jump" href="#js-17">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">03단계의 변수는 페이지를 새로고침하면 사라지는데, 쿠키는 브라우저에 값을 남겨 다음 방문에도 유지됩니다. 만료일 계산에는 11단계 Date 객체의 <code>setDate</code>·<code>toUTCString</code>이 그대로 쓰이고, 더 큰 저장이 필요하면 sessionStorage·localStorage로 넘어갑니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>document.cookie = "이름=값;옵션"</b><span>encodeURIComponent로 인코딩</span></div>
+            <div class="flow-arrow">삭제는</div>
+            <div class="flow-box"><b>만료일을 과거로 재저장</b><span>별도 삭제 명령 없음</span></div>
+            <div class="flow-arrow">더 큰 저장은</div>
+            <div class="flow-box leaf"><b>sessionStorage / localStorage</b><span>약 5MB, setItem/getItem</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>document.cookie 대입은 전체를 덮어쓰는 게 아니라 해당 이름의 쿠키 하나만 추가/갱신.</li>
+          <li>expires 계산에 11단계의 <code>date.setDate(date.getDate()+n)</code>이 그대로 재사용됨.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-js-18">
+        <div class="journey-step-head">
+          <span class="journey-num">18</span>
+          <h3>AJAX(XMLHttpRequest) — 여정의 마지막, 모든 게 결합됨</h3>
+          <a class="journey-jump" href="#js-18">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">JS 여정의 마지막 단계에서 지금까지 배운 것들이 한데 모입니다. 06단계의 콜백 함수 패턴이 <code>onreadystatechange</code>로, 15단계의 DOM 생성이 결과를 화면에 그리는 데, 06단계의 객체/JSON 감각이 <code>JSON.parse()</code>로 이어집니다. React를 배우면(학습 여정 React 탭 참고) 이 XMLHttpRequest의 자리를 fetch나 커스텀 훅(useStockData)이 대신하게 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>new XMLHttpRequest()</b><span>open(방식,주소,비동기) → send()</span></div>
+            <div class="flow-arrow">06의 콜백 패턴처럼</div>
+            <div class="flow-box leaf"><b>onreadystatechange 콜백 등록</b><span>상태 바뀔 때마다 호출</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">readyState 4 + status 200 확인 후</div>
+            <div class="flow-box"><b>responseText(문자열)</b><span></span></div>
+            <div class="flow-arrow">JSON.parse로</div>
+            <div class="flow-box leaf"><b>배열/객체로 변환</b><span>15단계 DOM 생성으로 화면에 출력</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li>readyState===4(수신 완료)와 status==200(성공) 두 조건을 함께 확인해야 안전.</li>
+          <li>GET 방식은 주소 뒤에 ?key=value&amp;key2=value2로 파라미터를 붙여 전달.</li>
+        </ul>
+        <div class="journey-tip"><b>JS 여정을 마치며</b> — 01단계의 CORE/BOM/DOM 지도를 다시 떠올려보면: 03·05~10단계는 CORE(문법·자료구조), 02·11~13·17단계는 BOM(window·시간·저장), 04·14~16단계는 DOM(문서 조작)이었고, 18단계 AJAX는 이 셋을 모두 엮어 쓰는 실전이었습니다. 헷갈리는 카드가 있으면 이 세 축 중 어디에 속하는지부터 확인해보세요. React를 배우는 중이라면, 여기서 배운 DOM 조작·이벤트·AJAX 감각이 각각 JSX 렌더링·이벤트 핸들러·useEffect+fetch로 형태만 바뀌어 다시 등장한다는 걸 알아두면 학습 여정 React 탭이 더 친숙하게 느껴질 것입니다.</div>
+      </article>
+
+    </div>
     </div>
 
     <div class="journey-panel hidden" data-subject="react">
