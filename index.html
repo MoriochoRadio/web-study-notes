@@ -215,13 +215,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     background:var(--panel-2);border:1px solid var(--border);border-radius:12px;
     padding:16px;margin:10px 0;display:flex;flex-direction:column;gap:12px;
   }
-  .flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:2px;}
+  .flow-row{display:flex;align-items:center;flex-wrap:nowrap;gap:2px;overflow-x:auto;padding-bottom:4px;}
   .flow-box{
     background:var(--panel);border:1px solid var(--border);border-radius:10px;
-    padding:9px 13px;font-size:12.5px;line-height:1.5;min-width:110px;
+    padding:9px 13px;font-size:12.5px;line-height:1.5;width:170px;flex:none;
   }
   .flow-box b{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;color:var(--c);margin-bottom:2px;}
-  .flow-box span{color:var(--muted);font-size:11.5px;}
+  .flow-box span{display:block;color:var(--muted);font-size:11.5px;}
   .flow-box.leaf{border-style:dashed;}
   .flow-arrow{
     display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -5721,22 +5721,26 @@ export default function NotFound() {
           <h3>성능 훅 3종 — props가 두 단계를 거쳐가는 첫 사례</h3>
           <a class="journey-jump" href="#react-04">전체 카드 보기 →</a>
         </div>
-        <p class="journey-recap">파일이 늘어나 데이터 파일(data/stocks.js)까지 더해집니다. App → StockList → StockRow로 props가 두 단계를 거치는 첫 사례라, 02단계보다 한 겹 더 깊게 파일을 오가야 합니다.</p>
+        <p class="journey-recap">03단계처럼 App.jsx가 두 자식(StockSearch, StockList)을 나란히 렌더링하는 구조는 같지만, 이번엔 그중 한 자식(StockList)이 데이터 파일(data/stocks.js)까지 더해져 App → StockList → StockRow로 props가 두 단계를 거칩니다. 카드 제목의 "성능 훅 3종"(useRef·useMemo·useCallback)이 diagram 어디에 있는지 하나씩 표시해 뒀습니다.</p>
         <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>App.jsx</b><span>StockSearch·StockList 두 자식을 나란히 렌더(03단계와 같은 형제 구조)</span></div>
+            <div class="flow-arrow">렌더</div>
+            <div class="flow-box leaf"><b>StockSearch.jsx</b><span>useRef로 자기 input만 접근 — "화면엔 안 보이는 뒷메모장"</span></div>
+          </div>
           <div class="flow-row">
             <div class="flow-box leaf"><b>data/stocks.js</b><span>STOCKS 배열(순수 데이터, 컴포넌트 아님)</span></div>
             <div class="flow-arrow">import</div>
-            <div class="flow-box"><b>StockList.jsx</b><span>.map()으로 종목마다 호출</span></div>
-            <div class="flow-arrow">stock 객체<br>하나씩 props</div>
+            <div class="flow-box"><b>StockList.jsx</b><span>App의 두 번째 자식 · useMemo(필터·정렬 결과 캐싱) + useCallback(toggleFavorite 고정)</span></div>
+            <div class="flow-arrow">stock·isFavorite·<br>onToggleFavorite<br>(useCallback로 고정) props</div>
             <div class="flow-box leaf"><b>StockRow.jsx</b><span>React.memo — props 그대로면 재렌더 스킵</span></div>
-          </div>
-          <div class="flow-row">
-            <div class="flow-box"><b>StockSearch.jsx</b><span>다른 파일과 데이터 교류 없음(독립) · useRef로 자기 input만 접근</span></div>
           </div>
         </div>
         <div class="journey-label">핵심 요소</div>
         <ul class="journey-points">
           <li><b>data/stocks.js</b> — 컴포넌트가 아니라 그냥 배열 하나 export하는 데이터 파일.</li>
+          <li><b>StockList.jsx의 useMemo</b> — filter·sortBy가 안 바뀌면 필터링·정렬 연산을 다시 안 하고 이전 결과를 재사용.</li>
+          <li><b>StockList.jsx의 useCallback</b> — toggleFavorite 함수의 메모리 주소를 고정해, 아래 StockRow.jsx의 React.memo가 계속 효과를 유지하게 함.</li>
           <li><b>StockRow.jsx</b> — React.memo로 감싸져, 부모가 리렌더돼도 props가 같으면 그대로 있음.</li>
         </ul>
       </article>
@@ -5804,7 +5808,7 @@ export default function NotFound() {
           <h3>Context API — "감싸다"·"받아오다"가 본격적으로 시작되는 지점</h3>
           <a class="journey-jump" href="#react-07">전체 카드 보기 →</a>
         </div>
-        <p class="journey-recap">context/ 폴더가 새로 생기고 파일이 갑자기 늘어나면서, "이 파일이 저 파일을 감싸고, 거기서 뭘 받아온다"는 표현이 본격적으로 등장합니다 — 지금 헷갈리는 게 자연스러운 지점입니다. 상자 안에 상자로 그리면 "감싼다"는 말이 실제로 눈에 보입니다.</p>
+        <p class="journey-recap">context/ 폴더가 새로 생기고 파일이 갑자기 늘어나면서, "이 파일이 저 파일을 감싸고, 거기서 뭘 받아온다"는 표현이 본격적으로 등장합니다 — 지금 헷갈리는 게 자연스러운 지점입니다. 상자 안에 상자로 그리면 "감싼다"는 말이 실제로 눈에 보입니다. 03단계에서 "Counter.jsx와 TodoApp.jsx는 서로의 state를 전혀 모르는 완전한 남남"이라고 짚었던 것, 기억하시나요? Header.jsx와 StockGrid.jsx도 똑같이 서로를 import하지 않는 남남 형제인데, 이번엔 Context 덕분에 그 상태로도 같은 데이터(테마·관심목록)를 함께 씁니다 — 03단계의 "형제는 서로 모른다"가 바로 이 대조를 위한 복선이었습니다.</p>
         <div class="wrap-diagram">
           <div class="wrap-box">
             <span class="wrap-label">&lt;ThemeProvider&gt; (context/ThemeContext.jsx)</span>
@@ -5823,7 +5827,7 @@ export default function NotFound() {
           <li><b>context/ThemeContext.jsx</b> — "값을 보관하는 곳"(Provider)과 "값을 꺼내는 함수"(useTheme)를 함께 export.</li>
           <li><b>Header.jsx / StockGrid.jsx</b> — <u>App.jsx가 아니라</u> context 파일에서 직접 useTheme·useWatchlist를 import. props로 안 받고 "직통 라인"으로 꺼내 씀.</li>
         </ul>
-        <div class="journey-tip"><b>4단계로 쪼개 읽기</b> — ① App.jsx에서 몇 겹으로 감쌌는지 세기 → ② 그 Provider가 어느 context 파일 것인지 확인 → ③ 그 파일 안 useXxx가 뭘 리턴하는지 확인 → ④ Header/StockGrid에서 그 리턴값을 어떻게 쓰는지 확인. 개념 자체가 헷갈리면 <a href="#concept-context-api">기초 개념 사전 — Context API란?</a>도 함께 보세요.</div>
+        <div class="journey-tip"><b>파일 오가는 순서 팁 (4단계)</b> — ① App.jsx에서 몇 겹으로 감쌌는지 세기 → ② 그 Provider가 어느 context 파일 것인지 확인 → ③ 그 파일 안 useXxx가 뭘 리턴하는지 확인 → ④ Header/StockGrid에서 그 리턴값을 어떻게 쓰는지 확인. 개념 자체가 헷갈리면 <a href="#concept-context-api">기초 개념 사전 — Context API란?</a>도 함께 보세요.</div>
 
         <div class="journey-label" style="margin-top:20px;">🔧 지금 직접 연습 중인 부분 — SortContext 추가</div>
         <p class="journey-recap">지금 작업 중인 SortContext.jsx는 위 그림과 <b>완전히 같은 패턴</b>을 세 번째로 반복한 것입니다 — 새로운 개념이 아니라 "겹 하나 더 감싸기"일 뿐입니다.</p>
@@ -5869,7 +5873,7 @@ export default function NotFound() {
             <li><span class="t-name">app/blog/</span>
               <ul>
                 <li><span class="t-name">page.js</span><span class="t-url">→ /blog</span></li>
-                <li><span class="t-name">[id]/page.js</span><span class="t-url">→ /blog/1, /blog/2 …</span><span class="t-desc">동적 라우트</span></li>
+                <li><span class="t-name">[id]/page.js</span><span class="t-url">→ /blog/1, /blog/2 …</span><span class="t-desc">동적 라우트(URL 패턴이 유동적 — 06단계 "동적 import"와는 다른 개념)</span></li>
                 <li><span class="t-name">[id]/not-found.js</span><span class="t-desc">존재하지 않는 id면 notFound()가 이 화면 표시</span></li>
               </ul>
             </li>
