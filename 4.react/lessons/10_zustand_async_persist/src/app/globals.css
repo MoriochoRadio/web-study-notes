@@ -1,0 +1,21 @@
+/* 최소 전역 스타일 + Suspense 스켈레톤용 shimmer 애니메이션(뒤 레슨에서 사용) */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

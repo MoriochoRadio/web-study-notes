@@ -3,12 +3,18 @@
 // [symbol] 처럼 폴더명에 대괄호가 들어간 것을 "동적 라우트(Dynamic Route)"라고 합니다.
 // 주소가 /api/stock/AAPL, /api/stock/NVDA 처럼 가변적으로 들어올 때 처리합니다.
 
+//경로구조: /api/stock/[symbol]/[date]
+//-> /api/stock/MSFT/2026-07-30
+//경로구조: /api/stock/[...symbol]
+//-> /api/stock/MSFT/2026-07-30/2026-07-29/2026-07-28
+
 export async function GET(request, { params }) {
     // 📌 1) 동적 경로 파라미터 symbol 꺼내기
     // Next.js 15 버전부터는 params가 비동기(Promise) 객체이므로 await params로 꺼내야 합니다.
     const { symbol } = await params
-    
+
     // 📌 2) 환경변수(.env.local)에 등록된 보안 API 키 읽기
+    // .env.local -> 환경설정파일 -> process.env -> 알아서 환경파일을 찾는다.
     const apiKey = process.env.FINNHUB_API_KEY
 
     // 📌 3) API 키가 없을 때 (더미 시세 데이터 반환)
@@ -33,7 +39,7 @@ export async function GET(request, { params }) {
         )
         if (!res.ok) throw new Error(`API 호출 실패 (status ${res.status})`)
         const data = await res.json()
-        
+
         return Response.json({
             symbol: symbol.toUpperCase(),
             price: data.c,        // c: Current price (현재가)

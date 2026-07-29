@@ -142,6 +142,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   .stat-card.concepts .n{color:var(--concepts);}
   .stat-card.next .n{color:var(--next);}
   .stat-card.progress .n{color:var(--good);}
+  .progress-breakdown{
+    display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;
+  }
+  .progress-chip{
+    font-size:11px;font-weight:700;color:var(--muted);
+    background:var(--bg);border:1px solid var(--border);border-radius:999px;
+    padding:2px 8px;
+  }
+  .progress-chip b{color:var(--text);font-weight:800;}
+  .progress-chip.chip-done{color:var(--good);border-color:var(--good);}
 
   .howto{
     background:var(--panel);border:1px solid var(--border);border-radius:14px;
@@ -546,6 +556,19 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     border-radius:999px;padding:2px 8px;
   }
 
+  /* ==== 버그 났어요: 어디서든 눌러 기초 개념 사전의 '증상별 찾기'로 바로 이동 ==== */
+  #bug-fab{
+    position:fixed;right:22px;bottom:88px;z-index:40;
+    display:flex;align-items:center;gap:6px;
+    background:var(--panel);color:var(--fg);
+    border:1.5px solid var(--border);border-radius:999px;
+    padding:10px 16px;font-size:13.5px;font-weight:700;
+    font-family:inherit;cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.12);
+    transition:transform .15s,border-color .15s;
+  }
+  #bug-fab:hover{transform:translateY(-2px);border-color:#e94560;}
+
   #review-modal{
     position:fixed;inset:0;z-index:50;
     background:color-mix(in srgb, var(--bg) 88%, black 12%);
@@ -653,6 +676,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     .tab-spacer{display:none;}
     #search-box{width:110px;}
     #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
+    #bug-fab{right:14px;bottom:72px;padding:9px 14px;font-size:12.5px;}
     .review-top{padding:14px 16px;}
     .review-card{min-height:240px;padding:22px 20px;}
     .review-easy{font-size:15.5px;}
@@ -674,13 +698,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     <h1>웹 개발 학습 노트</h1>
     <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-07-28</span>
+      <span id="updated-badge">마지막 업데이트: 2026-07-29</span>
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 10개 단원</span>
+      <span>React 12개 단원</span>
       <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 33개 항목</span>
+      <span>기초 개념 사전 34개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -712,11 +736,11 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">10</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">12</div><div class="l">React 단원</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
-      <div class="stat-card concepts"><div class="n">33</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card concepts"><div class="n">34</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
-      <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
+      <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
     <div class="howto">
       <h3>📖 이 노트로 복습하는 방법</h3>
@@ -3921,7 +3945,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, 그리고 route.js로 나만의 백엔드를 만드는 API Routes까지 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, route.js로 나만의 백엔드를 만드는 API Routes, persist 미들웨어로 새로고침에도 유지되는 상태와 매수/매도가 있는 포트폴리오, 그리고 async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식까지 복습합니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -6151,6 +6175,631 @@ export default function StockSearch() {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/api/search/route.js" target="_blank" rel="noopener">api/search/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/api/stock/[symbol]/route.js" target="_blank" rel="noopener">api/stock/[symbol]/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/components/StockSearch.jsx" target="_blank" rel="noopener">components/StockSearch.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/components/WatchlistPanel.jsx" target="_blank" rel="noopener">components/WatchlistPanel.jsx</a></div>
   </div>
 </article>
+
+<article class="note-card" id="react-11">
+  <div class="note-head">
+    <span class="note-num">11</span>
+    <h3>Zustand persist + async 액션 — 새로고침에도 살아남는 저장소, 매수/매도 포트폴리오</h3>
+    <div class="note-tags"><span class="tag">persist</span><span class="tag">localStorage</span><span class="tag">async 액션</span><span class="tag">Promise.all</span><span class="tag">포트폴리오</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>create(persist((set, get) =&gt; ({ ... }), { name, partialize }))</code>처럼 <code>persist</code>로 스토어를 한 겹 더 감싸면 지정한 상태 조각(<code>watchlist</code>·<code>portfolio</code> 등)이 자동으로 localStorage에 저장/복원되고, 스토어 안 액션 함수를 <code>async</code>로 선언해 <code>fetch</code>·<code>Promise.all</code>로 실제 API 통신까지 처리하며, 매수(<code>buyStock</code>)·매도(<code>sellStock</code>)로 평단가를 재계산하는 포트폴리오 로직까지 스토어 안에 함께 들어간다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>09단계의 저장소는 브라우저를 새로고침(F5)하면 다시 초기값으로 리셋되는 "화이트보드"였어요. <code>persist</code>는 그 화이트보드 내용을 자동으로 사진 찍어 서랍(localStorage)에 저장했다가, 다시 켤 때 그대로 복원해주는 "자동 저장 기능"입니다(게임의 세이브 파일과 같아요). 그리고 이번엔 저장소 안의 함수(액션)들이 직접 인터넷에 나가 시세를 물어보고(<code>fetchPrice</code>) 답을 기다렸다가(<code>async</code>/<code>await</code>) 돌아오는 일까지 하게 됩니다 — 09단계에서 컴포넌트가 하던 API 호출 역할 일부가 이제 저장소 쪽으로 옮겨온 셈이죠.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>create(persist(fn, options)) — 스토어를 감싸는 두 겹 포장</h4>
+        <p>09단계는 <code>create((set, get) =&gt; ({...}))</code> 한 겹이었다면, 이번엔 그 안에 <code>persist</code>가 한 겹 더 들어가 <code>create(persist(fn, options))</code> 구조가 됩니다.</p>
+        <ul>
+          <li><b><code>fn</code></b> — <code>(set, get) =&gt; ({...})</code>, 09단계와 똑같은 "상태+액션 정의" 함수. 저장소의 실제 내용물은 그대로.</li>
+          <li><b><code>persist(fn, options)</code></b> — <code>fn</code>이 만드는 저장소를 통째로 감싸서 "자동 저장/복원 기능"을 덧붙이는 zustand의 미들웨어 함수.</li>
+          <li><b><code>options</code></b> — <code>{ name, partialize }</code>처럼 persist의 동작 방식을 정하는 설정 객체.</li>
+        </ul>
+        <p>비유하면 <code>fn</code>은 "화이트보드에 뭘 적을지 정하는 설계도"이고, <code>persist(fn, options)</code>는 그 화이트보드 전체를 "자동 사진 찍어 저장하는 액자"로 감싸는 것과 같아요 — 안에 적히는 내용(상태·액션)은 그대로인데, 겉에 저장 기능만 덧씌워집니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>name과 partialize — 어디에, 무엇을 저장할지</h4>
+        <p>persist의 옵션 두 개는 각각 다른 질문에 답합니다 — "어디에 저장?"과 "뭘 저장?".</p>
+        <ul>
+          <li><b><code>name: 'stock-dashboard'</code></b> — localStorage 안에서 이 저장소를 구분할 열쇠(key) 이름. 브라우저 개발자도구 → Application → Local Storage에서 이 이름으로 실제 저장된 값을 확인할 수 있습니다.</li>
+          <li><b><code>partialize: (state) =&gt; ({ watchlist, selectedSymbol, portfolio })</code></b> — 전체 상태 중 <b>이 함수가 리턴하는 조각만</b> localStorage에 저장합니다.</li>
+          <li>일부러 <b>빼는</b> 것도 있습니다 — <code>prices</code>·<code>loading</code>·<code>error</code>는 저장하지 않습니다. 시세는 오래되면 의미가 없어 새로고침할 때마다 새로 받아오는 게 맞고, 로딩/에러 상태를 그대로 저장하면 다음에 열었을 때 "로딩 중..."이 얼어붙은 채로 나타나는 이상한 화면이 될 수 있기 때문입니다.</li>
+        </ul>
+        <p>비유하면 partialize는 "이사 갈 때 뭘 챙기고 뭘 버릴지 고르는 것"과 같아요 — 관심종목·포트폴리오(내가 직접 고른 것들)는 챙기고, 방금 확인한 시세나 "로딩 중" 팻말처럼 당장의 상황에만 유효한 것들은 새 집에서 다시 확인하면 되니 굳이 안 챙깁니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>fetchPrice·fetchAllPrices — 저장소 액션이 async가 되는 순간</h4>
+        <p>09단계 액션은 <code>set({...})</code> 한 줄이면 끝나는 동기 함수였지만, <code>fetchPrice</code>는 API 응답을 기다려야 해서 <code>async</code>로 선언됩니다.</p>
+        <ul>
+          <li><b><code>set({ loading: true, error: null })</code></b> — 요청을 시작하자마자 먼저 "로딩 중"으로 표시하고 이전 에러를 지움.</li>
+          <li><b><code>const res = await fetch(...)</code></b> — 10단계에서 배운 <code>/api/stock/[symbol]</code>을 저장소 액션 안에서 직접 호출. 컴포넌트가 아니라 저장소가 API를 부르는 구조로 바뀜.</li>
+          <li><b><code>try...catch</code></b> — 성공하면 <code>prices</code>를 갱신하고 로딩 해제, 실패하면 <code>error</code>에 메시지를 담고 로딩 해제 — 어느 쪽이든 <code>loading: false</code>는 꼭 실행되어야 "로딩 중"에 영원히 멈추지 않습니다.</li>
+          <li><b><code>fetchAllPrices</code></b> — <code>Promise.all(watchlist.map((s) =&gt; fetchPrice(s)))</code>로 관심종목 전체를 한 번에 병렬 요청 — 하나씩 순서대로(<code>for</code>) 기다리는 대신 모두 동시에 보내고 다 끝날 때까지만 기다려 훨씬 빠릅니다.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>buyStock의 평단가 재계산 — 숫자 계산을 코드로 옮기면</h4>
+        <p><code>buyStock(symbol, qty, price)</code>은 "이미 보유 중이면 평단가를 다시 계산"하는 조건 분기가 핵심입니다.</p>
+        <ul>
+          <li><b><code>totalQty = existing.qty + qty</code></b> — 기존 수량과 새로 산 수량을 더한 총 수량.</li>
+          <li><b><code>totalCost = existing.qty * existing.avgPrice + price * qty</code></b> — 기존에 들어간 돈(기존 수량×기존 평단가)과 이번에 들어간 돈(새 수량×새 가격)을 더한 총 매입원가.</li>
+          <li><b><code>avgPrice: totalCost / totalQty</code></b> — 총 매입원가를 총 수량으로 나눈 새 평단가.</li>
+        </ul>
+        <p>비유하면 이미 10주를 평균 170.5달러에 사둔 상태에서 5주를 200달러에 더 사면, "지금까지 낸 돈 전부(10×170.5 + 5×200)를 지금까지 산 주식 수(15)로 다시 나눠 평균을 새로 내는" 것과 같습니다 — <code>sellStock</code>은 반대로 <code>remainingQty</code>가 0 이하면 <code>delete</code>로 그 종목을 포트폴리오에서 아예 지우고, 남으면 평단가는 그대로 두고 수량만 줄입니다(판 가격은 평단가에 영향을 주지 않음).</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/store/useStockStore.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 1: persist + async 액션 + 포트폴리오 스토어 ──
+// [개념 한눈에 보기]
+// 1. Zustand 스토어: 전역 데이터(상태)와 데이터를 변경하는 함수(액션)를 하나로 묶어 관리합니다.
+// 2. persist: 브라우저를 새로고침(F5)해도 데이터가 사라지지 않고 localStorage에 자동 저장/복원됩니다.
+// 3. partialize: localStorage에 저장할 데이터만 콕 찝어 필터링합니다. (로딩/에러/현재가 등 동적 데이터 제외)
+// 4. get(): 스토어 내부에서 다른 상태값이나 액션 함수를 불러올 때 사용합니다.
+
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+
+// 📌 create와 persist로 전역 스토어 생성
+const useStockStore = create(
+  persist(
+    (set, get) =&gt; ({
+      // -------------------------------------------------------------
+      // 📦 [상태 (State)]: 앱 전체에서 공유하는 데이터
+      // -------------------------------------------------------------
+      watchlist: ['AAPL', 'TSLA', 'MSFT'], // 관심 종목 코드 목록 (초기값)
+      selectedSymbol: 'AAPL',               // 현재 화면에 선택된 종목 코드
+      prices: {},                           // 종목별 실시간 시세 저장 객체 (예: { AAPL: 180.5, TSLA: 240.2 })
+      loading: false,                       // API 통신 중 로딩 상태 표시 (true / false)
+      error: null,                          // 에러 발생 시 에러 메시지 저장
+      portfolio: { AAPL: { qty: 10, avgPrice: 170.5 } }, // 보유 중인 주식 내역 (종목코드: { 수량, 평단가 })
+
+      // -------------------------------------------------------------
+      // ⚡ [액션 (Actions)]: 상태를 변경하거나 API를 호출하는 함수들
+      // -------------------------------------------------------------
+
+      // 📌 1. 관심종목 추가
+      addToWatchlist: (symbol) =&gt; {
+        const { watchlist, fetchPrice } = get() // get()으로 기존 watchlist와 fetchPrice 함수 가져오기
+        if (watchlist.includes(symbol)) return  // 이미 관심종목에 포함되어 있다면 중복 추가 방지
+
+        // 관심종목 배열에 새 종목 추가
+        set({ watchlist: [...watchlist, symbol] })
+
+        // 종목을 추가하자마자 해당 종목의 최신 시세를 바로 API로 가져옴
+        fetchPrice(symbol)
+      },
+
+      // 📌 2. 관심종목 삭제
+      removeFromWatchlist: (symbol) =&gt;
+        set((state) =&gt; ({
+          // filter를 사용해 클릭한 symbol만 제외한 새로운 배열로 관심종목 갱신
+          watchlist: state.watchlist.filter((s) =&gt; s !== symbol),
+        })),
+
+      // 📌 3. 선택 종목 변경
+      selectSymbol: (symbol) =&gt; set({ selectedSymbol: symbol }),
+
+      // 📌 4. 단일 종목 시세 조회 (비동기 API 통신)
+      fetchPrice: async (symbol) =&gt; {
+        // API 요청 시작: 로딩 켜고 이전 에러 초기화
+        set({ loading: true, error: null })
+        try {
+          // 백엔드 API Route (/api/stock/[symbol]) 호출
+          const res = await fetch(`/api/stock/${symbol}`)
+          if (!res.ok) throw new Error(`${symbol} 시세 조회 실패`)
+
+          const data = await res.json()
+
+          // 성공 시: 기존 prices 객체를 복사(...) 후 현재 종목의 최신 가격 갱신 및 로딩 해제
+          set((state) =&gt; ({
+            prices: { ...state.prices, [symbol]: data.price },
+            loading: false,
+          }))
+        } catch (error) {
+          // 실패 시: 에러 메시지 저장 및 로딩 해제
+          set({ error: error.message, loading: false })
+        }
+      },
+
+      // 📌 5. 관심종목 전체 병렬 조회
+      fetchAllPrices: async () =&gt; {
+        const { watchlist, fetchPrice } = get()
+        // Promise.all: watchlist 안의 모든 종목 시세 조회를 동시에(병렬로) 처리하고 모두 끝날 때까지 기다림
+        await Promise.all(watchlist.map((s) =&gt; fetchPrice(s)))
+      },
+
+      // 📌 6. 주식 매수 (신규 구매 또는 추가 구매 시 평단가 재계산)
+      buyStock: (symbol, qty, price) =&gt; {
+        const { portfolio } = get()
+        const existing = portfolio[symbol] // 현재 이미 보유 중인 주식 내역인지 확인
+
+        if (existing) {
+          // 💡 이미 보유 중인 주식이면: 평단가 재계산 공식 적용
+          // 1) 총 수량 = 기존 수량 + 새로 산 수량
+          const totalQty = existing.qty + qty
+          // 2) 총 매입원가 = (기존 수량 × 기존 평단가) + (새로 산 수량 × 새로 산 가격)
+          const totalCost = existing.qty * existing.avgPrice + price * qty
+
+          // 3) 새로운 평단가 = 총 매입원가 / 총 수량
+          set((state) =&gt; ({
+            portfolio: {
+              ...state.portfolio,
+              [symbol]: { qty: totalQty, avgPrice: totalCost / totalQty },
+            },
+          }))
+        } else {
+          // 💡 신규 등록 주식이면: 수량과 살 때 가격 그대로 저장
+          set((state) =&gt; ({
+            portfolio: {
+              ...state.portfolio,
+              [symbol]: { qty: qty, avgPrice: price },
+            },
+          }))
+        }
+      },
+
+      // 📌 7. 주식 매도 (수량 차감 또는 전량 매도 시 종목 삭제)
+      sellStock: (symbol, qty) =&gt; {
+        const { portfolio } = get()
+        const existing = portfolio[symbol]
+        if (!existing) return // 보유 중인 종목이 없으면 아무 작업도 하지 않고 즉시 종료
+
+        // 매도 후 남을 예상 수량 계산 (기존 수량 - 팔려는 수량)
+        const remainingQty = existing.qty - qty
+
+        // 1) 남은 수량이 0 이하라면: 내 포트폴리오 객체에서 해당 종목 아예 삭제
+        if (remainingQty &lt;= 0) {
+          const newPortfolio = { ...portfolio }
+          delete newPortfolio[symbol] // delete 키워드로 해당 종목 속성을 완벽히 제거
+          set({ portfolio: newPortfolio })
+        } else {
+          // 2) 남은 수량이 1개 이상이면: 구매 평단가는 유지하고 수량(qty)만 차감
+          set((state) =&gt; ({
+            portfolio: {
+              ...state.portfolio,
+              [symbol]: { ...existing, qty: remainingQty },
+            },
+          }))
+        }
+      },
+    }),
+
+    // -------------------------------------------------------------
+    // ⚙️ [persist 미들웨어 설정 (localStorage 저장 옵션)]
+    // -------------------------------------------------------------
+    {
+      // 1) name: 브라우저 localStorage에 저장될 Key(열쇠) 이름입니다.
+      name: 'stock-dashboard',
+
+      // 2) partialize: 새로고침 후에도 '유지할 상태만 선택'하는 옵션입니다.
+      // (loading, error, prices처럼 새로고침 시 다시 받아와야 하거나 초기화되어야 하는 데이터는 저장에서 제외됩니다.)
+      partialize: (state) =&gt; ({
+        watchlist: state.watchlist,
+        selectedSymbol: state.selectedSymbol, // 선택된 종목 변수(selectedSymbol) 저장
+        portfolio: state.portfolio,
+      }),
+    } // persist 괄호 종료
+  ) // create 괄호 종료
+)
+
+export default useStockStore
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/WatchlistPanel.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2: 관심종목 패널 (WatchlistPanel) ──
+// [역할 설명]
+// 1. Zustand 스토어의 관심종목(watchlist) 목록과 종목별 가격(prices)을 화면에 출력합니다.
+// 2. 컴포넌트가 처음 마운트되면 useEffect를 통해 모든 관심종목의 최신 시세를 일괄 조회합니다 (fetchAllPrices).
+// 3. 종목을 클릭하면 선택 상태(selectSymbol)가 변경되고, '✕'를 누르면 삭제(removeFromWatchlist)됩니다.
+// 4. '+1주 매수' 버튼을 누르면 해당 종목을 1주 매수(buyStock)합니다.
+
+'use client'
+import { useEffect } from 'react'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function WatchlistPanel() {
+  // 📌 1) Zustand 스토어에서 필요한 상태 및 액션 함수들만 각각 개별 구독 (리렌더링 성능 최적화)
+  const watchlist = useStockStore((s) =&gt; s.watchlist)
+  const selectedSymbol = useStockStore((s) =&gt; s.selectedSymbol)
+  const prices = useStockStore((s) =&gt; s.prices)
+  const selectSymbol = useStockStore((s) =&gt; s.selectSymbol)
+  const removeFromWatchlist = useStockStore((s) =&gt; s.removeFromWatchlist)
+  const fetchAllPrices = useStockStore((s) =&gt; s.fetchAllPrices)
+  const buyStock = useStockStore((s) =&gt; s.buyStock)
+
+  // 📌 2) 최초 마운트 시 1회: 관심종목 전체 시세 일괄 조회
+  // (가격 정보는 localStorage에 저장하지 않으므로, 앱이 켜질 때마다 최신 시세를 다시 불러옵니다.)
+  useEffect(() =&gt; {
+    fetchAllPrices()
+  }, [fetchAllPrices])
+
+  return (
+    &lt;div style={{ padding: '1rem' }}&gt;
+      &lt;h2&gt;관심종목&lt;/h2&gt;
+      &lt;ul style={{ listStyle: 'none', padding: 0 }}&gt;
+        {watchlist.map((symbol) =&gt; {
+          const price = prices[symbol]
+          return (
+            &lt;li
+              key={symbol}
+              onClick={() =&gt; selectSymbol(symbol)} // 클릭 시 선택된 종목 변경 (하이라이트 표시)
+              style={{
+                padding: '12px',
+                marginBottom: '8px',
+                borderRadius: '8px',
+                border: `1px solid ${selectedSymbol === symbol ? '#61dafb' : '#0f3460'}`,
+                cursor: 'pointer',
+                backgroundColor: selectedSymbol === symbol ? '#123a2a' : '#0d2137',
+              }}
+            &gt;
+              &lt;div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}&gt;
+                &lt;div&gt;
+                  &lt;strong style={{ color: '#ccd6f6' }}&gt;{symbol}&lt;/strong&gt;
+                  &lt;div style={{ fontSize: '12px', color: '#8892b0' }}&gt;
+                    {/* price 시세 데이터가 들어오면 소수점 둘째 자리까지 표시, 들어오기 전엔 '로딩 중...' */}
+                    {price ? `$${price.toFixed(2)}` : '로딩 중...'}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                {/* 📌 관심종목 삭제 버튼 */}
+                &lt;button
+                  onClick={(e) =&gt; {
+                    e.stopPropagation() // 부모 &lt;li&gt;의 onClick(종목 선택) 이벤트 전파 방지
+                    removeFromWatchlist(symbol)
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#e94560',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                  }}
+                &gt;
+                  ✕
+                &lt;/button&gt;
+              &lt;/div&gt;
+
+              {/* 📌 1주 매수 버튼 */}
+              &lt;button
+                onClick={(e) =&gt; {
+                  e.stopPropagation() // 부모 &lt;li&gt;의 onClick(종목 선택) 클릭 이벤트 전파 방지
+                  // 시세 가격(price)이 유효하면 수량 1주를 현재 가격(price)으로 매수 실행
+                  if (price) buyStock(symbol, 1, price)
+                }}
+                disabled={!price} // 아직 시세 데이터를 로딩 중이면 매수 버튼 비활성화
+                style={{
+                  marginTop: '8px',
+                  width: '100%',
+                  padding: '5px',
+                  fontSize: '12px',
+                  borderRadius: '6px',
+                  background: '#61dafb22',
+                  color: '#61dafb',
+                  border: '1px solid #61dafb55',
+                  cursor: price ? 'pointer' : 'not-allowed',
+                }}
+              &gt;
+                ＋1주 매수
+              &lt;/button&gt;
+            &lt;/li&gt;
+          )
+        })}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/PortfolioPanel.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 3: 포트폴리오 패널 (PortfolioPanel) ──
+// [역할 설명]
+// 1. Zustand 스토어의 보유 주식(portfolio) 및 최신 시세(prices)를 바탕으로
+//    총 평가금액, 총 원금, 총 손익($), 손익률(%)을 계산하여 보여줍니다.
+// 2. 보유 종목별 수량, 평단가, 현재가, 개별 평가손익을 표시합니다.
+// 3. '전량 매도' 버튼 클릭 시 sellStock을 호출해 해당 주식을 전량 매도 처리합니다.
+
+'use client'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function PortfolioPanel() {
+  // 📌 1) Zustand 스토어에서 보유 자산(portfolio), 실시간 시세(prices), 매도 액션(sellStock) 구독
+  const portfolio = useStockStore((s) =&gt; s.portfolio)
+  const prices = useStockStore((s) =&gt; s.prices)
+  const sellStock = useStockStore((s) =&gt; s.sellStock)
+
+  // 📌 2) 객체 형태의 portfolio를 배열 형태로 변환: [ [symbol, {qty, avgPrice}], ... ]
+  // (예: { AAPL: { qty: 10, avgPrice: 170.5 } } -&gt; [ ['AAPL', { qty: 10, avgPrice: 170.5 }] ])
+  const holdings = Object.entries(portfolio)
+
+  // 📌 3) 총 평가금액(totalValue) 계산 (`reduce` 이용)
+  // - holdings 배열을 돌면서 각 종목의 (현재가 × 수량)을 더해나갑니다.
+  // - 최신 시세(prices[symbol])가 없으면 구매 평단가(h.avgPrice)를 대신 사용합니다.
+  // - 맨 뒤의 0은 초기 합계 시작 금액(0원)입니다.
+  const totalValue = holdings.reduce(
+    (sum, [symbol, h]) =&gt; sum + (prices[symbol] || h.avgPrice) * h.qty,
+    0
+  )
+
+  // 📌 4) 나의 총 매입원가(totalCost) 계산 (`reduce` 이용)
+  // - holdings 배열을 돌면서 각 종목의 (구매 평단가 × 수량)을 더해나갑니다.
+  // - [, h] 형태의 구조 분해로 첫 번째 인자인 종목코드(symbol)는 생략하고 내역 객체(h)만 가져옵니다.
+  const totalCost = holdings.reduce(
+    (sum, [, h]) =&gt; sum + h.avgPrice * h.qty,
+    0
+  )
+
+  // 📌 5) 총 손익($) = 총 평가금액 - 총 매입원가
+  const totalPnl = totalValue - totalCost
+
+  // 📌 6) 총 손익률(%) = (총 손익 / 총 매입원가) × 100 (원금이 0보다 큰 경우에만 계산)
+  const totalPnlPct = totalCost &gt; 0 ? (totalPnl / totalCost) * 100 : 0
+
+  return (
+    &lt;div style={{ padding: '1rem' }}&gt;
+      &lt;h2&gt;내 포트폴리오&lt;/h2&gt;
+
+      {/* 📌 총 자산 / 수익률 요약 카드 */}
+      &lt;div
+        style={{
+          padding: '12px',
+          marginBottom: '1rem',
+          borderRadius: '8px',
+          background: '#0d2137',
+          border: '1px solid #0f3460',
+        }}
+      &gt;
+        &lt;div style={{ fontSize: '12px', color: '#8892b0' }}&gt;총 평가금액&lt;/div&gt;
+        {/* toFixed(2): 소수점 둘째 자리까지 표시 */}
+        &lt;div style={{ fontSize: '22px', fontWeight: 'bold', color: '#ccd6f6' }}&gt;
+          ${totalValue.toFixed(2)}
+        &lt;/div&gt;
+        {/* 이익이면 초록색(#64ffda), 손실이면 빨간색(#e94560) 표시 */}
+        &lt;div style={{ fontSize: '13px', color: totalPnl &gt;= 0 ? '#64ffda' : '#e94560' }}&gt;
+          {totalPnl &gt;= 0 ? '+' : ''}
+          {totalPnl.toFixed(2)} ({totalPnlPct.toFixed(2)}%)
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* 보유 종목이 없을 때 보여줄 안내 메시지 */}
+      {holdings.length === 0 &amp;&amp; (
+        &lt;p style={{ color: '#8892b0', fontSize: '13px' }}&gt;보유 종목이 없습니다.&lt;/p&gt;
+      )}
+
+      {/* 📌 보유 종목 개별 카드 목록 */}
+      {holdings.map(([symbol, h]) =&gt; {
+        const cur = prices[symbol] || h.avgPrice // 현재 시세 (없으면 구매 평단가 사용)
+        const pnl = (cur - h.avgPrice) * h.qty   // 종목별 평가손익($) = (현재가 - 평단가) × 수량
+        const pnlPct = ((cur - h.avgPrice) / h.avgPrice) * 100 // 종목별 수익률(%)
+        const isUp = pnl &gt;= 0                    // 이익 여부 (양수: 초록색, 음수: 빨간색)
+
+        return (
+          &lt;div
+            key={symbol}
+            style={{
+              padding: '12px',
+              marginBottom: '8px',
+              borderRadius: '8px',
+              background: '#0d2137',
+              border: `1px solid ${isUp ? '#64ffda33' : '#e9456033'}`,
+            }}
+          &gt;
+            {/* 상단: 종목명 및 개별 수익률 */}
+            &lt;div style={{ display: 'flex', justifyContent: 'space-between' }}&gt;
+              &lt;strong style={{ color: '#ccd6f6' }}&gt;{symbol}&lt;/strong&gt;
+              &lt;span style={{ color: isUp ? '#64ffda' : '#e94560', fontSize: '13px' }}&gt;
+                {isUp ? '+' : ''}
+                {pnlPct.toFixed(2)}%
+              &lt;/span&gt;
+            &lt;/div&gt;
+
+            {/* 중단: 수량, 평단가, 현재가 상세 내역 */}
+            &lt;div style={{ fontSize: '12px', color: '#8892b0', marginTop: '4px' }}&gt;
+              {h.qty}주 · 평균 ${h.avgPrice.toFixed(2)} · 현재 ${cur.toFixed(2)}
+            &lt;/div&gt;
+
+            {/* 하단: 손익($)금액 및 전량 매도 버튼 */}
+            &lt;div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px' }}&gt;
+              &lt;span style={{ color: isUp ? '#64ffda' : '#e94560', fontSize: '13px' }}&gt;
+                {isUp ? '+' : ''}${pnl.toFixed(2)}
+              &lt;/span&gt;
+
+              {/* 📌 전량 매도 버튼: 현재 보유 중인 수량(h.qty) 전체를 매도하도록 sellStock 호출 */}
+              &lt;button
+                onClick={() =&gt; sellStock(symbol, h.qty)}
+                style={{
+                  padding: '3px 10px',
+                  fontSize: '11px',
+                  borderRadius: '4px',
+                  border: '1px solid #e94560',
+                  background: 'none',
+                  color: '#e94560',
+                  cursor: 'pointer',
+                }}
+              &gt;
+                전량 매도
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        )
+      })}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>create(persist(fn, options))</code>처럼 <code>persist</code>로 스토어를 감싸면 <code>partialize</code>가 고른 상태 조각만 localStorage에 자동 저장/복원된다.</li>
+        <li><code>prices</code>·<code>loading</code>·<code>error</code>처럼 "새로고침하면 다시 받아와야 하는 값"은 partialize에서 일부러 뺀다.</li>
+        <li>저장소 액션도 <code>async</code>로 선언해 <code>fetch</code>를 직접 호출할 수 있다 — <code>fetchAllPrices</code>는 <code>Promise.all</code>로 여러 종목을 동시에 병렬 조회한다.</li>
+        <li><code>buyStock</code>은 총 매입원가÷총 수량으로 평단가를 재계산하고, <code>sellStock</code>은 수량이 0 이하가 되면 <code>delete</code>로 종목 자체를 지운다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>새로고침해도 관심종목·포트폴리오는 남아있는데 시세가 항상 "로딩 중..."부터 다시 시작한다면 정상입니다 — <code>partialize</code>가 <code>prices</code>를 일부러 저장에서 뺐기 때문에, <code>WatchlistPanel</code>의 <code>useEffect(() =&gt; fetchAllPrices(), [])</code>가 페이지를 열 때마다 최신 시세를 다시 받아옵니다. persist 자체가 헷갈리면 <a href="#concept-zustand-persist">기초 개념 사전 — Zustand persist 미들웨어란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/10_zustand_async_persist/src/app/store/useStockStore.js" target="_blank" rel="noopener">store/useStockStore.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/10_zustand_async_persist/src/app/components/WatchlistPanel.jsx" target="_blank" rel="noopener">components/WatchlistPanel.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/10_zustand_async_persist/src/app/components/PortfolioPanel.jsx" target="_blank" rel="noopener">components/PortfolioPanel.jsx</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="react-12">
+  <div class="note-head">
+    <span class="note-num">12</span>
+    <h3>서버 컴포넌트 + Suspense — async 컴포넌트로 데이터를 기다렸다가 화면을 스트리밍</h3>
+    <div class="note-tags"><span class="tag">서버 컴포넌트</span><span class="tag">async 컴포넌트</span><span class="tag">Suspense</span><span class="tag">스트리밍</span><span class="tag">스켈레톤</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>'use client'</code>가 없는 컴포넌트(<code>StockInfo</code>)를 <code>async function</code>으로 선언해 함수 안에서 바로 <code>await</code>로 데이터를 가져오게 만들고, 그 컴포넌트를 <code>&lt;Suspense fallback={&lt;CardSkeleton /&gt;}&gt;</code>로 감싸면 데이터가 오는 동안은 스켈레톤 UI가, 준비되면 실제 내용이 화면에 나타난다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>08단계에서 "서버 컴포넌트는 함수 자체를 async로 만들 수 있다"고 개념만 배웠다면, 이번엔 그걸 실제로 "데이터를 기다리는" 용도로 처음 써봅니다. 그리고 06단계에서 배운 Suspense는 그때는 "아직 안 받아온 코드"를 기다리는 팻말이었는데, 이번엔 "아직 안 받아온 데이터"를 기다리는 팻말로 똑같은 도구가 재사용됩니다 — 팻말 자체는 그대로고, 기다리는 대상만 코드에서 데이터로 바뀐 거예요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>StockInfo — async 서버 컴포넌트, 요소별로 뜯어보면</h4>
+        <p><code>export default async function StockInfo({ symbol }) { ... }</code>이 낯설게 보이는 이유는 지금까지 만든 컴포넌트는 전부 동기 함수였기 때문입니다.</p>
+        <ul>
+          <li><b>파일 맨 위에 <code>'use client'</code>가 없음</b> — 08단계에서 배운 규칙대로, 아무 선언이 없으면 기본값인 <b>서버 컴포넌트</b>가 됩니다.</li>
+          <li><b><code>async function StockInfo(...)</code></b> — 컴포넌트 함수 자체가 <code>async</code>. 클라이언트 컴포넌트였다면 "리액트가 이 비동기 결과를 언제 그려야 할지 알 수 없다"는 이유로 허용되지 않지만, 서버 컴포넌트는 서버에서 딱 한 번 실행되고 끝나므로 자연스럽게 동작합니다.</li>
+          <li><b><code>const profile = await getStockProfile(symbol)</code></b> — 함수 본문 맨 위에서 바로 <code>await</code>. useEffect도, 로딩 state도 따로 만들 필요가 없습니다 — 데이터가 다 준비된 다음에야 이 함수의 나머지 부분(JSX를 그리는 부분)이 실행되기 때문입니다.</li>
+        </ul>
+        <p>비유하면 클라이언트 컴포넌트의 <code>useEffect</code>+<code>fetch</code> 패턴은 "일단 빈 접시를 손님상에 내고, 요리가 되면 나중에 슬쩍 바꿔치기"하는 방식이었다면, async 서버 컴포넌트는 "주방에서 요리가 다 완성될 때까지 아예 내보내지 않는" 방식입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Suspense의 두 번째 용도 — 코드를 기다리던 팻말이 데이터를 기다리는 팻말로</h4>
+        <p>06단계 <a href="#concept-lazy-suspense">React.lazy + Suspense</a>에서는 Suspense가 "아직 다운로드 안 된 컴포넌트 코드"를 기다렸습니다. 이번엔 감싸는 대상이 다릅니다.</p>
+        <ul>
+          <li><b><code>&lt;Suspense fallback={&lt;CardSkeleton height="180px" /&gt;}&gt;</code></b> — 이 울타리 안에 있는 <code>&lt;StockInfo symbol="AAPL" /&gt;</code>가 아직 데이터를 다 받아오지 못한 async 서버 컴포넌트라는 걸 감지.</li>
+          <li><b>데이터 로딩 중</b> — <code>fallback</code>으로 지정한 <code>CardSkeleton</code>(회색 그라데이션 뼈대 UI)을 대신 표시.</li>
+          <li><b>로딩 완료</b> — <code>getStockProfile</code>의 <code>await</code>가 끝나 StockInfo가 실제 JSX를 반환하면, 리액트가 자동으로 스켈레톤을 내리고 실제 내용으로 교체(스트리밍).</li>
+        </ul>
+        <p>즉 Suspense 자체는 "안에서 뭔가 준비 안 된 게 있으면 fallback을 보여준다"는 하나의 규칙만 갖고 있고, 그 "준비 안 된 것"이 06단계에서는 lazy 컴포넌트의 코드였고 이번엔 async 서버 컴포넌트의 데이터라는 점만 다릅니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>한 화면 안에서 서버 컴포넌트와 클라이언트 컴포넌트가 섞이는 구조</h4>
+        <p><code>page.js</code>를 보면 왼쪽 <code>aside</code>의 <code>StockSearch</code>·<code>WatchlistPanel</code>·<code>PortfolioPanel</code>은 전부 파일 맨 위에 <code>'use client'</code>가 있는 클라이언트 컴포넌트(Zustand 구독·클릭 이벤트가 필요)이고, 오른쪽 <code>main</code>의 <code>StockInfo</code>만 서버 컴포넌트입니다.</p>
+        <ul>
+          <li>서버/클라이언트 경계는 <b>파일 단위</b>로 정해집니다 — 한 페이지 안에 두 종류가 얼마든지 섞일 수 있고, <code>page.js</code>처럼 이들을 조립하는 부모는 그대로 서버 컴포넌트로 둘 수 있습니다.</li>
+          <li>사용자 입력(검색, 매수/매도 클릭)이 필요한 부분은 클라이언트로, 데이터를 받아와 "보여주기만" 하면 되는 부분은 서버로 — 이 구분 기준이 08단계 개념 카드에서 이미 설명한 내용과 그대로 일치합니다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/StockInfo.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 1: async 서버 컴포넌트 ──
+// 개념: 'use client' 없음 = 서버 컴포넌트. 함수 자체를 async로 만들고 안에서 await 가능.
+
+// (헬퍼는 제공됨) 느린 API 흉내 (Suspense fallback 확인용)
+const delay = (ms) =&gt; new Promise((resolve) =&gt; setTimeout(resolve, ms))
+
+async function getStockProfile(symbol) {
+  await delay(2000)
+  const names = { AAPL: 'Apple Inc.', TSLA: 'Tesla Inc.', MSFT: 'Microsoft Corp.' }
+  return {
+    name: names[symbol] || symbol,
+    exchange: 'NASDAQ',
+    industry: '기술',
+    marketCap: '2.8T',
+    description: `${symbol}은 글로벌 기업으로 혁신적인 제품과 서비스를 제공합니다.`,
+  }
+}
+
+// StockInfo 자체가 async 함수 — 컴포넌트 본문에서 바로 await를 쓸 수 있다.
+export default async function StockInfo({ symbol }) {
+  const profile = await getStockProfile(symbol)
+  return (
+    &lt;div style={{ padding: '1.25rem', borderRadius: '12px', border: '1px solid #0f3460', background: '#0d2137' }}&gt;
+      &lt;h3 style={{ color: '#61dafb', marginTop: 0, marginBottom: '0.5rem' }}&gt;{profile.name} ({symbol})&lt;/h3&gt;
+      &lt;div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '13px' }}&gt;
+        {[
+          ['거래소', profile.exchange],
+          ['업종', profile.industry],
+          ['시가총액', profile.marketCap],
+        ].map(([label, value]) =&gt; (
+          &lt;div key={label}&gt;
+            &lt;span style={{ color: '#8892b0' }}&gt;{label}: &lt;/span&gt;
+            &lt;span style={{ color: '#ccd6f6' }}&gt;{value}&lt;/span&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;p style={{ color: '#8892b0', fontSize: '12px', marginTop: '0.75rem', lineHeight: 1.6 }}&gt;{profile.description}&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/page.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2: Suspense + 서버 컴포넌트로 대시보드 완성 ──
+// 개념: &lt;Suspense fallback&gt;로 async 서버 컴포넌트를 감싸면 로딩 중 스켈레톤 표시.
+import { Suspense } from 'react'
+import StockSearch from './components/StockSearch'
+import WatchlistPanel from './components/WatchlistPanel'
+import PortfolioPanel from './components/PortfolioPanel'
+import StockInfo from './components/StockInfo'
+
+function CardSkeleton({ height = '180px' }) {
+  return (
+    &lt;div style={{ height, borderRadius: '12px', border: '1px solid #0f3460', background: 'linear-gradient(90deg, #0d2137 20%, #0e478d 40%, #0d2137 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} /&gt;
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    &lt;div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '1rem', minHeight: '100vh', padding: '1rem' }}&gt;
+      &lt;aside style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}&gt;
+        &lt;StockSearch /&gt;
+        &lt;WatchlistPanel /&gt;
+        &lt;PortfolioPanel /&gt;
+      &lt;/aside&gt;
+
+      &lt;main style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}&gt;
+        {/* async 서버 컴포넌트를 Suspense로 감싸 로딩 동안 스켈레톤을 보여줌 */}
+        &lt;Suspense fallback={&lt;CardSkeleton height="180px" /&gt;}&gt;
+          {/* 지금은 symbol="AAPL"로 고정 — 관심종목 클릭 시 그 symbol을 전달하도록 확장하는 건 다음 실습 */}
+          &lt;StockInfo symbol="AAPL" /&gt;
+        &lt;/Suspense&gt;
+
+        &lt;div style={{ padding: '1.25rem', borderRadius: '12px', border: '1px solid #0f3460', background: '#0d2137' }}&gt;
+          &lt;p style={{ color: '#8892b0' }}&gt;차트 영역 (13강에서 구현)&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>파일 맨 위에 <code>'use client'</code>가 없는 컴포넌트는 서버 컴포넌트이며, 함수 자체를 <code>async</code>로 선언해 본문에서 바로 <code>await</code>로 데이터를 가져올 수 있다.</li>
+        <li><code>&lt;Suspense fallback={...}&gt;</code>는 06단계의 코드 분할뿐 아니라, async 서버 컴포넌트의 데이터 로딩을 기다리는 데도 똑같이 쓰인다.</li>
+        <li>한 페이지 안에서 클라이언트 컴포넌트(사용자 상호작용)와 서버 컴포넌트(데이터 표시)가 파일 단위로 섞여 쓰일 수 있다.</li>
+        <li>현재는 <code>symbol="AAPL"</code>로 고정돼 있고, 관심종목을 클릭했을 때 그 symbol을 전달하도록 연결하는 것은 다음 실습 과제로 남아 있다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>StockInfo가 화면에 뜨기까지 항상 2초쯤 걸리는 게 정상입니다 — <code>getStockProfile</code> 안의 <code>delay(2000)</code>이 실제 API 통신 지연을 흉내 내기 위해 일부러 넣어둔 코드라, Suspense의 스켈레톤 화면을 눈으로 확인하기 좋게 해줍니다. 서버/클라이언트 컴포넌트 구분이 헷갈리면 <a href="#concept-server-client-component">기초 개념 사전 — 서버 vs 클라이언트 컴포넌트</a>를, Suspense 자체가 헷갈리면 <a href="#concept-lazy-suspense">React.lazy + Suspense란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/11_server_components/src/app/components/StockInfo.jsx" target="_blank" rel="noopener">components/StockInfo.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/11_server_components/src/app/page.js" target="_blank" rel="noopener">page.js</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -7429,6 +8078,55 @@ export default function StockSearch() {
         </ul>
       </article>
 
+      <article class="journey-step" id="journey-react-11">
+        <div class="journey-step-head">
+          <span class="journey-num">11</span>
+          <h3>persist + async 액션 — 스토어가 "새로고침을 견디는 서랍"이 됩니다</h3>
+          <a class="journey-jump" href="#react-11">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">09단계의 저장소를 <code>persist</code>가 한 겹 더 감싸면서, <code>watchlist</code>·<code>portfolio</code>는 새로고침해도 사라지지 않게 됩니다. 그리고 10단계에서 컴포넌트가 직접 하던 <code>fetch('/api/stock/...')</code> 호출이 이번엔 저장소 액션(<code>fetchPrice</code>) 안으로 들어와 async가 됩니다 — "누가 API를 부르는가"가 컴포넌트에서 저장소로 옮겨간 셈입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>WatchlistPanel.jsx</b><span>useEffect(fetchAllPrices, [])</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box"><b>useStockStore.js</b><span>persist(create(...))로 감싼 저장소</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>PortfolioPanel.jsx</b><span>buyStock·sellStock으로 평단가 계산</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>persist(fn, { name, partialize })</b> — <code>partialize</code>가 고른 상태 조각(watchlist·selectedSymbol·portfolio)만 localStorage에 저장, prices·loading·error는 제외.</li>
+          <li><b>fetchAllPrices</b> — <code>Promise.all(watchlist.map(fetchPrice))</code>로 관심종목 전체를 병렬 조회.</li>
+          <li>persist 자체가 헷갈리면 <a href="#concept-zustand-persist">기초 개념 사전 — Zustand persist 미들웨어란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-react-12">
+        <div class="journey-step-head">
+          <span class="journey-num">12</span>
+          <h3>서버 컴포넌트 + Suspense — 화면의 절반은 서버가, 절반은 브라우저가 그립니다</h3>
+          <a class="journey-jump" href="#react-12">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">08단계에서 "동적 라우트 페이지는 async 컴포넌트일 수 있다"고 개념만 잠깐 짚었던 이야기가, 이번엔 <code>StockInfo.jsx</code>라는 실제 화면 조각으로 등장합니다. 왼쪽 aside의 <code>StockSearch</code>·<code>WatchlistPanel</code>·<code>PortfolioPanel</code>(전부 <code>'use client'</code>)은 그대로 브라우저에서 그려지고, 오른쪽 main의 <code>StockInfo</code>만 서버에서 데이터를 다 받아온 다음에야 화면에 나타납니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>page.js</b><span>Suspense fallback=CardSkeleton</span></div>
+            <div class="flow-arrow">감싸서 렌더</div>
+            <div class="flow-box leaf"><b>StockInfo.jsx</b><span>async 함수 + await getStockProfile</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>'use client' 없음</b> — 아무 선언이 없으면 기본값인 서버 컴포넌트, 함수 자체를 async로 선언 가능.</li>
+          <li><b>Suspense의 두 번째 용도</b> — 06단계에선 lazy 컴포넌트의 코드를 기다렸다면, 이번엔 async 서버 컴포넌트의 데이터를 기다림.</li>
+          <li>서버/클라이언트 구분이 헷갈리면 <a href="#concept-server-client-component">기초 개념 사전</a>을, Suspense가 헷갈리면 <a href="#concept-lazy-suspense">React.lazy + Suspense란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
     </div>
     </div>
   </section>
@@ -7505,10 +8203,11 @@ export default function StockSearch() {
           <span class="step-n">5</span>
           <div class="step-body">
             <b>전역 상태·Next.js 라우팅·백엔드 연동이 궁금하다면</b>
-            <p>react-07~10에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand, Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, 그리고 route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes를 정리했습니다.</p>
+            <p>react-07~12에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand(+새로고침에도 남는 persist), Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes, 그리고 async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식까지 정리했습니다.</p>
             <div class="step-links">
               <a href="#concept-context-api">Context API란?</a>
               <a href="#concept-zustand">Zustand란?</a>
+              <a href="#concept-zustand-persist">Zustand persist 미들웨어란?</a>
               <a href="#concept-server-client-component">서버 vs 클라이언트 컴포넌트</a>
               <a href="#concept-file-routing">파일 기반 라우팅이란?</a>
               <a href="#concept-api-routes">API Routes란?</a>
@@ -8478,6 +9177,10 @@ export default function StockSearch() {
         <p>동작 순서: ① 사용자가 "📈 차트" 탭을 처음 클릭 → ② HeavyChart의 코드가 아직 다운로드되지 않았음을 Suspense가 감지 → ③ fallback(로딩 스피너)을 화면에 대신 표시 → ④ 다운로드가 끝나면 리액트가 자동으로 fallback을 내리고 실제 HeavyChart로 교체. 개발자가 로딩 상태를 직접 state로 관리할 필요가 없다는 점이 핵심입니다.</p>
       </div>
       <div class="concept-block">
+        <h4>두 번째 용도 — "코드가 준비 안 됨"뿐 아니라 "데이터가 준비 안 됨"도 감지한다</h4>
+        <p>Suspense 자체는 "안에 있는 자식 중 준비 안 된 게 있으면 fallback을 보여준다"는 규칙만 갖고 있을 뿐, 정확히 뭘 기다리는지는 신경 쓰지 않습니다. 그래서 lazy 컴포넌트의 코드 다운로드뿐 아니라, <b>async 서버 컴포넌트가 함수 안에서 <code>await</code>로 데이터를 가져오는 동안</b>에도 똑같이 fallback을 보여주는 용도로 쓸 수 있습니다(<a href="#react-12">react-12 — 서버 컴포넌트 + Suspense</a> 참고). 감싸는 방법(<code>&lt;Suspense fallback={...}&gt;</code>)은 완전히 동일하고, 그 안에 <code>lazy(...)</code> 컴포넌트가 들어가는지 <code>async</code> 서버 컴포넌트가 들어가는지만 다릅니다.</p>
+      </div>
+      <div class="concept-block">
         <h4>lazyWithDelay 헬퍼 — 실습에서 일부러 1초 늦춘 이유</h4>
         <p>로컬 개발 서버에서는 파일이 이미 내 컴퓨터 디스크에 있어서 다운로드가 거의 순식간에 끝나버려, 정작 Suspense의 fallback(로딩 스피너)이 눈 깜빡할 사이에 지나가 버립니다. 그래서 실습 코드는 이 함수로 lazy를 한 겹 더 감쌌습니다.</p>
         <ul>
@@ -8496,7 +9199,7 @@ export default function StockSearch() {
         <li>정적 import(파일 맨 위)는 즉시 번들에 포함되고, 동적 import('...')(함수처럼 호출)만 별도 청크로 분리된다.</li>
       </ul>
     </div>
-    <div class="note-files">관련 실습: <a href="#react-06">react-06 — React.memo·lazy/Suspense</a></div>
+    <div class="note-files">관련 실습: <a href="#react-06">react-06 — React.memo·lazy/Suspense</a>, <a href="#react-12">react-12 — 서버 컴포넌트 + Suspense</a></div>
   </div>
 </article>
 
@@ -8579,11 +9282,50 @@ export default function StockSearch() {
   </div>
 </article>
 
+<article class="note-card" id="concept-zustand-persist">
+  <div class="note-head">
+    <span class="note-num">28</span>
+    <h3>Zustand persist 미들웨어란? — localStorage 자동 저장/복원</h3>
+    <div class="note-tags"><span class="tag">persist</span><span class="tag">localStorage</span><span class="tag">partialize</span><span class="tag">미들웨어</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>persist</code>는 <code>create(persist(fn, options))</code>처럼 Zustand 스토어를 감싸는 미들웨어로, <code>options.partialize</code>가 고른 상태 조각을 브라우저의 localStorage에 자동으로 저장하고, 페이지를 다시 열 때 그 값을 자동으로 복원해준다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>Zustand 스토어는 원래 "화이트보드"라서 새로고침(F5)하면 지웠다 다시 쓴 것처럼 초기값으로 돌아갑니다. persist는 그 화이트보드에 자동 저장 기능이 달린 액자를 씌우는 것과 같아요 — 내용이 바뀔 때마다 몰래 사진을 찍어 서랍(localStorage)에 넣어두고, 다음에 켤 때 그 사진을 보고 화이트보드를 그대로 복원합니다. 게임을 끄기 전 자동 저장이 되고, 다시 켜면 저장된 지점부터 이어지는 것과 같은 원리입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>create(persist(fn, options)) — 감싸는 함수 하나 더</h4>
+        <p><code>import { persist } from 'zustand/middleware'</code>로 가져온 <code>persist</code>는 원래의 스토어 정의 함수(<code>(set, get) =&gt; ({...})</code>)를 통째로 받아, 그 위에 "자동 저장/복원" 기능을 덧씌운 새 버전을 돌려줍니다. 그 결과를 다시 <code>create()</code>에 넣으면 평소처럼 <code>useStockStore((s) =&gt; s.watchlist)</code>로 쓸 수 있는 훅이 만들어집니다 — 사용하는 컴포넌트 쪽 코드는 persist가 있든 없든 똑같습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>options.name과 options.partialize</h4>
+        <ul>
+          <li><b><code>name</code></b> — localStorage 안에서 이 데이터를 찾을 때 쓰는 열쇠(key) 이름. 브라우저 개발자도구의 Application → Local Storage에서 이 이름으로 실제 저장된 JSON을 확인할 수 있습니다.</li>
+          <li><b><code>partialize: (state) =&gt; ({...})</code></b> — 저장소 전체 상태 중, 이 함수가 리턴하는 조각만 골라 저장합니다. 지정하지 않으면 상태 전체가 그대로 저장됩니다.</li>
+        </ul>
+        <p>시세(<code>prices</code>)나 로딩/에러 상태처럼 "지금 이 순간에만 의미 있는" 값은 partialize에서 일부러 빼는 것이 일반적입니다 — 오래된 시세가 저장돼 있으면 다음에 열었을 때 그 자체로 잘못된 정보가 되기 때문입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>새로고침해도 이어지는 것 / 매번 새로 받아오는 것</h4>
+        <p>사용자가 직접 고른 값(관심종목 목록, 선택한 종목, 보유 포트폴리오)은 "그 사람의 설정"이라 계속 유지되는 게 자연스럽지만, 서버에서 받아오는 값(실시간 시세)은 시간이 지나면 틀린 값이 되므로 매번 새로 요청하는 게 맞습니다. persist를 쓸 때는 항상 이 두 가지를 구분해서 partialize에 무엇을 담을지 정해야 합니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>persist(fn, options)</code>로 스토어를 감싸면 지정한 상태 조각이 localStorage에 자동 저장·복원된다.</li>
+        <li><code>name</code>은 localStorage에 저장될 키 이름, <code>partialize</code>는 저장할 상태 조각을 고르는 필터다.</li>
+        <li>사용자가 직접 설정한 값은 저장하고, 시간이 지나면 낡아버리는 서버 응답값(시세 등)은 저장에서 빼는 것이 기본 원칙이다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-11">react-11 — Zustand persist + async 액션</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">D</span> · Next.js 핵심 개념 — 파일 기반 라우팅이 처음이라면</h3>
 
 <article class="note-card" id="concept-server-client-component">
   <div class="note-head">
-    <span class="note-num">28</span>
+    <span class="note-num">29</span>
     <h3>서버 컴포넌트 vs 클라이언트 컴포넌트란? (Next.js)</h3>
     <div class="note-tags"><span class="tag">서버 컴포넌트</span><span class="tag">use client</span><span class="tag">Next.js</span></div>
   </div>
@@ -8622,7 +9364,7 @@ export default function StockSearch() {
 
 <article class="note-card" id="concept-file-routing">
   <div class="note-head">
-    <span class="note-num">29</span>
+    <span class="note-num">30</span>
     <h3>파일 기반 라우팅이란? — 폴더 구조 = URL (Next.js App Router)</h3>
     <div class="note-tags"><span class="tag">파일 기반 라우팅</span><span class="tag">App Router</span><span class="tag">동적 라우트</span><span class="tag">Link</span></div>
   </div>
@@ -8665,7 +9407,7 @@ export default function StockSearch() {
 
 <article class="note-card" id="concept-api-routes">
   <div class="note-head">
-    <span class="note-num">30</span>
+    <span class="note-num">31</span>
     <h3>API Routes란? — route.js로 프론트 안에 백엔드 두기 (Next.js)</h3>
     <div class="note-tags"><span class="tag">API Routes</span><span class="tag">route.js</span><span class="tag">fetch</span></div>
   </div>
@@ -8698,7 +9440,7 @@ export default function StockSearch() {
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">31</span>
+    <span class="note-num">32</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -8734,7 +9476,7 @@ export default function StockSearch() {
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">32</span>
+    <span class="note-num">33</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -8772,7 +9514,7 @@ export default function StockSearch() {
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">33</span>
+    <span class="note-num">34</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -8828,6 +9570,10 @@ export default function StockSearch() {
 
 </main>
 
+<button id="bug-fab" type="button" title="막혔을 때: 증상별로 원인을 바로 찾아보세요">
+  🐛 버그 났어요
+</button>
+
 <button id="review-fab" type="button">
   ⚡ 5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
 </button>
@@ -8860,7 +9606,7 @@ export default function StockSearch() {
 
 <script>
 const nextTopics = [
-  { badge:"NEXT", title:"10~13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes는 완료 → 10 persist·async(스토어에 fetch 연동) → 11 서버 컴포넌트 → 12 Tailwind 다크모드 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장" },
+  { badge:"NEXT", title:"12~13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes·10 persist/async·11 서버 컴포넌트+Suspense는 완료 → 12 Tailwind 다크모드 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장(13강이 커리큘럼 마지막 단계)" },
 ];
 
 function renderNext(){
@@ -8900,6 +9646,13 @@ buttons.forEach(b => b.addEventListener("click", () => {
   window.scrollTo({top:0, behavior:"smooth"});
 }));
 
+// 🐛 버그 났어요 — 어느 탭에 있든 한 번에 기초 개념 사전의 "증상별로 바로 찾기" 로드맵으로 이동
+document.getElementById("bug-fab").addEventListener("click", () => {
+  showTab("concepts");
+  const bugStep = document.querySelectorAll(".roadmap-step")[5]; // 6번째 단계 = 버그 증상별 찾기
+  (bugStep || document.getElementById("concepts-section")).scrollIntoView({block:"center", behavior:"smooth"});
+});
+
 // 학습 여정 과목별 서브탭
 const journeySubtabBtns = document.querySelectorAll(".journey-subtab-btn");
 function showJourneySubject(subject){
@@ -8933,13 +9686,41 @@ function loadDoneSet(){
 function saveDoneSet(set){ localStorage.setItem(DONE_KEY, JSON.stringify([...set])); }
 const doneSet = loadDoneSet();
 
+const PROGRESS_SECTION_LABEL = {
+  "html-section":"HTML", "css-section":"CSS", "js-section":"JavaScript",
+  "react-section":"React", "concepts-section":"개념 사전",
+};
 function updateProgressStat(){
-  const total = document.querySelectorAll(".note-card").length;
+  const cards = [...document.querySelectorAll(".note-card")];
+  const total = cards.length;
   const done = doneSet.size;
   const nEl = document.getElementById("progress-stat-n");
   const pctEl = document.getElementById("progress-stat-pct");
   if (nEl) nEl.textContent = done + "/" + total;
   if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
+
+  // 과목별 진도 — 큰 숫자 하나보다 "어디를 얼마나 봤는지"가 보여야 다음에 뭘 볼지 정하기 쉽다
+  const bySubject = {};
+  cards.forEach(card => {
+    const secId = card.closest("section.cat")?.id;
+    const label = PROGRESS_SECTION_LABEL[secId];
+    if (!label) return;
+    const bucket = bySubject[label] || (bySubject[label] = { done: 0, total: 0 });
+    bucket.total++;
+    if (doneSet.has(card.id)) bucket.done++;
+  });
+  const breakdownEl = document.getElementById("progress-by-subject");
+  if (breakdownEl) {
+    breakdownEl.innerHTML = Object.keys(PROGRESS_SECTION_LABEL)
+      .map(secId => PROGRESS_SECTION_LABEL[secId])
+      .filter(label => bySubject[label])
+      .map(label => {
+        const b = bySubject[label];
+        const isDone = b.total > 0 && b.done === b.total;
+        return `<span class="progress-chip${isDone ? " chip-done" : ""}"><b>${label}</b> ${b.done}/${b.total}</span>`;
+      })
+      .join("");
+  }
 }
 
 // 카드 접기/펼치기 + aria-expanded 갱신을 한 곳에서 처리 (클릭·키보드·해시 이동 공용)
