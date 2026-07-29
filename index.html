@@ -384,7 +384,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
 
   /* ---- 한 줄 요약 ---- */
   .note-summary{
-    display:flex;gap:10px;align-items:flex-start;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;
     background:var(--panel-2);border:1px solid var(--border);
     border-left:3px solid var(--c,var(--accent));border-radius:10px;
     padding:13px 15px;margin:0 0 12px;font-size:14.8px;line-height:1.85;
@@ -678,9 +678,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 8개 단원</span>
+      <span>React 10개 단원</span>
       <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 31개 항목</span>
+      <span>기초 개념 사전 33개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -712,9 +712,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">8</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">10</div><div class="l">React 단원</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
-      <div class="stat-card concepts"><div class="n">31</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card concepts"><div class="n">33</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div></div>
     </div>
@@ -3921,7 +3921,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, 그리고 Next.js App Router의 파일 기반 라우팅·동적 라우트까지 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, 그리고 route.js로 나만의 백엔드를 만드는 API Routes까지 복습합니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -5649,6 +5649,508 @@ export default function NotFound() {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/layout.js" target="_blank" rel="noopener">layout.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/page.js" target="_blank" rel="noopener">page.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/about/page.js" target="_blank" rel="noopener">about/page.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/blog/page.js" target="_blank" rel="noopener">blog/page.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/blog/[id]/page.js" target="_blank" rel="noopener">blog/[id]/page.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/07_next_routing/src/app/blog/[id]/not-found.js" target="_blank" rel="noopener">blog/[id]/not-found.js</a></div>
   </div>
 </article>
+
+<article class="note-card" id="react-09">
+  <div class="note-head">
+    <span class="note-num">09</span>
+    <h3>Zustand — Provider 없는 전역 상태 관리 (create · set/get · 셀렉터 패턴)</h3>
+    <div class="note-tags"><span class="tag">Zustand</span><span class="tag">create</span><span class="tag">set/get</span><span class="tag">셀렉터 패턴</span><span class="tag">전역 상태</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Zustand는 <code>create((set, get) =&gt; ({ ... }))</code>로 컴포넌트 트리 밖에 저장소를 하나 만들면, 어떤 컴포넌트든 Provider로 감쌀 필요 없이 그 저장소를 바로 import해서 <code>useStockStore((s) =&gt; s.watchlist)</code>처럼 필요한 조각(셀렉터)만 구독하고, <code>set</code>·<code>get</code>으로 상태를 읽고 바꾸는 액션 함수까지 저장소 안에 함께 정의하는 전역 상태 관리 라이브러리다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>07단계에서 배운 Context API는 "이 건물(Provider) 안에서만 들리는 사내 방송"이라, 반드시 <code>&lt;Provider&gt;</code>로 트리를 감싸야 했죠. Zustand는 그 건물 자체가 없어요 — 회사 클라우드에 있는 공유 문서 같아서, 어느 컴포넌트든 파일을 열듯 <code>import useStockStore</code> 한 줄이면 바로 접근할 수 있습니다. 그리고 문서 전체를 다 읽는 게 아니라 "나는 이 시트(상태 조각)만 볼래" 하고 원하는 부분만 구독하면, 다른 시트가 바뀌어도 나는 리렌더링될 필요가 없어서 더 가볍습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>create((set, get) =&gt; ({ ... })) — 저장소를 만드는 문법 하나하나</h4>
+        <p>이 한 줄에 낯선 이름 셋이 섞여 있어서 헷갈리기 쉽습니다. 역할별로 쪼개 보면 다음과 같습니다.</p>
+        <ul>
+          <li><b><code>create</code></b> — zustand 라이브러리가 주는 "저장소 생성 함수". 인자로 넘긴 함수가 리턴하는 객체 모양 그대로가 저장소의 상태+액션이 됩니다.</li>
+          <li><b><code>set</code></b> — 상태를 갱신하는 함수. <code>set({ watchlist: [...] })</code>처럼 객체를 넘기면 그 키만 기존 상태에 병합되고, 나머지 상태는 그대로 남습니다.</li>
+          <li><b><code>get</code></b> — 지금 이 순간의 최신 상태 전체를 읽는 함수. <code>addToWatchlist</code> 내부에서 <code>get()</code>으로 방금 전의 옛날 값이 아니라 항상 최신 <code>watchlist</code>를 확인합니다.</li>
+        </ul>
+        <p>비유하면 <code>create</code>는 "저장소 건물을 짓는 공사", <code>set</code>은 "서류를 새로 갈아 끼우는 손", <code>get</code>은 "지금 캐비닛에 뭐가 들었는지 확인하는 눈"이라고 생각하면 역할이 분명해집니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>셀렉터 패턴 — 저장소 전체가 아니라 "이 조각만" 구독하기</h4>
+        <p><code>const watchlist = useStockStore((s) =&gt; s.watchlist)</code>처럼 화살표 함수로 콕 집어 요청하는 것을 셀렉터(selector)라고 부릅니다.</p>
+        <ul>
+          <li><b><code>s</code></b> — 저장소 전체 상태(<code>{ watchlist, prices, selectedSymbol, ... }</code> 전부).</li>
+          <li><b><code>s =&gt; s.watchlist</code></b> — 그 전체 중 <code>watchlist</code> 조각 하나만 골라 리턴.</li>
+          <li>이 조각이 바뀔 때만 그 컴포넌트가 리렌더링됩니다 — <code>prices</code>만 바뀌어도 <code>watchlist</code>만 구독한 컴포넌트는 전혀 영향받지 않습니다.</li>
+        </ul>
+        <p>04단계의 <code>useMemo</code>·<code>React.memo</code>가 "이미 계산한 값을 아껴 쓰는" 최적화였다면, 셀렉터는 애초에 "관심 없는 변화엔 반응 자체를 안 하는" 최적화라 결이 다릅니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>액션 함수를 컴포넌트가 아니라 저장소 안에 두는 이유</h4>
+        <p><code>addToWatchlist</code>·<code>removeFromWatchlist</code> 같은 함수는 컴포넌트 안이 아니라 저장소 자체에 정의돼 있습니다. <code>AddStockForm.jsx</code>는 이 함수를 가져다 호출만 할 뿐, "중복이면 추가하지 않는다" 같은 로직은 전혀 모릅니다.</p>
+        <p><code>addToWatchlist</code> 내부에서 <code>get()</code>으로 현재 <code>watchlist</code>를 확인해 <code>includes(symbol)</code>이면 조기 리턴하는 것도 저장소 쪽 책임입니다 — 여러 컴포넌트가 같은 저장소를 쓰더라도 "중복 방지 규칙"은 한 곳에만 있으면 되므로, 컴포넌트가 몇 개로 늘어나도 로직이 흩어지지 않습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>setPrice의 <code>[symbol]: price</code> — 계산된 속성 이름</h4>
+        <p><code>prices: { ...state.prices, [symbol]: price }</code>에서 <code>[symbol]</code>처럼 객체 키 자리에 대괄호를 쓰면, <code>symbol</code> 변수에 들어있는 실제 값(예: <code>'NVDA'</code>)이 키 이름이 됩니다 — 대괄호가 없으면 <code>symbol</code>이라는 글자 그대로가 키가 되어버립니다.</p>
+        <p><code>...state.prices</code>(스프레드)로 기존 가격들을 먼저 복사해오지 않으면, <code>set</code>이 <code>prices</code> 전체를 새 객체로 통째로 갈아 끼우면서 다른 종목 가격이 전부 사라집니다 — <a href="#concept-js-spread-rest">기초 개념 사전 — 스프레드·rest</a>에서 다룬 "복사 후 덧붙이기" 패턴이 여기서도 그대로 쓰입니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/store/useStockStore.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 1: Zustand 스토어 (전역 중앙 저장소) ──
+// [핵심 개념]
+// 1. create((set, get) =&gt; ({ ... })) : 중앙 저장소를 생성합니다.
+// 2. set : 상태(state)를 새롭게 업데이트(변경)하는 함수입니다.
+// 3. get : 현재 저장되어 있는 모든 최신 상태/함수 객체를 읽어오는 함수입니다.
+
+import { create } from 'zustand'
+
+const useStockStore = create((set, get) =&gt; ({
+    // ──────────────────────────────────────────
+    // 📌 [1] 전역 상태 (공유 데이터)
+    // ──────────────────────────────────────────
+    watchlist: ['AAPL', 'TSLA', 'MSFT'], // 관심종목 배열
+    selectedSymbol: 'AAPL',               // 현재 선택된 종목 코드
+    prices: { AAPL: 182.52, TSLA: 248.5, MSFT: 378.85 }, // 종목별 가격 객체
+
+    // ──────────────────────────────────────────
+    // 📌 [2] 액션 함수 (데이터 조작 리모컨)
+    // ──────────────────────────────────────────
+
+    // 1) 관심종목 추가
+    addToWatchlist: (symbol) =&gt; {
+        // get() : 현재 시점의 최신 상태 객체를 가져옵니다. ({ watchlist, prices, ... })
+        const { watchlist } = get()
+
+        // 이미 목록에 존재하는 종목이면 추가하지 않고 중단
+        if (watchlist.includes(symbol)) return
+
+        // set() : 기존 배열에 새 종목을 추가하여 watchlist 상태를 업데이트
+        set({ watchlist: [...watchlist, symbol] })
+    },
+
+    // 2) 관심종목 제거
+    removeFromWatchlist: (symbol) =&gt; {
+        // set((state) =&gt; ... ) : state 매개변수에는 저장소의 전체 상태가 들어옵니다.
+        // .filter((s) =&gt; s !== symbol) : 클릭한 symbol과 다른 종목들만 골라내어 새 배열 생성
+        set((state) =&gt; ({
+            watchlist: state.watchlist.filter((s) =&gt; s !== symbol)
+        }))
+    },
+
+    // 3) 선택 종목 변경
+    selectSymbol: (symbol) =&gt; set({ selectedSymbol: symbol }),
+
+    // 4) 특정 종목 가격 갱신 (고급 문법 포함)
+    setPrice: (symbol, price) =&gt; set((state) =&gt; ({
+        prices: {
+            ...state.prices,   // 기존 가격 정보들을 지우지 않고 복사해옴
+            [symbol]: price    // [symbol] 대괄호: 변수에 들어있는 값(예: 'NVDA')을 객체의 키(Key)로 사용함
+        }
+    })),
+}))
+
+export default useStockStore
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/AddStockForm.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2: 관심종목 추가 폼 컴포넌트 ──
+// [핵심 개념]
+// Next.js App Router에서는 브라우저 이벤트(클릭, 입력) 및 useState를 사용하는 컴포넌트에
+// 최상단 'use client' 선언이 필수입니다.
+
+'use client'
+import { useState } from 'react'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function AddStockForm() {
+    // 1) 사용자 입력값을 관리하는 로컬 state (이 컴포넌트 내부에서만 사용)
+    const [input, setInput] = useState('')
+
+    // 2) [핵심 Zustand 사용법]
+    // s =&gt; s.addToWatchlist : 스토어 전체 중 필요한 'addToWatchlist' 함수만 쏙 짚어서 구독(가져옴)
+    const addToWatchlist = useStockStore((s) =&gt; s.addToWatchlist)
+
+    // 3) 추가 버튼 클릭 또는 Enter 키 입력 시 실행되는 이벤트 핸들러
+    const handleAdd = () =&gt; {
+        // 공백만 입력했으면 아무것도 하지 않고 리턴
+        if (!input.trim()) return
+
+        // Zustand 스토어의 addToWatchlist 함수 호출 (입력값을 대문자로 변환해 전달)
+        addToWatchlist(input.toUpperCase())
+
+        // 입력창 비우기
+        setInput('')
+    }
+
+    return (
+        &lt;div style={{ display: 'flex', gap: '8px', padding: '1rem' }}&gt;
+            &lt;input
+                value={input}
+                onChange={(e) =&gt; setInput(e.target.value)}
+                onKeyDown={(e) =&gt; e.key === 'Enter' &amp;&amp; handleAdd()}
+                placeholder="종목 코드 입력 (예: NVDA)"
+                style={{
+                    flex: 1, padding: '8px 12px', borderRadius: '6px',
+                    border: '1px solid #0f3460', background: '#0d2137', color: '#ccd6f6'
+                }}
+            /&gt;
+            &lt;button
+                onClick={handleAdd}
+                style={{
+                    padding: '8px 16px', borderRadius: '6px',
+                    background: '#61dafb', color: '#0a192f', border: 'none',
+                    cursor: 'pointer', fontWeight: 'bold'
+                }}
+            &gt;
+                추가
+            &lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/WatchlistPanel.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 3: 관심종목 목록 컴포넌트 ──
+// [핵심 개념: 조각별 구독(Selector Pattern)]
+// useStockStore((s) =&gt; s.상태이름) 형태로 내가 사용할 조각(상태/함수)만 각각 가져옵니다.
+// 이렇게 하면 가져오지 않은 다른 상태가 바뀌어도 이 컴포넌트는 재렌더링되지 않아 성능이 최적화됩니다.
+
+'use client'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function WatchlistPanel() {
+    // 1) Zustand 중앙 저장소에서 필요한 상태와 액션들을 하나씩 가져오기 (셀렉터 사용)
+    const watchlist = useStockStore((s) =&gt; s.watchlist)             // 관심종목 배열
+    const selectedSymbol = useStockStore((s) =&gt; s.selectedSymbol)   // 선택된 종목 코드
+    const prices = useStockStore((s) =&gt; s.prices)                   // 가격 객체
+    const selectSymbol = useStockStore((s) =&gt; s.selectSymbol)       // 선택 변경 함수
+    const removeFromWatchlist = useStockStore((s) =&gt; s.removeFromWatchlist) // 삭제 함수
+
+    return (
+        &lt;div style={{ padding: '1rem' }}&gt;
+            &lt;h2&gt;관심종목&lt;/h2&gt;
+            &lt;ul style={{ listStyle: 'none', padding: 0 }}&gt;
+                {watchlist.map((symbol) =&gt; (
+                    &lt;li
+                        key={symbol}
+                        // 카드(li)를 클릭하면 Zustand 스토어의 selectedSymbol 상태를 변경
+                        onClick={() =&gt; selectSymbol(symbol)}
+                        style={{
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            padding: '12px', marginBottom: '8px', borderRadius: '8px',
+                            border: `1px solid ${selectedSymbol === symbol ? '#61dafb' : '#0f3460'}`,
+                            cursor: 'pointer', backgroundColor: selectedSymbol === symbol ? '#123a2a' : '#0d2137',
+                        }}
+                    &gt;
+                        &lt;div&gt;
+                            &lt;strong style={{ color: '#ccd6f6' }}&gt;{symbol}&lt;/strong&gt;
+                            &lt;div style={{ fontSize: '12px', color: '#8892b0' }}&gt;
+                                {/* prices 객체에 해당 symbol 가격이 존재하면 표시, 없으면 '가격 없음' */}
+                                {prices[symbol] ? `$${prices[symbol].toFixed(2)}` : '가격 없음'}
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                        {/* ✕ 삭제 버튼 */}
+                        &lt;button
+                            onClick={(e) =&gt; {
+                                // e.stopPropagation(): 부모 li 태그의 onClick(종목선택) 이벤트로 퍼지는 것을 방지함
+                                e.stopPropagation()
+                                // Zustand 스토어의 removeFromWatchlist 함수 실행하여 종목 삭제
+                                removeFromWatchlist(symbol)
+                            }}
+                            style={{ background: 'none', border: 'none', color: '#e94560', cursor: 'pointer', fontSize: '16px' }}
+                        &gt;
+                            ✕
+                        &lt;/button&gt;
+                    &lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>Zustand는 <code>create((set, get) =&gt; ({...}))</code>로 만든 저장소를 Provider 없이 어디서든 import해서 쓴다 — Context API와 달리 감싸는 트리 구조가 필요 없다.</li>
+        <li>셀렉터(<code>useStockStore(s =&gt; s.watchlist)</code>)로 필요한 조각만 구독하면, 구독하지 않은 다른 상태가 바뀌어도 리렌더링되지 않는다.</li>
+        <li>액션 함수(<code>addToWatchlist</code> 등)는 컴포넌트가 아니라 저장소 안에 정의해, 로직이 여러 컴포넌트에 흩어지지 않게 한다.</li>
+        <li><code>set({ ... })</code>은 넘긴 키만 병합하고, <code>[symbol]: price</code>처럼 대괄호로 감싸면 변수 값이 객체 키가 된다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>WatchlistPanel의 삭제 버튼에 <code>e.stopPropagation()</code>이 없으면, 버튼 클릭이 부모 <code>&lt;li&gt;</code>의 <code>onClick(selectSymbol)</code>까지 같이 실행돼 "삭제하려고 눌렀는데 그 종목이 선택까지 되는" 이상한 동작이 생깁니다. Context API와 비교하며 보고 싶다면 <a href="#concept-zustand">기초 개념 사전 — Zustand란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/08_zustand_store/src/app/store/useStockStore.js" target="_blank" rel="noopener">store/useStockStore.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/08_zustand_store/src/app/components/AddStockForm.jsx" target="_blank" rel="noopener">components/AddStockForm.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/08_zustand_store/src/app/components/WatchlistPanel.jsx" target="_blank" rel="noopener">components/WatchlistPanel.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/08_zustand_store/src/app/page.js" target="_blank" rel="noopener">page.js</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="react-10">
+  <div class="note-head">
+    <span class="note-num">10</span>
+    <h3>Next.js API Routes — route.js로 같은 프로젝트 안에 백엔드 두기 (GET · 동적 세그먼트 · fetch 연동)</h3>
+    <div class="note-tags"><span class="tag">API Routes</span><span class="tag">route.js</span><span class="tag">fetch</span><span class="tag">동적 세그먼트</span><span class="tag">Response.json</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Next.js는 <code>app/api/.../route.js</code> 파일에 <code>GET</code>처럼 HTTP 메서드 이름의 함수를 export하면 그 경로가 그대로 백엔드 API 엔드포인트가 되고, 프론트엔드 컴포넌트는 그 경로를 평범한 <code>fetch('/api/...')</code>로 호출해 데이터를 받아온다 — 별도 백엔드 서버 없이 한 프로젝트 안에서 프론트와 백엔드를 함께 만들 수 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>08단계까지는 <code>page.js</code>로 "화면"만 만들었다면, <code>route.js</code>는 화면이 아니라 "요청을 받고 답장을 써 주는 창구" 파일이에요. <code>app/api/search/route.js</code>처럼 <code>api</code> 폴더 밑에 두면, <code>/api/search</code> 주소로 요청이 왔을 때 이 파일 안의 <code>GET</code> 함수가 실행돼 답장을 보냅니다. <code>fetch</code>가 창구에 편지를 넣는 손님이라면, <code>route.js</code>는 그 편지를 뜯어 읽고 답장을 써서 돌려주는 창구 직원인 셈입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>route.js — page.js와 같은 규칙, 다른 역할</h4>
+        <p><code>app/</code> 아래 폴더 구조가 곧 경로라는 08단계의 파일 기반 라우팅 규칙은 API에도 그대로 적용됩니다. 다른 점은 리턴하는 것입니다.</p>
+        <ul>
+          <li><b><code>page.js</code></b> — JSX(화면)를 리턴 → 브라우저에 보이는 페이지가 됨.</li>
+          <li><b><code>route.js</code></b> — <code>GET</code>·<code>POST</code> 같은 HTTP 메서드 이름의 함수를 export하고, 그 함수가 <code>Response</code> 객체를 리턴 → 화면이 아니라 데이터를 응답하는 API 엔드포인트가 됨.</li>
+          <li><b><code>app/api/search/route.js</code></b> → <code>GET /api/search</code>, <b><code>app/api/stock/[symbol]/route.js</code></b> → <code>GET /api/stock/AAPL</code> 처럼, 08단계에서 배운 <code>[id]</code> 동적 세그먼트 규칙도 API 경로에 동일하게 적용됩니다.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>GET(request) — 요청에서 정보를 안전하게 꺼내는 3단계</h4>
+        <p><code>/api/search?q=apple</code>처럼 <code>?</code> 뒤에 붙는 쿼리스트링을 읽어오는 코드 한 줄에 방어적 문법이 여러 개 겹쳐 있습니다. 하나씩 쪼개면:</p>
+        <ul>
+          <li><b><code>new URL(request.url)</code></b> — 요청 전체 주소에서 <code>searchParams</code>(쿼리파라미터 사물함)를 꺼낼 수 있는 형태로 바꿈.</li>
+          <li><b><code>searchParams.get('q')</code></b> — <code>q=</code> 뒤의 실제 값을 읽음. <code>q</code>가 아예 없으면 <code>null</code>.</li>
+          <li><b><code>?.toLowerCase()</code></b> — 옵셔널 체이닝. <code>q</code>가 <code>null</code>이면 <code>.toLowerCase()</code>를 아예 호출하지 않고 그대로 <code>undefined</code>가 되어, 서버가 에러로 멈추는 것을 막음.</li>
+          <li><b><code>|| ''</code></b> — 그 결과가 여전히 없는 값(<code>undefined</code>/빈 문자열)이면 안전한 빈 문자열로 최종 확정.</li>
+        </ul>
+        <p>이 네 조각이 합쳐진 <code>searchParams.get('q')?.toLowerCase() || ''</code>는 "값이 있으면 소문자로, 아예 없어도 절대 에러 내지 않고 빈 문자열로" 라는 뜻이 됩니다 — <a href="#concept-js-optional-chaining">기초 개념 사전 — 옵셔널 체이닝·??</a>에서 배운 문법이 실전 서버 코드에서 이렇게 조합됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>동적 세그먼트 + await params — 08단계 규칙이 API에도 그대로</h4>
+        <p><code>app/api/stock/[symbol]/route.js</code>의 <code>GET(request, { params })</code>는 08단계 <code>[id]/page.js</code>에서 배운 것과 완전히 같은 패턴입니다.</p>
+        <ul>
+          <li><b><code>{ params }</code></b> — 두 번째 인자로 동적 세그먼트 값이 담긴 객체가 들어옴.</li>
+          <li><b><code>const { symbol } = await params</code></b> — Next.js 15+에서 <code>params</code>는 Promise라, 08단계와 마찬가지로 <code>await</code>로 풀어야 실제 <code>symbol</code> 문자열을 꺼낼 수 있음.</li>
+        </ul>
+        <p><code>stock/[symbol]/route.js</code>는 <code>FINNHUB_API_KEY</code> 환경변수가 없으면 랜덤 더미 시세를, 있으면 실제 Finnhub API를 호출해 진짜 시세를 반환합니다 — 외부 API 키가 없는 환경에서도 앱이 멈추지 않고 개발을 계속할 수 있게 하는 방어적 설계입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>프론트엔드에서 내가 만든 API를 fetch로 호출하기</h4>
+        <p><code>StockSearch.jsx</code>의 <code>handleChange</code>는 타자를 칠 때마다 방금 만든 <code>/api/search</code>를 직접 호출합니다.</p>
+        <ul>
+          <li><b><code>fetch(\`/api/search?q=${encodeURIComponent(q)}\`)</code></b> — 같은 프로젝트 안의 API Route라 <code>https://...</code> 전체 주소 없이 상대 경로만으로 호출 가능. <code>encodeURIComponent</code>는 한글·공백이 섞여도 URL이 깨지지 않게 변환.</li>
+          <li><b><code>await res.json()</code></b> — 서버가 돌려준 JSON 텍스트를 자바스크립트 객체/배열로 변환.</li>
+          <li><b><code>setResults(data.results || [])</code></b> — 결과 배열을 state에 저장해 드롭다운으로 렌더링.</li>
+        </ul>
+        <p>비유하면 06단계까지는 우리 코드가 클라이언트 역할만 했다면, 이제는 같은 프로젝트 안에서 클라이언트(<code>StockSearch.jsx</code>)와 서버(<code>route.js</code>) 역할을 모두 우리가 직접 만들어 서로 통신시키는 셈입니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/api/search/route.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 1: 백엔드 검색 API Route (GET /api/search?q=...) ──
+// [역할 설명]
+// Next.js App Router에서 app/api/search/route.js 파일은
+// 브라우저 화면(UI)을 보여주는 곳이 아니라, 데이터를 주고받는 "백엔드 API 서버" 역할을 합니다.
+
+const STOCKS = [
+    { symbol: 'AAPL', name: 'Apple Inc.', exchange: 'NASDAQ' },
+    { symbol: 'TSLA', name: 'Tesla Inc.', exchange: 'NASDAQ' },
+    { symbol: 'MSFT', name: 'Microsoft Corp.', exchange: 'NASDAQ' },
+    { symbol: 'GOOGL', name: 'Alphabet Inc.', exchange: 'NASDAQ' },
+    { symbol: 'AMZN', name: 'Amazon.com Inc.', exchange: 'NASDAQ' },
+    { symbol: 'NVDA', name: 'NVIDIA Corp.', exchange: 'NASDAQ' },
+    { symbol: 'META', name: 'Meta Platforms Inc.', exchange: 'NASDAQ' },
+    { symbol: 'JPM', name: 'JPMorgan Chase &amp; Co.', exchange: 'NYSE' },
+    { symbol: 'V', name: 'Visa Inc.', exchange: 'NYSE' },
+    { symbol: 'JNJ', name: 'Johnson &amp; Johnson', exchange: 'NYSE' },
+]
+
+// 클라이언트(프론트엔드)에서 GET 방식으로 /api/search?q=... 요청을 보내면 자동 실행됩니다.
+export async function GET(request) {
+    // 📌 1) URL에서 쿼리파라미터(?q=...) 읽어오기
+    // new URL(request.url)은 전달받은 전체 주소에서 searchParams(쿼리파라미터 사물함)를 추출합니다.
+    const { searchParams } = new URL(request.url)
+
+    // 📌 2) ?q= 뒤의 실제 값 안전하게 꺼내기
+    // - searchParams.get('q'): 'q=' 뒤의 값을 읽음
+    // - ?. (옵셔널체이닝): q가 없을 때 null 에러로 서버가 터지지 않게 방지
+    // - .toLowerCase(): 대소문자 구분 없이 검색하기 위해 소문자로 통일
+    // - || '': 값이 없으면 빈 문자열('')로 안전하게 처리
+    const q = searchParams.get('q')?.toLowerCase() || ''
+
+    // 📌 3) 조기 리턴 (Early Return)
+    // 검색어 q가 비어있다면, 아래의 필터링 로직을 수행하지 않고 즉시 빈 결과를 응답하고 종료합니다.
+    if (!q) return Response.json({ results: [] })
+
+    // 📌 4) 배열 데이터 필터링
+    // symbol(종목코드) 또는 name(회사명)에 검색어 q가 포함된 항목을 최대 5개까지 걸러냅니다.
+    const results = STOCKS.filter(
+        (s) =&gt; s.symbol.toLowerCase().includes(q) || s.name.toLowerCase().includes(q)
+    ).slice(0, 5)
+
+    // 📌 5) JSON 형태로 프론트엔드에 응답
+    // Response.json()은 자바스크립트 객체를 브라우저가 이해할 수 있는 JSON 전송 포맷으로 응답합니다.
+    return Response.json({ results })
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/api/stock/[symbol]/route.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── STEP 2: 동적 API Route (GET /api/stock/[symbol]) ──
+// [역할 설명]
+// [symbol] 처럼 폴더명에 대괄호가 들어간 것을 "동적 라우트(Dynamic Route)"라고 합니다.
+// 주소가 /api/stock/AAPL, /api/stock/NVDA 처럼 가변적으로 들어올 때 처리합니다.
+
+export async function GET(request, { params }) {
+    // 📌 1) 동적 경로 파라미터 symbol 꺼내기
+    // Next.js 15 버전부터는 params가 비동기(Promise) 객체이므로 await params로 꺼내야 합니다.
+    const { symbol } = await params
+
+    // 📌 2) 환경변수(.env.local)에 등록된 보안 API 키 읽기
+    const apiKey = process.env.FINNHUB_API_KEY
+
+    // 📌 3) API 키가 없을 때 (더미 시세 데이터 반환)
+    // Finnhub API 키가 등록되어 있지 않은 상태에서도 앱이 동작하도록 시뮬레이션 데이터를 제공합니다.
+    if (!apiKey) {
+        const price = parseFloat((150 + Math.random() * 50).toFixed(2))
+        const change = parseFloat((Math.random() * 6 - 3).toFixed(2))
+        return Response.json({
+            symbol: symbol.toUpperCase(),
+            price,
+            change,
+            timestamp: Date.now(),
+            source: 'dummy' // 출처: 더미 데이터
+        })
+    }
+
+    // 📌 4) API 키가 있을 때 (실제 Finnhub 증권 API 서버와 통신)
+    try {
+        const res = await fetch(
+            `https://finnhub.io/api/v1/quote?symbol=${symbol}&amp;token=${apiKey}`,
+            { cache: 'no-store' } // 최신 시세를 얻기 위해 캐시를 사용하지 않음
+        )
+        if (!res.ok) throw new Error(`API 호출 실패 (status ${res.status})`)
+        const data = await res.json()
+
+        return Response.json({
+            symbol: symbol.toUpperCase(),
+            price: data.c,        // c: Current price (현재가)
+            change: data.d,       // d: Change (변동금액)
+            changePercent: data.dp, // dp: Change percent (변동률)
+            timestamp: Date.now(),
+            source: 'finnhub'     // 출처: Finnhub API
+        })
+    } catch (err) {
+        return Response.json({ error: err.message }, { status: 500 })
+    }
+}
+</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/StockSearch.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// ── [StockSearch.jsx] 검색창 컴포넌트 ──
+// 타자를 칠 때마다 /api/search에 요청 → 결과를 드롭다운으로 표시 → 클릭하면 관심종목에 추가
+
+'use client'
+import { useState, useRef } from 'react'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function StockSearch() {
+  const [query, setQuery] = useState('')       // 입력창 글자
+  const [results, setResults] = useState([])   // 서버가 찾아준 결과 배열
+  const inputRef = useRef(null)                // 검색 후 다시 포커스하기 위한 참조
+  const addToWatchlist = useStockStore((s) =&gt; s.addToWatchlist)
+
+  // 타자 칠 때마다 우리가 만든 백엔드 API를 호출
+  const handleChange = async (e) =&gt; {
+    const q = e.target.value
+    setQuery(q)
+
+    if (!q.trim()) {
+      setResults([])
+      return
+    }
+
+    // 상대 경로 하나로 "같은 프로젝트 안의 백엔드" 호출
+    const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
+    const data = await res.json()
+    setResults(data.results || [])
+  }
+
+  // 드롭다운에서 하나를 클릭했을 때
+  const handleSelect = (symbol) =&gt; {
+    addToWatchlist(symbol)
+    setQuery('')
+    setResults([])
+    inputRef.current?.focus() // 다음 검색을 바로 이어갈 수 있도록 커서 복원
+  }
+
+  return (
+    &lt;div style={{ position: 'relative', padding: '1rem' }}&gt;
+      &lt;input
+        ref={inputRef}
+        value={query}
+        onChange={handleChange}
+        placeholder="종목 검색 (예: Apple, AAPL)"
+        style={{
+          width: '100%', padding: '10px 14px', borderRadius: '8px',
+          border: '1px solid #0f3460', background: '#0a192f', color: '#ccd6f6', fontSize: '14px'
+        }}
+      /&gt;
+
+      {results.length &gt; 0 &amp;&amp; (
+        &lt;ul style={{
+          position: 'absolute', top: '100%', left: '1rem', right: '1rem',
+          background: '#0d2137', border: '1px solid #0f3460', borderRadius: '8px',
+          listStyle: 'none', padding: '4px', margin: 0, zIndex: 100
+        }}&gt;
+          {results.map((r) =&gt; (
+            &lt;li
+              key={r.symbol}
+              onClick={() =&gt; handleSelect(r.symbol)}
+              style={{ padding: '10px 12px', cursor: 'pointer', borderRadius: '6px', display: 'flex', justifyContent: 'space-between' }}
+            &gt;
+              &lt;span&gt;
+                &lt;strong style={{ color: '#61dafb' }}&gt;{r.symbol}&lt;/strong&gt;
+                &lt;span style={{ color: '#8892b0', marginLeft: '8px', fontSize: '13px' }}&gt;{r.name}&lt;/span&gt;
+              &lt;/span&gt;
+              &lt;span style={{ fontSize: '11px', padding: '2px 6px', borderRadius: '4px', background: '#0a192f', color: '#8892b0' }}&gt;
+                {r.exchange}
+              &lt;/span&gt;
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      )}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>app/api/.../route.js</code>는 화면이 아니라 <code>GET</code> 같은 HTTP 메서드 함수를 export해 데이터를 응답하는 백엔드 엔드포인트다.</li>
+        <li><code>new URL(request.url).searchParams</code>로 쿼리스트링을, <code>await params</code>로 동적 세그먼트 값을 꺼낸다(08단계 <code>[id]</code>와 같은 규칙).</li>
+        <li>프론트엔드는 절대경로 없이 <code>fetch('/api/...')</code>로 같은 프로젝트 안의 API를 바로 호출할 수 있다.</li>
+        <li>외부 API 키가 없어도 더미 데이터로 동작하게 만드는 방어적 분기는, 실전에서 API 키 없이도 개발을 이어갈 수 있게 해주는 흔한 패턴이다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>/api/search?q=apple</code>을 호출했는데 결과가 항상 <code>{"results":[]}</code>로 빈 배열만 온다면, <code>route.js</code>의 <code>q</code> 추출 로직이나 <code>STOCKS.filter</code> 조건부터 의심하세요 — 서버 콘솔(터미널)에는 브라우저 콘솔과 다른 에러가 찍힐 수 있습니다. API Routes 개념이 헷갈리면 <a href="#concept-api-routes">기초 개념 사전 — API Routes란?</a>을, Zustand와 헷갈리면 <a href="#concept-zustand">Zustand란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/api/search/route.js" target="_blank" rel="noopener">api/search/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/api/stock/[symbol]/route.js" target="_blank" rel="noopener">api/stock/[symbol]/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/components/StockSearch.jsx" target="_blank" rel="noopener">components/StockSearch.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/09_api_routes/src/app/components/WatchlistPanel.jsx" target="_blank" rel="noopener">components/WatchlistPanel.jsx</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -6873,6 +7375,60 @@ export default function NotFound() {
         </ul>
       </article>
 
+      <article class="journey-step" id="journey-react-09">
+        <div class="journey-step-head">
+          <span class="journey-num">09</span>
+          <h3>Zustand — 이번엔 "감싸기" 없이 그냥 나란히 연결됩니다</h3>
+          <a class="journey-jump" href="#react-09">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">07단계에서 본 <code>&lt;Provider&gt;</code>로 겹겹이 감싸는 그림, 기억하시나요? Zustand는 그 감싸기 자체가 없습니다 — <code>AddStockForm.jsx</code>와 <code>WatchlistPanel.jsx</code>는 서로 다른 컴포넌트지만, 각자 <code>useStockStore.js</code>를 그냥 import해서 나란히 연결될 뿐입니다. "누가 누구를 감싸는지"가 아니라 "누가 같은 저장소를 구독하는지"만 보면 됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>AddStockForm.jsx</b><span>addToWatchlist 액션만 구독</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box"><b>useStockStore.js</b><span>create(set, get)로 만든 저장소</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>WatchlistPanel.jsx</b><span>watchlist·prices 등을 구독</span></div>
+            <div class="flow-arrow">import</div>
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>Provider 없음</b> — 07단계는 App.jsx가 Header·StockGrid를 감싸야 했지만, 여기선 두 컴포넌트가 App.jsx를 거치지 않고 저장소를 직접 import.</li>
+          <li><b>셀렉터로 조각만 구독</b> — AddStockForm은 <code>addToWatchlist</code> 함수만, WatchlistPanel은 <code>watchlist</code>·<code>prices</code>만 각자 필요한 조각만 가져감.</li>
+          <li>Context API와 무엇이 다른지 헷갈리면 <a href="#concept-zustand">기초 개념 사전 — Zustand란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-react-10">
+        <div class="journey-step-head">
+          <span class="journey-num">10</span>
+          <h3>API Routes — 우리 프로젝트 안에 "창구 직원"이 생겼습니다</h3>
+          <a class="journey-jump" href="#react-10">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">지금까지 <code>fetch</code>는 항상 외부(가상의 서버)를 향했는데, 이번엔 그 상대가 같은 프로젝트 안의 <code>route.js</code>입니다. 08단계에서 배운 "폴더 구조 = URL", "동적 세그먼트는 <code>await params</code>" 규칙이 화면(<code>page.js</code>)이 아니라 데이터 응답(<code>route.js</code>)에 그대로 재사용됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>StockSearch.jsx</b><span>fetch('/api/search?q=...')</span></div>
+            <div class="flow-arrow">요청</div>
+            <div class="flow-box"><b>api/search/route.js</b><span>GET에서 STOCKS 필터링</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>StockSearch.jsx</b><span>setResults(data.results)</span></div>
+            <div class="flow-arrow">응답(JSON)</div>
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>route.js</b> — page.js와 같은 폴더 규칙, 다른 리턴값(화면 대신 <code>Response.json({ ... })</code>).</li>
+          <li><b>[symbol]/route.js</b> — 08단계 <code>[id]</code>와 똑같이 <code>await params</code>로 동적 세그먼트를 꺼냄.</li>
+          <li>API Routes 자체가 헷갈리면 <a href="#concept-api-routes">기초 개념 사전 — API Routes란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
     </div>
     </div>
   </section>
@@ -6948,12 +7504,14 @@ export default function NotFound() {
         <div class="roadmap-step">
           <span class="step-n">5</span>
           <div class="step-body">
-            <b>전역 상태·Next.js 라우팅이 궁금하다면</b>
-            <p>react-07·react-08에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와, Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분을 정리했습니다.</p>
+            <b>전역 상태·Next.js 라우팅·백엔드 연동이 궁금하다면</b>
+            <p>react-07~10에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand, Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, 그리고 route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes를 정리했습니다.</p>
             <div class="step-links">
               <a href="#concept-context-api">Context API란?</a>
+              <a href="#concept-zustand">Zustand란?</a>
               <a href="#concept-server-client-component">서버 vs 클라이언트 컴포넌트</a>
               <a href="#concept-file-routing">파일 기반 라우팅이란?</a>
+              <a href="#concept-api-routes">API Routes란?</a>
             </div>
           </div>
         </div>
@@ -7982,11 +8540,50 @@ export default function NotFound() {
   </div>
 </article>
 
+<article class="note-card" id="concept-zustand">
+  <div class="note-head">
+    <span class="note-num">27</span>
+    <h3>Zustand란? — Context API와 무엇이 다른가</h3>
+    <div class="note-tags"><span class="tag">Zustand</span><span class="tag">전역 상태</span><span class="tag">셀렉터</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Zustand는 <code>create()</code>로 컴포넌트 트리 밖에 저장소를 만들고 Provider로 감싸지 않아도 어디서든 import해서 쓰는 전역 상태 라이브러리로, Context API와 달리 셀렉터로 구독한 조각이 바뀔 때만 리렌더링된다는 점이 가장 큰 차이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>Context API는 "이 건물(Provider) 안에서만 들리는 사내 방송"이라 반드시 감싸야 했다면, Zustand는 그냥 클라우드에 있는 공유 문서예요 — 아무 파일에서나 import 한 줄이면 열람할 수 있고, 문서 전체가 아니라 내가 보고 싶은 시트(상태 조각)만 구독하면 다른 시트가 바뀌어도 나는 신경 쓸 필요가 없습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Context API와 나란히 비교하면</h4>
+        <ul>
+          <li><b>감싸는 구조</b> — Context는 <code>&lt;Provider&gt;</code>로 트리를 감싸야 하고, 그 안에서만 <code>useContext</code>가 동작. Zustand는 감싸는 구조 자체가 없고 어디서든 저장소를 import.</li>
+          <li><b>리렌더링 범위</b> — Context는 Provider의 <code>value</code>가 바뀌면 그 아래에서 <code>useContext</code>를 쓰는 컴포넌트 전부가 리렌더링. Zustand는 셀렉터로 구독한 조각이 바뀔 때만, 그 조각을 구독한 컴포넌트만 리렌더링.</li>
+          <li><b>정의 위치</b> — Context는 값을 갱신하는 함수를 보통 Provider 컴포넌트 안에 둠. Zustand는 <code>set</code>/<code>get</code>을 쓰는 액션 함수를 저장소 정의 자체에 포함.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>create · set · get — 저장소를 이루는 세 조각</h4>
+        <p><code>create((set, get) =&gt; ({ ... }))</code> 한 줄에 세 가지 역할이 섞여 있습니다. <code>create</code>는 저장소를 만드는 함수, <code>set</code>은 상태를 갱신하는 함수(넘긴 키만 병합), <code>get</code>은 지금 이 순간의 최신 상태를 읽는 함수입니다. <code>set</code>·<code>get</code>은 리액트 Hooks가 아니라 저장소 자체가 주는 도구라서, 컴포넌트 밖(예: 이벤트 핸들러가 아닌 순수 함수)에서도 상태를 갱신할 수 있습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>셀렉터 — 왜 <code>useStockStore((s) =&gt; s.watchlist)</code>처럼 쓰는가</h4>
+        <p>저장소를 통째로 구독(<code>useStockStore()</code>)하면 저장소 안 어떤 값이 바뀌어도 리렌더링됩니다. 화살표 함수로 원하는 조각만 콕 집으면(<code>s =&gt; s.watchlist</code>), 그 조각이 바뀔 때만 리렌더링되어 불필요한 렌더링을 줄일 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>Zustand는 Provider 없이 <code>create()</code>로 만든 저장소를 어디서든 import해서 쓴다.</li>
+        <li>셀렉터로 구독한 상태 조각이 바뀔 때만 리렌더링되어, Context보다 리렌더링 범위가 좁다.</li>
+        <li>액션 함수(<code>set</code>/<code>get</code> 사용)를 저장소 정의 안에 두어 상태와 로직을 한 곳에 모은다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-09">react-09 — Zustand</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">D</span> · Next.js 핵심 개념 — 파일 기반 라우팅이 처음이라면</h3>
 
 <article class="note-card" id="concept-server-client-component">
   <div class="note-head">
-    <span class="note-num">27</span>
+    <span class="note-num">28</span>
     <h3>서버 컴포넌트 vs 클라이언트 컴포넌트란? (Next.js)</h3>
     <div class="note-tags"><span class="tag">서버 컴포넌트</span><span class="tag">use client</span><span class="tag">Next.js</span></div>
   </div>
@@ -8025,7 +8622,7 @@ export default function NotFound() {
 
 <article class="note-card" id="concept-file-routing">
   <div class="note-head">
-    <span class="note-num">28</span>
+    <span class="note-num">29</span>
     <h3>파일 기반 라우팅이란? — 폴더 구조 = URL (Next.js App Router)</h3>
     <div class="note-tags"><span class="tag">파일 기반 라우팅</span><span class="tag">App Router</span><span class="tag">동적 라우트</span><span class="tag">Link</span></div>
   </div>
@@ -8066,11 +8663,42 @@ export default function NotFound() {
   </div>
 </article>
 
+<article class="note-card" id="concept-api-routes">
+  <div class="note-head">
+    <span class="note-num">30</span>
+    <h3>API Routes란? — route.js로 프론트 안에 백엔드 두기 (Next.js)</h3>
+    <div class="note-tags"><span class="tag">API Routes</span><span class="tag">route.js</span><span class="tag">fetch</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>app/api/.../route.js</code> 파일에 <code>GET</code> 같은 HTTP 메서드 이름의 함수를 export하면, 그 경로가 화면이 아니라 데이터를 응답하는 백엔드 엔드포인트가 되어 프론트엔드 컴포넌트가 <code>fetch('/api/...')</code>로 호출할 수 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>page.js</code>가 손님에게 보여줄 "매장 진열창"이라면, <code>route.js</code>는 손님이 안 보이는 "주문을 받고 답을 만들어 내보내는 주방/창구"예요. 같은 <code>app/</code> 폴더 규칙을 쓰지만 하나는 화면을, 하나는 데이터를 돌려준다는 점만 다릅니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>page.js와 같은 위치 규칙, 다른 리턴값</h4>
+        <p><a href="#concept-file-routing">파일 기반 라우팅</a>에서 배운 "폴더 구조 = 경로" 규칙은 그대로입니다. 다른 점은 <code>page.js</code>는 JSX(화면)를 리턴하고, <code>route.js</code>는 <code>GET</code>·<code>POST</code> 같은 함수가 <code>Response</code> 객체(주로 <code>Response.json({ ... })</code>)를 리턴한다는 것입니다. <code>app/api/stock/[symbol]/route.js</code>처럼 동적 세그먼트 <code>[symbol]</code>도 페이지와 똑같이 <code>await params</code>로 꺼냅니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>프론트에서 호출하는 법 — 절대경로가 필요 없는 이유</h4>
+        <p>외부 API는 <code>https://api.example.com/...</code>처럼 전체 주소가 필요하지만, 내가 만든 API Route는 같은 프로젝트·같은 서버 안에 있으므로 <code>fetch('/api/search?q=apple')</code>처럼 상대경로만으로 호출할 수 있습니다. 응답은 <code>await res.json()</code>으로 실제 객체/배열로 변환해서 씁니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>route.js</code>는 page.js와 같은 폴더 규칙을 쓰지만 화면 대신 <code>Response</code>를 리턴하는 백엔드 엔드포인트다.</li>
+        <li>동적 세그먼트(<code>[symbol]</code> 등)는 페이지와 동일하게 <code>await params</code>로 꺼낸다.</li>
+        <li>같은 프로젝트 안의 API Route는 절대경로 없이 <code>fetch('/api/...')</code>로 바로 호출할 수 있다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-10">react-10 — API Routes</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">C</span> · 실전에서 만나는 버그와 함정 — 실습하다 막혔다면</h3>
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">29</span>
+    <span class="note-num">31</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -8106,7 +8734,7 @@ export default function NotFound() {
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">30</span>
+    <span class="note-num">32</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -8144,7 +8772,7 @@ export default function NotFound() {
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">31</span>
+    <span class="note-num">33</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -8232,7 +8860,7 @@ export default function NotFound() {
 
 <script>
 const nextTopics = [
-  { badge:"NEXT", title:"08~13 · 주식 대시보드 앱", desc:"Zustand 전역 상태 → API Routes → persist·async → 서버 컴포넌트 → Tailwind 다크모드 → Recharts·WebSocket으로 하나의 앱을 누적 확장" },
+  { badge:"NEXT", title:"10~13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes는 완료 → 10 persist·async(스토어에 fetch 연동) → 11 서버 컴포넌트 → 12 Tailwind 다크모드 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장" },
 ];
 
 function renderNext(){
