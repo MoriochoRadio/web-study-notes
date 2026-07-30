@@ -6,8 +6,9 @@
 <title>웹 개발 학습 노트 | 취업아카데미</title>
 <meta name="description" content="취업아카데미 HTML·CSS·JavaScript 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>/* 저장된 테마를 CSS보다 먼저 적용해 화면 깜빡임 방지 */
-document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";</script>
+<script>/* 저장된 테마를 CSS보다 먼저 적용해 화면 깜빡임 방지. 저장된 값이 없으면(첫 방문) OS의 라이트/다크 설정을 따른다 */
+document.documentElement.dataset.theme = localStorage.getItem("theme")
+  || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");</script>
 <style>
   /* ==== 학습 노트 테마: 밝은 종이 위에 어두운 코드 에디터 ==== */
   :root{
@@ -121,6 +122,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     cursor:pointer;white-space:nowrap;
   }
   #theme-btn:hover{color:var(--text);border-color:var(--accent);}
+  #star-filter-btn{
+    appearance:none;flex:none;
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;
+    cursor:pointer;white-space:nowrap;
+  }
+  #star-filter-btn:hover{color:var(--text);border-color:#eab308;}
+  #star-filter-btn.active{color:#fff;background:#eab308;border-color:#eab308;}
 
   main{padding:36px 0 80px;}
 
@@ -160,6 +169,39 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   .howto h3{margin:0 0 10px;font-size:15.5px;}
   .howto ol{margin:0;padding-left:20px;color:var(--muted);font-size:14.5px;line-height:1.8;display:flex;flex-direction:column;gap:7px;}
   .howto strong{color:var(--text);}
+
+  /* ---- 이어보기 배너: 마지막으로 펼쳤던 카드로 바로 이동 ---- */
+  .resume-banner{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    background:color-mix(in srgb, var(--accent) 9%, var(--panel));
+    border:1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+    border-radius:12px;padding:12px 16px;margin-bottom:18px;font-size:14px;color:var(--text);
+  }
+  .resume-banner.hidden{display:none;}
+  .resume-banner span{flex:1;min-width:200px;}
+  .resume-banner button{
+    appearance:none;flex:none;background:var(--accent);color:#fff;border:none;
+    border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
+  }
+
+  /* ---- 오늘의 복습 추천: 5분 복습에서 "다시 볼래요"를 자주 누른 카드 ---- */
+  .today-recommend{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+  }
+  .today-recommend h3{margin:0 0 12px;font-size:15.5px;}
+  .today-recommend-list{display:flex;flex-direction:column;gap:6px;}
+  .today-recommend-item{
+    display:flex;align-items:center;gap:9px;color:var(--text);text-decoration:none;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:9px;
+    padding:9px 12px;font-size:14px;transition:.15s;
+  }
+  .today-recommend-item:hover{border-color:var(--accent);}
+  .today-recommend-item b{
+    flex:none;font-size:11.5px;font-weight:800;color:var(--accent);background:var(--bg);
+    border:1px solid var(--border);padding:2px 7px;border-radius:7px;
+  }
+  .today-empty{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
 
   /* ---- 기초 개념 사전: 읽는 순서 로드맵 ---- */
   .concept-roadmap{
@@ -345,7 +387,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     color:var(--muted);background:var(--panel-2);border:1px solid var(--border);
     padding:2px 8px;border-radius:999px;white-space:nowrap;
+    cursor:pointer;transition:.15s;
   }
+  .note-tags .tag:hover{color:#fff;background:var(--c,var(--accent));border-color:var(--c,var(--accent));}
   .note-num{
     font-size:12.5px;font-weight:800;color:var(--c,var(--accent));background:var(--panel-2);
     border:1px solid var(--border);padding:3px 9px;border-radius:8px;flex:none;
@@ -378,6 +422,28 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
   }
   .link-copy-btn:hover{color:var(--text);border-color:var(--c,var(--accent));}
   .link-copy-btn.done{color:var(--good);border-color:var(--good);}
+  .star-btn{
+    flex:none;font-size:14px;line-height:1;color:var(--muted);
+    border:1px solid var(--border);border-radius:8px;padding:4px 8px;
+    background:var(--panel-2);cursor:pointer;font-family:inherit;
+  }
+  .star-btn:hover{border-color:#eab308;}
+  .star-btn.starred{color:#eab308;border-color:#eab308;}
+  .note-card.is-starred{border-color:#eab308;}
+
+  /* ---- 내 메모: 카드마다 자유롭게 남기는 개인 노트 ---- */
+  .note-memo{margin-top:18px;}
+  .note-memo label{
+    display:block;font-size:11.5px;color:var(--muted);font-weight:800;letter-spacing:.05em;
+    margin-bottom:7px;text-transform:uppercase;
+  }
+  .note-memo textarea{
+    width:100%;min-height:64px;resize:vertical;box-sizing:border-box;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
+    padding:11px 13px;font-size:14px;line-height:1.7;color:var(--text);font-family:inherit;
+  }
+  .note-memo textarea:focus{outline:none;border-color:var(--c,var(--accent));}
+  .note-memo textarea::placeholder{color:var(--muted);}
 
   /* 접힌 카드: 요약과 '쉽게 말하면'만 남긴다 */
   .note-card.collapsed .note-body > *:not(.note-summary):not(.note-easy){display:none;}
@@ -675,6 +741,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     .tab-buttons button{flex:none;}
     .tab-spacer{display:none;}
     #search-box{width:110px;}
+    #star-filter-btn{padding:8px 10px;font-size:12px;}
     #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
     #bug-fab{right:14px;bottom:72px;padding:9px 14px;font-size:12.5px;}
     .review-top{padding:14px 16px;}
@@ -725,6 +792,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
     </div>
     <span class="tab-spacer"></span>
     <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색">
+    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
   </div>
 </nav>
@@ -732,6 +800,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
 <main class="wrap">
 
   <section id="overview">
+    <div id="resume-banner" class="resume-banner hidden">
+      <span id="resume-text"></span>
+      <button id="resume-btn" type="button">이어보기 →</button>
+    </div>
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
@@ -741,6 +813,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
       <div class="stat-card concepts"><div class="n">34</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
+    </div>
+    <div class="today-recommend">
+      <h3>🎯 오늘의 복습 추천</h3>
+      <div class="today-recommend-list" id="today-recommend-list"></div>
     </div>
     <div class="howto">
       <h3>📖 이 노트로 복습하는 방법</h3>
@@ -752,6 +828,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme") || "light
         <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML·CSS·JS는 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
+        <li>완료 체크 옆 <strong>☆ 버튼</strong>을 누르면 그 카드가 "헷갈리는 카드"로 표시되고(⭐), 검색창 옆 <strong>⭐ 헷갈리는 것만</strong> 버튼으로 그 카드들만 모아볼 수 있습니다. 카드 태그를 클릭해도 같은 검색으로 바로 필터링됩니다. 카드를 펼쳐서 공부하면 자동으로 <strong>"이어보기"</strong>에 기억돼 다음 방문 시 바로 이어서 볼 수 있고, 하단에는 자유롭게 적는 <strong>📝 내 메모</strong> 칸이 있습니다. 위쪽 <strong>🎯 오늘의 복습 추천</strong>은 5분 복습에서 자주 "다시 볼래요"를 누른 카드를 자동으로 모아 보여줍니다.</li>
       </ol>
     </div>
   </section>
@@ -9686,6 +9763,22 @@ function loadDoneSet(){
 function saveDoneSet(set){ localStorage.setItem(DONE_KEY, JSON.stringify([...set])); }
 const doneSet = loadDoneSet();
 
+// ---- 즐겨찾기(헷갈리는 카드 표시) ----
+const STAR_KEY = "starredCards";
+function loadStarSet(){
+  try { return new Set(JSON.parse(localStorage.getItem(STAR_KEY) || "[]")); } catch { return new Set(); }
+}
+function saveStarSet(set){ localStorage.setItem(STAR_KEY, JSON.stringify([...set])); }
+const starSet = loadStarSet();
+
+// ---- 카드별 내 메모 ----
+const MEMO_KEY = "cardMemos";
+function loadMemos(){
+  try { return JSON.parse(localStorage.getItem(MEMO_KEY) || "{}"); } catch { return {}; }
+}
+function saveMemos(memos){ localStorage.setItem(MEMO_KEY, JSON.stringify(memos)); }
+const memos = loadMemos();
+
 const PROGRESS_SECTION_LABEL = {
   "html-section":"HTML", "css-section":"CSS", "js-section":"JavaScript",
   "react-section":"React", "concepts-section":"개념 사전",
@@ -9724,9 +9817,11 @@ function updateProgressStat(){
 }
 
 // 카드 접기/펼치기 + aria-expanded 갱신을 한 곳에서 처리 (클릭·키보드·해시 이동 공용)
+const RESUME_KEY = "lastViewedCard";
 function setCardCollapsed(card, collapsed){
   card.classList.toggle("collapsed", collapsed);
   card.querySelector(".note-head")?.setAttribute("aria-expanded", String(!collapsed));
+  if (!collapsed) localStorage.setItem(RESUME_KEY, card.id); // 펼친 카드를 "이어보기" 대상으로 기억
 }
 
 document.querySelectorAll(".note-card").forEach(card => {
@@ -9758,6 +9853,23 @@ document.querySelectorAll(".note-card").forEach(card => {
   });
   head.appendChild(doneLabel);
 
+  // 즐겨찾기(헷갈리는 카드 표시) — 완료 여부와는 별개로 "다시 봐야 할 카드"만 골라 모아볼 수 있게
+  const starBtn = document.createElement("button");
+  starBtn.type = "button";
+  starBtn.className = "star-btn";
+  starBtn.title = "헷갈리는 카드로 표시";
+  const isStarred0 = starSet.has(card.id);
+  starBtn.textContent = isStarred0 ? "⭐" : "☆";
+  if (isStarred0) { starBtn.classList.add("starred"); card.classList.add("is-starred"); }
+  starBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const nowStarred = !starSet.has(card.id);
+    if (nowStarred) { starSet.add(card.id); starBtn.textContent = "⭐"; starBtn.classList.add("starred"); card.classList.add("is-starred"); }
+    else { starSet.delete(card.id); starBtn.textContent = "☆"; starBtn.classList.remove("starred"); card.classList.remove("is-starred"); }
+    saveStarSet(starSet);
+  });
+  head.appendChild(starBtn);
+
   // 이 카드만의 링크를 복사(다른 사람에게 공유하거나 내가 나중에 바로 찾아오기)
   const linkBtn = document.createElement("button");
   linkBtn.type = "button";
@@ -9780,16 +9892,34 @@ document.querySelectorAll(".note-card").forEach(card => {
   head.appendChild(toggle);
 
   head.addEventListener("click", (e) => {
-    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done")) return;
+    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done, .star-btn, .tag")) return;
     setCardCollapsed(card, !card.classList.contains("collapsed"));
   });
   head.addEventListener("keydown", (e) => {
-    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done")) return;
+    if (e.target.closest("a, .copy-btn, .link-copy-btn, .note-done, .star-btn, .tag")) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setCardCollapsed(card, !card.classList.contains("collapsed"));
     }
   });
+
+  // 내 메모 — 완료/즐겨찾기와 별개로 이 카드에서 헷갈렸던 점 등을 자유롭게 적어 두는 칸
+  const memoWrap = document.createElement("div");
+  memoWrap.className = "note-memo";
+  const memoLabel = document.createElement("label");
+  memoLabel.textContent = "📝 내 메모";
+  memoLabel.setAttribute("for", card.id + "-memo");
+  const memoTextarea = document.createElement("textarea");
+  memoTextarea.id = card.id + "-memo";
+  memoTextarea.placeholder = "이 카드에서 헷갈렸던 점, 나만의 정리를 적어보세요";
+  memoTextarea.value = memos[card.id] || "";
+  memoTextarea.addEventListener("input", () => {
+    if (memoTextarea.value) memos[card.id] = memoTextarea.value;
+    else delete memos[card.id];
+    saveMemos(memos);
+  });
+  memoWrap.append(memoLabel, memoTextarea);
+  card.querySelector(".note-body")?.appendChild(memoWrap);
 });
 updateProgressStat();
 
@@ -9819,6 +9949,20 @@ document.addEventListener("click", (e) => {
     history.replaceState(null, "", "#" + id);
   }
 });
+
+// ---- 이어보기 배너: 마지막으로 펼쳤던 카드를 개요 상단에서 바로 이어볼 수 있게 ----
+function initResumeBanner(){
+  const banner = document.getElementById("resume-banner");
+  if (!banner) return;
+  const id = localStorage.getItem(RESUME_KEY);
+  const card = id && document.getElementById(id);
+  if (!card || !card.classList.contains("note-card")) { banner.classList.add("hidden"); return; }
+  document.getElementById("resume-text").textContent =
+    `📍 지난번엔 "${card.querySelector("h3")?.textContent || ""}" 카드를 보고 계셨어요.`;
+  banner.classList.remove("hidden");
+  document.getElementById("resume-btn").addEventListener("click", () => revealCard(id));
+}
+initResumeBanner();
 
 // ---- 과목별 단원 목차 칩 + '모두 펼치기' 버튼 ----
 document.querySelectorAll("section.cat").forEach(sec => {
@@ -9860,14 +10004,12 @@ document.querySelectorAll("section.cat").forEach(sec => {
 // ---- 검색: 모든 과목에서 제목·태그·본문에 키워드가 들어간 카드만 표시 ----
 const searchBox = document.getElementById("search-box");
 const catKeys = ["html", "css", "js", "react", "concepts"];
-searchBox.addEventListener("input", () => {
-  const q = searchBox.value.trim().toLowerCase();
-  if (!q) {
-    document.querySelectorAll(".note-card").forEach(c => { c.style.display = ""; });
-    document.querySelectorAll("section.cat .toc").forEach(t => { t.style.display = ""; });
-    showTab(document.querySelector("nav.tabs button.active")?.dataset.target || "overview");
-    return;
-  }
+function clearCardFilter(){
+  document.querySelectorAll(".note-card").forEach(c => { c.style.display = ""; });
+  document.querySelectorAll("section.cat .toc").forEach(t => { t.style.display = ""; });
+  showTab(document.querySelector("nav.tabs button.active")?.dataset.target || "overview");
+}
+function filterCardsBy(matchFn){
   sections.overview.classList.add("hidden");
   sections.journey.classList.add("hidden");
   sections.next.classList.add("hidden");
@@ -9876,14 +10018,65 @@ searchBox.addEventListener("input", () => {
     const sec = sections[k];
     let any = false;
     sec.querySelectorAll(".note-card").forEach(c => {
-      const hit = c.textContent.toLowerCase().includes(q);
+      const hit = matchFn(c);
       c.style.display = hit ? "" : "none";
       if (hit) any = true;
     });
     sec.querySelectorAll(".toc").forEach(t => { t.style.display = "none"; });
     sec.classList.toggle("hidden", !any);
   });
+}
+searchBox.addEventListener("input", () => {
+  starFilterActive = false;
+  starFilterBtn.classList.remove("active");
+  const q = searchBox.value.trim().toLowerCase();
+  if (!q) { clearCardFilter(); return; }
+  filterCardsBy(c => c.textContent.toLowerCase().includes(q));
 });
+
+// 카드 태그를 클릭하면 그 태그 그대로 검색해서 관련 카드를 바로 모아 보여준다
+document.querySelectorAll(".note-tags .tag").forEach(tag => {
+  tag.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchBox.value = tag.textContent;
+    searchBox.dispatchEvent(new Event("input"));
+    searchBox.scrollIntoView({behavior:"smooth", block:"center"});
+  });
+});
+
+// ---- ⭐ 헷갈리는 것만 보기 필터 ----
+const starFilterBtn = document.getElementById("star-filter-btn");
+let starFilterActive = false;
+starFilterBtn.addEventListener("click", () => {
+  starFilterActive = !starFilterActive;
+  starFilterBtn.classList.toggle("active", starFilterActive);
+  searchBox.value = "";
+  if (starFilterActive) filterCardsBy(c => starSet.has(c.id));
+  else clearCardFilter();
+});
+
+// ---- 🎯 오늘의 복습 추천: 5분 복습에서 "다시 볼래요"를 자주 누른(weaknessScore 높은) 카드 상위 5개 ----
+function reviewStatsSnapshot(){
+  try { return JSON.parse(localStorage.getItem("cardReviewStats") || "{}"); } catch { return {}; }
+}
+function renderTodayRecommend(){
+  const list = document.getElementById("today-recommend-list");
+  if (!list) return;
+  const stats = reviewStatsSnapshot();
+  const top = [...document.querySelectorAll(".note-card")]
+    .map(c => {
+      const s = stats[c.id];
+      return { id: c.id, num: c.querySelector(".note-num")?.textContent || "", title: c.querySelector("h3")?.textContent || "", score: s ? s.again * 2 - s.know : 0 };
+    })
+    .filter(c => c.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+  list.innerHTML = top.length
+    ? top.map(c => `<a href="#${c.id}" class="today-recommend-item"><b>${c.num}</b> ${c.title}</a>`).join("")
+    : `<p class="today-empty">아직 헷갈린 카드 기록이 없어요. <strong>⚡ 5분 복습</strong>에서 "🤔 다시 볼래요"를 누른 카드가 여기 쌓입니다.</p>`;
+}
+renderTodayRecommend();
+window.renderTodayRecommend = renderTodayRecommend;
 
 // 코드 하이라이팅 (CDN 로드 실패 시에도 페이지는 정상 동작)
 if (window.hljs) hljs.highlightAll();
@@ -9943,6 +10136,7 @@ document.querySelectorAll(".note-code").forEach(box => {
     s[result]++;
     stats[id] = s;
     saveCardStats(stats);
+    window.renderTodayRecommend?.();
   }
   // 점수가 높을수록 더 자주 틀린 카드 — 0보다 크면 "헷갈리는 카드"로 표시
   function weaknessScore(stats, id){
@@ -10076,6 +10270,7 @@ document.querySelectorAll(".note-code").forEach(box => {
   const resetStatsBtn = document.getElementById("review-reset-stats");
   resetStatsBtn.addEventListener("click", () => {
     localStorage.removeItem(STATS_KEY);
+    window.renderTodayRecommend?.();
     const original = resetStatsBtn.textContent;
     resetStatsBtn.textContent = "초기화됨 ✓";
     setTimeout(() => { resetStatsBtn.textContent = original; }, 1500);
