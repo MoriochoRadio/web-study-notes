@@ -793,13 +793,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>웹 개발 학습 노트</h1>
     <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-07-29</span>
+      <span id="updated-badge">마지막 업데이트: 2026-07-30</span>
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 12개 단원</span>
+      <span>React 13개 단원</span>
       <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 34개 항목</span>
+      <span>기초 개념 사전 35개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -836,9 +836,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">12</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">13</div><div class="l">React 단원</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
-      <div class="stat-card concepts"><div class="n">34</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card concepts"><div class="n">35</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -6920,6 +6920,155 @@ export default function DashboardPage() {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/11_server_components/src/app/components/StockInfo.jsx" target="_blank" rel="noopener">components/StockInfo.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/11_server_components/src/app/page.js" target="_blank" rel="noopener">page.js</a></div>
   </div>
 </article>
+<article class="note-card" id="react-13">
+  <div class="note-head">
+    <span class="note-num">13</span>
+    <h3>Tailwind CSS + 다크모드 — 인라인 style을 유틸리티 클래스로, 전역 테마 스위치 달기</h3>
+    <div class="note-tags"><span class="tag">Tailwind CSS v4</span><span class="tag">@theme</span><span class="tag">dark:</span><span class="tag">zustand persist</span><span class="tag">반응형 그리드</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>지금까지 <code>style={{...}}</code>로 한 줄씩 적던 스타일을 Tailwind의 <code>className="bg-white dark:bg-stock-card"</code> 같은 유틸리티 클래스로 바꾸고, Zustand에 <code>theme</code> 상태를 추가해 <code>ThemeWrapper</code>가 <code>&lt;html&gt;</code> 태그에 <code>dark</code> 클래스를 붙였다 뗐다 하는 방식으로 사이트 전체 다크/라이트 모드를 전환한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>지금까지는 옷(스타일)을 <code>style={{}}</code>로 한 벌 한 벌 직접 재단해서 입혔다면, Tailwind는 미리 만들어진 라벨 스티커(<code>className="px-3 py-2 rounded-lg"</code>)를 골라 붙이는 것에 가깝습니다. 다크모드는 방의 조명 스위치예요 — 10강에서 배운 Zustand가 "지금 스위치가 켜져 있나 꺼져 있나(<code>theme</code>)"를 기억하는 스위치 자체이고, <code>ThemeWrapper</code>는 그 기억을 보고 실제로 방(<code>&lt;html&gt;</code> 태그)의 전등을 켜고 끄는 손입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Tailwind CSS란 — 클래스 이름이 곧 스타일</h4>
+        <p><code>className="px-3 py-1 rounded-lg text-sm border"</code>처럼, Tailwind는 미리 정의된 짧은 클래스 이름 하나하나가 CSS 속성 하나(또는 몇 개)에 대응하는 "유틸리티 CSS 프레임워크"입니다. <code>px-3</code>은 <code>padding: 0.75rem</code>, <code>rounded-lg</code>는 <code>border-radius: 0.5rem</code> 같은 식으로, 직접 CSS 파일에 클래스를 정의하지 않고도 JSX 안에서 바로 스타일을 조합할 수 있습니다.</p>
+        <p>2강에서 <code>&lt;link rel="stylesheet"&gt;</code>로 외부 CSS 파일을 연결했던 것과 달리, Tailwind는 <code>globals.css</code>에 <code>@import "tailwindcss"</code> 한 줄만 넣어두면 프로젝트 전체에서 이 유틸리티 클래스들을 즉시 쓸 수 있게 해주는 빌드 도구입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>@theme으로 커스텀 색상, @variant dark로 다크모드 스위치 켜기</h4>
+        <ul>
+          <li><b><code>@theme { --color-stock-cyan: #61dafb; ... }</code></b> — <code>globals.css</code>에서 프로젝트 전용 색상을 정의하면, Tailwind가 자동으로 <code>bg-stock-cyan</code>·<code>text-stock-cyan</code> 같은 클래스를 만들어줍니다. 지금까지 <code>style={{ color: '#61dafb' }}</code>로 반복해 적던 색상 코드를 이름 있는 클래스 하나로 재사용하는 것입니다.</li>
+          <li><b><code>@variant dark (&amp;:where(.dark, .dark *));</code></b> — 이 한 줄이 있어야 <code>&lt;html&gt;</code>에 <code>class="dark"</code>가 붙어 있을 때만 <code>dark:</code> 접두사가 붙은 클래스(예: <code>dark:bg-stock-bg</code>)가 활성화됩니다. 즉 다크모드의 "스위치 규칙" 자체가 이 줄에서 정의됩니다.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>Zustand의 theme 상태 + ThemeWrapper — 상태가 브라우저 DOM을 직접 조작하는 첫 사례</h4>
+        <p>10강에서 만든 <code>useStockStore</code>에 <code>theme: 'dark'</code>와 <code>toggleTheme</code> 액션을 추가하고, <code>partialize</code>에도 <code>theme</code>를 포함시켜 새로고침해도 마지막에 고른 테마가 유지되게 했습니다(persist의 원리는 <a href="#concept-zustand-persist">기초 개념 사전 — Zustand persist란?</a> 참고).</p>
+        <ul>
+          <li><b><code>ThemeWrapper</code></b>는 화면에 아무것도 그리지 않고 <code>children</code>만 그대로 반환하는 특이한 컴포넌트입니다 — 존재 이유는 오직 <code>useEffect(() =&gt; { document.documentElement.classList.add/remove('dark') }, [theme])</code> 하나뿐입니다.</li>
+          <li>지금까지의 useEffect는 대부분 "값을 가져오는" 용도(fetch, 구독)였다면, 이건 "리액트 상태(theme)가 바뀌었으니 리액트 바깥의 실제 브라우저 DOM(<code>&lt;html&gt;</code> 태그)을 직접 고쳐 쓰는" 용도입니다 — Tailwind의 <code>dark:</code> 클래스는 CSS 선택자라서, React가 아니라 실제 DOM에 <code>class="dark"</code>가 붙어 있어야만 작동하기 때문입니다.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>dark: 변형으로 라이트/다크를 한 줄에 함께 쓰기 + 반응형 그리드</h4>
+        <p><code>className="bg-white text-gray-900 dark:bg-stock-card dark:text-stock-light"</code>처럼, 클래스 하나에 라이트 스타일과 <code>dark:</code> 스타일을 나란히 적어두면 매번 <code>if (theme === 'dark')</code> 분기를 짤 필요 없이 CSS 선택자가 알아서 골라 씁니다. <code>page.js</code>의 <code>grid-cols-1 md:grid-cols-[300px_1fr]</code>도 같은 원리(<code>md:</code> 변형)로, 화면이 좁으면 1열, <code>md</code>(768px) 이상이면 사이드바+메인 2열로 바뀝니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-css">CSS</span>
+        <span class="code-file">src/app/globals.css</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-css">/* Tailwind v4 설정 — 파일 맨 위 한 줄로 유틸리티 클래스 전부 활성화 */
+@import "tailwindcss";
+
+/* <html>에 class="dark"가 있을 때만 dark: 접두사 클래스를 활성화하는 규칙 */
+@variant dark (&:where(.dark, .dark *));
+
+/* 커스텀 색 — bg-stock-card, text-stock-cyan 등 클래스를 자동 생성 */
+@theme {
+  --color-stock-bg: #1a1a2e;
+  --color-stock-card: #0d2137;
+  --color-stock-border: #0f3460;
+  --color-stock-cyan: #61dafb;
+  --color-stock-green: #64ffda;
+  --color-stock-red: #e94560;
+  --color-stock-muted: #8892b0;
+  --color-stock-light: #ccd6f6;
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/store/useStockStore.js — theme 부분만 발췌</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">const useStockStore = create(
+  persist(
+    (set, get) =&gt; ({
+      // 다크/라이트도 다른 상태와 똑같이 전역 상태로 관리
+      theme: 'dark',
+      toggleTheme: () =&gt; set((s) =&gt; ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
+
+      // ...watchlist, prices, portfolio 등 10강의 나머지 상태 (그대로)
+    }),
+    {
+      name: 'stock-dashboard',
+      partialize: (state) =&gt; ({
+        theme: state.theme, // 테마도 새로고침 후 그대로 유지되도록 저장 대상에 포함
+        watchlist: state.watchlist,
+        selectedSymbol: state.selectedSymbol,
+        portfolio: state.portfolio,
+      }),
+    }
+  )
+)</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/ThemeWrapper.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">'use client'
+import { useEffect } from 'react'
+import useStockStore from '@/app/store/useStockStore'
+
+// 화면에는 아무것도 그리지 않고, theme가 바뀔 때마다 <html> 태그의 class만 조작한다
+export default function ThemeWrapper({ children }) {
+  const theme = useStockStore((s) =&gt; s.theme)
+
+  useEffect(() =&gt; {
+    const root = document.documentElement
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  }, [theme])
+
+  return children
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/ThemeToggle.jsx</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">'use client'
+import useStockStore from '@/app/store/useStockStore'
+
+export default function ThemeToggle() {
+  const theme = useStockStore((s) =&gt; s.theme)
+  const toggleTheme = useStockStore((s) =&gt; s.toggleTheme)
+
+  return (
+    &lt;button
+      onClick={toggleTheme}
+      className="px-3 py-1 rounded-lg text-sm border border-stock-border text-stock-muted
+                 hover:text-stock-cyan hover:border-stock-cyan/50 transition-colors cursor-pointer"
+    &gt;
+      {theme === 'dark' ? '🌙 다크' : '☀️ 라이트'}
+    &lt;/button&gt;
+  )
+}</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>Tailwind는 <code>className</code>에 미리 정의된 짧은 클래스를 조합해 스타일을 적용하는 유틸리티 CSS 프레임워크로, <code>globals.css</code>의 <code>@import "tailwindcss"</code> 한 줄로 활성화된다.</li>
+        <li><code>@theme</code>으로 프로젝트 전용 색상 클래스를, <code>@variant dark</code>로 <code>&lt;html&gt;.dark</code>일 때만 동작하는 <code>dark:</code> 접두사 규칙을 만든다.</li>
+        <li>Zustand의 <code>theme</code> 상태 + <code>toggleTheme</code>이 다크모드의 "기억"을 담당하고, <code>ThemeWrapper</code>의 <code>useEffect</code>가 그 기억을 실제 <code>&lt;html&gt;</code> DOM에 반영하는 "실행"을 담당한다 — 역할이 나뉘어 있다.</li>
+        <li><code>bg-white dark:bg-stock-card</code>처럼 한 클래스 안에 라이트·다크 스타일을 같이 적으면 조건 분기 없이 CSS가 알아서 전환하고, <code>md:grid-cols-[300px_1fr]</code>도 같은 방식으로 반응형을 만든다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>StockSearch·WatchlistPanel·PortfolioPanel·StockInfo의 실습 로직 자체는 9~11강과 동일하고, <code>style={{ color: '#8892b0' }}</code> 같은 인라인 style이 <code>className="text-stock-muted"</code> 같은 Tailwind 클래스로만 바뀌었습니다 — 헷갈리면 두 강의 같은 컴포넌트를 나란히 비교해보세요. Zustand persist가 헷갈리면 <a href="#concept-zustand-persist">기초 개념 사전 — Zustand persist란?</a>을 참고하세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/globals.css" target="_blank" rel="noopener">globals.css</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/store/useStockStore.js" target="_blank" rel="noopener">store/useStockStore.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/components/ThemeWrapper.jsx" target="_blank" rel="noopener">components/ThemeWrapper.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/components/ThemeToggle.jsx" target="_blank" rel="noopener">components/ThemeToggle.jsx</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -8247,6 +8396,28 @@ export default function DashboardPage() {
         </ul>
       </article>
 
+      <article class="journey-step" id="journey-react-13">
+        <div class="journey-step-head">
+          <span class="journey-num">13</span>
+          <h3>Tailwind CSS + 다크모드 — 스타일을 클래스로, 테마를 전역 스위치로</h3>
+          <a class="journey-jump" href="#react-13">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">지금까지 모든 컴포넌트에 반복해서 적던 <code>style={{ color: '#8892b0' }}</code> 같은 인라인 style이 이번엔 <code>className="text-stock-muted"</code> 같은 Tailwind 클래스로 바뀝니다. 그리고 10단계에서 배운 Zustand가 이번엔 <code>theme</code> 상태를 들고, <code>ThemeWrapper</code>의 <code>useEffect</code>가 그 상태를 보고 <code>&lt;html&gt;</code> 태그에 <code>dark</code> 클래스를 붙였다 뗐다 하면서 사이트 전체 다크모드를 전환합니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>useStockStore</b><span>theme·toggleTheme (+persist)</span></div>
+            <div class="flow-arrow">구독</div>
+            <div class="flow-box leaf"><b>ThemeWrapper</b><span>useEffect → &lt;html&gt; class 토글</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>@variant dark</b> — <code>&lt;html&gt;.dark</code>일 때만 <code>dark:</code> 접두사 클래스가 켜지도록 정의하는 Tailwind v4 설정 한 줄.</li>
+          <li><b>상태와 DOM 조작의 분리</b> — Zustand는 "기억"만, <code>ThemeWrapper</code>의 <code>useEffect</code>가 실제 DOM에 반영하는 "실행"을 담당.</li>
+          <li>Tailwind 자체가 낯설면 <a href="#concept-tailwind-css">기초 개념 사전 — Tailwind CSS란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
     </div>
     </div>
   </section>
@@ -8323,7 +8494,7 @@ export default function DashboardPage() {
           <span class="step-n">5</span>
           <div class="step-body">
             <b>전역 상태·Next.js 라우팅·백엔드 연동이 궁금하다면</b>
-            <p>react-07~12에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand(+새로고침에도 남는 persist), Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes, 그리고 async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식까지 정리했습니다.</p>
+            <p>react-07~13에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand(+새로고침에도 남는 persist), Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, 그리고 Tailwind CSS 유틸리티 클래스와 전역 다크모드 스위치까지 정리했습니다.</p>
             <div class="step-links">
               <a href="#concept-context-api">Context API란?</a>
               <a href="#concept-zustand">Zustand란?</a>
@@ -9441,11 +9612,46 @@ export default function DashboardPage() {
   </div>
 </article>
 
+<article class="note-card" id="concept-tailwind-css">
+  <div class="note-head">
+    <span class="note-num">29</span>
+    <h3>Tailwind CSS란? — 유틸리티 클래스로 짜는 스타일</h3>
+    <div class="note-tags"><span class="tag">Tailwind CSS</span><span class="tag">유틸리티 클래스</span><span class="tag">@theme</span><span class="tag">dark:</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Tailwind CSS는 <code>px-3</code>(padding), <code>rounded-lg</code>(border-radius)처럼 CSS 속성 하나하나에 대응하는 짧은 클래스 이름을 <code>className</code>에 조합해서 스타일을 만드는 "유틸리티 CSS 프레임워크"다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>직접 CSS를 쓰는 건 옷을 처음부터 재단해서 만드는 것이고, Tailwind는 이미 만들어진 라벨 스티커(<code>bg-white</code>, <code>text-sm</code>, <code>rounded-lg</code>)를 골라서 옷에 붙이는 것에 가깝습니다. 스티커 하나하나는 아주 단순하지만(색 하나, 크기 하나), 여러 개를 겹쳐 붙이면 원하는 스타일이 완성됩니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>className에 스타일 이름을 직접 조합</h4>
+        <p><code>className="px-3 py-1 rounded-lg text-sm border border-stock-border"</code>처럼, 클래스 하나가 CSS 속성 한두 개에 대응합니다. 5강에서 <code>&lt;link rel="stylesheet"&gt;</code>로 외부 CSS 파일을 따로 만들어 연결했던 것과 달리, <code>globals.css</code>에 <code>@import "tailwindcss"</code> 한 줄만 넣으면 이런 클래스들을 프로젝트 어디서든 즉시 쓸 수 있습니다 — 새 CSS 규칙을 따로 작성할 필요가 거의 없어집니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>@theme으로 나만의 색상 클래스 만들기</h4>
+        <p><code>@theme { --color-stock-cyan: #61dafb; }</code>처럼 CSS 변수를 정의해두면, Tailwind가 자동으로 <code>bg-stock-cyan</code>·<code>text-stock-cyan</code>·<code>border-stock-cyan</code> 같은 클래스를 만들어줍니다. 색상 코드(<code>#61dafb</code>)를 여기저기 반복해서 적는 대신, 의미 있는 이름 하나로 프로젝트 전체에서 재사용하는 방식입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>다크모드는 어떻게? — @variant dark + html.dark</h4>
+        <p><code>globals.css</code>에 <code>@variant dark (&amp;:where(.dark, .dark *));</code> 한 줄을 추가하면, <code>&lt;html&gt;</code> 태그에 <code>class="dark"</code>가 붙어 있을 때만 <code>dark:bg-stock-card</code> 같은 <code>dark:</code> 접두사 클래스가 활성화됩니다. 즉 다크모드 전환은 별도의 마법이 아니라 "<code>&lt;html&gt;</code>에 클래스 하나를 붙였다 뗐다 하는" 아주 단순한 규칙이고, 그 클래스를 실제로 붙이고 떼는 역할은 React의 <code>useEffect</code>가 맡습니다(자세한 예시는 <a href="#react-13">react-13 — Tailwind CSS + 다크모드</a> 참고).</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>Tailwind는 CSS 속성 하나하나에 대응하는 짧은 클래스를 <code>className</code>에 조합해 스타일을 만드는 유틸리티 프레임워크다.</li>
+        <li><code>@theme</code>으로 프로젝트 전용 색상 등을 정의하면 그에 대응하는 클래스가 자동으로 생긴다.</li>
+        <li><code>@variant dark</code>가 "<code>&lt;html&gt;.dark</code>일 때만 <code>dark:</code> 클래스 활성화"라는 다크모드 규칙 자체를 정의하고, 실제로 그 클래스를 붙이고 떼는 것은 별도의 React 코드(useEffect)가 담당한다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-13">react-13 — Tailwind CSS + 다크모드</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">D</span> · Next.js 핵심 개념 — 파일 기반 라우팅이 처음이라면</h3>
 
 <article class="note-card" id="concept-server-client-component">
   <div class="note-head">
-    <span class="note-num">29</span>
+    <span class="note-num">30</span>
     <h3>서버 컴포넌트 vs 클라이언트 컴포넌트란? (Next.js)</h3>
     <div class="note-tags"><span class="tag">서버 컴포넌트</span><span class="tag">use client</span><span class="tag">Next.js</span></div>
   </div>
@@ -9484,7 +9690,7 @@ export default function DashboardPage() {
 
 <article class="note-card" id="concept-file-routing">
   <div class="note-head">
-    <span class="note-num">30</span>
+    <span class="note-num">31</span>
     <h3>파일 기반 라우팅이란? — 폴더 구조 = URL (Next.js App Router)</h3>
     <div class="note-tags"><span class="tag">파일 기반 라우팅</span><span class="tag">App Router</span><span class="tag">동적 라우트</span><span class="tag">Link</span></div>
   </div>
@@ -9527,7 +9733,7 @@ export default function DashboardPage() {
 
 <article class="note-card" id="concept-api-routes">
   <div class="note-head">
-    <span class="note-num">31</span>
+    <span class="note-num">32</span>
     <h3>API Routes란? — route.js로 프론트 안에 백엔드 두기 (Next.js)</h3>
     <div class="note-tags"><span class="tag">API Routes</span><span class="tag">route.js</span><span class="tag">fetch</span></div>
   </div>
@@ -9560,7 +9766,7 @@ export default function DashboardPage() {
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">32</span>
+    <span class="note-num">33</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -9596,7 +9802,7 @@ export default function DashboardPage() {
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">33</span>
+    <span class="note-num">34</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -9634,7 +9840,7 @@ export default function DashboardPage() {
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">34</span>
+    <span class="note-num">35</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -9726,7 +9932,7 @@ export default function DashboardPage() {
 
 <script>
 const nextTopics = [
-  { badge:"NEXT", title:"12~13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes·10 persist/async·11 서버 컴포넌트+Suspense는 완료 → 12 Tailwind 다크모드 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장(13강이 커리큘럼 마지막 단계)" },
+  { badge:"NEXT", title:"13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes·10 persist/async·11 서버 컴포넌트+Suspense·12 Tailwind 다크모드는 완료 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장(13강이 커리큘럼 마지막 단계)" },
 ];
 
 function renderNext(){
