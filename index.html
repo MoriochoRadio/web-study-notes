@@ -800,9 +800,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 13개 단원</span>
+      <span>React 14개 단원</span>
       <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 35개 항목</span>
+      <span>기초 개념 사전 36개 항목</span>
       <span>강의자료 PPT 3건</span>
     </div>
   </div>
@@ -839,10 +839,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">13</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">14</div><div class="l">React 단원</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
-      <div class="stat-card concepts"><div class="n">35</div><div class="l">기초 개념 사전 항목</div></div>
-      <div class="stat-card next"><div class="n">1</div><div class="l">다음 학습 예정 주제</div></div>
+      <div class="stat-card concepts"><div class="n">36</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card next"><div class="n">0</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
     <div class="today-recommend">
@@ -4068,7 +4068,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(13개 레슨)의 시작. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, route.js로 나만의 백엔드를 만드는 API Routes, persist 미들웨어로 새로고침에도 유지되는 상태와 매수/매도가 있는 포트폴리오, 그리고 async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식까지 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(14개 레슨) 전체. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, route.js로 나만의 백엔드를 만드는 API Routes, persist 미들웨어로 새로고침에도 유지되는 상태와 매수/매도가 있는 포트폴리오, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, Tailwind CSS + 전역 다크모드, 그리고 REST+WebSocket으로 실시간 차트를 그리는 마지막 단원까지 전부 복습합니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -7072,6 +7072,159 @@ export default function ThemeToggle() {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/globals.css" target="_blank" rel="noopener">globals.css</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/store/useStockStore.js" target="_blank" rel="noopener">store/useStockStore.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/components/ThemeWrapper.jsx" target="_blank" rel="noopener">components/ThemeWrapper.jsx</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/12_tailwind_darkmode/src/app/components/ThemeToggle.jsx" target="_blank" rel="noopener">components/ThemeToggle.jsx</a></div>
   </div>
 </article>
+<article class="note-card" id="react-14">
+  <div class="note-head">
+    <span class="note-num">14</span>
+    <h3>Recharts + WebSocket — REST로 초기 데이터, 실시간 소켓으로 계속 갱신 (커리큘럼 마지막 단원)</h3>
+    <div class="note-tags"><span class="tag">Recharts</span><span class="tag">WebSocket</span><span class="tag">REST</span><span class="tag">순수 업데이터</span><span class="tag">cleanup</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>StockChart</code>는 첫 화면은 <code>fetch('/api/stock/[symbol]/chart')</code>(REST)로 과거 60개 시세를 받아 그리고, 그 뒤로는 Finnhub <code>WebSocket</code>을 열어 실시간으로 들어오는 시세를 <code>Recharts</code>의 <code>&lt;LineChart&gt;</code>에 계속 이어 붙인다 — 미국 장이 닫혀 있거나 API 키가 없으면 서버가 자동으로 더미 데이터를 대신 준다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>REST로 초기 데이터를 받아오는 건 "지난 방송 다시듣기(VOD)"를 한 번 다운로드하는 것이고, WebSocket은 "라디오 생방송 채널에 계속 주파수를 맞춰두는 것"에 가깝습니다 — 전화를 한 번 걸어 대답을 듣고 끊는 게 아니라, 통화를 계속 연결해둔 채로 상대가 뭔가 말할 때마다(<code>onmessage</code>) 바로바로 알림을 받는 방식입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>초기 데이터 로드 — REST + cleanup으로 stale 응답 무시하기</h4>
+        <p><code>useEffect(() =&gt; { ... }, [selectedSymbol])</code> 안에서 <code>fetch</code>로 초기 60개 시세를 받아 <code>setChartData</code>에 넣습니다. 여기서 <code>let alive = true</code>와 <code>return () =&gt; { alive = false }</code>가 중요한데, 사용자가 응답이 오기 전에 다른 종목을 빠르게 클릭하면 effect가 다시 실행되면서 이전 fetch의 cleanup이 먼저 호출됩니다 — 그 뒤 <b>먼저 보낸(옛날) 요청</b>의 응답이 나중에 도착해도 <code>if (!alive) return</code>이 걸러줘서, 화면에는 항상 <b>가장 최근에 고른 종목</b>의 데이터만 남습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>실시간 갱신 — WebSocket 구독/해제</h4>
+        <ul>
+          <li><b><code>new WebSocket('wss://ws.finnhub.io?token=...')</code></b> — 서버와 계속 열려있는 양방향 연결을 하나 생성.</li>
+          <li><b><code>ws.onopen</code></b> — 연결되자마자 <code>{ type: 'subscribe', symbol }</code> 메시지를 보내 "이 종목 시세가 바뀔 때마다 알려줘"라고 요청.</li>
+          <li><b><code>ws.onmessage</code></b> — 서버가 실제 체결가를 보낼 때마다 실행되는 콜백. 받은 값으로 <code>pushPrice</code>를 호출해 차트에 새 점을 추가.</li>
+          <li><b>cleanup(<code>return () =&gt; {...}</code>)</b> — 컴포넌트가 사라지거나 종목이 바뀌면 <code>unsubscribe</code> 메시지를 보내고 <code>ws.close()</code>로 소켓을 정리 — 08~11강에서 봐온 "effect가 열어둔 건 반드시 cleanup에서 닫는다"는 원칙이 여기서도 그대로 적용됩니다.</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>setChartData 업데이터 "밖"에서 setPrice를 부르는 이유</h4>
+        <p><code>pushPrice</code> 안의 <code>setChartData((prev) =&gt; [...prev.slice(-59), point])</code>처럼, state 업데이터 함수(콜백)는 "이전 값을 받아 새 값을 계산해서 리턴"하는 순수 함수여야 합니다. 그 콜백 안에서 <code>setPrice(...)</code> 같은 다른 스토어의 상태 변경(부수 효과)까지 같이 실행하면, 리액트가 같은 업데이트를 두 번 실행하는 상황(예: StrictMode의 이중 호출)에서 <code>setPrice</code>도 의도치 않게 두 번 불릴 수 있습니다. 그래서 <code>setPrice(selectedSymbol, newPrice)</code>는 <code>setChartData</code> 콜백 <b>바깥</b>, <code>pushPrice</code> 함수 본문에서 한 번만 호출되도록 분리돼 있습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Recharts로 라인 차트 그리기 + 장이 닫혀 있을 때의 폴백</h4>
+        <p><code>&lt;ResponsiveContainer&gt;</code>가 부모 박스 크기에 맞춰 차트 크기를 자동 조절하고, 그 안의 <code>&lt;LineChart data={chartData}&gt;</code>에 <code>&lt;XAxis dataKey="time"&gt;</code>·<code>&lt;YAxis&gt;</code>·<code>&lt;Tooltip&gt;</code>·<code>&lt;Line dataKey="price"&gt;</code>를 조합해 넣으면 끝입니다 — 각 태그가 축 하나, 툴팁 하나, 선 하나를 담당하는 "조립식" 구조입니다. 그리고 <code>chart/route.js</code>는 <code>isUSMarketOpen()</code>(뉴욕 시간대 기준 평일 9:30~16:00 판별, <code>lib/market.js</code>)으로 장이 닫혀 있거나 API 키가 없으면 <code>generateDummyData</code>로 만든 가짜 60개 시세를 대신 반환합니다 — 그래서 새벽에 실습해도 항상 차트가 정상적으로 그려집니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/api/stock/[symbol]/chart/route.js</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">import { isUSMarketOpen } from '@/app/lib/market'
+
+// API 키가 없거나 장이 닫혀 있을 때 대신 내보낼 가짜 60개 시세
+function generateDummyData(symbol) {
+  const now = Date.now()
+  const oneMin = 60 * 1000
+  const base = symbol === 'AAPL' ? 182 : symbol === 'TSLA' ? 250 : 150
+  return Array.from({ length: 60 }, (_, i) =&gt; {
+    const t = now - (59 - i) * oneMin
+    const noise = (Math.random() - 0.5) * 3
+    return {
+      time: new Date(t).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),
+      price: parseFloat((base + noise + i * 0.05).toFixed(2)),
+    }
+  })
+}
+
+export async function GET(request, { params }) {
+  const { symbol } = await params
+  const apiKey = process.env.FINNHUB_API_KEY
+
+  // 키가 없거나 미국장이 닫혀 있으면 더미 60개를 바로 반환
+  if (!apiKey || !isUSMarketOpen()) {
+    return Response.json({ symbol, data: generateDummyData(symbol) })
+  }
+
+  try {
+    const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`, { cache: 'no-store' })
+    if (!res.ok) throw new Error(`quote 실패 (${res.status})`)
+    const q = await res.json()
+    if (typeof q.c !== 'number' || q.c === 0) throw new Error('quote 없음')
+    const point = { time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }), price: parseFloat(q.c.toFixed(2)) }
+    return Response.json({ symbol, data: [point] })
+  } catch (err) {
+    // 실제 API 실패 시에도 더미 데이터로 안전하게 폴백
+    return Response.json({ symbol, data: generateDummyData(symbol) })
+  }
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/StockChart.jsx — 초기 데이터 로드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">const [chartData, setChartData] = useState([])
+const [isLoading, setIsLoading] = useState(true)
+const lastPriceRef = useRef(0)
+
+// selectedSymbol이 바뀔 때마다 REST로 초기 60개 데이터를 다시 로드
+useEffect(() =&gt; {
+  let alive = true // 이 effect가 아직 "최신"인지 표시
+  setIsLoading(true)
+  fetch(`/api/stock/${selectedSymbol}/chart`)
+    .then((r) =&gt; r.json())
+    .then(({ data }) =&gt; {
+      if (!alive) return // 그 사이 종목이 또 바뀌었다면(=최신이 아니면) 이 응답은 버림
+      setChartData(data)
+      if (data.length) lastPriceRef.current = data[data.length - 1].price
+      setIsLoading(false)
+    })
+  return () =&gt; { alive = false } // cleanup: 다음 effect가 시작되기 전에 이 요청을 "낡은 것"으로 표시
+}, [selectedSymbol])</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-jsx">JSX</span>
+        <span class="code-file">src/app/components/StockChart.jsx — 실시간 WebSocket 갱신</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">useEffect(() =&gt; {
+  if (isLoading) return
+
+  // 새 시세가 들어올 때마다 차트 배열 끝에 점을 추가 + 스토어 동기화
+  const pushPrice = (price) =&gt; {
+    const newPrice = parseFloat(price.toFixed(2))
+    lastPriceRef.current = newPrice
+    const point = { time: nowLabel(), price: newPrice }
+    // setChartData 업데이터 콜백은 배열 계산만 순수하게 — 최근 60개로 유지
+    setChartData((prev) =&gt; [...prev.slice(-59), point])
+    // 다른 스토어 상태 변경은 업데이터 "밖"에서 한 번만
+    setPrice(selectedSymbol, newPrice)
+  }
+
+  const token = process.env.NEXT_PUBLIC_FINNHUB_API_KEY
+  if (token) {
+    const ws = new WebSocket(`wss://ws.finnhub.io?token=${token}`)
+    ws.onopen = () =&gt; ws.send(JSON.stringify({ type: 'subscribe', symbol: selectedSymbol }))
+    ws.onmessage = (event) =&gt; {
+      const msg = JSON.parse(event.data)
+      if (msg.type !== 'trade' || !msg.data?.length) return
+      pushPrice(msg.data[msg.data.length - 1].p)
+    }
+    return () =&gt; {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'unsubscribe', symbol: selectedSymbol }))
+        ws.close() // 컴포넌트가 사라지거나 종목이 바뀌면 소켓도 반드시 정리
+      }
+    }
+  }
+}, [selectedSymbol, isLoading, setPrice])</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>초기 데이터는 REST(<code>fetch</code>)로 한 번에 받고, 실시간 갱신은 WebSocket으로 계속 열린 연결을 통해 받는다 — 목적이 다른 두 통신 방식을 한 컴포넌트 안에서 함께 쓴다.</li>
+        <li><code>alive</code> 플래그로 stale 응답을 거르고, WebSocket cleanup에서 <code>unsubscribe</code>+<code>close</code>로 연결을 반드시 정리한다 — 둘 다 "이 effect가 만든 건 이 effect가 책임지고 치운다"는 같은 원칙.</li>
+        <li>state 업데이터 콜백(<code>setChartData(prev =&gt; ...)</code>)은 순수하게 값 계산만 하고, 다른 상태 변경(<code>setPrice</code>)은 그 바깥에서 한 번만 호출한다.</li>
+        <li>API 키가 없거나 미국 장이 닫혀 있으면 서버가 자동으로 더미 데이터를 반환해, 실습 시간과 무관하게 항상 정상적으로 동작한다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>이 레슨은 React & Next.js 커리큘럼의 마지막 단원입니다 🎉 — 01강의 "선언형 UI"부터 여기까지, JSX·state·훅·Context·Zustand·Next.js 라우팅·서버 컴포넌트·Tailwind·실시간 통신까지 하나의 StockDash 앱에 전부 누적됐습니다. 전체 흐름이 헷갈리면 <a href="#journey-section">🧭 학습 여정 — React 패널</a>에서 01~14단계를 처음부터 훑어보세요.</div>
+    <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/13_recharts_websocket/src/app/api/stock/[symbol]/chart/route.js" target="_blank" rel="noopener">api/stock/[symbol]/chart/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/13_recharts_websocket/src/app/lib/market.js" target="_blank" rel="noopener">lib/market.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/4.react/lessons/13_recharts_websocket/src/app/components/StockChart.jsx" target="_blank" rel="noopener">components/StockChart.jsx</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -8421,6 +8574,28 @@ export default function ThemeToggle() {
         </ul>
       </article>
 
+      <article class="journey-step" id="journey-react-14">
+        <div class="journey-step-head">
+          <span class="journey-num">14</span>
+          <h3>Recharts + WebSocket — 커리큘럼 마지막 단원 🎉</h3>
+          <a class="journey-jump" href="#react-14">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">12단계의 "차트 영역 (13강에서 구현)" 자리채우기가 드디어 완성됩니다. 처음 화면을 열 때는 REST로 과거 60개 시세를 한 번에 받아오고, 그 이후로는 WebSocket을 계속 열어둔 채 실시간 체결가가 올 때마다 <code>Recharts</code> 라인 차트에 점을 하나씩 이어 붙입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box"><b>chart/route.js</b><span>REST — 초기 60개</span></div>
+            <div class="flow-arrow">이어서</div>
+            <div class="flow-box leaf"><b>WebSocket</b><span>실시간 체결가 → pushPrice</span></div>
+          </div>
+        </div>
+        <div class="journey-label">핵심 요소</div>
+        <ul class="journey-points">
+          <li><b>alive 플래그</b> — 종목을 빠르게 바꿔도 옛날 요청의 응답이 화면을 덮어쓰지 않도록 cleanup에서 거름.</li>
+          <li><b>WebSocket cleanup</b> — unsubscribe+close로 소켓을 정리하는 것도 08~11강의 "연 건 반드시 닫는다" 원칙과 동일.</li>
+          <li>REST와 WebSocket의 차이가 헷갈리면 <a href="#concept-websocket">기초 개념 사전 — WebSocket이란?</a>을 참고하세요.</li>
+        </ul>
+      </article>
+
     </div>
     </div>
   </section>
@@ -8497,7 +8672,7 @@ export default function ThemeToggle() {
           <span class="step-n">5</span>
           <div class="step-body">
             <b>전역 상태·Next.js 라우팅·백엔드 연동이 궁금하다면</b>
-            <p>react-07~13에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand(+새로고침에도 남는 persist), Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, 그리고 Tailwind CSS 유틸리티 클래스와 전역 다크모드 스위치까지 정리했습니다.</p>
+            <p>react-07~14에서 다루는 개념입니다. prop drilling 없이 값을 공유하는 Context API와 Zustand(+새로고침에도 남는 persist), Next.js의 폴더 = URL 라우팅·서버/클라이언트 컴포넌트 구분, route.js로 같은 프로젝트 안에 백엔드를 두는 API Routes, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, Tailwind CSS 유틸리티 클래스와 전역 다크모드 스위치, 그리고 REST와 WebSocket의 차이까지 정리했습니다.</p>
             <div class="step-links">
               <a href="#concept-context-api">Context API란?</a>
               <a href="#concept-zustand">Zustand란?</a>
@@ -8505,6 +8680,8 @@ export default function ThemeToggle() {
               <a href="#concept-server-client-component">서버 vs 클라이언트 컴포넌트</a>
               <a href="#concept-file-routing">파일 기반 라우팅이란?</a>
               <a href="#concept-api-routes">API Routes란?</a>
+              <a href="#concept-tailwind-css">Tailwind CSS란?</a>
+              <a href="#concept-websocket">WebSocket이란?</a>
             </div>
           </div>
         </div>
@@ -9650,11 +9827,47 @@ export default function ThemeToggle() {
   </div>
 </article>
 
+<article class="note-card" id="concept-websocket">
+  <div class="note-head">
+    <span class="note-num">30</span>
+    <h3>WebSocket이란? — REST와 뭐가 다른가</h3>
+    <div class="note-tags"><span class="tag">WebSocket</span><span class="tag">REST</span><span class="tag">실시간 통신</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>REST(<code>fetch</code>)는 요청 하나에 응답 하나를 받고 바로 연결을 끊는 "1회성 통신"이고, WebSocket은 <code>new WebSocket(url)</code>로 연결을 한 번 열어두면 그 뒤로 서버가 원할 때마다 계속 데이터를 보내주는 "상시 연결" 통신 방식이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>REST는 편지를 보내고 답장을 기다리는 것에 가까워요 — 매번 다시 편지를 써서 부쳐야 합니다. WebSocket은 전화를 걸어서 통화 상태를 계속 유지해두는 것과 같습니다 — 한 번 연결해두면 상대방이 말할 때마다(<code>onmessage</code>) 바로 들리고, 나도 언제든 바로 말할 수 있습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>왜 실시간 시세엔 REST 대신 WebSocket을 쓸까</h4>
+        <p>REST로 "실시간처럼" 보이게 하려면 <code>setInterval</code>로 몇 초마다 계속 <code>fetch</code>를 반복해야 합니다(폴링) — 매번 새 요청을 만들고 응답을 기다리는 비용이 들고, 가격이 안 바뀌었어도 계속 요청을 보내게 됩니다. WebSocket은 연결을 한 번만 맺어두면 서버가 "가격이 바뀔 때만" 알아서 보내주므로, 불필요한 요청 없이 진짜 실시간에 가깝게 동작합니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>연결 → 구독 → 수신 → 해제, 4단계</h4>
+        <ul>
+          <li><b><code>new WebSocket('wss://...')</code></b> — 연결 시작. <code>http</code> 대신 <code>ws</code>(암호화된 경우 <code>wss</code>) 프로토콜을 씁니다.</li>
+          <li><b><code>ws.onopen</code></b> — 연결이 완료되면 실행. 보통 여기서 "이 종목 소식 받고 싶어요" 같은 구독 메시지를 보냅니다.</li>
+          <li><b><code>ws.onmessage</code></b> — 서버가 데이터를 보낼 때마다(몇 번이든) 실행되는 콜백. REST의 <code>.then()</code>은 한 번만 실행되지만 이건 계속 반복 호출됩니다.</li>
+          <li><b><code>ws.close()</code></b> — 더 이상 필요 없을 때 연결을 끊는 것. React에서는 <code>useEffect</code>의 cleanup 함수에서 호출해, 컴포넌트가 사라지거나 구독 대상이 바뀔 때 항상 정리되도록 합니다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>REST는 요청·응답 한 번으로 끝나는 통신, WebSocket은 한 번 연결하면 계속 유지되는 양방향 통신이다.</li>
+        <li>실시간성이 필요할 때 REST 폴링 대신 WebSocket을 쓰면 불필요한 반복 요청 없이 서버가 필요할 때만 데이터를 보내준다.</li>
+        <li>연결(<code>new WebSocket</code>) → 구독(<code>onopen</code>) → 수신(<code>onmessage</code>) → 해제(<code>close</code>, cleanup에서)의 흐름을 기억해두면 된다.</li>
+      </ul>
+    </div>
+    <div class="note-files">관련 실습: <a href="#react-14">react-14 — Recharts + WebSocket</a></div>
+  </div>
+</article>
+
 <h3 class="concept-group-title"><span class="n">D</span> · Next.js 핵심 개념 — 파일 기반 라우팅이 처음이라면</h3>
 
 <article class="note-card" id="concept-server-client-component">
   <div class="note-head">
-    <span class="note-num">30</span>
+    <span class="note-num">31</span>
     <h3>서버 컴포넌트 vs 클라이언트 컴포넌트란? (Next.js)</h3>
     <div class="note-tags"><span class="tag">서버 컴포넌트</span><span class="tag">use client</span><span class="tag">Next.js</span></div>
   </div>
@@ -9693,7 +9906,7 @@ export default function ThemeToggle() {
 
 <article class="note-card" id="concept-file-routing">
   <div class="note-head">
-    <span class="note-num">31</span>
+    <span class="note-num">32</span>
     <h3>파일 기반 라우팅이란? — 폴더 구조 = URL (Next.js App Router)</h3>
     <div class="note-tags"><span class="tag">파일 기반 라우팅</span><span class="tag">App Router</span><span class="tag">동적 라우트</span><span class="tag">Link</span></div>
   </div>
@@ -9736,7 +9949,7 @@ export default function ThemeToggle() {
 
 <article class="note-card" id="concept-api-routes">
   <div class="note-head">
-    <span class="note-num">32</span>
+    <span class="note-num">33</span>
     <h3>API Routes란? — route.js로 프론트 안에 백엔드 두기 (Next.js)</h3>
     <div class="note-tags"><span class="tag">API Routes</span><span class="tag">route.js</span><span class="tag">fetch</span></div>
   </div>
@@ -9769,7 +9982,7 @@ export default function ThemeToggle() {
 
 <article class="note-card" id="concept-infinite-loop-handler">
   <div class="note-head">
-    <span class="note-num">33</span>
+    <span class="note-num">34</span>
     <h3>이벤트 핸들러 "즉시 실행" 무한 루프</h3>
     <div class="note-tags"><span class="tag">onClick</span><span class="tag">무한 루프</span><span class="tag">화살표로 감싸기</span></div>
   </div>
@@ -9805,7 +10018,7 @@ export default function ThemeToggle() {
 
 <article class="note-card" id="concept-strictmode-effect-bug">
   <div class="note-head">
-    <span class="note-num">34</span>
+    <span class="note-num">35</span>
     <h3>useEffect 2개 + StrictMode = 저장한 데이터가 빈 값으로 사라지는 버그</h3>
     <div class="note-tags"><span class="tag">StrictMode</span><span class="tag">useEffect</span><span class="tag">localStorage</span><span class="tag">게으른 초기화</span></div>
   </div>
@@ -9843,7 +10056,7 @@ export default function ThemeToggle() {
 
 <article class="note-card" id="concept-stale-closure">
   <div class="note-head">
-    <span class="note-num">35</span>
+    <span class="note-num">36</span>
     <h3>stale closure — 의존성 배열을 빠뜨렸을 때 생기는 "오래된 값" 버그</h3>
     <div class="note-tags"><span class="tag">stale closure</span><span class="tag">의존성 배열</span><span class="tag">클로저</span></div>
   </div>
@@ -9883,7 +10096,7 @@ export default function ThemeToggle() {
 
   <section id="next-section" class="cat">
     <div class="cat-head"><span class="dot next"></span><h2>다음 학습 예정</h2></div>
-    <p class="cat-desc">강의자료 목차 기준으로, 아직 실습 파일이 없는 앞으로의 학습 주제입니다.</p>
+    <p class="cat-desc">강의자료 목차 기준의 React & Next.js 커리큘럼을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>
     <div class="grid" id="next-grid"></div>
   </section>
 
@@ -9934,12 +10147,14 @@ export default function ThemeToggle() {
 </footer>
 
 <script>
-const nextTopics = [
-  { badge:"NEXT", title:"13 · 주식 대시보드 앱 (이어서)", desc:"08 Zustand·09 API Routes·10 persist/async·11 서버 컴포넌트+Suspense·12 Tailwind 다크모드는 완료 → 13 Recharts·WebSocket으로 하나의 앱을 계속 누적 확장(13강이 커리큘럼 마지막 단계)" },
-];
+const nextTopics = [];
 
 function renderNext(){
   const el = document.getElementById("next-grid");
+  if (!nextTopics.length) {
+    el.innerHTML = `<p class="today-empty">🎉 React &amp; Next.js 커리큘럼 14개 단원을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>`;
+    return;
+  }
   el.innerHTML = nextTopics.map(t => `
     <div class="next-card">
       <span class="badge">${t.badge}</span>
