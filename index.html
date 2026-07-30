@@ -202,6 +202,26 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     border:1px solid var(--border);padding:2px 7px;border-radius:7px;
   }
   .today-empty{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
+  .memo-overview-item{align-items:flex-start;flex-direction:column;gap:2px;}
+  .memo-overview-item .mo-title{display:flex;align-items:center;gap:9px;}
+  .memo-snippet{color:var(--muted);font-size:12.5px;line-height:1.6;}
+
+  /* ---- 진도 백업 ---- */
+  .data-backup{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+  }
+  .data-backup h3{margin:0 0 8px;font-size:15.5px;}
+  .data-backup p{margin:0 0 12px;color:var(--muted);font-size:13.5px;line-height:1.75;}
+  .data-backup-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .data-backup-actions button{
+    appearance:none;background:var(--panel-2);border:1px solid var(--border);border-radius:9px;
+    color:var(--text);font-size:13.5px;font-weight:700;padding:8px 14px;cursor:pointer;font-family:inherit;
+  }
+  .data-backup-actions button:hover{border-color:var(--accent);}
+  #backup-status{font-size:13px;color:var(--muted);}
+  #backup-status.ok{color:var(--good);}
+  #backup-status.error{color:#ef4444;}
 
   /* ---- 기초 개념 사전: 읽는 순서 로드맵 ---- */
   .concept-roadmap{
@@ -390,6 +410,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     cursor:pointer;transition:.15s;
   }
   .note-tags .tag:hover{color:#fff;background:var(--c,var(--accent));border-color:var(--c,var(--accent));}
+  .note-tags .tag:focus-visible{outline:2px solid var(--c,var(--accent));outline-offset:2px;}
   .note-num{
     font-size:12.5px;font-weight:800;color:var(--c,var(--accent));background:var(--panel-2);
     border:1px solid var(--border);padding:3px 9px;border-radius:8px;flex:none;
@@ -433,10 +454,17 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
   /* ---- 내 메모: 카드마다 자유롭게 남기는 개인 노트 ---- */
   .note-memo{margin-top:18px;}
+  .note-memo-head{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
   .note-memo label{
-    display:block;font-size:11.5px;color:var(--muted);font-weight:800;letter-spacing:.05em;
-    margin-bottom:7px;text-transform:uppercase;
+    flex:1;font-size:11.5px;color:var(--muted);font-weight:800;letter-spacing:.05em;
+    text-transform:uppercase;
   }
+  .memo-clear-btn{
+    flex:none;font-size:11.5px;color:var(--muted);
+    border:1px solid var(--border);border-radius:7px;padding:2px 9px;
+    background:var(--panel-2);cursor:pointer;font-family:inherit;
+  }
+  .memo-clear-btn:hover{color:#ef4444;border-color:#ef4444;}
   .note-memo textarea{
     width:100%;min-height:64px;resize:vertical;box-sizing:border-box;
     background:var(--panel-2);border:1px solid var(--border);border-radius:10px;
@@ -818,6 +846,20 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <h3>🎯 오늘의 복습 추천</h3>
       <div class="today-recommend-list" id="today-recommend-list"></div>
     </div>
+    <div class="today-recommend hidden" id="memo-overview-box">
+      <h3>📝 내가 남긴 메모 모아보기</h3>
+      <div class="today-recommend-list" id="memo-overview-list"></div>
+    </div>
+    <div class="data-backup">
+      <h3>💾 내 진도 백업</h3>
+      <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요.</p>
+      <div class="data-backup-actions">
+        <button id="backup-export-btn" type="button">⬇ 내보내기</button>
+        <button id="backup-import-btn" type="button">⬆ 가져오기</button>
+        <input id="backup-import-input" type="file" accept="application/json" hidden>
+        <span id="backup-status"></span>
+      </div>
+    </div>
     <div class="howto">
       <h3>📖 이 노트로 복습하는 방법</h3>
       <ol>
@@ -828,7 +870,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML·CSS·JS는 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
-        <li>완료 체크 옆 <strong>☆ 버튼</strong>을 누르면 그 카드가 "헷갈리는 카드"로 표시되고(⭐), 검색창 옆 <strong>⭐ 헷갈리는 것만</strong> 버튼으로 그 카드들만 모아볼 수 있습니다. 카드 태그를 클릭해도 같은 검색으로 바로 필터링됩니다. 카드를 펼쳐서 공부하면 자동으로 <strong>"이어보기"</strong>에 기억돼 다음 방문 시 바로 이어서 볼 수 있고, 하단에는 자유롭게 적는 <strong>📝 내 메모</strong> 칸이 있습니다. 위쪽 <strong>🎯 오늘의 복습 추천</strong>은 5분 복습에서 자주 "다시 볼래요"를 누른 카드를 자동으로 모아 보여줍니다.</li>
+        <li>완료 체크 옆 <strong>☆ 버튼</strong>을 누르면 그 카드가 "헷갈리는 카드"로 표시되고(⭐), 검색창 옆 <strong>⭐ 헷갈리는 것만</strong> 버튼으로 그 카드들만 모아볼 수 있습니다. 카드 태그를 클릭해도(키보드 Tab+Enter도 가능) 같은 검색으로 바로 필터링됩니다. 카드를 펼쳐서 공부하면 자동으로 <strong>"이어보기"</strong>에 기억돼 다음 방문 시 바로 이어서 볼 수 있고, 하단에는 자유롭게 적는 <strong>📝 내 메모</strong> 칸이 있습니다(개요의 "내가 남긴 메모 모아보기"에서 전체를 한눈에 확인). 위쪽 <strong>🎯 오늘의 복습 추천</strong>은 5분 복습에서 자주 "다시 볼래요"를 누른 카드를 자동으로 모아 보여줍니다.</li>
+        <li>완료·즐겨찾기·메모·복습 기록은 전부 이 브라우저에만 저장됩니다. <strong>💾 내 진도 백업</strong>의 내보내기로 JSON 파일을 받아두면, 캐시를 지우거나 기기를 옮겨도 가져오기로 그대로 복원할 수 있습니다.</li>
       </ol>
     </div>
   </section>
@@ -9860,10 +9903,13 @@ document.querySelectorAll(".note-card").forEach(card => {
   starBtn.title = "헷갈리는 카드로 표시";
   const isStarred0 = starSet.has(card.id);
   starBtn.textContent = isStarred0 ? "⭐" : "☆";
+  starBtn.setAttribute("aria-label", "헷갈리는 카드로 표시");
+  starBtn.setAttribute("aria-pressed", String(isStarred0));
   if (isStarred0) { starBtn.classList.add("starred"); card.classList.add("is-starred"); }
   starBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const nowStarred = !starSet.has(card.id);
+    starBtn.setAttribute("aria-pressed", String(nowStarred));
     if (nowStarred) { starSet.add(card.id); starBtn.textContent = "⭐"; starBtn.classList.add("starred"); card.classList.add("is-starred"); }
     else { starSet.delete(card.id); starBtn.textContent = "☆"; starBtn.classList.remove("starred"); card.classList.remove("is-starred"); }
     saveStarSet(starSet);
@@ -9906,9 +9952,16 @@ document.querySelectorAll(".note-card").forEach(card => {
   // 내 메모 — 완료/즐겨찾기와 별개로 이 카드에서 헷갈렸던 점 등을 자유롭게 적어 두는 칸
   const memoWrap = document.createElement("div");
   memoWrap.className = "note-memo";
+  const memoHead = document.createElement("div");
+  memoHead.className = "note-memo-head";
   const memoLabel = document.createElement("label");
   memoLabel.textContent = "📝 내 메모";
   memoLabel.setAttribute("for", card.id + "-memo");
+  const memoClearBtn = document.createElement("button");
+  memoClearBtn.type = "button";
+  memoClearBtn.className = "memo-clear-btn";
+  memoClearBtn.textContent = "지우기";
+  memoClearBtn.setAttribute("aria-label", "이 카드 메모 지우기");
   const memoTextarea = document.createElement("textarea");
   memoTextarea.id = card.id + "-memo";
   memoTextarea.placeholder = "이 카드에서 헷갈렸던 점, 나만의 정리를 적어보세요";
@@ -9917,8 +9970,19 @@ document.querySelectorAll(".note-card").forEach(card => {
     if (memoTextarea.value) memos[card.id] = memoTextarea.value;
     else delete memos[card.id];
     saveMemos(memos);
+    window.renderMemoOverview?.();
   });
-  memoWrap.append(memoLabel, memoTextarea);
+  memoClearBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!memoTextarea.value) return;
+    if (!confirm("이 카드의 메모를 지울까요? 되돌릴 수 없습니다.")) return;
+    memoTextarea.value = "";
+    delete memos[card.id];
+    saveMemos(memos);
+    window.renderMemoOverview?.();
+  });
+  memoHead.append(memoLabel, memoClearBtn);
+  memoWrap.append(memoHead, memoTextarea);
   card.querySelector(".note-body")?.appendChild(memoWrap);
 });
 updateProgressStat();
@@ -10034,22 +10098,30 @@ searchBox.addEventListener("input", () => {
   filterCardsBy(c => c.textContent.toLowerCase().includes(q));
 });
 
-// 카드 태그를 클릭하면 그 태그 그대로 검색해서 관련 카드를 바로 모아 보여준다
+// 카드 태그를 클릭하면 그 태그 그대로 검색해서 관련 카드를 바로 모아 보여준다 (마우스·키보드 둘 다 지원)
 document.querySelectorAll(".note-tags .tag").forEach(tag => {
-  tag.addEventListener("click", (e) => {
+  tag.tabIndex = 0;
+  tag.setAttribute("role", "button");
+  const runTagFilter = (e) => {
     e.stopPropagation();
     searchBox.value = tag.textContent;
     searchBox.dispatchEvent(new Event("input"));
     searchBox.scrollIntoView({behavior:"smooth", block:"center"});
+  };
+  tag.addEventListener("click", runTagFilter);
+  tag.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); runTagFilter(e); }
   });
 });
 
 // ---- ⭐ 헷갈리는 것만 보기 필터 ----
 const starFilterBtn = document.getElementById("star-filter-btn");
 let starFilterActive = false;
+starFilterBtn.setAttribute("aria-pressed", "false");
 starFilterBtn.addEventListener("click", () => {
   starFilterActive = !starFilterActive;
   starFilterBtn.classList.toggle("active", starFilterActive);
+  starFilterBtn.setAttribute("aria-pressed", String(starFilterActive));
   searchBox.value = "";
   if (starFilterActive) filterCardsBy(c => starSet.has(c.id));
   else clearCardFilter();
@@ -10077,6 +10149,69 @@ function renderTodayRecommend(){
 }
 renderTodayRecommend();
 window.renderTodayRecommend = renderTodayRecommend;
+
+// ---- 📝 내가 남긴 메모 모아보기: 카드를 일일이 안 열어봐도 뭘 적었는지 한눈에 ----
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function renderMemoOverview(){
+  const box = document.getElementById("memo-overview-box");
+  const list = document.getElementById("memo-overview-list");
+  if (!box || !list) return;
+  const entries = Object.entries(memos).filter(([id, text]) => text && document.getElementById(id));
+  box.classList.toggle("hidden", entries.length === 0);
+  if (!entries.length) return;
+  list.innerHTML = entries.map(([id, text]) => {
+    const card = document.getElementById(id);
+    const num = card.querySelector(".note-num")?.textContent || "";
+    const title = card.querySelector("h3")?.textContent || "";
+    const snippet = text.length > 60 ? text.slice(0, 60) + "…" : text;
+    return `<a href="#${id}" class="today-recommend-item memo-overview-item">
+      <span class="mo-title"><b>${num}</b>${escapeHtml(title)}</span>
+      <span class="memo-snippet">${escapeHtml(snippet)}</span>
+    </a>`;
+  }).join("");
+}
+renderMemoOverview();
+window.renderMemoOverview = renderMemoOverview;
+
+// ---- 💾 진도 백업/복원: 완료·즐겨찾기·메모·복습 기록을 JSON 파일로 내보내고 되살린다 ----
+const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard"];
+document.getElementById("backup-export-btn").addEventListener("click", () => {
+  const data = {};
+  BACKUP_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) data[k] = v; });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "web-study-notes-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+const backupImportBtn = document.getElementById("backup-import-btn");
+const backupImportInput = document.getElementById("backup-import-input");
+const backupStatus = document.getElementById("backup-status");
+backupImportBtn.addEventListener("click", () => backupImportInput.click());
+backupImportInput.addEventListener("change", () => {
+  const file = backupImportInput.files[0];
+  backupImportInput.value = "";
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (typeof data !== "object" || data === null) throw new Error("invalid backup file");
+      BACKUP_KEYS.forEach(k => { if (typeof data[k] === "string") localStorage.setItem(k, data[k]); });
+      backupStatus.textContent = "✓ 불러왔어요. 새로고침합니다…";
+      backupStatus.className = "ok";
+      setTimeout(() => location.reload(), 700);
+    } catch (err) {
+      backupStatus.textContent = "⚠ 올바른 백업 파일이 아니에요.";
+      backupStatus.className = "error";
+    }
+  };
+  reader.readAsText(file);
+});
 
 // 코드 하이라이팅 (CDN 로드 실패 시에도 페이지는 정상 동작)
 if (window.hljs) hljs.highlightAll();
