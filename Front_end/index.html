@@ -786,6 +786,55 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     html{scroll-behavior:auto;}
     *{transition:none !important;}
   }
+  /* ---- ✏️ 시험 대비 (한 문제씩 즉시 채점) ---- */
+  #exam-section{--c:var(--accent);}
+  .exam-box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:14px;}
+  .exam-setup-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;}
+  .exam-setup-row .setup-label{font-size:13px;font-weight:700;color:var(--muted);width:64px;flex-shrink:0;}
+  .exam-chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--border);border-radius:999px;padding:6px 13px;font-size:13.5px;cursor:pointer;user-select:none;color:var(--text);}
+  .exam-chip input{accent-color:var(--accent);margin:0;}
+  .exam-chip.count-chip.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700;}
+  .exam-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+  .exam-btn{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:10px 20px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .exam-btn.secondary{background:var(--panel);color:var(--accent);border:1.5px solid var(--accent);}
+  .exam-btn:disabled{opacity:.45;cursor:not-allowed;}
+  .exam-progress{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:13.5px;color:var(--muted);}
+  .exam-progress .track{flex:1;height:8px;background:var(--panel-2);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .exam-progress .fill{height:100%;background:var(--accent);border-radius:6px;transition:width .25s;}
+  .exam-q-cat{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 10px;border-radius:999px;color:#fff;margin-bottom:10px;}
+  .exam-q-text{font-size:16px;font-weight:700;line-height:1.55;margin:0 0 14px;}
+  .exam-choice{display:block;width:100%;text-align:left;background:var(--panel);border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;margin-bottom:8px;font-size:14.5px;line-height:1.5;cursor:pointer;color:var(--text);font-family:inherit;transition:background .12s,border-color .12s;}
+  .exam-choice:hover:not(:disabled){background:var(--panel-2);border-color:var(--accent);}
+  .exam-choice:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .exam-choice .marker{display:inline-block;font-weight:800;margin-right:8px;color:var(--muted);}
+  .exam-choice:disabled{cursor:default;}
+  .exam-choice.is-correct{background:color-mix(in srgb, var(--good) 14%, var(--panel));border-color:var(--good);font-weight:700;}
+  .exam-choice.is-correct .marker{color:var(--good);}
+  .exam-choice.is-wrong{background:color-mix(in srgb, var(--html) 12%, var(--panel));border-color:var(--html);}
+  .exam-choice.is-wrong .marker{color:var(--html);}
+  .exam-choice.is-dimmed{opacity:.55;}
+  .exam-verdict{font-size:15px;font-weight:800;margin:12px 0 6px;}
+  .exam-verdict.ok{color:var(--good);}
+  .exam-verdict.no{color:var(--html);}
+  .exam-explain{background:var(--panel-2);border-left:4px solid var(--accent);border-radius:8px;padding:11px 14px;font-size:14px;line-height:1.6;}
+  .exam-explain b{color:var(--accent);}
+  .exam-next-row{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;}
+  .exam-score-line{font-size:13.5px;color:var(--muted);white-space:nowrap;}
+  .exam-result-num{font-size:38px;font-weight:800;color:var(--accent);line-height:1.1;}
+  .exam-cat-bars{display:flex;flex-direction:column;gap:7px;margin:14px 0;}
+  .exam-cat-row{display:flex;align-items:center;gap:10px;font-size:12.5px;}
+  .exam-cat-row .label{width:96px;color:var(--muted);flex-shrink:0;}
+  .exam-cat-row .track{flex:1;height:10px;background:var(--panel-2);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .exam-cat-row .fill{height:100%;border-radius:6px;}
+  .exam-cat-row .frac{width:46px;text-align:right;color:var(--muted);flex-shrink:0;}
+  .exam-wrong-list{margin:10px 0 0;padding:0;list-style:none;}
+  .exam-wrong-list li{border-top:1px dashed var(--border);padding:9px 2px;font-size:13.5px;line-height:1.55;}
+  .exam-wrong-list li:first-child{border-top:none;}
+  .exam-wrong-list .wa{color:var(--good);font-weight:700;}
+  @media (max-width:600px){
+    .exam-setup-row .setup-label{width:100%;}
+    .exam-next-row{flex-direction:column;align-items:stretch;}
+  }
 </style>
 </head>
 <body>
@@ -803,7 +852,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>React 14개 단원 + 🎓 졸업 과제</span>
       <span>🧭 학습 여정 4/4과목</span>
       <span>기초 개념 사전 39개 항목</span>
-      <span>강의자료·정리 문서 6건</span>
+      <span>✏️ 시험 대비 75문제</span>
+      <span>강의자료·정리 문서 7건</span>
     </div>
   </div>
 </header>
@@ -818,6 +868,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="react">React</button>
       <button data-target="journey">🧭 학습 여정</button>
       <button data-target="concepts">기초 개념 사전</button>
+      <button data-target="exam">✏️ 시험 대비</button>
       <button data-target="next">다음 학습 예정</button>
       <button data-target="materials">강의자료</button>
     </div>
@@ -872,6 +923,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>위쪽 <strong>검색</strong>에 키워드(예: flex, 배열)를 치면 모든 과목에서 해당 카드만 걸러 줍니다. 밤에는 <strong>다크 모드</strong> 버튼으로 화면을 어둡게 바꿀 수 있습니다.</li>
         <li>카드 하나하나는 이해되는데 <strong>"그래서 전체 흐름이 뭐지?" 큰 그림이 안 잡히면</strong> 위쪽 탭에서 <strong>🧭 학습 여정</strong>을 열어보세요. 과목별 서브탭(HTML·CSS·JS·React)을 골라 커리큘럼 순서 그대로 복습할 수 있습니다 — React는 어떤 파일이 어떤 파일을 부르고 데이터가 어디로 흐르는지, HTML·CSS·JS는 이전 레슨에서 배운 게 다음에 어떻게 확장되는지를 그림으로 정리했습니다.</li>
         <li>수업 진도와 상관없이 <strong>혼자 개념을 하나씩 짚고 싶다면</strong> 위쪽 탭에서 <strong>기초 개념 사전</strong>을 열어보세요. 용어 하나하나를 독립적으로 설명하고, 처음 보는 사람을 위한 <strong>읽는 순서</strong>도 안내되어 있습니다.</li>
+        <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 연습문제를 풀어보세요. 한 문제씩 풀면서 <strong>고르는 즉시 정답과 해설</strong>이 나오고, 틀린 문제는 자동으로 오답 노트에 쌓여 나중에 그것만 다시 풀 수 있습니다(오답 기록은 💾 진도 백업에도 포함).</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>로 다 본 카드를 표시해두면(브라우저에 저장됨) 위 <strong>학습 완료 진도</strong> 카드에 자동 반영되고, <strong>🔗 버튼</strong>으로 그 카드만의 링크를 복사할 수 있습니다. 5분 복습 모드는 "다시 볼래요"를 누른 카드를 기억해뒀다가 다음에 더 자주 보여줍니다.</li>
         <li>완료 체크 옆 <strong>☆ 버튼</strong>을 누르면 그 카드가 "헷갈리는 카드"로 표시되고(⭐), 검색창 옆 <strong>⭐ 헷갈리는 것만</strong> 버튼으로 그 카드들만 모아볼 수 있습니다. 카드 태그를 클릭해도(키보드 Tab+Enter도 가능) 같은 검색으로 바로 필터링됩니다. 카드를 펼쳐서 공부하면 자동으로 <strong>"이어보기"</strong>에 기억돼 다음 방문 시 바로 이어서 볼 수 있고, 하단에는 자유롭게 적는 <strong>📝 내 메모</strong> 칸이 있습니다(개요의 "내가 남긴 메모 모아보기"에서 전체를 한눈에 확인). 위쪽 <strong>🎯 오늘의 복습 추천</strong>은 5분 복습에서 자주 "다시 볼래요"를 누른 카드를 자동으로 모아 보여줍니다.</li>
         <li>완료·즐겨찾기·메모·복습 기록은 전부 이 브라우저에만 저장됩니다. <strong>💾 내 진도 백업</strong>의 내보내기로 JSON 파일을 받아두면, 캐시를 지우거나 기기를 옮겨도 가져오기로 그대로 복원할 수 있습니다.</li>
@@ -10277,6 +10329,63 @@ const results = STOCKS
     </div>
   </section>
 
+  <section id="exam-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — 객관식 연습문제</h2></div>
+    <p class="cat-desc">지금까지 배운 프론트엔드 전 범위(HTML·CSS·JS·React/Next.js)의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 틀린 문제는 자동으로 오답 노트에 쌓여서 나중에 그 문제들만 다시 풀 수 있어요. 시험 전에 과목을 골라 몇 바퀴 돌려보세요.</p>
+
+    <div class="exam-box" id="exam-setup">
+      <div class="exam-setup-row">
+        <span class="setup-label">과목</span>
+        <label class="exam-chip"><input type="checkbox" class="exam-cat" value="HTML" checked> HTML</label>
+        <label class="exam-chip"><input type="checkbox" class="exam-cat" value="CSS" checked> CSS</label>
+        <label class="exam-chip"><input type="checkbox" class="exam-cat" value="JS" checked> JavaScript</label>
+        <label class="exam-chip"><input type="checkbox" class="exam-cat" value="React" checked> React/Next.js</label>
+      </div>
+      <div class="exam-setup-row">
+        <span class="setup-label">문제 수</span>
+        <button type="button" class="exam-chip count-chip" data-count="10">10문제</button>
+        <button type="button" class="exam-chip count-chip active" data-count="25">25문제</button>
+        <button type="button" class="exam-chip count-chip" data-count="0">전체</button>
+      </div>
+      <div class="exam-actions">
+        <button type="button" class="exam-btn" id="exam-start-btn">시험 시작 →</button>
+        <button type="button" class="exam-btn secondary" id="exam-wrong-btn" hidden>📕 틀렸던 문제만 다시 풀기 (<span id="exam-wrong-count">0</span>)</button>
+      </div>
+    </div>
+
+    <div class="exam-box" id="exam-stage" hidden>
+      <div class="exam-progress">
+        <span id="exam-progress-label">1 / 25</span>
+        <span class="track"><span class="fill" id="exam-progress-fill" style="width:0%"></span></span>
+        <span class="exam-score-line" id="exam-score-line">맞힌 문제 0</span>
+      </div>
+      <span class="exam-q-cat" id="exam-q-cat">HTML</span>
+      <p class="exam-q-text" id="exam-q-text"></p>
+      <div id="exam-choices" role="group" aria-label="보기"></div>
+      <div id="exam-feedback" hidden>
+        <p class="exam-verdict" id="exam-verdict"></p>
+        <div class="exam-explain" id="exam-explain"></div>
+        <div class="exam-next-row">
+          <button type="button" class="exam-btn" id="exam-next-btn">다음 문제 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="exam-box" id="exam-result" hidden>
+      <div class="exam-result-num" id="exam-result-num">0 / 0</div>
+      <p style="margin:4px 0 0;color:var(--muted);font-size:13.5px;" id="exam-result-msg"></p>
+      <div class="exam-cat-bars" id="exam-cat-bars"></div>
+      <div id="exam-wrong-review" hidden>
+        <h3 style="font-size:14.5px;margin:14px 0 4px;">이번에 틀린 문제</h3>
+        <ul class="exam-wrong-list" id="exam-wrong-list"></ul>
+      </div>
+      <div class="exam-actions" style="margin-top:14px;">
+        <button type="button" class="exam-btn" id="exam-retry-wrong-btn" hidden>📕 방금 틀린 문제만 다시 풀기</button>
+        <button type="button" class="exam-btn secondary" id="exam-restart-btn">↩ 새로 시작하기</button>
+      </div>
+    </div>
+  </section>
+
   <section id="next-section" class="cat">
     <div class="cat-head"><span class="dot next"></span><h2>다음 학습 예정</h2></div>
     <p class="cat-desc">강의자료 목차 기준의 React & Next.js 커리큘럼을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>
@@ -10293,6 +10402,7 @@ const results = STOCKS
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/React_Nextjs_Master_Guide.md" target="_blank" rel="noopener">📘 React &amp; Next.js 풀스택 마스터 가이드 — 01~13강 핵심 이론·코드 패턴 종합 정리 (직접 정리)</a>
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/User_Learning_QnA_Archive.md" target="_blank" rel="noopener">💬 질문 &amp; 개념 풀이 아카이브 — 수업 중 실제로 했던 질문 12개와 답 (직접 정리)</a>
       <a href="React풀스택웹서비스개발프로젝트기능정의서및제출가이드.docx">🎓 캡스톤 기능정의서 &amp; 제출 가이드 — 졸업 과제(StockDash) 요구사항 원본</a>
+      <a href="시험대비_개념정리_연습문제_1.html" target="_blank" rel="noopener">✏️ 시험 대비 원본 자료 — 개념 정리 + 50제 일괄 채점 버전 (한 문제씩 풀기는 위 시험 대비 탭)</a>
     </div>
   </section>
 
@@ -10359,6 +10469,7 @@ const sections = {
   react: document.getElementById("react-section"),
   journey: document.getElementById("journey-section"),
   concepts: document.getElementById("concepts-section"),
+  exam: document.getElementById("exam-section"),
   next: document.getElementById("next-section"),
   materials: document.getElementById("materials-section"),
 };
@@ -10839,7 +10950,7 @@ renderMemoOverview();
 window.renderMemoOverview = renderMemoOverview;
 
 // ---- 💾 진도 백업/복원: 완료·즐겨찾기·메모·복습 기록을 JSON 파일로 내보내고 되살린다 ----
-const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard"];
+const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "examWrongBank"];
 document.getElementById("backup-export-btn").addEventListener("click", () => {
   const data = {};
   BACKUP_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) data[k] = v; });
@@ -11105,6 +11216,278 @@ document.querySelectorAll(".note-code").forEach(box => {
   });
 
   updateStreakBadge();
+})();
+
+// ═══════════ ✏️ 시험 대비 — 한 문제씩 즉시 채점 ═══════════
+(() => {
+  // 문제은행: 시험대비_개념정리_연습문제_1.html의 50제 + 커리큘럼 공백을 메우는 추가 25제
+  const EXAM_BANK = [
+    // ---- HTML (9) ----
+    {id:"h1",cat:"HTML",q:"다음 중 블록(block) 요소가 아닌 것은?",ch:["div","h1","span","ul"],a:2,ex:"span은 대표적인 인라인 요소다. div/h1/ul은 블록 요소로 줄바꿈되며 부모 너비 전체를 차지한다."},
+    {id:"h2",cat:"HTML",q:"표(table)에서 가로로 두 칸을 하나로 병합할 때 사용하는 속성은?",ch:["rowspan","colspan","merge","span"],a:1,ex:"colspan은 가로(열) 병합, rowspan은 세로(행) 병합을 담당한다."},
+    {id:"h3",cat:"HTML",q:"짧은 인라인 인용구에 사용하며 브라우저가 자동으로 따옴표를 붙여주는 태그는?",ch:["blockquote","q","cite","address"],a:1,ex:"q는 인라인 인용 태그로 자동으로 따옴표가 붙는다. blockquote는 블록 단위 인용에 사용된다."},
+    {id:"h4",cat:"HTML",q:"HTML 문서의 기본 구조 순서로 올바른 것은?",ch:["<html> → <body> → <head>","<!DOCTYPE html> → <html> → <head> → <body>","<head> → <!DOCTYPE html> → <body>","<body> → <head> → <html>"],a:1,ex:"문서형 선언(DOCTYPE) → html → head(메타정보) → body(렌더링 콘텐츠) 순서가 표준이다."},
+    {id:"h5",cat:"HTML",q:"다음 중 종료 태그가 없는(빈) 요소는?",ch:["<div>","<p>","<br>","<span>"],a:2,ex:"br, img 등은 내용이 없는 빈 요소로 종료 태그가 없다."},
+    {id:"h6",cat:"HTML",q:"스크린리더 접근성을 고려할 때, 데이터 표를 마크업하는 가장 올바른 방법은?",ch:["div에 display:table 적용","table/tr/th/td 태그 사용","ul>li 목록으로 대체","span을 나열해 배치"],a:1,ex:"div+display:table은 시각적으로는 표처럼 보여도 스크린리더가 표로 인식하지 못한다. 데이터 표는 반드시 table 태그를 사용해야 한다."},
+    {id:"h7",cat:"HTML",q:"번호가 붙는 '순서 있는 목록'을 만드는 태그 조합은?",ch:["<ul> + <li>","<ol> + <li>","<dl> + <dt>","<table> + <tr>"],a:1,ex:"ol(ordered list)은 번호가 자동으로 붙는 순서 목록, ul(unordered list)은 순서 없는 목록이다. 두 경우 모두 항목은 li로 만든다."},
+    {id:"h8",cat:"HTML",q:"img 태그의 alt 속성의 주된 역할은?",ch:["이미지 로딩 속도를 높인다","이미지를 불러오지 못했을 때 대체 텍스트를 보여주고, 스크린리더가 이미지를 설명할 때 읽어준다","이미지에 테두리를 추가한다","이미지를 자동으로 압축한다"],a:1,ex:"alt는 이미지가 깨졌을 때의 대체 텍스트이자 스크린리더용 설명으로, 접근성 측면에서 필수 속성이다."},
+    {id:"h9",cat:"HTML",q:"a 태그에서 target=\"_blank\" 속성의 역할은?",ch:["같은 탭에서 링크를 연다","새 탭(창)에서 링크를 연다","링크를 비활성화한다","파일 다운로드를 강제한다"],a:1,ex:"target=\"_blank\"는 링크를 새 탭(또는 새 창)에서 연다. 보안을 위해 rel=\"noopener\"를 함께 쓰는 것이 권장된다."},
+    // ---- CSS (13) ----
+    {id:"c1",cat:"CSS",q:"다음 CSS 적용 방식 중 우선순위가 가장 높은 것은?",ch:["외부 스타일시트","내부 스타일시트","인라인 스타일(style 속성)","브라우저 기본 스타일"],a:2,ex:"인라인 스타일(style 속성)이 우선순위가 가장 높다. 유지보수 측면에서는 외부 스타일시트가 권장된다."},
+    {id:"c2",cat:"CSS",q:"CSS 선택자에서 '자식 선택자'를 나타내는 기호는?",ch:["공백( )",">","+","~"],a:1,ex:"'A B'는 자손 선택자(모든 하위), 'A > B'는 자식 선택자(한 단계 아래만)이다."},
+    {id:"c3",cat:"CSS",q:"box-sizing: border-box일 때, width 값에 포함되는 영역은?",ch:["content만","content + padding + border","margin까지 전부 포함","아무 것도 포함하지 않음"],a:1,ex:"border-box는 padding과 border까지 width에 포함시켜, 지정한 크기 그대로 렌더링되게 한다. (기본값인 content-box는 content만 포함)"},
+    {id:"c4",cat:"CSS",q:"position: absolute인 요소의 위치 기준이 되는 것은?",ch:["가장 가까운 relative/absolute 조상","항상 <body> 태그","화면(뷰포트) 정중앙","부모 중 static인 요소"],a:0,ex:"absolute 요소는 가장 가까운 relative(또는 absolute) 조상을 기준(containing block)으로 위치가 결정된다."},
+    {id:"c5",cat:"CSS",q:"다음 중 font 축약형(shorthand) 속성에 포함되지 않는 것은?",ch:["font-size","font-family","font-weight","text-align"],a:3,ex:"text-align, text-decoration, text-indent는 font 축약형에 포함되지 않는 별도 속성이다."},
+    {id:"c6",cat:"CSS",q:"flex-direction: column일 때, justify-content가 정렬하는 축은?",ch:["가로축(고정)","세로축 (주축)","대각선 방향","z축(쌓임 순서)"],a:1,ex:"flex-direction이 주축을 결정한다. column이면 세로가 주축이 되어 justify-content가 세로 정렬을 담당하게 된다."},
+    {id:"c7",cat:"CSS",q:"z-index 속성이 실제로 의미를 가지려면 반드시 필요한 조건은?",ch:["border가 설정되어 있어야 함","position이 static이 아니어야 함","display: flex여야 함","margin: auto가 설정되어야 함"],a:1,ex:"z-index는 position이 static이 아닌(relative/absolute/fixed 등) 요소에만 적용된다."},
+    {id:"c8",cat:"CSS",q:"background 축약형(shorthand)의 올바른 작성 순서는?",ch:["반복 → 이미지 → 위치","이미지 → 반복 → 위치 / 크기","크기 → 위치 → 이미지","순서는 상관없다"],a:1,ex:"background 축약형은 '이미지 반복 위치 / 크기' 순서로 작성한다. (예: url(...) no-repeat 20px 50px / 100px 100px)"},
+    {id:"c9",cat:"CSS",q:"display:none과 visibility:hidden의 차이로 옳은 것은?",ch:["둘은 완전히 동일하게 동작한다","display:none은 차지하던 공간까지 사라지고, visibility:hidden은 공간은 남긴 채 보이지만 않는다","visibility:hidden이 공간까지 없앤다","display:none은 클릭만 막고 화면에는 보인다"],a:1,ex:"display:none은 레이아웃에서 완전히 제거되어 공간도 사라진다. visibility:hidden은 자리는 그대로 차지한 채 눈에만 안 보인다."},
+    {id:"c10",cat:"CSS",q:"같은 요소에 .class 규칙과 #id 규칙이 서로 다른 값을 지정하면?",ch:["항상 나중에 쓴 규칙이 이긴다","#id 규칙이 이긴다 (더 구체적인 선택자가 우선)",".class 규칙이 이긴다","브라우저마다 다르다"],a:1,ex:"선택자 우선순위(구체성)는 인라인 > #id > .class > 태그 순이다. '나중에 쓴 것이 이기는' 규칙은 우선순위가 같을 때만 적용된다."},
+    {id:"c11",cat:"CSS",q:"position: fixed인 요소의 위치 기준은?",ch:["부모 요소","가장 가까운 relative 조상","브라우저 화면(뷰포트) — 스크롤해도 제자리에 고정","문서 전체 높이"],a:2,ex:"fixed는 뷰포트(브라우저 화면)를 기준으로 위치가 고정되어, 스크롤해도 같은 자리에 떠 있다. (이 사이트의 '5분 복습' 버튼이 그 예)"},
+    {id:"c12",cat:"CSS",q:"@media (max-width: 600px) { ... } 의 의미는?",ch:["화면 너비가 600px보다 클 때만 적용","화면 너비가 600px 이하일 때만 적용","화면 높이가 600px 이하일 때 적용","인쇄할 때만 적용"],a:1,ex:"max-width 미디어 쿼리는 '이 너비 이하'에서만 스타일을 적용한다 — 모바일 화면 대응(반응형)의 기본 도구다."},
+    {id:"c13",cat:"CSS",q:"::after 가상요소가 화면에 렌더링되기 위해 반드시 필요한 속성은?",ch:["display","content","position","z-index"],a:1,ex:"::before/::after 가상요소는 content 속성이 있어야만 생성된다. 빈 값이라도 content: \"\"를 반드시 선언해야 한다."},
+    // ---- JavaScript (23) ----
+    {id:"j1",cat:"JS",q:"블록 스코프를 가지며 재할당이 불가능한 변수 선언 키워드는?",ch:["var","let","const","function"],a:2,ex:"const는 블록 스코프이며 재할당이 불가능하다. 단, 배열/객체의 내부 값 변경은 가능하다."},
+    {id:"j2",cat:"JS",q:"prompt() 창에서 사용자가 '취소' 버튼을 누르면 반환되는 값은?",ch:["빈 문자열 \"\"","undefined","null","0"],a:2,ex:"취소 시 null이 반환된다. 아무 값도 입력하지 않고 확인을 누르면 빈 문자열 \"\"이 반환되므로 둘을 혼동하면 안 된다."},
+    {id:"j3",cat:"JS",q:"\"10\" + 20 의 실행 결과는?",ch:["\"1020\"","30","NaN","\"30\""],a:0,ex:"문자열과 숫자를 +로 연결하면 숫자가 문자열로 변환되어 이어붙여진다 (\"1020\"). 덧셈을 하려면 Number(\"10\")+20처럼 형변환이 필요하다."},
+    {id:"j4",cat:"JS",q:"화살표 함수(arrow function)의 특징으로 옳은 것은?",ch:["자신만의 this를 새로 바인딩한다","this 바인딩이 없어 외부 스코프의 this를 그대로 사용한다","항상 이름이 있어야 한다","호이스팅되어 선언 전에도 호출할 수 있다"],a:1,ex:"화살표 함수는 자체 this가 없어 자신을 감싸는 외부 스코프의 this를 그대로 참조한다."},
+    {id:"j5",cat:"JS",q:"클로저(closure)에 대한 설명으로 가장 옳은 것은?",ch:["전역 변수만 참조할 수 있는 함수","부모 함수의 스코프 변수를 자식 함수가 기억하여 상태를 유지하는 특성","함수 실행이 끝나면 즉시 모든 변수가 사라지는 특성","화살표 함수만 가질 수 있는 특성"],a:1,ex:"클로저는 부모 함수 스코프의 변수를 내부(자식) 함수가 계속 기억·참조해, 전역 노출 없이 상태를 은닉·유지할 수 있게 한다."},
+    {id:"j6",cat:"JS",q:"기존 객체와 새로 생성되는 객체 모두에 메서드를 공유시켜 메모리 효율이 좋은 객체 생성 방식은?",ch:["객체 리터럴","생성자 함수","프로토타입","JSON.parse"],a:2,ex:"Fn.prototype.method = ... 형태로 메서드를 등록하면 모든 인스턴스가 하나의 메서드를 공유해 메모리를 절약한다."},
+    {id:"j7",cat:"JS",q:"함수의 매개변수에서 나머지 인자들을 하나의 배열로 묶어 받는 문법은?",ch:["spread 연산자","rest 파라미터","구조분해할당","삼항 연산자"],a:1,ex:"함수 매개변수 자리의 ...args는 rest 파라미터로, 나머지 인자를 배열로 묶는다. (배열/객체를 펼칠 때 쓰는 ...은 spread 연산자)"},
+    {id:"j8",cat:"JS",q:"원본과 같은 길이의 새 배열을, 각 요소를 변환한 값으로 반환하는 배열 메서드는?",ch:["filter","reduce","map","forEach"],a:2,ex:"map은 콜백의 반환값으로 원본과 같은 길이의 새 배열(변환)을 만든다. filter는 선별(길이 감소 가능), reduce는 값 하나로 누적, forEach는 반환값이 없다."},
+    {id:"j9",cat:"JS",q:"배열의 '얕은 복사(shallow copy)'에 대한 설명으로 옳은 것은?",ch:["완전히 독립된 새 메모리를 생성해 원본과 전혀 무관해진다","복사된 배열 내부에 중첩된 객체/배열이 있다면 그 안쪽은 여전히 원본과 주소를 공유한다","얕은 복사는 항상 깊은 복사보다 느리다","원본 배열을 그대로 반환하는 것과 동일하다"],a:1,ex:"slice()나 spread(...arr)로 만든 배열도 바깥 껍데기만 새로 생기고, 내부에 또 다른 배열/객체가 있으면 그 안쪽은 여전히 주소를 공유한다(얕은 복사의 함정)."},
+    {id:"j10",cat:"JS",q:"비교함수 없이 [3, 10, 4].sort()를 실행한 결과는?",ch:["[3, 4, 10]","[10, 3, 4]","[4, 3, 10]","에러가 발생한다"],a:1,ex:"기본 sort()는 숫자를 문자열(사전식)로 취급해 정렬하므로 [10, 3, 4]가 된다. 숫자 정렬에는 반드시 (a,b)=>a-b 같은 비교함수가 필요하다."},
+    {id:"j11",cat:"JS",q:"공백이나 줄바꿈으로 생긴 텍스트 노드까지 포함하여 자식 노드를 반환하는 DOM 프로퍼티는?",ch:["children","parentElement","childNodes","firstElementChild"],a:2,ex:"childNodes는 Node 계열로 텍스트 노드까지 포함한다. children은 Element 계열로 태그 요소만 포함한다."},
+    {id:"j12",cat:"JS",q:"XMLHttpRequest에서 요청·응답이 완전히 끝난 상태(DONE)를 나타내는 readyState 값은?",ch:["0","1","2","4"],a:3,ex:"readyState는 0(UNSENT)~4(DONE) 순으로 진행되며, 4이면서 status가 200일 때 응답을 안전하게 사용할 수 있다."},
+    {id:"j13",cat:"JS",q:"Promise에서 실패(에러) 상황을 처리하기 위해 사용하는 메서드는?",ch:["then","catch","resolve","open"],a:1,ex:"성공 시 처리는 then, 실패(에러) 처리는 catch가 담당한다. resolve/reject는 Promise 내부에서 결과를 결정할 때 사용하는 함수다."},
+    {id:"j14",cat:"JS",q:"옵셔널 체이닝(?.)과 null 병합 연산자(??)에 대한 설명으로 옳은 것은?",ch:["?.는 falsy 값 전체(0, '' 포함)를 다른 값으로 대체한다","??는 왼쪽 값이 0이나 ''이어도 오른쪽 값으로 대체한다","??는 왼쪽 값이 정확히 null 또는 undefined일 때만 오른쪽 값을 사용한다","?.는 프로퍼티가 없으면 항상 에러를 발생시킨다"],a:2,ex:"??(null 병합)는 왼쪽이 null/undefined일 때만 오른쪽 값을 사용한다(0, ''은 그대로 유지) — 이 점이 falsy 전체를 대체하는 ||와의 핵심 차이다. ?.(옵셔널 체이닝)는 null/undefined 접근 시 에러 대신 undefined를 반환한다."},
+    {id:"j15",cat:"JS",q:"== 와 === 의 차이로 옳은 것은?",ch:["차이가 없다","==는 타입을 자동 변환해 비교하고, ===는 값과 타입을 모두 엄격하게 비교한다","===가 타입을 자동 변환한다","==가 더 엄격한 비교다"],a:1,ex:"==는 \"1\" == 1을 true로 만드는 느슨한 비교(타입 자동 변환), ===는 타입까지 같아야 true인 엄격한 비교다. 실무에서는 ===를 기본으로 쓴다."},
+    {id:"j16",cat:"JS",q:"백틱(`) 문자열 안에 변수 값을 삽입하는 템플릿 리터럴 문법은?",ch:["#{name}","${name}","{{name}}","%name%"],a:1,ex:"백틱으로 감싼 템플릿 리터럴 안에서는 ${변수} 형태로 값을 삽입할 수 있고, 줄바꿈도 그대로 유지된다."},
+    {id:"j17",cat:"JS",q:"클릭 이벤트 핸들러에서, 이벤트가 실제로 발생한 요소를 가리키는 것은?",ch:["e.target","e.element","e.source","e.node"],a:0,ex:"e.target은 이벤트가 실제 발생한 요소를 가리킨다. 목록 전체에 핸들러 하나를 달고 e.target으로 '어떤 항목이 클릭됐는지' 알아내는 이벤트 위임 패턴의 핵심이다."},
+    {id:"j18",cat:"JS",q:"document.createElement('li')로 만든 요소를 실제 화면에 나타나게 하려면?",ch:["만들기만 하면 자동으로 표시된다","appendChild 등으로 문서 트리(부모 요소)에 붙여야 한다","innerHTML을 호출해야 한다","id를 부여해야 한다"],a:1,ex:"createElement로 만든 요소는 메모리에만 존재한다. 부모.appendChild(새요소)처럼 실제 DOM 트리에 연결해야 화면에 렌더링된다."},
+    {id:"j19",cat:"JS",q:"localStorage에 객체를 저장할 때 필요한 처리는?",ch:["객체를 그대로 저장할 수 있다","JSON.stringify로 문자열로 바꿔 저장하고, 읽을 때 JSON.parse로 되돌린다","Number로 변환해야 한다","저장 전에 암호화가 필수다"],a:1,ex:"localStorage는 문자열만 저장할 수 있다. 객체/배열은 JSON.stringify로 저장하고 JSON.parse로 복원해야 한다."},
+    {id:"j20",cat:"JS",q:"setInterval로 시작한 반복 실행을 멈추는 함수는?",ch:["stopInterval","clearInterval","cancelInterval","removeInterval"],a:1,ex:"setInterval이 돌려준 타이머 id를 clearInterval(id)에 넘겨야 반복이 멈춘다. (setTimeout의 짝은 clearTimeout)"},
+    {id:"j21",cat:"JS",q:"쿠키(Cookie)와 localStorage의 차이로 옳은 것은?",ch:["쿠키는 만료일을 설정할 수 있고 HTTP 요청 시 서버로 자동 전송된다","localStorage는 브라우저를 닫으면 항상 사라진다","쿠키가 저장 용량이 훨씬 크다","localStorage도 서버로 자동 전송된다"],a:0,ex:"쿠키는 만료일(expires) 설정이 가능하고 매 요청마다 서버로 자동 전송된다. localStorage는 서버로 전송되지 않고, 지우기 전까지 브라우저에 계속 남는다."},
+    {id:"j22",cat:"JS",q:"new Date().getMonth()가 3을 반환했다면 지금은 몇 월인가?",ch:["3월","4월","2월","13월"],a:1,ex:"getMonth()는 0(1월)부터 시작하므로 3은 4월이다. 화면에 표시할 때는 +1을 해야 하는 대표적인 함정이다."},
+    {id:"j23",cat:"JS",q:"const res = await fetch(url) 다음, 응답에서 JSON 데이터를 꺼내는 올바른 코드는?",ch:["const data = res","const data = await res.json()","const data = res.body.text","const data = JSON.stringify(res)"],a:1,ex:"fetch가 돌려주는 것은 Response 껍데기 객체다. await res.json()으로 한 번 더 파싱해야 실제 데이터를 쓸 수 있다."},
+    // ---- React / Next.js (30) ----
+    {id:"r1",cat:"React",q:"JSX의 중괄호 {} 안에 들어갈 수 없는 것은?",ch:["변수","삼항 연산자","if문 자체(statement)","함수 호출"],a:2,ex:"JSX의 {}에는 값으로 평가되는 표현식(expression)만 들어갈 수 있다. if문 같은 statement는 직접 사용할 수 없고 삼항 연산자로 대체해야 한다."},
+    {id:"r2",cat:"React",q:"HTML의 class 속성은 JSX에서 무엇으로 바꿔 써야 하는가?",ch:["class","className","cssClass","styleName"],a:1,ex:"JSX에서는 class 예약어 충돌을 피하기 위해 className을 사용하며, for는 htmlFor로 바꿔 쓴다."},
+    {id:"r3",cat:"React",q:"React의 Props에 대한 설명으로 옳은 것은?",ch:["자식에서 부모로 전달된다","부모에서 자식으로만 전달되는 단방향 데이터 흐름이다","형제 컴포넌트끼리 직접 주고받는다","컴포넌트 내부에서 자유롭게 재할당할 수 있다"],a:1,ex:"Props는 항상 부모 → 자식 방향으로만 전달되는 단방향(one-way) 데이터 흐름을 따른다."},
+    {id:"r4",cat:"React",q:"리액트가 상태(state) 변화를 감지하는 기준은?",ch:["값의 자료형","메모리 주소(참조)의 변경","변수 이름","console.log 출력 여부"],a:1,ex:"리액트는 참조(메모리 주소) 변경을 통해 상태 변화를 감지하므로, 배열/객체를 직접 수정(push, obj.a=1)하면 리렌더링이 일어나지 않는다."},
+    {id:"r5",cat:"React",q:"배열 상태(items)에 새 항목(newItem)을 추가하는 올바른 방법은?",ch:["items.push(newItem)","setItems([...items, newItem])","items[items.length] = newItem","items.newItem = true"],a:1,ex:"불변성을 지키기 위해 spread 연산자로 새 배열을 만들어 setState 함수에 전달해야 한다."},
+    {id:"r6",cat:"React",q:"useEffect의 의존성 배열을 빈 배열 []로 지정하면 언제 실행되는가?",ch:["렌더링될 때마다","특정 state가 변경될 때마다","컴포넌트가 처음 마운트될 때 1회만","절대 실행되지 않는다"],a:2,ex:"빈 배열([])은 마운트 시 1회만 실행됨을 의미한다. 의존성 배열 자체를 생략하면 매 렌더링마다 실행된다."},
+    {id:"r7",cat:"React",q:"useEffect 내부에서 return하는 함수는 어떤 역할을 하는가?",ch:["초기 렌더링을 트리거한다","언마운트 또는 의존성 변경 직전에 실행되는 클린업(정리) 함수다","state를 초기값으로 리셋한다","에러를 캐치(catch)한다"],a:1,ex:"return된 함수는 클린업 함수로, 컴포넌트가 사라지거나 의존성이 바뀌기 직전에 실행되어 이전 효과를 정리한다(타이머 해제, 구독 취소 등)."},
+    {id:"r8",cat:"React",q:"useRef의 .current 값을 변경하면 어떤 일이 일어나는가?",ch:["컴포넌트가 리렌더링된다","리렌더링이 발생하지 않는다","컴포넌트가 언마운트된다","에러가 발생한다"],a:1,ex:"useRef로 만든 값은 .current를 변경해도 리렌더링을 유발하지 않아, 렌더링과 무관한 값을 저장하는 용도로 적합하다."},
+    {id:"r9",cat:"React",q:"input 요소에 직접 접근해 .focus()를 호출하려면 어떤 훅을 사용해야 하는가?",ch:["useState","useRef","useMemo","useCallback"],a:1,ex:"useRef를 <input ref={inputRef}/>처럼 연결하면 inputRef.current로 실제 DOM 요소에 직접 접근할 수 있다."},
+    {id:"r10",cat:"React",q:"커스텀 훅(Custom Hook)의 이름 작성 규칙은?",ch:["반드시 대문자로 시작해야 한다","반드시 use로 시작해야 한다","Hook이라는 단어로 끝나야 한다","특별한 명명 규칙이 없다"],a:1,ex:"커스텀 훅은 useInput, useFetch처럼 반드시 use로 시작하는 이름을 사용해야 한다."},
+    {id:"r11",cat:"React",q:"자식 컴포넌트의 Props가 바뀌지 않았다면 리렌더링을 건너뛰게 해주는 것은?",ch:["useMemo","useCallback","React.memo","useEffect"],a:2,ex:"React.memo는 컴포넌트를 감싸 Props가 변경되지 않으면 리렌더링을 건너뛰게 한다."},
+    {id:"r12",cat:"React",q:"복잡한 계산의 결과값을 의존성이 바뀌기 전까지 재사용하기 위한 훅은?",ch:["useCallback","useMemo","useRef","useState"],a:1,ex:"useMemo는 연산 결과값을 캐싱해, 의존성 배열이 바뀌지 않는 한 재계산 없이 재사용한다."},
+    {id:"r13",cat:"React",q:"컴포넌트가 리렌더링될 때마다 함수 객체가 새로 생성되는 것을 방지하는 훅은?",ch:["useMemo","useCallback","React.memo","React.lazy"],a:1,ex:"useCallback은 함수 자체를 메모이제이션하여, 의존성이 바뀌지 않는 한 동일한 함수 객체를 재사용한다."},
+    {id:"r14",cat:"React",q:"초기 로딩 속도를 높이기 위해 모듈/코드를 나누어 불러오는(Code Splitting) 기법은?",ch:["useMemo","React.lazy + Suspense","useEffect","Context API"],a:1,ex:"React.lazy와 Suspense를 조합하면 필요한 시점에 컴포넌트를 동적으로 불러와 초기 번들 크기를 줄일 수 있다."},
+    {id:"r15",cat:"React",q:"여러 단계의 자식 컴포넌트를 거쳐 Props를 전달해야 하는 'Prop Drilling' 문제를 해결하기 위해 사용하는 것은?",ch:["useRef","Context API","useEffect","Array.sort"],a:1,ex:"Context API(createContext + Provider + useContext)를 사용하면 중간 단계를 거치지 않고 필요한 컴포넌트에서 바로 값을 구독할 수 있다."},
+    {id:"r16",cat:"React",q:"Next.js App Router에서 동적 라우팅을 만들 때 사용하는 폴더명 표기법은?",ch:["[symbol]","{symbol}","(symbol)","<symbol>"],a:0,ex:"src/app/stock/[symbol]/page.js처럼 대괄호로 감싼 폴더명이 동적 라우팅 세그먼트를 의미한다."},
+    {id:"r17",cat:"React",q:"Next.js App Router에서 앱 전역 공통 레이아웃을 정의하는 파일은?",ch:["page.js","layout.js","route.js","app.js"],a:1,ex:"layout.js는 하위 페이지에 공통으로 적용되는 레이아웃(HTML 뼈대)을 정의한다. page.js는 실제 화면, route.js는 API 엔드포인트다."},
+    {id:"r18",cat:"React",q:"Zustand가 Context API에 비해 갖는 장점으로 옳지 않은 것은?",ch:["더 가볍고 빠르다","Provider로 감쌀 필요가 없다","불필요한 리렌더링을 방지한다","반드시 서버 환경에서만 사용할 수 있다"],a:3,ex:"'반드시 서버에서만 사용 가능하다'는 잘못된 설명이다. Zustand는 클라이언트 컴포넌트에서 주로 사용되는 경량 상태관리 라이브러리다."},
+    {id:"r19",cat:"React",q:"Next.js에서 백엔드 API 엔드포인트(GET/POST 등)를 정의하는 파일명은?",ch:["page.js","layout.js","route.js","api.js"],a:2,ex:"src/app/api/.../route.js 파일 안에 GET, POST, PUT, DELETE 함수를 export하여 API 엔드포인트를 구현한다."},
+    {id:"r20",cat:"React",q:"Zustand에서 상태를 localStorage에 자동으로 저장하기 위해 사용하는 미들웨어는?",ch:["persist","devtools","immer","subscribe"],a:0,ex:"zustand/middleware의 persist를 사용하면 상태가 자동으로 localStorage에 저장되고, partialize로 저장할 항목만 선택할 수 있다."},
+    {id:"r21",cat:"React",q:"컴포넌트 파일에 'use client'를 선언해야 하는 경우로 가장 적절한 것은?",ch:["DB에 직접 접근할 때","useState, onClick 등 브라우저 상호작용 기능이 필요할 때","SEO를 최적화하고 싶을 때","모든 컴포넌트에 항상 필요하다"],a:1,ex:"'use client'는 useState/useEffect/onClick/WebSocket/document 등 브라우저에서 실행되어야 하는 기능을 쓸 때 선언한다. 기본값(서버 컴포넌트)은 DB/환경변수 접근과 SEO에 유리하다."},
+    {id:"r22",cat:"React",q:"useEffect 내부에서 let alive = true를 두고 클린업에서 alive = false로 바꾸는 패턴의 주된 목적은?",ch:["렌더링 성능을 높이기 위해","이전 비동기 요청의 응답이 최신 화면을 덮어쓰는 경쟁 상태(race condition)를 막기 위해","메모리 사용량을 줄이기 위해","코드의 가독성을 높이기 위해서일 뿐 기능적 의미는 없다"],a:1,ex:"종목을 빠르게 바꾸는 등 여러 비동기 요청이 겹칠 때, 이미 낡은 요청의 응답이 늦게 도착해 최신 화면을 덮어쓰는 것을 막기 위해 alive 취소표 패턴을 사용한다."},
+    {id:"r23",cat:"React",q:".map()으로 목록을 렌더링할 때 각 항목에 key를 지정하는 이유는?",ch:["없으면 빌드가 실패하는 필수 문법이라서","리액트가 어떤 항목이 추가/삭제/변경됐는지 식별해 효율적으로 리렌더링하도록 돕기 위해","key 값이 화면에 표시되기 때문에","CSS 스타일을 적용하기 위해"],a:1,ex:"key는 리액트가 목록의 각 항목을 구별하는 이름표다. 없으면 경고가 뜨고, 항목 추가/삭제 시 어떤 것이 바뀌었는지 파악하지 못해 불필요하거나 잘못된 리렌더링이 생길 수 있다."},
+    {id:"r24",cat:"React",q:"입력창을 '제어 컴포넌트(controlled component)'로 만드는 올바른 구성은?",ch:["value={state}와 onChange 핸들러를 state에 연결한다","ref로만 값을 읽는다","defaultValue만 지정한다","form의 action 속성만 사용한다"],a:0,ex:"제어 컴포넌트는 입력값을 리액트 state가 소유하는 방식이다 — value로 state를 보여주고, onChange에서 setState로 갱신하는 한 쌍이 핵심이다."},
+    {id:"r25",cat:"React",q:"개발 모드의 React.StrictMode에서 useEffect가 두 번 실행되는 이유는?",ch:["리액트의 버그라서","클린업이 제대로 작성됐는지 검증하려고 리액트가 의도적으로 마운트→정리→재마운트를 반복하기 때문","성능을 측정하기 위해","브라우저 캐시 때문"],a:1,ex:"StrictMode는 개발 모드에서만 effect를 두 번 실행해 '클린업 없이 두 번 실행되면 깨지는 코드'를 미리 드러낸다. 배포 빌드에서는 한 번만 실행된다."},
+    {id:"r26",cat:"React",q:"useEffect 안에서 쓰는 state를 의존성 배열에 빠뜨리면 생기는 대표적인 문제는?",ch:["컴파일 에러가 난다","effect가 '만들어질 당시의 오래된 값'만 계속 참조하는 stale closure 버그","state가 삭제된다","무조건 무한 루프에 빠진다"],a:1,ex:"클로저는 함수가 만들어질 때의 값을 기억하므로, 의존성에서 빠진 state는 최초 렌더링 시점의 낡은 값으로 고정된다(stale closure). effect 안에서 쓰는 값은 전부 의존성 배열에 넣는 것이 원칙이다."},
+    {id:"r27",cat:"React",q:"Zustand에서 useStore((s) => s.watchlist)처럼 셀렉터로 골라 구독하는 이유는?",ch:["문법상 필수라서","선택한 조각이 바뀔 때만 리렌더링되도록 구독 범위를 좁히기 위해","타입 검사를 위해","서버 컴포넌트에서 쓰기 위해"],a:1,ex:"스토어 전체가 아니라 필요한 조각만 구독하면, 다른 상태가 바뀌어도 이 컴포넌트는 리렌더링되지 않는다 — Zustand의 불필요한 리렌더링 방지가 바로 이 셀렉터에서 나온다."},
+    {id:"r28",cat:"React",q:"async 서버 컴포넌트를 Suspense(fallback 지정)로 감싸면 일어나는 일은?",ch:["에러가 발생한다","데이터가 준비되는 동안 fallback UI(스켈레톤)를 보여주다가, 준비되면 실제 내용으로 교체된다","fallback이 항상 고정 표시된다","자동으로 클라이언트 컴포넌트로 바뀐다"],a:1,ex:"서버 컴포넌트가 await로 데이터를 기다리는 동안 fallback이 먼저 렌더링되고, 데이터가 준비되면 실제 내용이 스트리밍되어 교체된다."},
+    {id:"r29",cat:"React",q:"브라우저(클라이언트 컴포넌트)에서 읽어야 하는 환경변수의 이름 규칙은?",ch:["아무 이름이나 가능하다","NEXT_PUBLIC_ 접두사가 붙어야 브라우저 번들에 포함된다","PRIVATE_ 접두사를 붙인다","반드시 소문자로 쓴다"],a:1,ex:"일반 환경변수는 서버에서만 읽을 수 있다. 브라우저에서 쓰려면 NEXT_PUBLIC_ 접두사가 필요하며, 그만큼 값이 노출되므로 공개 가능한 값만 써야 한다."},
+    {id:"r30",cat:"React",q:"WebSocket 클린업에서 unsubscribe 메시지를 보낸 뒤 close()까지 호출하는 이유는?",ch:["형식적인 관례일 뿐이다","서버 쪽 구독까지 정리하고 연결을 닫아, 메모리 누수와 이전 종목 시세가 섞이는 버그를 막기 위해","전송 속도를 높이기 위해","자동 재연결을 위해"],a:1,ex:"unsubscribe로 서버에 '더 이상 이 종목 소식 보내지 마'라고 알리고, close()로 연결 자체를 닫아야 이전 구독의 시세가 새 화면에 섞이거나 연결이 쌓여 새는 것을 막을 수 있다."},
+  ];
+  const EXAM_CAT_LABEL = { HTML:"HTML", CSS:"CSS", JS:"JavaScript", React:"React/Next.js" };
+  const EXAM_CAT_VAR = { HTML:"--html", CSS:"--css", JS:"--js", React:"--react" };
+  const CIRCLED = ["①","②","③","④"];
+  const WRONG_KEY = "examWrongBank"; // { 문제id: 틀린 횟수 } — 맞히면 1 감소, 0이 되면 제거
+
+  const $ = (id) => document.getElementById(id);
+  const setup = $("exam-setup"), stage = $("exam-stage"), result = $("exam-result");
+
+  function loadWrong(){ try { return JSON.parse(localStorage.getItem(WRONG_KEY)) || {}; } catch { return {}; } }
+  function saveWrong(bank){ localStorage.setItem(WRONG_KEY, JSON.stringify(bank)); }
+  function refreshWrongBtn(){
+    const n = Object.keys(loadWrong()).length;
+    $("exam-wrong-count").textContent = n;
+    $("exam-wrong-btn").hidden = n === 0;
+  }
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // ---- 세션 상태 ----
+  let quiz = [], pos = 0, correctCount = 0, catStats = {}, wrongThisRun = [];
+
+  function startSession(questions){
+    if (!questions.length) return;
+    quiz = shuffle(questions);
+    pos = 0; correctCount = 0; catStats = {}; wrongThisRun = [];
+    setup.hidden = true; result.hidden = true; stage.hidden = false;
+    renderQuestion();
+    stage.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  function startFromSetup(){
+    const cats = [...document.querySelectorAll(".exam-cat:checked")].map(el => el.value);
+    const limit = parseInt(document.querySelector(".count-chip.active")?.dataset.count || "0");
+    let pool = EXAM_BANK.filter(q => cats.includes(q.cat));
+    if (!pool.length) { $("exam-start-btn").textContent = "과목을 하나 이상 선택하세요"; setTimeout(() => $("exam-start-btn").textContent = "시험 시작 →", 1500); return; }
+    pool = shuffle(pool);
+    if (limit > 0) pool = pool.slice(0, limit);
+    startSession(pool);
+  }
+
+  function renderQuestion(){
+    const item = quiz[pos];
+    $("exam-progress-label").textContent = (pos + 1) + " / " + quiz.length;
+    $("exam-progress-fill").style.width = Math.round(pos / quiz.length * 100) + "%";
+    $("exam-score-line").textContent = "맞힌 문제 " + correctCount;
+    const catEl = $("exam-q-cat");
+    catEl.textContent = EXAM_CAT_LABEL[item.cat];
+    catEl.style.background = "var(" + EXAM_CAT_VAR[item.cat] + ")";
+    $("exam-q-text").textContent = (pos + 1) + ". " + item.q;
+    $("exam-feedback").hidden = true;
+
+    // 보기 순서도 매번 섞기 (번호 위치 암기 방지) — 정답 인덱스를 재계산
+    const order = shuffle(item.ch.map((_, i) => i));
+    const box = $("exam-choices");
+    box.innerHTML = "";
+    order.forEach((origIdx, di) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "exam-choice";
+      btn.dataset.orig = origIdx;
+      const marker = document.createElement("span");
+      marker.className = "marker";
+      marker.textContent = CIRCLED[di];
+      btn.appendChild(marker);
+      btn.appendChild(document.createTextNode(item.ch[origIdx]));
+      btn.addEventListener("click", () => answer(origIdx, btn));
+      box.appendChild(btn);
+    });
+  }
+
+  function answer(chosenOrigIdx, chosenBtn){
+    const item = quiz[pos];
+    const isCorrect = chosenOrigIdx === item.a;
+    const bank = loadWrong();
+    if (isCorrect) {
+      correctCount++;
+      if (bank[item.id]) { bank[item.id]--; if (bank[item.id] <= 0) delete bank[item.id]; }
+    } else {
+      bank[item.id] = (bank[item.id] || 0) + 1;
+      wrongThisRun.push(item);
+    }
+    saveWrong(bank);
+    catStats[item.cat] = catStats[item.cat] || { c: 0, t: 0 };
+    catStats[item.cat].t++;
+    if (isCorrect) catStats[item.cat].c++;
+
+    // 모든 보기 비활성화 + 정답/오답 표시 (dataset.orig = 섞기 전 원래 인덱스)
+    [...$("exam-choices").children].forEach(btn => {
+      btn.disabled = true;
+      if (parseInt(btn.dataset.orig) === item.a) btn.classList.add("is-correct");
+      else if (btn === chosenBtn) btn.classList.add("is-wrong");
+      else btn.classList.add("is-dimmed");
+    });
+
+    const verdict = $("exam-verdict");
+    verdict.textContent = isCorrect ? "⭕ 정답입니다!" : "❌ 아쉬워요 — 정답은 초록색 보기입니다";
+    verdict.className = "exam-verdict " + (isCorrect ? "ok" : "no");
+    $("exam-explain").innerHTML = "<b>해설</b> · " + escapeExamHtml(item.ex);
+    $("exam-next-btn").textContent = pos === quiz.length - 1 ? "결과 보기 🏁" : "다음 문제 →";
+    $("exam-feedback").hidden = false;
+    $("exam-score-line").textContent = "맞힌 문제 " + correctCount;
+    $("exam-next-btn").focus({ preventScroll: true });
+  }
+
+  function escapeExamHtml(str){
+    const d = document.createElement("div");
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function showResult(){
+    stage.hidden = true; result.hidden = false;
+    $("exam-result-num").textContent = correctCount + " / " + quiz.length;
+    const pct = Math.round(correctCount / quiz.length * 100);
+    $("exam-result-msg").textContent =
+      pct === 100 ? "만점입니다! 이 범위는 시험 걱정 없겠어요 🎉" :
+      pct >= 80 ? "훌륭해요 — 틀린 문제만 한 번 더 돌리면 완성입니다." :
+      pct >= 60 ? "절반 이상은 잡혔어요. 아래 틀린 문제를 해설과 함께 복습해 보세요." :
+      "아직 헷갈리는 범위가 있네요. 틀린 문제의 해설을 읽고, 관련 탭의 카드로 개념을 다져보세요.";
+    const bars = $("exam-cat-bars");
+    bars.innerHTML = "";
+    Object.keys(catStats).forEach(cat => {
+      const s = catStats[cat];
+      const p = Math.round(s.c / s.t * 100);
+      const row = document.createElement("div");
+      row.className = "exam-cat-row";
+      row.innerHTML = '<span class="label">' + EXAM_CAT_LABEL[cat] + '</span>' +
+        '<span class="track"><span class="fill" style="width:' + p + '%;background:var(' + EXAM_CAT_VAR[cat] + ')"></span></span>' +
+        '<span class="frac">' + s.c + "/" + s.t + '</span>';
+      bars.appendChild(row);
+    });
+    const wrongBox = $("exam-wrong-review");
+    const wrongList = $("exam-wrong-list");
+    wrongList.innerHTML = "";
+    if (wrongThisRun.length) {
+      wrongThisRun.forEach(item => {
+        const li = document.createElement("li");
+        const q = document.createElement("div");
+        q.textContent = "Q. " + item.q;
+        const a = document.createElement("div");
+        a.className = "wa";
+        a.textContent = "정답: " + item.ch[item.a];
+        li.appendChild(q); li.appendChild(a);
+        wrongList.appendChild(li);
+      });
+      wrongBox.hidden = false;
+      $("exam-retry-wrong-btn").hidden = false;
+    } else {
+      wrongBox.hidden = true;
+      $("exam-retry-wrong-btn").hidden = true;
+    }
+    result.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  // ---- 이벤트 연결 ----
+  document.querySelectorAll(".count-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".count-chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+    });
+  });
+  $("exam-start-btn").addEventListener("click", startFromSetup);
+  $("exam-next-btn").addEventListener("click", () => {
+    pos++;
+    if (pos >= quiz.length) showResult();
+    else renderQuestion();
+  });
+  $("exam-wrong-btn").addEventListener("click", () => {
+    const ids = Object.keys(loadWrong());
+    startSession(EXAM_BANK.filter(q => ids.includes(q.id)));
+  });
+  $("exam-retry-wrong-btn").addEventListener("click", () => startSession(wrongThisRun.slice()));
+  $("exam-restart-btn").addEventListener("click", () => {
+    result.hidden = true; stage.hidden = true; setup.hidden = false;
+    refreshWrongBtn();
+    setup.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+
+  refreshWrongBtn();
 })();
 </script>
 </body>
