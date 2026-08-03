@@ -1,0 +1,14 @@
+# Java 빌드 산출물 — 소스(src/)만 추적
+**/bin/
+**/build/
+**/target/
+*.class
+*.jar
+
+# IDE 개인 설정
+**/.idea/
+*.iml
+
+# OS 잡파일
+Thumbs.db
+.DS_Store
