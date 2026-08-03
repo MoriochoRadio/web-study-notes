@@ -800,10 +800,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 14개 단원</span>
+      <span>React 14개 단원 + 🎓 졸업 과제</span>
       <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 36개 항목</span>
-      <span>강의자료 PPT 3건</span>
+      <span>기초 개념 사전 39개 항목</span>
+      <span>강의자료·정리 문서 6건</span>
     </div>
   </div>
 </header>
@@ -841,7 +841,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
       <div class="stat-card react"><div class="n">14</div><div class="l">React 단원</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
-      <div class="stat-card concepts"><div class="n">36</div><div class="l">기초 개념 사전 항목</div></div>
+      <div class="stat-card concepts"><div class="n">39</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">0</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -4068,7 +4068,7 @@ console.log(localStorage.getItem("id3"));
 
   <section id="react-section" class="cat">
     <div class="cat-head"><span class="dot react"></span><h2>4. React</h2></div>
-    <p class="cat-desc">React &amp; Next.js 커리큘럼(14개 레슨) 전체. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, route.js로 나만의 백엔드를 만드는 API Routes, persist 미들웨어로 새로고침에도 유지되는 상태와 매수/매도가 있는 포트폴리오, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, Tailwind CSS + 전역 다크모드, 그리고 REST+WebSocket으로 실시간 차트를 그리는 마지막 단원까지 전부 복습합니다.</p>
+    <p class="cat-desc">React &amp; Next.js 커리큘럼(14개 레슨) 전체. 선언형 UI·Virtual DOM 개념과 Vite 개발 환경, JSX·컴포넌트·props, useState·이벤트 핸들러·배열 불변성 업데이트·useEffect, useRef·useMemo·useCallback·React.memo 성능 최적화, 커스텀 훅 4종, React.memo·useCallback 비교와 lazy/Suspense 코드 분할, createContext·Provider·useContext로 전역 상태를 공유하는 Context API, Next.js App Router의 파일 기반 라우팅·동적 라우트, Provider 없이 전역 상태를 다루는 Zustand, route.js로 나만의 백엔드를 만드는 API Routes, persist 미들웨어로 새로고침에도 유지되는 상태와 매수/매도가 있는 포트폴리오, async 서버 컴포넌트가 Suspense와 함께 데이터를 스트리밍하는 방식, Tailwind CSS + 전역 다크모드, 그리고 REST+WebSocket으로 실시간 차트를 그리는 마지막 단원까지 전부 복습합니다. 마지막에는 이 기술 전부를 총동원해 직접 만든 <b>🎓 졸업 과제(StockDash 주식 대시보드)</b> 카드가 있습니다.</p>
     <div class="notes-list" id="react-notes">
 <article class="note-card" id="react-01">
   <div class="note-head">
@@ -7225,6 +7225,81 @@ useEffect(() =&gt; {
     <div class="note-files">실습 파일: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/lessons/13_recharts_websocket/src/app/api/stock/[symbol]/chart/route.js" target="_blank" rel="noopener">api/stock/[symbol]/chart/route.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/lessons/13_recharts_websocket/src/app/lib/market.js" target="_blank" rel="noopener">lib/market.js</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/lessons/13_recharts_websocket/src/app/components/StockChart.jsx" target="_blank" rel="noopener">components/StockChart.jsx</a></div>
   </div>
 </article>
+
+<article class="note-card" id="react-capstone">
+  <div class="note-head">
+    <span class="note-num">🎓</span>
+    <h3>졸업 과제: StockDash 주식 대시보드 — 14개 단원 기술을 총동원해 직접 만든 풀스택 앱</h3>
+    <div class="note-tags"><span class="tag">캡스톤</span><span class="tag">커스텀 훅</span><span class="tag">API Routes</span><span class="tag">Zustand</span><span class="tag">WebSocket</span><span class="tag">AI 협업</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>수업 실습(lessons)과 별개로 진행한 졸업 과제 — 종목 검색·시세 카드·실시간 전광판·차트·뉴스·실적·추천까지 8개 기능을 갖춘 주식 대시보드를 직접 구현했고, 핵심 로직(커스텀 훅·API Route·Zustand 스토어)은 전부 내가 작성하고 UI/UX 개편만 AI에게 맡기는 역할 분담으로 완성했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>14개 단원이 "부품 하나하나를 만들어보는 실습"이었다면, 이 과제는 그 부품들을 전부 꺼내 "진짜 자동차 한 대를 조립"해본 경험입니다 — 03강의 useEffect, 04강의 커스텀 훅, 09강의 API Route, 10강의 Zustand persist, 14강의 WebSocket이 한 앱 안에서 실제로 맞물려 돌아갑니다. 그리고 도색(스타일링)은 정비사(AI)에게 맡기되 "엔진(로직)은 절대 건드리지 마세요"라는 계약서를 먼저 쓰고 진행했습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>무엇을 직접 만들었나 — 기능 8개의 핵심 로직</h4>
+        <p>종목 검색(useDebounce로 입력 지연 → <code>/api/search</code> 호출), 시세 카드(useStockData 커스텀 훅), 관심종목(Zustand + persist), 실시간 전광판·차트(useLiveTicker의 WebSocket 다중 구독), 기업/시장 뉴스·실적·추천(각각 별도 API Route) — 이 핵심 로직들은 전부 빈칸 채우기와 힌트 방식으로 직접 작성했습니다. 과정에서 버그 6건(전광판 애니메이션 인터리빙, 차트 레이스 컨디션, Hooks 규칙 위반 2건, 해외 종목 응답 검증 누락, recommendation 라우트 오사용)도 직접 잡았고, 전부 CODE_REVIEW.md에 Before/After로 기록해뒀습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>가장 애먹은 지점 — fetch 응답은 "데이터"가 아니라 "껍데기"다</h4>
+        <p><code>/api/search</code>를 만들 때 Finnhub 응답에 바로 <code>.map()</code>을 걸었다가 "그런 메서드가 없다"는 에러를 세 번 만나며 알아낸 것: <code>fetch()</code>가 주는 건 실제 데이터가 아니라 <b>Response 객체(껍데기)</b>라서 <code>await res.json()</code>으로 한 번 벗겨야 하고, Finnhub는 그마저도 배열을 바로 주지 않고 <code>{ count, result }</code> 객체 안에 한 겹 더 감싸서 줍니다. 외부 API를 쓸 때는 "응답이 정확히 어떤 모양인지"부터 확인하는 습관이 이때 생겼습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>AI와의 역할 분담 — "로직 보존" 규칙을 먼저 정하고 시작</h4>
+        <p>UI/UX 전면 개편(반응형·접근성·다크 테마 통일)은 AI(Claude Code)에게 맡기되, 시작 전에 <b>"useEffect/fetch/상태 로직/API 응답 모양은 손대지 말고 스타일링만 허용"</b>이라는 규칙을 먼저 정했습니다. 매 라운드가 끝날 때마다 브라우저로 직접 눌러보며 동작이 그대로인지 확인했고, AI 쪽에서도 diff 전수 대조와 eslint 결과 비교로 로직이 한 줄도 안 바뀌었음을 교차 검증했습니다. 작업 인수인계는 HANDOFF(맡길 때)/HANDBACK(돌려받을 때) 문서 한 쌍으로 관리해, 어느 세션이 이어받아도 현재 상태를 정확히 알 수 있게 했습니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/app/api/search/route.js — 직접 작성한 Finnhub 응답 파싱</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">const apiKey = process.env.FINNHUB_API_KEY
+const APISTOCK = await fetch(
+  `https://finnhub.io/api/v1/search?q=${q}&amp;token=${apiKey}`,
+  { cache: 'no-store' }
+)
+const data = await APISTOCK.json() // Response 껍데기를 진짜 데이터로
+const STOCKS = data.result         // 진짜 배열은 { count, result } 한 겹 더 안에 있었음
+const results = STOCKS
+  .map((s) =&gt; ({ symbol: s.displaySymbol, name: s.description, type: s.type }))
+  .slice(0, 5) // Finnhub 필드명을 프로젝트 공용 이름(symbol, name)으로 통일 + 상위 5개만</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/hooks/useLiveTicker.js — WebSocket 다중 종목 구독/해제</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">useEffect(() =&gt; {
+  const ws = new WebSocket(`wss://ws.finnhub.io?token=${token}`)
+  ws.onopen = () =&gt; {
+    // 14강은 종목 1개 구독이었지만, 전광판은 관심종목 "여러 개"를 한 소켓으로 구독
+    symbols.forEach((sym) =&gt; ws.send(JSON.stringify({ type: 'subscribe', symbol: sym })))
+  }
+  ws.onmessage = (event) =&gt; { /* 체결가로 prices 갱신 */ }
+  return () =&gt; {
+    // 정리도 종목 수만큼: 서버 쪽 구독까지 해제한 뒤에 소켓을 닫는다
+    if (ws.readyState === WebSocket.OPEN)
+      symbols.forEach((sym) =&gt; ws.send(JSON.stringify({ type: 'unsubscribe', symbol: sym })))
+    ws.close()
+  }
+}, [symbols])</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>커리큘럼에서 배운 기술(커스텀 훅·API Routes·Zustand persist·서버/클라이언트 컴포넌트·Tailwind 다크모드·WebSocket)이 한 앱 안에서 전부 실전 조합됐다.</li>
+        <li>외부 API 응답은 <code>await res.json()</code>으로 벗기고, 실제 데이터가 어느 깊이에 있는지(<code>data.result</code>) 확인한 뒤에 배열 메서드를 건다.</li>
+        <li>AI와 협업할 때는 "어디까지 맡기는지" 경계(로직 보존 규칙)를 먼저 문서로 정하고, 매 단계 결과를 직접 실행해보며 검증한다.</li>
+        <li>직접 잡은 버그 6건은 전부 Before/After로 문서화 — 버그는 고치는 것보다 "왜 그랬는지 기록"이 다음에 더 큰 자산이 된다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>이 과제의 판단 근거는 전부 제출 문서 3종에 있습니다 — <b>README</b>(기여도·핵심 코드 명세), <b>CODE_REVIEW</b>(버그 6건 Before/After), <b>PROMPT_LOG</b>(AI 협업 사례 19건). 소스 23개 파일에는 학습용 주석(파일 헤더·훅 요소별 해설)이 전면 정리돼 있어, 시간이 지난 뒤 다시 읽어도 코드 흐름을 따라갈 수 있습니다.</div>
+    <div class="note-files">프로젝트: <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Front_end/4.react/stock-dashboard" target="_blank" rel="noopener">stock-dashboard 전체 코드</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/README.md" target="_blank" rel="noopener">README(기여도 명세)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/CODE_REVIEW.md" target="_blank" rel="noopener">CODE_REVIEW(버그 6건)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/PROMPT_LOG.md" target="_blank" rel="noopener">PROMPT_LOG(협업 기록)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/src/hooks/useLiveTicker.js" target="_blank" rel="noopener">src/hooks/useLiveTicker.js</a></div>
+  </div>
+</article>
     </div>
   </section>
 
@@ -8602,7 +8677,7 @@ useEffect(() =&gt; {
 
   <section id="concepts-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>기초 개념 사전</h2></div>
-    <p class="cat-desc">수업 진도와 상관없이, 자바스크립트·리액트의 핵심 용어와 자주 만나는 버그를 하나씩 독립적으로 찾아볼 수 있는 개인 학습용 사전입니다. 처음이라면 아래 <b>읽는 순서</b>부터 따라가 보세요.</p>
+    <p class="cat-desc">수업 진도와 상관없이, 자바스크립트·리액트의 핵심 용어와 자주 만나는 버그를 하나씩 독립적으로 찾아볼 수 있는 개인 학습용 사전입니다. 처음이라면 아래 <b>읽는 순서</b>부터 따라가 보세요. 맨 아래 <b>💬 그룹 E</b>에는 수업 중 실제로 막혀서 했던 질문과 답을 그대로 정리해뒀습니다.</p>
 
     <div class="concept-roadmap">
       <h3>🧭 처음이라면 이 순서대로 읽어보세요</h3>
@@ -10091,6 +10166,114 @@ useEffect(() =&gt; {
   </div>
 </article>
 
+<h3 class="concept-group-title"><span class="n">E</span> · 💬 내가 실제로 했던 질문들 — 수업 중 막혔던 지점 그대로</h3>
+
+<article class="note-card" id="concept-qna-darkmode">
+  <div class="note-head">
+    <span class="note-num">37</span>
+    <h3>다크모드 Q&amp;A — "dark 클래스 하나 붙이면 정말 싹 다 바뀌어?" (12강에서 했던 질문들)</h3>
+    <div class="note-tags"><span class="tag">Tailwind v4</span><span class="tag">다크모드</span><span class="tag">documentElement</span><span class="tag">@variant</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>12강 다크모드 실습에서 실제로 막혔던 질문 5개 — @variant에 뜨는 빨간 밑줄의 정체, dark: 접두사가 평소엔 왜 안 먹는지, ThemeWrapper가 어디서 뭘 하는지, 그리고 "감싼 범위 밖인 body까지 왜 바뀌는지"에 대한 답을 모았다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>다크모드의 핵심은 "건물 전체의 조명 스위치는 옥상(html 태그) 한 곳에만 있다"는 것입니다 — ThemeWrapper가 JSX에서 어디를 감싸고 있든, 내부에서는 <code>document.documentElement</code>(옥상)를 직접 조작하므로 건물 전체(body 포함)의 불이 한꺼번에 바뀝니다. <code>dark:bg-...</code> 클래스들은 "스위치가 켜졌을 때만 작동하는 예약 전구"라서 평소에는 있어도 안 켜져 있는 것뿐이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Q. globals.css의 @variant에 빨간 밑줄 에러가 떠요</h4>
+        <p><code>@variant</code>는 Tailwind CSS v4에서 클래스 기반 다크모드를 정의하는 <b>정식 문법</b>입니다. VS Code의 기본 CSS 린터가 v4 신규 지시어를 아직 몰라서 밑줄을 그을 뿐, 실제 Next.js 빌드는 정상입니다. <code>.vscode/settings.json</code>에 <code>"css.lint.unknownAtRules": "ignore"</code>를 추가하면 에디터 경고만 사라집니다 — "에디터의 밑줄 ≠ 실제 에러"를 처음 체감한 사례.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. dark:가 붙은 클래스는 이미 다 적혀 있는데 왜 평소엔 적용이 안 돼요?</h4>
+        <p><code>dark:</code>는 "다크모드 전용 예약 조건"입니다. <code>&lt;html&gt;</code>에 <code>dark</code> 클래스가 없으면 일반 클래스(<code>bg-white</code>)만 적용되고, <code>&lt;html class="dark"&gt;</code>가 되는 순간 <code>globals.css</code>의 <code>@variant dark (&amp;:where(.dark, .dark *));</code> 규칙에 따라 <code>dark:bg-...</code>들이 일반 클래스를 덮어씁니다 — 스위치가 켜져야만 동작하는 조건부 스타일입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. ThemeWrapper로 감싼 부분만 바뀌는 거 아니에요? body는 왜 같이 바뀌죠?</h4>
+        <p>일반적인 JSX 구조라면 감싼 하위 요소만 영향을 받는 게 맞습니다. 하지만 ThemeWrapper는 화면에 뭔가를 그리는 게 아니라, <code>useEffect</code> 안에서 브라우저 객체 <code>document.documentElement</code>(<code>&lt;html&gt;</code> 태그 자체)를 <b>직접 선택해서</b> 클래스를 넣었다 뺐다 합니다. <code>&lt;body&gt;</code>도 결국 <code>&lt;html&gt;</code>의 자식이므로, JSX에서 어디를 감쌌는지와 무관하게 페이지 최상단부터 전체가 바뀝니다 — "React 컴포넌트 경계"와 "DOM 직접 조작의 영향 범위"는 별개라는 걸 배운 질문.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>에디터의 빨간 밑줄이 곧 빌드 에러는 아니다 — 린터가 최신 문법을 모르는 경우가 있다.</li>
+        <li><code>dark:</code> 접두사는 <code>&lt;html class="dark"&gt;</code>라는 스위치가 켜져야만 동작하는 조건부 클래스다.</li>
+        <li><code>document.documentElement</code> 직접 조작은 컴포넌트가 JSX 어디에 있든 페이지 전체에 적용된다.</li>
+      </ul>
+    </div>
+    <div class="note-files">전체 기록: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/User_Learning_QnA_Archive.md" target="_blank" rel="noopener">질문 &amp; 개념 풀이 아카이브</a> · 관련 카드: <a href="#react-13">react-13 — Tailwind 다크모드</a>, <a href="#concept-tailwind-css">Tailwind CSS란?</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-qna-websocket-env">
+  <div class="note-head">
+    <span class="note-num">38</span>
+    <h3>WebSocket·환경변수 Q&amp;A — "웹소켓이 뭐야?"부터 "왜 차트가 안 움직여?"까지 (13강에서 했던 질문들)</h3>
+    <div class="note-tags"><span class="tag">WebSocket</span><span class="tag">NEXT_PUBLIC_</span><span class="tag">cleanup</span><span class="tag">폴링 폴백</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>13강 실시간 차트 실습에서 실제로 했던 질문들 — 왜 API 키에 NEXT_PUBLIC_을 붙여야 하는지, 웹소켓이 HTTP와 뭐가 다른지, cleanup의 unsubscribe/close가 뭘 하는지, 그리고 "연결은 됐는데 차트가 안 밀려나는" 미스터리의 원인(미국장 마감)까지.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>HTTP는 "주문할 때만 대답하고 끊는 카운터 주문"이고, 웹소켓은 "전용 전화선을 계속 켜둔 채 새 소식이 생길 때마다 상대가 바로 말해주는 통화"입니다. 그런데 전화선이 멀쩡해도 상대(미국 주식시장)가 자고 있으면(장 마감) 아무 말이 없어요 — 그래서 낮에는 2초마다 "지금 얼마예요?"라고 직접 물어보는 폴링으로 갈아탑니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Q. 왜 웹소켓 API 키는 NEXT_PUBLIC_을 붙여야 해요?</h4>
+        <p>일반 환경변수(<code>FINNHUB_API_KEY</code>)는 <b>서버 쪽</b>(API Route, 서버 컴포넌트)에서만 읽을 수 있습니다. 웹소켓은 브라우저(클라이언트 컴포넌트)에서 직접 연결해야 하므로, 변수명 앞에 <code>NEXT_PUBLIC_</code>이 붙어야만 Next.js가 그 값을 브라우저 번들에 포함시켜 줍니다. 대신 브라우저에 노출되는 만큼 보안에는 취약해진다는 트레이드오프가 있습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. useEffect 리턴 안의 unsubscribe와 ws.close()는 뭐 하는 거예요?</h4>
+        <p>웹소켓 전화선을 깔끔하게 끊는 정리(cleanup) 코드입니다. 종목을 AAPL에서 TSLA로 바꾸거나 페이지를 나갈 때, ① 이전 종목의 실시간 알림 구독을 서버에 취소 통보(<code>unsubscribe</code> 메시지)하고 ② 열려 있던 소켓 연결 자체를 닫습니다(<code>ws.close()</code>). 이걸 안 하면 메모리 누수에 더해, 이전 종목 시세가 새 종목 차트에 섞여 들어오는 버그가 생깁니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. 차트가 계속 옆으로 밀려나면서 갱신돼야 하는데 왜 안 움직여요?</h4>
+        <p>범인은 코드가 아니라 <b>시차</b>였습니다 — Finnhub 웹소켓은 미국 주식시장 개장 시간(한국 기준 밤 11:30~아침 06:00)에만 실시간 체결 데이터를 보냅니다. 한국 낮에는 연결이 정상이어도 체결 소식 자체가 없어서 차트가 멈춰 보였던 것. 그래서 장 마감 시간대이거나 키가 없을 때는 2초마다 시세 API를 호출하는 <b>폴링(setInterval) 폴백</b>으로 전환해, 언제 실습해도 차트가 우측으로 밀려나게 보완했습니다 — "코드는 맞는데 왜 안 되지?"의 원인이 환경(장 운영시간)일 수도 있다는 교훈.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>브라우저에서 읽어야 하는 환경변수만 <code>NEXT_PUBLIC_</code>을 붙인다 — 노출되어도 되는 값인지 먼저 판단할 것.</li>
+        <li>effect가 연 연결(웹소켓·타이머)은 cleanup에서 반드시 닫는다 — 구독 해제 통보 후 close 순서.</li>
+        <li>"연결은 정상인데 데이터가 안 온다"면 코드보다 먼저 데이터 공급자의 상태(장 운영시간 등)를 의심해 본다.</li>
+      </ul>
+    </div>
+    <div class="note-files">전체 기록: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/User_Learning_QnA_Archive.md" target="_blank" rel="noopener">질문 &amp; 개념 풀이 아카이브</a> · 관련 카드: <a href="#react-14">react-14 — Recharts + WebSocket</a>, <a href="#concept-websocket">WebSocket이란?</a></div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-qna-chart-data">
+  <div class="note-head">
+    <span class="note-num">39</span>
+    <h3>차트 데이터 Q&amp;A — "slice(-59)가 뭐야?" "그 .p는 무슨 문법이야?" (13강에서 했던 질문들)</h3>
+    <div class="note-tags"><span class="tag">슬라이딩 윈도우</span><span class="tag">slice</span><span class="tag">toFixed</span><span class="tag">API 응답 구조</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>실시간 차트의 데이터 처리 한 줄 한 줄에서 했던 질문들 — <code>[...prev.slice(-59), point]</code>가 만드는 슬라이딩 윈도우, <code>msg.data[msg.data.length - 1].p</code>의 .p가 문법이 아니라 API 응답의 속성명이라는 것, 그리고 <code>parseFloat(price.toFixed(2))</code>가 왕복 변환인 이유.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>슬라이딩 윈도우는 "60칸짜리 회전초밥 레일"입니다 — 새 접시(시세)가 하나 들어올 때마다 가장 오래된 접시 하나를 치워서 레일 위 접시 수를 항상 60개로 유지해요. 그리고 <code>.p</code>는 자바스크립트의 숨은 문법이 아니라 그냥 Finnhub가 정한 필드 이름(price의 약자)일 뿐이라, "모르는 점 표기가 나오면 문법서가 아니라 API 문서를 찾아라"가 정답이었습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Q. setChartData((prev) =&gt; [...prev.slice(-59), point])에서 -59가 어떻게 작용해요?</h4>
+        <p>슬라이딩 윈도우(sliding window) 기법입니다 — 요소별로 쪼개면: ① <code>prev.slice(-59)</code>는 기존 배열에서 <b>뒤쪽(최신) 59개만</b> 남기고 가장 오래된 맨 앞 1개를 버립니다(음수 인덱스 = 뒤에서부터 세기). ② <code>[...59개, point]</code>로 그 뒤에 새 시세 1개를 덧붙입니다. ③ 결과적으로 배열이 무한히 늘어나 렉이 걸리는 걸 막고 항상 최신 60개로 유지됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. pushPrice(msg.data[msg.data.length - 1].p)의 .p는 무슨 문법이에요?</h4>
+        <p>특별한 문법이 아니라 <b>Finnhub 웹소켓 응답 객체의 속성 이름</b>입니다. 응답 형식이 <code>{ type: 'trade', data: [{ s: 'AAPL', p: 182.5, v: 100 }] }</code>라서, <code>msg.data[msg.data.length - 1]</code>로 가장 최신 체결 객체를 꺼낸 뒤 그 안의 가격 필드 <code>.p</code>(price)를 읽는 것뿐입니다. s(symbol)·v(volume)도 마찬가지 — 낯선 점 표기가 나오면 문법이 아니라 그 API의 응답 명세를 먼저 확인하면 됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>Q. const newPrice = parseFloat(price.toFixed(2))는 뭐예요?</h4>
+        <p>"반올림 → 타입 복구"의 왕복 변환입니다: ① <code>price.toFixed(2)</code>는 소수점 둘째 자리까지 반올림하지만 결과가 <code>"182.50"</code> 같은 <b>문자열</b>이 됩니다. ② 문자열인 채로 두면 차트 계산이 어긋나므로 <code>parseFloat(...)</code>로 다시 숫자 <code>182.5</code>로 되돌립니다. <code>toFixed()</code>를 쓸 때마다 "결과가 문자열"이라는 함정을 기억할 것 — 07강(String)에서 배운 타입 변환 감각이 실전에서 쓰인 지점입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>[...prev.slice(-59), point]</code> — 오래된 것 하나 버리고 새것 하나 추가, 배열 크기를 60개로 고정하는 슬라이딩 윈도우.</li>
+        <li><code>data[data.length - 1]</code>은 배열의 맨 마지막(가장 최신) 요소를 가리키는 관용 표현.</li>
+        <li>모르는 <code>.속성</code>이 나오면 자바스크립트 문법이 아니라 API 응답 명세부터 찾아본다.</li>
+        <li><code>toFixed()</code>의 결과는 문자열 — 계산에 쓰려면 <code>parseFloat</code>로 숫자로 복구해야 한다.</li>
+      </ul>
+    </div>
+    <div class="note-files">전체 기록: <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/User_Learning_QnA_Archive.md" target="_blank" rel="noopener">질문 &amp; 개념 풀이 아카이브</a> · 관련 카드: <a href="#react-14">react-14 — Recharts + WebSocket</a>, <a href="#concept-js-array-methods">배열 메서드</a></div>
+  </div>
+</article>
+
     </div>
   </section>
 
@@ -10102,11 +10285,14 @@ useEffect(() =&gt; {
 
   <section id="materials-section" class="cat">
     <div class="cat-head"><span class="dot next"></span><h2>강의자료</h2></div>
-    <p class="cat-desc">수업에서 사용한 원본 슬라이드입니다.</p>
+    <p class="cat-desc">수업에서 사용한 원본 슬라이드와, 학습하며 직접 정리한 문서들입니다.</p>
     <div class="slides-box">
       <a href="slides/UI강의자료_20260629.pptx">📑 UI강의자료 — HTML/CSS/JS/jQuery 개론</a>
       <a href="slides/JS_개념학습20260710.pptx">📑 JS 개념학습 — JavaScript 기초 20강 정리</a>
       <a href="slides/React_Nextjs_커리큘럼_수업자료_20260721.pptx">📑 React &amp; Next.js 실전 커리큘럼 — JSX 기초부터 주식 대시보드 앱까지 13개 레슨</a>
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/React_Nextjs_Master_Guide.md" target="_blank" rel="noopener">📘 React &amp; Next.js 풀스택 마스터 가이드 — 01~13강 핵심 이론·코드 패턴 종합 정리 (직접 정리)</a>
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/User_Learning_QnA_Archive.md" target="_blank" rel="noopener">💬 질문 &amp; 개념 풀이 아카이브 — 수업 중 실제로 했던 질문 12개와 답 (직접 정리)</a>
+      <a href="React풀스택웹서비스개발프로젝트기능정의서및제출가이드.docx">🎓 캡스톤 기능정의서 &amp; 제출 가이드 — 졸업 과제(StockDash) 요구사항 원본</a>
     </div>
   </section>
 
