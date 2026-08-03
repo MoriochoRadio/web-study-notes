@@ -1,0 +1,28 @@
+// ── 기능 1: 스마트 주식 검색 연동 ──
+// 아직 기능 2(실시간 시세 대시보드)가 없으므로, 선택한 종목은 우선 텍스트로만 확인한다.
+// 다음 기능을 만들 때 이 안내 문구 자리를 <StockQuoteCard symbol={selectedSymbol} />로 교체할 예정.
+'use client'
+
+import { useState } from 'react'
+import StockSearch from '@/components/StockSearch'
+
+export default function DashboardPage() {
+  const [selectedSymbol, setSelectedSymbol] = useState(null)
+
+  return (
+    <main className="mx-auto max-w-7xl space-y-6 p-6">
+      <StockSearch onSelect={setSelectedSymbol} />
+
+      {selectedSymbol ? (
+        <p className="text-sm text-gray-600 dark:text-stock-muted">
+          선택한 종목: <strong className="text-stock-cyan">{selectedSymbol}</strong> — 기능
+          2(실시간 시세 대시보드)에서 이 자리에 시세 카드가 표시될 예정입니다.
+        </p>
+      ) : (
+        <p className="text-sm text-gray-500 dark:text-stock-muted">
+          🚧 위 검색창에서 종목명이나 티커를 입력해보세요. 기능 2부터 하나씩 계속 만들어 나갑니다.
+        </p>
+      )}
+    </main>
+  );
+}

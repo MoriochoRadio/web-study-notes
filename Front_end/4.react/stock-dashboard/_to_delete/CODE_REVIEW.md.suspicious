@@ -1,0 +1,173 @@
+# 🔍 AI 코드 리뷰 & 디버깅 일지 (CODE_REVIEW.md)
+
+> 제출 가이드: AI가 생성한 코드를 그대로 쓰지 않고, React 개념에 기반하여 직접 검증하고
+> 수정한 사례를 기록합니다. 기능을 만들면서 실제로 발견한 문제를 그때그때 이 문서에 추가합니다.
+
+---
+
+## AI 코드의 한계/오류 분석 (최소 1건)
+
+### 사례 1: `next/font/google`이 네트워크 제한 환경에서 빌드를 깨뜨림
+
+**AI가 준 코드 (Before)** — `create-next-app` 기본 템플릿
+```jsx
+import { Geist, Geist_Mono } from "next/font/google";
+
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+
+export default function RootLayout({ children }) {
+  return (
+    <html className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+**문제점**: `next/font/google`은 빌드 시점에 Google Fonts 서버에서 폰트 파일을
+실제로 다운로드한다. 이 프로젝트가 만들어진 개발 환경(클라우드 샌드박스)은 외부
+네트워크가 제한돼 있어서 `npm run build`가 `Failed to fetch 'Geist' from Google Fonts`
+에러로 실패했다. 또한 13강까지의 레슨 코드들은 애초에 커스텀 웹폰트를 쓰지 않고
+시스템 폰트만 사용해왔기 때문에, 이 프로젝트에서도 불필요한 외부 의존성이었다.
+
+**내가 수정한 코드 (After)**
+```jsx
+// next/font의 Google Fonts 자동 다운로드는 일부러 쓰지 않음
+import './globals.css'
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="ko">
+      <body className="min-h-screen bg-white text-gray-900 dark:bg-stock-bg dark:text-stock-light">
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+**수정 이유 (개념 기반 설명)**: `next/font`는 빌드 타임에 폰트를 최적화해서 번들에
+포함시키는 기능이지만, 이는 성능 최적화 옵션이지 앱 동작에 필수인 로직이 아니다.
+외부 네트워크 요청이라는 실패 지점을 하나 없애는 게 안정성 면에서 더 낫다고 판단했고,
+13강까지 배운 프로젝트 전체의 스타일 일관성(시스템 폰트 + Tailwind 유틸리티 클래스)도
+그대로 유지할 수 있었다.
+
+---
+
+### 사례 2: [기능 1] 검색 결과가 늦게 도착한 이전 요청에 덮어써지는 경쟁 상태(race condition)
+
+**AI가 처음 준 코드 (Before)** — `StockSearch.jsx`의 검색 `useEffect`
+```jsx
+useEffect(() => {
+  if (!debouncedQuery.trim()) {
+    setResults([])
+    return
+  }
+  fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`)
+    .then((res) => res.json())
+    .then((data) => setResults(data.results || []))
+}, [debouncedQuery])
+```
+
+**문제점**: `useDebounce`로 요청 횟수는 줄였지만, 네트워크 상황에 따라 응답이 도착하는
+순서가 요청을 보낸 순서와 다를 수 있다. 예를 들어 "a" 검색 요청이 네트워크 지연으로
+늦게 도착하고 그 사이에 사용자가 "app"까지 입력해 두 번째 요청의 응답이 먼저 오면,
+나중에 도착한 "a"의 응답이 `setResults`를 다시 호출해서 화면에 최신 검색어("app")가
+아닌 옛날 검색어("a")의 결과가 남는 문제가 생긴다.
+
+**내가 수정한 코드 (After)**
+```jsx
+useEffect(() => {
+  if (!debouncedQuery.trim()) {
+    setResults([])
+    return
+  }
+  const controller = new AbortController()
+  fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`, { signal: controller.signal })
+    .then((res) => res.json())
+    .then((data) => setResults(data.results || []))
+    .catch((err) => {
+      if (err.name !== 'AbortError') console.error('검색 요청 실패:', err)
+    })
+  return () => controller.abort()
+}, [debouncedQuery])
+```
+
+**수정 이유 (React 개념 기반 설명)**: `useEffect`의 클린업 함수는 의존성(`debouncedQuery`)이
+바뀌어 effect가 다시 실행되기 직전에 호출된다. 이 시점에 `AbortController.abort()`로
+"방금 직전 검색어"의 요청을 취소하도록 만들면, 항상 가장 최근에 보낸 요청의 응답만
+`setResults`에 반영되는 것이 보장된다. WebSocket 연결 해제(기능 3)에서 쓸 클린업 패턴과
+동일한 원리 — "이 effect가 만든 부수효과는 이 effect 스스로 정리한다"는 원칙을 fetch에도
+동일하게 적용한 것이다.
+
+---
+
+### 사례 3: [기능 1] 전면 QA에서 발견한 결함 — 실패가 조용히 숨겨짐
+
+**AI가 처음 준 코드 (Before)** — 응답 상태(`res.ok`)를 확인하지 않고 바로 파싱
+```jsx
+fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`, { signal: controller.signal })
+  .then((res) => res.json())
+  .then((data) => setResults(data.results || []))
+  .catch((err) => {
+    if (err.name !== 'AbortError') console.error('검색 요청 실패:', err)
+  })
+```
+
+**문제점**: `route.js`는 Finnhub 호출이 실패하면 `Response.json({ error: msg }, { status: 500 })`을
+반환하는데, 클라이언트는 `res.ok` 여부를 확인하지 않고 무조건 `res.json()`으로 파싱했다.
+그 결과 `{ error: "..." }` 객체를 `data`로 받아 `data.results || []`가 조용히 빈 배열이 되고,
+사용자에게도 콘솔에도 실패 사실이 전혀 남지 않았다. 실제로 `FINNHUB_API_KEY`에 잘못된 값을
+넣고 재현해보니 화면엔 그냥 "검색 결과가 없습니다"만 떴다 — 과제 기능 정의서가 요구하는
+"비동기 데이터 에러 핸들링"을 놓치고 있던 셈이다.
+
+**내가 수정한 코드 (After)**
+```jsx
+fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`, { signal: controller.signal })
+  .then(async (res) => {
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      throw new Error(body.error || `검색 요청 실패 (status ${res.status})`)
+    }
+    return res.json()
+  })
+  .then((data) => {
+    setResults(data.results || [])
+    setSearchError(null)
+    setCompletedQuery(debouncedQuery)
+  })
+  .catch((err) => {
+    if (err.name === 'AbortError') return
+    console.error('검색 요청 실패:', err)
+    setSearchError('검색 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
+    setCompletedQuery(debouncedQuery)
+  })
+```
+
+**수정 이유 (React 개념 기반 설명)**: `fetch()`는 HTTP 상태가 4xx/5xx여도 프로미스를 거부하지
+않는다 — `res.ok`를 직접 확인해야만 실패를 감지할 수 있다. `res.ok`가 거짓일 때 명시적으로
+`throw`해서 뒤의 `.catch()`로 흘려보내고, `searchError` 상태에 담아 화면에 빨간 오류 박스로
+보여주도록 고쳤다. `FINNHUB_API_KEY=invalid_test_key`로 실제 401 응답을 재현해 브라우저에서
+"검색 중 오류가 발생했습니다" 문구와 콘솔의 `Error: Finnhub API 호출 실패 (status 401)` 로그가
+둘 다 정상 출력되는 것까지 확인했다.
+
+**같은 QA에서 함께 보완한 것들**:
+- **로딩 상태 없음** → `completedQuery`(fetch가 실제로 끝난 검색어)를 두고
+  `isSearching = debouncedQuery.trim() && completedQuery !== debouncedQuery`로 파생시켜 "🔍 검색 중..."
+  표시를 추가. `isSearching`을 `useState`로 두고 effect 안에서 `setIsSearching(true)`를 동기 호출하는
+  방식은 `eslint-plugin-react-hooks`의 `set-state-in-effect` 규칙에 걸려서(effect 본문에서 setState를
+  즉시 호출하면 연쇄 리렌더를 유발할 수 있다는 경고), 별도 상태로 두지 않고 **파생값으로 계산**하는
+  방식으로 바꿨다 — effect 안에서 남은 setState 호출은 전부 `.then()`/`.catch()` 콜백 안(비동기 완료
+  시점)으로만 남게 되어 규칙 위반이 사라졌다.
+- **키보드로 결과 선택 불가** → `highlightedIndex` 상태 + `onKeyDown`(방향키로 이동, Enter로 선택,
+  Escape로 닫기)을 추가. 실제 브라우저에서 "a" 검색 후 ↓ 두 번 → GOOGL 강조 → Enter → 상위
+  `onSelect`로 GOOGL 전달까지 확인.
+- **입력창에 접근성 이름/역할 없음** → `role="combobox"` + `aria-label="종목 검색"` +
+  `aria-expanded`/`aria-controls`/`aria-activedescendant`를 input에, 목록엔 `role="listbox"`,
+  각 항목엔 `role="option"` + `aria-selected`를 추가해 스크린리더가 검색 상태를 읽을 수 있게 함.
+
+---
+
+*이 문서는 기능을 추가할 때마다 계속 갱신됩니다. 특히 "AI가 처음 준 코드에 내가
+문제를 제기하고 함께 고친" 순간이 생기면 반드시 여기에 남깁니다.*

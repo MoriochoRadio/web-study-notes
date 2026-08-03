@@ -1,0 +1,29 @@
+/* ── STEP 1: Tailwind v4 설정 ── */
+/* Tailwind v4는 설정 파일 대신 CSS에서 직접 선언한다. */
+@import "tailwindcss";
+
+/* 💡 클래스 기반 다크모드: <html>에 .dark가 있을 때만 dark: 유틸리티가 켜진다.
+   (기본값은 OS 설정 기반이므로, 토글 버튼과 연동하려면 이 선언이 필요) */
+@variant dark (&:where(.dark, .dark *));
+
+/* 💡 커스텀 색상 등록: --color-{이름} → bg-stock-bg, text-stock-cyan 등 유틸리티 자동 생성 */
+@theme {
+  --color-stock-bg: #1a1a2e;
+  --color-stock-card: #0d2137;
+  --color-stock-border: #0f3460;
+  --color-stock-cyan: #61dafb;
+  --color-stock-green: #64ffda;
+  --color-stock-red: #e94560;
+  --color-stock-muted: #8892b0;
+  --color-stock-light: #ccd6f6;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
