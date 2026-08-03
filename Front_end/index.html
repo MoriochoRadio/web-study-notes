@@ -88,6 +88,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     background:var(--panel);border:1px solid var(--border);
     padding:5px 12px;border-radius:999px;
   }
+  /* 백엔드(Java) 노트로 건너가는 링크 — 두 과정이 한 저장소에 있으므로 서로 오갈 수 있게 */
+  .cross-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+    background:var(--panel-2);border:1px solid var(--border);border-radius:999px;
+    padding:5px 14px;font-size:13px;color:var(--text);text-decoration:none;
+  }
+  .cross-link:hover{border-color:var(--accent);color:var(--accent);}
 
   /* ---- 상단 탭 + 도구(검색·테마) ---- */
   nav.tabs{
@@ -870,6 +877,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>✏️ 시험 대비 83문제</span>
       <span>강의자료·정리 문서 7건</span>
     </div>
+    <a class="cross-link" href="../Back_end/">☕ Java 백엔드 학습 노트로 이동 →</a>
   </div>
 </header>
 

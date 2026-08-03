@@ -2,15 +2,57 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>웹 개발 학습 노트 — 이동 중…</title>
-  <!-- 저장소가 Front_end / Back_end 구조로 재편되면서 대시보드가 Front_end/로 이동함.
-       기존 북마크·공유 링크(카드 앵커 #id 포함)가 깨지지 않도록 해시를 보존해 리다이렉트. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>취업아카데미 학습 노트</title>
+  <meta name="description" content="취업아카데미 프론트엔드(HTML·CSS·JS·React)와 백엔드(Java) 학습 노트 모음" />
+  <!-- 카드 앵커가 붙은 기존 북마크·공유 링크(#html-01 등)는 전부 프론트엔드 노트를 가리키므로,
+       해시가 있으면 예전처럼 Front_end/로 그대로 넘겨주고, 해시가 없을 때만 이 허브를 보여 준다. -->
   <script>
-    location.replace("Front_end/" + location.search + location.hash);
+    if (location.hash) location.replace("Front_end/" + location.search + location.hash);
   </script>
-  <meta http-equiv="refresh" content="0; url=Front_end/" />
+  <style>
+    :root{ --bg:#f7f5ef; --panel:#fff; --border:#e4dfd1; --text:#2d3038; --muted:#6e7178; --fe:#0c85ad; --be:#b56a12; }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0f1115; --panel:#161922; --border:#272c38; --text:#e7e9ee; --muted:#9aa2b1; --fe:#5cd6f2; --be:#f0b45c; }
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard","Noto Sans KR",sans-serif;
+      background:var(--bg);color:var(--text);line-height:1.7;}
+    .wrap{width:100%;max-width:720px;}
+    .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+    h1{margin:6px 0 4px;font-size:30px;letter-spacing:-.02em;}
+    .sub{margin:0 0 28px;color:var(--muted);font-size:15px;}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media (max-width:600px){ .cards{grid-template-columns:1fr;} }
+    a.card{display:block;padding:22px 20px;background:var(--panel);border:1px solid var(--border);
+      border-radius:14px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s;}
+    a.card:hover{border-color:var(--c);transform:translateY(-2px);}
+    a.card .ico{font-size:26px;}
+    a.card b{display:block;margin-top:8px;font-size:17px;color:var(--c);}
+    a.card span{display:block;margin-top:4px;font-size:13.5px;color:var(--muted);}
+    .fe{--c:var(--fe);} .be{--c:var(--be);}
+    footer{margin-top:26px;font-size:12.5px;color:var(--muted);}
+  </style>
 </head>
 <body>
-  <p><a href="Front_end/">웹 개발 학습 노트로 이동하기</a></p>
+  <div class="wrap">
+    <div class="eyebrow">📚 취업아카데미</div>
+    <h1>학습 노트</h1>
+    <p class="sub">수업에서 실습한 코드를 바탕으로 정리한 복습 노트입니다. 공부할 과정을 선택하세요.</p>
+    <div class="cards">
+      <a class="card fe" href="Front_end/">
+        <span class="ico">🎨</span>
+        <b>프론트엔드 학습 노트</b>
+        <span>HTML · CSS · JavaScript · React &amp; Next.js — 51개 단원 + 학습 여정 + 개념 사전 + 시험 대비</span>
+      </a>
+      <a class="card be" href="Back_end/">
+        <span class="ico">☕</span>
+        <b>Java 백엔드 학습 노트</b>
+        <span>자바 기초 · 객체지향 · 활용 · 네트워크 — 54개 항목 + 실습과제 12문제 + 시험 대비</span>
+      </a>
+    </div>
+    <footer>Claude와 함께 수동으로 최신화하는 개인 복습 노트입니다.</footer>
+  </div>
 </body>
 </html>
