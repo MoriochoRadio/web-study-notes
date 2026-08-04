@@ -39,9 +39,15 @@ export async function GET(request) {
     // Finnhub의 필드명(displaySymbol/description)을 우리 앱에서 쓰기 쉬운
     // 이름(symbol/name)으로 바꾸고(map), 5개만 잘라서(slice) 응답 크기를 줄인다.
     // ⚠️ 이 { symbol, name, type } 모양(응답 shape)을 바꾸면 StockSearch.jsx가 깨짐!
-    const results = STOCKS
+    let results = STOCKS
         .map((s) => ({ symbol: s.displaySymbol, name: s.description, type: s.type }))
         .slice(0, 5) //이름만 나중에 쉽게 쓰려고 바꾸고, 5개 잘라서 리턴
+
+    // Finnhub 주식 검색 API에는 코인이 안 걸림 — 미국장이 닫혀있어도 실시간으로
+    // 움직이는 모습을 보여주려고 "bit"/"btc" 검색어일 때만 직접 하나 끼워 넣는다
+    if (q.includes('bit') || q.includes('btc')) {
+        results = [{ symbol: 'BINANCE:BTCUSDT', name: 'Bitcoin / Tether (Binance)', type: 'Crypto' }, ...results].slice(0, 5)
+    }
 
     return Response.json({ results })
 

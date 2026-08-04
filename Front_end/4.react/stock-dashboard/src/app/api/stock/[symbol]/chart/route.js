@@ -18,7 +18,8 @@ function generateDummyData(symbol) {
     const now = Date.now()
     const oneMin = 60 * 1000 // 1분 = 60,000밀리초
     // 종목별로 그럴듯한 기준가를 다르게 (AAPL이면 182달러 부근에서 움직이는 것처럼)
-    const base = symbol === 'AAPL' ? 182 : symbol === 'TSLA' ? 250 : symbol === 'NVDA' ? 130 : 150
+    const base = symbol === 'AAPL' ? 182 : symbol === 'TSLA' ? 250 : symbol === 'NVDA' ? 130
+        : symbol.includes('BTC') ? 65000 : 150
     return Array.from({ length: 60 }, (_, i) => {
         const t = now - (59 - i) * oneMin // 59분 전 → 현재까지 1분 간격 시각
         const noise = (Math.random() - 0.5) * 3 // -1.5 ~ +1.5 사이 랜덤 잡음 (지그재그 느낌)
@@ -35,9 +36,13 @@ export async function GET(request, { params }) {
     const { symbol } = await params
     const apiKey = process.env.FINNHUB_API_KEY
 
-    // ① API 키가 없거나(!apiKey), 미국장이 닫혀있으면(!isUSMarketOpen())
+    // 코인(예: BINANCE:BTCUSDT)은 24시간 거래되니 미국장 개장 여부와 무관하게
+    // 항상 실시세를 시도한다. Finnhub 심볼 규칙상 코인은 "거래소:페어" 형태로 콜론이 들어있다.
+    const isCrypto = symbol.includes(':')
+
+    // ① API 키가 없거나(!apiKey), 코인이 아닌데 미국장이 닫혀있으면(!isUSMarketOpen())
     //    → 실시세를 받을 수 없으니 더미 60점을 리턴하고 끝
-    if (!apiKey || !isUSMarketOpen()) {
+    if (!apiKey || (!isCrypto && !isUSMarketOpen())) {
         return Response.json({ symbol, data: generateDummyData(symbol) })
     }
 

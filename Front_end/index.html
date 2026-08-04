@@ -7356,6 +7356,32 @@ useEffect(() =&gt; {
         <h4>AI와의 역할 분담 — "로직 보존" 규칙을 먼저 정하고 시작</h4>
         <p>UI/UX 전면 개편(반응형·접근성·다크 테마 통일)은 AI(Claude Code)에게 맡기되, 시작 전에 <b>"useEffect/fetch/상태 로직/API 응답 모양은 손대지 말고 스타일링만 허용"</b>이라는 규칙을 먼저 정했습니다. 매 라운드가 끝날 때마다 브라우저로 직접 눌러보며 동작이 그대로인지 확인했고, AI 쪽에서도 diff 전수 대조와 eslint 결과 비교로 로직이 한 줄도 안 바뀌었음을 교차 검증했습니다. 작업 인수인계는 HANDOFF(맡길 때)/HANDBACK(돌려받을 때) 문서 한 쌍으로 관리해, 어느 세션이 이어받아도 현재 상태를 정확히 알 수 있게 했습니다.</p>
       </div>
+      <div class="concept-block">
+        <h4>제출 이후 추가 — "미국장이 닫혀 있으면 화면이 멈춘다" 문제와 코인 대응</h4>
+        <p>과제를 마치고 나서 남은 아쉬움이 하나 있었습니다. <b>한국 시간 낮에는 미국장이 닫혀 있어서</b> 실시간 전광판을 켜도 숫자가 하나도 안 움직인다는 것 — 실시간 기능을 만들어 놓고 정작 자랑할 수가 없죠. 그래서 <b>24시간 거래되는 코인</b>을 끼워 넣었습니다. 검색어에 <code>bit</code>/<code>btc</code>가 들어오면 Finnhub 주식 검색에는 안 걸리는 <code>BINANCE:BTCUSDT</code>를 결과 맨 앞에 직접 하나 붙이고, 차트 API에서는 <b>심볼에 콜론(<code>:</code>)이 있으면 코인</b>으로 판정해 "미국장 개장 여부" 검사를 건너뛰게 했습니다(<code>if (!apiKey || (!isCrypto &amp;&amp; !isUSMarketOpen()))</code>). 외부 API의 <b>심볼 명명 규칙 자체를 분기 조건으로 쓴</b> 첫 경험입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>그 과정에서 드러난 7번째 버그 — 빠른 체결이 flash를 잡아먹는다</h4>
+        <p>코인을 붙이자 곧바로 새 버그가 드러났습니다. 가격이 바뀌면 0.5초간 색이 번쩍이게 해 뒀는데, <b>BTC는 체결이 0.5초보다 훨씬 빠르게 연달아</b> 들어옵니다. 그러면 이전 체결이 걸어 둔 "flash 끄기" 타이머가 <b>방금 켠 flash를 조기에 꺼 버려서</b> 화면에 색이 거의 안 보였습니다. 미국 주식으로 테스트할 때는 체결 간격이 느려 절대 드러나지 않던 문제예요. 해결은 <code>useRef</code>로 <b>심볼별 타이머 id를 기억해 두었다가, 새 체결이 오면 이전 타이머를 먼저 <code>clearTimeout</code>으로 취소</b>하고 다시 거는 것 — 14강 WebSocket과 04강 useRef가 정확히 이 지점에서 만났습니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-js">JS</span>
+        <span class="code-file">src/hooks/useLiveTicker.js — 심볼별 flash 타이머 경합 해결</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-javascript">// 심볼별로 "flash를 끄는 타이머 ID"를 기억해두는 상자
+const flashTimersRef = useRef({})
+
+// ...체결 메시지가 올 때마다
+// 이 종목에 걸려있던 "이전 flash 끄기" 타이머가 아직 안 끝났다면 취소.
+// (취소 안 하면 오래된 타이머가 방금 켠 flash를 조기에 꺼버린다)
+clearTimeout(flashTimersRef.current[trade.s])
+
+flashTimersRef.current[trade.s] = setTimeout(() =&gt; {
+  // 0.5초 뒤 flash 해제
+}, 500)</code></pre>
     </div>
     <div class="note-code">
       <div class="code-head">
@@ -7370,7 +7396,7 @@ const APISTOCK = await fetch(
 )
 const data = await APISTOCK.json() // Response 껍데기를 진짜 데이터로
 const STOCKS = data.result         // 진짜 배열은 { count, result } 한 겹 더 안에 있었음
-const results = STOCKS
+let results = STOCKS
   .map((s) =&gt; ({ symbol: s.displaySymbol, name: s.description, type: s.type }))
   .slice(0, 5) // Finnhub 필드명을 프로젝트 공용 이름(symbol, name)으로 통일 + 상위 5개만</code></pre>
     </div>
@@ -7402,9 +7428,10 @@ const results = STOCKS
         <li>외부 API 응답은 <code>await res.json()</code>으로 벗기고, 실제 데이터가 어느 깊이에 있는지(<code>data.result</code>) 확인한 뒤에 배열 메서드를 건다.</li>
         <li>AI와 협업할 때는 "어디까지 맡기는지" 경계(로직 보존 규칙)를 먼저 문서로 정하고, 매 단계 결과를 직접 실행해보며 검증한다.</li>
         <li>직접 잡은 버그 6건은 전부 Before/After로 문서화 — 버그는 고치는 것보다 "왜 그랬는지 기록"이 다음에 더 큰 자산이 된다.</li>
+        <li>제출 이후에도 코인(24시간 거래) 대응을 붙이며 <b>테스트 환경이 달라져야만 드러나는 버그</b>(빠른 체결 → flash 타이머 경합)를 만났다 — 느린 데이터로만 테스트하면 절대 안 보이는 종류의 문제다.</li>
       </ul>
     </div>
-    <div class="note-tip"><span class="tip-label">TIP</span>이 과제의 판단 근거는 전부 제출 문서 3종에 있습니다 — <b>README</b>(기여도·핵심 코드 명세), <b>CODE_REVIEW</b>(버그 6건 Before/After), <b>PROMPT_LOG</b>(AI 협업 사례 19건). 소스 23개 파일에는 학습용 주석(파일 헤더·훅 요소별 해설)이 전면 정리돼 있어, 시간이 지난 뒤 다시 읽어도 코드 흐름을 따라갈 수 있습니다.</div>
+    <div class="note-tip"><span class="tip-label">TIP</span>이 과제의 판단 근거는 전부 제출 문서 3종에 있습니다 — <b>README</b>(기여도·핵심 코드 명세), <b>CODE_REVIEW</b>(버그 6건 Before/After), <b>PROMPT_LOG</b>(AI 협업 사례 19건). 소스 23개 파일에는 학습용 주석(파일 헤더·훅 요소별 해설)이 전면 정리돼 있어, 시간이 지난 뒤 다시 읽어도 코드 흐름을 따라갈 수 있습니다 — 저장소에 올라가 있는 것이 이 <b>주석본</b>이며, 제출용으로 주석을 걷어낸 버전은 따로 보관하지 않습니다(필요하면 언제든 다시 만들 수 있으니, 오래 남는 쪽은 읽기 좋은 주석본으로 통일했습니다).</div>
     <div class="note-files">프로젝트: <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Front_end/4.react/stock-dashboard" target="_blank" rel="noopener">stock-dashboard 전체 코드</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/README.md" target="_blank" rel="noopener">README(기여도 명세)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/CODE_REVIEW.md" target="_blank" rel="noopener">CODE_REVIEW(버그 6건)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/PROMPT_LOG.md" target="_blank" rel="noopener">PROMPT_LOG(협업 기록)</a>, <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/src/hooks/useLiveTicker.js" target="_blank" rel="noopener">src/hooks/useLiveTicker.js</a></div>
   </div>
 </article>

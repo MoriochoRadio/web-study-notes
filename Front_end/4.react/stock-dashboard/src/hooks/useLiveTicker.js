@@ -25,6 +25,11 @@ export function useLiveTicker(symbols) {
     //   여기서는 "직전 가격"을 기억하는 용도 — 직전 가격은 화면에 그릴 게 아니라
     //   비교용으로만 쓰니까, state로 두면 불필요한 리렌더링만 생긴다. 그래서 ref.
     const prevPricesRef = useRef({})
+    // 심볼별로 "flash를 끄는 타이머 ID"를 기억해두는 상자.
+    // BTC처럼 체결이 0.5초보다 훨씬 빠르게 연달아 들어오는 종목은, 이전 체결의 타이머가
+    // 방금 켠 flash를 조기에 꺼버리는 문제가 있어서 — 새 체결이 오면 이전 타이머를
+    // 먼저 취소하고 다시 걸어야 한다.
+    const flashTimersRef = useRef({})
 
     useEffect(() => {
         // NEXT_PUBLIC_ 접두사가 붙은 환경변수만 브라우저에서 읽을 수 있다.
@@ -57,8 +62,13 @@ export function useLiveTicker(symbols) {
                     // 이 종목의 flash 방향을 기록 → TickerBoard가 초록/빨강 배경으로 표시
                     setFlashes((prev) => ({ ...prev, [trade.s]: direction }))
 
+                    // 이 종목에 걸려있던 "이전 flash 끄기" 타이머가 아직 안 끝났다면 취소.
+                    // (취소 안 하면, 체결이 빠르게 연달아 올 때 오래된 타이머가 방금 켠
+                    //  flash를 조기에 꺼버려서 화면에 색이 거의 안 보이는 문제가 생긴다)
+                    clearTimeout(flashTimersRef.current[trade.s])
+
                     // 0.5초 뒤에 flash를 다시 끈다(null) → "반짝"하고 사라지는 효과
-                    setTimeout(() => {
+                    flashTimersRef.current[trade.s] = setTimeout(() => {
                         setFlashes((prev) => ({ ...prev, [trade.s]: null }))
                     }, 500)
                 }
