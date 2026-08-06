@@ -566,6 +566,42 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .note-code pre{
     padding:14px 16px;overflow-x:auto;margin:0;
   }
+  /* ---- ▶ 실행 결과: 코드 바로 아래에 "실제로 돌려 본 콘솔 출력"을 접어 둔다 ----
+     자바는 결과를 봐야 이해되는 코드가 많아서(별 찍기·해시코드·문자열 비교),
+     읽는 흐름을 끊지 않도록 기본은 접혀 있고 궁금할 때만 펼치게 했다. */
+  .run-output{
+    margin:8px 0 0;background:var(--code-bg);
+    border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  }
+  .run-output>summary{
+    cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;
+    padding:9px 13px;font-size:12.5px;font-weight:700;color:#9aa2b1;
+  }
+  .run-output>summary::-webkit-details-marker{display:none;}
+  .run-output>summary::before{content:"▶";font-size:9px;transition:transform .15s;}
+  .run-output[open]>summary::before{transform:rotate(90deg);}
+  .run-output>summary:hover{color:#e7e9ee;}
+  .run-output .run-tag{
+    font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:5px;
+    background:rgba(74,222,128,.16);color:#4ade80;letter-spacing:.03em;flex:none;
+  }
+  .run-output .run-in{
+    padding:8px 14px;border-top:1px solid rgba(255,255,255,.07);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12px;color:#9aa2b1;
+  }
+  .run-output .run-in b{color:#f7d154;font-weight:700;}
+  .run-output pre{
+    margin:0;padding:13px 16px;overflow-x:auto;
+    border-top:1px solid rgba(255,255,255,.07);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px;line-height:1.62;color:#dbe0ea;
+  }
+  .run-output .run-note{
+    padding:10px 14px;border-top:1px solid rgba(255,255,255,.07);
+    font-size:12.5px;line-height:1.75;color:#9aa2b1;
+  }
+  .run-output .run-note b{color:#e7e9ee;}
   .note-code code{
     font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     font-size:13.2px;line-height:1.75;color:#d9dee8;white-space:pre;
@@ -1017,7 +1053,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>순서대로 본다면 <strong>☕ 자바 기초 → 🧱 객체지향 → 🛠️ 자바 활용 → 🌐 네트워크</strong> 흐름을 따르세요. 기초는 "변수·연산·제어문", 객체지향은 "클래스가 메모리에 올라가는 방식", 활용은 "컬렉션·예외·입출력·스레드", 네트워크는 "소켓으로 서버 만들기"가 중심입니다.</li>
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
-        <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 문제를 풀어보세요. 한 문제씩 <strong>고르는 즉시 정답·해설</strong>이 나오고, <strong>🔎 자세한 해설</strong>을 펼치면 보기 네 개를 하나씩 짚어 주는 풀이와 더 쉬운 정리가 이어집니다. <strong>⭐ 즐겨찾기 · 🔥 어려움</strong>으로 표시해 둔 문제나 틀린 문제만 골라 다시 푸는 것도 됩니다.</li>
+        <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 문제를 풀어보세요. 한 문제씩 <strong>고르는 즉시 정답·해설</strong>이 나오고, <strong>🔎 자세한 해설</strong>을 펼치면 보기 네 개를 하나씩 짚어 주는 풀이와 더 쉬운 정리가 이어집니다. <strong>⭐ 즐겨찾기 · 🔥 어려움</strong>으로 표시해 둔 문제나 틀린 문제만 골라 다시 푸는 것도 됩니다. 아직 진도가 안 나간 단원까지 섞여 나오는 게 부담이라면 범위에서 <strong>📅 배운 데까지</strong>를 고르세요 — 수업 진도 탭에 정리된 만큼만 출제됩니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>·<strong>☆ 버튼</strong>(헷갈리는 카드)·<strong>🔗 버튼</strong>(카드 링크 복사)을 활용하고, 하단 <strong>📝 내 메모</strong> 칸에 헷갈린 점을 적어두세요. 우하단 <strong>⚡ 5분 복습</strong>은 카드의 "쉽게 말하면"만 뽑아 플래시카드로 넘겨 줍니다.</li>
         <li>프론트엔드(HTML·CSS·JS·React) 노트는 <strong><a href="../Front_end/">🎨 프론트엔드 학습 노트</a></strong>에 따로 있습니다.</li>
       </ol>
@@ -1104,6 +1140,13 @@ public class HelloJava {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+Hello Java
+메서드 실행결과: 200</pre>
+      <div class="run-note">선언만 하고 출력하지 않은 <b>NUMBER</b>(상수)와 <b>number</b>(인스턴스 필드)는 화면에 나오지 않습니다 — 메모리에 올라가 있는 것과 출력되는 것은 별개입니다. 둘째 줄이 <b>200</b>인 이유는 <code>testMethod()</code> 안에서 <code>i</code>를 100으로 초기화한 뒤 200으로 덮어썼기 때문입니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1157,6 +1200,15 @@ public class VariableTest {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+long타입 표현범위: 1000000000000000000
+바이트 타입 표현범위: 126
+======================
+바이트 타입 연산 결과: 30</pre>
+      <div class="run-note"><b>126</b>은 int 126을 byte로 다운캐스팅한 값 — byte 범위(-128~127) 안이라 <b>손실이 없습니다</b>. 바로 위에서 한 <code>(byte) i</code>(i = 100000)는 범위를 넘어 값이 깨지는 쪽인데 출력하지 않았으니, 궁금하면 <code>System.out.println(bb);</code>를 넣어 비교해 보세요. 마지막 <b>30</b>은 <code>10 + 20</code>이 리터럴이라 컴파일 시점에 계산돼 byte에 그대로 들어간 경우입니다.</div>
+    </details>
     <div class="note-points">
       <div class="note-points-title">1일차에 배운 것 (시험 대비 체크리스트)</div>
       <ul>
@@ -1258,6 +1310,21 @@ public class D1_isLeapYear {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <div class="run-in">키보드 입력: <b>2026</b></div>
+      <pre>
+년도를 입력해주세요 : 2026는 평년입니다
+2000는 윤년입니다
+2004는 윤년입니다
+2008는 윤년입니다
+2012는 윤년입니다
+2016는 윤년입니다
+2020는 윤년입니다
+2024는 윤년입니다
+2028는 윤년입니다</pre>
+      <div class="run-note">첫 줄이 <code>년도를 입력해주세요 : 2026는 평년입니다</code>처럼 붙어 보이는 건 <code>print</code>(줄바꿈 없음) 뒤에 입력이 오고 이어서 <code>println</code>이 찍혔기 때문입니다. 2026은 4의 배수가 아니라 평년이고, 아래 목록의 <b>2000년</b>은 100의 배수지만 <b>400의 배수라서 윤년</b>으로 잡힌 것 — 조건식의 <code>|| year % 400 == 0</code>이 실제로 일한 자리입니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1420,6 +1487,32 @@ public class D2_ControlEx {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <div class="run-in">키보드 입력: <b>1 → 50000 → 3 → 2 → 20000 → 3 → 4</b></div>
+      <pre>
+옵션을 선택하세요
+---------------------
+1.예금 2.출금 3.잔고 4.종료
+선택 &gt;&gt; 예금액 : 
+옵션을 선택하세요
+---------------------
+1.예금 2.출금 3.잔고 4.종료
+선택 &gt;&gt; 잔고 : 50000
+옵션을 선택하세요
+---------------------
+1.예금 2.출금 3.잔고 4.종료
+선택 &gt;&gt; 출금액 : 
+옵션을 선택하세요
+---------------------
+1.예금 2.출금 3.잔고 4.종료
+선택 &gt;&gt; 잔고 : 30000
+옵션을 선택하세요
+---------------------
+1.예금 2.출금 3.잔고 4.종료
+선택 &gt;&gt; 종료합니다</pre>
+      <div class="run-note">파일의 앞부분(구구단·합계·주사위)은 전부 주석 처리돼 있어 실제로 도는 것은 <b>ATM 메뉴뿐</b>입니다. <code>예금액 :</code> 뒤가 비어 보이는 건 키보드로 친 값이 화면에 다시 찍히지 않기 때문이고, 흐름은 <b>예금 50000 → 잔고 50000 → 출금 20000 → 잔고 30000 → 종료</b>입니다. 메뉴가 계속 다시 뜨는 것이 <code>while (start)</code>가 하는 일입니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1522,6 +1615,57 @@ public class prac01 {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+
+*
+**
+***
+****
+*****
+
+*****
+****
+***
+**
+*
+    *
+   ***
+  *****
+ *******
+*********
+      
+     *
+    **
+   ***
+  ****
+ *****
+
+******
+ *****
+  ****
+   ***
+    **
+     *
+
+*********
+ *******
+  *****
+   ***
+    *
+
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *</pre>
+      <div class="run-note">첫 줄과 네 번째 그림의 첫 줄이 비어 보이는 이유는 <code>i</code>가 0일 때 안쪽 for가 한 번도 돌지 않아 <b>별을 0개 찍기</b> 때문입니다(공백만 찍힌 줄). <code>i</code>를 1부터 시작하거나 개수 식을 <code>i+1</code>로 바꾸면 사라집니다. 마지막 다이아몬드는 아래쪽을 <code>i = c-2</code>부터 시작해 <b>가운데 줄이 두 번 찍히지 않는다</b>는 걸 출력에서 확인할 수 있습니다.</div>
+    </details>
     <div class="note-points">
       <div class="note-points-title">2일차에 배운 것 (시험 대비 체크리스트)</div>
       <ul>
@@ -1688,6 +1832,65 @@ public class D1_StarView {
 
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+
+*
+**
+***
+****
+*****
+
+***** 
+**** 
+*** 
+** 
+* 
+ 
+
+    *
+   ***
+  *****
+ *******
+*********
+
+     
+    *
+   **
+  ***
+ ****
+*****
+
+*****
+ ****
+  ***
+   **
+    *
+     
+*********
+ *******
+  *****
+   ***
+    *
+
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+
+    *
+   ***
+  *****
+ *******
+*********</pre>
+      <div class="run-note">두 번째 그림에서 별 뒤에 <b>공백이 한 칸씩</b> 붙는 건 <code>System.out.println(" ")</code>로 빈 문자열이 아니라 공백을 출력했기 때문입니다(<code>println()</code>으로 바꾸면 깔끔해집니다). 그리고 <b>세 번째 그림과 마지막 그림이 완전히 같습니다</b> — 하나는 <code>line-1-i</code>·<code>2i+1</code>로, 다른 하나는 등차수열 식 <code>5-(i+1)</code>·<code>(i+1)*2-1</code>로 세운 것이라 <b>식만 달라도 결과가 같다</b>는 걸 출력이 증명합니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1748,6 +1951,14 @@ public class D2_MethodTest {
 
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+static 메서드
+non-static 메서드
+non-static 메서드</pre>
+      <div class="run-note"><code>non-static 메서드</code>가 <b>두 번</b> 찍힙니다 — <code>main</code>에서 객체를 만들어 한 번, static인 <code>test01()</code> 안에서 다시 객체를 만들어 또 한 번 불렀기 때문입니다. "static은 non-static을 직접 못 쓰고 객체가 있어야 한다"는 규칙이 출력 횟수로 드러난 자리입니다. <code>test03·test04·test05</code>는 <b>정의만 하고 호출하지 않아</b> 아무것도 찍히지 않습니다.</div>
+    </details>
     <div class="note-points">
       <div class="note-points-title">3일차에 배운 것 (시험 대비 체크리스트)</div>
       <ul>
@@ -1879,6 +2090,17 @@ public class D2_ClassTestMain {
 
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+인스턴스에 관련된 기능을 정의한다
+메서드영역 메모리에 생성되어 공통기능을 정의한다.
+classTest.number:20
+classTest2.number:40
+classTest.staticNumber:50
+classTest2.staticNumber:50</pre>
+      <div class="run-note"><code>number</code>는 <b>20과 40으로 서로 다르고</b>, <code>staticNumber</code>는 <code>D2_ClassTest.staticNumber = 50</code> 한 줄에 <b>둘 다 50</b>이 됩니다 — 인스턴스 변수는 객체마다, static 변수는 클래스에 하나뿐이라는 차이가 그대로 보입니다. 참고로 <code>classTest</code>는 기본 생성자의 <code>this(10)</code>으로 10이 들어갔다가 <code>classTest.number = 20</code>에 덮어써진 상태입니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1953,6 +2175,12 @@ public class D1_ConstructioMain {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+(출력 없음 — 이 프로그램은 화면에 아무것도 찍지 않습니다)</pre>
+      <div class="run-note">이 프로그램은 <b>객체 네 개를 만들기만 하고 아무것도 출력하지 않습니다</b> — 에러가 난 게 아니라 <code>println</code>이 한 줄도 없어서 그렇습니다. 생성자가 어떤 값으로 돌았는지 보려면 생성자 안에 <code>System.out.println(size + " / " + color);</code>를 넣어 보세요. 그러면 <code>tv2 = new D4_Constructor(70)</code>이 <b>size만 받는 생성자라 color가 필드 초기값 그대로</b> 남는 것도 눈으로 확인됩니다.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -1999,6 +2227,22 @@ public class D3_ObjectTest {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+class java.lang.String
+class java.lang.String
+class hk.edu20260806.day04.D3_ObjectTest
+hk.edu20260806.day04.D3_ObjectTest@2ff4acd0
+Object
+804564176
+false
+true
+true
+false
+true</pre>
+      <div class="run-note"><code>@2ff4acd0</code>과 <code>804564176</code>은 <b>같은 값의 16진수·10진수 표기</b>이고, <b>실행할 때마다 달라집니다</b> — 시험에서는 값이 아니라 <code>패키지.클래스명@해시코드</code>라는 <b>형식</b>만 기억하면 됩니다. 마지막 다섯 줄 <code>false / true / true / false / true</code>가 핵심입니다: 다른 객체와의 <code>equals</code>는 false, 리터럴 <code>s == s2</code>는 <b>true</b>(String pool 공유), <code>new String("a")</code>과는 <code>==</code>가 false지만 <code>equals</code>는 true.</div>
+    </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -2104,6 +2348,20 @@ public class D1_divisor {
     }
 }</code></pre>
     </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+1,2,3,4,6,12
+최대공약수1:6
+최대공약수2:6
+최소공배수:36
+220와 284는 친화수 관계입니다.
+284와 220는 친화수 관계입니다.
+6는 완전수입니다.
+28는 완전수입니다.
+496는 완전수입니다.</pre>
+      <div class="run-note"><b>최대공약수1(뺄셈 방식)과 최대공약수2(재귀)가 모두 6</b>으로, 방법이 달라도 답이 같다는 걸 확인할 수 있습니다(<code>getGcd</code>는 정의만 하고 호출하지 않았습니다). 친화수가 <b>220·284 두 줄</b>로 찍히는 건 i가 220일 때와 284일 때 각각 조건을 만족하기 때문이고, 1~1000 사이 완전수는 <b>6 · 28 · 496</b> 셋뿐입니다.</div>
+    </details>
     <div class="note-points">
       <div class="note-points-title">4일차에 배운 것 (시험 대비 체크리스트)</div>
       <ul>
@@ -7646,7 +7904,7 @@ public class CardMain {
 
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java 객관식 연습문제</h2></div>
-    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요.</p>
+    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
 
     <div class="exam-box" id="exam-setup">
       <div class="exam-setup-row">
@@ -7659,6 +7917,8 @@ public class CardMain {
       <div class="exam-setup-row">
         <span class="setup-label">범위</span>
         <button type="button" class="exam-chip scope-chip active" data-scope="all" aria-pressed="true">전체 문제</button>
+        <button type="button" class="exam-chip scope-chip" data-scope="learned" aria-pressed="false"
+                title="📅 수업 진도 탭에 정리된 날짜별 카드가 가리키는 개념 카드의 문제만 출제합니다. 진도가 나갈수록 자동으로 넓어집니다.">📅 배운 데까지 <b id="scope-learned-n">0</b></button>
         <button type="button" class="exam-chip scope-chip" data-scope="star" aria-pressed="false">⭐ 즐겨찾기 <b id="scope-star-n">0</b></button>
         <button type="button" class="exam-chip scope-chip" data-scope="hard" aria-pressed="false">🔥 어려움 표시 <b id="scope-hard-n">0</b></button>
         <button type="button" class="exam-chip scope-chip" data-scope="wrong" aria-pressed="false">📕 틀린 문제 <b id="scope-wrong-n">0</b></button>
@@ -9308,15 +9568,25 @@ document.querySelectorAll(".note-code").forEach(box => {
     saveFlags(flags);
     refreshScopeChips();
   }
-  // 범위 칩이 고른 문제 id 목록 — 즐겨찾기(s) / 어려움(h) / 오답 노트
+  // 📅 "배운 데까지" — 수업 진도 탭의 날짜별 카드가 링크한 개념 카드를 그대로 학습 범위로 본다.
+  // 진도 카드를 새로 붙이면 그 카드의 링크가 자동으로 합쳐지므로, 따로 관리할 목록이 없다.
+  function learnedAnchors(){
+    const links = document.querySelectorAll('#class-notes .note-card a[href^="#"]');
+    return new Set([...links].map(a => a.getAttribute("href")));
+  }
+  // 범위 칩이 고른 문제 id 목록 — 배운 범위 / 즐겨찾기(s) / 어려움(h) / 오답 노트
   function idsForScope(scope){
+    if (scope === "learned") {
+      const learned = learnedAnchors();
+      return EXAM_BANK.filter(q => q.link && learned.has(q.link[0])).map(q => q.id);
+    }
     if (scope === "wrong") return Object.keys(loadWrong());
     const flags = loadFlags(), key = scope === "star" ? "s" : "h";
     return Object.keys(flags).filter(id => flags[id][key]);
   }
   function currentScope(){ return document.querySelector(".scope-chip.active")?.dataset.scope || "all"; }
   function refreshScopeChips(){
-    ["star","hard","wrong"].forEach(scope => {
+    ["learned","star","hard","wrong"].forEach(scope => {
       const ids = idsForScope(scope).filter(id => BANK_BY_ID[id]);   // 문제은행에서 사라진 id는 세지 않는다
       const chip = document.querySelector('.scope-chip[data-scope="' + scope + '"]');
       $("scope-" + scope + "-n").textContent = ids.length;
