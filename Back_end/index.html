@@ -934,6 +934,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --net:#2b6cd4;
     --prac:#c9541f;
     --class:#0c85ad;
+    --journey:#0f766e;
   }
   [data-theme="dark"]{
     --basic:#f0b45c;
@@ -942,7 +943,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --net:#5ca8ff;
     --prac:#ff8a5c;
     --class:#5cd6f2;
+    --journey:#5eead4;
   }
+  #journey-section{--c:var(--journey);}
   #class-section{--c:var(--class);}
   #basic-section{--c:var(--basic);}
   #oop-section{--c:var(--oop);}
@@ -955,6 +958,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .stat-card.util .n{color:var(--util);}
   .stat-card.net .n{color:var(--net);}
   .stat-card.prac .n{color:var(--prac);}
+  .stat-card.journey .n{color:var(--journey);}
   .lang-java{background:rgba(240,180,92,.16);color:#f0b45c;}
   /* 프론트엔드 노트로 건너가는 링크 (두 과정이 한 저장소에 있으므로 서로 오갈 수 있게) */
   .cross-link{
@@ -984,6 +988,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>🛠️ 자바 활용 11개</span>
       <span>🌐 네트워크 8개</span>
       <span>🧪 실습과제 12문제</span>
+      <span>🧭 학습 여정 13단계</span>
+      <span>📖 개념 사전 24개</span>
       <span>✏️ 시험 대비 102문제</span>
     </div>
     <a class="cross-link" href="../Front_end/">🎨 프론트엔드 학습 노트로 이동 →</a>
@@ -1000,6 +1006,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util">🛠️ 자바 활용</button>
       <button data-target="net">🌐 네트워크</button>
       <button data-target="prac">🧪 실습과제</button>
+      <button data-target="journey">🧭 학습 여정</button>
+      <button data-target="concepts">📖 개념 사전</button>
       <button data-target="exam">✏️ 시험 대비</button>
       <button data-target="materials">강의자료</button>
     </div>
@@ -1024,6 +1032,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
+      <div class="stat-card journey"><div class="n">13</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card concepts"><div class="n">24</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
     <div class="today-recommend">
@@ -1050,6 +1060,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <ol>
         <li>이 노트는 <strong>수업보다 먼저 만들어 둔 예습용</strong>입니다. 교안 197장과 실습과제 12문제를 전 범위 정리했으니, 수업에서 진도가 나간 부분을 골라 읽으면 복습 노트로도 그대로 쓸 수 있습니다.</li>
         <li><strong>📅 수업 진도</strong> 탭에는 수업에서 <strong>직접 작성한 실습 코드</strong>가 날짜별로 정리돼 있습니다. "오늘 어디까지 나갔는지"와 "그게 어느 개념 카드로 이어지는지"를 한눈에 볼 수 있어 시험 범위를 가늠하기 좋습니다.</li>
+        <li><strong>🧭 학습 여정</strong> 탭은 교안 전 범위를 <strong>"왜 이 순서로 배우는가"</strong> 하나의 흐름으로 엮은 13단계 지도입니다. 지금 배우는 내용이 앞의 무엇 위에 서 있고 뒤의 무엇으로 이어지는지 헷갈릴 때 여기부터 보세요. <strong>📖 개념 사전</strong> 탭은 진도와 상관없이 <strong>용어 하나만 찾아보는</strong> 곳이고, 특히 <strong>그룹 D는 빨간 에러 메시지를 그대로 찾는 사전</strong>입니다 — 코드가 안 돌아가면 <code>NullPointer</code>처럼 메시지 일부를 검색창에 쳐 보세요.</li>
         <li>순서대로 본다면 <strong>☕ 자바 기초 → 🧱 객체지향 → 🛠️ 자바 활용 → 🌐 네트워크</strong> 흐름을 따르세요. 기초는 "변수·연산·제어문", 객체지향은 "클래스가 메모리에 올라가는 방식", 활용은 "컬렉션·예외·입출력·스레드", 네트워크는 "소켓으로 서버 만들기"가 중심입니다.</li>
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
@@ -7902,6 +7913,1184 @@ public class CardMain {
     </div>
   </section>
 
+  <section id="journey-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>🧭 학습 여정 — 개념이 쌓이는 순서</h2></div>
+    <p class="cat-desc">교안 54개 항목을 <b>"왜 이 순서로 배우는가"</b>라는 하나의 흐름으로 엮은 지도입니다. 📅 수업 진도 탭이 <b>날짜별 기록</b>이고 과목 탭이 <b>항목별 사전</b>이라면, 이 탭은 <b>앞에서 배운 것이 뒤에서 어떻게 다시 쓰이는지</b>를 이어서 보여 줍니다.</p>
+
+    <div class="journey-intro">
+      <h3>💡 이 탭을 보는 법</h3>
+      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>지금 수업은 07단계 근처</b>(2026-08-06 기준 4일차)를 지나고 있습니다.</p>
+    </div>
+
+    <div class="journey-list">
+
+      <article class="journey-step" id="journey-java-01">
+        <div class="journey-step-head">
+          <span class="journey-num">01</span>
+          <h3>코드가 실행되기까지 — 아직 문법이 하나도 없는 단계</h3>
+          <a class="journey-jump" href="#basic-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">문법보다 먼저 배우는 것이 <b>"내가 쓴 글자가 어떻게 프로그램이 되는가"</b>입니다. <code>.java</code>를 <code>javac</code>가 바이트코드로 번역하고, 그걸 각 OS의 JVM이 해석해 실행합니다. 이 2단계 구조를 알아야 <b>"파일명은 왜 클래스명과 같아야 하나", "package는 왜 폴더와 일치해야 하나"</b>가 규칙이 아니라 이유로 이해됩니다. 이름 짓는 규칙(명명법)도 여기서 함께 잡습니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>.java</b><span>사람이 쓴 소스</span></div>
+            <div class="flow-arrow">javac</div>
+            <div class="flow-box"><b>.class</b><span>바이트코드(중간 언어)</span></div>
+            <div class="flow-arrow">java</div>
+            <div class="flow-box leaf"><b>JVM</b><span>OS마다 다른 실행기</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b>JDK ⊃ JRE ⊃ JVM</b> — 개발은 JDK, 실행만 하면 JRE.</li>
+          <li>클래스=파스칼, 메서드·변수=카멜, 상수=대문자 — 이후 모든 코드가 이 규칙을 따릅니다.</li>
+          <li>이 단계의 내용이 <b>📅 1일차 수업</b>의 절반이었습니다. → <a href="#class-day01">1일차 진도 보기</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-02">
+        <div class="journey-step-head">
+          <span class="journey-num">02</span>
+          <h3>값을 담고, 바꿔 담는다 — 상자의 크기를 배우는 단계</h3>
+          <a class="journey-jump" href="#basic-04">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01에서 "코드가 돌아가는 구조"를 봤다면 여기서는 <b>그 안에 값을 담는 법</b>을 배웁니다. 기본타입 8종은 결국 <b>상자의 크기표</b>이고, 크기가 다르니 <b>큰 상자의 값을 작은 상자에 옮길 때 문제가 생긴다</b>는 것이 형 변환의 전부입니다. 2의 보수는 "왜 byte가 -128부터인가"에 대한 답이라, 표현 범위를 외우지 않고 이해하게 해 줍니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>변수 · 스코프</b><span>어디까지 살아 있나</span></div>
+            <div class="flow-arrow">담을 크기</div>
+            <div class="flow-box"><b>기본타입 8종</b><span>byte ~ boolean</span></div>
+            <div class="flow-arrow">크기가 다르니</div>
+            <div class="flow-box leaf"><b>형 변환</b><span>자동 승격 · 강제 캐스팅</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b>정수 리터럴 기본 <code>int</code>, 실수 리터럴 기본 <code>double</code></b> — <code>L</code>과 <code>f</code> 접미사가 필요한 이유.</li>
+          <li>블록 <code>{ }</code>을 벗어나면 지역변수가 사라진다 — 03단계 반복문에서 곧바로 부딪히는 규칙입니다.</li>
+          <li><b>큰 → 작은</b>은 강제 캐스팅, <b>작은 → 큰</b>은 자동. → <a href="#concept-java-err-lossy">📖 possible lossy conversion 에러</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-03">
+        <div class="journey-step-head">
+          <span class="journey-num">03</span>
+          <h3>값을 굴리고, 흐름을 가른다 — 프로그램이 처음 "판단"하는 단계</h3>
+          <a class="journey-jump" href="#basic-09">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">02까지는 값을 담기만 했습니다. 여기서 <b>연산자로 값을 굴리고, 그 결과로 길을 고르고(조건문), 같은 일을 반복합니다(반복문)</b>. 갈림길이 둘이면 <code>if~else</code>, 여럿이면 <code>switch</code>, 횟수를 알면 <code>for</code>, 모르면 <code>while</code> — 이 네 가지 조합이 이후 모든 실습 코드의 뼈대입니다. 중첩 for는 구구단·별 찍기로 손에 붙이고, <b>줄마다 개수를 i의 식으로 세우는</b> 감각까지 여기서 만들어집니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>연산자</b><span>산술 · 관계 · 논리 · 삼항</span></div>
+            <div class="flow-arrow">결과가 true/false</div>
+            <div class="flow-box"><b>조건문</b><span>if~else · switch</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">횟수만큼</div>
+            <div class="flow-box"><b>반복문</b><span>for · while · do~while</span></div>
+            <div class="flow-arrow">둘을 겹치면</div>
+            <div class="flow-box leaf"><b>중첩 for</b><span>구구단 · 별 찍기</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b><code>&amp;&amp;</code>가 <code>||</code>보다 우선순위가 높다</b> — 윤년 조건식이 이걸 그대로 쓰는 예입니다.</li>
+          <li>별 찍기는 도형이 아니라 <b>개수 식 세우기</b> — 피라미드는 공백 <code>n-1-i</code>개 + 별 <code>2i+1</code>개.</li>
+          <li>이 단계가 <b>📅 2일차·3일차 수업</b>의 중심이었습니다. → <a href="#class-day02">2일차</a> · <a href="#class-day03">3일차</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-04">
+        <div class="journey-step-head">
+          <span class="journey-num">04</span>
+          <h3>바깥과 주고받는다 — 출력과 입력</h3>
+          <a class="journey-jump" href="#basic-11">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">03까지 만든 계산 결과를 <b>사람이 볼 수 있게 내보내고(출력), 사람이 넣은 값을 받아들입니다(입력)</b>. <code>printf</code>의 서식 문자는 이후 표 모양 출력(구구단·마방진·달력)에서 계속 쓰이고, <code>Scanner</code>는 실습과제 대부분의 시작점이 됩니다. 여기서 만나는 <b><code>nextInt()</code> 뒤에 <code>nextLine()</code>이 건너뛰어지는 함정</b>은 초보자가 반드시 한 번은 겪는 문제입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>print · println</b><span>줄바꿈 유무</span></div>
+            <div class="flow-arrow">서식을 주면</div>
+            <div class="flow-box"><b>printf</b><span>%d %s %.2f · \t</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>Scanner</b><span>키보드 입력</span></div>
+            <div class="flow-arrow">숫자로 바꿔</div>
+            <div class="flow-box"><b>Integer.parseInt</b><span>개행 함정을 피하는 방식</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><code>print</code>는 줄바꿈 없음 — 실행 결과에서 프롬프트와 입력이 붙어 보이는 이유입니다.</li>
+          <li>입력은 <b><code>Integer.parseInt(sc.nextLine())</code></b>로 통일하면 함정이 아예 없어집니다. → <a href="#concept-java-err-scanner">📖 Scanner 함정 카드</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-05">
+        <div class="journey-step-head">
+          <span class="journey-num">05</span>
+          <h3>코드에 이름을 붙인다 — 메서드, 객체지향으로 가는 문턱</h3>
+          <a class="journey-jump" href="#oop-03">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">01~04로 <b>돌아가는 코드</b>는 만들 수 있게 됐지만, 전부 <code>main</code> 안에 있습니다. 여기서 <b>자주 쓰는 코드 덩어리에 이름을 붙여 밖으로 꺼냅니다</b>. 매개변수는 "받을 것", 반환타입은 "돌려줄 것"이고, 이 둘의 유무로 메서드는 네 종류가 됩니다. 그리고 <b><code>main</code>이 <code>static</code>이라 생기는 벽</b>을 여기서 처음 만나는데, 이 벽이 다음 단계(객체)의 필요성을 그대로 설명해 줍니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>main 안의 코드</b><span>전부 한 곳에</span></div>
+            <div class="flow-arrow">이름을 붙여</div>
+            <div class="flow-box"><b>메서드로 분리</b><span>매개변수 · 반환타입</span></div>
+            <div class="flow-arrow">호출하려면</div>
+            <div class="flow-box leaf"><b>static? 객체?</b><span>다음 단계로 이어짐</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>반환타입을 선언했으면 <b>모든 경로에서 <code>return</code></b>, 실행만 할 거면 <code>void</code>.</li>
+          <li><b>static은 non-static을 직접 못 쓴다</b> — 06단계에서 "객체를 만든다"는 답을 얻습니다. → <a href="#concept-java-err-static-context">📖 해당 에러 카드</a></li>
+          <li>4일차 <code>D1_divisor</code>가 이 단계의 완성형 — 약수·최대공약수·친화수를 <b>메서드로 쪼개고 서로 재사용</b>했습니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-06">
+        <div class="journey-step-head">
+          <span class="journey-num">06</span>
+          <h3>설계도와 실체 — 클래스 · 객체 · 생성자</h3>
+          <a class="journey-jump" href="#oop-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">05에서 코드에 이름을 붙였다면, 여기서는 <b>데이터와 그 데이터를 다루는 메서드를 한 덩어리로 묶습니다</b> — 그게 클래스입니다. 클래스는 설계도일 뿐이고 <code>new</code>를 해야 Heap에 실체(객체)가 생깁니다. 그 순간 딱 한 번 실행돼 초기값을 정하는 것이 <b>생성자</b>이고, 주문 방식을 여러 개 두는 것이 <b>생성자 오버로딩</b>입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>클래스</b><span>설계도(코드)</span></div>
+            <div class="flow-arrow">new</div>
+            <div class="flow-box"><b>객체(Heap)</b><span>실제로 만들어진 것</span></div>
+            <div class="flow-arrow">태어날 때</div>
+            <div class="flow-box leaf"><b>생성자</b><span>초기값 설정 · 오버로딩</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b>매개변수 있는 생성자를 만들면 기본 생성자는 자동으로 안 생긴다</b>.</li>
+          <li>생성자 첫 줄에는 <code>this(...)</code>나 <code>super(...)</code> 중 <b>하나만</b>.</li>
+          <li>오버로딩은 <b>매개변수의 개수·타입·순서</b>로 구분 — 반환타입만 다른 건 안 됩니다. → <a href="#concept-java-overload-override">📖 오버로딩 vs 오버라이딩</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-07">
+        <div class="journey-step-head">
+          <span class="journey-num">07</span>
+          <h3>감추고, 공유한다 — 접근 제한자 · static · package</h3>
+          <a class="journey-jump" href="#oop-05">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06에서 객체를 만들 수 있게 되자 곧바로 두 가지 질문이 생깁니다 — <b>"아무나 필드를 고쳐도 되나?"</b>와 <b>"객체마다 따로여야 하나, 다 같이 써야 하나?"</b>. 앞의 답이 <code>private</code> + getter/setter(캡슐화)이고, 뒤의 답이 <code>static</code>입니다. 여기까지 오면 02단계에서 배운 "메모리 어디에 저장되나"가 <b>Method Area / Stack / Heap</b>이라는 그림으로 완성됩니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>private 필드</b><span>직접 접근 차단</span></div>
+            <div class="flow-arrow">창구를 만들어</div>
+            <div class="flow-box"><b>getter · setter</b><span>조건을 끼워 넣을 수 있다</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>인스턴스 멤버</b><span>객체마다 따로(Heap)</span></div>
+            <div class="flow-arrow">vs</div>
+            <div class="flow-box"><b>static 멤버</b><span>클래스에 하나(Method Area)</span></div>
+          </div>
+        </div>
+        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-06(4일차)까지 06~07단계를 지났습니다. 클래스·객체·생성자 오버로딩·<code>this()</code>/<code>super()</code>·<code>private</code>과 getter/setter·인스턴스 vs static, 그리고 <code>Object</code>의 4대 메서드까지가 오늘까지의 범위예요. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>접근 범위 넓은 순서 — <code>public</code> &gt; <code>protected</code> &gt; (default) &gt; <code>private</code>.</li>
+          <li>캡슐화의 진짜 이유는 은닉이 아니라 <b>"검사 조건을 끼워 넣을 수 있다"</b>는 것.</li>
+          <li>static은 객체 없이 이미 존재 → <code>클래스명.멤버</code>. → <a href="#concept-java-static-instance">📖 static vs 인스턴스</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-08">
+        <div class="journey-step-head">
+          <span class="journey-num">08</span>
+          <h3>값이 아니라 주소를 다룬다 — 참조타입 · Object · String · 배열</h3>
+          <a class="journey-jump" href="#oop-09">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06에서 <code>new</code>를 배운 순간부터 사실 <b>변수가 값이 아니라 주소를 들고 있는</b> 세계에 들어와 있었습니다. 여기서 그 사실을 정면으로 다룹니다 — 대입하면 주소만 복사되고(얕은 복사), <code>==</code>는 주소를 비교하며, 그래서 <b>내용 비교는 <code>equals()</code></b>가 필요합니다. 모든 클래스의 부모인 <code>Object</code>가 <code>equals</code>·<code>hashCode</code>·<code>toString</code>을 물려주기 때문에 이 이야기가 성립하고, <code>String</code>은 그 중 <code>equals</code>를 <b>내용 비교로 재정의해 둔 특별한 예</b>입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>참조변수(Stack)</b><span>주소를 들고 있다</span></div>
+            <div class="flow-arrow">가리킴</div>
+            <div class="flow-box"><b>객체(Heap)</b><span>실제 데이터</span></div>
+            <div class="flow-arrow">비교하면</div>
+            <div class="flow-box leaf"><b>== 주소 / equals 내용</b><span>String pool의 함정</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>Object</b><span>모든 클래스의 부모</span></div>
+            <div class="flow-arrow">물려줌</div>
+            <div class="flow-box"><b>equals · hashCode · toString</b><span>재정의해서 쓴다</span></div>
+            <div class="flow-arrow">여럿을 담으면</div>
+            <div class="flow-box leaf"><b>배열</b><span>크기 고정 · 인덱스 0부터</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>리터럴 문자열은 pool에서 공유돼 <code>==</code>도 <code>true</code>가 나온다 — <b>그래서 더 위험</b>합니다.</li>
+          <li><code>equals()</code>를 재정의하면 <code>hashCode()</code>도 함께 재정의한다.</li>
+          <li>반복문 안의 문자열 조립은 <code>StringBuilder</code>. → <a href="#concept-java-string-builder">📖 String vs StringBuilder</a> · <a href="#concept-java-equals">📖 == vs equals</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-09">
+        <div class="journey-step-head">
+          <span class="journey-num">09</span>
+          <h3>물려받고 바꿔 쓴다 — 상속 · 오버라이딩 · 다형성</h3>
+          <a class="journey-jump" href="#oop-18">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">06~07에서 클래스를 한 개씩 잘 만들 수 있게 됐다면, 여기서는 <b>클래스끼리 관계를 맺습니다</b>. 공통된 것을 부모에 두고 물려받아(상속), 다르게 동작해야 하는 부분만 자식이 다시 정의하고(오버라이딩), 그 덕분에 <b>부모 타입 하나로 여러 자식을 똑같이 다룰 수 있게</b> 됩니다(다형성). 08단계에서 배운 <code>Object</code>가 사실 <b>이미 모두의 부모였다</b>는 것도 여기서 제자리를 찾습니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>부모 클래스</b><span>공통 필드 · 메서드</span></div>
+            <div class="flow-arrow">extends</div>
+            <div class="flow-box"><b>자식 클래스</b><span>물려받아 확장</span></div>
+            <div class="flow-arrow">같은 모양으로 재정의</div>
+            <div class="flow-box leaf"><b>오버라이딩</b><span>@Override</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">그 결과</div>
+            <div class="flow-box"><b>다형성</b><span>부모 타입으로 자식들을 한 번에</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>자바는 <b>클래스 다중 상속을 지원하지 않는다</b> — 대신 인터페이스가 그 자리를 메웁니다(10단계).</li>
+          <li>오버라이딩은 이름·매개변수·반환타입이 모두 같아야 하고 <b>접근 범위를 좁힐 수 없다</b>.</li>
+          <li>업캐스팅은 자동, <b>다운캐스팅은 <code>instanceof</code>로 확인</b> 후. → <a href="#concept-java-err-cce">📖 ClassCastException</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-10">
+        <div class="journey-step-head">
+          <span class="journey-num">10</span>
+          <h3>틀만 남기고 물려준다 — 추상 클래스 · 인터페이스 · 제네릭</h3>
+          <a class="journey-jump" href="#oop-22">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">09의 상속은 <b>"완성된 것을 물려주는"</b> 방식이었습니다. 여기서는 반대로 <b>"이름만 정해 두고 내용은 자식에게 맡기는"</b> 방식을 배웁니다 — 그게 추상 클래스와 인터페이스입니다. 자바가 클래스 다중 상속을 막은 대신 <b>인터페이스는 여러 개 구현</b>할 수 있게 열어 두었죠. 제네릭은 여기에 <b>"어떤 타입을 담을지 나중에 정한다"</b>를 더해, 다음 단계 컬렉션의 <code>ArrayList&lt;String&gt;</code> 문법을 미리 준비시킵니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>추상 클래스</b><span>완성 + 미완성 섞어서(하나만)</span></div>
+            <div class="flow-arrow">또는</div>
+            <div class="flow-box"><b>인터페이스</b><span>약속 목록(여러 개 가능)</span></div>
+            <div class="flow-arrow">타입까지 미루면</div>
+            <div class="flow-box leaf"><b>제네릭 &lt;T&gt;</b><span>담을 타입을 나중에</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>둘 다 <b><code>new</code>로 직접 객체를 만들 수 없다</b>.</li>
+          <li>공통 코드를 물려주려면 추상 클래스, <b>상관없는 클래스들에 같은 기능을 강제</b>하려면 인터페이스.</li>
+          <li>싱글턴·중첩 클래스도 이 단계에 함께 나옵니다. → <a href="#concept-java-abstract-interface">📖 추상 클래스 vs 인터페이스</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-11">
+        <div class="journey-step-head">
+          <span class="journey-num">11</span>
+          <h3>여러 개를 담고, 실패를 대비한다 — 컬렉션 · 예외 처리</h3>
+          <a class="journey-jump" href="#util-01">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">08의 배열은 <b>크기를 미리 정해야</b> 했습니다. 실전에서는 몇 개가 들어올지 모르는 경우가 훨씬 많아서, <b>크기가 자동으로 늘어나는 컬렉션</b>이 필요해집니다 — List(순서·중복 O), Set(중복 X), Map(키-값). 그리고 프로그램이 커질수록 <b>"잘못될 수 있는 지점"</b>이 늘어나므로, 터뜨리는 대신 붙잡아 처리하는 <code>try~catch</code>를 배웁니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>배열</b><span>크기 고정</span></div>
+            <div class="flow-arrow">크기를 자유롭게</div>
+            <div class="flow-box"><b>List · Set · Map</b><span>컬렉션 프레임워크</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>예외 발생</b><span>NPE · 인덱스 초과 …</span></div>
+            <div class="flow-arrow">붙잡아</div>
+            <div class="flow-box"><b>try ~ catch ~ finally</b><span>throw · throws</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>컬렉션은 객체만 담는다 → <code>int</code>는 <code>Integer</code>로(오토박싱). → <a href="#concept-java-primitive-reference">📖 기본타입 vs 참조타입</a></li>
+          <li><code>arr.length</code>(필드) / <code>list.size()</code>(메서드) 구분은 시험 단골.</li>
+          <li><code>finally</code>는 예외가 나든 안 나든 <b>반드시 실행</b> — 자원 정리(close)의 자리.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-12">
+        <div class="journey-step-head">
+          <span class="journey-num">12</span>
+          <h3>짧게 쓰고, 읽고 쓰고, 동시에 — 람다 · Stream · IO · 스레드</h3>
+          <a class="journey-jump" href="#util-11">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">11까지가 <b>"한 프로그램 안에서 데이터를 다루는 법"</b>이었다면, 여기서는 그 데이터를 <b>더 짧게 표현하고(람다·Stream), 프로그램 밖으로 내보내고 들여오고(IO), 여러 흐름을 동시에 굴립니다(스레드)</b>. 람다는 10단계의 인터페이스(메서드 하나짜리)를 짧게 쓴 형태라 <b>앞 단계를 알아야 이해되는</b> 문법이고, 스레드는 다음 단계인 네트워크 서버에서 곧바로 필요해집니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>람다식</b><span>인터페이스 하나를 짧게</span></div>
+            <div class="flow-arrow">이어 붙이면</div>
+            <div class="flow-box"><b>Stream</b><span>중간 연산 → 최종 연산</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>IO 스트림</b><span>파일 · 콘솔 읽고 쓰기</span></div>
+            <div class="flow-arrow">동시에 여러 개</div>
+            <div class="flow-box"><b>스레드</b><span>생성 · 동기화 · 생명주기</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>Stream의 중간 연산은 <b>최종 연산이 호출돼야 실제로 돈다</b>(지연 연산).</li>
+          <li>IO는 다 쓰면 <code>close()</code> — <code>try-with-resources</code>가 이걸 자동으로 해 줍니다.</li>
+          <li>공유 자원을 여럿이 건드리면 <code>synchronized</code>가 필요 — 13단계 채팅 서버의 전제입니다.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-java-13">
+        <div class="journey-step-head">
+          <span class="journey-num">13</span>
+          <h3>컴퓨터끼리 이야기한다 — 네트워크와 소켓</h3>
+          <a class="journey-jump" href="#net-06">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">마지막 단계는 <b>지금까지 만든 프로그램을 다른 컴퓨터와 연결하는</b> 일입니다. IP는 주소, 포트는 그 안의 방 번호이고, <b>소켓은 두 프로그램 사이에 놓인 통로</b>입니다. 통로로 흐르는 데이터를 읽고 쓰는 방식은 12단계의 <b>IO 스트림 그대로</b>이고, 여러 명이 동시에 접속하는 채팅 서버는 12단계의 <b>스레드</b>가 있어야 만들 수 있습니다 — 즉 이 단계는 <b>앞의 모든 것이 합쳐지는 자리</b>입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>IP · 포트</b><span>주소 + 방 번호</span></div>
+            <div class="flow-arrow">연결 통로</div>
+            <div class="flow-box"><b>Socket · ServerSocket</b><span>TCP(신뢰) / UDP(속도)</span></div>
+            <div class="flow-arrow">데이터는</div>
+            <div class="flow-box leaf"><b>IO 스트림</b><span>12단계 그대로</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-box" style="visibility:hidden"><b>-</b></div>
+            <div class="flow-arrow">여러 명이면</div>
+            <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
+          <li>서버는 <code>accept()</code>에서 <b>접속이 올 때까지 멈춰 기다립니다</b>.</li>
+          <li>여기까지 오면 자바 교안 전 범위가 한 바퀴 — <b>실습과제 12문제</b>로 종합 점검하세요. → <a href="#prac-01">🧪 실습과제 탭</a></li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="concepts-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>📖 개념 사전 — 자바 용어와 에러 메시지</h2></div>
+    <p class="cat-desc">수업 진도와 상관없이 <b>궁금한 용어 하나만 찾아보는</b> 사전입니다. 앞의 과목 탭이 "교안을 순서대로 정리한 노트"라면, 여기는 <b>"그 용어가 정확히 무슨 뜻이냐"</b>에만 답합니다. 특히 맨 아래 <b>그룹 D</b>는 <b>빨간 에러 메시지를 그대로 찾아볼 수 있는 사전</b>이에요 — 코드가 안 돌아갈 때 메시지를 여기서 검색해 보세요.</p>
+
+    <div class="concept-roadmap">
+      <h3>🧭 처음이라면 이 순서대로 읽어보세요</h3>
+      <div class="roadmap-steps">
+        <div class="roadmap-step">
+          <span class="step-n">1</span>
+          <div class="step-body">
+            <b>"자바가 내 코드를 어떻게 돌리는가"부터</b>
+            <p>변수 하나가 어디에 저장되는지를 알면, 뒤에 나오는 static·참조·NullPointerException이 전부 같은 그림 위에서 설명됩니다. 자바에서 가장 먼저 잡아야 할 감각입니다.</p>
+            <div class="step-links">
+              <a href="#concept-java-compile">컴파일과 실행</a>
+              <a href="#concept-java-memory">메모리 3영역</a>
+              <a href="#concept-java-reference">참조란?</a>
+              <a href="#concept-java-gc">가비지 컬렉션</a>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <span class="step-n">2</span>
+          <div class="step-body">
+            <b>객체지향 용어가 뒤섞여 헷갈린다면</b>
+            <p>클래스·객체·인스턴스처럼 <b>거의 같은 말로 들리는 단어</b>들을 한 번에 정리합니다. 4일차 수업에서 한꺼번에 쏟아진 용어들이 여기 다 있습니다.</p>
+            <div class="step-links">
+              <a href="#concept-java-class-object">클래스 · 객체 · 인스턴스</a>
+              <a href="#concept-java-field-variable">멤버필드 · 지역변수</a>
+              <a href="#concept-java-constructor">생성자</a>
+              <a href="#concept-java-this-super">this와 super</a>
+              <a href="#concept-java-oop3">캡슐화 · 상속 · 다형성</a>
+              <a href="#concept-java-package">패키지와 import</a>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <span class="step-n">3</span>
+          <div class="step-body">
+            <b>시험에 가장 많이 나오는 "짝" 비교</b>
+            <p>객관식 문제는 <b>둘을 나란히 놓고 무엇이 다른지</b> 묻는 형태가 압도적으로 많습니다. 시험 전날 이 일곱 장만 훑어도 체감이 다릅니다.</p>
+            <div class="step-links">
+              <a href="#concept-java-equals">== vs equals()</a>
+              <a href="#concept-java-overload-override">오버로딩 vs 오버라이딩</a>
+              <a href="#concept-java-static-instance">static vs 인스턴스</a>
+              <a href="#concept-java-primitive-reference">기본타입 vs 참조타입</a>
+              <a href="#concept-java-string-builder">String vs StringBuilder</a>
+              <a href="#concept-java-array-collection">배열 vs 컬렉션</a>
+              <a href="#concept-java-abstract-interface">추상 클래스 vs 인터페이스</a>
+            </div>
+          </div>
+        </div>
+        <div class="roadmap-step">
+          <span class="step-n">4</span>
+          <div class="step-body">
+            <b>🚨 빨간 에러가 떴다면 — 메시지로 찾기</b>
+            <p>에러 메시지를 그대로 옮겨 둔 사전입니다. 위 검색창에 <code>NullPointer</code>처럼 메시지 일부를 쳐도 바로 걸립니다. 자바 초보가 만나는 에러는 사실 몇 종류로 정해져 있어요.</p>
+            <div class="step-links">
+              <a href="#concept-java-err-npe">NullPointerException</a>
+              <a href="#concept-java-err-aioobe">ArrayIndexOutOfBounds</a>
+              <a href="#concept-java-err-static-context">non-static … static context</a>
+              <a href="#concept-java-err-cannot-find-symbol">cannot find symbol</a>
+              <a href="#concept-java-err-lossy">possible lossy conversion</a>
+              <a href="#concept-java-err-cce">ClassCastException</a>
+              <a href="#concept-java-err-scanner">Scanner 입력이 건너뛰어짐</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes-list" id="concepts-notes">
+
+<h3 class="concept-group-title"><span class="n">A</span> · 자바가 코드를 실행하는 방식 — 모든 설명의 바닥</h3>
+
+<article class="note-card" id="concept-java-compile">
+  <div class="note-head">
+    <span class="note-num">01</span>
+    <h3>컴파일과 실행 — .java가 화면에 나오기까지</h3>
+    <div class="note-tags"><span class="tag">javac</span><span class="tag">바이트코드</span><span class="tag">JVM</span><span class="tag">.class</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>사람이 쓴 <code>.java</code>를 <code>javac</code>가 <b>바이트코드(<code>.class</code>)</b>로 번역하고, 그 바이트코드를 각 운영체제용 <b>JVM</b>이 다시 그 컴퓨터가 알아듣는 말로 바꿔 실행한다 — 이 <b>2단계 번역</b>이 "한 번 짜면 어디서나 돌아간다"의 정체다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>한국어 소설을 세계에 파는 상황이에요. 나라마다 번역가를 두는 대신 <b>먼저 에스페란토(바이트코드) 한 벌로 번역</b>해 두고, 각 나라에 <b>에스페란토를 읽어 주는 통역사(JVM)</b>를 한 명씩 심어 둡니다. 그러면 원고는 하나만 쓰면 되죠. 그 통역사가 윈도우용 JVM, 맥용 JVM입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>세 글자(JDK · JRE · JVM)의 포함 관계</h4>
+        <p><b>JDK ⊃ JRE ⊃ JVM</b> 순서로 감싸고 있습니다. 가장 안쪽 <b>JVM</b>이 바이트코드를 실제로 실행하는 엔진, 그걸 감싼 <b>JRE</b>는 JVM + 실행에 필요한 기본 라이브러리(<code>String</code>, <code>Scanner</code> 같은 것), 가장 바깥 <b>JDK</b>는 JRE + <code>javac</code>·<code>javap</code>·<code>javadoc</code> 같은 <b>개발 도구</b>입니다. 그래서 코드를 짜려면 JDK, 남이 만든 프로그램을 돌리기만 하면 JRE로 충분합니다. → <a href="#basic-01">☕ 01. JDK · JRE · JVM과 컴파일 과정</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>"파일명 = public 클래스명"이 강제인 이유</h4>
+        <p><code>javac</code>는 <b>클래스 하나당 <code>.class</code> 파일 하나</b>를 만듭니다. 그래서 <code>java HelloJava</code>라고 쳤을 때 JVM은 <code>HelloJava.class</code>를 찾아 그 안의 <code>main</code>을 부릅니다. 파일명과 public 클래스명이 다르면 이 약속이 깨지므로 컴파일 단계에서 막습니다. <code>package</code> 선언이 폴더 구조와 일치해야 하는 것도 같은 이유 — <b>이름이 곧 찾아가는 경로</b>이기 때문입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>javac</code> = 컴파일(.java → .class), <code>java</code> = 실행(.class를 JVM이 해석).</li>
+        <li>JDK ⊃ JRE ⊃ JVM. 개발은 JDK, 실행만 하면 JRE.</li>
+        <li>OS 독립성의 정체는 <b>바이트코드라는 중간 단계</b> — OS마다 다른 건 JVM뿐이다.</li>
+        <li>파일명 = public 클래스명, package 선언 = 폴더 경로. 둘 다 "이름으로 찾아가기 때문"에 강제된다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-memory">
+  <div class="note-head">
+    <span class="note-num">02</span>
+    <h3>메모리 3영역 — Method Area · Stack · Heap</h3>
+    <div class="note-tags"><span class="tag">static 영역</span><span class="tag">스택</span><span class="tag">힙</span><span class="tag">지역변수</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>자바가 값을 두는 자리는 셋뿐이다 — <b>Method Area</b>(static·클래스 정보, 프로그램 내내 하나), <b>Stack</b>(메서드 안 지역변수·매개변수, 메서드가 끝나면 사라짐), <b>Heap</b>(<code>new</code>로 만든 객체, 아무도 안 쓰면 나중에 치워짐).</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>사무실로 비유하면 <b>Method Area는 벽에 붙은 공지사항</b>(모두가 보고, 안 바뀌고, 하나뿐), <b>Stack은 책상 위 메모지</b>(일 하나 하는 동안만 쓰고 끝나면 버림), <b>Heap은 창고</b>(물건을 계속 쌓아 두고 필요할 때 번호표로 꺼냄)입니다. 변수 하나를 볼 때 "이건 공지사항이야, 메모지야, 창고야?"만 물어도 대부분의 헷갈림이 풀립니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>어느 변수가 어디로 가는가</h4>
+        <ul>
+          <li><b>Method Area(static 영역)</b> — <code>static</code>이 붙은 변수·메서드, 그리고 클래스 정보 자체. 프로그램이 켜질 때 올라가서 <b>객체를 만들지 않아도 이미 존재</b>합니다. 그래서 <code>클래스명.메서드()</code>로 바로 부를 수 있죠.</li>
+          <li><b>Stack</b> — 메서드 안에서 선언한 지역변수와 매개변수. 메서드가 호출될 때 쌓이고 <b>끝나는 순간 통째로 사라집니다</b>. 블록 스코프(<code>{ }</code> 밖에서 못 쓴다)의 정체가 바로 이것입니다.</li>
+          <li><b>Heap</b> — <code>new</code>로 만든 모든 객체(배열도 객체입니다). 객체 안의 인스턴스 변수는 <b>객체와 함께 Heap에</b> 있습니다.</li>
+        </ul>
+        <p>→ <a href="#oop-05">🧱 05. static vs non-static과 메모리 3영역</a> · <a href="#basic-03">☕ 03. 변수와 블록 스코프</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>Stack과 Heap이 이어지는 지점</h4>
+        <p><code>D2_ClassTest c = new D2_ClassTest();</code> 한 줄에서 <b>두 곳이 동시에 쓰입니다</b>. 오른쪽 <code>new ...</code>가 <b>Heap에 객체를 만들고</b>, 왼쪽 <code>c</code>는 <b>Stack에 놓인 변수</b>인데 그 안에 든 것은 객체 자체가 아니라 <b>객체가 있는 창고 번호(주소)</b>입니다. 이 그림이 잡히면 <a href="#concept-java-reference">참조</a>·<a href="#concept-java-equals">== vs equals</a>·<a href="#concept-java-err-npe">NullPointerException</a>이 전부 같은 이야기로 보입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>static · 클래스 정보 → <b>Method Area</b>, 지역변수 · 매개변수 → <b>Stack</b>, <code>new</code>로 만든 객체 → <b>Heap</b>.</li>
+        <li>Stack은 메서드가 끝나면 통째로 사라진다 — 이것이 블록 스코프의 실체.</li>
+        <li>참조변수는 Stack에, 객체는 Heap에. 변수가 들고 있는 건 <b>주소</b>다.</li>
+        <li>static은 객체 없이도 이미 메모리에 있으므로 <code>클래스명.멤버</code>로 접근한다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-reference">
+  <div class="note-head">
+    <span class="note-num">03</span>
+    <h3>참조(reference)란? — 변수가 들고 있는 건 값일까 주소일까</h3>
+    <div class="note-tags"><span class="tag">참조변수</span><span class="tag">주소</span><span class="tag">null</span><span class="tag">얕은 복사</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>기본타입 변수는 <b>값 자체</b>를 들고 있지만, 객체·배열·문자열 같은 참조타입 변수는 <b>Heap에 있는 물건의 주소</b>를 들고 있다 — 그래서 참조변수를 다른 변수에 대입하면 물건이 복사되는 게 아니라 <b>주소만 하나 더 생긴다</b>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>참조변수는 <b>택배 송장 번호</b>예요. 친구에게 송장 번호를 알려 줘도 물건이 두 개가 되지는 않습니다 — <b>같은 물건을 둘이 같이 보게</b> 될 뿐이죠. 그래서 친구가 상자를 열어 내용물을 바꾸면 내가 봐도 바뀌어 있습니다. <code>null</code>은 <b>송장 번호가 아직 없는 상태</b>고, 그 상태로 물건을 열려고 하면 나는 오류가 NullPointerException입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>대입할 때 벌어지는 일</h4>
+        <p><code>int a = 10; int b = a;</code>는 <b>값 10이 복사</b>돼서 <code>b</code>를 바꿔도 <code>a</code>는 그대로입니다. 반면 <code>int[] x = {1,2,3}; int[] y = x;</code>는 <b>주소가 복사</b>되므로 <code>y[0] = 99</code>를 하면 <code>x[0]</code>도 99가 됩니다 — 애초에 같은 배열이니까요. 이것이 <b>얕은 복사(shallow copy)</b>이고, 진짜 별개로 만들려면 새 배열을 만들어 값을 하나씩 옮기는 <b>깊은 복사</b>가 필요합니다. → <a href="#oop-09">🧱 09. 기본타입 vs 참조타입</a> · <a href="#oop-17">🧱 17. 얕은 복사 · 깊은 복사</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>메서드에 넘길 때도 똑같다</h4>
+        <p>자바는 <b>항상 값을 복사해서 넘깁니다</b>. 다만 참조타입일 때 "복사되는 값"이 <b>주소</b>라서, 메서드 안에서 <code>배열[0] = 99</code>처럼 <b>내용물을 고치면 밖에도 반영</b>되고, <code>배열 = new int[3]</code>처럼 <b>주소 자체를 갈아 끼우면 밖에는 아무 영향이 없습니다</b>(복사된 주소만 바뀐 것). 이 구분이 시험에도 자주 나옵니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>기본타입 = 값 자체, 참조타입 = <b>Heap 객체의 주소</b>.</li>
+        <li>참조변수 대입은 주소 복사 → 둘이 <b>같은 객체</b>를 본다(얕은 복사).</li>
+        <li>메서드 안에서 <b>내용을 고치면</b> 밖에 반영되고, <b>주소를 갈아 끼우면</b> 반영되지 않는다.</li>
+        <li><code>null</code> = 아직 아무 객체도 가리키지 않는 상태.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-gc">
+  <div class="note-head">
+    <span class="note-num">04</span>
+    <h3>가비지 컬렉션(GC) — 다 쓴 객체는 누가 치우나</h3>
+    <div class="note-tags"><span class="tag">GC</span><span class="tag">Heap</span><span class="tag">메모리 해제</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>C 언어처럼 직접 메모리를 반납하지 않아도, <b>아무 참조변수도 가리키지 않게 된 Heap 객체</b>는 JVM의 가비지 컬렉터가 알아서 회수한다 — 그래서 자바에는 <code>free()</code>가 없다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>창고에 물건을 넣어 두고 송장 번호를 버리면, 그 물건은 <b>아무도 찾을 수 없는 물건</b>이 됩니다. 창고 관리인(GC)은 주기적으로 돌면서 <b>번호표가 하나도 안 붙은 물건</b>을 내다 버립니다. 언제 버릴지는 관리인 마음이라 <b>정확한 시점은 알 수 없습니다</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>"참조가 끊긴다"는 게 무슨 뜻인가</h4>
+        <p><code>D4_Constructor tv = new D4_Constructor(); tv = null;</code>이면 방금 만든 TV 객체는 <b>가리키는 변수가 하나도 없어져</b> 회수 대상이 됩니다. 메서드 안에서 만든 객체도 마찬가지로, 메서드가 끝나면 Stack의 참조변수가 사라지므로 대부분 회수됩니다. 반대로 <b><code>static</code> 변수가 붙들고 있는 객체</b>는 프로그램이 끝날 때까지 안 사라집니다 — static을 남발하면 메모리가 계속 차는 이유가 이것입니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>회수 대상 = <b>어떤 참조변수도 가리키지 않는 Heap 객체</b>.</li>
+        <li>시점은 JVM이 정한다 — <code>System.gc()</code>도 "요청"일 뿐 보장이 아니다.</li>
+        <li><code>static</code>이 붙들고 있는 객체는 회수되지 않는다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<h3 class="concept-group-title"><span class="n">B</span> · 객체지향 기본 용어 — 비슷해 보이는 말들 구분하기</h3>
+
+<article class="note-card" id="concept-java-class-object">
+  <div class="note-head">
+    <span class="note-num">05</span>
+    <h3>클래스 · 객체 · 인스턴스 — 셋은 무엇이 다른가</h3>
+    <div class="note-tags"><span class="tag">클래스</span><span class="tag">객체</span><span class="tag">인스턴스</span><span class="tag">new</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><b>클래스</b>는 설계도(코드), <b>객체</b>는 그 설계도로 <code>new</code>해서 Heap에 실제로 만들어진 것, <b>인스턴스</b>는 "이 객체는 어느 클래스에서 나왔다"는 관계를 강조할 때 쓰는 같은 말이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>붕어빵 틀 = 클래스</b>, <b>구워 나온 붕어빵 하나하나 = 객체</b>입니다. 그럼 인스턴스는? <b>"이 붕어빵은 그 틀의 붕어빵이다"</b>라고 말할 때 쓰는 표현이에요 — 물건이 다른 게 아니라 <b>보는 각도가 다른 것</b>입니다. 그래서 "객체"와 "인스턴스"는 실무에서 거의 구분 없이 섞어 씁니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>객체를 두 개 만들면 무엇이 두 개가 되나</h4>
+        <p>인스턴스 변수는 <b>객체마다 따로</b> 생기고, <code>static</code> 변수는 <b>클래스에 하나만</b> 있습니다. 4일차 실습이 정확히 이걸 확인한 코드였습니다 — <code>classTest.number</code>는 20, <code>classTest2.number</code>는 40으로 갈렸지만 <code>staticNumber = 50</code> 한 줄에 둘 다 50이 됐죠. 메서드도 마찬가지여서 인스턴스 메서드는 <code>객체명.메서드()</code>, static 메서드는 <code>클래스명.메서드()</code>로 부릅니다. → <a href="#oop-01">🧱 01. 클래스 · 객체 · 인스턴스</a> · <a href="#class-day04">📅 4일차 수업 진도</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>클래스 = 설계도, 객체 = <code>new</code>로 Heap에 만들어진 실체, 인스턴스 = 그 관계를 강조한 표현.</li>
+        <li>인스턴스 변수는 객체마다, static 변수는 클래스마다 하나.</li>
+        <li>클래스는 코드가 있는 것만으로 Method Area에 올라가지만, <b>객체는 <code>new</code>를 해야 생긴다</b>.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-field-variable">
+  <div class="note-head">
+    <span class="note-num">06</span>
+    <h3>멤버필드 · 지역변수 · 매개변수 — 변수의 세 가지 신분</h3>
+    <div class="note-tags"><span class="tag">멤버필드</span><span class="tag">지역변수</span><span class="tag">매개변수</span><span class="tag">초기화</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>클래스 바로 아래에 선언한 <b>멤버필드</b>는 객체가 살아 있는 동안 유지되고 자동으로 기본값이 들어가지만, 메서드 안의 <b>지역변수</b>는 메서드가 끝나면 사라지고 <b>직접 초기화하지 않으면 쓸 수 없다</b>. <b>매개변수</b>는 호출할 때 값을 받아 오는 특수한 지역변수다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>멤버필드는 <b>집에 놓아둔 가구</b>(내가 사는 동안 계속 있음), 지역변수는 <b>여행 갈 때 챙긴 짐</b>(돌아오면 없어짐), 매개변수는 <b>문 앞에서 건네받은 택배</b>(들어오면서 손에 쥐고 온 것)입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>가장 자주 걸리는 차이 — 자동 초기화</h4>
+        <p>멤버필드는 선언만 해도 <code>int</code>는 0, <code>boolean</code>은 false, 참조타입은 <code>null</code>이 <b>자동으로</b> 들어갑니다. 그런데 <b>지역변수에는 이런 자동 초기화가 없습니다</b> — <code>int sum; sum += 10;</code>은 "변수 sum을 초기화하지 않았을 수 있습니다"라는 컴파일 에러가 납니다. 4일차의 <code>int res = 0;</code>처럼 <b>0으로라도 먼저 채워 두는 습관</b>이 여기서 나옵니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>이름이 겹칠 때</h4>
+        <p>생성자·setter에서 <code>public void setSize(int size){ this.size = size; }</code>처럼 <b>매개변수와 멤버필드 이름이 같은 경우</b>가 매우 흔합니다. 이때 그냥 <code>size</code>는 <b>가까운 쪽(매개변수)</b>을 가리키므로, 멤버필드를 지목하려면 <code>this.</code>를 붙여야 합니다. → <a href="#concept-java-this-super">this와 super</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>멤버필드 = 객체와 함께 Heap에, 지역변수·매개변수 = Stack에.</li>
+        <li>멤버필드는 <b>자동 초기화</b>(0/false/null), 지역변수는 <b>직접 초기화해야</b> 쓸 수 있다.</li>
+        <li>이름이 겹치면 가까운 쪽(매개변수)이 이기고, 멤버필드는 <code>this.</code>로 지목한다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-constructor">
+  <div class="note-head">
+    <span class="note-num">07</span>
+    <h3>생성자(Constructor) — 객체가 태어나는 순간 딱 한 번</h3>
+    <div class="note-tags"><span class="tag">생성자</span><span class="tag">기본 생성자</span><span class="tag">오버로딩</span><span class="tag">this()</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>생성자는 <b>클래스명과 이름이 같고 반환타입이 없는</b> 특수한 메서드로, <code>new</code>하는 순간 딱 한 번 실행돼 객체의 초기 상태를 정한다. 매개변수가 있는 생성자를 하나라도 직접 만들면 <b>기본 생성자는 더 이상 자동으로 생기지 않는다</b>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>붕어빵을 굽는 순간 <b>"팥이요, 슈크림이요"를 정하는 주문서</b>입니다. 아무 말 없이 주문하면 기본 맛(기본 생성자), 크기만 말하면 크기만 바꿔서, 크기와 맛을 다 말하면 둘 다 바꿔서 굽습니다 — 이렇게 <b>주문서 양식을 여러 개 만들어 두는 것</b>이 생성자 오버로딩입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>세 가지 규칙</h4>
+        <ul>
+          <li><b>이름은 클래스명과 같고, 반환타입을 쓰지 않는다.</b> <code>public void D4_Constructor()</code>처럼 <code>void</code>를 붙이면 그건 생성자가 아니라 <b>이름이 우연히 같은 일반 메서드</b>가 됩니다 — 찾기 어려운 실수 1순위입니다.</li>
+          <li><b>직접 만든 생성자가 하나라도 있으면 기본 생성자는 자동 생성되지 않는다.</b> 그래서 <code>new D2_ClassTest()</code>도 쓰고 싶다면 인자 없는 생성자를 <b>명시적으로 선언</b>해야 합니다.</li>
+          <li><b>첫 줄에는 <code>this(...)</code>나 <code>super(...)</code> 중 하나만</b> 올 수 있습니다(둘 다 "첫 줄" 자리를 요구하므로 함께 쓸 수 없음). 아무것도 안 쓰면 컴파일러가 <code>super()</code>를 넣어 줍니다.</li>
+        </ul>
+        <p>→ <a href="#oop-07">🧱 07. 생성자와 생성자 오버로딩</a> · <a href="#class-day04">📅 4일차 수업 진도</a></p>
+      </div>
+      <div class="concept-block">
+        <h4><code>this(...)</code>로 초기화를 한 곳에 모으기</h4>
+        <p>기본 생성자 안에서 <code>this(24, "검정색");</code>처럼 <b>자기 자신의 다른 생성자를 부르면</b> 기본값을 한 군데에서만 관리할 수 있습니다. 생성자가 세 개인데 각자 값을 채우면, 나중에 기본값을 바꿀 때 세 곳을 다 고쳐야 하니까요.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>이름 = 클래스명, <b>반환타입 없음</b>, <code>new</code> 시 한 번 실행.</li>
+        <li>매개변수 있는 생성자를 만들면 기본 생성자는 <b>자동으로 안 생긴다</b>.</li>
+        <li>첫 줄에 <code>this(...)</code> 또는 <code>super(...)</code> 중 하나만.</li>
+        <li>생성자 오버로딩 = 매개변수의 <b>개수·타입·순서</b>를 다르게 한 여러 벌의 주문서.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-this-super">
+  <div class="note-head">
+    <span class="note-num">08</span>
+    <h3>this와 super — 각각 두 가지 얼굴이 있다</h3>
+    <div class="note-tags"><span class="tag">this</span><span class="tag">super</span><span class="tag">this()</span><span class="tag">super()</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>this</code>는 <b>"이 객체 자신"</b>, <code>super</code>는 <b>"부모 쪽"</b>을 가리키는데, 뒤에 괄호를 붙인 <code>this()</code>·<code>super()</code>는 뜻이 달라져 <b>생성자를 호출</b>하는 명령이 된다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>this.size</code>는 <b>"내 사이즈"</b>라고 자기를 가리키며 말하는 것이고, <code>this(24)</code>는 <b>"나 자신의 다른 생성자를 대신 실행해 줘"</b>라고 넘기는 것입니다. 철자가 같아서 헷갈릴 뿐, <b>괄호가 있느냐 없느냐</b>로 완전히 다른 기능이라고 외우면 편합니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>네 가지 쓰임을 한 표로</h4>
+        <ul>
+          <li><code>this.필드</code> — 매개변수와 이름이 겹칠 때 <b>멤버필드를 지목</b>. 가장 자주 쓰는 형태.</li>
+          <li><code>this(인자)</code> — <b>같은 클래스의 다른 생성자 호출</b>. 반드시 생성자의 첫 줄.</li>
+          <li><code>super.멤버</code> — 오버라이딩으로 가려진 <b>부모의 메서드·필드</b>를 꺼내 씀.</li>
+          <li><code>super(인자)</code> — <b>부모 생성자 호출</b>. 역시 첫 줄이며, 안 쓰면 컴파일러가 <code>super()</code>를 자동으로 넣습니다.</li>
+        </ul>
+        <p>부모를 상속한 적이 없어도 <code>super()</code>가 들어가는 이유는 <b>자바의 모든 클래스가 자동으로 <code>Object</code>를 상속</b>하기 때문입니다. → <a href="#oop-20">🧱 20. this와 super, 참조타입 형 변환</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>괄호 없음 = <b>대상 지목</b>(this.필드 / super.메서드), 괄호 있음 = <b>생성자 호출</b>.</li>
+        <li><code>this()</code>와 <code>super()</code>는 <b>둘 다 첫 줄</b>을 요구하므로 함께 쓸 수 없다.</li>
+        <li>모든 클래스의 최상위 부모는 <code>Object</code>.</li>
+        <li><code>static</code> 메서드 안에서는 <code>this</code>를 쓸 수 없다 — "이 객체"가 없기 때문.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-oop3">
+  <div class="note-head">
+    <span class="note-num">09</span>
+    <h3>캡슐화 · 상속 · 다형성 — OOP 3대 개념이 실제로 하는 일</h3>
+    <div class="note-tags"><span class="tag">캡슐화</span><span class="tag">상속</span><span class="tag">다형성</span><span class="tag">getter/setter</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><b>캡슐화</b>는 필드를 <code>private</code>으로 감추고 메서드라는 창구로만 다루게 하는 것, <b>상속</b>은 이미 만든 클래스를 물려받아 확장하는 것, <b>다형성</b>은 <b>부모 타입 하나로 여러 자식을 똑같이 다루는</b> 것이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>캡슐화</b>는 은행 금고 — 돈을 직접 못 만지고 창구 직원(메서드)을 거치게 합니다. <b>상속</b>은 가업을 물려받아 거기에 내 것을 얹는 것. <b>다형성</b>은 리모컨 하나로 TV·에어컨·선풍기를 모두 켜는 것 — <b>"전원 켜기"라는 같은 버튼을 눌러도 기기마다 다르게 동작</b>합니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>캡슐화를 왜 하는가 — 조건을 끼워 넣을 수 있다</h4>
+        <p>필드를 <code>public</code>으로 열어 두면 누구나 아무 값이나 넣습니다. <code>private int size;</code>로 막고 <code>setSize(int size)</code>를 거치게 하면 <b>그 안에 검사 코드를 넣을 수 있습니다</b>(음수 거부, 비밀번호 확인 등). 4일차 <code>getSize(int pw)</code>가 정확히 그 예였죠 — 이것이 캡슐화를 하는 진짜 이유입니다. → <a href="#oop-04">🧱 04. 접근 제한자 4가지</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>다형성이 없으면 어떻게 되는가</h4>
+        <p>도형 10종을 그린다고 할 때 다형성이 없으면 <code>if (원이면) 원그리기 else if (사각형이면)…</code>이 끝없이 늘어납니다. <code>Shape</code>라는 부모 타입으로 배열에 담아 두고 <code>shape.draw()</code>만 부르면, <b>실제 객체가 무엇이냐에 따라 알아서 각자의 draw가 실행</b>됩니다. 이걸 가능하게 하는 것이 오버라이딩이고, 그래서 <b>상속 → 오버라이딩 → 다형성</b>은 한 세트로 배웁니다. → <a href="#oop-18">🧱 18. OOP 3대 개념과 상속</a> · <a href="#oop-19">🧱 19. 오버라이딩과 VMI</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>캡슐화 = <code>private</code> 필드 + getter/setter — <b>검사 조건을 끼워 넣기 위해서</b>.</li>
+        <li>상속 = <code>extends</code>로 물려받아 확장. 자바는 <b>클래스 다중 상속을 지원하지 않는다</b>.</li>
+        <li>다형성 = 부모 타입으로 자식들을 똑같이 다루는 것 — 오버라이딩이 있어야 성립한다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-package">
+  <div class="note-head">
+    <span class="note-num">10</span>
+    <h3>패키지와 import — 이름이 곧 경로다</h3>
+    <div class="note-tags"><span class="tag">package</span><span class="tag">import</span><span class="tag">java.lang</span><span class="tag">FQCN</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>package</code>는 클래스가 들어 있는 <b>폴더 경로</b>를 파일 첫 줄에 적어 둔 것이고, <code>import</code>는 다른 패키지의 클래스를 <b>짧은 이름으로 부르게 해 달라는 선언</b>일 뿐 — 코드를 복사해 오는 게 아니다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>같은 반에 김민수가 셋이면 <b>"1반 김민수", "2반 김민수"</b>로 불러야 하죠. 패키지가 그 반 이름입니다. <code>import</code>는 <b>"우리 얘기에서 '민수'라고 하면 2반 민수를 말하는 거야"</b>라고 미리 약속해 두는 것 — 그래야 매번 반 이름을 붙이지 않아도 됩니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>세 가지만 기억하면 된다</h4>
+        <ul>
+          <li><b><code>package</code>는 파일의 맨 첫 줄</b>이고 폴더 구조와 정확히 일치해야 합니다(<code>hk.edu20260806.day04</code> → <code>hk/edu20260806/day04</code>).</li>
+          <li><b><code>java.lang</code>은 import가 필요 없습니다.</b> <code>String</code>·<code>System</code>·<code>Object</code>·<code>Integer</code>를 그냥 쓸 수 있는 이유가 이것입니다.</li>
+          <li><code>import java.util.*;</code>의 <code>*</code>는 <b>그 패키지 바로 아래 클래스만</b> 포함합니다 — 하위 패키지(<code>java.util.function</code>)까지 따라오지는 않습니다.</li>
+        </ul>
+        <p>→ <a href="#oop-08">🧱 08. package와 import</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>package</code> = 첫 줄, 폴더 경로와 일치. <code>import</code> = 짧은 이름 사용 허가.</li>
+        <li><code>java.lang</code>은 자동 import.</li>
+        <li>이름이 겹치면 <code>java.util.Date</code>처럼 <b>전체 이름(FQCN)</b>을 직접 써서 구분한다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<h3 class="concept-group-title"><span class="n">C</span> · 자주 헷갈리는 짝 — 시험에 가장 많이 나오는 형태</h3>
+
+<article class="note-card" id="concept-java-equals">
+  <div class="note-head">
+    <span class="note-num">11</span>
+    <h3><code>==</code> vs <code>equals()</code> — 주소를 볼 것인가 내용을 볼 것인가</h3>
+    <div class="note-tags"><span class="tag">==</span><span class="tag">equals</span><span class="tag">String pool</span><span class="tag">hashCode</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>==</code>는 <b>주소가 같은가</b>(같은 객체인가)를 보고, <code>equals()</code>는 <b>내용이 같은가</b>를 본다 — 단 <code>equals()</code>도 재정의하지 않으면 Object의 기본 구현이 그대로 <code>==</code>와 같은 주소 비교를 한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>쌍둥이 두 명을 두고 <code>==</code>는 <b>"같은 사람이야?"</b>라고 묻고(아니오), <code>equals()</code>는 <b>"생김새가 같아?"</b>라고 묻습니다(예). 기본타입(<code>int</code> 등)은 애초에 주소가 없으니 <code>==</code>가 곧 값 비교라 헷갈릴 일이 없고, <b>문제는 항상 참조타입</b>에서 생깁니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>문자열이 특히 헷갈리는 이유 — String pool</h4>
+        <p>4일차 실습 결과가 이걸 그대로 보여 줬습니다. <code>String s = "a"; String s2 = "a";</code>는 <code>s == s2</code>가 <b><code>true</code></b>인데, 리터럴 문자열은 <b>String pool에 하나만 만들어 두고 돌려쓰기</b> 때문입니다. 반면 <code>String s3 = new String("a");</code>는 <b>Heap에 새 객체</b>를 만들므로 <code>s == s3</code>는 <code>false</code>, <code>s.equals(s3)</code>는 <code>true</code>가 됩니다. 그래서 <b>문자열 비교는 무조건 <code>equals()</code></b>가 정답입니다 — <code>==</code>가 우연히 맞는 경우가 있어서 더 위험합니다. → <a href="#oop-12">🧱 12. String pool 메모리 구조</a> · <a href="#oop-14">🧱 14. == 와 equals의 차이</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>내가 만든 클래스는 <code>equals()</code>를 직접 만들어야 한다</h4>
+        <p><code>Object</code>의 기본 <code>equals()</code>는 주소를 비교합니다. 그래서 내용이 같은 내 객체 둘을 비교하면 <code>false</code>가 나오죠. 내용 비교를 원하면 <code>equals()</code>를 오버라이딩해야 하고, 이때 <b><code>hashCode()</code>도 함께 재정의</b>해야 합니다 — <code>HashSet</code>·<code>HashMap</code>이 <b>hashCode로 먼저 자리를 찾고 그다음 equals로 확인</b>하는 순서로 동작하기 때문에, 둘이 어긋나면 "분명 넣었는데 <code>contains()</code>가 false"인 상황이 생깁니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>==</code> = 주소(같은 객체인가), <code>equals()</code> = 내용 — 단 <b>재정의했을 때만</b>.</li>
+        <li>리터럴 문자열은 pool에서 공유되어 <code>==</code>도 <code>true</code>, <code>new String()</code>은 <code>false</code>.</li>
+        <li>문자열 비교는 항상 <code>equals()</code>를 쓴다.</li>
+        <li><code>equals()</code>를 재정의하면 <code>hashCode()</code>도 같이 재정의한다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-overload-override">
+  <div class="note-head">
+    <span class="note-num">12</span>
+    <h3>오버로딩 vs 오버라이딩 — 이름만 비슷한 완전히 다른 것</h3>
+    <div class="note-tags"><span class="tag">오버로딩</span><span class="tag">오버라이딩</span><span class="tag">@Override</span><span class="tag">다형성</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><b>오버로딩(Overloading)</b>은 <b>한 클래스 안에서</b> 같은 이름의 메서드를 매개변수만 다르게 여러 개 만드는 것이고, <b>오버라이딩(Overriding)</b>은 <b>부모에게 물려받은 메서드를 자식이 똑같은 모양으로 다시 쓰는</b> 것이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오버로딩은 <b>같은 이름의 주문 메뉴가 여러 개</b>인 것 — "아메리카노(톨)", "아메리카노(그란데)"처럼 <b>주문 방식만 다른 형제 메뉴</b>입니다. 오버라이딩은 <b>물려받은 레시피를 내 가게 방식으로 덮어쓰는</b> 것 — 메뉴 이름은 그대로인데 만드는 법이 바뀝니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>구분하는 기준 딱 하나 — "어디에 있는가"</h4>
+        <ul>
+          <li><b>오버로딩</b> — 같은 클래스 안. <b>매개변수의 개수·타입·순서</b>가 달라야 하고, <b>반환타입만 다른 건 오버로딩이 아닙니다</b>(컴파일 에러). 생성자 오버로딩도 같은 규칙입니다.</li>
+          <li><b>오버라이딩</b> — 부모-자식 관계. <b>메서드 이름·매개변수·반환타입이 모두 같아야</b> 하고, 접근 범위를 <b>부모보다 좁게</b> 만들 수 없습니다(<code>public</code>을 <code>private</code>으로 못 바꿈).</li>
+        </ul>
+        <p><code>@Override</code>는 없어도 동작하지만 <b>붙이는 게 정답</b>입니다 — 오타로 이름이 살짝 달라지면 "재정의가 아니라 새 메서드"가 조용히 만들어지는데, <code>@Override</code>가 있으면 컴파일러가 즉시 잡아 줍니다. → <a href="#oop-06">🧱 06. 오버로딩</a> · <a href="#oop-19">🧱 19. 오버라이딩과 VMI</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>오버로딩 = 같은 클래스, <b>매개변수를 다르게</b>. 반환타입만 다른 건 안 된다.</li>
+        <li>오버라이딩 = 부모의 메서드를 <b>똑같은 모양으로</b> 자식이 다시 정의.</li>
+        <li>오버라이딩은 접근 범위를 <b>좁힐 수 없다</b>.</li>
+        <li>다형성이 성립하는 것은 오버라이딩 덕분이다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-static-instance">
+  <div class="note-head">
+    <span class="note-num">13</span>
+    <h3>static vs 인스턴스 — 클래스의 것인가 객체의 것인가</h3>
+    <div class="note-tags"><span class="tag">static</span><span class="tag">클래스 변수</span><span class="tag">인스턴스 변수</span><span class="tag">공유</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>static</code>이 붙으면 <b>클래스에 하나만 존재</b>해 모든 객체가 공유하고 객체 없이 <code>클래스명.멤버</code>로 쓸 수 있으며, 붙지 않으면 <b>객체마다 따로</b> 생겨 <code>new</code> 후에만 쓸 수 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>학교로 치면 <code>static</code>은 <b>교문에 붙은 학교 이름</b>(학생이 몇 명이든 하나뿐, 학생이 없어도 이미 붙어 있음)이고, 인스턴스 멤버는 <b>학생 각자의 이름표</b>(학생이 있어야 존재하고 사람마다 다름)입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>가장 많이 걸리는 규칙 — static은 non-static을 직접 못 쓴다</h4>
+        <p><code>main</code>이 <code>static</code>이라 <b>이미 메모리에 있는데</b>, 인스턴스 메서드는 <b>객체가 만들어져야 생기므로</b> 아직 없습니다. 없는 것을 부를 수는 없으니 컴파일러가 막는 것이죠(<a href="#concept-java-err-static-context">해당 에러 카드</a>). 해결은 두 가지 — <b>객체를 만들어</b> <code>참조변수.메서드()</code>로 부르거나, 그 메서드도 <b><code>static</code>으로</b> 만들거나. 3일차 <code>D2_MethodTest</code>가 앞의 방식, 1일차 <code>testMethod()</code>가 뒤의 방식이었습니다. 같은 이유로 <b><code>static</code> 메서드 안에서는 <code>this</code>를 쓸 수 없습니다</b>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>언제 static을 쓰나</h4>
+        <p>객체마다 달라질 이유가 없는 것 — <b>상수</b>(<code>public static final</code>), <b>유틸리티 메서드</b>(<code>Math.random()</code>처럼 상태 없이 계산만 하는 것), <b>공유 카운터</b> 정도입니다. 반대로 객체마다 값이 달라야 하는 것에 static을 붙이면 <b>모든 객체가 같은 값을 보게 되는 버그</b>가 됩니다. → <a href="#oop-05">🧱 05. static vs non-static과 메모리 3영역</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>static = 클래스에 하나(공유), 인스턴스 = 객체마다 따로.</li>
+        <li>static 멤버는 <b>객체 없이</b> <code>클래스명.멤버</code>로 접근한다.</li>
+        <li>static 안에서는 인스턴스 멤버와 <code>this</code>를 <b>직접 쓸 수 없다</b>.</li>
+        <li>static 변수가 붙들고 있는 객체는 GC 대상이 되지 않는다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-primitive-reference">
+  <div class="note-head">
+    <span class="note-num">14</span>
+    <h3>기본타입 vs 참조타입 — 그리고 Wrapper 클래스</h3>
+    <div class="note-tags"><span class="tag">기본타입 8종</span><span class="tag">참조타입</span><span class="tag">Wrapper</span><span class="tag">오토박싱</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>기본타입은 <b><code>byte·short·int·long·float·double·char·boolean</code> 8가지뿐</b>이고 값을 직접 담으며 <code>null</code>이 될 수 없다. 그 밖의 모든 타입(클래스·배열·인터페이스·String)은 참조타입으로, <b>주소를 담고 <code>null</code>이 될 수 있다</b>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>기본타입은 <b>지갑에 든 현금</b>(그 자체가 값), 참조타입은 <b>은행 계좌번호가 적힌 카드</b>(값이 있는 곳을 가리킴)입니다. 현금은 "없음"이라는 상태가 없지만(0은 0원이라는 값), 카드는 <b>발급조차 안 된 상태(<code>null</code>)</b>가 있습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>Wrapper 클래스가 필요한 이유</h4>
+        <p>컬렉션(<code>ArrayList</code> 등)은 <b>객체만 담을 수 있어서</b> <code>int</code>를 그대로 넣지 못합니다. 그래서 <code>int</code>를 감싼 <b><code>Integer</code></b>, <code>double</code>을 감싼 <b><code>Double</code></b> 같은 Wrapper 클래스가 있습니다. 요즘은 <b>오토박싱/언박싱</b>으로 <code>list.add(10)</code>처럼 그냥 써도 자동 변환되지만, <b><code>Integer</code>는 참조타입이라 <code>null</code>이 될 수 있다</b>는 차이는 남아 있습니다 — <code>null</code>인 <code>Integer</code>를 <code>int</code>에 대입하는 순간 NullPointerException이 납니다.</p>
+        <p>Wrapper의 또 다른 쓸모는 <b>문자열 → 숫자 변환</b>입니다. <code>Integer.parseInt("123")</code>이 대표적이고, 2일차 <code>Integer.parseInt(sc.nextLine())</code>이 바로 이 형태였습니다. → <a href="#oop-10">🧱 10. final · 상수와 Wrapper 클래스</a> · <a href="#basic-04">☕ 04. 기본타입 8가지</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>기본타입 8종만 값을 직접 담고, <b>나머지는 전부 참조타입</b>이다.</li>
+        <li>기본타입은 <code>null</code>이 될 수 없고, 참조타입은 될 수 있다.</li>
+        <li>컬렉션에는 객체만 들어가므로 <code>int</code> → <code>Integer</code> Wrapper가 필요하다(오토박싱).</li>
+        <li>문자열을 숫자로: <code>Integer.parseInt()</code> · <code>Double.parseDouble()</code>.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-string-builder">
+  <div class="note-head">
+    <span class="note-num">15</span>
+    <h3>String vs StringBuilder — 문자열은 왜 못 바꾸나</h3>
+    <div class="note-tags"><span class="tag">불변</span><span class="tag">immutable</span><span class="tag">StringBuilder</span><span class="tag">StringBuffer</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>String</code>은 <b>한 번 만들어지면 절대 바뀌지 않아서</b>(불변) <code>s += "a"</code>를 할 때마다 <b>새 객체가 만들어진다</b>. 반복문 안에서 문자열을 이어 붙일 때는 내용을 직접 고칠 수 있는 <code>StringBuilder</code>를 써야 한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>String</code>은 <b>인쇄된 종이</b>예요. 한 글자를 더하려면 <b>새 종이에 전부 다시 인쇄</b>해야 하고, 옛 종이는 버려집니다. 1000번 반복하면 종이 1000장을 버리는 셈이죠. <code>StringBuilder</code>는 <b>화이트보드</b>라서 옆에 계속 이어 쓰면 됩니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>불변이라 좋은 점도 있다</h4>
+        <p>바뀌지 않기 때문에 <b>String pool에서 안심하고 공유</b>할 수 있고, 여러 스레드가 동시에 봐도 안전합니다. <code>"a" + "b"</code>가 <code>"ab"</code>가 되는 건 <b>원래 문자열이 바뀐 게 아니라 새 문자열이 생긴</b> 것이라는 점만 잊지 마세요. <code>StringBuilder</code>와 <code>StringBuffer</code>는 기능이 같고, <b><code>StringBuffer</code>만 동기화(thread-safe)</b>되어 조금 느립니다 — 혼자 쓰는 코드면 <code>StringBuilder</code>가 정답입니다. → <a href="#oop-12">🧱 12. String의 특징과 pool</a> · <a href="#oop-15">🧱 15. StringBuffer · StringBuilder</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>String</code>은 <b>불변</b> — 이어 붙일 때마다 새 객체가 생긴다.</li>
+        <li>반복문 안에서 문자열 조립 → <b><code>StringBuilder.append()</code></b>.</li>
+        <li><code>StringBuilder</code>(빠름, 단일 스레드) vs <code>StringBuffer</code>(동기화, 느림).</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-array-collection">
+  <div class="note-head">
+    <span class="note-num">16</span>
+    <h3>배열 vs 컬렉션 — 크기를 미리 정해야 하는가</h3>
+    <div class="note-tags"><span class="tag">배열</span><span class="tag">ArrayList</span><span class="tag">length</span><span class="tag">size()</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>배열은 <b>만들 때 크기를 정하면 끝까지 못 바꾸고</b> 기본타입도 담을 수 있는 반면, <code>ArrayList</code> 같은 컬렉션은 <b>크기가 자동으로 늘어나고</b> 객체만 담을 수 있으며 추가·삭제 메서드를 제공한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>배열은 <b>칸 수가 정해진 계란판</b>(10칸짜리를 샀으면 11개는 못 담음), 컬렉션은 <b>지퍼백</b>(넣는 대로 늘어남)입니다. 계란판이 더 빠르고 가볍지만, 몇 개가 들어올지 모를 때는 지퍼백이 편하죠.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>헷갈리는 이름 세 가지</h4>
+        <ul>
+          <li>배열은 <code>arr.length</code>(<b>괄호 없는 필드</b>), 컬렉션은 <code>list.size()</code>(<b>메서드</b>), 문자열은 <code>str.length()</code>(<b>메서드</b>) — 셋이 미묘하게 달라서 시험 단골입니다.</li>
+          <li>배열의 인덱스는 <b>0부터 <code>length-1</code>까지</b>. 이걸 넘으면 <a href="#concept-java-err-aioobe">ArrayIndexOutOfBoundsException</a>이 납니다.</li>
+          <li>컬렉션 3형제 — <b>List</b>(순서 O, 중복 O) / <b>Set</b>(순서 X, 중복 X) / <b>Map</b>(키-값 쌍). → <a href="#util-01">🛠️ 01. 컬렉션 프레임워크 개요</a> · <a href="#oop-16">🧱 16. 배열</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>배열 = 고정 크기 + 기본타입 가능, 컬렉션 = 가변 크기 + 객체만.</li>
+        <li><code>arr.length</code>(필드) / <code>list.size()</code> / <code>str.length()</code>(메서드) 구분.</li>
+        <li>List(순서·중복 O) · Set(중복 X) · Map(키-값).</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-abstract-interface">
+  <div class="note-head">
+    <span class="note-num">17</span>
+    <h3>추상 클래스 vs 인터페이스 — 둘 다 "미완성"인데 뭐가 다른가</h3>
+    <div class="note-tags"><span class="tag">abstract</span><span class="tag">interface</span><span class="tag">implements</span><span class="tag">다중 구현</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>추상 클래스는 <b>완성된 코드와 미완성 메서드를 섞어</b> 물려주는 <b>부모</b>이고(<code>extends</code>, 하나만), 인터페이스는 <b>"이 기능들은 반드시 만들어라"는 약속 목록</b>이다(<code>implements</code>, 여러 개 가능).</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>추상 클래스는 <b>반쯤 지어진 집</b>을 물려받는 것 — 골조와 배관은 이미 있고 내부 인테리어만 내가 채웁니다. 인터페이스는 <b>계약서</b>예요 — "전원 켜기, 끄기 기능은 반드시 만들 것"이라고 적혀만 있고 내용은 전부 내가 씁니다. 집은 하나만 물려받을 수 있지만 <b>계약서는 여러 장에 서명할 수 있습니다</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>고르는 기준</h4>
+        <ul>
+          <li><b>공통 코드를 물려주고 싶다</b> → 추상 클래스. 필드와 구현된 메서드를 가질 수 있습니다.</li>
+          <li><b>서로 상관없는 클래스들에 같은 기능을 강제하고 싶다</b> → 인터페이스. 상속 계층과 무관하게 붙일 수 있고, <b>여러 개를 동시에</b> 구현할 수 있습니다(자바가 클래스 다중 상속을 막은 대신 열어 둔 길).</li>
+          <li>공통점 — <b>둘 다 직접 <code>new</code> 할 수 없고</b>, 자식이 미완성 메서드를 전부 구현해야 객체를 만들 수 있습니다. → <a href="#oop-21">🧱 21. 추상 클래스</a> · <a href="#oop-22">🧱 22. 인터페이스</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>추상 클래스 = <code>extends</code>, <b>하나만</b>. 필드와 구현 메서드를 가질 수 있다.</li>
+        <li>인터페이스 = <code>implements</code>, <b>여러 개 가능</b>. 기본은 추상 메서드와 상수.</li>
+        <li>둘 다 <b><code>new</code>로 직접 객체를 만들 수 없다</b>.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<h3 class="concept-group-title"><span class="n">D</span> · 🚨 에러 메시지 사전 — 빨간 글씨를 그대로 찾아보기</h3>
+
+<article class="note-card" id="concept-java-err-npe">
+  <div class="note-head">
+    <span class="note-num">18</span>
+    <h3>NullPointerException — "가리키는 게 없는데 열려고 했다"</h3>
+    <div class="note-tags"><span class="tag">NPE</span><span class="tag">null</span><span class="tag">실행 중 에러</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>null</code>인 참조변수에 대고 <b>필드를 읽거나 메서드를 부를 때</b> 나는, 자바에서 가장 흔한 실행 중(runtime) 에러다 — <b>컴파일은 멀쩡히 되고 실행할 때 터진다</b>는 게 특징이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>택배 송장 번호가 비어 있는데 물건을 열어 보려고 한</b> 상황입니다. 번호가 없으니 찾아갈 곳도 없죠. 그래서 고치는 방향은 늘 둘 중 하나예요 — <b>번호를 채워 주거나(객체를 만들어 주거나)</b>, <b>번호가 있는지 먼저 확인하거나</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>자주 나오는 상황</h4>
+        <ul>
+          <li>객체를 <code>new</code> 하지 않고 선언만 한 뒤 바로 사용 — <code>Scanner sc; sc.nextInt();</code></li>
+          <li>배열은 만들었지만 <b>안의 객체는 안 만든</b> 경우 — <code>String[] arr = new String[3]; arr[0].length();</code>(칸은 3개지만 전부 <code>null</code>).</li>
+          <li>메서드가 <code>null</code>을 돌려줬는데 그대로 이어서 쓴 경우 — <code>map.get("없는키").length()</code>.</li>
+          <li><code>null</code>인 <code>Integer</code>를 <code>int</code>에 대입(언박싱 순간 터짐).</li>
+        </ul>
+      </div>
+      <div class="concept-block">
+        <h4>고치는 법</h4>
+        <p>에러 메시지의 <b>줄 번호부터 보세요</b> — 자바 17 이상은 <code>Cannot invoke "String.length()" because "&lt;local1&gt;" is null</code>처럼 <b>무엇이 null인지까지 알려 줍니다</b>. 그다음 ① 그 변수를 <code>new</code>로 만들어 주거나, ② <code>if (x != null)</code>로 감싸거나, ③ 애초에 <code>null</code>을 반환하지 않도록(빈 문자열·빈 리스트를 돌려주도록) 설계를 바꿉니다. 문자열 비교라면 <code>"확인".equals(input)</code>처럼 <b>확실한 값을 앞에 두는</b> 방법도 자주 씁니다.</p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>원인 = <code>null</code>에 대고 <b>. 을 찍은 것</b>(필드 접근·메서드 호출).</li>
+        <li>컴파일은 통과하고 <b>실행 중에</b> 터진다.</li>
+        <li>배열을 만들었다고 <b>안의 객체까지 만들어지는 건 아니다</b>.</li>
+        <li>→ <a href="#concept-java-reference">참조란?</a> 카드와 함께 보면 이해가 빠르다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-aioobe">
+  <div class="note-head">
+    <span class="note-num">19</span>
+    <h3>ArrayIndexOutOfBoundsException — 없는 칸을 꺼내려 했다</h3>
+    <div class="note-tags"><span class="tag">배열</span><span class="tag">인덱스</span><span class="tag">length</span><span class="tag">반복문</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>배열의 인덱스는 <b>0부터 <code>length - 1</code>까지</b>인데 그 범위를 벗어난 칸에 접근했을 때 나는 실행 중 에러다 — 대부분 반복문 조건의 <code>&lt;</code>와 <code>&lt;=</code> 하나 차이에서 생긴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>10칸짜리 사물함에서 <b>11번 칸을 열려고 한</b> 것입니다. 자바는 칸 번호를 <b>0번부터</b> 매기기 때문에, 10칸이면 번호는 <b>0~9</b>이고 10번은 없습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>거의 항상 이 둘 중 하나</h4>
+        <ul>
+          <li><code>for (int i = 0; i &lt;= arr.length; i++)</code> — <b><code>&lt;=</code>를 <code>&lt;</code>로</b> 바꾸면 끝납니다. 가장 흔한 원인.</li>
+          <li>배열 크기를 <b>고정 숫자로 써 놓고</b> 배열 길이를 바꾼 경우 — <code>arr.length</code>를 쓰면 다시는 안 틀립니다.</li>
+        </ul>
+        <p>메시지에 나오는 <code>Index 10 out of bounds for length 10</code>은 <b>"10번을 찾았는데 길이가 10이다"</b>라는 뜻이라, 숫자 두 개가 같으면 <b>딱 한 칸 넘은 것</b>임을 바로 알 수 있습니다. 인덱스만 다루는 실수를 피하려면 <b>향상된 for문</b>(<code>for (int n : arr)</code>)을 쓰는 것도 좋은 방법입니다. → <a href="#oop-16">🧱 16. 배열</a> · <a href="#oop-17">🧱 17. 향상된 for문</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>유효 인덱스는 <b>0 ~ length-1</b>.</li>
+        <li>반복문 조건은 <code>i &lt; arr.length</code>(<code>&lt;=</code> 아님).</li>
+        <li><code>Index N out of bounds for length N</code> = 딱 한 칸 넘긴 것.</li>
+        <li>문자열에도 같은 계열의 <code>StringIndexOutOfBoundsException</code>이 있다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-static-context">
+  <div class="note-head">
+    <span class="note-num">20</span>
+    <h3>non-static method cannot be referenced from a static context</h3>
+    <div class="note-tags"><span class="tag">static</span><span class="tag">main</span><span class="tag">컴파일 에러</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>main</code>처럼 <b>static인 자리</b>에서 <b>객체가 있어야 존재하는 메서드·필드</b>를 그냥 부르려고 할 때 나는 컴파일 에러 — 자바를 처음 배울 때 가장 많이 만나는 에러다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>가게가 문도 열기 전에 "3번 테이블 손님 주문 받아 와"라고 시킨</b> 상황입니다. 3번 테이블 손님(객체)이 아직 없으니까요. 그러니 <b>손님을 앉히거나(객체 생성)</b>, 아니면 <b>손님과 무관한 일로 바꾸거나(static으로 선언)</b> 해야 합니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>두 가지 해결책 — 둘 다 정답이다</h4>
+        <ul>
+          <li><b>객체를 만들어 부른다</b> — <code>D2_MethodTest t = new D2_MethodTest(); t.test02();</code> (3일차 수업에서 쓴 방식)</li>
+          <li><b>그 메서드도 static으로 선언한다</b> — 상태 없이 계산만 하는 메서드라면 이쪽이 더 간결합니다. (1일차 <code>testMethod()</code>가 이 방식)</li>
+        </ul>
+        <p>같은 이유로 <b><code>static</code> 메서드 안에서는 인스턴스 필드와 <code>this</code>도 쓸 수 없습니다</b>. 반대 방향(인스턴스 메서드에서 static 부르기)은 <b>아무 문제 없습니다</b> — static은 이미 메모리에 있으니까요. → <a href="#oop-05">🧱 05. static vs non-static</a> · <a href="#class-day03">📅 3일차 수업 진도</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>원인 = static인 자리(<code>main</code> 등)에서 인스턴스 멤버를 직접 호출.</li>
+        <li>해결 = <b>객체 생성</b> 또는 <b>그 멤버도 static으로</b>.</li>
+        <li>static → 인스턴스 (X) / 인스턴스 → static (O).</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-cannot-find-symbol">
+  <div class="note-head">
+    <span class="note-num">21</span>
+    <h3>cannot find symbol — "그런 이름을 못 찾겠다"</h3>
+    <div class="note-tags"><span class="tag">오타</span><span class="tag">스코프</span><span class="tag">import</span><span class="tag">컴파일 에러</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>변수·메서드·클래스 <b>이름을 찾지 못했다</b>는 뜻으로, 원인은 거의 항상 <b>오타 · 선언하지 않음 · 블록 밖에서 사용 · import 누락</b> 넷 중 하나다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>출석부에 없는 이름을 부른 것입니다. 이름을 잘못 불렀거나(오타), 아직 등록을 안 했거나(선언 안 함), <b>다른 반 학생을 우리 반에서 부른</b> 것(스코프 밖)이죠.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>메시지의 <code>symbol:</code> 줄부터 보세요</h4>
+        <p>에러에 <code>symbol: variable sum</code>, <code>location: class Test</code>처럼 <b>무엇을, 어디서 찾았는지</b>가 같이 나옵니다. 그다음 확인 순서는 —</p>
+        <ul>
+          <li><b>철자와 대소문자</b>. 자바는 <code>Number</code>와 <code>number</code>를 다른 이름으로 봅니다.</li>
+          <li><b>선언 위치</b>. <code>for</code>문이나 <code>if</code> 블록 <b>안에서 선언한 변수는 그 <code>{ }</code>를 벗어나면 존재하지 않습니다</b>(Stack에서 사라짐). 밖에서도 써야 하면 블록 밖에서 선언하세요.</li>
+          <li><b>import</b>. <code>Scanner</code>·<code>ArrayList</code>·<code>Random</code>은 <code>java.util</code> 소속이라 import가 필요합니다(<code>String</code>은 <code>java.lang</code>이라 불필요).</li>
+          <li><b>메서드 이름·매개변수</b>. <code>getSize()</code>로 불렀는데 정의가 <code>getSize(int pw)</code>라면 "그런 이름 없음"으로 나옵니다.</li>
+        </ul>
+        <p>→ <a href="#basic-03">☕ 03. 변수와 블록 스코프</a> · <a href="#oop-08">🧱 08. package와 import</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>오타 · 미선언 · 스코프 밖 · import 누락 — 이 넷을 순서대로 확인한다.</li>
+        <li>자바는 <b>대소문자를 구분</b>한다.</li>
+        <li>블록 <code>{ }</code> 안에서 선언한 변수는 밖에서 쓸 수 없다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-lossy">
+  <div class="note-head">
+    <span class="note-num">22</span>
+    <h3>incompatible types: possible lossy conversion — "값이 깨질 수 있다"</h3>
+    <div class="note-tags"><span class="tag">형 변환</span><span class="tag">다운캐스팅</span><span class="tag">자동 승격</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><b>큰 상자의 값을 작은 상자에 넣으려 할 때</b> 나는 컴파일 에러다. 정말 괜찮다면 <code>(byte)</code>·<code>(int)</code>처럼 <b>강제 형 변환을 직접 써서 "손실을 감수하겠다"고 표시</b>해야 통과한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>2L 물을 500mL 컵에 부으려는 상황이에요. 자바는 <b>"넘칠 텐데 진짜 할 거야?"</b>라고 묻고 멈춥니다. <code>(int)</code>를 붙이는 건 <b>"응, 넘치는 건 버려도 돼"</b>라고 서명하는 것입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>세 가지 대표 상황</h4>
+        <ul>
+          <li><b>큰 타입 → 작은 타입</b> — <code>int i = 100000; byte b = i;</code> ❌ → <code>byte b = (byte) i;</code> (값은 깨집니다)</li>
+          <li><b>실수 → 정수</b> — <code>double d = 15.7; int i = d;</code> ❌ → <code>int i = (int) d;</code> (소수점 아래는 <b>반올림이 아니라 잘림</b> → 15)</li>
+          <li><b>연산 결과의 자동 승격</b> — <code>byte b1 = 10, b2 = 20; byte b3 = b1 + b2;</code> ❌. byte끼리 더해도 <b>결과는 int</b>로 승격되기 때문입니다. <code>byte b3 = (byte)(b1 + b2);</code>로 해결. 반면 <code>byte b4 = 10 + 20;</code>은 <b>리터럴이라 컴파일 시점에 30으로 계산</b>돼 통과합니다 — 1일차 <code>VariableTest</code>가 정확히 이 비교였습니다.</li>
+        </ul>
+        <p>반대 방향(작은 → 큰)은 손실이 없으므로 <b>자동으로 변환</b>됩니다. 그리고 <code>float f = 15.77;</code>이 에러인 것도 같은 이유예요 — 실수 리터럴의 기본이 <code>double</code>이라 <code>f</code>를 붙여야 합니다. → <a href="#basic-06">☕ 06. 형 변환(캐스팅) 총정리</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>큰 타입 → 작은 타입은 <b>강제 형 변환</b>을 직접 써야 한다.</li>
+        <li>실수 → 정수는 <b>반올림이 아니라 소수점 아래를 버린다</b>.</li>
+        <li><code>byte + byte</code>의 결과는 <b><code>int</code></b>로 승격된다.</li>
+        <li>정수 리터럴의 기본은 <code>int</code>, 실수 리터럴의 기본은 <code>double</code>(→ <code>L</code>, <code>f</code> 접미사).</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-cce">
+  <div class="note-head">
+    <span class="note-num">23</span>
+    <h3>ClassCastException — 참조타입을 잘못 형 변환했다</h3>
+    <div class="note-tags"><span class="tag">다운캐스팅</span><span class="tag">instanceof</span><span class="tag">다형성</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>부모 타입으로 담아 둔 객체를 <b>실제와 다른 자식 타입으로 강제 변환</b>했을 때 나는 실행 중 에러다 — 컴파일러는 "가능성이 있다"고 보고 통과시키지만, 실행 시점의 진짜 정체가 다르면 터진다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>"동물"이라고 적힌 상자를 열면서 "고양이겠지" 하고 고양이 사료를 준</b> 상황입니다. 안에 강아지가 들어 있으면 사고가 나죠. 그래서 열기 전에 <b>"너 고양이 맞아?"라고 먼저 물어보는 것</b>이 <code>instanceof</code>입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>안전하게 다운캐스팅하는 법</h4>
+        <p>업캐스팅(자식 → 부모)은 항상 안전해서 자동으로 됩니다. 위험한 건 <b>다운캐스팅(부모 → 자식)</b>이라, 하기 전에 <code>if (obj instanceof Cat) { Cat c = (Cat) obj; ... }</code>로 확인합니다. 요즘 문법에서는 <code>if (obj instanceof Cat c)</code>처럼 <b>확인과 형 변환을 한 번에</b> 할 수도 있습니다. → <a href="#oop-20">🧱 20. 참조타입 형 변환</a> · <a href="#oop-18">🧱 18. 상속과 다형성</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>업캐스팅(자식→부모)은 자동·안전, <b>다운캐스팅(부모→자식)이 위험</b>하다.</li>
+        <li>다운캐스팅 전에는 <code>instanceof</code>로 확인한다.</li>
+        <li>컴파일은 통과하고 <b>실행 중에</b> 터진다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="concept-java-err-scanner">
+  <div class="note-head">
+    <span class="note-num">24</span>
+    <h3>Scanner 함정 — 입력이 건너뛰어지거나 InputMismatchException이 난다</h3>
+    <div class="note-tags"><span class="tag">Scanner</span><span class="tag">nextInt</span><span class="tag">nextLine</span><span class="tag">개행</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>nextInt()</code>는 숫자만 가져가고 <b>엔터(개행)를 버퍼에 남기기</b> 때문에, 바로 뒤의 <code>nextLine()</code>이 그 개행을 읽고 <b>빈 문자열을 반환하며 입력을 건너뛴 것처럼</b> 보인다. 숫자를 기대한 자리에 글자가 들어오면 <code>InputMismatchException</code>이 난다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>줄 서 있는 사람들에게서 <b>"숫자만 쏙 뽑아 가고 줄바꿈 표시는 그대로 두고 온</b> 것입니다. 다음 사람이 와서 "한 줄 주세요" 하면 <b>남아 있던 그 줄바꿈</b>을 받아 가 버리죠 — 그래서 아무것도 못 받은 것처럼 보입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>가장 깔끔한 해결 — 처음부터 한 줄로 읽기</h4>
+        <p><code>int n = Integer.parseInt(sc.nextLine());</code>처럼 <b>항상 <code>nextLine()</code>으로 한 줄을 통째로 읽고 숫자로 바꾸면</b> 개행이 남는 문제가 아예 생기지 않습니다. 2일차 실습에서 D1은 <code>nextInt()</code>를, D2는 <code>Integer.parseInt(sc.nextLine())</code>을 썼는데, <b>뒤쪽이 실무에서 권장되는 방식</b>입니다. <code>nextInt()</code>를 계속 쓰겠다면 그 뒤에 <code>sc.nextLine();</code>을 <b>버리는 용도로 한 번 더</b> 호출하면 됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>InputMismatchException은 다른 문제다</h4>
+        <p>이쪽은 <b>타입이 안 맞는</b> 경우입니다 — <code>nextInt()</code>를 기다리는데 사용자가 <code>abc</code>를 친 상황이죠. <code>try-catch</code>로 감싸 다시 입력받게 하거나, <code>nextLine()</code>으로 읽은 뒤 <code>Integer.parseInt()</code>를 <code>try</code> 안에서 처리하는 방식이 일반적입니다(이 경우 예외 이름은 <code>NumberFormatException</code>이 됩니다). → <a href="#basic-11">☕ 11. 키보드 입력 — Scanner</a> · <a href="#util-05">🛠️ 05. 예외 처리</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>nextInt()</code>는 <b>개행을 버퍼에 남긴다</b> → 뒤의 <code>nextLine()</code>이 건너뛴 것처럼 보인다.</li>
+        <li>권장: <code>Integer.parseInt(sc.nextLine())</code>로 통일한다.</li>
+        <li>타입 불일치는 <code>InputMismatchException</code>(Scanner) / <code>NumberFormatException</code>(parseInt).</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+    </div>
+  </section>
+
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java 객관식 연습문제</h2></div>
     <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
@@ -8019,6 +9208,7 @@ public class CardMain {
       <button class="review-chip" data-subject="util" type="button">자바 활용</button>
       <button class="review-chip" data-subject="net" type="button">네트워크</button>
       <button class="review-chip" data-subject="prac" type="button">실습과제</button>
+      <button class="review-chip" data-subject="concepts" type="button">개념 사전</button>
       <span style="flex:1"></span>
       <button class="review-chip" data-count="10" type="button">10장만</button>
       <button class="review-chip active" data-count="0" type="button">전체 장수</button>
@@ -8044,6 +9234,8 @@ const sections = {
   util: document.getElementById("util-section"),
   net: document.getElementById("net-section"),
   prac: document.getElementById("prac-section"),
+  journey: document.getElementById("journey-section"),
+  concepts: document.getElementById("concepts-section"),
   exam: document.getElementById("exam-section"),
   materials: document.getElementById("materials-section"),
 };
@@ -8099,6 +9291,7 @@ const memos = loadMemos();
 const PROGRESS_SECTION_LABEL = {
   "class-section":"수업 진도", "basic-section":"자바 기초", "oop-section":"객체지향",
   "util-section":"자바 활용", "net-section":"네트워크", "prac-section":"실습과제",
+  "concepts-section":"개념 사전",
 };
 function updateProgressStat(){
   const cards = [...document.querySelectorAll(".note-card")];
@@ -8341,7 +9534,7 @@ document.querySelectorAll("section.cat").forEach(sec => {
 
 // ---- 검색: 모든 과목에서 제목·태그·본문에 키워드가 들어간 카드만 표시 ----
 const searchBox = document.getElementById("search-box");
-const catKeys = ["class", "basic", "oop", "util", "net", "prac"];
+const catKeys = ["class", "basic", "oop", "util", "net", "prac", "concepts"];
 function clearCardFilter(){
   document.querySelectorAll(".note-card").forEach(c => { c.style.display = ""; });
   document.querySelectorAll("section.cat .toc").forEach(t => { t.style.display = ""; });
@@ -8580,7 +9773,7 @@ document.querySelectorAll(".note-code").forEach(box => {
 // 카드를 새로 안 만들고, 이미 있는 note-easy(쉽게 말하면)·note-summary를
 // 그대로 재활용해 슥슥 넘기는 플래시카드 덱을 화면에서 즉석으로 만든다.
 (function reviewMode(){
-  const SUBJ_LABEL = { class:"수업 진도", basic:"자바 기초", oop:"객체지향", util:"자바 활용", net:"네트워크", prac:"실습과제" };
+  const SUBJ_LABEL = { class:"수업 진도", basic:"자바 기초", oop:"객체지향", util:"자바 활용", net:"네트워크", prac:"실습과제", concepts:"개념 사전" };
   const fab = document.getElementById("review-fab");
   const streakBadge = document.getElementById("review-streak-badge");
   const modal = document.getElementById("review-modal");
