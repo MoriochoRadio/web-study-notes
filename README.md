@@ -14,7 +14,11 @@
 │   ├── index.html        # 학습 정리 대시보드 본체
 │   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # 실습 코드
 │   └── slides/           # 강의 자료(PPT)
-└── Back_end/     # 백엔드 과정 (예정)
+└── Back_end/     # 백엔드(Java) 과정 (진행 중 — 2026-08-03 시작)
+    ├── index.html            # Java 백엔드 학습 노트 대시보드
+    ├── java_edu_project/     # 수업 실습 코드 (날짜별 패키지)
+    └── *.pptx / *.pdf        # 교안 · 실습과제
 ```
 
-과정별 상세 내용은 [`Front_end/README.md`](Front_end/README.md)를 참고하세요.
+과정별 상세 내용은 [`Front_end/README.md`](Front_end/README.md) ·
+[`Back_end/README.md`](Back_end/README.md)를 참고하세요.

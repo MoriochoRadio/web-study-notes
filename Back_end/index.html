@@ -941,8 +941,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제를 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 미리 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-04</span>
-      <span>📅 수업 진도 2일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-08-06</span>
+      <span>📅 수업 진도 4일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -982,7 +982,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">2</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">4</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -1544,6 +1544,597 @@ public class prac01 {
   </div>
 </article>
 
+<article class="note-card" id="class-day03">
+  <div class="note-head">
+    <span class="note-num">3일차</span>
+    <h3>2026-08-05 · 별 찍기 심화 · 메서드의 유형(static / 매개변수 / 반환값)</h3>
+    <div class="note-tags"><span class="tag">StarView</span><span class="tag">중첩 for</span><span class="tag">등차수열</span><span class="tag">MethodTest</span><span class="tag">static</span><span class="tag">반환타입</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>2일차 끝에 손대기 시작한 별 찍기를 8종으로 늘려 <b>"줄마다 찍을 공백·별 개수를 i에 대한 식으로 세우는"</b> 감각을 굳혔고, 이어서 <code>D2_MethodTest</code>로 메서드를 <b>static / non-static</b>, <b>매개변수 유무</b>, <b>반환값 유무</b>로 나눠 보며 객체지향의 입구에 발을 들였다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>별 찍기는 사실 도형 그리기가 아니라 <b>"n번째 줄에 몇 개를 찍을지"를 계산하는 식 세우기 연습</b>이에요. 그림이 달라 보여도 바깥 for(줄)와 안쪽 for(개수)는 그대로고, 개수를 정하는 식만 바뀝니다. 뒤이어 배운 메서드는 <b>자주 쓰는 코드에 이름을 붙여 둔 것</b>인데, 오늘은 그 이름표를 붙이는 방식 — 객체 없이 바로 쓸지(static), 값을 받을지(매개변수), 값을 돌려줄지(반환) — 를 나눠 봤습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D1_StarView — 별 찍기 8종, 공식은 하나뿐</h4>
+        <p>패턴이 여덟 개지만 뼈대는 전부 같습니다. <b>바깥 for = 줄 번호 <code>i</code>, 안쪽 for = 그 줄에 찍을 개수</b>. 좌측 정렬 직각삼각형은 별이 <code>i</code>개, 뒤집으면 <code>6 - i</code>개. 오른쪽 정렬로 밀고 싶으면 <b>별을 찍기 전에 공백을 먼저 찍는</b> for문을 하나 더 붙이면 됩니다. 피라미드는 여기서 한 걸음 더 나아가 <b>공백 <code>line-1-i</code>개 + 별 <code>2i+1</code>개</b> — 별 개수를 홀수(1, 3, 5, 7…)로 늘려야 좌우 대칭이 맞기 때문입니다. → <a href="#basic-09">☕ 09. 반복문: for · while · do~while</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② 등차수열로 보면 <code>i--</code>도 전부 <code>i++</code>로 바뀐다</h4>
+        <p>코드 안에 직접 남긴 주석 두 줄 — <code>// 10 8 6 4 2 -&gt; 10 + (n-1)* -2</code>, <code>// 등차수열공식으로 하면 ++로 다 할 수 있음</code> — 이 오늘의 핵심입니다. 줄마다 개수가 일정하게 늘거나 줄면 그건 <b>등차수열 <code>a + (n-1)d</code></b>이고, 첫항 <code>a</code>와 공차 <code>d</code>만 정하면 됩니다. 그래서 <code>for (int i = a; i &gt; 0; i--)</code>로 거꾸로 도는 역피라미드도 <code>for (int i = 0; i &lt; 5; i++)</code>로 두고 개수 식만 <code>(i+1)*2-1</code>로 바꾸면 똑같이 나옵니다 — 마지막 블록이 바로 그걸 확인한 코드입니다. <b>반복 방향이 아니라 식이 본질</b>이라는 감각을 잡은 셈입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ D2_MethodTest — main은 진입점, 그리고 static의 벽</h4>
+        <p><code>main</code>은 프로그램이 <b>가장 먼저 들어오는 문(진입점)</b>이고, 다른 메서드는 여기서 불러 줘야 실행됩니다. 그런데 <code>main</code>은 <code>static</code>이라 <b>이미 메모리에 올라가 있고</b>, 아직 메모리에 없는 non-static 메서드를 직접 부를 수 없습니다. 그래서 <code>test02()</code>를 쓰려면 <code>new D2_MethodTest()</code>로 객체를 만들어 <code>methodTest.test02()</code>로 호출해야 합니다. 반대로 <code>test01()</code>은 static이므로 <b>클래스명.메서드()</b>로 객체 없이 바로 부를 수 있죠. 1일차에 <code>testMethod()</code>에 static을 붙여 해결했던 그 문제를, 이번엔 <b>객체를 만드는 쪽</b>으로 풀어 본 것입니다. → <a href="#oop-05">🧱 05. static vs non-static과 메모리 3영역</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ 메서드 유형 — (매개변수 O/X) × (반환값 O/X)</h4>
+        <p>메서드는 결국 네 종류로 나뉩니다. <code>test04()</code>처럼 <b>받지도 돌려주지도 않고 실행만</b> 하는 <code>void</code>형, <code>test03()</code>처럼 <b>받지 않고 돌려주기만</b> 하는 형, <code>test05(int a, int b)</code>처럼 <b>받아서 계산해 돌려주는</b> 형이 대표적입니다. 반환타입을 <code>void</code>가 아닌 것으로 선언했다면 <b>모든 경로에서 반드시 그 타입을 <code>return</code></b> 해야 하고, 그러지 않으면 컴파일 에러가 납니다. <code>test05</code>는 두 수 중 큰 값을 돌려주는데, 여기서 <code>res</code>를 미리 <code>0</code>으로 초기화해 둔 것도 "지역변수는 초기화하지 않으면 쓸 수 없다"는 규칙 때문입니다. → <a href="#oop-03">🧱 03. 메서드의 구조 — 리턴타입 · parameter · argument</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_StarView.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260805.day03;
+
+public class D1_StarView {
+    public static void main(String[] args) {
+        for (int i = 0; i &lt; 6; i++) {
+            for (int j = 0; j &lt; i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+        for (int i = 1; i &lt;= 6; i++) {
+            for (int j = 6; j &gt; i; j--) {
+                System.out.print("*");
+            }
+            System.out.println(" ");
+        }
+
+        System.out.println();
+
+        int line = 5;
+        for (int i = 0; i &lt; line; i++) {
+            for (int j = 0; j &lt; line - 1 - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k &lt; i * 2 + 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+        for (int i = 0; i &lt; 6; i++) {
+            for (int j = 0; j &lt; 6 - i - 1; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k &lt; i; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+        for (int i = 0; i &lt; 6; i++) {
+            for (int k = 0; k &lt; i; k++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j &lt; 6 - i - 1; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+
+        // 10 8 6 4 2 -&gt; 10 + (n-1)* -2
+
+        int a = 5;
+        for (int i = a; i &gt; 0; i--) {
+            for (int k = 0; k &lt; 5 - i; k++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j &lt; i * 2 - 1; j++) {
+                System.out.print("*");
+            }
+
+            System.out.println();
+        }
+
+        System.out.println();
+
+        int c = 5;
+        for (int i = 0; i &lt; c; i++) {
+            for (int j = c; j &gt; i + 1; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k &lt; 2 * i + 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i = 4; i &gt; 0; i--) {
+            for (int j = 0; j &lt; 5 - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k &lt; i * 2 - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+
+        // 등차수열공식으로 하면 ++로 다 할 수 있음
+        for (int i = 0; i &lt; 5; i++) {
+            for (int j = 0; j &lt; 5 - (i + 1); j++) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k &lt; (i + 1) * 2 - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+    }
+
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_MethodTest.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260805.day03;
+
+public class D2_MethodTest {
+    // main 메서드는 프로그램을 실행시키는 진입점(시작점)
+    // 구현된 메서드를 실행시켜주는 메서드
+    public static void main(String[] args) {
+        // static 메서드 사용: 클래스명.메서드() 호출해서 사용
+        D2_MethodTest.test01();
+
+        // non-static 메서드 사용: 객체생성후 메서드 호출
+        D2_MethodTest methodTest = new D2_MethodTest();
+        methodTest.test02();
+    }
+
+    // 메서드의 유형
+    // 1.static과 non-static 유형
+    public static void test01() {
+        System.out.println("static 메서드");
+        // test01() 은 이미 메모리에 올라가 있음
+        // test02() 는 메모리에 올라가 있지 않음
+        // non-static을 사용못함-&gt;객체생성이나, static으로 만들면 사용가능
+        D2_MethodTest methodTest = new D2_MethodTest();
+        methodTest.test02();
+    }
+
+    // non-static 메서드 -&gt; 객체생성해야지만 사용 가능
+    public void test02() {
+        System.out.println("non-static 메서드");
+    }
+
+    // 2. 매개변수와 반환유무에 따른 유형
+    // 매개변수 없음, 반환값 없음
+    public int test03() {
+        return 0;// 반환타입을 설정했다면 반드시 해당 타입을 반환
+    }
+
+    // 반환타입X는 코드만 실행하고 끝내는 경우
+    public void test04() {
+
+    }
+
+    // 3. 파라미터 O/X : 외부로부터 값을 받아서 뭔가 실행하려고
+    public int test05(int a, int b) {
+        int res = 0;
+        if (a &gt; b) {
+            res = a;
+        } else {
+            res = b;
+        }
+        return res;
+    }
+
+}</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">3일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li>별 찍기의 기본형: <b>바깥 for = 줄, 안쪽 for = 그 줄에 찍을 개수</b>. 도형이 달라도 개수 식만 바뀐다.</li>
+        <li>오른쪽 정렬·피라미드는 <b>공백 for문을 별 for문 앞에</b> 둔다. 피라미드 = 공백 <code>n-1-i</code>개 + 별 <code>2i+1</code>개.</li>
+        <li>줄마다 개수가 일정하게 변하면 <b>등차수열 <code>a + (n-1)d</code></b> — <code>i--</code>로 거꾸로 도는 대신 식을 바꿔 <code>i++</code>로 통일할 수 있다.</li>
+        <li>다이아몬드 = 정피라미드 + 역피라미드. 이어 붙일 때 <b>가운데 줄이 두 번 찍히지 않게</b> 시작값을 한 칸 당긴다.</li>
+        <li><code>main</code>은 프로그램의 <b>진입점</b>이며 <code>static</code>이다.</li>
+        <li>static 메서드는 <b>클래스명.메서드()</b>로, non-static 메서드는 <b>객체 생성 후 참조변수.메서드()</b>로 호출한다.</li>
+        <li>static 메서드 안에서 non-static 메서드를 쓰려면 <b>객체를 만들어야</b> 한다(또는 그 메서드도 static으로).</li>
+        <li>반환타입을 선언했으면 <b>반드시 그 타입을 <code>return</code></b>해야 하고, 실행만 하고 끝낼 때는 <code>void</code>를 쓴다.</li>
+        <li>메서드 유형 = (매개변수 있음/없음) × (반환값 있음/없음) 네 가지 조합.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>test03()</code> 위에 달린 주석 <code>// 매개변수 없음, 반환값 없음</code>은 실제 코드(<code>public int test03()</code>)와 어긋납니다 — 매개변수는 없지만 <b>반환값은 있는</b> 형이죠. 주석을 코드와 함께 고치는 습관이 시험에서도, 나중 협업에서도 그대로 점수가 됩니다. 그리고 <code>test05</code>의 <code>if~else</code>는 삼항연산자로 <code>return a &gt; b ? a : b;</code> 한 줄로 줄일 수 있습니다. 2일차 별 찍기에서 <code>(i == a) ? i : i + ","</code>를 이미 써 봤으니, 같은 도구를 <b>반환에도 쓸 수 있다</b>는 걸 기억해 두세요.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260805/day03/D1_StarView.java" target="_blank" rel="noopener">D1_StarView.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260805/day03/D2_MethodTest.java" target="_blank" rel="noopener">D2_MethodTest.java</a>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day04">
+  <div class="note-head">
+    <span class="note-num">4일차</span>
+    <h3>2026-08-06 · 클래스와 객체 · 생성자 오버로딩 · 캡슐화 · Object 클래스</h3>
+    <div class="note-tags"><span class="tag">ClassTest</span><span class="tag">Constructor</span><span class="tag">this()</span><span class="tag">private</span><span class="tag">getter/setter</span><span class="tag">Object</span><span class="tag">equals</span><span class="tag">유클리드 호제법</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>문법에서 <b>객체지향</b>으로 넘어간 날 — 멤버필드가 객체마다 따로인지(인스턴스) 클래스가 공유하는지(static)를 눈으로 확인하고, <b>생성자 오버로딩과 <code>this()</code>·<code>super()</code></b>, <code>private</code> + <b>getter/setter</b>로 감싸는 캡슐화, 모든 클래스의 부모인 <b><code>Object</code>의 getClass · toString · hashCode · equals</b>까지 훑었고, 실습과제의 약수 · 최대공약수 · 최소공배수 · 친화수 · 완전수를 <b>메서드로 분리해</b> 한 파일에 구현했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>클래스는 <b>붕어빵 틀</b>, 객체는 그 틀로 구워 나온 <b>붕어빵 하나하나</b>입니다. 생성자는 굽는 순간 "팥이요, 슈크림이요"를 정하는 <b>주문서</b>고, 생성자 오버로딩은 주문서 양식을 여러 개 만들어 두는 것(아무 말 없으면 기본 맛, 크기만 말하면 크기만 바꿔 굽기). <code>private</code>은 "속 재료는 손대지 마세요"라고 포장해 두는 것이고, getter/setter는 그 포장을 여는 <b>정해진 창구</b>입니다. 창구를 거치게 만들면 "비밀번호를 아는 사람에게만 알려준다" 같은 조건을 끼워 넣을 수 있어요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D2_ClassTest — 인스턴스 변수 vs static 변수</h4>
+        <p>같은 클래스에 <code>public int number;</code>(인스턴스 변수)와 <code>public static int staticNumber;</code>(클래스 변수)를 나란히 두고, 객체를 <b>두 개</b> 만들어 값을 다르게 넣어 봤습니다. 결과는 <code>classTest.number</code>는 20, <code>classTest2.number</code>는 40으로 <b>따로 관리</b>되지만, <code>D2_ClassTest.staticNumber = 50;</code> 한 번에 두 객체가 모두 50을 봅니다 — <b>static은 객체가 아니라 클래스에 하나만 존재</b>하기 때문입니다. 메서드도 마찬가지여서 <code>methodTest()</code>는 <code>객체명.메서드()</code>로, <code>stmethodTest()</code>는 <code>클래스명.메서드()</code>로 호출했습니다. → <a href="#oop-05">🧱 05. static vs non-static과 메모리 3영역</a> · <a href="#oop-01">🧱 01. 클래스 · 객체 · 인스턴스</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② 생성자 오버로딩과 <code>this(...)</code> — 초기화를 한 곳으로 모으기</h4>
+        <p>생성자는 <b>객체가 만들어지는 순간 딱 한 번 실행되는 초기화 코드</b>입니다. 아무것도 안 쓰면 컴파일러가 기본 생성자를 만들어 주지만, <b>파라미터가 있는 생성자를 하나라도 직접 만들면 기본 생성자는 더 이상 자동으로 생기지 않아</b> 직접 선언해야 합니다(<code>D2_ClassTest</code>·<code>D4_Constructor</code> 둘 다 이 이유로 기본 생성자를 명시했습니다). 그리고 기본 생성자 안에서 <code>this(10)</code>, <code>this(24, "검정색")</code>처럼 <b>자기 자신의 다른 생성자를 호출</b>해 초기화 로직을 한 곳에 모았습니다 — 이때 <code>this(...)</code>는 <b>반드시 생성자의 첫 줄</b>이어야 합니다. 파라미터 이름과 필드 이름이 같을 때 <code>this.size = size;</code>로 구분하는 것도 같은 <code>this</code>지만 <b>"이 객체 자신의 필드"</b>라는 다른 쓰임입니다. → <a href="#oop-07">🧱 07. 생성자와 생성자 오버로딩</a> · <a href="#oop-06">🧱 06. 오버로딩</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ <code>super()</code>와 <code>this()</code>는 함께 쓸 수 없다</h4>
+        <p><code>D1_divisor</code>의 생성자에 <code>super();</code>를 직접 써 보고, 그 아래 <code>// this(); // 같이 작성할 수 없다</code>를 주석으로 남긴 부분이 오늘의 중요한 한 줄입니다. <b>생성자의 첫 줄에는 <code>super(...)</code>나 <code>this(...)</code> 둘 중 하나만</b> 올 수 있습니다(둘 다 "첫 줄" 자리를 요구하니까요). 아무것도 쓰지 않으면 컴파일러가 <b><code>super()</code>를 몰래 넣어</b> 줍니다. 그런데 부모를 선언한 적이 없는데 무슨 부모냐 하면 — <b>자바의 모든 클래스는 자동으로 <code>Object</code>를 상속</b>하기 때문입니다. → <a href="#oop-20">🧱 20. this와 super, 참조타입 형 변환</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ D4_Constructor — private과 getter/setter (캡슐화)</h4>
+        <p>TV를 클래스로 만들면서 <code>size</code>는 <code>private</code>, <code>color</code>는 <code>public</code>으로 두고 차이를 확인했습니다. main에서 <code>tv4.color = "파란색";</code>은 바로 되지만 <code>tv4.size = 24;</code>는 <b>컴파일 자체가 안 되고</b> <code>tv4.setSize(24);</code>를 거쳐야 합니다. 그럼 왜 굳이 막느냐 — <code>getSize(int pw)</code>가 그 답을 보여줍니다. 비밀번호가 <code>1234</code>일 때만 값을 돌려주고 아니면 <code>-1</code>을 반환하죠. <b>필드를 직접 열어 두면 아무 값이나 들어오고 아무나 읽지만, 메서드로 감싸면 조건을 끼워 넣을 수 있다</b> — 이게 캡슐화를 하는 이유 그 자체입니다. → <a href="#oop-04">🧱 04. 접근 제한자 4가지</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>⑤ D3_ObjectTest — Object의 4대 메서드와 String pool</h4>
+        <p><code>getClass()</code>는 <b>패키지.클래스명</b>을, <code>toString()</code>은 재정의하지 않았을 때 <b><code>패키지.클래스명@해시코드(16진수)</code></b>를, <code>hashCode()</code>는 같은 값을 <b>10진수</b>로 돌려줍니다. 그리고 <code>equals()</code>는 <b>기본이 주소 비교</b>라서 <code>ot.equals(str2)</code>가 <code>false</code>인 게 당연합니다. 여기서 String이 특별한 이유가 드러나는데, <b>String은 equals를 "내용 비교"로 재정의해 두었기</b> 때문입니다. 이어서 <code>String s = "a"; String s2 = "a";</code>는 <code>s == s2</code>가 <b><code>true</code></b> — 리터럴은 <b>String pool에 하나만 만들어 두고 공유</b>하니까요. 반면 <code>new String("a")</code>는 힙에 새 객체를 만들어 <code>s == s3</code>는 <code>false</code>, <code>s.equals(s3)</code>는 <code>true</code>가 됩니다. <b>== 는 주소, equals는 내용</b> — 시험 단골입니다. → <a href="#oop-02">🧱 02. Object 클래스와 4대 메서드</a> · <a href="#oop-12">🧱 12. String pool 메모리 구조</a> · <a href="#oop-14">🧱 14. == 와 equals의 차이</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>⑥ D1_divisor — 실습과제를 "메서드로 쪼개서" 풀기</h4>
+        <p>3일차에 배운 메서드를 바로 써먹은 파일입니다. 약수(<code>divisor</code>) → 최대공약수(<code>getGcd</code>·<code>getGcd1</code>·<code>getGcd2</code>) → 최소공배수(<code>lowestMultiple</code>) → 진약수 합(<code>sumDivisor</code>) → 친화수(<code>amicable</code>) · 완전수(<code>perfectnum</code>)로, <b>앞에서 만든 메서드를 뒤에서 재사용</b>하는 구조가 깔끔하게 잡혔습니다. 최대공약수는 <b>유클리드 호제법 세 가지 버전</b>으로 만들었는데, ⓐ 나눗셈 반복(<code>a % b</code>를 <code>b</code>가 0이 될 때까지), ⓑ 큰 수에서 작은 수를 계속 빼기, ⓒ 같은 식을 <b>재귀 호출</b>(<code>getGcd2(b, a % b)</code>)로 옮긴 것입니다 — 셋 다 결과는 같고, 재귀 버전이 가장 짧습니다. 최소공배수는 <code>(a * b) / gcd</code> 공식을 그대로 옮겼고, 친화수는 <code>i != sumDivisor(i) &amp;&amp; i == sumDivisor(sumDivisor(i))</code>로 <b>"자기 자신(=완전수)은 제외"</b>하는 조건까지 정확히 넣었습니다. static 메서드는 바로 호출하고 non-static인 <code>amicable</code>·<code>perfectnum</code>은 객체 <code>d</code>를 만들어 호출한 것도 3일차 내용의 복습입니다. → <a href="#prac-01">🧪 1번 약수</a> · <a href="#prac-02">🧪 2번 최대공약수</a> · <a href="#prac-03">🧪 3번 최소공배수</a> · <a href="#prac-04">🧪 4번 친화수</a> · <a href="#prac-05">🧪 5번 완전수</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_ClassTest.java (수업 실습 원본 — 클래스 쪽)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D2_ClassTest {
+    // 멤버필드: 클래스에서 데이터를 저장해서 사용하는 저장공간 개념
+    // -&gt; 객체가 사라지지 않는 한 항상 유지 됨
+    public int number; // 인스턴스 멤버필드 (변수)
+    public static int staticNumber; // 클래스 변수
+
+    // 기본 생성자(deafult생성자) 파라미터 없음, 생략 가능,
+    // //멤버필드 초기화나 초기 실행할 작업
+    // 아래와 같이 파라미터가 있는 생성자를 추가하면 default생성자 생략 못함
+    public D2_ClassTest() {
+        // 자기 자신의 생성자 호출
+        // 객체 생성할때 default 생성자를 호출하면 10으로 초기화함
+        // this.number10;
+        this(10);
+    }
+
+    // 생성자 오버로딩: 파라미터의 개수와 타입을 다르게 해서 생성자나 메서드 이름을 같게 사용
+    public D2_ClassTest(int number) {
+        // super:부모, this:자기자신 클래스
+        this.number = number; // this-&gt;이 객체 자신을 의미. 멤버필드 number를 지칭
+    }
+
+    // 메서드: 인스턴스 메서드
+    public void methodTest() {
+        System.out.println("인스턴스에 관련된 기능을 정의한다");
+    }
+
+    // 메서드: 클래스 메서드
+    public static void stmethodTest() {
+        System.out.println("메서드영역 메모리에 생성되어 공통기능을 정의한다.");
+    }
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_ClassTestMain.java (수업 실습 원본 — 실행 쪽)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D2_ClassTestMain {
+    public static void main(String[] args) {
+        // 참조타입 객체명 생성자
+        D2_ClassTest classTest = new D2_ClassTest(); // Heap 메모리에 생성
+        classTest.methodTest(); // 객체명.메서드로 호출 -&gt; 인스턴스 메서드
+        classTest.number = 20; // 객체명.멤버필드로 호출 -&gt; 인스턴스 변수
+
+        D2_ClassTest.stmethodTest();// 클래스명.메서드로 호출 -&gt; 정적 메서드
+
+        // 객체 생성을 또 할 수 있다.
+        D2_ClassTest classTest2 = new D2_ClassTest(30);
+        classTest2.number = 40;
+
+        // 인스턴스변수는 각각의 해당 객체에서 관리됨
+        System.out.println("classTest.number:" + classTest.number);
+        System.out.println("classTest2.number:" + classTest2.number);
+
+        // static 변수는 클래스 전체에서 공유됨
+        D2_ClassTest.staticNumber = 50;
+        System.out.println("classTest.staticNumber:" + classTest.staticNumber);
+        System.out.println("classTest2.staticNumber:" + classTest2.staticNumber);
+    }
+
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D4_Constructor.java (수업 실습 원본 — 생성자 오버로딩 · 캡슐화)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D4_Constructor {
+
+    // 티비객체
+    // private은 클래스 내부에서만 접근 가능
+    private int size = 0; // 중요한 데이터 --&gt;private 선언
+    public String color = "검정석"; // 색상
+
+    // default 생성자: 단독으로 사용한다면 생략 가능 -&gt; 오버로딩을 하면 생략 못함
+    public D4_Constructor() {
+        // this.size = 24;
+        // this.color = "검정색";
+        // System.out.println(); //생성자는 가장 처음에 실행되어야 하므로 첫줄에 작성
+        this(24, "검정색"); // 생성자 호출은 반드시 첫줄에 작성
+    }
+
+    // 생성자 오버로딩
+    public D4_Constructor(int size) {
+        // 멤버필드size = 파라미터 size
+        this.size = size;
+    }
+
+    public D4_Constructor(int size, String color) {
+        // 멤버필드size = 파라미터 size
+        this.size = size;
+        this.color = color;
+    }
+
+    // private으로 선언한 맴버필드는 어떻게 접근할까?-&gt;getter, setter메서드를 사용한다
+
+    public int getSize(int pw) {
+        // 조건에 따라 값을 반환한다. ex: 비밀번호를 알고 있다면 반환
+        if (pw == 1234) {
+            return size;
+        } else {
+            System.out.println("잘못된 비밀번호");
+            return -1;
+        }
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_ConstructioMain.java (수업 실습 원본 — 생성자 호출 비교)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D1_ConstructioMain {
+    public static void main(String[] args) {
+
+        D4_Constructor tv = new D4_Constructor();
+        D4_Constructor tv2 = new D4_Constructor(70);
+        D4_Constructor tv3 = new D4_Constructor(60, "노랑색");
+        // 생성자 이용 안하고, 직접 멤버필드에 접근해서 초기화 할경우 불편하다
+        D4_Constructor tv4 = new D4_Constructor();
+        tv4.color = "파란색";
+        tv4.setSize(24); // private이라 메서드 통해 값 추가
+    }
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D3_ObjectTest.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D3_ObjectTest {
+    public static void main(String[] args) {
+        // Object 클래스: 최상위 객체
+        // getClass(): 클래스의 위치를 반환한다. -&gt; 패키지.클래스명
+        String str = new String("Object");
+        String str2 = "ObjectLit"; // 주로 사용되는 방식
+        System.out.println(str.getClass());
+        System.out.println(str2.getClass());
+
+        D3_ObjectTest ot = new D3_ObjectTest();
+        System.out.println(ot.getClass());
+
+        // toString(): 문자열로 반환한다
+        // target 객체에 "위치@hashcode(16진수)" 반환
+        System.out.println(ot.toString());
+        System.out.println(str.toString());
+
+        // hashcode(): 객체의 hashcode를 반환한다. -&gt; 10진수로 표현
+        System.out.println(ot.hashCode());
+
+        // 객체를 비교할떄 hashcode로 비교한다. --&gt; 일반적인 객체 비교할때는 의미가 없음
+        // --&gt; equals()가 hashcode()를 이용해서 객체를 비교한다.
+        System.out.println(ot.equals(str2));
+
+        // 리터럴 방식 선언(String)
+        String s = "a";
+        String s2 = "a";
+        System.out.println(s == s2); // 비교연산자: 객체에 주소로 비교
+        System.out.println(s.equals(s2)); // hashcode로 비교
+
+        // 객체 생성으로 선언(new String())
+        String s3 = new String("a");
+        System.out.println(s == s3); // false //메모리 주소가 달라서
+        System.out.println(s.equals(s3)); // true --&gt; 내용물이 같은지 봐서
+
+    }
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_divisor.java (수업 실습 원본 — 약수 · 최대공약수 · 친화수 · 완전수)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260806.day04;
+
+public class D1_divisor {
+
+    public D1_divisor() {
+        // 기본적으로 생성자 호출은 맨 윗줄에 작성
+        super(); // 부모생성자를 호출 -&gt;Object 클래스가 부모임. 매개변수가 없으면 기본적으로 Object()호출
+        // this(); // 같이 작성할 수 없다
+    }
+
+    public static void main(String[] args) {
+        D1_divisor d = new D1_divisor();
+        d.divisor(12);
+        System.out.println("최대공약수1:" + getGcd1(12, 18));
+        System.out.println("최대공약수2:" + getGcd2(12, 18));
+        lowestMultiple(12, 18);
+
+        // amicable은 non-static메서드이기떄문에 객체생성해서 객체명.메서드로 호출한다.
+        d.amicable(1, 1000);
+        d.perfectnum(1, 1000);
+    }
+
+    // 약수를 구하는 메서드
+    public void divisor(int a) {
+        for (int i = 1; i &lt; a + 1; i++) {
+            if (a % i == 0) {
+                System.out.print((i == a) ? i : i + ",");
+            }
+        }
+        System.out.println();
+    }
+
+    // 최대공약수 구하는 메서드 유클리드 호제법
+    public static int getGcd(int a, int b) {
+        while (b != 0) {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
+    }
+
+    // 뺄셈 방식 유클리드 호제법
+    public static int getGcd1(int a, int b) {
+        while (a != b) {
+            if (a &gt; b) {
+                a = a - b;
+            } else {
+                b = b - a;
+            }
+        }
+        return a;
+    }
+
+    // 유클리드 호제법 재귀호출
+    public static int getGcd2(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return getGcd2(b, a % b);
+    }
+
+    // 최소공배수
+    public static void lowestMultiple(int a, int b) {
+        int gcd = getGcd1(a, b);
+        int lowestMultiple = (a * b) / gcd;
+        System.out.println("최소공배수:" + lowestMultiple);
+    }
+
+    // 진약수 합
+    public static int sumDivisor(int a) {
+        int sum = 0;
+        for (int i = 1; i &lt; a; i++) {
+            if (a % i == 0) {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+
+    // 친화수
+    public void amicable(int s, int e) {
+        for (int i = s; i &lt;= e; i++) {
+            if (i != sumDivisor(i) &amp;&amp; i == sumDivisor(sumDivisor(i))) {
+                System.out.printf("%d와 %d는 친화수 관계입니다.\n", i, sumDivisor(i));
+            }
+        }
+    }
+
+    // 완전수
+    public void perfectnum(int s, int e) {
+        for (int i = s; i &lt;= e; i++) {
+            if (i == sumDivisor(i)) {
+                System.out.println(i + "는 완전수입니다.");
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">4일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li>클래스 = 설계도, 객체(인스턴스) = <code>new</code>로 <b>Heap에 실제로 만들어진 것</b>.</li>
+        <li><b>인스턴스 변수는 객체마다 따로</b>, <b>static 변수는 클래스 전체가 공유</b>한다.</li>
+        <li>인스턴스 메서드는 <code>객체명.메서드()</code>, 클래스(static) 메서드는 <code>클래스명.메서드()</code>로 호출한다.</li>
+        <li>생성자는 <b>객체 생성 시 한 번 실행</b>되며, 이름은 클래스명과 같고 <b>반환타입이 없다</b>.</li>
+        <li>파라미터 있는 생성자를 직접 만들면 <b>기본 생성자는 자동으로 생기지 않는다</b> → 필요하면 직접 선언.</li>
+        <li>생성자 첫 줄에는 <code>this(...)</code> 또는 <code>super(...)</code> <b>둘 중 하나만</b> 올 수 있다.</li>
+        <li>모든 클래스는 자동으로 <b><code>Object</code>를 상속</b>하고, 생략된 <code>super()</code>는 그 <code>Object()</code>를 부른다.</li>
+        <li><code>this.필드 = 파라미터</code>로 <b>같은 이름의 필드와 파라미터를 구분</b>한다.</li>
+        <li><code>private</code> 필드는 <b>getter / setter를 통해서만</b> 접근 — 그 안에 조건 검사를 넣을 수 있는 게 캡슐화의 이점.</li>
+        <li><code>toString()</code>의 기본 형태는 <b><code>패키지.클래스명@해시코드(16진수)</code></b>, <code>hashCode()</code>는 같은 값을 <b>10진수</b>로 반환.</li>
+        <li><b><code>==</code>는 주소 비교, <code>equals()</code>는 내용 비교</b>(String 등에서 재정의된 경우). Object의 기본 <code>equals</code>는 주소 비교다.</li>
+        <li>문자열 <b>리터럴은 String pool에서 공유</b>되어 <code>==</code>도 <code>true</code>, <code>new String()</code>은 새 객체라 <code>false</code>.</li>
+        <li>유클리드 호제법: <b><code>gcd(a, b) = gcd(b, a % b)</code>, <code>b</code>가 0이면 <code>a</code>가 답</b>. 최소공배수 = <code>a * b / gcd</code>.</li>
+        <li>진약수 합 <code>sumDivisor(n)</code> 기준: <b>완전수는 <code>n == sumDivisor(n)</code></b>, <b>친화수는 서로의 진약수 합이 상대가 되는 쌍</b>(자기 자신은 제외).</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>오늘 코드에서 눈여겨볼 곳 세 군데. ① <code>D4_Constructor</code>의 필드 초기값이 <code>"검정석"</code>으로 <b>오타</b>가 나 있는데, <code>new D4_Constructor(70)</code>처럼 <b>size만 받는 생성자</b>로 만들면 color가 그 오타 값 그대로 남습니다. 이 생성자도 <code>this(size, "검정색");</code>으로 위임하면 기본값을 한 곳에서만 관리할 수 있어요. ② <code>getSize(int pw)</code>는 "조건을 걸 수 있다"는 걸 보여주기엔 좋지만, <b>getter의 일반 규약은 "파라미터 없이 값만 반환"</b>입니다 — 시험에서는 <code>public int getSize() { return size; }</code> 형태를 기억하세요. ③ 뺄셈 방식 <code>getGcd1(a, b)</code>은 <code>a</code>나 <code>b</code>에 <b>0이 들어오면 <code>a != b</code>가 끝나지 않아 무한 루프</b>에 빠집니다. 나눗셈 버전 <code>getGcd</code>·재귀 버전 <code>getGcd2</code>는 <code>b == 0</code>에서 정상 종료하니, 실전에서는 이쪽이 안전합니다.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D1_divisor.java" target="_blank" rel="noopener">D1_divisor.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTest.java" target="_blank" rel="noopener">D2_ClassTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTestMain.java" target="_blank" rel="noopener">D2_ClassTestMain.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D3_ObjectTest.java" target="_blank" rel="noopener">D3_ObjectTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D4_Constructor.java" target="_blank" rel="noopener">D4_Constructor.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D1_ConstructioMain.java" target="_blank" rel="noopener">D1_ConstructioMain.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/practice/prac02.java" target="_blank" rel="noopener">prac02.java</a>
+    </div>
+  </div>
+</article>
     </div>
   </section>
 
