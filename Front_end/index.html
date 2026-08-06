@@ -7075,7 +7075,7 @@ export default function DashboardPage() {
       <pre><code class="language-css">/* Tailwind v4 설정 — 파일 맨 위 한 줄로 유틸리티 클래스 전부 활성화 */
 @import "tailwindcss";
 
-/* <html>에 class="dark"가 있을 때만 dark: 접두사 클래스를 활성화하는 규칙 */
+/* &lt;html&gt;에 class="dark"가 있을 때만 dark: 접두사 클래스를 활성화하는 규칙 */
 @variant dark (&:where(.dark, .dark *));
 
 /* 커스텀 색 — bg-stock-card, text-stock-cyan 등 클래스를 자동 생성 */
@@ -7127,7 +7127,7 @@ export default function DashboardPage() {
 import { useEffect } from 'react'
 import useStockStore from '@/app/store/useStockStore'
 
-// 화면에는 아무것도 그리지 않고, theme가 바뀔 때마다 <html> 태그의 class만 조작한다
+// 화면에는 아무것도 그리지 않고, theme가 바뀔 때마다 &lt;html&gt; 태그의 class만 조작한다
 export default function ThemeWrapper({ children }) {
   const theme = useStockStore((s) =&gt; s.theme)
 
