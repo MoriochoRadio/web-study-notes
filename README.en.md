@@ -2,46 +2,51 @@
 
 🇰🇷 [한국어](README.md) · 🇬🇧 English
 
-A repository organizing the practice code and study notes from a job academy course.
-Since 2026-08, the frontend and backend tracks are managed in separate folders.
+This repository keeps both the original practice code from a job academy course and review notes reorganized for rapid study. Since 2026-08, the frontend and backend tracks have been separated; each track contains source exercises, a dashboard, and its own guide.
 
 👉 **[Go to the study dashboard](https://moriochoradio.github.io/web-study-notes/)**
 
-## Scope
+## Scope and Current Review
 
-| Track | Contents | Status |
+As of the repository review on 2026-08-13, the frontend curriculum is reflected in both the exercise source and the study dashboard. Backend materials continue to accumulate by class date as the course progresses.
+
+| Track | Covered material | Status |
 | --- | --- | --- |
-| Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units + graduation project StockDash | ✅ Complete |
-| Backend | Java — daily class exercises + prep/review notes (concept cards, 12 practice problems, 102 exam-prep questions) | 🔄 In progress (started 2026-08-03) |
+| Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
+| Backend | Java daily exercises · concept cards · 12 practice problems · 102 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
-## Why Organize It This Way — Q&A
+> **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
 
-**Q. Why build a dashboard instead of just piling up code?**
-Because the goal is review. Every note follows the format "one-line summary → in plain words → concept → annotated code → key takeaways",
-and search, flashcards, progress tracking, and a wrong-answer notebook make things easy to look up again later.
+## Review and Verification
 
-**Q. Why split the folders into Front_end / Back_end?**
-Because there are two tracks. Each folder has its own dashboard (`index.html`) and README,
-and the root `index.html` only handles a redirect for backward-compatible links.
+The dashboard supports search, collapsing/expanding cards, dark mode, five-minute flashcards, progress tracking, and a wrong-answer notebook to reduce the time needed to find a topic again. After each class, the original exercise and its review card are checked to ensure they point to the same lesson.
 
-**Q. Is the code in the notes verified?**
-Yes. All the Java code was compiled and run with `javac` to confirm the results (actual console output is attached in the dashboard),
-and the frontend notes are also verified by rendering on a local server before pushing.
+| Target | Verification | Location |
+| --- | --- | --- |
+| Java exercises | Compile and run with `javac` | `Back_end/` code and backend dashboard |
+| React and Next.js exercises | After installing dependencies, run `npm run lint`, `npm run build`, and verify locally | `Front_end/4.react/lessons/` |
+| Static dashboards | Check links, search, theme behavior, and mobile layout | Root and track-level `index.html` files |
+| Version control | Commit source and documentation only; exclude generated and secret files | `.gitignore`, `Front_end/.gitignore` |
 
 ## Folder Structure
 
-```
+```text
 .
-├── index.html    # Redirects to the Front_end/ dashboard (backward-compatible links)
-├── Front_end/    # Frontend track (HTML · CSS · JS · React/Next.js — complete)
-│   ├── index.html        # The study dashboard itself
-│   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # Practice code
+├── index.html    # Study-track hub; legacy hash links remain compatible with Front_end/
+├── .nojekyll     # Serves static files on GitHub Pages without Jekyll processing
+├── Front_end/    # Frontend track (HTML · CSS · JS · React/Next.js)
+│   ├── index.html        # Frontend study dashboard
+│   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # Original practice code
 │   └── slides/           # Lecture materials (PPT)
-└── Back_end/     # Backend (Java) track (in progress — started 2026-08-03)
-    ├── index.html            # Java backend study note dashboard
-    ├── java_edu_project/     # Class practice code (packages by date)
-    └── *.pptx / *.pdf        # Course materials, assignments
+└── Back_end/     # Backend (Java) track
+    ├── index.html            # Java backend study-note dashboard
+    ├── java_edu_project/     # Class exercises organized by date
+    └── *.pptx / *.pdf        # Course materials and assignments
 ```
 
-For details on each track, see [`Front_end/README.md`](Front_end/README.md) ·
-[`Back_end/README.md`](Back_end/README.md).
+## Workflow for a New Lesson
+
+First add the original practice code and minimal run instructions to the appropriate track. Then add a review card and a source link to the dashboard, and update its statistics, learning journey, and review/exam scope together. Finally, verify the lesson runtime and static-page behavior, then commit with a message that clearly explains the change.
+
+For track-specific details, see [`Front_end/README.md`](Front_end/README.md) and [`Back_end/README.md`](Back_end/README.md).

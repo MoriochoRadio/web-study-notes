@@ -22,7 +22,10 @@
     .wrap{width:100%;max-width:720px;}
     .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
     h1{margin:6px 0 4px;font-size:30px;letter-spacing:-.02em;}
-    .sub{margin:0 0 28px;color:var(--muted);font-size:15px;}
+    .sub{margin:0 0 14px;color:var(--muted);font-size:15px;}
+    .snapshot{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 28px;}
+    .snapshot span{padding:4px 9px;border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--muted);background:var(--panel);}
+    .snapshot b{color:var(--text);}
     .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
     @media (max-width:600px){ .cards{grid-template-columns:1fr;} }
     a.card{display:block;padding:22px 20px;background:var(--panel);border:1px solid var(--border);
@@ -37,9 +40,14 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="eyebrow">📚 취업아카데미</div>
+    <div class="eyebrow">JOB ACADEMY · STUDY ARCHIVE</div>
     <h1>학습 노트</h1>
-    <p class="sub">수업에서 실습한 코드를 바탕으로 정리한 복습 노트입니다. 공부할 과정을 선택하세요.</p>
+    <p class="sub">수업에서 작성한 원본 실습 코드와 복습 노트를 과정별로 정리했습니다. 공부할 과정을 선택하세요.</p>
+    <p class="snapshot" aria-label="저장소 최신 반영 현황">
+      <span><b>프런트엔드</b> 51개 실습 · 완료</span>
+      <span><b>React·Next.js</b> 13개 레슨 + 졸업 과제</span>
+      <span><b>저장소 점검</b> 2026-08-13</span>
+    </p>
     <div class="cards">
       <a class="card fe" href="Front_end/">
         <span class="ico">🎨</span>
@@ -52,7 +60,7 @@
         <span>자바 기초 · 객체지향 · 활용 · 네트워크 — 54개 항목 + 실습과제 12문제 + 시험 대비</span>
       </a>
     </div>
-    <footer>Claude와 함께 수동으로 최신화하는 개인 복습 노트입니다.</footer>
+    <footer>GitHub Pages로 제공하는 개인 학습 아카이브입니다. 원본 실습 코드와 복습 노트를 함께 관리합니다.</footer>
   </div>
 </body>
 </html>
