@@ -29,6 +29,7 @@ The dashboard supports search, collapsing/expanding cards, dark mode, five-minut
 | Static dashboards | Check links, search, theme behavior, and mobile layout | Root and track-level `index.html` files |
 | Internal links and assets | Run `python3 scripts/check_internal_links.py` to validate local paths | `scripts/check_internal_links.py` |
 | Frontend inventory | Run `python3 scripts/verify_frontend_inventory.py` to compare card, header, and statistic counts | `scripts/verify_frontend_inventory.py` |
+| Backend inventory | Run `python3 scripts/verify_backend_inventory.py` to compare class, concept, assignment, journey, and statistic counts | `scripts/verify_backend_inventory.py` |
 | Automated verification | Automatically validate links and inventory when HTML, documentation, or checker files change | `.github/workflows/verify-study-notes.yml` |
 | Version control | Commit source and documentation only; exclude generated and secret files | `.gitignore`, `Front_end/.gitignore` |
 
@@ -44,6 +45,12 @@ After adding a frontend lesson card, also run the command below. It compares the
 
 ```bash
 python3 scripts/verify_frontend_inventory.py
+```
+
+After adding a backend class day, Java concept card, practice assignment, or learning-journey step, run the command below. It checks that each section's item count matches its dashboard statistic card.
+
+```bash
+python3 scripts/verify_backend_inventory.py
 ```
 
 ## Automated Verification
@@ -69,6 +76,6 @@ Manual checks remain available, and the same checks now run automatically for `m
 
 ## Workflow for a New Lesson
 
-First add the original practice code and minimal run instructions to the appropriate track. Then add a review card and a source link to the dashboard, and update its statistics, learning journey, and review/exam scope together. Finally, verify the lesson runtime and static-page behavior, run `check_internal_links.py` and `verify_frontend_inventory.py`, then commit with a message that clearly explains the change.
+First add the original practice code and minimal run instructions to the appropriate track. Then add a review card and a source link to the dashboard, and update its statistics, learning journey, and review/exam scope together. Finally, verify the lesson runtime and static-page behavior, run `check_internal_links.py` and the relevant inventory checker (`verify_frontend_inventory.py` or `verify_backend_inventory.py`), then commit with a message that clearly explains the change.
 
 For track-specific details, see [`Front_end/README.md`](Front_end/README.md) and [`Back_end/README.md`](Back_end/README.md).

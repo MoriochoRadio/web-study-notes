@@ -240,6 +240,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   #backup-status{font-size:13px;color:var(--muted);}
   #backup-status.ok{color:var(--good);}
   #backup-status.error{color:#ef4444;}
+  .backup-preview{
+    margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;
+    background:var(--panel-2);font-size:13.5px;color:var(--text);
+  }
+  .backup-preview.hidden{display:none;}
+  .backup-preview p{margin:0 0 10px;line-height:1.7;}
+  .backup-preview-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .backup-preview-actions button{font-family:inherit;font-weight:700;cursor:pointer;border-radius:8px;padding:7px 11px;}
+  #backup-confirm-btn{border:1px solid var(--accent);background:var(--accent);color:#fff;}
+  #backup-cancel-btn{border:1px solid var(--border);background:var(--panel);color:var(--text);}
 
   /* ---- 기초 개념 사전: 읽는 순서 로드맵 ---- */
   .concept-roadmap{
@@ -977,13 +987,21 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     </div>
     <div class="data-backup">
       <h3>💾 내 진도 백업</h3>
-      <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요.</p>
+      <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요. 가져오기 전에는 반영될 기록을 미리 확인할 수 있고, 직전 가져오기는 한 번 되돌릴 수 있습니다.</p>
       <div class="data-backup-actions">
         <button id="backup-export-btn" type="button">⬇ 내보내기</button>
         <button id="backup-import-btn" type="button">⬆ 가져오기</button>
         <input id="backup-import-input" type="file" accept="application/json" hidden>
+        <button id="backup-undo-btn" type="button" hidden>↩ 직전 가져오기 되돌리기</button>
         <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">🗑 전체 데이터 초기화</button>
         <span id="backup-status" role="status" aria-live="polite"></span>
+      </div>
+      <div class="backup-preview hidden" id="backup-preview" aria-live="polite">
+        <p id="backup-preview-text"></p>
+        <div class="backup-preview-actions">
+          <button id="backup-confirm-btn" type="button">이 기록 가져오기</button>
+          <button id="backup-cancel-btn" type="button">취소</button>
+        </div>
       </div>
     </div>
     <div class="howto">
@@ -11118,22 +11136,68 @@ function renderMemoOverview(){
 renderMemoOverview();
 window.renderMemoOverview = renderMemoOverview;
 
-// ---- 💾 진도 백업/복원: 완료·즐겨찾기·메모·복습 기록을 JSON 파일로 내보내고 되살린다 ----
+// ---- 💾 진도 백업/복원: 버전이 있는 파일로 내보내고, 가져오기 전 미리보기·되돌리기를 제공한다 ----
+const BACKUP_FORMAT = "web-study-notes-backup";
+const BACKUP_VERSION = 2;
+const RESTORE_POINT_KEY = "webStudyNotesLastRestorePoint";
 const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "examWrongBank", "examHistory", "examFlags"];
+const backupImportBtn = document.getElementById("backup-import-btn");
+const backupImportInput = document.getElementById("backup-import-input");
+const backupStatus = document.getElementById("backup-status");
+const backupPreview = document.getElementById("backup-preview");
+const backupPreviewText = document.getElementById("backup-preview-text");
+const backupConfirmBtn = document.getElementById("backup-confirm-btn");
+const backupCancelBtn = document.getElementById("backup-cancel-btn");
+const backupUndoBtn = document.getElementById("backup-undo-btn");
+let pendingBackup = null;
+
+function setBackupStatus(message, state = ""){
+  backupStatus.textContent = message;
+  backupStatus.className = state;
+}
+function parseBackupJSON(value, fallback){
+  try { return JSON.parse(value); } catch { return fallback; }
+}
+function backupSummary(data){
+  const completed = parseBackupJSON(data.completedCards, []);
+  const starred = parseBackupJSON(data.starredCards, []);
+  const memos = parseBackupJSON(data.cardMemos, {});
+  const history = parseBackupJSON(data.examHistory, []);
+  return `완료 카드 ${Array.isArray(completed) ? completed.length : 0}개 · 즐겨찾기 ${Array.isArray(starred) ? starred.length : 0}개 · 메모 ${memos && typeof memos === "object" ? Object.keys(memos).length : 0}개 · 시험 기록 ${Array.isArray(history) ? history.length : 0}개`;
+}
+function normalizeBackup(raw){
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new Error("invalid backup file");
+  const versioned = raw.format === BACKUP_FORMAT;
+  if (raw.format && !versioned) throw new Error("unknown backup format");
+  if (versioned && (!Number.isInteger(raw.version) || raw.version > BACKUP_VERSION)) throw new Error("unsupported backup version");
+  const source = versioned ? raw.data : raw; // 첫 버전의 백업 파일도 계속 불러올 수 있게 호환
+  if (!source || typeof source !== "object" || Array.isArray(source)) throw new Error("invalid backup data");
+  const data = {};
+  BACKUP_KEYS.forEach(key => { if (typeof source[key] === "string") data[key] = source[key]; });
+  if (!Object.keys(data).length) throw new Error("empty backup data");
+  return { data, version: versioned ? raw.version : 1 };
+}
+function hideBackupPreview(){
+  pendingBackup = null;
+  backupPreview.classList.add("hidden");
+}
+function updateUndoButton(){
+  backupUndoBtn.hidden = !localStorage.getItem(RESTORE_POINT_KEY);
+}
+
 document.getElementById("backup-export-btn").addEventListener("click", () => {
   const data = {};
-  BACKUP_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) data[k] = v; });
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  BACKUP_KEYS.forEach(key => { const value = localStorage.getItem(key); if (value !== null) data[key] = value; });
+  const payload = { format: BACKUP_FORMAT, version: BACKUP_VERSION, exportedAt: new Date().toISOString(), data };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
   a.download = "web-study-notes-backup-" + new Date().toISOString().slice(0, 10) + ".json";
   a.click();
   URL.revokeObjectURL(url);
+  setBackupStatus("✓ 현재 기록을 내보냈어요.", "ok");
 });
-const backupImportBtn = document.getElementById("backup-import-btn");
-const backupImportInput = document.getElementById("backup-import-input");
-const backupStatus = document.getElementById("backup-status");
 backupImportBtn.addEventListener("click", () => backupImportInput.click());
 backupImportInput.addEventListener("change", () => {
   const file = backupImportInput.files[0];
@@ -11142,19 +11206,52 @@ backupImportInput.addEventListener("change", () => {
   const reader = new FileReader();
   reader.onload = () => {
     try {
-      const data = JSON.parse(reader.result);
-      if (typeof data !== "object" || data === null) throw new Error("invalid backup file");
-      BACKUP_KEYS.forEach(k => { if (typeof data[k] === "string") localStorage.setItem(k, data[k]); });
-      backupStatus.textContent = "✓ 불러왔어요. 새로고침합니다…";
-      backupStatus.className = "ok";
-      setTimeout(() => location.reload(), 700);
+      pendingBackup = normalizeBackup(JSON.parse(reader.result));
+      backupPreviewText.textContent = `백업 v${pendingBackup.version}을 확인했습니다. ${backupSummary(pendingBackup.data)}. 현재 기록의 같은 항목만 덮어씁니다.`;
+      backupPreview.classList.remove("hidden");
+      setBackupStatus("", "");
     } catch (err) {
-      backupStatus.textContent = "⚠ 올바른 백업 파일이 아니에요.";
-      backupStatus.className = "error";
+      hideBackupPreview();
+      setBackupStatus("⚠ 올바른 백업 파일이 아니거나 지원하지 않는 버전입니다.", "error");
     }
   };
   reader.readAsText(file);
 });
+backupCancelBtn.addEventListener("click", () => {
+  hideBackupPreview();
+  setBackupStatus("가져오기를 취소했어요.");
+});
+backupConfirmBtn.addEventListener("click", () => {
+  if (!pendingBackup) return;
+  const previous = {};
+  BACKUP_KEYS.forEach(key => { previous[key] = localStorage.getItem(key); });
+  localStorage.setItem(RESTORE_POINT_KEY, JSON.stringify({ createdAt: new Date().toISOString(), data: previous }));
+  Object.entries(pendingBackup.data).forEach(([key, value]) => localStorage.setItem(key, value));
+  hideBackupPreview();
+  updateUndoButton();
+  setBackupStatus("✓ 가져왔어요. 새로고침해 반영합니다…", "ok");
+  setTimeout(() => location.reload(), 700);
+});
+backupUndoBtn.addEventListener("click", () => {
+  try {
+    const restorePoint = JSON.parse(localStorage.getItem(RESTORE_POINT_KEY));
+    if (!restorePoint?.data || typeof restorePoint.data !== "object") throw new Error("missing restore point");
+    BACKUP_KEYS.forEach(key => {
+      const value = restorePoint.data[key];
+      if (typeof value === "string") localStorage.setItem(key, value);
+      else localStorage.removeItem(key);
+    });
+    localStorage.removeItem(RESTORE_POINT_KEY);
+    updateUndoButton();
+    setBackupStatus("✓ 직전 가져오기 전 기록으로 되돌렸어요. 새로고침합니다…", "ok");
+    setTimeout(() => location.reload(), 700);
+  } catch (err) {
+    localStorage.removeItem(RESTORE_POINT_KEY);
+    updateUndoButton();
+    setBackupStatus("⚠ 되돌릴 기록을 찾지 못했어요.", "error");
+  }
+});
+updateUndoButton();
 
 // 전체 데이터 초기화 — 실수 방지를 위해 두 번 클릭해야 실행 (blocking confirm() 대신 인라인 확인)
 const dataResetBtn = document.getElementById("data-reset-btn");
