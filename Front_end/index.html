@@ -140,6 +140,17 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     cursor:pointer;white-space:nowrap;
   }
   #theme-btn:hover{color:var(--text);border-color:var(--accent);}
+  #density-btn{
+    appearance:none;flex:none;background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;cursor:pointer;white-space:nowrap;
+  }
+  #density-btn:hover,#density-btn[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);}
+  [data-density="compact"] .note-card{padding:15px 17px 17px;margin-bottom:10px;}
+  [data-density="compact"] .note-body{margin-top:11px;}
+  [data-density="compact"] .note-summary,[data-density="compact"] .note-easy{margin-bottom:9px;line-height:1.65;}
+  [data-density="compact"] .note-concept{gap:8px;}
+  [data-density="compact"] .concept-block{padding:10px 12px;}
+  .mobile-quickbar{display:none;}
   #star-filter-btn{
     appearance:none;flex:none;
     background:var(--panel);border:1px solid var(--border);border-radius:10px;
@@ -220,6 +231,23 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     border:1px solid var(--border);padding:2px 7px;border-radius:7px;
   }
   .today-empty{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
+  .study-goal{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+  }
+  .study-goal-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .study-goal h3{margin:0;font-size:15.5px;}
+  .study-goal-status{margin:0;color:var(--muted);font-size:13.5px;line-height:1.7;}
+  .study-goal-form{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+  .study-goal-form label{font-size:13.5px;font-weight:700;color:var(--muted);}
+  #study-goal-count{font:inherit;color:var(--text);background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:7px 9px;}
+  #study-goal-save{font:inherit;font-size:13px;font-weight:800;color:#fff;background:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:7px 11px;cursor:pointer;}
+  .milestone-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:7px;font-size:13px;}
+  .milestone-head b{font-size:13.5px;}
+  .milestone-head span{color:var(--muted);}
+  .milestone-track{height:10px;overflow:hidden;border:1px solid var(--border);border-radius:999px;background:var(--panel-2);}
+  .milestone-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));border-radius:inherit;transition:width .25s;}
+  .milestone-caption{margin:8px 0 0;color:var(--muted);font-size:12.5px;line-height:1.6;}
   .memo-overview-item{align-items:flex-start;flex-direction:column;gap:2px;}
   .memo-overview-item .mo-title{display:flex;align-items:center;gap:9px;}
   .memo-snippet{color:var(--muted);font-size:12.5px;line-height:1.6;}
@@ -801,8 +829,18 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     .tab-spacer{display:none;}
     #search-box{width:110px;}
     #star-filter-btn{padding:8px 10px;font-size:12px;}
-    #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
-    #bug-fab{right:14px;bottom:72px;padding:9px 14px;font-size:12.5px;}
+    body{padding-bottom:76px;}
+    #review-fab,#bug-fab{display:none;}
+    .mobile-quickbar{
+      position:fixed;z-index:45;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:5px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+      background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--border);
+    }
+    .mobile-quickbar button{
+      min-height:42px;border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--text);
+      font:700 11.5px/1.2 inherit;cursor:pointer;padding:5px 3px;
+    }
+    .mobile-quickbar button.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
     .review-top{padding:14px 16px;}
     .review-card{min-height:240px;padding:22px 20px;}
     .review-easy{font-size:15.5px;}
@@ -952,6 +990,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <span class="tab-spacer"></span>
     <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색. 단축키 슬래시 또는 Control K" title="검색 단축키: / 또는 Ctrl/Cmd + K">
     <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
+    <button id="density-btn" type="button" aria-label="카드 간격을 좁게 또는 넓게 전환" aria-pressed="false">간격 좁게</button>
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
   </div>
 </nav>
@@ -966,6 +1005,25 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <div class="today-recommend" id="next-study-box">
       <h3>📚 다음 학습 추천</h3>
       <div class="today-recommend-list" id="next-study-list" aria-live="polite"></div>
+    </div>
+    <div class="study-goal" id="study-goal-box">
+      <div class="study-goal-head">
+        <h3>✅ 오늘의 학습 목표</h3>
+        <p class="study-goal-status" id="study-goal-status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="study-goal-form">
+        <label for="study-goal-count">오늘 완료할 카드</label>
+        <select id="study-goal-count">
+          <option value="1">1개</option>
+          <option value="3" selected>3개</option>
+          <option value="5">5개</option>
+          <option value="10">10개</option>
+        </select>
+        <button id="study-goal-save" type="button">목표 설정</button>
+      </div>
+      <div class="milestone-head"><b>전체 진도 마일스톤</b><span id="milestone-label"></span></div>
+      <div class="milestone-track" id="milestone-track" role="progressbar" aria-label="전체 학습 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="milestone-fill" id="milestone-fill"></div></div>
+      <p class="milestone-caption" id="milestone-caption"></p>
     </div>
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
@@ -10561,6 +10619,13 @@ let results = STOCKS
   ⚡ 5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
 </button>
 
+<nav class="mobile-quickbar" aria-label="모바일 빠른 실행">
+  <button id="mobile-next-action" class="primary" type="button">📚 다음</button>
+  <button id="mobile-search-action" type="button">🔎 검색</button>
+  <button id="mobile-review-action" type="button">⚡ 복습</button>
+  <button id="mobile-help-action" type="button">🐛 도움</button>
+</nav>
+
 <div id="review-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="review-title">
   <div class="review-top">
     <h2 id="review-title">⚡ 5분 스피드 복습</h2>
@@ -10674,6 +10739,19 @@ applyTheme(document.documentElement.dataset.theme || "light");
 themeBtn.addEventListener("click", () =>
   applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
 
+// 긴 노트를 읽을 때는 카드 간격을 좁혀 한 화면에 더 많이 보도록 선택할 수 있다.
+const DENSITY_KEY = "studyNoteDensity";
+const densityBtn = document.getElementById("density-btn");
+function applyDensity(density){
+  const compact = density === "compact";
+  document.documentElement.dataset.density = compact ? "compact" : "comfortable";
+  densityBtn.textContent = compact ? "간격 넓게" : "간격 좁게";
+  densityBtn.setAttribute("aria-pressed", String(compact));
+  localStorage.setItem(DENSITY_KEY, compact ? "compact" : "comfortable");
+}
+applyDensity(localStorage.getItem(DENSITY_KEY) || "comfortable");
+densityBtn.addEventListener("click", () => applyDensity(document.documentElement.dataset.density === "compact" ? "comfortable" : "compact"));
+
 // ---- 접이식 카드: 처음엔 요약 + '쉽게 말하면'만 보이게 ----
 const DONE_KEY = "completedCards";
 function loadDoneSet(){
@@ -10737,7 +10815,63 @@ function updateProgressStat(){
       })
       .join("");
   }
+  renderStudyGoal(done, total);
 }
+
+// 오늘 목표는 해당 날짜에 새로 완료한 카드 수를 기준으로 계산한다. 브라우저에만 보관되며 백업에도 포함된다.
+const STUDY_GOAL_KEY = "studyDailyGoal";
+function localDateString(){
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60000;
+  return new Date(now - offset).toISOString().slice(0, 10);
+}
+function loadStudyGoal(){
+  const today = localDateString();
+  try {
+    const saved = JSON.parse(localStorage.getItem(STUDY_GOAL_KEY) || "null");
+    if (saved?.date === today && Number.isInteger(saved.target) && Number.isInteger(saved.baseline)) return saved;
+  } catch {}
+  return { date: today, target: 3, baseline: doneSet.size };
+}
+let studyGoal = loadStudyGoal();
+function saveStudyGoal(){ localStorage.setItem(STUDY_GOAL_KEY, JSON.stringify(studyGoal)); }
+function renderStudyGoal(done, total){
+  const today = localDateString();
+  if (studyGoal.date !== today) {
+    studyGoal = { date: today, target: studyGoal.target || 3, baseline: done };
+    saveStudyGoal();
+  }
+  const todayDone = Math.max(0, done - studyGoal.baseline);
+  const target = Math.max(1, studyGoal.target || 3);
+  const status = document.getElementById("study-goal-status");
+  if (status) status.textContent = todayDone >= target
+    ? `오늘 목표 달성 · ${todayDone}/${target}개 완료`
+    : `오늘 ${todayDone}/${target}개 완료 · ${target - todayDone}개 남음`;
+  const goalSelect = document.getElementById("study-goal-count");
+  if (goalSelect) goalSelect.value = String(target);
+
+  const percentage = total ? Math.round(done / total * 100) : 0;
+  const nextMilestone = [25, 50, 75, 100].find(mark => percentage < mark);
+  const milestoneLabel = document.getElementById("milestone-label");
+  const milestoneCaption = document.getElementById("milestone-caption");
+  const milestoneTrack = document.getElementById("milestone-track");
+  const milestoneFill = document.getElementById("milestone-fill");
+  if (milestoneLabel) milestoneLabel.textContent = nextMilestone ? `${percentage}% · 다음 ${nextMilestone}%` : "100% · 전체 완료";
+  if (milestoneCaption) {
+    const remaining = nextMilestone ? Math.max(0, Math.ceil(total * nextMilestone / 100) - done) : 0;
+    milestoneCaption.textContent = nextMilestone
+      ? `다음 마일스톤까지 완료 카드 ${remaining}개가 남았습니다.`
+      : "🎉 모든 학습 카드를 완료했습니다. 학습 확장 주제로 다음 목표를 정해 보세요.";
+  }
+  if (milestoneTrack) milestoneTrack.setAttribute("aria-valuenow", String(percentage));
+  if (milestoneFill) milestoneFill.style.width = `${percentage}%`;
+}
+document.getElementById("study-goal-save").addEventListener("click", () => {
+  const target = Number.parseInt(document.getElementById("study-goal-count").value, 10);
+  studyGoal = { date: localDateString(), target: Number.isInteger(target) && target > 0 ? target : 3, baseline: doneSet.size };
+  saveStudyGoal();
+  updateProgressStat();
+});
 
 // 카드 접기/펼치기 + aria-expanded 갱신을 한 곳에서 처리 (클릭·키보드·해시 이동 공용)
 const RESUME_KEY = "lastViewedCard";
@@ -10892,6 +11026,20 @@ function renderNextStudy(){
   list.append(link);
 }
 renderNextStudy();
+
+// 모바일 하단 바는 기존 기능을 다시 구현하지 않고, 같은 이벤트를 호출해 동작·접근성을 한 곳에서 유지한다.
+document.getElementById("mobile-next-action").addEventListener("click", () => {
+  document.querySelector("#next-study-list a")?.click();
+});
+document.getElementById("mobile-search-action").addEventListener("click", () => {
+  const input = document.getElementById("search-box");
+  showTab("overview");
+  input.scrollIntoView({ behavior:getScrollBehavior(), block:"center" });
+  input.focus();
+  input.select();
+});
+document.getElementById("mobile-review-action").addEventListener("click", () => document.getElementById("review-fab").click());
+document.getElementById("mobile-help-action").addEventListener("click", () => document.getElementById("bug-fab").click());
 
 // 카드 id를 펼치고, 필요하면 해당 탭으로 전환한 뒤 스크롤 이동 (주소창 #해시 + 카드 간 상호 링크 공용)
 function revealCard(id){
@@ -11140,7 +11288,7 @@ window.renderMemoOverview = renderMemoOverview;
 const BACKUP_FORMAT = "web-study-notes-backup";
 const BACKUP_VERSION = 2;
 const RESTORE_POINT_KEY = "webStudyNotesLastRestorePoint";
-const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "examWrongBank", "examHistory", "examFlags"];
+const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "studyDailyGoal", "examWrongBank", "examHistory", "examFlags"];
 const backupImportBtn = document.getElementById("backup-import-btn");
 const backupImportInput = document.getElementById("backup-import-input");
 const backupStatus = document.getElementById("backup-status");
