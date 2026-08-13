@@ -28,6 +28,7 @@ The dashboard supports search, collapsing/expanding cards, dark mode, five-minut
 | React and Next.js exercises | After installing dependencies, run `npm run lint`, `npm run build`, and verify locally | `Front_end/4.react/lessons/` |
 | Static dashboards | Check links, search, theme behavior, and mobile layout | Root and track-level `index.html` files |
 | Internal links and assets | Run `python3 scripts/check_internal_links.py` to validate local paths | `scripts/check_internal_links.py` |
+| Frontend inventory | Run `python3 scripts/verify_frontend_inventory.py` to compare card, header, and statistic counts | `scripts/verify_frontend_inventory.py` |
 | Version control | Commit source and documentation only; exclude generated and secret files | `.gitignore`, `Front_end/.gitignore` |
 
 ## Internal Link Check
@@ -36,6 +37,12 @@ The repository includes a dependency-free checker for **repository-local paths**
 
 ```bash
 python3 scripts/check_internal_links.py
+```
+
+After adding a frontend lesson card, also run the command below. It compares the **dashboard card count**, header summary, and statistic card for HTML, CSS, JavaScript, and React/Next.js. The React graduation project is checked separately from the 14 lessons.
+
+```bash
+python3 scripts/verify_frontend_inventory.py
 ```
 
 ## Folder Structure
@@ -56,6 +63,6 @@ python3 scripts/check_internal_links.py
 
 ## Workflow for a New Lesson
 
-First add the original practice code and minimal run instructions to the appropriate track. Then add a review card and a source link to the dashboard, and update its statistics, learning journey, and review/exam scope together. Finally, verify the lesson runtime and static-page behavior, then commit with a message that clearly explains the change.
+First add the original practice code and minimal run instructions to the appropriate track. Then add a review card and a source link to the dashboard, and update its statistics, learning journey, and review/exam scope together. Finally, verify the lesson runtime and static-page behavior, run `check_internal_links.py` and `verify_frontend_inventory.py`, then commit with a message that clearly explains the change.
 
 For track-specific details, see [`Front_end/README.md`](Front_end/README.md) and [`Back_end/README.md`](Back_end/README.md).

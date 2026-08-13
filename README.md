@@ -28,6 +28,7 @@
 | React·Next.js 실습 | 의존성 설치 후 `npm run lint`, `npm run build`, 로컬 렌더링 확인 | `Front_end/4.react/lessons/` |
 | 정적 대시보드 | 링크·검색·테마·모바일 레이아웃 확인 | 루트 및 과정별 `index.html` |
 | 내부 링크·자원 | `python3 scripts/check_internal_links.py`로 로컬 경로 검사 | `scripts/check_internal_links.py` |
+| 프런트엔드 인벤토리 | `python3 scripts/verify_frontend_inventory.py`로 카드·헤더·통계 수 일치 검사 | `scripts/verify_frontend_inventory.py` |
 | 형상 관리 | 소스·문서만 커밋하고 생성물·비밀 값은 제외 | `.gitignore`, `Front_end/.gitignore` |
 
 ## 내부 링크 검사
@@ -36,6 +37,12 @@
 
 ```bash
 python3 scripts/check_internal_links.py
+```
+
+프런트엔드에 새 수업 카드를 추가했다면 아래 명령도 실행합니다. HTML·CSS·JavaScript·React/Next.js의 **대시보드 카드 수**, 헤더 요약, 통계 카드가 같은 수치를 가리키는지 확인하며, React 졸업 과제는 14개 레슨과 별도로 검증합니다.
+
+```bash
+python3 scripts/verify_frontend_inventory.py
 ```
 
 ## 폴더 구조
@@ -56,6 +63,6 @@ python3 scripts/check_internal_links.py
 
 ## 다음 수업을 반영하는 순서
 
-새 단원이 생기면 해당 과정 폴더에 원본 실습 코드와 최소한의 실행 안내를 먼저 추가합니다. 이후 대시보드에 복습 카드와 실습 파일 링크를 연결하고, 상단 통계·학습 여정·시험/복습 범위를 함께 갱신합니다. 마지막으로 단원별 실행 검증과 정적 페이지 동작을 확인한 뒤, 변경 목적이 드러나는 커밋으로 기록합니다.
+새 단원이 생기면 해당 과정 폴더에 원본 실습 코드와 최소한의 실행 안내를 먼저 추가합니다. 이후 대시보드에 복습 카드와 실습 파일 링크를 연결하고, 상단 통계·학습 여정·시험/복습 범위를 함께 갱신합니다. 마지막으로 단원별 실행 검증과 정적 페이지 동작을 확인하고, `check_internal_links.py`와 `verify_frontend_inventory.py`를 실행한 뒤 변경 목적이 드러나는 커밋으로 기록합니다.
 
 과정별 상세 내용은 [`Front_end/README.md`](Front_end/README.md)와 [`Back_end/README.md`](Back_end/README.md)를 참고하세요.
