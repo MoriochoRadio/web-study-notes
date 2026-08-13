@@ -948,6 +948,139 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     .exam-next-row{flex-direction:column;align-items:stretch;}
     .exam-history .h-date{width:96px;}
   }
+
+  /* ---- 문서형 학습 노트 재설계: 장식보다 읽기 흐름과 정보 위계를 우선한다 ---- */
+  :root{
+    --bg:#fbfbf9;--panel:#ffffff;--panel-2:#f5f6f5;--border:#d9dedc;
+    --text:#202825;--muted:#65706b;--accent:#245c52;--good:#20704a;
+    --html:#a94e2a;--css:#2e639f;--js:#876b12;--react:#257b83;--next:#5e6a66;--concepts:#6855a2;
+    --shadow:none;
+  }
+  [data-theme="dark"]{
+    --bg:#121715;--panel:#181e1b;--panel-2:#222a26;--border:#34403a;
+    --text:#edf1ed;--muted:#a8b4ac;--accent:#8bc6b4;--good:#72d49b;
+  }
+  body{font-size:15.5px;line-height:1.75;background:var(--bg);}
+  .wrap{max-width:920px;}
+  header.hero{padding:54px 24px 34px;border-bottom:1px solid var(--border);background:var(--panel);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+  h1{font-size:clamp(30px,4vw,42px);font-weight:750;letter-spacing:-.035em;margin-bottom:12px;}
+  .sub{max-width:690px;font-size:15.5px;line-height:1.8;margin-bottom:20px;}
+  .meta-row{gap:0;row-gap:3px;line-height:1.5;}
+  .meta-row span{border:0;border-radius:0;background:transparent;padding:0;font-size:12px;}
+  .meta-row span:not(:last-child)::after{content:"·";margin:0 7px;color:var(--border);}
+  .meta-row span:nth-child(n+6){display:none;}
+  .cross-link{margin-top:15px;border:0;border-radius:0;background:transparent;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:4px;}
+  nav.tabs{background:var(--panel);backdrop-filter:none;}
+  nav.tabs .wrap{max-width:920px;gap:0;padding:0 20px;min-height:56px;}
+  .tab-buttons{gap:0;align-self:stretch;}
+  nav.tabs button{border-radius:0;padding:17px 10px 14px;font-size:13.5px;border-bottom:2px solid transparent;}
+  nav.tabs button:hover{background:transparent;color:var(--accent);}
+  nav.tabs button.active{background:transparent;color:var(--accent);border-bottom-color:var(--accent);}
+  [data-theme="dark"] nav.tabs button.active{color:var(--accent);}
+  #search-box,#theme-btn,#density-btn,#star-filter-btn{border:0;border-radius:0;background:transparent;padding:6px 8px;font-size:12.5px;}
+  #search-box{width:122px;border-bottom:1px solid var(--border);}
+  #theme-btn:hover,#density-btn:hover,#density-btn[aria-pressed="true"],#star-filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  #star-filter-btn.active{background:transparent;color:#a97900;border-color:#a97900;}
+  main{padding:42px 0 88px;}
+  .resume-banner,.today-recommend,.study-goal,.data-backup,.howto,.concept-roadmap,.journey-intro,.journey-step,.journey-placeholder{
+    background:transparent;border-radius:0;box-shadow:none;
+  }
+  .resume-banner{border:1px solid var(--border);border-left:3px solid var(--accent);padding:12px 14px;margin-bottom:22px;}
+  .resume-banner button,#study-goal-save{border-radius:4px;background:var(--accent);}
+  .today-recommend,.study-goal,.data-backup{border:0;border-top:1px solid var(--border);padding:18px 0;margin-bottom:0;}
+  .today-recommend h3,.study-goal h3,.data-backup h3,.howto h3{font-size:14px;font-weight:800;letter-spacing:.02em;}
+  .today-recommend-item{background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--border);padding:10px 2px;}
+  .today-recommend-item:hover{border-color:var(--accent);}
+  .today-recommend-item b{border:0;border-radius:0;background:transparent;padding:0;color:var(--accent);}
+  .study-goal{padding-bottom:20px;}
+  .study-goal-form{margin-bottom:15px;}
+  #study-goal-count{border-radius:4px;background:var(--panel);}
+  .milestone-track{height:6px;border:0;border-radius:0;background:var(--panel-2);}
+  .milestone-fill{border-radius:0;background:var(--accent);}
+  .stat-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--border);border-left:1px solid var(--border);margin:20px 0 26px;}
+  .stat-card{min-height:92px;border:0;border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0;background:transparent;padding:15px 16px;box-shadow:none;}
+  .stat-card .n{font-size:23px;color:var(--text) !important;letter-spacing:-.03em;}
+  .stat-card .l{font-size:12px;margin-top:4px;line-height:1.45;}
+  .stat-card.progress{grid-column:span 2;}
+  .progress-chip{border:0;border-radius:0;background:transparent;padding:0 6px 0 0;font-size:10.5px;}
+  .progress-chip:not(:last-child)::after{content:"·";margin-left:6px;color:var(--border);}
+  .howto{border-top:1px solid var(--border);padding:24px 0;margin:24px 0 48px;}
+  .howto ol{font-size:13.5px;line-height:1.8;gap:5px;}
+  section.cat{margin-bottom:66px;}
+  section.cat .cat-head{gap:9px;margin-bottom:6px;}
+  .dot{width:5px;height:20px;border-radius:0;}
+  section.cat h2{font-size:25px;font-weight:750;padding:0;background:none;letter-spacing:-.025em;}
+  section.cat .cat-desc{font-size:14px;margin:4px 0 20px;max-width:720px;}
+  .toc{gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:7px 0;margin-bottom:20px;}
+  .toc a{border:0;border-radius:0;background:transparent;padding:4px 10px 4px 0;font-size:12.5px;}
+  .notes-list{gap:0;border-top:1px solid var(--border);}
+  .note-card{background:transparent;border:0;border-bottom:1px solid var(--border);border-radius:0;padding:20px 2px 22px;box-shadow:none;}
+  .note-card.collapsed{padding-bottom:18px;}
+  .note-head{gap:9px;margin-bottom:10px;}
+  .note-head h3{font-size:17px;font-weight:750;letter-spacing:-.015em;}
+  .note-num,.note-toggle,.note-done,.link-copy-btn,.star-btn{border:0;border-radius:0;background:transparent;padding:2px 4px;}
+  .note-num{padding-left:0;}
+  .note-toggle{border-bottom:1px solid var(--c,var(--accent));}
+  .note-tags{margin-left:0;order:4;width:100%;}
+  .note-tags .tag{border:0;border-radius:0;background:transparent;padding:0 8px 0 0;font-size:10.5px;}
+  .note-tags .tag:not(:last-child)::after{content:"·";margin-left:8px;color:var(--border);}
+  .note-summary{border:0;border-left:2px solid var(--c,var(--accent));border-radius:0;background:transparent;padding:2px 0 2px 13px;margin-bottom:11px;font-size:14px;}
+  .note-easy{border-radius:0;background:var(--easy-bg);border:0;border-left:2px solid var(--easy-border);padding:11px 13px;}
+  .note-memo textarea,.flow-diagram,.tree-diagram,.wrap-box{border-radius:4px;}
+  .journey-subtabs{gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;}
+  .journey-subtab-btn{border:0;border-radius:0;background:transparent;padding:9px 12px;border-bottom:2px solid transparent;}
+  .journey-subtab-btn.active{background:transparent;color:var(--sc,var(--accent));border-bottom-color:var(--sc,var(--accent));}
+  .journey-step{border:0;border-left:2px solid var(--c);border-bottom:1px solid var(--border);padding:18px 0 18px 16px;}
+  .journey-num,.journey-jump{border-radius:0;background:transparent;color:var(--c);border:0;padding:0;}
+  .mobile-quickbar{box-shadow:none;}
+  footer{border-top:1px solid var(--border);background:transparent;}
+  @media(max-width:700px){
+    header.hero{padding:36px 18px 26px;}
+    .wrap{padding:0 16px;}
+    nav.tabs .wrap{padding:0 16px;}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .stat-card.progress{grid-column:span 2;}
+    .meta-row span{font-size:11.5px;}
+    .tab-buttons{overflow-x:auto;}
+    .tab-buttons button{padding-left:8px;padding-right:8px;}
+    #density-btn,#theme-btn,#star-filter-btn{font-size:11.5px;padding:6px 5px;}
+    #search-box{width:96px;}
+    .note-head h3{font-size:16px;}
+  }
+  /* ---- 보조 기능도 본문을 방해하지 않는 간결한 조작부로 정리 ---- */
+  #review-fab{background:var(--accent);border:1px solid var(--accent);border-radius:4px;box-shadow:none;padding:11px 14px;font-size:13px;}
+  #review-fab:hover,#bug-fab:hover{transform:none;box-shadow:none;}
+  #review-fab .streak{border-radius:0;background:transparent;padding:0;margin-left:3px;}
+  #bug-fab{border-radius:4px;box-shadow:none;padding:9px 12px;border-color:var(--border);}
+  #bug-fab:hover{border-color:var(--accent);color:var(--accent);}
+  #review-modal{background:var(--bg);}
+  .review-top{background:var(--panel);padding:18px max(20px,calc((100vw - 920px)/2));}
+  .review-close,.review-chip{border-radius:0;background:transparent;}
+  .review-chip{border:0;border-bottom:2px solid transparent;padding:7px 9px;}
+  .review-chip.active{background:transparent;color:var(--accent);border-color:var(--accent);}
+  .review-card{border-radius:0;box-shadow:none;padding:24px;border-left:2px solid var(--accent);}
+  .review-badge,.review-struggle-badge{border-radius:0;background:transparent;padding:0;}
+  .review-actions button,.review-end-actions button{border-radius:4px;}
+  .review-again,.review-know{background:transparent;border-color:var(--border);}
+  .review-again{color:var(--html);border-left:2px solid var(--html);}
+  .review-know{color:var(--good);border-left:2px solid var(--good);}
+  .exam-box{background:transparent;border-radius:0;box-shadow:none;border:0;border-top:1px solid var(--border);padding:20px 0;}
+  .exam-chip,.exam-btn,.exam-choice,.exam-detail,.exam-why li,.exam-concept-link,.danger-btn{border-radius:4px;}
+  .exam-chip{background:transparent;border-color:var(--border);}
+  .exam-chip.count-chip.active,.exam-chip.scope-chip.active{background:var(--accent);}
+  .exam-btn{border-radius:4px;}
+  .exam-choice{background:transparent;border-width:1px;}
+  .exam-detail{background:transparent;}
+  .exam-why li{background:transparent;}
+  .exam-explain,.exam-deep,.exam-concept-link{border-radius:0;background:transparent;}
+  @media(max-width:600px){
+    .mobile-quickbar{background:var(--panel);backdrop-filter:none;padding:7px 10px calc(7px + env(safe-area-inset-bottom));}
+    .mobile-quickbar button{border-radius:0;background:transparent;border:0;border-right:1px solid var(--border);font-size:11px;}
+    .mobile-quickbar button:last-child{border-right:0;}
+    .mobile-quickbar button.primary{background:transparent;color:var(--accent);border-color:var(--border);}
+    .review-top{padding:14px 16px;}
+  }
 </style>
 </head>
 <body>
@@ -955,7 +1088,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">📚 취업아카데미 · 웹 개발 복습 노트</div>
+    <div class="eyebrow">취업아카데미 · 웹 개발 복습 노트</div>
     <h1>웹 개발 학습 노트</h1>
     <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
     <div class="meta-row">
@@ -963,13 +1096,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React·Next.js 14개 레슨 + 🎓 졸업 과제</span>
-      <span>🧭 학습 여정 4/4과목</span>
+      <span>React·Next.js 14개 레슨 + 졸업 과제</span>
+      <span>학습 여정 4/4과목</span>
       <span>기초 개념 사전 39개 항목</span>
-      <span>✏️ 시험 대비 83문제</span>
+      <span>시험 대비 83문제</span>
       <span>강의자료·정리 문서 7건</span>
     </div>
-    <a class="cross-link" href="../Back_end/">☕ Java 백엔드 학습 노트로 이동 →</a>
+    <a class="cross-link" href="../Back_end/">Java 백엔드 학습 노트로 이동 →</a>
   </div>
 </header>
 
@@ -981,15 +1114,15 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="css" type="button">CSS</button>
       <button data-target="js" type="button">JavaScript</button>
       <button data-target="react" type="button">React</button>
-      <button data-target="journey" type="button">🧭 학습 여정</button>
+      <button data-target="journey" type="button">학습 여정</button>
       <button data-target="concepts" type="button">기초 개념 사전</button>
-      <button data-target="exam" type="button">✏️ 시험 대비</button>
+      <button data-target="exam" type="button">시험 대비</button>
       <button data-target="next" type="button">학습 확장</button>
       <button data-target="materials" type="button">강의자료</button>
     </div>
     <span class="tab-spacer"></span>
     <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색. 단축키 슬래시 또는 Control K" title="검색 단축키: / 또는 Ctrl/Cmd + K">
-    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
+    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">헷갈리는 것만</button>
     <button id="density-btn" type="button" aria-label="카드 간격을 좁게 또는 넓게 전환" aria-pressed="false">간격 좁게</button>
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
   </div>
@@ -1003,12 +1136,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="today-recommend" id="next-study-box">
-      <h3>📚 다음 학습 추천</h3>
+      <h3>다음 학습</h3>
       <div class="today-recommend-list" id="next-study-list" aria-live="polite"></div>
     </div>
     <div class="study-goal" id="study-goal-box">
       <div class="study-goal-head">
-        <h3>✅ 오늘의 학습 목표</h3>
+        <h3>오늘의 학습 목표</h3>
         <p class="study-goal-status" id="study-goal-status" role="status" aria-live="polite"></p>
       </div>
       <div class="study-goal-form">
@@ -1036,22 +1169,22 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
     <div class="today-recommend">
-      <h3>🎯 오늘의 복습 추천</h3>
+      <h3>복습 추천</h3>
       <div class="today-recommend-list" id="today-recommend-list"></div>
     </div>
     <div class="today-recommend hidden" id="memo-overview-box">
-      <h3>📝 내가 남긴 메모 모아보기</h3>
+      <h3>내 메모</h3>
       <div class="today-recommend-list" id="memo-overview-list"></div>
     </div>
     <div class="data-backup">
-      <h3>💾 내 진도 백업</h3>
+      <h3>진도 백업</h3>
       <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요. 가져오기 전에는 반영될 기록을 미리 확인할 수 있고, 직전 가져오기는 한 번 되돌릴 수 있습니다.</p>
       <div class="data-backup-actions">
-        <button id="backup-export-btn" type="button">⬇ 내보내기</button>
-        <button id="backup-import-btn" type="button">⬆ 가져오기</button>
+        <button id="backup-export-btn" type="button">내보내기</button>
+        <button id="backup-import-btn" type="button">가져오기</button>
         <input id="backup-import-input" type="file" accept="application/json" hidden>
-        <button id="backup-undo-btn" type="button" hidden>↩ 직전 가져오기 되돌리기</button>
-        <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">🗑 전체 데이터 초기화</button>
+        <button id="backup-undo-btn" type="button" hidden>직전 가져오기 되돌리기</button>
+        <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">전체 기록 초기화</button>
         <span id="backup-status" role="status" aria-live="polite"></span>
       </div>
       <div class="backup-preview hidden" id="backup-preview" aria-live="polite">
@@ -10612,23 +10745,23 @@ let results = STOCKS
 </main>
 
 <button id="bug-fab" type="button" title="막혔을 때: 증상별로 원인을 바로 찾아보세요">
-  🐛 버그 났어요
+  도움말
 </button>
 
 <button id="review-fab" type="button">
-  ⚡ 5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
+  5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
 </button>
 
 <nav class="mobile-quickbar" aria-label="모바일 빠른 실행">
-  <button id="mobile-next-action" class="primary" type="button">📚 다음</button>
-  <button id="mobile-search-action" type="button">🔎 검색</button>
-  <button id="mobile-review-action" type="button">⚡ 복습</button>
-  <button id="mobile-help-action" type="button">🐛 도움</button>
+  <button id="mobile-next-action" class="primary" type="button">다음</button>
+  <button id="mobile-search-action" type="button">검색</button>
+  <button id="mobile-review-action" type="button">복습</button>
+  <button id="mobile-help-action" type="button">도움</button>
 </nav>
 
 <div id="review-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="review-title">
   <div class="review-top">
-    <h2 id="review-title">⚡ 5분 스피드 복습</h2>
+    <h2 id="review-title">5분 복습</h2>
     <button class="review-close" id="review-close" type="button">닫기 ✕</button>
     <div class="review-filters" id="review-filters">
       <button class="review-chip active" data-subject="all" type="button">전체</button>
