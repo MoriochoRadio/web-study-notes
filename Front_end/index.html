@@ -6,6 +6,8 @@
 <title>웹 개발 학습 노트 | 취업아카데미</title>
 <meta name="description" content="취업아카데미 HTML·CSS·JavaScript 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>/* 저장된 테마를 CSS보다 먼저 적용해 화면 깜빡임 방지. 저장된 값이 없으면(첫 방문) OS의 라이트/다크 설정을 따른다 */
 document.documentElement.dataset.theme = localStorage.getItem("theme")
@@ -1183,6 +1185,31 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     .mobile-quickbar{background:color-mix(in srgb,var(--panel) 93%,transparent);backdrop-filter:blur(13px);box-shadow:0 -8px 20px rgba(18,42,54,.06);}
     .mobile-quickbar button{border-radius:8px;border:1px solid transparent;}
     .mobile-quickbar button.primary{background:linear-gradient(135deg,#0f6c72,#23825b);color:#fff;border-color:transparent;}
+  }
+  /* ---- 서체 체계: 제목·본문·코드의 역할을 분명하게 구분한다 ---- */
+  :root{
+    --font-ui:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Segoe UI",sans-serif;
+    --font-code:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  body{font-family:var(--font-ui);font-weight:450;letter-spacing:-.012em;text-rendering:optimizeLegibility;font-synthesis:none;}
+  button,input,select,textarea{font-family:var(--font-ui);}
+  h1,section.cat h2,.today-recommend h3,.study-goal h3,.review-top h2,.review-end h3{
+    font-family:var(--font-ui);font-style:normal;font-weight:760;letter-spacing:-.045em;
+  }
+  h1{font-size:clamp(31px,4vw,43px);line-height:1.22;}
+  section.cat h2{font-size:27px;line-height:1.35;}
+  .sub{font-weight:430;letter-spacing:-.018em;}
+  .eyebrow{font-family:var(--font-ui);font-weight:650;letter-spacing:.08em;}
+  .meta-row span,.cross-link,nav.tabs button,#search-box,#theme-btn,#density-btn,#star-filter-btn{font-family:var(--font-ui);font-weight:550;letter-spacing:-.018em;}
+  .stat-card .n{font-family:var(--font-ui);font-weight:780;letter-spacing:-.05em;}
+  .note-head h3{font-family:var(--font-ui);font-weight:720;letter-spacing:-.033em;}
+  .note-concept p,.note-summary,.note-easy{letter-spacing:-.014em;}
+  pre,code,.note-concept code,.note-points code,.note-tip code,.note-easy code,.note-tags .tag,.journey-points b{font-family:var(--font-code);letter-spacing:0;}
+  @media(max-width:700px){
+    body{letter-spacing:-.01em;}
+    h1{font-size:32px;letter-spacing:-.05em;}
+    section.cat h2{font-size:24px;}
+    .note-head h3{letter-spacing:-.025em;}
   }
 </style>
 </head>
