@@ -1248,6 +1248,141 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     #next-study-box,#study-goal-box{min-height:0;}
     .study-goal-status{font-size:11px;}
   }
+
+  /* ==== Premium learning workspace: 시각적 서명과 행동 위계 ==== */
+  header.hero{
+    position:relative;overflow:hidden;padding:0;border:0;
+    background:linear-gradient(118deg,#071826 0%,#10283a 54%,#0f5b63 125%);
+  }
+  [data-theme="dark"] header.hero{background:linear-gradient(118deg,#07121f 0%,#102333 54%,#0a535a 125%);}
+  header.hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+    background-image:linear-gradient(rgba(194,237,231,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(194,237,231,.22) 1px,transparent 1px);
+    background-size:34px 34px;mask-image:linear-gradient(90deg,#000,transparent 88%);
+  }
+  header.hero::after{
+    content:"";position:absolute;width:580px;height:580px;right:-180px;top:-280px;border-radius:50%;pointer-events:none;
+    border:1px solid rgba(168,239,230,.22);box-shadow:0 0 0 48px rgba(168,239,230,.035),0 0 0 110px rgba(168,239,230,.02);
+  }
+  header.hero .wrap{max-width:1120px;padding:0 28px;}
+  .hero-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(285px,.82fr);gap:clamp(36px,7vw,100px);align-items:center;min-height:372px;padding:46px 0 38px;}
+  .hero-copy{min-width:0;}
+  .hero .eyebrow{color:#a9e5dc;font-size:12px;font-weight:760;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px;}
+  .hero h1{color:#f6fbfb;font-size:clamp(35px,4.4vw,53px);font-weight:780;line-height:1.08;letter-spacing:-.065em;margin:0 0 17px;}
+  .hero .sub{max-width:665px;color:rgba(233,247,246,.79);font-size:15.5px;line-height:1.85;margin-bottom:23px;}
+  .hero .sub b{color:#fff;font-weight:700;}
+  .hero .meta-row{gap:7px;max-width:680px;}
+  .hero .meta-row span{color:rgba(235,250,248,.78);border-color:rgba(193,239,233,.22);background:rgba(4,17,27,.22);backdrop-filter:blur(6px);padding:5px 10px;font-size:11.5px;}
+  .hero .cross-link{margin-top:14px;color:#dff8f4;background:rgba(4,19,29,.26);border-color:rgba(190,235,229,.31);border-radius:8px;padding:8px 13px;font-weight:700;transition:transform .18s cubic-bezier(.23,1,.32,1),background .18s,border-color .18s;}
+  .hero .cross-link:hover{color:#fff;background:rgba(76,194,184,.18);border-color:#9bddd4;transform:translateY(-1px);}
+  .hero-atlas{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:27px 24px 24px;border:1px solid rgba(198,240,234,.25);border-radius:18px;background:linear-gradient(145deg,rgba(10,34,47,.74),rgba(15,74,80,.3));box-shadow:0 22px 50px rgba(0,7,16,.18);backdrop-filter:blur(10px);overflow:hidden;}
+  .hero-atlas::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,transparent 0 47%,rgba(172,243,235,.1) 47.15% 47.45%,transparent 47.6% 100%);}
+  .atlas-kicker,.atlas-footer,.atlas-grid{position:relative;z-index:1;}
+  .atlas-kicker{display:flex;justify-content:space-between;gap:12px;color:#abdeda;font-size:10px;font-weight:800;letter-spacing:.14em;}
+  .atlas-kicker span{color:rgba(223,248,244,.56);font-variant-numeric:tabular-nums;}
+  .atlas-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0 17px;}
+  .atlas-node{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 12px;border:1px solid rgba(205,241,235,.18);border-radius:10px;background:rgba(3,18,28,.2);color:rgba(237,251,249,.72);font-size:12.5px;font-weight:720;overflow:hidden;}
+  .atlas-node::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--node,#70d2c7);opacity:.92;}
+  .atlas-node b{color:#f0fffc;font-size:20px;font-weight:760;letter-spacing:-.06em;font-variant-numeric:tabular-nums;}
+  .atlas-node:nth-child(1){--node:#e28760;}.atlas-node:nth-child(2){--node:#72a8ef;}.atlas-node:nth-child(3){--node:#e5c25a;}.atlas-node:nth-child(4){--node:#76d6de;}
+  .atlas-node.active{border-color:rgba(156,230,220,.48);background:linear-gradient(135deg,rgba(50,156,150,.22),rgba(7,32,41,.12));}
+  .atlas-footer{margin:0;padding-top:14px;border-top:1px solid rgba(202,240,235,.18);color:rgba(230,249,246,.67);font-size:11.5px;letter-spacing:.025em;}
+  .atlas-footer b{color:#c9f4ee;font-weight:800;}
+
+  #overview{padding-top:5px;}
+  #overview > .overview-command{grid-column:1/-1;}
+  .overview-command{position:relative;display:grid;grid-template-columns:minmax(0,1.34fr) minmax(282px,.86fr);grid-template-areas:"resume resume" "next goal";gap:14px;margin:20px 0 28px;}
+  #resume-banner{grid-area:resume;margin:0;min-height:50px;padding:10px 13px 10px 16px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:10px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 10%,var(--panel)),var(--panel));box-shadow:none;}
+  #resume-banner::before{content:"LAST SESSION";flex:none;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.095em;}
+  #resume-banner button{border-radius:7px;padding:7px 12px;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 25%,transparent);transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .16s;}
+  #resume-banner button:hover{transform:translateY(-1px);box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 32%,transparent);}
+  #next-study-box{grid-area:next;min-height:232px;margin:0;padding:23px 23px 21px;border:1px solid color-mix(in srgb,var(--accent) 38%,var(--border));border-top:3px solid var(--accent);border-radius:15px;background:linear-gradient(142deg,color-mix(in srgb,var(--accent) 8%,var(--panel)),var(--panel) 63%);box-shadow:0 16px 34px rgba(18,42,54,.09);}
+  #study-goal-box{grid-area:goal;min-height:232px;margin:0;padding:23px 20px 20px;border-top:3px solid #d18b57;border-radius:15px;background:linear-gradient(150deg,color-mix(in srgb,#d18b57 7%,var(--panel)),var(--panel) 68%);box-shadow:0 12px 27px rgba(18,42,54,.055);}
+  #next-study-box::before,#study-goal-box::before{display:block;margin-bottom:9px;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.11em;}
+  #next-study-box::before{content:"01 · CONTINUE";}
+  #study-goal-box::before{content:"02 · CALIBRATE";color:#ad693e;}
+  #next-study-box h3,#study-goal-box h3{font-family:var(--font-ui,"Pretendard",sans-serif);font-size:20px;font-weight:780;letter-spacing:-.052em;margin-bottom:14px;}
+  #next-study-box .today-recommend-list{gap:8px;}
+  #next-study-box .today-recommend-item{padding:13px 14px;border-color:color-mix(in srgb,var(--accent) 15%,var(--border));background:color-mix(in srgb,var(--accent) 4%,var(--panel));border-radius:9px;transition:transform .18s cubic-bezier(.23,1,.32,1),border-color .18s,background .18s;}
+  #next-study-box .today-recommend-item:hover{transform:translateX(3px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--panel));}
+  #study-goal-box .study-goal-head{margin-bottom:12px;}
+  #study-goal-box .study-goal-status{background:color-mix(in srgb,#d18b57 10%,var(--panel));color:color-mix(in srgb,#96562f 78%,var(--text));}
+  [data-theme="dark"] #study-goal-box .study-goal-status{color:#f1bd92;}
+  #study-goal-box .study-goal-form{padding:8px;background:color-mix(in srgb,#d18b57 5%,var(--panel));}
+  #study-goal-save{background:#b56a3d;box-shadow:0 5px 13px rgba(154,78,35,.2);}
+  #study-goal-save:hover{background:#9e5730;}
+  .overview-command + .stat-grid{margin-top:0;}
+  #overview .stat-grid{position:relative;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:30px;}
+  #overview .stat-grid::before{content:"LEARNING LIBRARY · INDEXED BY SUBJECT";grid-column:1/-1;margin:2px 0 1px;color:var(--muted);font-size:10px;font-weight:820;letter-spacing:.105em;}
+  #overview .stat-card{position:relative;min-height:110px;border-radius:12px;box-shadow:0 8px 22px rgba(18,42,54,.045);overflow:hidden;}
+  #overview .stat-card::after{content:"";position:absolute;right:-18px;bottom:-20px;width:68px;height:68px;border:1px solid color-mix(in srgb,var(--c,var(--accent)) 36%,transparent);border-radius:50%;opacity:.48;}
+  #overview .stat-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(18,42,54,.09);}
+  #overview .stat-card.progress{grid-column:span 2;}
+  nav.tabs{border-bottom-color:color-mix(in srgb,var(--border) 88%,transparent);box-shadow:0 8px 22px rgba(13,28,41,.025);}
+  nav.tabs button.active{box-shadow:0 6px 14px color-mix(in srgb,var(--accent) 26%,transparent);}
+
+  @media(max-width:850px){
+    header.hero .wrap{padding:0 22px;}
+    .hero-shell{grid-template-columns:1fr;gap:22px;min-height:0;padding:38px 0 30px;}
+    .hero-atlas{min-height:0;padding:20px;}
+    .atlas-grid{grid-template-columns:repeat(4,1fr);}
+    .atlas-node{min-height:52px;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 10px;}
+    .atlas-node b{font-size:18px;}
+    .overview-command{grid-template-columns:1fr;grid-template-areas:"resume" "next" "goal";}
+    #next-study-box,#study-goal-box{min-height:0;}
+  }
+  @media(max-width:700px){
+    header.hero .wrap{padding:0 18px;}
+    .hero-shell{padding:32px 0 25px;}
+    .hero h1{font-size:34px;}
+    .hero .sub{font-size:14px;line-height:1.75;}
+    .hero .meta-row{gap:6px;}
+    .hero .meta-row span{font-size:10.5px;padding:4px 8px;}
+    .hero-atlas{border-radius:13px;padding:16px;}
+    .atlas-grid{gap:6px;margin:13px 0;}
+    .atlas-node{min-height:48px;font-size:10.5px;padding:7px 8px;}
+    .atlas-node b{font-size:16px;}
+    .atlas-footer{padding-top:10px;font-size:10.5px;}
+    .overview-command{gap:10px;margin:15px 0 22px;}
+    #resume-banner{padding:10px 11px;}
+    #resume-banner::before{font-size:9px;}
+    #next-study-box,#study-goal-box{padding:18px 16px;}
+    #next-study-box h3,#study-goal-box h3{font-size:18px;}
+    #overview .stat-grid{gap:8px;}
+    #overview .stat-card{min-height:94px;}
+  }
+
+  /* 보조 도구도 주 학습 흐름을 방해하지 않는 하나의 작업 공간으로 정렬한다. */
+  nav.tabs .wrap{max-width:1120px;column-gap:7px;row-gap:5px;}
+  nav.tabs .tab-buttons{gap:1px;}
+  nav.tabs button{border-radius:7px;letter-spacing:-.015em;}
+  nav.tabs button.active{background:transparent;color:var(--accent);box-shadow:none;}
+  nav.tabs button.active::after{left:11px;right:11px;bottom:-6px;height:2px;background:var(--accent);}
+  #search-box{width:146px;border:0;border-bottom:1px solid color-mix(in srgb,var(--accent) 42%,var(--border));border-radius:0;background:transparent;padding:8px 4px;}
+  #star-filter-btn,#density-btn,#theme-btn{border:1px solid transparent;border-radius:7px;background:transparent;padding:8px 9px;font-size:12px;}
+  #star-filter-btn:hover,#density-btn:hover,#theme-btn:hover{background:color-mix(in srgb,var(--accent) 6%,var(--panel));border-color:color-mix(in srgb,var(--accent) 16%,var(--border));}
+  #star-filter-btn.active{background:#d9a912;border-color:#d9a912;}
+
+  @media(min-width:601px){
+    #review-fab,#bug-fab{right:24px;min-width:108px;justify-content:center;border-radius:10px;letter-spacing:-.015em;}
+    #review-fab{bottom:24px;padding:12px 14px;background:linear-gradient(135deg,#0f6c72,#278f91);box-shadow:0 12px 26px rgba(12,91,96,.27);}
+    #bug-fab{bottom:79px;padding:10px 13px;color:var(--text);background:color-mix(in srgb,var(--panel) 94%,transparent);border-color:color-mix(in srgb,var(--border) 85%,transparent);box-shadow:0 9px 19px rgba(18,42,54,.1);backdrop-filter:blur(10px);}
+    #review-fab:hover,#bug-fab:hover{transform:translateY(-2px);}
+  }
+  #review-modal{background:color-mix(in srgb,var(--bg) 86%,#071826 14%);}
+  .review-top{padding:18px max(20px,calc((100vw - 1040px) / 2));background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(12px);}
+  .review-top h2{font-family:var(--font-ui,"Pretendard",sans-serif);font-size:19px;font-weight:780;letter-spacing:-.04em;}
+  .review-chip{border-radius:7px;}
+  .review-card{border-radius:16px;border-color:color-mix(in srgb,var(--accent) 20%,var(--border));background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 3%,var(--panel)));box-shadow:0 20px 45px rgba(10,31,43,.13);}
+  .review-card::before{content:"RECALL · 05 MIN";display:block;margin-bottom:14px;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.12em;}
+  .review-actions button{border-radius:9px;}
+  .mobile-quickbar{box-shadow:0 -8px 24px rgba(13,31,42,.07);}
+  .mobile-quickbar button{transition:background .16s,color .16s,transform .16s;}
+  .mobile-quickbar button:active{transform:scale(.97);}
+  @media(max-width:700px){
+    nav.tabs .wrap{padding:0 16px;}
+    #search-box{width:106px;}
+  }
 </style>
 </head>
 <body>
@@ -1255,21 +1390,35 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">취업아카데미 · 웹 개발 복습 노트</div>
-    <h1>웹 개발 학습 노트</h1>
-    <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
-    <div class="meta-row">
-      <span id="updated-badge">마지막 점검: 2026-08-13</span>
-      <span>HTML 7개 단원</span>
-      <span>CSS 12개 단원</span>
-      <span>JavaScript 18개 단원</span>
-      <span>React·Next.js 14개 레슨 + 졸업 과제</span>
-      <span>학습 여정 4/4과목</span>
-      <span>기초 개념 사전 39개 항목</span>
-      <span>시험 대비 83문제</span>
-      <span>강의자료·정리 문서 7건</span>
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <div class="eyebrow">취업아카데미 · 웹 개발 복습 노트</div>
+        <h1>웹 개발 학습 노트</h1>
+        <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
+        <div class="meta-row">
+          <span id="updated-badge">마지막 점검: 2026-08-13</span>
+          <span>HTML 7개 단원</span>
+          <span>CSS 12개 단원</span>
+          <span>JavaScript 18개 단원</span>
+          <span>React·Next.js 14개 레슨 + 졸업 과제</span>
+          <span>학습 여정 4/4과목</span>
+          <span>기초 개념 사전 39개 항목</span>
+          <span>시험 대비 83문제</span>
+          <span>강의자료·정리 문서 7건</span>
+        </div>
+        <a class="cross-link" href="../Back_end/">Java 백엔드 학습 노트로 이동 →</a>
+      </div>
+      <aside class="hero-atlas" aria-label="프런트엔드 학습 구성">
+        <div class="atlas-kicker"><span>LEARNING INDEX</span><span>01—04</span></div>
+        <div class="atlas-grid">
+          <div class="atlas-node"><span>HTML</span><b>07</b></div>
+          <div class="atlas-node"><span>CSS</span><b>12</b></div>
+          <div class="atlas-node"><span>JavaScript</span><b>18</b></div>
+          <div class="atlas-node active"><span>React·Next</span><b>14</b></div>
+        </div>
+        <p class="atlas-footer"><b>51 lessons</b> · 한 줄씩 쌓아가는 프런트엔드 학습 기록</p>
+      </aside>
     </div>
-    <a class="cross-link" href="../Back_end/">Java 백엔드 학습 노트로 이동 →</a>
   </div>
 </header>
 
@@ -1298,11 +1447,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 <main class="wrap" id="main-content" tabindex="-1">
 
   <section id="overview">
-    <div id="resume-banner" class="resume-banner hidden">
-      <span id="resume-text"></span>
-      <button id="resume-btn" type="button">이어보기 →</button>
-    </div>
-    <div class="today-recommend" id="next-study-box">
+    <div class="overview-command" aria-label="오늘의 학습 시작">
+      <div id="resume-banner" class="resume-banner hidden">
+        <span id="resume-text"></span>
+        <button id="resume-btn" type="button">이어보기 →</button>
+      </div>
+      <div class="today-recommend" id="next-study-box">
       <h3>다음 학습</h3>
       <div class="today-recommend-list" id="next-study-list" aria-live="polite"></div>
     </div>
@@ -1324,6 +1474,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="milestone-head"><b>전체 진도 마일스톤</b><span id="milestone-label"></span></div>
       <div class="milestone-track" id="milestone-track" role="progressbar" aria-label="전체 학습 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="milestone-fill" id="milestone-fill"></div></div>
       <p class="milestone-caption" id="milestone-caption"></p>
+      </div>
     </div>
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
