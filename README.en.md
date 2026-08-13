@@ -29,6 +29,7 @@ The dashboard supports search, collapsing/expanding cards, dark mode, five-minut
 | Static dashboards | Check links, search, theme behavior, and mobile layout | Root and track-level `index.html` files |
 | Internal links and assets | Run `python3 scripts/check_internal_links.py` to validate local paths | `scripts/check_internal_links.py` |
 | Frontend inventory | Run `python3 scripts/verify_frontend_inventory.py` to compare card, header, and statistic counts | `scripts/verify_frontend_inventory.py` |
+| Automated verification | Automatically validate links and inventory when HTML, documentation, or checker files change | `.github/workflows/verify-study-notes.yml` |
 | Version control | Commit source and documentation only; exclude generated and secret files | `.gitignore`, `Front_end/.gitignore` |
 
 ## Internal Link Check
@@ -45,12 +46,17 @@ After adding a frontend lesson card, also run the command below. It compares the
 python3 scripts/verify_frontend_inventory.py
 ```
 
+## Automated Verification
+
+Manual checks remain available, and the same checks now run automatically for `main` pushes and Pull Requests that include HTML, Markdown, checker scripts, or the workflow itself. The automated verification is **read-only**: it does not write repository files, alter deployment settings, or modify issues and Pull Requests. It only validates links and dashboard inventory. It can also be started manually from the repository Actions page when needed.
+
 ## Folder Structure
 
 ```text
 .
 ├── index.html    # Study-track hub; legacy hash links remain compatible with Front_end/
 ├── .nojekyll     # Serves static files on GitHub Pages without Jekyll processing
+├── .github/workflows/verify-study-notes.yml  # Read-only automated verification
 ├── Front_end/    # Frontend track (HTML · CSS · JS · React/Next.js)
 │   ├── index.html        # Frontend study dashboard
 │   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # Original practice code

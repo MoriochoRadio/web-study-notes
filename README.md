@@ -29,6 +29,7 @@
 | 정적 대시보드 | 링크·검색·테마·모바일 레이아웃 확인 | 루트 및 과정별 `index.html` |
 | 내부 링크·자원 | `python3 scripts/check_internal_links.py`로 로컬 경로 검사 | `scripts/check_internal_links.py` |
 | 프런트엔드 인벤토리 | `python3 scripts/verify_frontend_inventory.py`로 카드·헤더·통계 수 일치 검사 | `scripts/verify_frontend_inventory.py` |
+| 자동 검증 | HTML·문서·검사 스크립트 변경 시 링크·인벤토리 검사를 자동 실행 | `.github/workflows/verify-study-notes.yml` |
 | 형상 관리 | 소스·문서만 커밋하고 생성물·비밀 값은 제외 | `.gitignore`, `Front_end/.gitignore` |
 
 ## 내부 링크 검사
@@ -45,12 +46,17 @@ python3 scripts/check_internal_links.py
 python3 scripts/verify_frontend_inventory.py
 ```
 
+## 자동 검증
+
+수동 검사는 그대로 사용할 수 있으며, 같은 검사가 HTML·Markdown·검사 스크립트·워크플로 변경을 포함한 `main` 푸시와 Pull Request에서 자동으로 실행됩니다. 자동 검증은 **읽기 전용**입니다. 저장소 파일, 배포 설정, 이슈·Pull Request에 변경을 쓰지 않고 링크와 대시보드 인벤토리만 검사합니다. 필요한 경우 저장소의 Actions 화면에서 수동 실행할 수도 있습니다.
+
 ## 폴더 구조
 
 ```text
 .
 ├── index.html    # 학습 과정 선택 허브, 기존 해시 링크는 Front_end/로 호환
 ├── .nojekyll     # GitHub Pages에서 정적 파일을 가공 없이 제공
+├── .github/workflows/verify-study-notes.yml  # 읽기 전용 자동 검증
 ├── Front_end/    # 프런트엔드 과정 (HTML · CSS · JS · React/Next.js)
 │   ├── index.html        # 프런트엔드 학습 대시보드
 │   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # 원본 실습 코드
