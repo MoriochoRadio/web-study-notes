@@ -27,7 +27,16 @@
 | Java 실습 | `javac` 컴파일 및 실행 결과 확인 | `Back_end/` 코드와 백엔드 대시보드 |
 | React·Next.js 실습 | 의존성 설치 후 `npm run lint`, `npm run build`, 로컬 렌더링 확인 | `Front_end/4.react/lessons/` |
 | 정적 대시보드 | 링크·검색·테마·모바일 레이아웃 확인 | 루트 및 과정별 `index.html` |
+| 내부 링크·자원 | `python3 scripts/check_internal_links.py`로 로컬 경로 검사 | `scripts/check_internal_links.py` |
 | 형상 관리 | 소스·문서만 커밋하고 생성물·비밀 값은 제외 | `.gitignore`, `Front_end/.gitignore` |
+
+## 내부 링크 검사
+
+정적 HTML의 실제 `a`, `link`, `script`, `img` 등에서 참조하는 **저장소 내부 경로**가 존재하는지 별도 패키지 없이 검사합니다. 새 실습 파일이나 대시보드 링크를 추가한 뒤 아래 명령을 실행하면, GitHub Pages에서 404가 될 수 있는 로컬 링크·자원을 커밋 전에 찾을 수 있습니다. 외부 URL은 네트워크 상태에 따라 달라지므로 이 검사 범위에서 제외합니다.
+
+```bash
+python3 scripts/check_internal_links.py
+```
 
 ## 폴더 구조
 

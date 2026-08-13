@@ -27,7 +27,16 @@ The dashboard supports search, collapsing/expanding cards, dark mode, five-minut
 | Java exercises | Compile and run with `javac` | `Back_end/` code and backend dashboard |
 | React and Next.js exercises | After installing dependencies, run `npm run lint`, `npm run build`, and verify locally | `Front_end/4.react/lessons/` |
 | Static dashboards | Check links, search, theme behavior, and mobile layout | Root and track-level `index.html` files |
+| Internal links and assets | Run `python3 scripts/check_internal_links.py` to validate local paths | `scripts/check_internal_links.py` |
 | Version control | Commit source and documentation only; exclude generated and secret files | `.gitignore`, `Front_end/.gitignore` |
+
+## Internal Link Check
+
+The repository includes a dependency-free checker for **repository-local paths** referenced by actual HTML `a`, `link`, `script`, `img`, and similar elements. Run the command below after adding a new practice file or dashboard link to catch local links or assets that could become 404s on GitHub Pages before committing. External URLs are intentionally outside this check because their availability depends on the network.
+
+```bash
+python3 scripts/check_internal_links.py
+```
 
 ## Folder Structure
 
