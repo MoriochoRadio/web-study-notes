@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>웹 개발 학습 노트 | 취업아카데미</title>
 <meta name="description" content="취업아카데미 HTML·CSS·JavaScript 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>/* 저장된 테마를 CSS보다 먼저 적용해 화면 깜빡임 방지. 저장된 값이 없으면(첫 방문) OS의 라이트/다크 설정을 따른다 */
 document.documentElement.dataset.theme = localStorage.getItem("theme")
@@ -69,6 +70,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   a{color:inherit;}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .skip-link{
+    position:fixed;z-index:100;top:10px;left:10px;transform:translateY(-160%);
+    background:var(--accent);color:#fff;border-radius:8px;padding:8px 12px;
+    font-size:14px;font-weight:800;text-decoration:none;transition:transform .15s;
+  }
+  .skip-link:focus{transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important;transition-duration:.01ms !important;}
+  }
 
   /* ---- 머리글: 종이 노트의 표지 ---- */
   header.hero{
@@ -892,6 +903,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">본문으로 바로가기</a>
 
 <header class="hero">
   <div class="wrap">
@@ -934,12 +946,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" id="main-content" tabindex="-1">
 
   <section id="overview">
     <div id="resume-banner" class="resume-banner hidden">
       <span id="resume-text"></span>
       <button id="resume-btn" type="button">이어보기 →</button>
+    </div>
+    <div class="today-recommend" id="next-study-box">
+      <h3>📚 다음 학습 추천</h3>
+      <div class="today-recommend-list" id="next-study-list" aria-live="polite"></div>
     </div>
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
@@ -10585,6 +10601,7 @@ const sections = {
   materials: document.getElementById("materials-section"),
 };
 const buttons = document.querySelectorAll("nav.tabs button[data-target]");
+const getScrollBehavior = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 // 탭처럼 보이지만 '개요'에서는 여러 섹션을 함께 보여 주므로 role=tab 대신 일반 버튼 그룹으로 유지한다.
 // 현재 보는 영역은 aria-pressed로 알려 마우스·키보드·보조기술의 상태를 일치시킨다.
 function showTab(target){
@@ -10603,7 +10620,7 @@ buttons.forEach(b => {
   b.setAttribute("aria-pressed", String(b.classList.contains("active")));
   b.addEventListener("click", () => {
     showTab(b.dataset.target);
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0, behavior:getScrollBehavior()});
   });
 });
 
@@ -10611,7 +10628,7 @@ buttons.forEach(b => {
 document.getElementById("bug-fab").addEventListener("click", () => {
   showTab("concepts");
   const bugStep = document.querySelectorAll(".roadmap-step")[5]; // 6번째 단계 = 버그 증상별 찾기
-  (bugStep || document.getElementById("concepts-section")).scrollIntoView({block:"center", behavior:"smooth"});
+  (bugStep || document.getElementById("concepts-section")).scrollIntoView({block:"center", behavior:getScrollBehavior()});
 });
 
 // 학습 여정 과목별 서브탭
@@ -10738,6 +10755,7 @@ document.querySelectorAll(".note-card").forEach(card => {
     else { doneSet.delete(card.id); card.classList.remove("is-done"); doneLabel.classList.remove("checked"); }
     saveDoneSet(doneSet);
     updateProgressStat();
+    renderNextStudy();
   });
   head.appendChild(doneLabel);
 
@@ -10832,6 +10850,31 @@ document.querySelectorAll(".note-card").forEach(card => {
 });
 updateProgressStat();
 
+// 처음 보는 사람은 첫 미완료 카드, 학습 중인 사람은 완료하지 않은 다음 카드를 바로 열 수 있게 안내한다.
+function renderNextStudy(){
+  const list = document.getElementById("next-study-list");
+  if (!list) return;
+  const nextCard = [...document.querySelectorAll(".note-card")].find(card => !doneSet.has(card.id));
+  list.replaceChildren();
+
+  const link = document.createElement("a");
+  link.className = "today-recommend-item";
+  if (!nextCard) {
+    link.href = "#next-section";
+    link.textContent = "🎉 모든 학습 카드를 완료했습니다. 학습 확장 주제에서 다음 목표를 추가해 보세요.";
+    list.append(link);
+    return;
+  }
+
+  const badge = document.createElement("b");
+  badge.textContent = nextCard.querySelector(".note-num")?.textContent || "다음";
+  const title = nextCard.querySelector("h3")?.textContent || "다음 학습 카드";
+  link.href = "#" + nextCard.id;
+  link.append(badge, document.createTextNode(title + " — 아직 완료하지 않은 다음 카드입니다."));
+  list.append(link);
+}
+renderNextStudy();
+
 // 카드 id를 펼치고, 필요하면 해당 탭으로 전환한 뒤 스크롤 이동 (주소창 #해시 + 카드 간 상호 링크 공용)
 function revealCard(id){
   const target = document.getElementById(id);
@@ -10891,7 +10934,7 @@ document.querySelectorAll("section.cat").forEach(sec => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
       c.classList.remove("collapsed");
-      c.scrollIntoView({behavior:"smooth", block:"start"});
+      c.scrollIntoView({behavior:getScrollBehavior(), block:"start"});
       history.replaceState(null, "", "#" + c.id);
     });
     toc.appendChild(a);
@@ -11005,7 +11048,7 @@ document.querySelectorAll(".note-tags .tag").forEach(tag => {
     e.stopPropagation();
     searchBox.value = tag.textContent;
     searchBox.dispatchEvent(new Event("input"));
-    searchBox.scrollIntoView({behavior:"smooth", block:"center"});
+    searchBox.scrollIntoView({behavior:getScrollBehavior(), block:"center"});
   };
   tag.addEventListener("click", runTagFilter);
   tag.addEventListener("keydown", (e) => {
