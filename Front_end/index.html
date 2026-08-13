@@ -899,11 +899,11 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>웹 개발 학습 노트</h1>
     <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-03</span>
+      <span id="updated-badge">마지막 점검: 2026-08-13</span>
       <span>HTML 7개 단원</span>
       <span>CSS 12개 단원</span>
       <span>JavaScript 18개 단원</span>
-      <span>React 14개 단원 + 🎓 졸업 과제</span>
+      <span>React·Next.js 14개 레슨 + 🎓 졸업 과제</span>
       <span>🧭 학습 여정 4/4과목</span>
       <span>기초 개념 사전 39개 항목</span>
       <span>✏️ 시험 대비 83문제</span>
@@ -915,20 +915,20 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
 <nav class="tabs">
   <div class="wrap">
-    <div class="tab-buttons">
-      <button data-target="overview" class="active">개요</button>
-      <button data-target="html">HTML</button>
-      <button data-target="css">CSS</button>
-      <button data-target="js">JavaScript</button>
-      <button data-target="react">React</button>
-      <button data-target="journey">🧭 학습 여정</button>
-      <button data-target="concepts">기초 개념 사전</button>
-      <button data-target="exam">✏️ 시험 대비</button>
-      <button data-target="next">다음 학습 예정</button>
-      <button data-target="materials">강의자료</button>
+    <div class="tab-buttons" role="group" aria-label="학습 노트 탐색">
+      <button data-target="overview" class="active" type="button">개요</button>
+      <button data-target="html" type="button">HTML</button>
+      <button data-target="css" type="button">CSS</button>
+      <button data-target="js" type="button">JavaScript</button>
+      <button data-target="react" type="button">React</button>
+      <button data-target="journey" type="button">🧭 학습 여정</button>
+      <button data-target="concepts" type="button">기초 개념 사전</button>
+      <button data-target="exam" type="button">✏️ 시험 대비</button>
+      <button data-target="next" type="button">학습 확장</button>
+      <button data-target="materials" type="button">강의자료</button>
     </div>
     <span class="tab-spacer"></span>
-    <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색">
+    <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색. 단축키 슬래시 또는 Control K" title="검색 단축키: / 또는 Ctrl/Cmd + K">
     <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
   </div>
@@ -945,7 +945,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">14</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">14</div><div class="l">React·Next.js 레슨</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
       <div class="stat-card concepts"><div class="n">39</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">0</div><div class="l">다음 학습 예정 주제</div></div>
@@ -967,7 +967,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <button id="backup-import-btn" type="button">⬆ 가져오기</button>
         <input id="backup-import-input" type="file" accept="application/json" hidden>
         <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">🗑 전체 데이터 초기화</button>
-        <span id="backup-status"></span>
+        <span id="backup-status" role="status" aria-live="polite"></span>
       </div>
     </div>
     <div class="howto">
@@ -10498,8 +10498,8 @@ let results = STOCKS
   </section>
 
   <section id="next-section" class="cat">
-    <div class="cat-head"><span class="dot next"></span><h2>다음 학습 예정</h2></div>
-    <p class="cat-desc">강의자료 목차 기준의 React & Next.js 커리큘럼을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>
+    <div class="cat-head"><span class="dot next"></span><h2>학습 확장 주제</h2></div>
+    <p class="cat-desc">강의자료 목차 기준의 React &amp; Next.js 커리큘럼을 모두 완료했습니다. 이후 새 수업·심화 실습·개인 프로젝트 주제를 이곳에서 이어 관리합니다.</p>
     <div class="grid" id="next-grid"></div>
   </section>
 
@@ -10549,7 +10549,7 @@ let results = STOCKS
 
 <footer>
   <div class="wrap">
-    이 페이지는 <b>Claude</b>와 함께 수동으로 최신화하는 개인 복습 노트입니다. 새로운 실습을 마칠 때마다 같은 형식(한 줄 요약 → 핵심 개념 → 주석 달린 코드 → 핵심 정리)으로 내용을 추가해 나갑니다.
+    이 페이지는 원본 실습 코드와 복습 노트를 함께 관리하는 개인 학습 아카이브입니다. 새로운 실습을 마칠 때마다 같은 형식(한 줄 요약 → 쉽게 말하면 → 핵심 개념 → 주석 달린 코드 → 핵심 정리)으로 내용을 추가해 나갑니다.
   </div>
 </footer>
 
@@ -10559,7 +10559,7 @@ const nextTopics = [];
 function renderNext(){
   const el = document.getElementById("next-grid");
   if (!nextTopics.length) {
-    el.innerHTML = `<p class="today-empty">🎉 React &amp; Next.js 커리큘럼 14개 단원을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>`;
+    el.innerHTML = `<p class="today-empty">🎉 React &amp; Next.js 14개 레슨과 졸업 과제를 완료했습니다. 다음 수업·심화 실습·개인 프로젝트 주제가 생기면 이곳에서 이어 관리합니다.</p>`;
     return;
   }
   el.innerHTML = nextTopics.map(t => `
@@ -10585,18 +10585,27 @@ const sections = {
   materials: document.getElementById("materials-section"),
 };
 const buttons = document.querySelectorAll("nav.tabs button[data-target]");
+// 탭처럼 보이지만 '개요'에서는 여러 섹션을 함께 보여 주므로 role=tab 대신 일반 버튼 그룹으로 유지한다.
+// 현재 보는 영역은 aria-pressed로 알려 마우스·키보드·보조기술의 상태를 일치시킨다.
 function showTab(target){
   Object.entries(sections).forEach(([key, el]) => {
     if(target === "overview"){ el.classList.remove("hidden"); return; }
     el.classList.toggle("hidden", key !== "overview" && key !== target);
   });
-  buttons.forEach(b => b.classList.toggle("active", b.dataset.target === target));
+  buttons.forEach(b => {
+    const active = b.dataset.target === target;
+    b.classList.toggle("active", active);
+    b.setAttribute("aria-pressed", String(active));
+  });
   if(target !== "overview") document.getElementById("overview").classList.add("hidden");
 }
-buttons.forEach(b => b.addEventListener("click", () => {
-  showTab(b.dataset.target);
-  window.scrollTo({top:0, behavior:"smooth"});
-}));
+buttons.forEach(b => {
+  b.setAttribute("aria-pressed", String(b.classList.contains("active")));
+  b.addEventListener("click", () => {
+    showTab(b.dataset.target);
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+});
 
 // 🐛 버그 났어요 — 어느 탭에 있든 한 번에 기초 개념 사전의 "증상별로 바로 찾기" 로드맵으로 이동
 document.getElementById("bug-fab").addEventListener("click", () => {
@@ -10656,8 +10665,14 @@ const memos = loadMemos();
 
 const PROGRESS_SECTION_LABEL = {
   "html-section":"HTML", "css-section":"CSS", "js-section":"JavaScript",
-  "react-section":"React", "concepts-section":"개념 사전",
+  "react-section":"React·Next.js", "concepts-section":"개념 사전",
 };
+const PROGRESS_SECTION_ORDER = ["HTML", "CSS", "JavaScript", "React·Next.js", "졸업 과제", "개념 사전"];
+function getProgressLabel(card){
+  // 졸업 과제는 React 섹션 안에 있지만 14개 레슨과 별개의 종합 실습이다.
+  if (card.id === "react-capstone") return "졸업 과제";
+  return PROGRESS_SECTION_LABEL[card.closest("section.cat")?.id];
+}
 function updateProgressStat(){
   const cards = [...document.querySelectorAll(".note-card")];
   const total = cards.length;
@@ -10667,11 +10682,10 @@ function updateProgressStat(){
   if (nEl) nEl.textContent = done + "/" + total;
   if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
 
-  // 과목별 진도 — 큰 숫자 하나보다 "어디를 얼마나 봤는지"가 보여야 다음에 뭘 볼지 정하기 쉽다
+  // 과목별 진도 — React·Next.js 14개 레슨과 졸업 과제를 나눠 실제 학습 범위와 숫자를 일치시킨다.
   const bySubject = {};
   cards.forEach(card => {
-    const secId = card.closest("section.cat")?.id;
-    const label = PROGRESS_SECTION_LABEL[secId];
+    const label = getProgressLabel(card);
     if (!label) return;
     const bucket = bySubject[label] || (bySubject[label] = { done: 0, total: 0 });
     bucket.total++;
@@ -10679,8 +10693,7 @@ function updateProgressStat(){
   });
   const breakdownEl = document.getElementById("progress-by-subject");
   if (breakdownEl) {
-    breakdownEl.innerHTML = Object.keys(PROGRESS_SECTION_LABEL)
-      .map(secId => PROGRESS_SECTION_LABEL[secId])
+    breakdownEl.innerHTML = PROGRESS_SECTION_ORDER
       .filter(label => bySubject[label])
       .map(label => {
         const b = bySubject[label];
@@ -10974,9 +10987,11 @@ searchBox.addEventListener("input", () => {
     if (c.style.display !== "none") highlightText(c, q);
   });
 });
-// '/' 로 어느 탭에 있든 검색창으로 바로 포커스 이동 (입력 중인 필드에 있을 땐 무시)
+// '/' 또는 Ctrl/Cmd + K로 어느 탭에 있든 검색창에 바로 포커스 이동 (입력 중인 필드에 있을 땐 무시)
 document.addEventListener("keydown", (e) => {
-  if (e.key !== "/" || e.target?.closest?.("input, textarea, select, [contenteditable]")) return;
+  const isEditable = e.target?.closest?.("input, textarea, select, [contenteditable]");
+  const isSearchShortcut = e.key === "/" || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k");
+  if (!isSearchShortcut || isEditable) return;
   e.preventDefault();
   searchBox.focus();
   searchBox.select();
