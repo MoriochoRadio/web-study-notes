@@ -1076,7 +1076,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n" id="stat-class-days">11</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">11</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -11427,8 +11427,10 @@ function updateProgressStat(){
   if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
 
   // 수업 진도 카드 수는 진도가 나갈 때마다 늘어나므로 하드코딩 대신 실제 개수를 센다
+  // (id를 붙이지 않고 .stat-card.class .n으로 찾는 이유: CI의 verify_backend_inventory.py가
+  //  <div class="n">정확히 이 형태</div>를 정규식으로 찾으므로 속성을 추가하면 안 됨)
   const classDayCount = document.querySelectorAll("#class-notes .note-card").length;
-  const classStatEl = document.getElementById("stat-class-days");
+  const classStatEl = document.querySelector(".stat-card.class .n");
   if (classStatEl) classStatEl.textContent = classDayCount;
   const navCountClassEl = document.getElementById("nav-count-class");
   if (navCountClassEl) navCountClassEl.textContent = classDayCount;
