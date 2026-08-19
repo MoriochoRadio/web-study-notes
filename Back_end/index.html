@@ -11527,6 +11527,10 @@ document.querySelectorAll(".note-card").forEach(card => {
       linkBtn.textContent = "✓";
       linkBtn.classList.add("done");
       setTimeout(() => { linkBtn.textContent = "🔗"; linkBtn.classList.remove("done"); }, 1500);
+    }).catch(() => {
+      linkBtn.textContent = "⚠";
+      linkBtn.title = "복사 실패 — 주소창에서 직접 복사해 주세요";
+      setTimeout(() => { linkBtn.textContent = "🔗"; linkBtn.title = "이 카드 링크 복사"; }, 1500);
     });
   });
   head.appendChild(linkBtn);
@@ -11896,6 +11900,9 @@ document.querySelectorAll(".note-code").forEach(box => {
       btn.textContent = "복사됨 ✓";
       btn.classList.add("done");
       setTimeout(() => { btn.textContent = "복사"; btn.classList.remove("done"); }, 1500);
+    }).catch(() => {
+      btn.textContent = "복사 실패";
+      setTimeout(() => { btn.textContent = "복사"; }, 1500);
     });
   });
 });
