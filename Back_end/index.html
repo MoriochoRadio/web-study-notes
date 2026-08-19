@@ -1014,8 +1014,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제를 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 미리 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-18</span>
-      <span>📅 수업 진도 11일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-08-19</span>
+      <span>📅 수업 진도 12일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -1076,7 +1076,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">11</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">12</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -4234,6 +4234,7 @@ public class D3_OddMagicSquare {
       <div class="concept-block">
         <h4>④ day11_2 마방진 — 인터페이스 → 추상 클래스 → 구현 클래스 3단 구조</h4>
         <p><code>Interface_Magic</code>(계약: <code>make()</code>·<code>magicPrint()</code>) → <code>MagicSquare</code>(추상 클래스, <code>implements Interface_Magic</code> — <code>sumCol</code>·<code>sumRow</code>·<code>sumDia</code>·<code>isCheck()</code> 같은 <b>공통 검증 로직은 완성해서 제공</b>하고 <code>make()</code>는 빈 몸체로 재선언) → <code>OddMagicSquare</code>(실제 구현, <code>make()</code>·<code>magicPrint()</code> 완성)로 이어집니다. 10일차의 <code>D3_OddMagicSquare</code>가 계산 로직 하나에 다 들어 있던 것과 달리, 오늘 버전은 <b>"약속(인터페이스)" · "공통 기능(추상 클래스)" · "실제 구현(자식 클래스)"을 계층으로 분리</b>한 설계입니다. → <a href="#prac-09">🧪 9번 마방진</a></p>
+        <p class="note-tip" style="margin:10px 0 0"><span class="tip-label">TIP</span>이 구조는 <b>12일차에 이어서 다듬어졌습니다</b> — <code>sumRow</code>·<code>sumCol</code> 이름이 실제로 하는 일과 반대로 붙어 있던 것을 바로잡고, 빈 몸체였던 <code>make()</code>를 진짜 <code>abstract</code>로 바꾸고, <code>magicPrint()</code>를 <code>MagicSquare</code>로 끌어올려 <b>진짜 부모·자식이 공유하는 형태</b>로 완성했습니다. 그 김에 <b>짝수 마방진(<code>EvenMagicSquare</code>)</b>도 같은 구조로 추가됐어요. → <a href="#class-day12">📅 12일차 카드에서 고친 내용 보기</a></p>
       </div>
     </div>
     <div class="note-code">
@@ -4496,7 +4497,379 @@ public class D3_MagicSquareMain {
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a> ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java" target="_blank" rel="noopener">OddMagicSquare.java</a> ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java" target="_blank" rel="noopener">EvenMagicSquare.java</a>(12일차에 추가) ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/practice/prac03.java" target="_blank" rel="noopener">prac03.java</a>(9번 마방진 풀이)
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day12">
+  <div class="note-head">
+    <span class="note-num">12일차</span>
+    <h3>2026-08-19 · 중첩 클래스 4종 · 마방진 리팩터링 + 짝수 마방진 · 제네릭</h3>
+    <div class="note-tags"><span class="tag">static 내부 클래스</span><span class="tag">인스턴스 내부 클래스</span><span class="tag">지역 내부 클래스</span><span class="tag">익명 클래스</span><span class="tag">짝수 마방진</span><span class="tag">제네릭</span><span class="tag">와일드카드</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>클래스 안에 클래스를 정의하는 <b>중첩 클래스 4종(정적 내부·인스턴스 내부·지역 내부·익명)을 한 파일에서 나란히</b> 비교했고, 11일차 마방진 코드로 돌아가 <b>이름이 뒤바뀌어 있던 <code>sumRow</code>/<code>sumCol</code> 버그와 비어 있던 <code>make()</code>/<code>magicPrint()</code>를 고쳐 진짜 공통 로직으로</b> 완성한 뒤 <b>짝수(4의 배수) 마방진</b>까지 같은 구조로 얹었으며, 마지막으로 <b>제네릭 클래스 <code>&lt;T&gt;</code>와 와일드카드 <code>&lt;? extends T&gt;</code></b>로 타입을 나중에 정하는 문법을 정리했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>중첩 클래스 4종은 <b>"어디서 얼마나 오래 쓸 물건이냐"</b>로 구분하면 쉽습니다 — 독립적으로 자주 쓸 거면 정적 내부, 바깥 객체에 딸린 거면 인스턴스 내부, 메서드 안에서 잠깐만 쓸 거면 지역, 딱 한 번 쓰고 버릴 거면 익명입니다. 오늘 마방진 리팩터링은 <b>어제 만든 서랍장의 이름표가 잘못 붙어 있던 걸 바로잡고, 비어 있던 서랍을 채운 것</b>과 같습니다. 제네릭은 <b>상자에 라벨을 붙이는 것</b> — 어떤 타입을 담을지 상자를 만들 때가 아니라 <b>사용할 때 정합니다</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D1_NestedClassTest — 중첩 클래스 4종을 한 번에 비교</h4>
+        <p><b>정적 내부 클래스</b>(<code>static class StaticInnerClass</code>)는 바깥 객체 없이 <code>new StaticInnerClass(...)</code>로 바로 만들 수 있고, <b>바깥 클래스의 <code>static</code> 필드만</b> 접근할 수 있습니다(<code>aa + bb</code>). <b>인스턴스 내부 클래스</b>(<code>class InnerClass</code>)는 <b>바깥 객체를 먼저 만들어야</b> 하고(<code>new D1_NestedClassTest().new InnerClass(...)</code>), 그 대신 바깥의 <b>인스턴스 필드까지</b> 접근할 수 있습니다(<code>a + b</code>). <b>지역 내부 클래스</b>는 <code>nestedMethod()</code> 안에서만 정의·사용되고, 메서드의 지역변수 <code>c</code>를 참조하는데 <b>이 변수가 이후 값이 바뀌면 컴파일 에러</b>가 납니다(사실상 final이어야 함) — 메서드가 끝나도 내부 클래스 객체가 그 값을 계속 들고 있어야 하기 때문입니다. <b>익명 클래스</b>는 <code>new MagicSquare() { ... }</code>처럼 <b>이름 없이 그 자리에서 즉시 구현</b>하는 방식으로, 11일차에 배운 것을 다시 확인했습니다. → <a href="#oop-23">🧱 23. 중첩 클래스(Nested Class)</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② 마방진 리팩터링 — 이름이 뒤바뀐 버그와 빈 메서드를 고치다</h4>
+        <p>11일차 <code>MagicSquare</code>를 다시 열어 보니 두 가지 문제가 있었습니다. 하나, <code>sumCol(i)</code>이 실제로는 <b>가로(행) 합을 계산하고 있었고</b> <code>sumRow(j)</code>가 <b>세로(열) 합을 계산</b>하고 있었습니다 — 이름과 동작이 정반대였던 버그입니다. 오늘 <code>sumRow</code>는 진짜 가로 합, <code>sumCol</code>은 진짜 세로 합을 계산하도록 이름을 맞바꿨습니다. 둘, <code>make()</code>와 <code>magicPrint()</code>가 <b>몸체만 비어 있는 "가짜 구현"</b>이었는데(추상이 아니라 아무 일도 안 하는 빈 메서드), <code>make()</code>는 <b><code>public abstract void make();</code>로 진짜 추상 메서드</b>로 되돌리고, <code>magicPrint()</code>는 <code>OddMagicSquare</code>에만 있던 걸 <b><code>MagicSquare</code>로 끌어올려 자식들이 공유</b>하게 했습니다. 그 결과 <code>OddMagicSquare</code> 생성자도 <code>this.magic = new int[n][n];</code> 대신 <b><code>super(n)</code></b> 한 줄로 줄었습니다. → <a href="#oop-21">🧱 21. 추상 클래스</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ EvenMagicSquare — 4의 배수 짝수 마방진, 두 단계로 채우기</h4>
+        <p><code>makeA()</code>가 <b>1부터 n²까지 순서대로</b> <code>[i/n][i%n]</code> 공식으로 격자를 채우고, <code>makeB()</code>가 <b>특정 영역만 골라 반대 값(<code>n²+1 - 원래값</code>)으로 덮어씁니다</b>. 영역 판정은 4등분한 좌표 범위로 나뉘는데, 가운데 세로 2/4 구간과 위아래 바깥 1/4 구간(<code>i &lt; n/4</code> 또는 <code>i ≥ n/4*3</code>일 때 <code>j</code>가 가운데 2/4)이 한 그룹, 나머지 위아래 가운데 구간에서는 <b>바깥쪽 좌우 1/4 구간</b>이 반대 그룹입니다 — 대각선 대칭 위치의 두 수를 맞바꾸는 효과입니다. day11_2의 <code>EvenMagicSquare</code>는 <code>MagicSquare</code>를 <b>상속</b>해서 <code>sumRow</code>·<code>sumCol</code>·<code>isCheck()</code>를 그대로 재사용하지만, day12의 <code>D2_EvenMagicSquare</code>는 <b>같은 알고리즘을 독립 클래스로 처음부터 다시 구현</b>했습니다 — 상속하면 코드가 얼마나 줄어드는지 비교하기 좋은 짝입니다. → <a href="#prac-09">🧪 9번 마방진</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ D3_GBox&lt;T&gt; — 제네릭 클래스와 와일드카드</h4>
+        <p><code>class D3_GBox&lt;T&gt;</code>는 <code>T</code> 자리에 <b>어떤 타입이 올지 객체를 만들 때 정하는</b> 상자입니다 — <code>D3_GBox&lt;String&gt;</code>과 <code>D3_GBox&lt;Integer&gt;</code>가 <b>같은 클래스 코드</b>를 재사용합니다. <code>List&lt;? extends Number&gt;</code>는 <b>와일드카드</b>로, "<code>Number</code>거나 그 하위 타입 중 아무거나"를 받을 수 있게 합니다 — 그래서 <code>List&lt;Integer&gt;</code>를 대입할 수 있지만(<code>numbers = num;</code>), 정확히 어떤 하위 타입인지 컴파일러가 모르기 때문에 <b><code>numbers.add(100)</code>은 막힙니다</b>(읽기는 되지만 쓰기는 안전하지 않음). <code>printList1(List&lt;? extends Number&gt; list)</code>처럼 <b>파라미터를 와일드카드로 선언</b>하면 <code>List&lt;Integer&gt;</code>든 <code>List&lt;Double&gt;</code>이든 <b>타입 계층을 유지한 채로</b> 하나의 메서드로 받을 수 있습니다. → <a href="#oop-24">🧱 24. 제네릭(Generic)</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_NestedClassTest.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260819.day12;
+
+import hk.edu20260818.day11.day11_2.MagicSquare;
+
+public class D1_NestedClassTest {
+    // 인스턴스 멤버필드
+    public int a = 5;
+    public int b = 10;
+    // 정적 멤버필드
+    public static int aa = 7;
+    public static int bb = 3;
+
+    // 정적 내부 클래스: 독립적으로 사용 가능
+    static class StaticInnerClass {
+        public String message;
+
+        public StaticInnerClass(String message) {
+            this.message = message;
+        }
+
+        public int getResult() {
+            int result = aa + bb; // static 필드만 접근 가능하다.
+            return result;
+        }
+    }
+
+    // 인스턴스 내부 클래스
+    class InnerClass {
+        public String message;
+
+        public InnerClass(String message) {
+            this.message = message;
+        }
+
+        public int getResult() {
+            int result = a + b;
+            return result;
+        }
+    }
+
+    public void nestedMethod() {
+        int c = 5;
+        class LocalInnerClass {
+            public int number;
+
+            public LocalInnerClass(int number) {
+                this.number = number;
+            }
+
+            public int getLic() {
+                int ss = c;
+                return ss;
+            }
+        }
+        // c=50; 값이 변경되는 코드가 있다면 오류발생 -&gt; 변경여지가 없는 변수여야 한다.
+        LocalInnerClass licObj = new LocalInnerClass(200);
+        System.out.println("지역내부클래스: " + licObj.getLic());
+    }
+
+    public static void main(String[] args) {
+        // 정적내부 클래스: 일반 클래스처럼 객체 생성해서 사용한다.
+        StaticInnerClass sic = new StaticInnerClass("정적내부클래스");
+        System.out.println(sic.getResult());
+
+        // 인스턴스 내부 클래스: 외부클래스를 먼저 객체 생성하고, 내부클래스를 생성해야 사용할 수 있다.
+        InnerClass inner = new D1_NestedClassTest().new InnerClass("내부클래스");
+        System.out.println(inner.getResult());
+
+        // 익명클래스: 인터페이스/추상클래스를 그 자리에서 구현해서 객체생성한다.
+        // -&gt; 클래스를 따로 정의하지 않기 때문에 이름이 없고, 외부에서 재사용 못함
+        MagicSquare magic = new MagicSquare() {
+            @Override
+            public void make() {
+            }
+
+            @Override
+            public void magicPrint() {
+            }
+        };
+
+        magic.make();
+        magic.magicPrint();
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+10
+15</pre>
+      <div class="run-note">정적 내부 클래스의 <code>getResult()</code>는 <code>aa + bb = 7 + 3 = 10</code>, 인스턴스 내부 클래스는 <code>a + b = 5 + 10 = 15</code>를 출력합니다. <code>nestedMethod()</code>는 <code>main</code>에서 <b>호출되지 않아</b> 지역 내부 클래스 쪽 출력은 나오지 않고, 익명 클래스의 <code>make()</code>·<code>magicPrint()</code>도 몸체가 비어 있어 아무것도 찍지 않습니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">MagicSquare.java (11일차 코드를 고친 버전 — sumRow/sumCol 이름 수정 · make() 진짜 추상화 · magicPrint() 공통화)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260818.day11.day11_2;
+
+public abstract class MagicSquare implements Interface_Magic {
+    protected int[][] magic;
+
+    public MagicSquare(int n) {
+        this.magic = new int[n][n];
+    }
+
+    @Override
+    public abstract void make(); // 예전엔 빈 몸체 구현이었음 -&gt; 진짜 추상 메서드로 수정
+
+    // 마방진 출력하기 — 예전엔 OddMagicSquare에만 있던 걸 부모로 끌어올려 자식들이 공유
+    @Override
+    public void magicPrint() {
+        for (int i = 0; i &lt; magic.length; i++) {
+            for (int j = 0; j &lt; magic.length; j++) {
+                System.out.print(magic[i][j] + "\t");
+            }
+            System.out.print(sumRow(i));
+            System.out.println();
+        }
+        for (int i = 0; i &lt; magic.length; i++) {
+            System.out.print(sumCol(i) + "\t");
+        }
+        System.out.println();
+        System.out.println("마방진 증명여부:" + isCheck());
+    }
+
+    // 가로의 합 구하는 기능 (예전엔 sumCol이라는 이름으로 이 일을 하고 있었음)
+    public int sumRow(int i) {
+        int tot = 0;
+        for (int j = 0; j &lt; magic.length; j++) tot += magic[i][j];
+        return tot;
+    }
+
+    // 세로의 합 구하는 기능 (예전엔 sumRow라는 이름으로 이 일을 하고 있었음)
+    public int sumCol(int j) {
+        int tot = 0;
+        for (int i = 0; i &lt; magic.length; i++) tot += magic[i][j];
+        return tot;
+    }
+
+    public int sumDia() {
+        int tot = 0;
+        for (int i = 0; i &lt; magic.length; i++) tot += magic[i][i];
+        return tot;
+    }
+
+    public int sumReverseDia() {
+        int tot = 0;
+        for (int i = 0; i &lt; magic.length; i++) tot += magic[i][magic.length - 1 - i];
+        return tot;
+    }
+
+    public boolean isCheck() {
+        boolean isC = true;
+        int n = magic.length;
+        int[] ma = new int[n * 2 + 2];
+        for (int i = 0; i &lt; n; i++) {
+            ma[i] = sumRow(i);
+            ma[i + n] = sumCol(i);
+        }
+        ma[n * 2] = sumDia();
+        ma[n * 2 + 1] = sumReverseDia();
+        for (int i = 1; i &lt; ma.length; i++) {
+            if (ma[0] != ma[i]) { isC = false; break; }
+        }
+        return isC;
+    }
+}
+
+//OddMagicSquare는 이제 magicPrint()가 없어도 부모 걸 그대로 물려받는다
+public class OddMagicSquare extends MagicSquare {
+    public OddMagicSquare() {
+        super(3);
+    }
+
+    public OddMagicSquare(int n) {
+        super(n); // 예전엔 this.magic = new int[n][n]; 을 직접 중복 작성했음
+    }
+
+    public void make() {
+        // ... 11일차와 동일한 홀수 마방진 채우기 알고리즘
+    }
+}
+
+// 짝수(4의 배수) 마방진 — 같은 부모를 상속해서 sumRow·sumCol·isCheck를 그대로 재사용
+public class EvenMagicSquare extends MagicSquare {
+    public EvenMagicSquare() {
+        super(4);
+    }
+
+    public EvenMagicSquare(int n) {
+        super(n);
+    }
+
+    public void make() {
+        makeA();
+        makeB();
+    }
+
+    // 1~n*n까지 숫자를 순서대로 채우기
+    public void makeA() {
+        int n = magic.length;
+        for (int i = 0; i &lt; n * n; i++) {
+            magic[i / n][i % n] = i + 1; // [i/열개수][i%열개수] 공식(7일차 배열 변환과 동일)
+        }
+    }
+
+    // 특정 영역만 반대 값(n*n+1 - 원래값)으로 덮어쓰기
+    public void makeB() {
+        int n = magic.length;
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if ((i &gt;= 0 &amp;&amp; i &lt; n / 4) || (i &gt;= n / 4 * 3 &amp;&amp; i &lt; n)) {
+                    if (j &gt;= n / 4 &amp;&amp; j &lt; n / 4 * 3) {
+                        magic[i][j] = (n * n) - (i * n + j);
+                    }
+                } else {
+                    if ((j &gt;= 0 &amp;&amp; j &lt; n / 4) || (j &gt;= n / 4 * 3 &amp;&amp; j &lt; n)) {
+                        magic[i][j] = (n * n) - (i * n + j);
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>D3_MagicSquareMain으로 홀수 3×3 + 짝수 4×4를 이어서 실행</summary>
+      <pre>
+6	1	8	15
+7	5	3	15
+2	9	4	15
+15	15	15
+ma결과:[15, 15, 15, 15, 15, 15, 15, 15]
+마방진 증명여부:true
+
+1	15	14	4	34
+12	6	7	9	34
+8	10	11	5	34
+13	3	2	16	34
+34	34	34	34
+ma결과:[34, 34, 34, 34, 34, 34, 34, 34, 34, 34]
+마방진 증명여부:true</pre>
+      <div class="run-note">3×3 홀수 마방진은 합이 <b>15</b>, 4×4 짝수 마방진은 합이 <b>34</b>로 모두 참(true)입니다. 이제 <code>OddMagicSquare</code>와 <code>EvenMagicSquare</code> 둘 다 <b><code>make()</code>만 직접 구현</b>하고 <code>magicPrint()</code>·<code>sumRow</code>·<code>sumCol</code>·<code>isCheck()</code>는 <code>MagicSquare</code>에서 그대로 물려받습니다 — 상속이 왜 "중복 제거"인지 보여주는 예시입니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D3_GBox.java (수업 실습 원본 — 제네릭 클래스와 와일드카드)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260819.day12;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class D3_GBox&lt;T&gt; {
+    private T item;
+
+    public void set(T item) {
+        this.item = item;
+    }
+
+    public T get() {
+        return item;
+    }
+
+    public static void main(String[] args) {
+        // String타입으로 정의
+        D3_GBox&lt;String&gt; strBox = new D3_GBox&lt;&gt;();
+        strBox.set("Hello~~~");
+        System.out.println(strBox.get());
+
+        // Integer타입으로 정의
+        D3_GBox&lt;Integer&gt; intBox = new D3_GBox&lt;&gt;();
+        intBox.set(1000);
+        System.out.println(intBox.get());
+
+        // 와일드카드: <? extends T> T와 T의 하위타입들: 읽기전용
+        List&lt;? extends Number&gt; numbers = new ArrayList&lt;Integer&gt;();
+        // numbers.add(100); // 추가,수정작업 X
+
+        List&lt;Integer&gt; num = new ArrayList&lt;&gt;();
+        num.add(100);
+        num.add(101);
+        num.add(102);
+
+        numbers = num; // 값이 있는 객체를 참조시킨다.
+        System.out.println(numbers.get(0));
+
+        printList1(num);
+    }
+
+    // 다형성 활용하기
+    // List에 저장되면 타입간에 계층구조가 깨짐 -&gt; 와일드카드로 처리하면 계층구조 유지
+    public static void printList1(List&lt;? extends Number&gt; list) {
+        Integer i = (Integer) list.get(0);
+        System.out.println(i);
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+Hello~~~
+1000
+100
+100</pre>
+      <div class="run-note"><code>strBox</code>·<code>intBox</code>는 <b>같은 클래스</b>에 서로 다른 타입(<code>String</code>·<code>Integer</code>)을 담았습니다. <code>numbers.get(0)</code>과 <code>printList1(num)</code> 둘 다 <b>100</b>을 출력하는데, <code>numbers</code>는 <code>List&lt;? extends Number&gt;</code>로 <b>읽기는 되지만</b> <code>numbers.add(100)</code>처럼 <b>쓰기는 컴파일 에러</b>가 난다는 걸 주석으로 확인했습니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">12일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li><b>정적 내부 클래스</b>는 바깥 객체 없이 생성 가능, <b>static 필드만</b> 접근한다.</li>
+        <li><b>인스턴스 내부 클래스</b>는 <code>바깥객체.new 내부클래스()</code>로 생성하며 바깥의 <b>인스턴스 필드까지</b> 접근한다.</li>
+        <li><b>지역 내부 클래스</b>가 참조하는 지역변수는 <b>사실상 final(값이 안 바뀜)</b>이어야 한다.</li>
+        <li><b>익명 클래스</b>는 이름 없이 그 자리에서 즉시 구현하는 일회성 클래스다.</li>
+        <li>코드를 다시 볼 때 <b>메서드 이름과 실제 동작이 일치하는지</b> 의심하는 습관이 중요하다 — <code>sumRow</code>/<code>sumCol</code>처럼 이름이 뒤바뀌어도 컴파일은 되기 때문에 버그를 못 잡는다.</li>
+        <li>추상 클래스의 공통 로직(<code>magicPrint</code>·<code>isCheck</code> 등)을 부모로 끌어올리면 <b>자식은 다른 부분(<code>make()</code>)만 구현</b>하면 된다.</li>
+        <li>짝수 마방진: <b>1~n²을 순서대로 채운 뒤, 정해진 사분면 영역만 반대 값(<code>n²+1-원래값</code>)으로 덮어쓴다</b>.</li>
+        <li>제네릭 클래스 <code>&lt;T&gt;</code>는 <b>사용하는 시점에 실제 타입이 정해진다</b>.</li>
+        <li><code>List&lt;? extends Number&gt;</code> 같은 <b>와일드카드는 읽기는 되지만 추가(쓰기)는 컴파일 에러</b> — 정확한 하위 타입을 컴파일러가 모르기 때문이다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>오늘 마방진 리팩터링은 <b>"컴파일이 되는 것"과 "이름이 맞는 것"은 다르다</b>는 걸 보여주는 좋은 예입니다. <code>sumRow</code>가 사실은 세로 합을 계산해도 자바는 에러를 내지 않습니다 — 메서드 이름은 그냥 식별자일 뿐, 실제 의미는 사람이 붙인 주석과 문서로만 전달되니까요. <code>isCheck()</code> 안에서 <code>ma[i] = sumRow(i)</code>처럼 <b>이름이 잘못된 메서드를 그대로 호출해도 결과가 우연히 맞을 수 있다</b>는 점(가로세로 합을 전부 비교하는 로직이라 순서가 바뀌어도 검증 자체는 통과)도 이런 종류의 버그가 오래 숨어 있기 쉬운 이유입니다. 코드 리뷰에서 <b>이름과 동작을 한 번씩 대조</b>해 보는 습관을 들이세요.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D1_NestedClassTest.java" target="_blank" rel="noopener">D1_NestedClassTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D2_EvenMagicSquare.java" target="_blank" rel="noopener">D2_EvenMagicSquare.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D3_GBox.java" target="_blank" rel="noopener">D3_GBox.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a>(수정) ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java" target="_blank" rel="noopener">OddMagicSquare.java</a>(수정) ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java" target="_blank" rel="noopener">EvenMagicSquare.java</a>(신규) ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a>(수정)
     </div>
   </div>
 </article>
@@ -10277,13 +10650,14 @@ public class CardMain {
             <div class="flow-box leaf"><b>제네릭 &lt;T&gt;</b><span>담을 타입을 나중에</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-18(11일차)까지 09~10단계를 지났습니다. 8일차부터 <code>extends</code>·<code>super()</code>·오버라이딩·다형성(09단계)을 로또·고객 등급·동물 계층 실습으로 다졌고, 10~11일차엔 추상 클래스(컴퓨터·계산기·마방진 계층)와 인터페이스(<code>default</code>·<code>static</code>·<code>private</code> 메서드, 익명 클래스)까지 배웠습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
+        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-19(12일차)까지 09~10단계를 지났습니다. 8일차부터 <code>extends</code>·<code>super()</code>·오버라이딩·다형성(09단계)을 로또·고객 등급·동물 계층 실습으로 다졌고, 10~12일차엔 추상 클래스(컴퓨터·계산기·마방진 계층)와 인터페이스(<code>default</code>·<code>static</code>·<code>private</code> 메서드, 익명 클래스), 중첩 클래스 4종(정적·인스턴스·지역·익명), 제네릭 <code>&lt;T&gt;</code>·와일드카드까지 배웠습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li>둘 다 <b><code>new</code>로 직접 객체를 만들 수 없다</b>.</li>
           <li>공통 코드를 물려주려면 추상 클래스, <b>상관없는 클래스들에 같은 기능을 강제</b>하려면 인터페이스.</li>
           <li>싱글턴·중첩 클래스도 이 단계에 함께 나옵니다. → <a href="#concept-java-abstract-interface">📖 추상 클래스 vs 인터페이스</a></li>
-          <li>11일차 마방진 3단 구조(인터페이스 → 추상 클래스 → 구현 클래스)가 이 단계의 완성형 — 계약·공통 기능·실제 구현을 층으로 나눴습니다.</li>
+          <li>11~12일차 마방진 3단 구조(인터페이스 → 추상 클래스 → 구현 클래스)가 이 단계의 완성형 — 계약·공통 기능·실제 구현을 층으로 나누고, 12일차에 이름 버그까지 고쳐 짝수 마방진으로 확장했습니다.</li>
+          <li>12일차 <code>D1_NestedClassTest</code>가 중첩 클래스 4종을 한 파일에서 비교한 완성형이고, <code>D3_GBox&lt;T&gt;</code>가 제네릭·와일드카드의 완성형입니다.</li>
         </ul>
       </article>
 

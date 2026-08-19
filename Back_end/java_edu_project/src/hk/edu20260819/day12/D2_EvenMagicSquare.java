@@ -1,35 +1,80 @@
-package hk.edu20260818.day11.day11_2;
+package hk.edu20260819.day12;
 
 import java.util.Arrays;
 
-public abstract class MagicSquare implements Interface_Magic {
+public class D2_EvenMagicSquare {
+    public int[][] magic;
 
-    protected int[][] magic;
-
-    public MagicSquare() {
-
+    public D2_EvenMagicSquare() {
+        this(4);
     }
 
-    public MagicSquare(int n) {
+    public D2_EvenMagicSquare(int n) {
         this.magic = new int[n][n];
     }
 
-    @Override
-    public abstract void make();
+    public void make() {
 
-    // 마방진 출력하기
-    @Override
+    }
+
+    // 1~16까지 숫자를 차례대로 저장하기
+    public void makeA() {
+        int n = magic.length;
+        // int count = 1;
+        // for (int i = 0; i < n; i++) {
+        // for (int j = 0; j < n; j++) {
+        // magic[i][j] = count++;
+        // }
+        // }
+
+        // 1~16까지의 숫자 1,2,3,4,5,...16 --> 2차원배열에 저장
+        // [i/col][i%col]
+        for (int i = 0; i < n * n; i++) {
+            magic[i / n][i % n] = i + 1;
+        }
+    }
+
+    // 범위에 맞는 위치에 반대로 숫자 저장하기
+    public void makeB() {
+        int n = magic.length;
+        // 16~1까지의 숫자를 입력
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                // 노란색 영역 (ppt그림에서)
+                if ((i >= 0 && i < n / 4) || (i >= n / 4 * 3 && i < n)) {
+                    if (j >= n / 4 && j < n / 4 * 3) { // j인덱스 조건
+                        magic[i][j] = (n * n) - (i * n + j); // i*col+j -> 0,1,2,3,4,5...15
+                    }
+                } else { // 주황색 영역(ppt그림에서)
+                    if ((j >= 0 && j < n / 4) || (j >= n / 4 * 3 && j < n)) {
+                        magic[i][j] = (n * n) - (i * n + j);
+                    }
+                }
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+        D2_EvenMagicSquare even = new D2_EvenMagicSquare();
+        even.makeA();
+        even.makeB();
+        even.magicPrint();
+
+    }
+
     public void magicPrint() {
 
         for (int i = 0; i < magic.length; i++) {
             for (int j = 0; j < magic.length; j++) {
                 System.out.print(magic[i][j] + "\t");
             }
-            System.out.print(sumRow(i));
+            System.out.print(sumCol(i));
             System.out.println();
         }
         for (int i = 0; i < magic.length; i++) {
-            System.out.print(sumCol(i) + "\t");
+            System.out.print(sumRow(i) + "\t");
         }
         // 마방진 증명 확인하기
         System.out.println();
@@ -37,8 +82,7 @@ public abstract class MagicSquare implements Interface_Magic {
 
     }
 
-    // 가로의 합 구하는 기능
-    public int sumRow(int i) {
+    public int sumCol(int i) {
         int tot = 0;
         for (int j = 0; j < magic.length; j++) {
             tot += magic[i][j];
@@ -47,7 +91,7 @@ public abstract class MagicSquare implements Interface_Magic {
     }
 
     // 세로의 합 구하는 기능
-    public int sumCol(int j) {
+    public int sumRow(int j) {
         int tot = 0;
         for (int i = 0; i < magic.length; i++) {
             tot += magic[i][j];
@@ -85,8 +129,8 @@ public abstract class MagicSquare implements Interface_Magic {
         // 각각의 결과를 배열 ma에 저장
         // ma{15,15,15,15,15,15,0,0}
         for (int i = 0; i < n; i++) {
-            ma[i] = sumRow(i);// ma[0], ma[1], ma[2] 결과저장
-            ma[i + n] = sumCol(i);// ma[3],ma[4],ma[5]
+            ma[i] = sumCol(i);// ma[0], ma[1], ma[2] 결과저장
+            ma[i + n] = sumRow(i);// ma[3],ma[4],ma[5]
         }
         // ma{15,15,15,15,15,15,15,15} 모든 결과를 담을 수 있다.
         ma[n * 2] = sumDia();// ma[6]
@@ -105,5 +149,4 @@ public abstract class MagicSquare implements Interface_Magic {
 
         return isC;
     }
-
 }

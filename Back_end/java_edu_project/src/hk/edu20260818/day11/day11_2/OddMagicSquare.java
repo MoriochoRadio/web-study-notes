@@ -7,7 +7,7 @@ public class OddMagicSquare extends MagicSquare {
     }
 
     public OddMagicSquare(int n) {
-        this.magic = new int[n][n];
+        super(n);
     }
 
     public void make() {
@@ -42,25 +42,6 @@ public class OddMagicSquare extends MagicSquare {
 
             magic[x][y] = i;
         }
-    }
-
-    // 마방진 출력하기
-    public void magicPrint() {
-
-        for (int i = 0; i < magic.length; i++) {
-            for (int j = 0; j < magic.length; j++) {
-                System.out.print(magic[i][j] + "\t");
-            }
-            System.out.print(sumCol(i));
-            System.out.println();
-        }
-        for (int i = 0; i < magic.length; i++) {
-            System.out.print(sumRow(i) + "\t");
-        }
-        // 마방진 증명 확인하기
-        System.out.println();
-        System.out.println("마방진 증명여부:" + isCheck());
-
     }
 
 }
