@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///C:/Antigravity26_06/4.react/stock-dashboard/src/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,gKAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}},
-    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///C:/Antigravity26_06/4.react/stock-dashboard/src/app/page.js"],"sourcesContent":["// ── STEP 3: 메인 페이지 (뼈대) ──\n// 아직 아무 기능도 없는 빈 대시보드. 기능 1(주식 검색)부터 하나씩\n// 여기에 컴포넌트를 채워 넣을 예정이다. PROMPT_LOG.md / CODE_REVIEW.md 에\n// 각 기능을 추가할 때마다 무엇을 프롬프트했고 무엇을 직접 검토·수정했는지 기록한다.\nexport default function DashboardPage() {\n  return (\n    <main className=\"mx-auto max-w-7xl p-6\">\n      <p className=\"text-sm text-gray-500 dark:text-stock-muted\">\n        🚧 프로젝트 뼈대만 세운 상태입니다. 기능 1(스마트 주식 검색)부터 함께 만들어 나갑니다.\n      </p>\n    </main>\n  );\n}\n"],"names":["DashboardPage","className"],"mappings":"AAAA,4BAA4B;AAC5B,yCAAyC;AACzC,yDAAyD;AACzD,iDAAiD;;;;;;;AAClC,SAASA;IACtB,qBACE,oQAAC;QAAKC,WAAU;kBACd,cAAA,oQAAC;YAAEA,WAAU;sBAA8C;;;;;;;;;;;AAKjE"}}]
-}

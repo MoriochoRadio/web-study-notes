@@ -19,8 +19,10 @@ export default function StockChart() {
   const setPrice = useStockStore((s) => s.setPrice)
   // chartData: 차트의 X축(시간)과 Y축(가격)을 그리기 위한 데이터 배열 [{time, price}, ...]
   const [chartData, setChartData] = useState([])
-  // isLoading: 로딩 화면(스켈레톤/텍스트) 표시 여부 (기본값: true)
-  const [isLoading, setIsLoading] = useState(true)
+  // loadedSymbol: 마지막으로 초기 차트 데이터를 모두 받은 종목코드
+  // 종목코드와 비교해 로딩 여부를 계산하므로, effect 시작 시 동기 setState가 필요 없다.
+  const [loadedSymbol, setLoadedSymbol] = useState(null)
+  const isLoading = loadedSymbol !== selectedSymbol
   // lastPriceRef: 리렌더링 없이 직전 최신 가격을 내부 기억장소에 보존하는 useRef
   const lastPriceRef = useRef(0)
 
@@ -28,19 +30,30 @@ export default function StockChart() {
   // 종목(selectedSymbol)이 바뀔 때마다 /api/stock/[symbol]/chart 에서 초기 60개 데이터를 가져옴
   useEffect(() => {
     let alive = true // 💡 비동기 취소표: 광속 클릭 시 이전 요청의 응답이 화면을 덮어쓰는 버그 방지
-    setIsLoading(true) // 로딩 시작
 
-    fetch(`/api/stock/${selectedSymbol}/chart`)
-      .then((r) => r.json()) // 응답받은 HTTP Response 객체를 자바스크립트 객체로 변환
-      .then(({ data }) => {  // { symbol, data } 객체에서 data 배열만 { 구조 분해 할당 }
-        if (!alive) return   // 이미 다른 종목을 클릭했으면 이전 요청 응답을 무시하고 탈출
-        setChartData(data)   // 60개 과거 차트 가격 정보 상태 저장
+    async function loadChart() {
+      try {
+        const response = await fetch(`/api/stock/${selectedSymbol}/chart`)
+        if (!response.ok) throw new Error('차트 데이터를 불러오지 못했습니다.')
+        const { data = [] } = await response.json() // { symbol, data } 객체에서 data 배열만 구조 분해 할당
+        if (!alive) return // 이미 다른 종목을 클릭했으면 이전 요청 응답을 무시하고 탈출
+
+        setChartData(data) // 60개 과거 차트 가격 정보 상태 저장
         // 💡 data[data.length - 1]: 배열의 맨 마지막(가장 최신) 데이터 점의 가격을 lastPriceRef에 기억
-        if (data.length) lastPriceRef.current = data[data.length - 1].price
-        setIsLoading(false)  // 로딩 완료 -> 차트 렌더링 시작
-      })
+        lastPriceRef.current = data.at(-1)?.price ?? 0
+      } catch {
+        if (!alive) return
+        // 실패해도 이전 종목의 차트를 그대로 보여 주지 않고, 현재 종목의 빈 상태로 확정한다.
+        setChartData([])
+        lastPriceRef.current = 0
+      } finally {
+        // 비동기 요청이 끝난 뒤에만 로딩 완료를 기록해 불필요한 연쇄 렌더링을 피한다.
+        if (alive) setLoadedSymbol(selectedSymbol)
+      }
+    }
 
-    // 클인업(Clean-up) 함수: 종목이 변경되거나 컴포넌트가 꺼질 때 리액트가 자동 실행하여 취소표 찍음
+    loadChart()
+    // 클린업(Clean-up) 함수: 종목이 변경되거나 컴포넌트가 꺼질 때 리액트가 자동 실행하여 취소표를 찍는다.
     return () => { alive = false }
   }, [selectedSymbol])
 

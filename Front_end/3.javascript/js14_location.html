@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Location 객체 — 해시 파라미터 확인</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif; line-height: 1.65; background: #f6f8fb; color: #1d2735; }
+    main { width: min(680px, calc(100% - 40px)); margin: 48px auto; padding: 28px; border: 1px solid #d8e0ea; border-radius: 16px; background: #fff; box-shadow: 0 10px 30px rgb(19 39 67 / 8%); }
+    h1 { margin-top: 0; font-size: clamp(1.5rem, 4vw, 2rem); }
+    code { padding: 2px 6px; border-radius: 5px; background: #edf2f7; color: #b42318; }
+    dl { display: grid; grid-template-columns: max-content 1fr; gap: 10px 18px; padding: 16px; border-radius: 10px; background: #f1f6ff; }
+    dt { font-weight: 700; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    a { color: #075ec7; font-weight: 700; }
+    .empty { color: #667085; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111827; color: #edf2f7; }
+      main { background: #182230; border-color: #344054; }
+      code { background: #27364a; color: #fda29b; }
+      dl { background: #223047; }
+      a { color: #84adff; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Location 객체 — 해시 값 확인</h1>
+    <p><code>js14.html#id=hk&amp;addr=seoul</code> 링크로 전달된 <code>location.hash</code>를 읽어 표시하는 실습입니다.</p>
+    <dl id="params"><div class="empty">해시 파라미터를 읽는 중입니다.</div></dl>
+    <p><strong>현재 hash:</strong> <code id="raw-hash"></code></p>
+    <p><a href="js14.html">← Location 객체 실습으로 돌아가기</a></p>
+  </main>
+
+  <script>
+    // location.hash는 # 뒤의 문자열을 포함해 반환합니다. 앞의 #을 제외한 뒤 URLSearchParams로 key=value를 해석합니다.
+    const rawHash = location.hash;
+    const params = new URLSearchParams(rawHash.slice(1));
+    const paramList = document.getElementById('params');
+    const rawHashEl = document.getElementById('raw-hash');
+
+    rawHashEl.textContent = rawHash || '(전달된 해시 없음)';
+    paramList.replaceChildren();
+
+    if (!params.size) {
+      const message = document.createElement('div');
+      message.className = 'empty';
+      message.textContent = '전달된 해시 파라미터가 없습니다. js14.html의 요청 링크를 통해 다시 열어보세요.';
+      paramList.append(message);
+    } else {
+      for (const [key, value] of params) {
+        const term = document.createElement('dt');
+        const description = document.createElement('dd');
+        term.textContent = key;
+        description.textContent = value;
+        paramList.append(term, description);
+      }
+    }
+  </script>
+</body>
+</html>

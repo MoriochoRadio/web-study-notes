@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>웹 개발 학습 노트 | 취업아카데미</title>
 <meta name="description" content="취업아카데미 HTML·CSS·JavaScript 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script>/* 저장된 테마를 CSS보다 먼저 적용해 화면 깜빡임 방지. 저장된 값이 없으면(첫 방문) OS의 라이트/다크 설정을 따른다 */
 document.documentElement.dataset.theme = localStorage.getItem("theme")
@@ -69,6 +72,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   a{color:inherit;}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .skip-link{
+    position:fixed;z-index:100;top:10px;left:10px;transform:translateY(-160%);
+    background:var(--accent);color:#fff;border-radius:8px;padding:8px 12px;
+    font-size:14px;font-weight:800;text-decoration:none;transition:transform .15s;
+  }
+  .skip-link:focus{transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important;transition-duration:.01ms !important;}
+  }
 
   /* ---- 머리글: 종이 노트의 표지 ---- */
   header.hero{
@@ -129,6 +142,17 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     cursor:pointer;white-space:nowrap;
   }
   #theme-btn:hover{color:var(--text);border-color:var(--accent);}
+  #density-btn{
+    appearance:none;flex:none;background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;cursor:pointer;white-space:nowrap;
+  }
+  #density-btn:hover,#density-btn[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);}
+  [data-density="compact"] .note-card{padding:15px 17px 17px;margin-bottom:10px;}
+  [data-density="compact"] .note-body{margin-top:11px;}
+  [data-density="compact"] .note-summary,[data-density="compact"] .note-easy{margin-bottom:9px;line-height:1.65;}
+  [data-density="compact"] .note-concept{gap:8px;}
+  [data-density="compact"] .concept-block{padding:10px 12px;}
+  .mobile-quickbar{display:none;}
   #star-filter-btn{
     appearance:none;flex:none;
     background:var(--panel);border:1px solid var(--border);border-radius:10px;
@@ -209,6 +233,23 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     border:1px solid var(--border);padding:2px 7px;border-radius:7px;
   }
   .today-empty{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
+  .study-goal{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+  }
+  .study-goal-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  .study-goal h3{margin:0;font-size:15.5px;}
+  .study-goal-status{margin:0;color:var(--muted);font-size:13.5px;line-height:1.7;}
+  .study-goal-form{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+  .study-goal-form label{font-size:13.5px;font-weight:700;color:var(--muted);}
+  #study-goal-count{font:inherit;color:var(--text);background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:7px 9px;}
+  #study-goal-save{font:inherit;font-size:13px;font-weight:800;color:#fff;background:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:7px 11px;cursor:pointer;}
+  .milestone-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:7px;font-size:13px;}
+  .milestone-head b{font-size:13.5px;}
+  .milestone-head span{color:var(--muted);}
+  .milestone-track{height:10px;overflow:hidden;border:1px solid var(--border);border-radius:999px;background:var(--panel-2);}
+  .milestone-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));border-radius:inherit;transition:width .25s;}
+  .milestone-caption{margin:8px 0 0;color:var(--muted);font-size:12.5px;line-height:1.6;}
   .memo-overview-item{align-items:flex-start;flex-direction:column;gap:2px;}
   .memo-overview-item .mo-title{display:flex;align-items:center;gap:9px;}
   .memo-snippet{color:var(--muted);font-size:12.5px;line-height:1.6;}
@@ -229,6 +270,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   #backup-status{font-size:13px;color:var(--muted);}
   #backup-status.ok{color:var(--good);}
   #backup-status.error{color:#ef4444;}
+  .backup-preview{
+    margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;
+    background:var(--panel-2);font-size:13.5px;color:var(--text);
+  }
+  .backup-preview.hidden{display:none;}
+  .backup-preview p{margin:0 0 10px;line-height:1.7;}
+  .backup-preview-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .backup-preview-actions button{font-family:inherit;font-weight:700;cursor:pointer;border-radius:8px;padding:7px 11px;}
+  #backup-confirm-btn{border:1px solid var(--accent);background:var(--accent);color:#fff;}
+  #backup-cancel-btn{border:1px solid var(--border);background:var(--panel);color:var(--text);}
 
   /* ---- 기초 개념 사전: 읽는 순서 로드맵 ---- */
   .concept-roadmap{
@@ -780,8 +831,18 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     .tab-spacer{display:none;}
     #search-box{width:110px;}
     #star-filter-btn{padding:8px 10px;font-size:12px;}
-    #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
-    #bug-fab{right:14px;bottom:72px;padding:9px 14px;font-size:12.5px;}
+    body{padding-bottom:76px;}
+    #review-fab,#bug-fab{display:none;}
+    .mobile-quickbar{
+      position:fixed;z-index:45;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:5px;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+      background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--border);
+    }
+    .mobile-quickbar button{
+      min-height:42px;border:1px solid var(--border);border-radius:10px;background:var(--panel);color:var(--text);
+      font:700 11.5px/1.2 inherit;cursor:pointer;padding:5px 3px;
+    }
+    .mobile-quickbar button.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
     .review-top{padding:14px 16px;}
     .review-card{min-height:240px;padding:22px 20px;}
     .review-easy{font-size:15.5px;}
@@ -889,85 +950,567 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     .exam-next-row{flex-direction:column;align-items:stretch;}
     .exam-history .h-date{width:96px;}
   }
+
+  /* ---- 문서형 학습 노트 재설계: 장식보다 읽기 흐름과 정보 위계를 우선한다 ---- */
+  :root{
+    --bg:#fbfbf9;--panel:#ffffff;--panel-2:#f5f6f5;--border:#d9dedc;
+    --text:#202825;--muted:#65706b;--accent:#245c52;--good:#20704a;
+    --html:#a94e2a;--css:#2e639f;--js:#876b12;--react:#257b83;--next:#5e6a66;--concepts:#6855a2;
+    --shadow:none;
+  }
+  [data-theme="dark"]{
+    --bg:#121715;--panel:#181e1b;--panel-2:#222a26;--border:#34403a;
+    --text:#edf1ed;--muted:#a8b4ac;--accent:#8bc6b4;--good:#72d49b;
+  }
+  body{font-size:15.5px;line-height:1.75;background:var(--bg);}
+  .wrap{max-width:920px;}
+  header.hero{padding:54px 24px 34px;border-bottom:1px solid var(--border);background:var(--panel);}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+  h1{font-size:clamp(30px,4vw,42px);font-weight:750;letter-spacing:-.035em;margin-bottom:12px;}
+  .sub{max-width:690px;font-size:15.5px;line-height:1.8;margin-bottom:20px;}
+  .meta-row{gap:0;row-gap:3px;line-height:1.5;}
+  .meta-row span{border:0;border-radius:0;background:transparent;padding:0;font-size:12px;}
+  .meta-row span:not(:last-child)::after{content:"·";margin:0 7px;color:var(--border);}
+  .meta-row span:nth-child(n+6){display:none;}
+  .cross-link{margin-top:15px;border:0;border-radius:0;background:transparent;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:4px;}
+  nav.tabs{background:var(--panel);backdrop-filter:none;}
+  nav.tabs .wrap{max-width:920px;gap:0;padding:0 20px;min-height:56px;}
+  .tab-buttons{gap:0;align-self:stretch;}
+  nav.tabs button{border-radius:0;padding:17px 10px 14px;font-size:13.5px;border-bottom:2px solid transparent;}
+  nav.tabs button:hover{background:transparent;color:var(--accent);}
+  nav.tabs button.active{background:transparent;color:var(--accent);border-bottom-color:var(--accent);}
+  [data-theme="dark"] nav.tabs button.active{color:var(--accent);}
+  #search-box,#theme-btn,#density-btn,#star-filter-btn{border:0;border-radius:0;background:transparent;padding:6px 8px;font-size:12.5px;}
+  #search-box{width:122px;border-bottom:1px solid var(--border);}
+  #theme-btn:hover,#density-btn:hover,#density-btn[aria-pressed="true"],#star-filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  #star-filter-btn.active{background:transparent;color:#a97900;border-color:#a97900;}
+  main{padding:42px 0 88px;}
+  .resume-banner,.today-recommend,.study-goal,.data-backup,.howto,.concept-roadmap,.journey-intro,.journey-step,.journey-placeholder{
+    background:transparent;border-radius:0;box-shadow:none;
+  }
+  .resume-banner{border:1px solid var(--border);border-left:3px solid var(--accent);padding:12px 14px;margin-bottom:22px;}
+  .resume-banner button,#study-goal-save{border-radius:4px;background:var(--accent);}
+  .today-recommend,.study-goal,.data-backup{border:0;border-top:1px solid var(--border);padding:18px 0;margin-bottom:0;}
+  .today-recommend h3,.study-goal h3,.data-backup h3,.howto h3{font-size:14px;font-weight:800;letter-spacing:.02em;}
+  .today-recommend-item{background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--border);padding:10px 2px;}
+  .today-recommend-item:hover{border-color:var(--accent);}
+  .today-recommend-item b{border:0;border-radius:0;background:transparent;padding:0;color:var(--accent);}
+  .study-goal{padding-bottom:20px;}
+  .study-goal-form{margin-bottom:15px;}
+  #study-goal-count{border-radius:4px;background:var(--panel);}
+  .milestone-track{height:6px;border:0;border-radius:0;background:var(--panel-2);}
+  .milestone-fill{border-radius:0;background:var(--accent);}
+  .stat-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--border);border-left:1px solid var(--border);margin:20px 0 26px;}
+  .stat-card{min-height:92px;border:0;border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0;background:transparent;padding:15px 16px;box-shadow:none;}
+  .stat-card .n{font-size:23px;color:var(--text) !important;letter-spacing:-.03em;}
+  .stat-card .l{font-size:12px;margin-top:4px;line-height:1.45;}
+  .stat-card.progress{grid-column:span 2;}
+  .progress-chip{border:0;border-radius:0;background:transparent;padding:0 6px 0 0;font-size:10.5px;}
+  .progress-chip:not(:last-child)::after{content:"·";margin-left:6px;color:var(--border);}
+  .howto{border-top:1px solid var(--border);padding:24px 0;margin:24px 0 48px;}
+  .howto ol{font-size:13.5px;line-height:1.8;gap:5px;}
+  section.cat{margin-bottom:66px;}
+  section.cat .cat-head{gap:9px;margin-bottom:6px;}
+  .dot{width:5px;height:20px;border-radius:0;}
+  section.cat h2{font-size:25px;font-weight:750;padding:0;background:none;letter-spacing:-.025em;}
+  section.cat .cat-desc{font-size:14px;margin:4px 0 20px;max-width:720px;}
+  .toc{gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:7px 0;margin-bottom:20px;}
+  .toc a{border:0;border-radius:0;background:transparent;padding:4px 10px 4px 0;font-size:12.5px;}
+  .notes-list{gap:0;border-top:1px solid var(--border);}
+  .note-card{background:transparent;border:0;border-bottom:1px solid var(--border);border-radius:0;padding:20px 2px 22px;box-shadow:none;}
+  .note-card.collapsed{padding-bottom:18px;}
+  .note-head{gap:9px;margin-bottom:10px;}
+  .note-head h3{font-size:17px;font-weight:750;letter-spacing:-.015em;}
+  .note-num,.note-toggle,.note-done,.link-copy-btn,.star-btn{border:0;border-radius:0;background:transparent;padding:2px 4px;}
+  .note-num{padding-left:0;}
+  .note-toggle{border-bottom:1px solid var(--c,var(--accent));}
+  .note-tags{margin-left:0;order:4;width:100%;}
+  .note-tags .tag{border:0;border-radius:0;background:transparent;padding:0 8px 0 0;font-size:10.5px;}
+  .note-tags .tag:not(:last-child)::after{content:"·";margin-left:8px;color:var(--border);}
+  .note-summary{border:0;border-left:2px solid var(--c,var(--accent));border-radius:0;background:transparent;padding:2px 0 2px 13px;margin-bottom:11px;font-size:14px;}
+  .note-easy{border-radius:0;background:var(--easy-bg);border:0;border-left:2px solid var(--easy-border);padding:11px 13px;}
+  .note-memo textarea,.flow-diagram,.tree-diagram,.wrap-box{border-radius:4px;}
+  .journey-subtabs{gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;}
+  .journey-subtab-btn{border:0;border-radius:0;background:transparent;padding:9px 12px;border-bottom:2px solid transparent;}
+  .journey-subtab-btn.active{background:transparent;color:var(--sc,var(--accent));border-bottom-color:var(--sc,var(--accent));}
+  .journey-step{border:0;border-left:2px solid var(--c);border-bottom:1px solid var(--border);padding:18px 0 18px 16px;}
+  .journey-num,.journey-jump{border-radius:0;background:transparent;color:var(--c);border:0;padding:0;}
+  .mobile-quickbar{box-shadow:none;}
+  footer{border-top:1px solid var(--border);background:transparent;}
+  @media(max-width:700px){
+    header.hero{padding:36px 18px 26px;}
+    .wrap{padding:0 16px;}
+    nav.tabs .wrap{padding:0 16px;}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .stat-card.progress{grid-column:span 2;}
+    .meta-row span{font-size:11.5px;}
+    .tab-buttons{overflow-x:auto;}
+    .tab-buttons button{padding-left:8px;padding-right:8px;}
+    #density-btn,#theme-btn,#star-filter-btn{font-size:11.5px;padding:6px 5px;}
+    #search-box{width:96px;}
+    .note-head h3{font-size:16px;}
+  }
+  /* ---- 보조 기능도 본문을 방해하지 않는 간결한 조작부로 정리 ---- */
+  #review-fab{background:var(--accent);border:1px solid var(--accent);border-radius:4px;box-shadow:none;padding:11px 14px;font-size:13px;}
+  #review-fab:hover,#bug-fab:hover{transform:none;box-shadow:none;}
+  #review-fab .streak{border-radius:0;background:transparent;padding:0;margin-left:3px;}
+  #bug-fab{border-radius:4px;box-shadow:none;padding:9px 12px;border-color:var(--border);}
+  #bug-fab:hover{border-color:var(--accent);color:var(--accent);}
+  #review-modal{background:var(--bg);}
+  .review-top{background:var(--panel);padding:18px max(20px,calc((100vw - 920px)/2));}
+  .review-close,.review-chip{border-radius:0;background:transparent;}
+  .review-chip{border:0;border-bottom:2px solid transparent;padding:7px 9px;}
+  .review-chip.active{background:transparent;color:var(--accent);border-color:var(--accent);}
+  .review-card{border-radius:0;box-shadow:none;padding:24px;border-left:2px solid var(--accent);}
+  .review-badge,.review-struggle-badge{border-radius:0;background:transparent;padding:0;}
+  .review-actions button,.review-end-actions button{border-radius:4px;}
+  .review-again,.review-know{background:transparent;border-color:var(--border);}
+  .review-again{color:var(--html);border-left:2px solid var(--html);}
+  .review-know{color:var(--good);border-left:2px solid var(--good);}
+  .exam-box{background:transparent;border-radius:0;box-shadow:none;border:0;border-top:1px solid var(--border);padding:20px 0;}
+  .exam-chip,.exam-btn,.exam-choice,.exam-detail,.exam-why li,.exam-concept-link,.danger-btn{border-radius:4px;}
+  .exam-chip{background:transparent;border-color:var(--border);}
+  .exam-chip.count-chip.active,.exam-chip.scope-chip.active{background:var(--accent);}
+  .exam-btn{border-radius:4px;}
+  .exam-choice{background:transparent;border-width:1px;}
+  .exam-detail{background:transparent;}
+  .exam-why li{background:transparent;}
+  .exam-explain,.exam-deep,.exam-concept-link{border-radius:0;background:transparent;}
+  @media(max-width:600px){
+    .mobile-quickbar{background:var(--panel);backdrop-filter:none;padding:7px 10px calc(7px + env(safe-area-inset-bottom));}
+    .mobile-quickbar button{border-radius:0;background:transparent;border:0;border-right:1px solid var(--border);font-size:11px;}
+    .mobile-quickbar button:last-child{border-right:0;}
+    .mobile-quickbar button.primary{background:transparent;color:var(--accent);border-color:var(--border);}
+    .review-top{padding:14px 16px;}
+  }
+  /* ---- 프리미엄 학습 브랜드: 고급스러운 색상 깊이와 선택적 시각 포인트 ---- */
+  :root{
+    --bg:#f5f6f8;--panel:#ffffff;--panel-2:#f0f3f5;--border:#d8e0e4;
+    --text:#1f2a35;--muted:#687582;--accent:#0f6c72;--good:#23825b;
+    --html:#c5633e;--css:#316fb5;--js:#a1741c;--react:#187f89;--next:#5d6873;--concepts:#7657ad;
+  }
+  [data-theme="dark"]{
+    --bg:#101722;--panel:#17212c;--panel-2:#202d39;--border:#304152;
+    --text:#ecf2f5;--muted:#a6b4c0;--accent:#65c9c3;--good:#66d09b;
+  }
+  body{background:radial-gradient(900px 520px at 92% -6%,rgba(77,155,165,.11),transparent 65%),var(--bg);}
+  header.hero{position:relative;overflow:hidden;border:0;background:linear-gradient(118deg,#101b2b 0%,#193847 55%,#205b5d 100%);color:#f7fbfc;}
+  header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(560px 250px at 84% 10%,rgba(153,219,206,.19),transparent 72%),linear-gradient(90deg,rgba(3,10,19,.2),transparent 55%);pointer-events:none;}
+  header.hero .wrap{position:relative;z-index:1;}
+  .eyebrow{color:#a8ddd2;letter-spacing:.12em;}
+  h1{font-family:"Noto Serif KR","AppleMyungjo",Georgia,serif;font-weight:800;letter-spacing:-.045em;text-shadow:0 1px 0 rgba(0,0,0,.12);}
+  .sub{color:rgba(245,252,252,.83);}
+  .meta-row{margin-top:22px;gap:7px;}
+  .meta-row span{padding:4px 9px;border:1px solid rgba(214,245,239,.18);border-radius:999px;color:rgba(239,251,249,.76);background:rgba(255,255,255,.055);font-size:11.5px;backdrop-filter:blur(5px);}
+  .meta-row span:not(:last-child)::after{content:none;}
+  .cross-link{display:inline-flex;margin-top:17px;padding:7px 11px;border:1px solid rgba(205,242,233,.35);border-radius:7px;color:#d9f2ee;background:rgba(255,255,255,.05);text-decoration:none;transition:background .18s,border-color .18s,transform .18s;}
+  .cross-link:hover{color:#fff;border-color:#b6e6dd;background:rgba(255,255,255,.12);transform:translateY(-1px);}
+  nav.tabs{background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(12px);box-shadow:0 7px 20px rgba(18,35,48,.04);}
+  nav.tabs button{position:relative;transition:color .18s;}
+  nav.tabs button.active{font-weight:800;}
+  nav.tabs button.active::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,#d18b57,#66c9c3);}
+  #search-box{border-bottom-color:color-mix(in srgb,var(--accent) 40%,var(--border));}
+  #search-box:focus{outline:none;border-bottom-color:var(--accent);box-shadow:0 5px 0 -4px color-mix(in srgb,var(--accent) 25%,transparent);}
+  #overview{display:grid;grid-template-columns:1.15fr .85fr;column-gap:18px;align-items:stretch;}
+  #overview > #resume-banner,#overview > .stat-grid,#overview > #today-recommend-list,#overview > #memo-overview-box,#overview > .data-backup,#overview > .howto{grid-column:1/-1;}
+  #resume-banner{grid-column:1/-1;background:linear-gradient(110deg,color-mix(in srgb,var(--accent) 9%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--accent) 20%,var(--border));border-left:3px solid #d18b57;border-radius:10px;box-shadow:0 8px 20px rgba(19,55,62,.05);}
+  #next-study-box,#study-goal-box{margin:0 0 22px;padding:20px;border:1px solid var(--border);border-radius:14px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 4%,var(--panel)));box-shadow:0 10px 28px rgba(18,42,54,.06);}
+  #next-study-box{border-top:3px solid #0f6c72;}
+  #study-goal-box{border-top:3px solid #d18b57;}
+  .today-recommend h3,.study-goal h3{font-family:"Noto Serif KR","AppleMyungjo",serif;font-size:16px;letter-spacing:-.02em;}
+  .today-recommend-item{border-radius:8px;border:1px solid transparent;background:color-mix(in srgb,var(--accent) 4%,var(--panel));padding:10px 11px;transition:border-color .16s,transform .16s,background .16s;}
+  .today-recommend-item:hover{background:color-mix(in srgb,var(--accent) 8%,var(--panel));border-color:color-mix(in srgb,var(--accent) 28%,var(--border));transform:translateX(3px);}
+  .study-goal{border-top-color:var(--border);}
+  .milestone-track{height:7px;border-radius:999px;background:color-mix(in srgb,var(--accent) 10%,var(--panel-2));}
+  .milestone-fill{border-radius:inherit;background:linear-gradient(90deg,#0f6c72,#76cfc2);box-shadow:0 1px 5px rgba(15,108,114,.4);}
+  .stat-grid{grid-column:1/-1;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;border:0;margin:4px 0 26px;}
+  .stat-card{min-height:104px;border:1px solid var(--border);border-radius:12px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--c,var(--accent)) 4%,var(--panel)));padding:16px;box-shadow:0 8px 20px rgba(18,42,54,.04);transition:transform .18s,border-color .18s;}
+  .stat-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c,var(--accent)) 38%,var(--border));}
+  .stat-card .n{font-family:"Noto Serif KR","AppleMyungjo",serif;font-size:26px;color:var(--c,var(--accent)) !important;}
+  .stat-card.progress{grid-column:span 2;--c:var(--good);}
+  .progress-chip{padding:2px 6px;border-radius:999px;background:color-mix(in srgb,var(--c,var(--accent)) 7%,transparent);}
+  .progress-chip:not(:last-child)::after{content:none;}
+  section.cat h2{font-family:"Noto Serif KR","AppleMyungjo",serif;font-size:27px;position:relative;}
+  section.cat h2::after{content:"";display:block;width:42px;height:3px;margin-top:8px;border-radius:999px;background:linear-gradient(90deg,var(--c,var(--accent)),transparent);}
+  .toc{border:0;padding:0;gap:7px;}
+  .toc a{border:1px solid var(--border);border-radius:999px;background:var(--panel);padding:5px 10px;transition:transform .15s,border-color .15s,background .15s;}
+  .toc a:hover{transform:translateY(-1px);background:color-mix(in srgb,var(--c,var(--accent)) 6%,var(--panel));}
+  .notes-list{gap:12px;border:0;}
+  .note-card{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:20px 21px 22px;box-shadow:0 7px 20px rgba(18,42,54,.035);transition:transform .18s,box-shadow .18s,border-color .18s;}
+  .note-card::before{content:"";position:absolute;left:0;top:20px;bottom:20px;width:3px;background:linear-gradient(var(--c,var(--accent)),color-mix(in srgb,var(--c,var(--accent)) 15%,transparent));border-radius:0 3px 3px 0;opacity:.9;}
+  .note-card:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(18,42,54,.09);border-color:color-mix(in srgb,var(--c,var(--accent)) 28%,var(--border));}
+  .note-card.collapsed{padding-bottom:20px;}
+  .note-head{padding-left:5px;}
+  .note-num{color:var(--c,var(--accent));font-weight:850;letter-spacing:.03em;}
+  .note-toggle{border:1px solid color-mix(in srgb,var(--c,var(--accent)) 25%,var(--border));border-radius:6px;background:color-mix(in srgb,var(--c,var(--accent)) 5%,var(--panel));padding:4px 8px;}
+  .note-done,.link-copy-btn,.star-btn{border:1px solid var(--border);border-radius:6px;background:var(--panel);padding:4px 7px;transition:border-color .15s,background .15s;}
+  .note-done:hover,.link-copy-btn:hover,.star-btn:hover{background:var(--panel-2);}
+  .note-summary{border-left-width:3px;border-radius:0 7px 7px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--c,var(--accent)) 7%,var(--panel)),transparent);padding:8px 10px 8px 13px;}
+  .note-easy{border-radius:7px;background:linear-gradient(90deg,var(--easy-bg),transparent);}
+  @media(max-width:700px){
+    header.hero{padding:42px 18px 30px;}
+    #overview{display:block;}
+    #next-study-box,#study-goal-box{margin-bottom:14px;}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+    .stat-card{min-height:92px;}
+    .stat-card.progress{grid-column:span 2;}
+    .note-card:hover{transform:none;box-shadow:0 7px 20px rgba(18,42,54,.035);}
+  }
+  /* ---- 보조 학습 화면: 부드러운 깊이와 짧은 피드백으로 브랜드 경험을 연결 ---- */
+  #review-fab{background:linear-gradient(135deg,#0b5964,#16807d);border-color:rgba(160,237,226,.35);border-radius:9px;box-shadow:0 10px 22px rgba(12,85,100,.24);transition:transform .18s,box-shadow .18s;}
+  #review-fab:hover{transform:translateY(-2px);box-shadow:0 15px 28px rgba(12,85,100,.3);}
+  #bug-fab{border-radius:9px;background:var(--panel);box-shadow:0 8px 18px rgba(18,42,54,.11);transition:transform .18s,box-shadow .18s,border-color .18s;}
+  #bug-fab:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(18,42,54,.15);}
+  #review-modal{background:radial-gradient(720px 360px at 76% 0%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 70%),var(--bg);}
+  .review-top{background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(12px);box-shadow:0 8px 22px rgba(18,42,54,.05);}
+  .review-close{border-radius:7px;background:var(--panel-2);}
+  .review-chip{border-radius:999px;border:1px solid transparent;padding:6px 11px;transition:background .15s,border-color .15s,color .15s;}
+  .review-chip:hover{background:color-mix(in srgb,var(--accent) 7%,var(--panel));}
+  .review-chip.active{border-color:color-mix(in srgb,var(--accent) 38%,var(--border));background:color-mix(in srgb,var(--accent) 12%,var(--panel));}
+  .review-card{border-radius:16px;border:1px solid color-mix(in srgb,var(--accent) 20%,var(--border));border-left:4px solid var(--rc,var(--accent));background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--rc,var(--accent)) 5%,var(--panel)));box-shadow:0 18px 42px rgba(18,42,54,.11);}
+  .review-badge{border-radius:999px;padding:3px 9px;background:color-mix(in srgb,var(--rc,var(--accent)) 13%,transparent);}
+  .review-actions button{border-radius:9px;transition:transform .16s,box-shadow .16s;}
+  .review-actions button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(18,42,54,.08);}
+  .review-again{background:color-mix(in srgb,var(--html) 8%,var(--panel));border-left:1px solid color-mix(in srgb,var(--html) 34%,var(--border));}
+  .review-know{background:linear-gradient(135deg,#12706d,#23825b);color:#fff;border-left:0;}
+  .exam-box{border:1px solid var(--border);border-radius:14px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 3%,var(--panel)));box-shadow:0 10px 24px rgba(18,42,54,.05);padding:20px;}
+  .exam-chip{border-radius:999px;background:var(--panel);transition:transform .15s,border-color .15s;}
+  .exam-chip:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--accent) 40%,var(--border));}
+  .exam-btn{border-radius:8px;background:linear-gradient(135deg,#0f6c72,#23825b);box-shadow:0 6px 14px rgba(15,108,114,.18);}
+  .exam-choice{border-radius:9px;background:var(--panel);transition:transform .14s,border-color .14s,box-shadow .14s;}
+  .exam-choice:hover:not(:disabled){transform:translateX(3px);box-shadow:0 5px 12px rgba(18,42,54,.05);}
+  .exam-detail{border-radius:9px;background:var(--panel);}
+  .exam-explain{border-radius:0 9px 9px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 8%,var(--panel)),transparent);}
+  @media(max-width:600px){
+    .mobile-quickbar{background:color-mix(in srgb,var(--panel) 93%,transparent);backdrop-filter:blur(13px);box-shadow:0 -8px 20px rgba(18,42,54,.06);}
+    .mobile-quickbar button{border-radius:8px;border:1px solid transparent;}
+    .mobile-quickbar button.primary{background:linear-gradient(135deg,#0f6c72,#23825b);color:#fff;border-color:transparent;}
+  }
+  /* ---- 서체 체계: 제목·본문·코드의 역할을 분명하게 구분한다 ---- */
+  :root{
+    --font-ui:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic","Segoe UI",sans-serif;
+    --font-code:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  body{font-family:var(--font-ui);font-weight:450;letter-spacing:-.012em;text-rendering:optimizeLegibility;font-synthesis:none;}
+  button,input,select,textarea{font-family:var(--font-ui);}
+  h1,section.cat h2,.today-recommend h3,.study-goal h3,.review-top h2,.review-end h3{
+    font-family:var(--font-ui);font-style:normal;font-weight:760;letter-spacing:-.045em;
+  }
+  h1{font-size:clamp(31px,4vw,43px);line-height:1.22;}
+  section.cat h2{font-size:27px;line-height:1.35;}
+  .sub{font-weight:430;letter-spacing:-.018em;}
+  .eyebrow{font-family:var(--font-ui);font-weight:650;letter-spacing:.08em;}
+  .meta-row span,.cross-link,nav.tabs button,#search-box,#theme-btn,#density-btn,#star-filter-btn{font-family:var(--font-ui);font-weight:550;letter-spacing:-.018em;}
+  .stat-card .n{font-family:var(--font-ui);font-weight:780;letter-spacing:-.05em;}
+  .note-head h3{font-family:var(--font-ui);font-weight:720;letter-spacing:-.033em;}
+  .note-concept p,.note-summary,.note-easy{letter-spacing:-.014em;}
+  pre,code,.note-concept code,.note-points code,.note-tip code,.note-easy code,.note-tags .tag,.journey-points b{font-family:var(--font-code);letter-spacing:0;}
+  @media(max-width:700px){
+    body{letter-spacing:-.01em;}
+    h1{font-size:32px;letter-spacing:-.05em;}
+    section.cat h2{font-size:24px;}
+    .note-head h3{letter-spacing:-.025em;}
+  }
+  /* ---- 마이크로 UI: 학습 행동을 먼저 보이게 하고 조작부의 위계를 낮춘다 ---- */
+  nav.tabs .wrap{column-gap:6px;row-gap:0;}
+  .tab-buttons{padding-right:8px;}
+  #star-filter-btn,#density-btn,#theme-btn{font-size:11.5px;color:var(--muted);}
+  #star-filter-btn::before{content:"";display:inline-block;width:5px;height:5px;margin:0 5px 1px 0;border-radius:50%;background:currentColor;opacity:.65;}
+  #density-btn::before,#theme-btn::before{content:"·";margin-right:5px;color:var(--border);}
+  #overview{row-gap:0;}
+  #resume-banner{min-height:54px;padding:11px 14px 11px 17px;margin-bottom:22px;}
+  #resume-banner::before{content:"이어보기";flex:none;color:#b2774b;font-size:10px;font-weight:750;letter-spacing:.08em;}
+  #resume-banner span{font-size:13px;color:var(--muted);}
+  #resume-banner button{min-height:32px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));border-radius:7px;background:var(--panel);color:var(--accent);box-shadow:none;padding:6px 11px;transition:background .16s,border-color .16s,transform .16s;}
+  #resume-banner button:hover{background:color-mix(in srgb,var(--accent) 8%,var(--panel));border-color:var(--accent);transform:translateX(2px);}
+  #next-study-box,#study-goal-box{position:relative;overflow:hidden;min-height:178px;}
+  #next-study-box::after,#study-goal-box::after{content:"";position:absolute;right:-42px;bottom:-56px;width:150px;height:150px;border-radius:50%;pointer-events:none;opacity:.48;}
+  #next-study-box::after{background:radial-gradient(circle,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);}
+  #study-goal-box::after{background:radial-gradient(circle,rgba(209,139,87,.14),transparent 68%);}
+  #next-study-box h3,#study-goal-box h3,.today-recommend-list,.study-goal-form,.milestone-head,.milestone-track,.milestone-caption{position:relative;z-index:1;}
+  .study-goal-head{align-items:center;margin-bottom:15px;}
+  .study-goal-status{padding:4px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 7%,var(--panel));font-size:11.5px;line-height:1.35;}
+  .study-goal-form{gap:7px;padding:8px 9px;border:1px solid color-mix(in srgb,var(--border) 85%,transparent);border-radius:9px;background:rgba(255,255,255,.3);}
+  .study-goal-form label{font-size:12px;letter-spacing:-.02em;}
+  #study-goal-count{height:31px;border:1px solid var(--border);border-radius:6px;padding:0 7px;background:var(--panel);color:var(--text);}
+  #study-goal-save{min-height:31px;border:0;border-radius:6px;padding:5px 9px;box-shadow:0 5px 12px rgba(15,108,114,.18);}
+  .milestone-head{margin-top:15px;margin-bottom:7px;}
+  .milestone-head b{font-size:12.5px;letter-spacing:-.02em;}
+  .milestone-caption{font-size:12px;line-height:1.6;}
+  .stat-card::before{content:"";display:block;width:22px;height:3px;margin-bottom:10px;border-radius:999px;background:var(--c,var(--accent));opacity:.75;}
+  .stat-card.progress::before{background:linear-gradient(90deg,#0f6c72,#76cfc2);width:34px;}
+  .stat-card .l{font-size:11.5px;letter-spacing:-.02em;}
+  @media(max-width:700px){
+    .tab-buttons{padding-right:0;}
+    #resume-banner{gap:8px;align-items:center;}
+    #resume-banner::before{width:100%;}
+    #resume-banner span{min-width:0;}
+    #next-study-box,#study-goal-box{min-height:0;}
+    .study-goal-status{font-size:11px;}
+  }
+
+  /* ==== Premium learning workspace: 시각적 서명과 행동 위계 ==== */
+  header.hero{
+    position:relative;overflow:hidden;padding:0;border:0;
+    background:linear-gradient(118deg,#071826 0%,#10283a 54%,#0f5b63 125%);
+  }
+  [data-theme="dark"] header.hero{background:linear-gradient(118deg,#07121f 0%,#102333 54%,#0a535a 125%);}
+  header.hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+    background-image:linear-gradient(rgba(194,237,231,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(194,237,231,.22) 1px,transparent 1px);
+    background-size:34px 34px;mask-image:linear-gradient(90deg,#000,transparent 88%);
+  }
+  header.hero::after{
+    content:"";position:absolute;width:580px;height:580px;right:-180px;top:-280px;border-radius:50%;pointer-events:none;
+    border:1px solid rgba(168,239,230,.22);box-shadow:0 0 0 48px rgba(168,239,230,.035),0 0 0 110px rgba(168,239,230,.02);
+  }
+  header.hero .wrap{max-width:1120px;padding:0 28px;}
+  .hero-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(285px,.82fr);gap:clamp(36px,7vw,100px);align-items:center;min-height:372px;padding:46px 0 38px;}
+  .hero-copy{min-width:0;}
+  .hero .eyebrow{color:#a9e5dc;font-size:12px;font-weight:760;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px;}
+  .hero h1{color:#f6fbfb;font-size:clamp(35px,4.4vw,53px);font-weight:780;line-height:1.08;letter-spacing:-.065em;margin:0 0 17px;}
+  .hero .sub{max-width:665px;color:rgba(233,247,246,.79);font-size:15.5px;line-height:1.85;margin-bottom:23px;}
+  .hero .sub b{color:#fff;font-weight:700;}
+  .hero .meta-row{gap:7px;max-width:680px;}
+  .hero .meta-row span{color:rgba(235,250,248,.78);border-color:rgba(193,239,233,.22);background:rgba(4,17,27,.22);backdrop-filter:blur(6px);padding:5px 10px;font-size:11.5px;}
+  .hero .cross-link{margin-top:14px;color:#dff8f4;background:rgba(4,19,29,.26);border-color:rgba(190,235,229,.31);border-radius:8px;padding:8px 13px;font-weight:700;transition:transform .18s cubic-bezier(.23,1,.32,1),background .18s,border-color .18s;}
+  .hero .cross-link:hover{color:#fff;background:rgba(76,194,184,.18);border-color:#9bddd4;transform:translateY(-1px);}
+  .hero-atlas{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:27px 24px 24px;border:1px solid rgba(198,240,234,.25);border-radius:18px;background:linear-gradient(145deg,rgba(10,34,47,.74),rgba(15,74,80,.3));box-shadow:0 22px 50px rgba(0,7,16,.18);backdrop-filter:blur(10px);overflow:hidden;}
+  .hero-atlas::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,transparent 0 47%,rgba(172,243,235,.1) 47.15% 47.45%,transparent 47.6% 100%);}
+  .atlas-kicker,.atlas-footer,.atlas-grid{position:relative;z-index:1;}
+  .atlas-kicker{display:flex;justify-content:space-between;gap:12px;color:#abdeda;font-size:10px;font-weight:800;letter-spacing:.14em;}
+  .atlas-kicker span{color:rgba(223,248,244,.56);font-variant-numeric:tabular-nums;}
+  .atlas-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0 17px;}
+  .atlas-node{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:12px 12px;border:1px solid rgba(205,241,235,.18);border-radius:10px;background:rgba(3,18,28,.2);color:rgba(237,251,249,.72);font-size:12.5px;font-weight:720;overflow:hidden;}
+  .atlas-node::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--node,#70d2c7);opacity:.92;}
+  .atlas-node b{color:#f0fffc;font-size:20px;font-weight:760;letter-spacing:-.06em;font-variant-numeric:tabular-nums;}
+  .atlas-node:nth-child(1){--node:#e28760;}.atlas-node:nth-child(2){--node:#72a8ef;}.atlas-node:nth-child(3){--node:#e5c25a;}.atlas-node:nth-child(4){--node:#76d6de;}
+  .atlas-node.active{border-color:rgba(156,230,220,.48);background:linear-gradient(135deg,rgba(50,156,150,.22),rgba(7,32,41,.12));}
+  .atlas-footer{margin:0;padding-top:14px;border-top:1px solid rgba(202,240,235,.18);color:rgba(230,249,246,.67);font-size:11.5px;letter-spacing:.025em;}
+  .atlas-footer b{color:#c9f4ee;font-weight:800;}
+
+  #overview{padding-top:5px;}
+  #overview > .overview-command{grid-column:1/-1;}
+  .overview-command{position:relative;display:grid;grid-template-columns:minmax(0,1.34fr) minmax(282px,.86fr);grid-template-areas:"resume resume" "next goal";gap:14px;margin:20px 0 28px;}
+  #resume-banner{grid-area:resume;margin:0;min-height:50px;padding:10px 13px 10px 16px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:10px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 10%,var(--panel)),var(--panel));box-shadow:none;}
+  #resume-banner::before{content:"LAST SESSION";flex:none;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.095em;}
+  #resume-banner button{border-radius:7px;padding:7px 12px;box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 25%,transparent);transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .16s;}
+  #resume-banner button:hover{transform:translateY(-1px);box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 32%,transparent);}
+  #next-study-box{grid-area:next;min-height:232px;margin:0;padding:23px 23px 21px;border:1px solid color-mix(in srgb,var(--accent) 38%,var(--border));border-top:3px solid var(--accent);border-radius:15px;background:linear-gradient(142deg,color-mix(in srgb,var(--accent) 8%,var(--panel)),var(--panel) 63%);box-shadow:0 16px 34px rgba(18,42,54,.09);}
+  #study-goal-box{grid-area:goal;min-height:232px;margin:0;padding:23px 20px 20px;border-top:3px solid #d18b57;border-radius:15px;background:linear-gradient(150deg,color-mix(in srgb,#d18b57 7%,var(--panel)),var(--panel) 68%);box-shadow:0 12px 27px rgba(18,42,54,.055);}
+  #next-study-box::before,#study-goal-box::before{display:block;margin-bottom:9px;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.11em;}
+  #next-study-box::before{content:"01 · CONTINUE";}
+  #study-goal-box::before{content:"02 · CALIBRATE";color:#ad693e;}
+  #next-study-box h3,#study-goal-box h3{font-family:var(--font-ui,"Pretendard",sans-serif);font-size:20px;font-weight:780;letter-spacing:-.052em;margin-bottom:14px;}
+  #next-study-box .today-recommend-list{gap:8px;}
+  #next-study-box .today-recommend-item{padding:13px 14px;border-color:color-mix(in srgb,var(--accent) 15%,var(--border));background:color-mix(in srgb,var(--accent) 4%,var(--panel));border-radius:9px;transition:transform .18s cubic-bezier(.23,1,.32,1),border-color .18s,background .18s;}
+  #next-study-box .today-recommend-item:hover{transform:translateX(3px);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--panel));}
+  #study-goal-box .study-goal-head{margin-bottom:12px;}
+  #study-goal-box .study-goal-status{background:color-mix(in srgb,#d18b57 10%,var(--panel));color:color-mix(in srgb,#96562f 78%,var(--text));}
+  [data-theme="dark"] #study-goal-box .study-goal-status{color:#f1bd92;}
+  #study-goal-box .study-goal-form{padding:8px;background:color-mix(in srgb,#d18b57 5%,var(--panel));}
+  #study-goal-save{background:#b56a3d;box-shadow:0 5px 13px rgba(154,78,35,.2);}
+  #study-goal-save:hover{background:#9e5730;}
+  .overview-command + .stat-grid{margin-top:0;}
+  #overview .stat-grid{position:relative;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:30px;}
+  #overview .stat-grid::before{content:"LEARNING LIBRARY · INDEXED BY SUBJECT";grid-column:1/-1;margin:2px 0 1px;color:var(--muted);font-size:10px;font-weight:820;letter-spacing:.105em;}
+  #overview .stat-card{position:relative;min-height:110px;border-radius:12px;box-shadow:0 8px 22px rgba(18,42,54,.045);overflow:hidden;}
+  #overview .stat-card::after{content:"";position:absolute;right:-18px;bottom:-20px;width:68px;height:68px;border:1px solid color-mix(in srgb,var(--c,var(--accent)) 36%,transparent);border-radius:50%;opacity:.48;}
+  #overview .stat-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(18,42,54,.09);}
+  #overview .stat-card.progress{grid-column:span 2;}
+  nav.tabs{border-bottom-color:color-mix(in srgb,var(--border) 88%,transparent);box-shadow:0 8px 22px rgba(13,28,41,.025);}
+  nav.tabs button.active{box-shadow:0 6px 14px color-mix(in srgb,var(--accent) 26%,transparent);}
+
+  @media(max-width:850px){
+    header.hero .wrap{padding:0 22px;}
+    .hero-shell{grid-template-columns:1fr;gap:22px;min-height:0;padding:38px 0 30px;}
+    .hero-atlas{min-height:0;padding:20px;}
+    .atlas-grid{grid-template-columns:repeat(4,1fr);}
+    .atlas-node{min-height:52px;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 10px;}
+    .atlas-node b{font-size:18px;}
+    .overview-command{grid-template-columns:1fr;grid-template-areas:"resume" "next" "goal";}
+    #next-study-box,#study-goal-box{min-height:0;}
+  }
+  @media(max-width:700px){
+    header.hero .wrap{padding:0 18px;}
+    .hero-shell{padding:32px 0 25px;}
+    .hero h1{font-size:34px;}
+    .hero .sub{font-size:14px;line-height:1.75;}
+    .hero .meta-row{gap:6px;}
+    .hero .meta-row span{font-size:10.5px;padding:4px 8px;}
+    .hero-atlas{border-radius:13px;padding:16px;}
+    .atlas-grid{gap:6px;margin:13px 0;}
+    .atlas-node{min-height:48px;font-size:10.5px;padding:7px 8px;}
+    .atlas-node b{font-size:16px;}
+    .atlas-footer{padding-top:10px;font-size:10.5px;}
+    .overview-command{gap:10px;margin:15px 0 22px;}
+    #resume-banner{padding:10px 11px;}
+    #resume-banner::before{font-size:9px;}
+    #next-study-box,#study-goal-box{padding:18px 16px;}
+    #next-study-box h3,#study-goal-box h3{font-size:18px;}
+    #overview .stat-grid{gap:8px;}
+    #overview .stat-card{min-height:94px;}
+  }
+
+  /* 보조 도구도 주 학습 흐름을 방해하지 않는 하나의 작업 공간으로 정렬한다. */
+  nav.tabs .wrap{max-width:1120px;column-gap:7px;row-gap:5px;}
+  nav.tabs .tab-buttons{gap:1px;}
+  nav.tabs button{border-radius:7px;letter-spacing:-.015em;}
+  nav.tabs button.active{background:transparent;color:var(--accent);box-shadow:none;}
+  nav.tabs button.active::after{left:11px;right:11px;bottom:-6px;height:2px;background:var(--accent);}
+  #search-box{width:146px;border:0;border-bottom:1px solid color-mix(in srgb,var(--accent) 42%,var(--border));border-radius:0;background:transparent;padding:8px 4px;}
+  #star-filter-btn,#density-btn,#theme-btn{border:1px solid transparent;border-radius:7px;background:transparent;padding:8px 9px;font-size:12px;}
+  #star-filter-btn:hover,#density-btn:hover,#theme-btn:hover{background:color-mix(in srgb,var(--accent) 6%,var(--panel));border-color:color-mix(in srgb,var(--accent) 16%,var(--border));}
+  #star-filter-btn.active{background:#d9a912;border-color:#d9a912;}
+
+  @media(min-width:601px){
+    #review-fab,#bug-fab{right:24px;min-width:108px;justify-content:center;border-radius:10px;letter-spacing:-.015em;}
+    #review-fab{bottom:24px;padding:12px 14px;background:linear-gradient(135deg,#0f6c72,#278f91);box-shadow:0 12px 26px rgba(12,91,96,.27);}
+    #bug-fab{bottom:79px;padding:10px 13px;color:var(--text);background:color-mix(in srgb,var(--panel) 94%,transparent);border-color:color-mix(in srgb,var(--border) 85%,transparent);box-shadow:0 9px 19px rgba(18,42,54,.1);backdrop-filter:blur(10px);}
+    #review-fab:hover,#bug-fab:hover{transform:translateY(-2px);}
+  }
+  #review-modal{background:color-mix(in srgb,var(--bg) 86%,#071826 14%);}
+  .review-top{padding:18px max(20px,calc((100vw - 1040px) / 2));background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(12px);}
+  .review-top h2{font-family:var(--font-ui,"Pretendard",sans-serif);font-size:19px;font-weight:780;letter-spacing:-.04em;}
+  .review-chip{border-radius:7px;}
+  .review-card{border-radius:16px;border-color:color-mix(in srgb,var(--accent) 20%,var(--border));background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--accent) 3%,var(--panel)));box-shadow:0 20px 45px rgba(10,31,43,.13);}
+  .review-card::before{content:"RECALL · 05 MIN";display:block;margin-bottom:14px;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.12em;}
+  .review-actions button{border-radius:9px;}
+  .mobile-quickbar{box-shadow:0 -8px 24px rgba(13,31,42,.07);}
+  .mobile-quickbar button{transition:background .16s,color .16s,transform .16s;}
+  .mobile-quickbar button:active{transform:scale(.97);}
+  @media(max-width:700px){
+    nav.tabs .wrap{padding:0 16px;}
+    #search-box{width:106px;}
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">본문으로 바로가기</a>
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">📚 취업아카데미 · 웹 개발 복습 노트</div>
-    <h1>웹 개발 학습 노트</h1>
-    <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
-    <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-03</span>
-      <span>HTML 7개 단원</span>
-      <span>CSS 12개 단원</span>
-      <span>JavaScript 18개 단원</span>
-      <span>React 14개 단원 + 🎓 졸업 과제</span>
-      <span>🧭 학습 여정 4/4과목</span>
-      <span>기초 개념 사전 39개 항목</span>
-      <span>✏️ 시험 대비 83문제</span>
-      <span>강의자료·정리 문서 7건</span>
+    <div class="hero-shell">
+      <div class="hero-copy">
+        <div class="eyebrow">취업아카데미 · 웹 개발 복습 노트</div>
+        <h1>웹 개발 학습 노트</h1>
+        <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
+        <div class="meta-row">
+          <span id="updated-badge">마지막 점검: 2026-08-13</span>
+          <span>HTML 7개 단원</span>
+          <span>CSS 12개 단원</span>
+          <span>JavaScript 18개 단원</span>
+          <span>React·Next.js 14개 레슨 + 졸업 과제</span>
+          <span>학습 여정 4/4과목</span>
+          <span>기초 개념 사전 39개 항목</span>
+          <span>시험 대비 83문제</span>
+          <span>강의자료·정리 문서 7건</span>
+        </div>
+        <a class="cross-link" href="../Back_end/">Java 백엔드 학습 노트로 이동 →</a>
+      </div>
+      <aside class="hero-atlas" aria-label="프런트엔드 학습 구성">
+        <div class="atlas-kicker"><span>LEARNING INDEX</span><span>01—04</span></div>
+        <div class="atlas-grid">
+          <div class="atlas-node"><span>HTML</span><b>07</b></div>
+          <div class="atlas-node"><span>CSS</span><b>12</b></div>
+          <div class="atlas-node"><span>JavaScript</span><b>18</b></div>
+          <div class="atlas-node active"><span>React·Next</span><b>14</b></div>
+        </div>
+        <p class="atlas-footer"><b>51 lessons</b> · 한 줄씩 쌓아가는 프런트엔드 학습 기록</p>
+      </aside>
     </div>
-    <a class="cross-link" href="../Back_end/">☕ Java 백엔드 학습 노트로 이동 →</a>
   </div>
 </header>
 
 <nav class="tabs">
   <div class="wrap">
-    <div class="tab-buttons">
-      <button data-target="overview" class="active">개요</button>
-      <button data-target="html">HTML</button>
-      <button data-target="css">CSS</button>
-      <button data-target="js">JavaScript</button>
-      <button data-target="react">React</button>
-      <button data-target="journey">🧭 학습 여정</button>
-      <button data-target="concepts">기초 개념 사전</button>
-      <button data-target="exam">✏️ 시험 대비</button>
-      <button data-target="next">다음 학습 예정</button>
-      <button data-target="materials">강의자료</button>
+    <div class="tab-buttons" role="group" aria-label="학습 노트 탐색">
+      <button data-target="overview" class="active" type="button">개요</button>
+      <button data-target="html" type="button">HTML</button>
+      <button data-target="css" type="button">CSS</button>
+      <button data-target="js" type="button">JavaScript</button>
+      <button data-target="react" type="button">React</button>
+      <button data-target="journey" type="button">학습 여정</button>
+      <button data-target="concepts" type="button">기초 개념 사전</button>
+      <button data-target="exam" type="button">시험 대비</button>
+      <button data-target="next" type="button">학습 확장</button>
+      <button data-target="materials" type="button">강의자료</button>
     </div>
     <span class="tab-spacer"></span>
-    <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색">
-    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
+    <input id="search-box" type="search" placeholder="검색: flex, 배열…" aria-label="노트 검색. 단축키 슬래시 또는 Control K" title="검색 단축키: / 또는 Ctrl/Cmd + K">
+    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">헷갈리는 것만</button>
+    <button id="density-btn" type="button" aria-label="카드 간격을 좁게 또는 넓게 전환" aria-pressed="false">간격 좁게</button>
     <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" id="main-content" tabindex="-1">
 
   <section id="overview">
-    <div id="resume-banner" class="resume-banner hidden">
-      <span id="resume-text"></span>
-      <button id="resume-btn" type="button">이어보기 →</button>
+    <div class="overview-command" aria-label="오늘의 학습 시작">
+      <div id="resume-banner" class="resume-banner hidden">
+        <span id="resume-text"></span>
+        <button id="resume-btn" type="button">이어보기 →</button>
+      </div>
+      <div class="today-recommend" id="next-study-box">
+      <h3>다음 학습</h3>
+      <div class="today-recommend-list" id="next-study-list" aria-live="polite"></div>
+    </div>
+    <div class="study-goal" id="study-goal-box">
+      <div class="study-goal-head">
+        <h3>오늘의 학습 목표</h3>
+        <p class="study-goal-status" id="study-goal-status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="study-goal-form">
+        <label for="study-goal-count">오늘 완료할 카드</label>
+        <select id="study-goal-count">
+          <option value="1">1개</option>
+          <option value="3" selected>3개</option>
+          <option value="5">5개</option>
+          <option value="10">10개</option>
+        </select>
+        <button id="study-goal-save" type="button">목표 설정</button>
+      </div>
+      <div class="milestone-head"><b>전체 진도 마일스톤</b><span id="milestone-label"></span></div>
+      <div class="milestone-track" id="milestone-track" role="progressbar" aria-label="전체 학습 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="milestone-fill" id="milestone-fill"></div></div>
+      <p class="milestone-caption" id="milestone-caption"></p>
+      </div>
     </div>
     <div class="stat-grid">
       <div class="stat-card html"><div class="n">7</div><div class="l">HTML 단원</div></div>
       <div class="stat-card css"><div class="n">12</div><div class="l">CSS 단원</div></div>
       <div class="stat-card js"><div class="n">18</div><div class="l">JavaScript 단원</div></div>
-      <div class="stat-card react"><div class="n">14</div><div class="l">React 단원</div></div>
+      <div class="stat-card react"><div class="n">14</div><div class="l">React·Next.js 레슨</div></div>
       <div class="stat-card react"><div class="n">4/4</div><div class="l">🧭 학습 여정 과목</div></div>
       <div class="stat-card concepts"><div class="n">39</div><div class="l">기초 개념 사전 항목</div></div>
       <div class="stat-card next"><div class="n">0</div><div class="l">다음 학습 예정 주제</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
     <div class="today-recommend">
-      <h3>🎯 오늘의 복습 추천</h3>
+      <h3>복습 추천</h3>
       <div class="today-recommend-list" id="today-recommend-list"></div>
     </div>
     <div class="today-recommend hidden" id="memo-overview-box">
-      <h3>📝 내가 남긴 메모 모아보기</h3>
+      <h3>내 메모</h3>
       <div class="today-recommend-list" id="memo-overview-list"></div>
     </div>
     <div class="data-backup">
-      <h3>💾 내 진도 백업</h3>
-      <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요.</p>
+      <h3>진도 백업</h3>
+      <p>완료 체크·즐겨찾기·메모·복습 기록은 이 브라우저에만 저장됩니다. 캐시를 지우거나 다른 기기로 옮기면 사라지니, 가끔 내보내기로 백업해 두고 필요할 때 가져오기로 복원하세요. 가져오기 전에는 반영될 기록을 미리 확인할 수 있고, 직전 가져오기는 한 번 되돌릴 수 있습니다.</p>
       <div class="data-backup-actions">
-        <button id="backup-export-btn" type="button">⬇ 내보내기</button>
-        <button id="backup-import-btn" type="button">⬆ 가져오기</button>
+        <button id="backup-export-btn" type="button">내보내기</button>
+        <button id="backup-import-btn" type="button">가져오기</button>
         <input id="backup-import-input" type="file" accept="application/json" hidden>
-        <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">🗑 전체 데이터 초기화</button>
-        <span id="backup-status"></span>
+        <button id="backup-undo-btn" type="button" hidden>직전 가져오기 되돌리기</button>
+        <button id="data-reset-btn" type="button" class="danger-btn" aria-label="완료·즐겨찾기·메모·복습·시험 기록 전체 삭제">전체 기록 초기화</button>
+        <span id="backup-status" role="status" aria-live="polite"></span>
+      </div>
+      <div class="backup-preview hidden" id="backup-preview" aria-live="polite">
+        <p id="backup-preview-text"></p>
+        <div class="backup-preview-actions">
+          <button id="backup-confirm-btn" type="button">이 기록 가져오기</button>
+          <button id="backup-cancel-btn" type="button">취소</button>
+        </div>
       </div>
     </div>
     <div class="howto">
@@ -3687,7 +4230,7 @@ document.write("href:" + location.href + "&lt;br/&gt;");
 &lt;a href="js14_location.html#id=hk&amp;addr=seoul"&gt;요청&lt;/a&gt;
 
 &lt;!-- name이 subframe인 iframe 영역만 지정 페이지로 이동 --&gt;
-&lt;button onclick="subframe.location.href='js12_Date객체.html'"&gt;
+&lt;button onclick="subframe.location.href='js12.html'"&gt;
     이동
 &lt;/button&gt;
 
@@ -3705,7 +4248,7 @@ document.write("href:" + location.href + "&lt;br/&gt;");
       </ul>
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>쿼리스트링(search)과 해시(hash)를 헷갈리기 쉬운데, 쿼리스트링은 서버로 전달되는 값이고 해시는 서버로 전송되지 않고 브라우저(클라이언트) 안에서만 쓰이는 값이라는 차이를 기억해야 합니다.</div>
-    <div class="note-files">실습 파일: <a href="3.javascript/js14.html" target="_blank" rel="noopener">js14</a></div>
+    <div class="note-files">실습 파일: <a href="3.javascript/js14.html" target="_blank" rel="noopener">js14</a>, <a href="3.javascript/js14_location.html#id=hk&amp;addr=seoul" target="_blank" rel="noopener">해시 파라미터 확인</a></div>
   </div>
 </article>
 <article class="note-card" id="js-14">
@@ -10498,8 +11041,8 @@ let results = STOCKS
   </section>
 
   <section id="next-section" class="cat">
-    <div class="cat-head"><span class="dot next"></span><h2>다음 학습 예정</h2></div>
-    <p class="cat-desc">강의자료 목차 기준의 React & Next.js 커리큘럼을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>
+    <div class="cat-head"><span class="dot next"></span><h2>학습 확장 주제</h2></div>
+    <p class="cat-desc">강의자료 목차 기준의 React &amp; Next.js 커리큘럼을 모두 완료했습니다. 이후 새 수업·심화 실습·개인 프로젝트 주제를 이곳에서 이어 관리합니다.</p>
     <div class="grid" id="next-grid"></div>
   </section>
 
@@ -10520,16 +11063,23 @@ let results = STOCKS
 </main>
 
 <button id="bug-fab" type="button" title="막혔을 때: 증상별로 원인을 바로 찾아보세요">
-  🐛 버그 났어요
+  도움말
 </button>
 
 <button id="review-fab" type="button">
-  ⚡ 5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
+  5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
 </button>
+
+<nav class="mobile-quickbar" aria-label="모바일 빠른 실행">
+  <button id="mobile-next-action" class="primary" type="button">다음</button>
+  <button id="mobile-search-action" type="button">검색</button>
+  <button id="mobile-review-action" type="button">복습</button>
+  <button id="mobile-help-action" type="button">도움</button>
+</nav>
 
 <div id="review-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="review-title">
   <div class="review-top">
-    <h2 id="review-title">⚡ 5분 스피드 복습</h2>
+    <h2 id="review-title">5분 복습</h2>
     <button class="review-close" id="review-close" type="button">닫기 ✕</button>
     <div class="review-filters" id="review-filters">
       <button class="review-chip active" data-subject="all" type="button">전체</button>
@@ -10549,7 +11099,7 @@ let results = STOCKS
 
 <footer>
   <div class="wrap">
-    이 페이지는 <b>Claude</b>와 함께 수동으로 최신화하는 개인 복습 노트입니다. 새로운 실습을 마칠 때마다 같은 형식(한 줄 요약 → 핵심 개념 → 주석 달린 코드 → 핵심 정리)으로 내용을 추가해 나갑니다.
+    이 페이지는 원본 실습 코드와 복습 노트를 함께 관리하는 개인 학습 아카이브입니다. 새로운 실습을 마칠 때마다 같은 형식(한 줄 요약 → 쉽게 말하면 → 핵심 개념 → 주석 달린 코드 → 핵심 정리)으로 내용을 추가해 나갑니다.
   </div>
 </footer>
 
@@ -10559,7 +11109,7 @@ const nextTopics = [];
 function renderNext(){
   const el = document.getElementById("next-grid");
   if (!nextTopics.length) {
-    el.innerHTML = `<p class="today-empty">🎉 React &amp; Next.js 커리큘럼 14개 단원을 전부 완료했습니다. 새 학습 주제가 생기면 여기 표시됩니다.</p>`;
+    el.innerHTML = `<p class="today-empty">🎉 React &amp; Next.js 14개 레슨과 졸업 과제를 완료했습니다. 다음 수업·심화 실습·개인 프로젝트 주제가 생기면 이곳에서 이어 관리합니다.</p>`;
     return;
   }
   el.innerHTML = nextTopics.map(t => `
@@ -10585,24 +11135,34 @@ const sections = {
   materials: document.getElementById("materials-section"),
 };
 const buttons = document.querySelectorAll("nav.tabs button[data-target]");
+const getScrollBehavior = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+// 탭처럼 보이지만 '개요'에서는 여러 섹션을 함께 보여 주므로 role=tab 대신 일반 버튼 그룹으로 유지한다.
+// 현재 보는 영역은 aria-pressed로 알려 마우스·키보드·보조기술의 상태를 일치시킨다.
 function showTab(target){
   Object.entries(sections).forEach(([key, el]) => {
     if(target === "overview"){ el.classList.remove("hidden"); return; }
     el.classList.toggle("hidden", key !== "overview" && key !== target);
   });
-  buttons.forEach(b => b.classList.toggle("active", b.dataset.target === target));
+  buttons.forEach(b => {
+    const active = b.dataset.target === target;
+    b.classList.toggle("active", active);
+    b.setAttribute("aria-pressed", String(active));
+  });
   if(target !== "overview") document.getElementById("overview").classList.add("hidden");
 }
-buttons.forEach(b => b.addEventListener("click", () => {
-  showTab(b.dataset.target);
-  window.scrollTo({top:0, behavior:"smooth"});
-}));
+buttons.forEach(b => {
+  b.setAttribute("aria-pressed", String(b.classList.contains("active")));
+  b.addEventListener("click", () => {
+    showTab(b.dataset.target);
+    window.scrollTo({top:0, behavior:getScrollBehavior()});
+  });
+});
 
 // 🐛 버그 났어요 — 어느 탭에 있든 한 번에 기초 개념 사전의 "증상별로 바로 찾기" 로드맵으로 이동
 document.getElementById("bug-fab").addEventListener("click", () => {
   showTab("concepts");
   const bugStep = document.querySelectorAll(".roadmap-step")[5]; // 6번째 단계 = 버그 증상별 찾기
-  (bugStep || document.getElementById("concepts-section")).scrollIntoView({block:"center", behavior:"smooth"});
+  (bugStep || document.getElementById("concepts-section")).scrollIntoView({block:"center", behavior:getScrollBehavior()});
 });
 
 // 학습 여정 과목별 서브탭
@@ -10630,6 +11190,19 @@ applyTheme(document.documentElement.dataset.theme || "light");
 themeBtn.addEventListener("click", () =>
   applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
 
+// 긴 노트를 읽을 때는 카드 간격을 좁혀 한 화면에 더 많이 보도록 선택할 수 있다.
+const DENSITY_KEY = "studyNoteDensity";
+const densityBtn = document.getElementById("density-btn");
+function applyDensity(density){
+  const compact = density === "compact";
+  document.documentElement.dataset.density = compact ? "compact" : "comfortable";
+  densityBtn.textContent = compact ? "간격 넓게" : "간격 좁게";
+  densityBtn.setAttribute("aria-pressed", String(compact));
+  localStorage.setItem(DENSITY_KEY, compact ? "compact" : "comfortable");
+}
+applyDensity(localStorage.getItem(DENSITY_KEY) || "comfortable");
+densityBtn.addEventListener("click", () => applyDensity(document.documentElement.dataset.density === "compact" ? "comfortable" : "compact"));
+
 // ---- 접이식 카드: 처음엔 요약 + '쉽게 말하면'만 보이게 ----
 const DONE_KEY = "completedCards";
 function loadDoneSet(){
@@ -10656,8 +11229,14 @@ const memos = loadMemos();
 
 const PROGRESS_SECTION_LABEL = {
   "html-section":"HTML", "css-section":"CSS", "js-section":"JavaScript",
-  "react-section":"React", "concepts-section":"개념 사전",
+  "react-section":"React·Next.js", "concepts-section":"개념 사전",
 };
+const PROGRESS_SECTION_ORDER = ["HTML", "CSS", "JavaScript", "React·Next.js", "졸업 과제", "개념 사전"];
+function getProgressLabel(card){
+  // 졸업 과제는 React 섹션 안에 있지만 14개 레슨과 별개의 종합 실습이다.
+  if (card.id === "react-capstone") return "졸업 과제";
+  return PROGRESS_SECTION_LABEL[card.closest("section.cat")?.id];
+}
 function updateProgressStat(){
   const cards = [...document.querySelectorAll(".note-card")];
   const total = cards.length;
@@ -10667,11 +11246,10 @@ function updateProgressStat(){
   if (nEl) nEl.textContent = done + "/" + total;
   if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
 
-  // 과목별 진도 — 큰 숫자 하나보다 "어디를 얼마나 봤는지"가 보여야 다음에 뭘 볼지 정하기 쉽다
+  // 과목별 진도 — React·Next.js 14개 레슨과 졸업 과제를 나눠 실제 학습 범위와 숫자를 일치시킨다.
   const bySubject = {};
   cards.forEach(card => {
-    const secId = card.closest("section.cat")?.id;
-    const label = PROGRESS_SECTION_LABEL[secId];
+    const label = getProgressLabel(card);
     if (!label) return;
     const bucket = bySubject[label] || (bySubject[label] = { done: 0, total: 0 });
     bucket.total++;
@@ -10679,8 +11257,7 @@ function updateProgressStat(){
   });
   const breakdownEl = document.getElementById("progress-by-subject");
   if (breakdownEl) {
-    breakdownEl.innerHTML = Object.keys(PROGRESS_SECTION_LABEL)
-      .map(secId => PROGRESS_SECTION_LABEL[secId])
+    breakdownEl.innerHTML = PROGRESS_SECTION_ORDER
       .filter(label => bySubject[label])
       .map(label => {
         const b = bySubject[label];
@@ -10689,7 +11266,63 @@ function updateProgressStat(){
       })
       .join("");
   }
+  renderStudyGoal(done, total);
 }
+
+// 오늘 목표는 해당 날짜에 새로 완료한 카드 수를 기준으로 계산한다. 브라우저에만 보관되며 백업에도 포함된다.
+const STUDY_GOAL_KEY = "studyDailyGoal";
+function localDateString(){
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60000;
+  return new Date(now - offset).toISOString().slice(0, 10);
+}
+function loadStudyGoal(){
+  const today = localDateString();
+  try {
+    const saved = JSON.parse(localStorage.getItem(STUDY_GOAL_KEY) || "null");
+    if (saved?.date === today && Number.isInteger(saved.target) && Number.isInteger(saved.baseline)) return saved;
+  } catch {}
+  return { date: today, target: 3, baseline: doneSet.size };
+}
+let studyGoal = loadStudyGoal();
+function saveStudyGoal(){ localStorage.setItem(STUDY_GOAL_KEY, JSON.stringify(studyGoal)); }
+function renderStudyGoal(done, total){
+  const today = localDateString();
+  if (studyGoal.date !== today) {
+    studyGoal = { date: today, target: studyGoal.target || 3, baseline: done };
+    saveStudyGoal();
+  }
+  const todayDone = Math.max(0, done - studyGoal.baseline);
+  const target = Math.max(1, studyGoal.target || 3);
+  const status = document.getElementById("study-goal-status");
+  if (status) status.textContent = todayDone >= target
+    ? `오늘 목표 달성 · ${todayDone}/${target}개 완료`
+    : `오늘 ${todayDone}/${target}개 완료 · ${target - todayDone}개 남음`;
+  const goalSelect = document.getElementById("study-goal-count");
+  if (goalSelect) goalSelect.value = String(target);
+
+  const percentage = total ? Math.round(done / total * 100) : 0;
+  const nextMilestone = [25, 50, 75, 100].find(mark => percentage < mark);
+  const milestoneLabel = document.getElementById("milestone-label");
+  const milestoneCaption = document.getElementById("milestone-caption");
+  const milestoneTrack = document.getElementById("milestone-track");
+  const milestoneFill = document.getElementById("milestone-fill");
+  if (milestoneLabel) milestoneLabel.textContent = nextMilestone ? `${percentage}% · 다음 ${nextMilestone}%` : "100% · 전체 완료";
+  if (milestoneCaption) {
+    const remaining = nextMilestone ? Math.max(0, Math.ceil(total * nextMilestone / 100) - done) : 0;
+    milestoneCaption.textContent = nextMilestone
+      ? `다음 마일스톤까지 완료 카드 ${remaining}개가 남았습니다.`
+      : "🎉 모든 학습 카드를 완료했습니다. 학습 확장 주제로 다음 목표를 정해 보세요.";
+  }
+  if (milestoneTrack) milestoneTrack.setAttribute("aria-valuenow", String(percentage));
+  if (milestoneFill) milestoneFill.style.width = `${percentage}%`;
+}
+document.getElementById("study-goal-save").addEventListener("click", () => {
+  const target = Number.parseInt(document.getElementById("study-goal-count").value, 10);
+  studyGoal = { date: localDateString(), target: Number.isInteger(target) && target > 0 ? target : 3, baseline: doneSet.size };
+  saveStudyGoal();
+  updateProgressStat();
+});
 
 // 카드 접기/펼치기 + aria-expanded 갱신을 한 곳에서 처리 (클릭·키보드·해시 이동 공용)
 const RESUME_KEY = "lastViewedCard";
@@ -10725,6 +11358,7 @@ document.querySelectorAll(".note-card").forEach(card => {
     else { doneSet.delete(card.id); card.classList.remove("is-done"); doneLabel.classList.remove("checked"); }
     saveDoneSet(doneSet);
     updateProgressStat();
+    renderNextStudy();
   });
   head.appendChild(doneLabel);
 
@@ -10819,6 +11453,45 @@ document.querySelectorAll(".note-card").forEach(card => {
 });
 updateProgressStat();
 
+// 처음 보는 사람은 첫 미완료 카드, 학습 중인 사람은 완료하지 않은 다음 카드를 바로 열 수 있게 안내한다.
+function renderNextStudy(){
+  const list = document.getElementById("next-study-list");
+  if (!list) return;
+  const nextCard = [...document.querySelectorAll(".note-card")].find(card => !doneSet.has(card.id));
+  list.replaceChildren();
+
+  const link = document.createElement("a");
+  link.className = "today-recommend-item";
+  if (!nextCard) {
+    link.href = "#next-section";
+    link.textContent = "🎉 모든 학습 카드를 완료했습니다. 학습 확장 주제에서 다음 목표를 추가해 보세요.";
+    list.append(link);
+    return;
+  }
+
+  const badge = document.createElement("b");
+  badge.textContent = nextCard.querySelector(".note-num")?.textContent || "다음";
+  const title = nextCard.querySelector("h3")?.textContent || "다음 학습 카드";
+  link.href = "#" + nextCard.id;
+  link.append(badge, document.createTextNode(title + " — 아직 완료하지 않은 다음 카드입니다."));
+  list.append(link);
+}
+renderNextStudy();
+
+// 모바일 하단 바는 기존 기능을 다시 구현하지 않고, 같은 이벤트를 호출해 동작·접근성을 한 곳에서 유지한다.
+document.getElementById("mobile-next-action").addEventListener("click", () => {
+  document.querySelector("#next-study-list a")?.click();
+});
+document.getElementById("mobile-search-action").addEventListener("click", () => {
+  const input = document.getElementById("search-box");
+  showTab("overview");
+  input.scrollIntoView({ behavior:getScrollBehavior(), block:"center" });
+  input.focus();
+  input.select();
+});
+document.getElementById("mobile-review-action").addEventListener("click", () => document.getElementById("review-fab").click());
+document.getElementById("mobile-help-action").addEventListener("click", () => document.getElementById("bug-fab").click());
+
 // 카드 id를 펼치고, 필요하면 해당 탭으로 전환한 뒤 스크롤 이동 (주소창 #해시 + 카드 간 상호 링크 공용)
 function revealCard(id){
   const target = document.getElementById(id);
@@ -10878,7 +11551,7 @@ document.querySelectorAll("section.cat").forEach(sec => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
       c.classList.remove("collapsed");
-      c.scrollIntoView({behavior:"smooth", block:"start"});
+      c.scrollIntoView({behavior:getScrollBehavior(), block:"start"});
       history.replaceState(null, "", "#" + c.id);
     });
     toc.appendChild(a);
@@ -10974,9 +11647,11 @@ searchBox.addEventListener("input", () => {
     if (c.style.display !== "none") highlightText(c, q);
   });
 });
-// '/' 로 어느 탭에 있든 검색창으로 바로 포커스 이동 (입력 중인 필드에 있을 땐 무시)
+// '/' 또는 Ctrl/Cmd + K로 어느 탭에 있든 검색창에 바로 포커스 이동 (입력 중인 필드에 있을 땐 무시)
 document.addEventListener("keydown", (e) => {
-  if (e.key !== "/" || e.target?.closest?.("input, textarea, select, [contenteditable]")) return;
+  const isEditable = e.target?.closest?.("input, textarea, select, [contenteditable]");
+  const isSearchShortcut = e.key === "/" || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k");
+  if (!isSearchShortcut || isEditable) return;
   e.preventDefault();
   searchBox.focus();
   searchBox.select();
@@ -10990,7 +11665,7 @@ document.querySelectorAll(".note-tags .tag").forEach(tag => {
     e.stopPropagation();
     searchBox.value = tag.textContent;
     searchBox.dispatchEvent(new Event("input"));
-    searchBox.scrollIntoView({behavior:"smooth", block:"center"});
+    searchBox.scrollIntoView({behavior:getScrollBehavior(), block:"center"});
   };
   tag.addEventListener("click", runTagFilter);
   tag.addEventListener("keydown", (e) => {
@@ -11060,22 +11735,68 @@ function renderMemoOverview(){
 renderMemoOverview();
 window.renderMemoOverview = renderMemoOverview;
 
-// ---- 💾 진도 백업/복원: 완료·즐겨찾기·메모·복습 기록을 JSON 파일로 내보내고 되살린다 ----
-const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "examWrongBank", "examHistory", "examFlags"];
+// ---- 💾 진도 백업/복원: 버전이 있는 파일로 내보내고, 가져오기 전 미리보기·되돌리기를 제공한다 ----
+const BACKUP_FORMAT = "web-study-notes-backup";
+const BACKUP_VERSION = 2;
+const RESTORE_POINT_KEY = "webStudyNotesLastRestorePoint";
+const BACKUP_KEYS = ["completedCards", "starredCards", "cardMemos", "cardReviewStats", "reviewSessionCount", "lastViewedCard", "studyDailyGoal", "examWrongBank", "examHistory", "examFlags"];
+const backupImportBtn = document.getElementById("backup-import-btn");
+const backupImportInput = document.getElementById("backup-import-input");
+const backupStatus = document.getElementById("backup-status");
+const backupPreview = document.getElementById("backup-preview");
+const backupPreviewText = document.getElementById("backup-preview-text");
+const backupConfirmBtn = document.getElementById("backup-confirm-btn");
+const backupCancelBtn = document.getElementById("backup-cancel-btn");
+const backupUndoBtn = document.getElementById("backup-undo-btn");
+let pendingBackup = null;
+
+function setBackupStatus(message, state = ""){
+  backupStatus.textContent = message;
+  backupStatus.className = state;
+}
+function parseBackupJSON(value, fallback){
+  try { return JSON.parse(value); } catch { return fallback; }
+}
+function backupSummary(data){
+  const completed = parseBackupJSON(data.completedCards, []);
+  const starred = parseBackupJSON(data.starredCards, []);
+  const memos = parseBackupJSON(data.cardMemos, {});
+  const history = parseBackupJSON(data.examHistory, []);
+  return `완료 카드 ${Array.isArray(completed) ? completed.length : 0}개 · 즐겨찾기 ${Array.isArray(starred) ? starred.length : 0}개 · 메모 ${memos && typeof memos === "object" ? Object.keys(memos).length : 0}개 · 시험 기록 ${Array.isArray(history) ? history.length : 0}개`;
+}
+function normalizeBackup(raw){
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new Error("invalid backup file");
+  const versioned = raw.format === BACKUP_FORMAT;
+  if (raw.format && !versioned) throw new Error("unknown backup format");
+  if (versioned && (!Number.isInteger(raw.version) || raw.version > BACKUP_VERSION)) throw new Error("unsupported backup version");
+  const source = versioned ? raw.data : raw; // 첫 버전의 백업 파일도 계속 불러올 수 있게 호환
+  if (!source || typeof source !== "object" || Array.isArray(source)) throw new Error("invalid backup data");
+  const data = {};
+  BACKUP_KEYS.forEach(key => { if (typeof source[key] === "string") data[key] = source[key]; });
+  if (!Object.keys(data).length) throw new Error("empty backup data");
+  return { data, version: versioned ? raw.version : 1 };
+}
+function hideBackupPreview(){
+  pendingBackup = null;
+  backupPreview.classList.add("hidden");
+}
+function updateUndoButton(){
+  backupUndoBtn.hidden = !localStorage.getItem(RESTORE_POINT_KEY);
+}
+
 document.getElementById("backup-export-btn").addEventListener("click", () => {
   const data = {};
-  BACKUP_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) data[k] = v; });
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  BACKUP_KEYS.forEach(key => { const value = localStorage.getItem(key); if (value !== null) data[key] = value; });
+  const payload = { format: BACKUP_FORMAT, version: BACKUP_VERSION, exportedAt: new Date().toISOString(), data };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
   a.download = "web-study-notes-backup-" + new Date().toISOString().slice(0, 10) + ".json";
   a.click();
   URL.revokeObjectURL(url);
+  setBackupStatus("✓ 현재 기록을 내보냈어요.", "ok");
 });
-const backupImportBtn = document.getElementById("backup-import-btn");
-const backupImportInput = document.getElementById("backup-import-input");
-const backupStatus = document.getElementById("backup-status");
 backupImportBtn.addEventListener("click", () => backupImportInput.click());
 backupImportInput.addEventListener("change", () => {
   const file = backupImportInput.files[0];
@@ -11084,19 +11805,52 @@ backupImportInput.addEventListener("change", () => {
   const reader = new FileReader();
   reader.onload = () => {
     try {
-      const data = JSON.parse(reader.result);
-      if (typeof data !== "object" || data === null) throw new Error("invalid backup file");
-      BACKUP_KEYS.forEach(k => { if (typeof data[k] === "string") localStorage.setItem(k, data[k]); });
-      backupStatus.textContent = "✓ 불러왔어요. 새로고침합니다…";
-      backupStatus.className = "ok";
-      setTimeout(() => location.reload(), 700);
+      pendingBackup = normalizeBackup(JSON.parse(reader.result));
+      backupPreviewText.textContent = `백업 v${pendingBackup.version}을 확인했습니다. ${backupSummary(pendingBackup.data)}. 현재 기록의 같은 항목만 덮어씁니다.`;
+      backupPreview.classList.remove("hidden");
+      setBackupStatus("", "");
     } catch (err) {
-      backupStatus.textContent = "⚠ 올바른 백업 파일이 아니에요.";
-      backupStatus.className = "error";
+      hideBackupPreview();
+      setBackupStatus("⚠ 올바른 백업 파일이 아니거나 지원하지 않는 버전입니다.", "error");
     }
   };
   reader.readAsText(file);
 });
+backupCancelBtn.addEventListener("click", () => {
+  hideBackupPreview();
+  setBackupStatus("가져오기를 취소했어요.");
+});
+backupConfirmBtn.addEventListener("click", () => {
+  if (!pendingBackup) return;
+  const previous = {};
+  BACKUP_KEYS.forEach(key => { previous[key] = localStorage.getItem(key); });
+  localStorage.setItem(RESTORE_POINT_KEY, JSON.stringify({ createdAt: new Date().toISOString(), data: previous }));
+  Object.entries(pendingBackup.data).forEach(([key, value]) => localStorage.setItem(key, value));
+  hideBackupPreview();
+  updateUndoButton();
+  setBackupStatus("✓ 가져왔어요. 새로고침해 반영합니다…", "ok");
+  setTimeout(() => location.reload(), 700);
+});
+backupUndoBtn.addEventListener("click", () => {
+  try {
+    const restorePoint = JSON.parse(localStorage.getItem(RESTORE_POINT_KEY));
+    if (!restorePoint?.data || typeof restorePoint.data !== "object") throw new Error("missing restore point");
+    BACKUP_KEYS.forEach(key => {
+      const value = restorePoint.data[key];
+      if (typeof value === "string") localStorage.setItem(key, value);
+      else localStorage.removeItem(key);
+    });
+    localStorage.removeItem(RESTORE_POINT_KEY);
+    updateUndoButton();
+    setBackupStatus("✓ 직전 가져오기 전 기록으로 되돌렸어요. 새로고침합니다…", "ok");
+    setTimeout(() => location.reload(), 700);
+  } catch (err) {
+    localStorage.removeItem(RESTORE_POINT_KEY);
+    updateUndoButton();
+    setBackupStatus("⚠ 되돌릴 기록을 찾지 못했어요.", "error");
+  }
+});
+updateUndoButton();
 
 // 전체 데이터 초기화 — 실수 방지를 위해 두 번 클릭해야 실행 (blocking confirm() 대신 인라인 확인)
 const dataResetBtn = document.getElementById("data-reset-btn");
