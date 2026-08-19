@@ -96,47 +96,65 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   .cross-link:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* ---- 상단 탭 + 도구(검색·테마) ---- */
+  /* ---- 좌측 사이드바 내비게이션 + 본문 2단 레이아웃 ---- */
+  .layout-wrap{
+    display:flex;align-items:flex-start;gap:28px;
+    max-width:1180px;margin:0 auto;padding:0 20px;
+  }
   nav.tabs{
-    position:sticky;top:0;z-index:10;
-    background:color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--border);
+    flex:0 0 236px;min-width:0;
+    position:sticky;top:16px;align-self:flex-start;
+    max-height:calc(100vh - 32px);overflow-y:auto;
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:14px;box-shadow:var(--shadow);
+    scrollbar-width:thin;
   }
-  nav.tabs .wrap{max-width:860px;display:flex;gap:4px;flex-wrap:wrap;padding:10px 20px;align-items:center;}
-  .tab-buttons{display:flex;gap:4px;flex-wrap:wrap;min-width:0;}
-  nav.tabs button{
-    appearance:none;border:1px solid transparent;background:transparent;
-    color:var(--muted);font-size:14.5px;font-weight:600;padding:9px 15px;
-    border-radius:10px;cursor:pointer;white-space:nowrap;
-    transition:.15s;
-  }
-  nav.tabs button:hover{color:var(--text);background:var(--panel-2);}
-  nav.tabs button.active{color:#fff;background:var(--accent);}
-  [data-theme="dark"] nav.tabs button.active{color:var(--bg);}
-  .tab-spacer{flex:1;min-width:12px;}
+  .nav-topbar{display:none;} /* 데스크톱에서는 숨김, 900px 이하에서만 사용 */
+  .nav-search{margin-bottom:10px;}
   #search-box{
-    appearance:none;width:130px;flex:none;
-    background:var(--panel);border:1px solid var(--border);border-radius:10px;
-    color:var(--text);font-size:13.5px;padding:8px 12px;
+    appearance:none;width:100%;
+    background:var(--bg);border:1px solid var(--border);border-radius:10px;
+    color:var(--text);font-size:13.5px;padding:9px 12px;
     font-family:inherit;
   }
   #search-box::placeholder{color:var(--muted);}
-  #theme-btn{
-    appearance:none;flex:none;
-    background:var(--panel);border:1px solid var(--border);border-radius:10px;
-    color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;
+  .nav-groups{display:flex;flex-direction:column;}
+  .nav-group + .nav-group{margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+  .nav-group-label{
+    font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--muted);padding:10px 10px 5px;
+  }
+  .nav-item{
+    display:flex;align-items:center;gap:8px;width:100%;
+    appearance:none;border:1px solid transparent;background:transparent;text-align:left;
+    color:var(--muted);font-size:14.5px;font-weight:600;padding:9px 10px;
+    border-radius:9px;cursor:pointer;white-space:nowrap;
+    transition:.15s;
+  }
+  .nav-item .nav-label{overflow:hidden;text-overflow:ellipsis;}
+  .nav-item .nav-count{
+    margin-left:auto;flex:none;font-size:11px;font-weight:700;color:var(--muted);
+    background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:1px 7px;
+  }
+  .nav-item:hover{color:var(--text);background:var(--panel-2);}
+  .nav-item.active{color:#fff;background:var(--accent);}
+  .nav-item.active .nav-count{color:#fff;background:rgba(255,255,255,.22);border-color:transparent;}
+  [data-theme="dark"] .nav-item.active{color:var(--bg);}
+  [data-theme="dark"] .nav-item.active .nav-count{color:var(--bg);}
+  .nav-tools{
+    display:flex;flex-direction:column;gap:6px;
+    margin-top:10px;padding-top:10px;border-top:1px solid var(--border);
+  }
+  #theme-btn,#star-filter-btn{
+    appearance:none;width:100%;text-align:left;
+    background:transparent;border:1px solid var(--border);border-radius:9px;
+    color:var(--muted);font-size:13px;font-weight:700;padding:8px 10px;
     cursor:pointer;white-space:nowrap;
   }
   #theme-btn:hover{color:var(--text);border-color:var(--accent);}
-  #star-filter-btn{
-    appearance:none;flex:none;
-    background:var(--panel);border:1px solid var(--border);border-radius:10px;
-    color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;
-    cursor:pointer;white-space:nowrap;
-  }
   #star-filter-btn:hover{color:var(--text);border-color:#eab308;}
   #star-filter-btn.active{color:#fff;background:#eab308;border-color:#eab308;}
+  .main-content{flex:1;min-width:0;}
 
   main{padding:36px 0 80px;}
 
@@ -803,19 +821,34 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   .review-end-actions button.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
 
+  /* ---- 900px 이하: 사이드바 → 상단 접이식 메뉴로 전환 ---- */
+  @media(max-width:900px){
+    .layout-wrap{flex-direction:column;gap:0;padding:0;max-width:100%;}
+    nav.tabs{
+      flex:none;width:100%;position:sticky;top:0;z-index:10;align-self:stretch;
+      max-height:none;overflow:visible;border-radius:0;border:none;border-bottom:1px solid var(--border);
+      background:color-mix(in srgb, var(--bg) 94%, transparent);backdrop-filter:blur(8px);
+      box-shadow:none;padding:0;
+    }
+    .nav-topbar{display:flex;align-items:center;padding:12px 20px;}
+    #nav-toggle{
+      appearance:none;flex:1;display:flex;align-items:center;gap:8px;
+      background:var(--panel);border:1px solid var(--border);border-radius:10px;
+      color:var(--text);font-size:14.5px;font-weight:700;padding:10px 14px;cursor:pointer;
+      text-align:left;
+    }
+    #nav-toggle:hover{border-color:var(--accent);}
+    .nav-groups{
+      display:none;padding:4px 20px 18px;max-height:calc(100vh - 60px);overflow-y:auto;
+    }
+    nav.tabs.open .nav-groups{display:flex;}
+    .nav-item{padding:11px 12px;font-size:15px;}
+    .main-content{padding-top:20px;}
+  }
   @media(max-width:600px){
     header.hero{padding:36px 16px 24px;}
     .note-card{padding:18px 16px 20px;}
     .note-tags{display:none;}
-    /* 탭이 8개로 늘어 좁은 화면에서 줄바꿈되지 않도록 가로 스크롤로 전환 */
-    .tab-buttons{
-      flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
-      scrollbar-width:thin;padding-bottom:2px;
-    }
-    .tab-buttons button{flex:none;}
-    .tab-spacer{display:none;}
-    #search-box{width:110px;}
-    #star-filter-btn{padding:8px 10px;font-size:12px;}
     #review-fab{right:14px;bottom:14px;padding:12px 16px;font-size:13.5px;}
     #bug-fab{right:14px;bottom:72px;padding:9px 14px;font-size:12.5px;}
     .review-top{padding:14px 16px;}
@@ -996,29 +1029,46 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   </div>
 </header>
 
-<nav class="tabs">
-  <div class="wrap">
-    <div class="tab-buttons">
-      <button data-target="overview" class="active">개요</button>
-      <button data-target="class">📅 수업 진도</button>
-      <button data-target="basic">☕ 자바 기초</button>
-      <button data-target="oop">🧱 객체지향</button>
-      <button data-target="util">🛠️ 자바 활용</button>
-      <button data-target="net">🌐 네트워크</button>
-      <button data-target="prac">🧪 실습과제</button>
-      <button data-target="journey">🧭 학습 여정</button>
-      <button data-target="concepts">📖 개념 사전</button>
-      <button data-target="exam">✏️ 시험 대비</button>
-      <button data-target="materials">강의자료</button>
+<div class="layout-wrap">
+<nav class="tabs" aria-label="주요 메뉴">
+  <div class="nav-topbar">
+    <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-groups">
+      <span id="nav-toggle-icon">☰</span> <span id="nav-current-label">개요</span>
+    </button>
+  </div>
+  <div id="nav-groups" class="nav-groups">
+    <div class="nav-search">
+      <input id="search-box" type="search" placeholder="검색: static, 상속…" aria-label="노트 검색">
     </div>
-    <span class="tab-spacer"></span>
-    <input id="search-box" type="search" placeholder="검색: static, 상속…" aria-label="노트 검색">
-    <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
-    <button id="theme-btn" type="button" aria-label="화면 테마 전환">다크 모드</button>
+    <div class="nav-group">
+      <button data-target="overview" class="nav-item active"><span class="nav-label">🏠 개요</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">학습 콘텐츠</div>
+      <button data-target="class" class="nav-item"><span class="nav-label">📅 수업 진도</span><span class="nav-count" id="nav-count-class"></span></button>
+      <button data-target="basic" class="nav-item"><span class="nav-label">☕ 자바 기초</span><span class="nav-count">11</span></button>
+      <button data-target="oop" class="nav-item"><span class="nav-label">🧱 객체지향</span><span class="nav-count">24</span></button>
+      <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
+      <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
+      <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">학습 도구</div>
+      <button data-target="journey" class="nav-item"><span class="nav-label">🧭 학습 여정</span></button>
+      <button data-target="concepts" class="nav-item"><span class="nav-label">📖 개념 사전</span><span class="nav-count">24</span></button>
+      <button data-target="exam" class="nav-item"><span class="nav-label">✏️ 시험 대비</span></button>
+    </div>
+    <div class="nav-group">
+      <button data-target="materials" class="nav-item"><span class="nav-label">📎 강의자료</span></button>
+    </div>
+    <div class="nav-tools">
+      <button id="star-filter-btn" type="button" aria-label="헷갈리는 카드만 보기">⭐ 헷갈리는 것만</button>
+      <button id="theme-btn" type="button" aria-label="화면 테마 전환">🌙 다크 모드</button>
+    </div>
   </div>
 </nav>
 
-<main class="wrap">
+<main class="main-content">
 
   <section id="overview">
     <div id="resume-banner" class="resume-banner hidden">
@@ -1026,7 +1076,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">4</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n" id="stat-class-days">11</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -11241,6 +11291,7 @@ public class CardMain {
   </section>
 
 </main>
+</div>
 
 <button id="review-fab" type="button">
   ⚡ 5분 복습 <span class="streak" id="review-streak-badge" hidden></span>
@@ -11290,6 +11341,9 @@ const sections = {
   materials: document.getElementById("materials-section"),
 };
 const buttons = document.querySelectorAll("nav.tabs button[data-target]");
+const navEl = document.querySelector("nav.tabs");
+const navCurrentLabel = document.getElementById("nav-current-label");
+const navToggle = document.getElementById("nav-toggle");
 function showTab(target){
   Object.entries(sections).forEach(([key, el]) => {
     if(target === "overview"){ el.classList.remove("hidden"); return; }
@@ -11297,11 +11351,31 @@ function showTab(target){
   });
   buttons.forEach(b => b.classList.toggle("active", b.dataset.target === target));
   if(target !== "overview") document.getElementById("overview").classList.add("hidden");
+  // 900px 이하: 상단 접이식 메뉴 버튼에 현재 섹션 이름을 반영
+  const activeBtn = [...buttons].find(b => b.dataset.target === target);
+  if (navCurrentLabel && activeBtn) {
+    navCurrentLabel.textContent = (activeBtn.querySelector(".nav-label") || activeBtn).textContent.trim();
+  }
 }
 buttons.forEach(b => b.addEventListener("click", () => {
   showTab(b.dataset.target);
   window.scrollTo({top:0, behavior:"smooth"});
+  navEl?.classList.remove("open"); // 모바일 접이식 메뉴는 선택 즉시 닫는다
+  navToggle?.setAttribute("aria-expanded", "false");
 }));
+
+// ---- 900px 이하: 상단 "☰ 현재 섹션" 버튼으로 메뉴 접고 펼치기 ----
+navToggle?.addEventListener("click", () => {
+  const open = navEl.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", String(open));
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && navEl?.classList.contains("open")) {
+    navEl.classList.remove("open");
+    navToggle?.setAttribute("aria-expanded", "false");
+    navToggle?.focus();
+  }
+});
 
 // ---- 테마 전환 (라이트 기본, 선택은 localStorage에 저장) ----
 const themeBtn = document.getElementById("theme-btn");
@@ -11351,6 +11425,13 @@ function updateProgressStat(){
   const pctEl = document.getElementById("progress-stat-pct");
   if (nEl) nEl.textContent = done + "/" + total;
   if (pctEl) pctEl.textContent = (total ? Math.round(done / total * 100) : 0) + "%";
+
+  // 수업 진도 카드 수는 진도가 나갈 때마다 늘어나므로 하드코딩 대신 실제 개수를 센다
+  const classDayCount = document.querySelectorAll("#class-notes .note-card").length;
+  const classStatEl = document.getElementById("stat-class-days");
+  if (classStatEl) classStatEl.textContent = classDayCount;
+  const navCountClassEl = document.getElementById("nav-count-class");
+  if (navCountClassEl) navCountClassEl.textContent = classDayCount;
 
   // 과목별 진도 — 큰 숫자 하나보다 "어디를 얼마나 봤는지"가 보여야 다음에 뭘 볼지 정하기 쉽다
   const bySubject = {};
