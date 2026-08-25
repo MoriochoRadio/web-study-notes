@@ -1014,8 +1014,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제를 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 미리 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-19</span>
-      <span>📅 수업 진도 12일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-08-24</span>
+      <span>📅 수업 진도 15일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -1076,7 +1076,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">12</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">15</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -4524,6 +4524,7 @@ public class D3_MagicSquareMain {
       <div class="concept-block">
         <h4>③ EvenMagicSquare — 4의 배수 짝수 마방진, 두 단계로 채우기</h4>
         <p><code>makeA()</code>가 <b>1부터 n²까지 순서대로</b> <code>[i/n][i%n]</code> 공식으로 격자를 채우고, <code>makeB()</code>가 <b>특정 영역만 골라 반대 값(<code>n²+1 - 원래값</code>)으로 덮어씁니다</b>. 영역 판정은 4등분한 좌표 범위로 나뉘는데, 가운데 세로 2/4 구간과 위아래 바깥 1/4 구간(<code>i &lt; n/4</code> 또는 <code>i ≥ n/4*3</code>일 때 <code>j</code>가 가운데 2/4)이 한 그룹, 나머지 위아래 가운데 구간에서는 <b>바깥쪽 좌우 1/4 구간</b>이 반대 그룹입니다 — 대각선 대칭 위치의 두 수를 맞바꾸는 효과입니다. day11_2의 <code>EvenMagicSquare</code>는 <code>MagicSquare</code>를 <b>상속</b>해서 <code>sumRow</code>·<code>sumCol</code>·<code>isCheck()</code>를 그대로 재사용하지만, day12의 <code>D2_EvenMagicSquare</code>는 <b>같은 알고리즘을 독립 클래스로 처음부터 다시 구현</b>했습니다 — 상속하면 코드가 얼마나 줄어드는지 비교하기 좋은 짝입니다. → <a href="#prac-09">🧪 9번 마방진</a></p>
+        <p class="note-tip" style="margin:10px 0 0"><span class="tip-label">TIP</span>마방진 시리즈는 <b>14일차에 한 단계 더 나아갑니다</b> — 6마방진(4로 나누면 2가 남는 크기)을 추가하고, 완성된 <code>OddMagicSquare</code>·<code>EvenMagicSquare</code>·<code>SixMagicSquare</code> 셋을 <b>싱글턴 팩토리</b>로 한데 묶습니다. → <a href="#class-day14">📅 14일차 카드 보기</a></p>
       </div>
       <div class="concept-block">
         <h4>④ D3_GBox&lt;T&gt; — 제네릭 클래스와 와일드카드</h4>
@@ -4870,6 +4871,713 @@ Hello~~~
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java" target="_blank" rel="noopener">OddMagicSquare.java</a>(수정) ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java" target="_blank" rel="noopener">EvenMagicSquare.java</a>(신규) ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a>(수정)
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day13">
+  <div class="note-head">
+    <span class="note-num">13일차</span>
+    <h3>2026-08-20 · 컬렉션 프레임워크 시작 — List · Set · Map · 카드 52장 실습</h3>
+    <div class="note-tags"><span class="tag">List</span><span class="tag">Set</span><span class="tag">Map</span><span class="tag">HashSet</span><span class="tag">HashMap</span><span class="tag">Iterator</span><span class="tag">equals/hashCode</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>7일차의 "배열은 크기가 고정"이라는 한계를 넘어 <b>크기가 자동으로 늘어나는 컬렉션</b>을 배운 날 — <code>List</code>(순서·중복 O), <code>Set</code>(중복 X), <code>Map</code>(key-value)의 기본 사용법을 각각 실습했고, <b>카드 52장을 중복 없이 만드는 실습</b>으로 <code>equals()</code>·<code>hashCode()</code>를 재정의하지 않으면 <code>contains()</code>의 중복 검사가 왜 무력해지는지 직접 확인했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>배열이 <b>칸 수를 미리 정해 둔 서랍장</b>이라면, 컬렉션은 <b>필요할 때마다 칸이 늘어나는 서랍장</b>입니다. <code>List</code>는 순서대로 쌓는 서랍(같은 물건 여러 개 가능), <code>Set</code>은 <b>같은 물건은 하나만</b> 받는 바구니, <code>Map</code>은 <b>이름표(key)를 붙여 찾는</b> 사물함입니다. 카드 실습에서 <code>equals()</code>를 재정의하지 않으면 <code>contains()</code>가 "겉모습이 같아도 다른 상자"라고 착각해서 <b>중복 카드가 그대로 섞여 들어갑니다</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D1_ListTest — 제네릭 없는 List(형변환 필요) vs 제네릭 List&lt;String&gt;</h4>
+        <p><code>List list1 = new ArrayList();</code>처럼 <b>제네릭 없이 선언</b>하면 모든 값이 <code>Object</code>로 저장돼 꺼낼 때 <code>(String) list1.get(0)</code>처럼 <b>매번 형변환</b>이 필요합니다. <code>List&lt;String&gt; list2</code>로 쓰면 이 과정이 사라집니다. <code>add(idx, 값)</code>은 특정 위치에 끼워 넣고, <code>remove(idx)</code>는 그 위치를 지우며, <code>contains()</code>는 값이 있는지 검색합니다. 마지막엔 8일차의 <code>D1_Lotto</code> 객체를 <code>List&lt;D1_Lotto&gt;</code>에 직접 담아 봤습니다 — <b>배열 대신 리스트에 객체를 담는 것도 똑같이 자연스럽다</b>는 걸 보여줍니다. → <a href="#util-01">🛠️ 01. 컬렉션 프레임워크 개요</a> · <a href="#util-02">🛠️ 02. List 계열</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② D1_SetTest — HashSet은 중복을 자동으로 걸러낸다</h4>
+        <p><code>set.add("제")</code>를 <b>두 번</b> 호출해도 실제로는 <b>한 번만 저장</b>됩니다 — <code>Set</code>은 애초에 "같은 값을 두 번 못 넣는" 컬렉션이기 때문입니다. 순회는 두 가지로 해 봤는데, <b>향상된 for문</b>(<code>for (String s : set)</code>)이 짧고, <code>Iterator</code>(<code>hasNext()</code>로 확인하고 <code>next()</code>로 꺼내는 방식)는 <b>순회 중에 안전하게 제거</b>가 필요할 때 쓰는 더 원초적인 방법입니다. <code>List&lt;String&gt; list = new ArrayList&lt;&gt;(set);</code>처럼 <b>Set을 List로 바꾸면 인덱스로 접근</b>할 수 있게 됩니다(Set 자체는 순서 개념이 없어 <code>get(i)</code>가 없으니까요). → <a href="#util-03">🛠️ 03. Set 계열</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ D1_MapTest — key로 찾는 저장소, key는 중복 불가</h4>
+        <p><code>map.put("셋", "교육센터")</code>를 <b>두 번</b> 호출해도 <b>key "셋"의 값이 갱신될 뿐 항목이 늘지 않습니다</b> — Map은 key 중복을 허용하지 않기 때문입니다. 전체 데이터를 훑을 때는 <code>map.keySet()</code>으로 <b>key만 모은 Set</b>을 얻은 뒤, <code>Iterator</code>나 향상된 for문으로 그 key들을 하나씩 꺼내 <code>map.get(key)</code>로 값을 가져오는 두 가지 방식을 비교했습니다. → <a href="#util-04">🛠️ 04. Map 계열</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ D2_Card · D2_CardCase — <code>List.contains()</code>가 진짜로 동작하려면 <code>equals</code>·<code>hashCode</code>가 필요하다</h4>
+        <p><code>D2_CardCase.shuffle()</code>은 카드를 계속 뽑아 <code>cards.contains(cc)</code>로 <b>이미 있는 카드인지 확인</b>하고, 없을 때만 추가하는 식으로 <b>52장을 중복 없이</b> 채웁니다. 이게 실제로 작동하려면 <code>D2_Card</code>가 <code>equals()</code>를 <b>"카드 문자열(<code>card</code> 필드)이 같으면 같은 카드"</b>로 재정의해야 합니다 — 재정의하지 않으면 <code>Object</code>의 기본 <code>equals</code>(주소 비교)가 쓰여서 <b>모양이 같은 카드도 항상 "다른 카드"로 판정</b>되어 중복 방지가 무력해집니다. <code>hashCode()</code>도 함께 재정의한 이유는 <b>"<code>equals</code>를 재정의하면 <code>hashCode</code>도 재정의한다"</b>는 규약 때문입니다 — 4일차에 배운 내용을 실전에서 그대로 써먹은 예입니다. → <a href="#oop-02">🧱 02. Object 클래스와 4대 메서드</a> · <a href="#prac-12">🧪 12번 카드 만들기</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_ListTest.java + D1_SetTest.java + D1_MapTest.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260820.day13;
+
+import java.util.ArrayList;
+import java.util.List;
+import hk.edu20260812.day08.D1_Lotto;
+
+public class D1_ListTest {
+    public static void main(String[] args) {
+        // 제네릭 없이 선언 -&gt; 전부 Object로 저장됨
+        List list1 = new ArrayList();
+        list1.add("A");
+        String a = (String) list1.get(0); // String &lt;-- Object : 형변환해줘야 함
+        System.out.println(a);
+
+        // 제네릭을 적용하자
+        List&lt;String&gt; list2 = new ArrayList&lt;&gt;();
+        list2.add("A");
+        list2.add("B");
+        list2.add("C");
+        list2.add("D");
+        System.out.println(list2.toString());
+
+        for (int i = 0; i &lt; list2.size(); i++) {
+            System.out.println(list2.get(i));
+        }
+
+        System.out.println(list2.contains("A")); // 리스트값 검색
+
+        // 중간에 값을 추가하는 작업들이 많으면 ArrayList는 성능 효율이 낮다.
+        list2.add(1, "F"); // 1번째 인덱스에 "F"를 추가
+        list2.remove(0);   // 0번째 인덱스의 값을 제거
+
+        // 로또객체 저장한다면
+        List&lt;D1_Lotto&gt; lottoList = new ArrayList&lt;&gt;();
+        lottoList.add(new D1_Lotto());
+        lottoList.add(new D1_Lotto());
+        lottoList.add(new D1_Lotto());
+
+        for (int i = 0; i &lt; lottoList.size(); i++) {
+            System.out.println(lottoList.get(i));
+        }
+    }
+}
+
+public class D1_SetTest {
+    public static void main(String[] args) {
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        set.add("한");
+        set.add("국");
+        set.add("경");
+        set.add("제");
+        set.add("제"); // 중복 -&gt; 무시된다
+
+        // 향상된 for문
+        for (String s : set) {
+            System.out.println(s);
+        }
+
+        // Iterator
+        Iterator&lt;String&gt; iter = set.iterator(); // Set -&gt; Iterator 객체로 변환
+        while (iter.hasNext()) {
+            String str = iter.next();
+            System.out.println(str);
+        }
+
+        // 꺼내는 다른 방법: List로 변환 -&gt; 원하는값만 가져올 수 있다.
+        List&lt;String&gt; list = new ArrayList&lt;&gt;(set);
+        System.out.println(list.get(2));
+    }
+}
+
+public class D1_MapTest {
+    public static void main(String[] args) {
+        Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+        map.put("하나", "한경");
+        map.put("둘", "닷컴");
+        map.put("셋", "교육센터");
+        map.put("셋", "교육센터"); // key는 중복할 수 없다.
+        System.out.println(map.get("하나") + "," + map.get("둘"));
+
+        // Map에서 일괄적으로 데이터를 가져오려면
+        Set&lt;String&gt; setKeyMap = map.keySet(); // key들만 Set에 담아 반환
+        // 1. Iterator 사용
+        Iterator&lt;String&gt; iter = setKeyMap.iterator();
+        while (iter.hasNext()) {
+            System.out.println(map.get(iter.next()));
+        }
+        // 2. 향상된 for문 사용
+        for (String s : setKeyMap) {
+            System.out.println(map.get(s));
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+--- D1_ListTest ---
+A
+[A, B, C, D]
+A
+B
+C
+D
+true
+hk.edu20260812.day08.D1_Lotto@27716f4
+hk.edu20260812.day08.D1_Lotto@8efb846
+hk.edu20260812.day08.D1_Lotto@2a84aee7
+
+--- D1_SetTest ---
+한
+제
+국
+경
+한
+제
+국
+경
+국
+
+--- D1_MapTest ---
+한경,닷컴
+닷컴
+한경
+교육센터
+닷컴
+한경
+교육센터</pre>
+      <div class="run-note"><code>D1_ListTest</code>는 <code>list2.contains("A")</code>가 <b>true</b>이고, <code>D1_Lotto</code> 객체 3개는 <code>toString()</code>을 재정의하지 않아 <b>주소@해시코드</b> 형태로 찍힙니다(8일차 복습 포인트). <code>D1_SetTest</code>는 "제"를 두 번 넣어도 <b>4개(한·제·국·경)만</b> 저장되고, 순서는 <b>입력한 순서가 아니라 해시 기반 순서</b>라는 게 향상된 for문과 Iterator 두 결과가 똑같다는 것으로 확인됩니다 — <code>list.get(2)</code>는 이 순서의 세 번째인 "국"입니다. <code>D1_MapTest</code>는 <code>put("셋", ...)</code>을 두 번 해도 <b>값이 3개(하나·둘·셋)뿐</b>이라는 걸 보여줍니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_Card.java + D2_CardCase.java + D2_CardMain.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260820.day13;
+
+public class D2_Card {
+    public static final String[] DECK = { "◆", "♥", "♣", "♠" };
+    public static final String[] STECK = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
+
+    private String card; // "♦2"
+
+    public D2_Card() {
+        init();
+    }
+
+    public void init() {
+        int deck = (int) (Math.random() * DECK.length);
+        int steck = (int) (Math.random() * STECK.length);
+        card = DECK[deck] + STECK[steck];
+    }
+
+    public String getCard() {
+        return card;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + card + "]";
+    }
+
+    // Card객체 내부에 멤버필드인 card끼리 비교하는 기능으로 재정의
+    @Override
+    public boolean equals(Object obj) {
+        boolean isS = false;
+        D2_Card ca = (D2_Card) obj;
+        if (this.card.equals(ca.getCard())) {
+            isS = true;
+        }
+        return isS;
+    }
+
+    // equals()를 오버라이딩하면 hashCode()도 오버라이딩해야 됨 (공식같은거임)
+    @Override
+    public int hashCode() {
+        return card.hashCode() + 137;
+    }
+}
+
+public class D2_CardCase {
+    private List&lt;D2_Card&gt; cards;
+    private static final int NUMOFCARDS = D2_Card.DECK.length * D2_Card.STECK.length; // 4 * 13 = 52
+
+    public D2_CardCase() {
+        cards = new ArrayList&lt;&gt;();
+        shuffle();
+    }
+
+    public void shuffle() {
+        // List의 contains()는 내부적으로 equals()로 비교한다
+        int i = 0;
+        while (true) {
+            D2_Card cc = new D2_Card();
+            if (!cards.contains(cc)) { // 중복된 card가 없다면
+                cards.add(cc);
+                i++;
+            }
+            if (i == NUMOFCARDS) break;
+        }
+    }
+
+    public List&lt;D2_Card&gt; getCards() {
+        return cards;
+    }
+}
+
+public class D2_CardMain {
+    public static void main(String[] args) {
+        D2_Card card = new D2_Card();
+        System.out.println(card); // toString() 자동 호출
+
+        System.out.println("=================");
+
+        D2_CardCase cardCase = new D2_CardCase();
+        List&lt;D2_Card&gt; cards = cardCase.getCards();
+        for (int i = 0; i &lt; cards.size(); i++) {
+            System.out.print(cards.get(i) + "\t");
+            if ((i + 1) % 10 == 0) System.out.println();
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기(카드는 난수라 실행마다 달라집니다)</summary>
+      <pre>
+[◆5]
+=================
+[♠8]	[♣7]	[♥A]	[♥4]	[♣J]	[♥7]	[♠10]	[♠3]	[♥5]	[♥2]
+[♣6]	[♠7]	[♣3]	[♠9]	[◆J]	[♣2]	[♥6]	[◆8]	[♣4]	[♥9]
+[♠Q]	[♠K]	[◆Q]	[◆7]	[♥Q]	[♣Q]	[◆3]	[♠6]	[♠J]	[♥10]
+[♣9]	[◆9]	[♣10]	[◆5]	[♣5]	[◆10]	[◆2]	[♣8]	[◆6]	[♥8]
+[♠4]	[◆K]	[♠2]	[♣A]	[♥3]	[◆4]	[♥J]	[♠A]	[♣K]	[♠5]
+[♥K]	[◆A]</pre>
+      <div class="run-note">10장씩 5줄 + 마지막 2장으로 <b>총 52장</b>이 전부 출력됩니다. 잘 보면 <code>[◆5]</code>가 세 번째 줄 근처에 <b>한 번만</b> 등장합니다 — <code>equals()</code>·<code>hashCode()</code>를 재정의해 둔 덕분에 <code>contains()</code>가 진짜로 카드 내용을 비교해서 중복을 걸러낸 결과입니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">13일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li>컬렉션은 <b>크기가 자동으로 늘어나는</b> 저장소다 — 배열의 크기 고정 한계를 넘어선다.</li>
+        <li><code>List</code>: 순서 있음, 중복 허용, 인덱스로 접근(<code>get·add(idx,값)·remove(idx)</code>).</li>
+        <li><code>Set</code>: <b>중복 자동 제거</b>, 인덱스 접근 없음(필요하면 <code>List</code>로 변환).</li>
+        <li><code>Map</code>: key-value 쌍 저장, <b>key는 중복 불가</b>(같은 key로 put하면 값만 갱신).</li>
+        <li>제네릭 없이 <code>List</code>를 쓰면 모든 값이 <code>Object</code>가 되어 <b>꺼낼 때마다 형변환</b>이 필요하다.</li>
+        <li>순회 방법: <b>향상된 for문</b>(간단) 또는 <b><code>Iterator</code></b>(<code>hasNext()</code>+<code>next()</code>, 순회 중 제거가 필요할 때).</li>
+        <li><code>Map</code> 전체 순회는 <code>keySet()</code>으로 key의 <code>Set</code>을 얻은 뒤 그 key로 <code>get()</code>한다.</li>
+        <li><code>List.contains()</code>·<code>Set</code>의 중복 검사는 <b>내부적으로 <code>equals()</code>를 사용</b>한다 — 재정의하지 않으면 주소 비교라 중복 판정이 항상 실패한다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>D2_Card.hashCode()</code>가 <code>card.hashCode() + 137</code>처럼 <b>임의의 숫자(137)를 더한 것</b>이 눈에 띕니다. <code>hashCode()</code>의 규약은 <b>"같은 <code>equals</code> 결과라면 같은 값"</b>만 지키면 되고, 정확히 어떤 계산식을 쓰는지는 자유입니다 — <code>card.hashCode()</code>만 써도 되지만, 상수를 더해 "이 클래스만의" 해시 분포를 살짝 바꿔 보는 것도 흔한 습관입니다. 다만 반대로 <b>서로 다른 카드인데 우연히 <code>hashCode()</code>가 같아도 괜찮습니다</b> — <code>HashSet</code>·<code>HashMap</code>은 해시가 같으면 그다음에 <code>equals()</code>로 한 번 더 확인하기 때문입니다. "해시가 같다 = 반드시 같은 객체"가 아니라 <b>"해시가 다르면 반드시 다른 객체"</b>라는 방향으로만 성립한다는 걸 기억하세요.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_ListTest.java" target="_blank" rel="noopener">D1_ListTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_SetTest.java" target="_blank" rel="noopener">D1_SetTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_MapTest.java" target="_blank" rel="noopener">D1_MapTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_Card.java" target="_blank" rel="noopener">D2_Card.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardCase.java" target="_blank" rel="noopener">D2_CardCase.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardMain.java" target="_blank" rel="noopener">D2_CardMain.java</a>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day14">
+  <div class="note-head">
+    <span class="note-num">14일차</span>
+    <h3>2026-08-21 · 6마방진(싱글 이븐) · 싱글턴 + 팩토리 패턴으로 마방진 3종 통합</h3>
+    <div class="note-tags"><span class="tag">6마방진</span><span class="tag">LUX 방식</span><span class="tag">싱글턴</span><span class="tag">팩토리 패턴</span><span class="tag">템플릿 메서드</span><span class="tag">다형성</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>12일차의 홀수·짝수(4의 배수) 마방진에 이어 <b>4로 나누면 2가 남는 크기(6, 10, 14...)의 마방진</b>을 4개 영역으로 쪼개 채우는 방식으로 완성했고, 완성된 <b>세 가지 마방진(홀수·짝수·6마방진)을 <code>D2_MagicFactory</code> 하나로 묶어</b> 사용자가 입력한 숫자에 맞는 객체를 골라 돌려주는 <b>싱글턴 + 팩토리 패턴</b>을 만들었으며, <code>D1_MagicUtil.magicRun()</code>이라는 <b>템플릿 메서드</b>로 "어떤 마방진이든 <code>make()</code> 다음 <code>magicPrint()</code>"라는 공통 실행 순서를 한 곳에 모았다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오늘은 <b>마방진 자판기를 만든 날</b>입니다. 지금까지는 "홀수용 기계", "짝수용 기계"를 각각 따로 작동시켰다면, 오늘은 <b>숫자를 넣으면 알맞은 기계를 대신 골라 작동시켜 주는 자판기(<code>MagicFactory</code>)</b>를 만들었습니다. 자판기는 세상에 하나만 있으면 되니까 <b>싱글턴</b>이고, "어떤 상품이든 꺼내서(<code>make</code>) 보여주는(<code>magicPrint</code>) 순서는 똑같다"는 걸 <code>MagicUtil</code>이라는 <b>공통 사용 설명서</b> 한 장으로 정리했습니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D1_SixMagicSquare — 4영역으로 쪼개 채우는 LUX 방식</h4>
+        <p>6·10·14처럼 <b>4로 나누면 나머지가 2인 크기</b>(싱글 이븐)는 홀수·짝수 마방진보다 까다로워서 <b>4단계</b>로 나눠 채웁니다. <code>makeA()</code>·<code>makeB()</code>가 왼쪽 위/오른쪽 위 두 영역을 각각 3과 1·2 패턴으로 채우고, <code>makeCD()</code>가 그 값을 이용해 <b>아래쪽 두 영역(C·D)을 대칭적으로 채우며</b>(3↔0, 1↔2 맞바꾸기), <code>multi()</code>가 전체에 <code>(n/2)²</code>를 곱해 자리를 벌려 놓고, 마지막 <code>makeAdd()</code>가 <b>이미 만들어 둔 <code>OddMagicSquare</code>(n/2 크기)의 값을 네 영역에 똑같이 더해</b> 완성합니다 — <b>"새로 만들지 않고 이미 있는 걸 재사용한다"</b>는 게 핵심입니다. → <a href="#prac-09">🧪 9번 마방진</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② D2_MagicFactory — 싱글턴 + 팩토리 패턴</h4>
+        <p>생성자를 <code>private</code>으로 막고 <code>getInstance()</code>로만 얻게 한 건 5일차에 배운 <b>싱글턴 그대로</b>입니다. 여기에 <code>factory()</code> 메서드가 <b>새로운 역할</b>을 더합니다 — <code>Scanner</code>로 숫자를 입력받아 <code>num % 2 == 1</code>이면 <code>OddMagicSquare</code>, <code>num % 4 == 0</code>이면 <code>EvenMagicSquare</code>, <code>num % 4 == 2</code>이면 <code>D1_SixMagicSquare</code>를 <b>알아서 골라 만들어 반환</b>합니다. 반환 타입이 <code>Interface_Magic</code>이라 <b>호출하는 쪽은 어떤 구체 클래스가 나왔는지 몰라도</b> <code>make()</code>·<code>magicPrint()</code>를 그대로 쓸 수 있습니다 — 이게 <b>팩토리 패턴</b>입니다("객체 생성을 대신 해 주고, 사용하는 쪽은 인터페이스만 본다"). → <a href="#oop-11">🧱 11. 싱글턴 패턴</a> · <a href="#oop-22">🧱 22. 인터페이스</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ D1_MagicUtil — 템플릿 메서드로 공통 실행 순서를 한 곳에</h4>
+        <p><code>magicRun(Interface_Magic magic)</code>은 <b>딱 두 줄</b>, <code>magic.make(); magic.magicPrint();</code>뿐입니다. 별거 아닌 것 같지만, <b>어떤 마방진이 오든 "만들고 → 찍는다"는 순서는 항상 같다</b>는 사실을 한 메서드로 못박아 둔 것입니다. <code>D3_MagicSquareMain</code>은 이제 <code>if~else</code>로 타입을 구분하지 않고 <code>D1_MagicUtil.magicRun(magic)</code> 한 줄만 호출합니다 — <b>파라미터를 인터페이스 타입으로 선언</b>했기 때문에(10일차 다형성) 어떤 구현체가 와도 똑같이 동작합니다. → <a href="#oop-19">🧱 19. 오버라이딩과 VMI</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_SixMagicSquare.java (수업 실습 원본 — day14 독립형, day11_2엔 MagicSquare 상속판도 있음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260821.day14;
+
+import hk.edu20260818.day11.day11_2.OddMagicSquare;
+
+public class D1_SixMagicSquare {
+    private int[][] magic;
+
+    public D1_SixMagicSquare() {
+        this(6);
+    }
+
+    public D1_SixMagicSquare(int n) {
+        this.magic = new int[n][n];
+    }
+
+    public void make() {
+        makeA();
+        makeB();
+        makeCD();
+        multi();
+        makeAdd();
+    }
+
+    // A영역: i가 2일 땐 j+1 위치에, 그 외엔 j 위치에 3을 채운다
+    private void makeA() {
+        int n = magic.length;
+        for (int i = 0; i &lt; n / 2; i++) {
+            for (int j = 0; j &lt; n / 4; j++) {
+                if (i == 2) magic[i][j + 1] = 3;
+                else magic[i][j] = 3;
+            }
+        }
+    }
+
+    // B영역: 먼저 1로 채우고, 그 범위만큼 2로 덮어쓴다
+    private void makeB() {
+        int n = magic.length;
+        for (int i = 0; i &lt; n / 2; i++) {
+            for (int j = 0; j &lt; n / 2; j++) {
+                magic[i][j + n / 2] = 1;
+            }
+        }
+        for (int i = 0; i &lt; n / 2; i++) {
+            for (int j = 0; j &lt; n / 2 - (n / 4 - 1); j++) {
+                magic[i][j + n / 2] = 2;
+            }
+        }
+    }
+
+    // C영역: A의 3&lt;-&gt;0을 맞바꿔 아래로. D영역: B의 1&lt;-&gt;2를 맞바꿔 아래로
+    private void makeCD() {
+        int n = magic.length;
+        for (int i = 0; i &lt; n / 2; i++) {
+            for (int j = 0; j &lt; n / 2; j++) {
+                if (magic[i][j] == 3) magic[i + n / 2][j] = 0;
+                else if (magic[i][j] == 0) magic[i + n / 2][j] = 3;
+
+                if (magic[i][j + n / 2] == 1) magic[i + n / 2][j + n / 2] = 2;
+                else if (magic[i][j + n / 2] == 2) magic[i + n / 2][j + n / 2] = 1;
+            }
+        }
+    }
+
+    // 전체 값에 (n/2)*(n/2)를 곱해 자리를 벌린다
+    private void multi() {
+        int n = magic.length;
+        int m = (n / 2) * (n / 2);
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                magic[i][j] *= m;
+            }
+        }
+    }
+
+    // 이미 만들어 둔 홀수 마방진(n/2 크기)을 네 영역에 똑같이 더한다
+    private void makeAdd() {
+        int n = magic.length;
+        OddMagicSquare odd = new OddMagicSquare(n / 2);
+        odd.make();
+        int[][] oddMagic = odd.getMagic();
+
+        for (int i = 0; i &lt; n / 2; i++) {
+            for (int j = 0; j &lt; n / 2; j++) {
+                magic[i][j] += oddMagic[i][j];
+                magic[i][j + n / 2] += oddMagic[i][j];
+                magic[i + n / 2][j] += oddMagic[i][j];
+                magic[i + n / 2][j + n / 2] += oddMagic[i][j];
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        D1_SixMagicSquare six = new D1_SixMagicSquare(10);
+        six.make();
+        for (int i = 0; i &lt; six.magic.length; i++) {
+            for (int j = 0; j &lt; six.magic.length; j++) {
+                System.out.print(six.magic[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>10×10으로 실행(가로·세로·대각선 합 검증 포함 버전은 day11_2 상속판 기준)</summary>
+      <pre>
+90	83	1	24	17	65	58	51	74	42
+91	89	7	5	23	66	64	57	55	48
+22	95	88	6	4	72	70	63	56	29
+78	96	19	12	10	53	71	69	62	35
+84	77	25	18	11	59	52	75	68	36
+15	8	76	99	92	40	33	26	49	67
+16	14	82	80	98	41	39	32	30	73
+97	20	13	81	79	47	45	38	31	54
+3	21	94	87	85	28	46	44	37	60
+9	2	100	93	86	34	27	50	43	61</pre>
+      <div class="run-note">day11_2의 <code>MagicSquare</code>를 상속한 버전으로 <b>가로·세로·대각선 합을 전부 검증</b>해 보면 10×10 기준 <b>505</b>로 정확히 일치합니다(1~100의 합 5050 ÷ 10). <b>다만 6×6은 예외</b>였습니다 — 직접 돌려 보니 가로·세로 합은 전부 111로 맞았지만 <b>대각선 합은 84와 165로 서로 달라 <code>isCheck()</code>가 false</b>가 나왔습니다. 6은 <code>n/2=3</code>이 되는 가장 작은 싱글 이븐 크기라, 이 4영역 방식이 깔끔하게 들어맞지 않는 유명한 예외 케이스입니다 — 10 이상에서는 이 알고리즘이 잘 맞습니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_MagicFactory.java + D1_MagicUtil.java + D3_MagicSquareMain.java (day11_2, 수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260818.day11.day11_2;
+
+import java.util.Scanner;
+
+public class D2_MagicFactory {
+    // singleton pattern 적용
+    private static D2_MagicFactory magicFactory;
+
+    private D2_MagicFactory() { }
+
+    public static D2_MagicFactory getInstance() {
+        if (magicFactory == null) {
+            magicFactory = new D2_MagicFactory();
+        }
+        return magicFactory;
+    }
+
+    // Factory pattern: 원하는 마방진 요청을 확인해서 해당 객체를 반환
+    public Interface_Magic factory() {
+        Interface_Magic magic = null;
+
+        System.out.println("원하는 마방진을 입력하세요(숫자형식)");
+        Scanner scan = new Scanner(System.in);
+        int num = scan.nextInt();
+
+        if (num &lt; 3) {
+            System.out.println("3이상 숫자를 입력하세요");
+        } else if (num % 2 == 1) {
+            magic = new OddMagicSquare(num);
+        } else if (num % 4 == 0) {
+            magic = new EvenMagicSquare(num);
+        } else if (num % 4 == 2) {
+            magic = new D1_SixMagicSquare(num);
+        }
+        scan.close();
+        return magic;
+    }
+}
+
+public class D1_MagicUtil {
+    // 템플릿 메서드: 어떤 마방진이든 "만들고 -&gt; 찍는다" 순서는 동일
+    public static void magicRun(Interface_Magic magic) {
+        magic.make();
+        magic.magicPrint();
+    }
+}
+
+public class D3_MagicSquareMain {
+    public static void main(String[] args) {
+        // 메서드를 통해 객체 얻어옴: new 사용 못함(생성자가 private)
+        D2_MagicFactory fac = D2_MagicFactory.getInstance();
+        Interface_Magic magic = fac.factory();
+        if (magic == null) {
+            System.out.println("다시입력하세요");
+        } else {
+            D1_MagicUtil.magicRun(magic);
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>입력 "10" 넣고 돌려 본 출력 보기</summary>
+      <pre>
+원하는 마방진을 입력하세요(숫자형식)
+90	83	1	24	17	65	58	51	74	42	505
+91	89	7	5	23	66	64	57	55	48	505
+22	95	88	6	4	72	70	63	56	29	505
+78	96	19	12	10	53	71	69	62	35	505
+84	77	25	18	11	59	52	75	68	36	505
+15	8	76	99	92	40	33	26	49	67	505
+16	14	82	80	98	41	39	32	30	73	505
+97	20	13	81	79	47	45	38	31	54	505
+3	21	94	87	85	28	46	44	37	60	505
+9	2	100	93	86	34	27	50	43	61	505
+505	505	505	505	505	505	505	505	505	505
+ma결과:[505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505]
+마방진 증명여부:true</pre>
+      <div class="run-note">"10"을 입력하면 <code>10 % 4 == 2</code>라 <code>factory()</code>가 <code>D1_SixMagicSquare</code>를 만들어 돌려주고, <code>magicRun()</code>이 <code>make()</code> → <code>magicPrint()</code> 순서로 실행해 <b>가로·세로·대각선 전부 505</b>로 검증까지 통과합니다. "3","5" 같은 홀수를 넣으면 같은 코드가 <code>OddMagicSquare</code>를, "8","12" 같은 4의 배수를 넣으면 <code>EvenMagicSquare</code>를 대신 돌립니다 — <code>D3_MagicSquareMain</code>은 <b>어떤 경우든 코드를 한 줄도 바꾸지 않습니다</b>.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">14일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li>마방진 크기 3분류: <b>홀수</b> / <b>짝수(4의 배수)</b> / <b>싱글 이븐(4로 나누면 2가 남음)</b> — 알고리즘이 전부 다르다.</li>
+        <li>싱글 이븐은 <b>4영역으로 나눠 채운 뒤, 이미 만든 홀수 마방진 값을 더해 완성</b>한다(새로 만들지 않고 재사용).</li>
+        <li><b>팩토리 패턴</b> = 조건에 따라 알맞은 객체를 대신 생성해서 <b>인터페이스 타입으로 반환</b>하는 설계 — 호출하는 쪽은 구체 클래스를 몰라도 된다.</li>
+        <li>싱글턴 + 팩토리를 같이 쓰면 <b>"객체 만드는 공장은 하나만 있으면 된다"</b>는 게 자연스럽게 성립한다.</li>
+        <li><b>템플릿 메서드</b> = 여러 구현체에 공통되는 <b>실행 순서</b>를 메서드 하나로 고정해 두는 패턴.</li>
+        <li>파라미터를 인터페이스 타입으로 선언하면(<code>magicRun(Interface_Magic magic)</code>) <b>다형성 덕분에 <code>if~else</code> 분기 없이</b> 모든 구현체를 같은 코드로 처리할 수 있다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>6×6이 대각선 검증에 실패한 건 <b>버그가 아니라 이 알고리즘의 한계</b>입니다 — n=6은 <code>n/2=3</code>이라 4영역이 서로 너무 작아서 단순한 3↔0·1↔2 맞바꿈만으로는 대각선까지 맞추지 못하는, 마방진 이론에서도 유명한 예외 케이스입니다(실제로 6×6 마방진은 손으로 푸는 표준 알고리즘이 따로 있을 만큼 까다롭기로 유명합니다). <b>"코드가 컴파일되고 대부분의 입력에서 잘 동작한다"</b>고 해서 <b>모든 경계 케이스까지 검증된 건 아니라는 것</b>을 이 사례로 기억해 두면 좋습니다 — <code>isCheck()</code>처럼 <b>결과를 스스로 검증하는 코드를 같이 짜 두면</b> 이런 예외를 바로 발견할 수 있습니다.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260821/day14/D1_SixMagicSquare.java" target="_blank" rel="noopener">D1_SixMagicSquare.java</a>(독립형) ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_SixMagicSquare.java" target="_blank" rel="noopener">day11_2/D1_SixMagicSquare.java</a>(상속형) ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D2_MagicFactory.java" target="_blank" rel="noopener">D2_MagicFactory.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_MagicUtil.java" target="_blank" rel="noopener">D1_MagicUtil.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a>(getMagic 추가)
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day15">
+  <div class="note-head">
+    <span class="note-num">15일차</span>
+    <h3>2026-08-24 · 예외 처리 — try·catch·finally · 사용자 정의 예외 · 패키지 정리</h3>
+    <div class="note-tags"><span class="tag">try-catch-finally</span><span class="tag">다중 catch</span><span class="tag">사용자 정의 예외</span><span class="tag">throw/throws</span><span class="tag">try-with-resources</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>13일차 컬렉션에 이어 <b>프로그램이 잘못될 수 있는 지점을 붙잡아 처리하는 예외 처리</b>를 배운 날 — 여러 종류의 예외를 <b>타입별로 나눠 <code>catch</code></b>하고 <code>finally</code>로 <b>성공·실패 상관없이 항상 실행</b>되는 코드를 만드는 법, <code>Exception</code>을 상속해 <b>나만의 예외 클래스</b>를 만들고 <code>throw</code>로 던지는 법을 정리했고, 13일차의 카드 클래스를 <code>cardgame</code>이라는 <b>전용 패키지로 옮겨 정리</b>했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>예외 처리는 <b>"깨질 수 있는 부분에 미리 안전망을 쳐 두는 것"</b>입니다. <code>try</code>는 <b>안전망 위에서 일을 시도하는 구역</b>, <code>catch</code>는 <b>떨어졌을 때 받아 주는 그물</b>(그물 종류별로 다르게 받을 수 있음), <code>finally</code>는 <b>떨어지든 안 떨어지든 무조건 마지막에 하는 뒷정리</b>입니다. 사용자 정의 예외는 <b>"이 상황엔 이런 이름의 문제가 생겼다"고 직접 이름 붙인 그물</b>을 만드는 것입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① exTest2 — 예외 종류별로 <code>catch</code>를 나누고, <code>finally</code>는 항상 실행</h4>
+        <p>하나의 <code>try</code> 블록 안에서 <code>Integer.parseInt()</code>(숫자 변환 실패)·<code>substring()</code>(문자열 범위 초과)·배열 인덱스 초과가 모두 일어날 수 있는데, <code>catch</code>를 <b><code>NumberFormatException</code> → <code>StringIndexOutOfBoundsException</code> → <code>ArrayIndexOutOfBoundsException</code> → <code>Exception</code></b> 순서로 <b>구체적인 것부터 포괄적인 것 순으로</b> 나열했습니다. 순서가 중요한 이유는 <b>먼저 맞는 <code>catch</code> 하나만 실행</b>되기 때문입니다(더 넓은 <code>Exception</code>을 앞에 두면 뒤의 구체적인 catch들은 죽은 코드가 됩니다). <code>finally</code> 블록은 예외가 나든 안 나든 <b>무조건 실행</b>되어 뒷정리(자원 해제 등)를 맡습니다. → <a href="#util-05">🛠️ 05. 예외 처리 — try·catch·finally</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② D1_UserException — <code>Exception</code>을 상속해 나만의 예외 만들기</h4>
+        <p><code>class D1_UserException extends Exception</code>으로 선언하고, 기본 생성자가 <code>this("UserException 오류 입니다.")</code>로 <b>메시지 있는 생성자에 위임</b>하며, 그 생성자는 <code>super(msg)</code>로 <b>부모(<code>Exception</code>)에게 메시지를 전달</b>합니다(6·8일차에 배운 <code>this(...)</code>/<code>super(...)</code> 패턴 그대로). <code>UserExceptionTest(int a)</code>는 <code>throws D1_UserException</code>을 <b>메서드 선언에 명시</b>하고, 조건에 안 맞으면 <code>throw new D1_UserException("...")</code>으로 <b>직접 예외를 던집니다</b>. 이렇게 만든 예외는 자바 기본 예외들과 똑같이 <code>try~catch</code>로 잡을 수 있습니다. → <a href="#util-06">🛠️ 06. 예외 계층과 사용자 정의 예외</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ exTest4 — try-with-resources로 <code>close()</code> 자동 처리</h4>
+        <p><code>try (InputStream in = new FileInputStream("url")) { ... }</code>처럼 <b>괄호 안에서 자원을 선언</b>하면, <code>try</code> 블록이 끝날 때(정상이든 예외든) <b>자동으로 <code>close()</code>가 호출</b>됩니다. <code>InputStream</code>이 <code>AutoCloseable</code>을 구현하고 있어 가능한 문법으로, 예전처럼 <code>finally</code> 안에서 직접 <code>in.close()</code>를 호출하며 <b>그 자체가 또 예외를 던질 수 있는 상황</b>을 신경 쓸 필요가 없어집니다. → <a href="#util-10">🛠️ 10. InputStream · OutputStream과 close()</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ cardgame 패키지 — 13일차 카드 클래스를 전용 패키지로 정리</h4>
+        <p><code>D2_Card</code>·<code>D2_CardCase</code>·<code>D2_CardMain</code> 세 파일이 13일차와 <b>내용은 완전히 동일</b>하고, <code>package hk.edu20260820.day13;</code>이 <code>package hk.edu20260824.day15.cardgame;</code>으로만 바뀌었습니다. 로직 변경 없이 <b>관련 있는 클래스들을 전용 패키지로 묶어 정리</b>하는 연습으로, 프로젝트가 커질수록 "이 파일들이 한 기능을 담당한다"는 걸 <b>패키지 이름으로 드러내는 습관</b>이 중요해진다는 걸 보여줍니다. → <a href="#oop-08">🧱 08. package와 import</a> · <a href="#prac-12">🧪 12번 카드 만들기</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_UserException.java + D1_Exception.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260824.day15;
+
+// 내가 필요한 Exception 클래스를 만들때는 Exception을 상속받아 생성
+public class D1_UserException extends Exception {
+    public D1_UserException() {
+        this("UserException 오류 입니다.");
+    }
+
+    public D1_UserException(String msg) {
+        super(msg);
+    }
+}
+
+public class D1_Exception {
+    public static void main(String[] args) {
+        // 예외를 던지면
+        try {
+            UserExceptionTest(12);
+        } catch (D1_UserException e) {
+            System.out.println("예외가 발생했습니다");
+            e.printStackTrace();
+        }
+    }
+
+    public static void exTest1(String s) {
+        int a = 0;
+        try {
+            a = Integer.parseInt(s); // &lt;-- 예외가 발생될 여지가 있는 코드
+        } catch (NumberFormatException e) {
+            System.out.println("예외가 발생했습니다");
+        } catch (Exception ee) { // 넘버포멧익셉션 외 다른 예외는 큰 부모로 다 잡는다
+            ee.printStackTrace();
+        }
+        System.out.println(a);
+    }
+
+    public static void exTest2(String s) {
+        int i = 0;
+        String ss = "스트링";
+        int[] array = { 1, 2, 3, 4, 5 };
+        try {
+            i = Integer.parseInt(s);
+            ss = ss.substring(0, 2);
+            int a = array[5];
+        } catch (NumberFormatException e) {
+            System.out.println("문자가 숫자형태로 변환되지 않았습니다.");
+            e.printStackTrace();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("문자열의 범위를 벗어났습니다.");
+            e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("배열의 범위를 벗어났습니다.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("나머지 모든 예외를 처리한다");
+            e.printStackTrace();
+        } finally {
+            ss = ss.substring(0, 2);
+            System.out.println(ss);
+        }
+        System.out.println("오류발생해도 프로그램은 종료되지 않는다.");
+    }
+
+    // try-with-resources: InputStream은 AutoCloseable이라 자동으로 close()된다
+    public static void exTest4() {
+        try (java.io.InputStream in = new java.io.FileInputStream("url")) {
+            in.read();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 숫자를 받아서 1~10까지의 숫자만 허용, 벗어나면 예외를 던진다
+    public static void UserExceptionTest(int a) throws D1_UserException {
+        if (!(a &gt; 0 &amp;&amp; a &lt; 11)) {
+            throw new D1_UserException("1부터 10까지의 숫자만 입력가능");
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>main() 그대로 실행 — UserExceptionTest(12) 호출</summary>
+      <pre>
+예외가 발생했습니다
+hk.edu20260824.day15.D1_UserException: 1부터 10까지의 숫자만 입력가능
+	at hk.edu20260824.day15.D1_Exception.UserExceptionTest(D1_Exception.java:87)
+	at hk.edu20260824.day15.D1_Exception.main(D1_Exception.java:16)</pre>
+      <div class="run-note"><code>12</code>는 <code>1~10</code> 범위를 벗어나므로 <code>UserExceptionTest(12)</code>가 <code>D1_UserException</code>을 <code>throw</code>합니다. <code>main</code>의 <code>catch (D1_UserException e)</code>가 이를 잡아 <b>"예외가 발생했습니다"</b>를 출력하고, <code>e.printStackTrace()</code>가 <b>예외 메시지와 발생 위치(어느 파일, 몇 번째 줄)</b>를 자세히 찍습니다.</div>
+    </details>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>참고 — exTest2("오")를 따로 호출해 보면 (main에선 호출되지 않음)</summary>
+      <pre>
+문자가 숫자형태로 변환되지 않았습니다.
+java.lang.NumberFormatException: For input string: "오"
+	at java.base/java.lang.Integer.parseInt(...)
+	at hk.edu20260824.day15.D1_Exception.exTest2(D1_Exception.java:43)
+스트
+오류발생해도 프로그램은 종료되지 않는다.</pre>
+      <div class="run-note"><code>Integer.parseInt("오")</code>에서 <code>NumberFormatException</code>이 터져 <b>가장 먼저 맞는 <code>catch</code></b>가 잡고, <code>substring()</code>·배열 접근은 <b>실행되지도 못한 채 건너뜁니다</b>(예외가 나는 순간 <code>try</code> 블록 나머지는 전부 스킵). 그다음 <b><code>finally</code>가 무조건 실행</b>되어 <code>ss.substring(0,2)</code>로 "스트"를 다시 만들고, <code>catch</code>·<code>finally</code>가 다 끝난 뒤 <b>프로그램은 종료되지 않고 다음 줄이 계속 실행</b>됩니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">15일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li><code>catch</code>는 <b>구체적인 예외부터 포괄적인 예외(<code>Exception</code>) 순서로</b> 나열해야 한다(반대로 하면 뒤 catch가 죽은 코드가 됨).</li>
+        <li><code>finally</code>는 <b>예외 발생 여부와 상관없이 항상 실행</b>된다 — 자원 정리에 적합하다.</li>
+        <li>예외가 발생한 순간 <code>try</code> 블록의 <b>나머지 코드는 실행되지 않고 바로 <code>catch</code>로 넘어간다</b>.</li>
+        <li>사용자 정의 예외는 <code>Exception</code>(또는 그 자손)을 <b><code>extends</code></b>하고, 생성자에서 <code>super(msg)</code>로 메시지를 부모에게 전달한다.</li>
+        <li>예외를 직접 던질 땐 <code>throw new 예외()</code>, 메서드가 그 예외를 던질 수 있다고 알릴 땐 <code>throws 예외</code>를 메서드 선언에 붙인다.</li>
+        <li><code>try(자원 선언)</code> 형태(try-with-resources)를 쓰면 <code>AutoCloseable</code> 자원이 <b>자동으로 <code>close()</code></b>된다.</li>
+        <li>로직 변경 없이 <b>패키지만 옮겨 정리</b>하는 것도 정상적인 리팩터링이다 — 관련 클래스를 한 패키지로 묶으면 구조가 더 잘 드러난다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>exTest2</code>에서 <b><code>substring(0, 2)</code>가 <code>try</code> 안과 <code>finally</code> 안에 똑같이 등장</b>합니다. 예외가 나면 <code>try</code> 안의 <code>substring</code>은 실행되지 못하고 건너뛰지만, <code>finally</code> 안의 같은 코드는 <b>무조건 실행</b>되어 "스트"라는 결과를 만들어 냅니다 — <b>같은 코드라도 어느 블록에 있느냐에 따라 "실행이 보장되는지"가 완전히 달라진다</b>는 걸 보여주는 좋은 예입니다. 그리고 <code>D1_Exception.exTest4()</code>의 <code>new FileInputStream("url")</code>은 <b>"url"이라는 실제 파일이 없으므로 열자마자 <code>IOException</code>(정확히는 <code>FileNotFoundException</code>)이 납니다</b> — try-with-resources는 "자원을 안전하게 닫아 주는 것"이지 "파일이 존재하게 만들어 주는 것"은 아니라는 점도 기억해 두세요.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/D1_Exception.java" target="_blank" rel="noopener">D1_Exception.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/D1_UserException.java" target="_blank" rel="noopener">D1_UserException.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_Card.java" target="_blank" rel="noopener">cardgame/D2_Card.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardCase.java" target="_blank" rel="noopener">cardgame/D2_CardCase.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardMain.java" target="_blank" rel="noopener">cardgame/D2_CardMain.java</a>
     </div>
   </div>
 </article>
@@ -10650,13 +11358,12 @@ public class CardMain {
             <div class="flow-box leaf"><b>제네릭 &lt;T&gt;</b><span>담을 타입을 나중에</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-19(12일차)까지 09~10단계를 지났습니다. 8일차부터 <code>extends</code>·<code>super()</code>·오버라이딩·다형성(09단계)을 로또·고객 등급·동물 계층 실습으로 다졌고, 10~12일차엔 추상 클래스(컴퓨터·계산기·마방진 계층)와 인터페이스(<code>default</code>·<code>static</code>·<code>private</code> 메서드, 익명 클래스), 중첩 클래스 4종(정적·인스턴스·지역·익명), 제네릭 <code>&lt;T&gt;</code>·와일드카드까지 배웠습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li>둘 다 <b><code>new</code>로 직접 객체를 만들 수 없다</b>.</li>
           <li>공통 코드를 물려주려면 추상 클래스, <b>상관없는 클래스들에 같은 기능을 강제</b>하려면 인터페이스.</li>
           <li>싱글턴·중첩 클래스도 이 단계에 함께 나옵니다. → <a href="#concept-java-abstract-interface">📖 추상 클래스 vs 인터페이스</a></li>
-          <li>11~12일차 마방진 3단 구조(인터페이스 → 추상 클래스 → 구현 클래스)가 이 단계의 완성형 — 계약·공통 기능·실제 구현을 층으로 나누고, 12일차에 이름 버그까지 고쳐 짝수 마방진으로 확장했습니다.</li>
+          <li>11~14일차 마방진 시리즈(인터페이스 → 추상 클래스 → 구현 클래스 3종 → 싱글턴 팩토리)가 이 단계의 완성형 — 계약·공통 기능·실제 구현을 층으로 나누고, 다형성으로 <code>if~else</code> 없이 세 가지 마방진을 한 코드로 돌립니다.</li>
           <li>12일차 <code>D1_NestedClassTest</code>가 중첩 클래스 4종을 한 파일에서 비교한 완성형이고, <code>D3_GBox&lt;T&gt;</code>가 제네릭·와일드카드의 완성형입니다.</li>
         </ul>
       </article>
@@ -10680,11 +11387,14 @@ public class CardMain {
             <div class="flow-box"><b>try ~ catch ~ finally</b><span>throw · throws</span></div>
           </div>
         </div>
+        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-24(15일차)까지 09~11단계를 지났습니다. 13일차에 List·Set·Map 기본기와 카드 실습으로 <code>equals</code>·<code>hashCode</code>가 컬렉션의 중복 검사에 왜 필요한지 확인했고, 15일차엔 다중 <code>catch</code>·<code>finally</code>·사용자 정의 예외(<code>throw</code>/<code>throws</code>)·try-with-resources까지 배웠습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li>컬렉션은 객체만 담는다 → <code>int</code>는 <code>Integer</code>로(오토박싱). → <a href="#concept-java-primitive-reference">📖 기본타입 vs 참조타입</a></li>
           <li><code>arr.length</code>(필드) / <code>list.size()</code>(메서드) 구분은 시험 단골.</li>
           <li><code>finally</code>는 예외가 나든 안 나든 <b>반드시 실행</b> — 자원 정리(close)의 자리.</li>
+          <li>13일차 <code>D2_CardCase</code>가 컬렉션의 완성형 — <code>List.contains()</code>의 중복 검사가 <code>equals</code>·<code>hashCode</code> 재정의에 달려 있다는 걸 실습으로 확인했습니다.</li>
+          <li>15일차 <code>exTest2</code>가 예외 처리의 완성형 — 구체적인 예외부터 <code>catch</code>하고 <code>finally</code>로 마무리하는 순서를 갖췄고, <code>D1_UserException</code>으로 나만의 예외까지 만들었습니다.</li>
         </ul>
       </article>
 

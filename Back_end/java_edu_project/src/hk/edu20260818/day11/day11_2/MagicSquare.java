@@ -14,6 +14,11 @@ public abstract class MagicSquare implements Interface_Magic {
         this.magic = new int[n][n];
     }
 
+    // getMagic() 메서드 추가
+    public int[][] getMagic() {
+        return magic;
+    }
+
     @Override
     public abstract void make();
 
