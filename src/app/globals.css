@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════════════════════════════
+   📄 globals.css — 앱 전체 공통 스타일 (Tailwind v4 설정 + 디자인 토큰 + 애니메이션)
+   ───────────────────────────────────────────────────────────────────
+   구성: ① Tailwind 불러오기  ② 다크모드 방식 정의  ③ 테마별 CSS 변수
+         ④ 커스텀 색상 팔레트(@theme)  ⑤ 커스텀 keyframe 애니메이션 3종
+         ⑥ 모션 민감 사용자 배려(prefers-reduced-motion)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── STEP 1: Tailwind v4 설정 ──
+   Tailwind v4는 tailwind.config.js 대신 CSS 안에서 직접 설정한다.
+   (4.react/lessons/12_tailwind_darkmode, 13_recharts_websocket 에서 배운 것과 동일한 방식) */
+@import "tailwindcss";
+
+/* 💡 클래스 기반 다크모드: <html>에 .dark 클래스가 있을 때만 dark: 유틸리티가 켜진다.
+   기본값은 OS 설정 기반(prefers-color-scheme)이라, 토글 버튼과 직접 연동하려면
+   이 한 줄이 반드시 필요하다. (.dark 클래스를 붙였다 떼는 건 ThemeWrapper.jsx 담당) */
+@variant dark (&:where(.dark, .dark *));
+
+/* 💡 네이티브 폼 컨트롤/스크롤바 색을 현재 테마에 맞춤 (Web Interface Guidelines 권장)
+   + 차트(Recharts) 툴팁/그리드/축 눈금 색을 CSS 변수로 선언해 테마와 연동한다.
+   Recharts는 inline style로 색을 받는데, 거기에 var()를 넘기면 컴포넌트가 테마 상태를
+   직접 읽지 않아도(=훅 추가 없이) 라이트/다크에 맞는 색이 적용된다.
+   원리: <html>에 .dark가 붙는 순간 아래 .dark 블록의 변수 값이 이기게 되고,
+   var()를 참조하던 모든 곳의 색이 즉시 바뀐다. */
+:root {
+   color-scheme: light;
+   --chart-tooltip-bg: #ffffff;
+   --chart-tooltip-border: #e5e7eb;
+   --chart-text: #374151;
+   --chart-grid: #e5e7eb;
+   --chart-tick: #6b7280;
+}
+.dark {
+   color-scheme: dark;
+   --chart-tooltip-bg: #0d2137;
+   --chart-tooltip-border: #0f3460;
+   --chart-text: #ccd6f6;
+   --chart-grid: #0f346055;
+   --chart-tick: #8892b0;
+}
+
+/* 💡 커스텀 색상 등록: --color-{이름} 을 선언하면 bg-stock-bg, text-stock-cyan 같은
+   Tailwind 유틸리티 클래스가 자동으로 생성된다.
+   13_recharts_websocket 레슨에서 쓰던 팔레트를 그대로 재사용해 시각적 일관성을 맞췄다.
+   용도 요약: bg(페이지 배경) / card(카드 배경) / border(테두리) / cyan(브랜드 강조)
+             green(상승) / red(하락) / muted(보조 텍스트) / light(본문 텍스트) — 모두 다크모드 기준 */
+@theme {
+   --color-stock-bg: #1a1a2e;
+   --color-stock-card: #0d2137;
+   --color-stock-border: #0f3460;
+   --color-stock-cyan: #61dafb;
+   --color-stock-green: #64ffda;
+   --color-stock-red: #e94560;
+   --color-stock-muted: #8892b0;
+   --color-stock-light: #ccd6f6;
+}
+
+/* 💡 전광판 흐르는 애니메이션: 내용을 2벌 복제해두고(TickerBoard 참고)
+   전체를 왼쪽으로 -50%(= 정확히 1벌 너비)까지 밀면, 끝나는 순간의 모습이
+   시작 모습과 똑같아서 무한 반복해도 이어지는 것처럼 보인다 */
+@keyframes ticker-scroll {
+   from {
+      transform: translateX(0);
+   }
+
+   to {
+      transform: translateX(-50%);
+   }
+}
+
+/* 💡 스켈레톤 shimmer: 단순 pulse 대신 빛이 스치는 느낌으로,
+   실제 카드 로딩을 기다리는 느낌을 더 자연스럽게 표현한다.
+   (배경 그라디언트의 위치를 왼쪽 밖 → 오른쪽 밖으로 이동시키는 원리 — Skeleton.jsx의
+   bg-[length:200%_100%] 와 세트로 동작) */
+@keyframes shimmer {
+   from {
+      background-position: -200% 0;
+   }
+
+   to {
+      background-position: 200% 0;
+   }
+}
+
+/* 💡 데이터가 로드된 카드가 스켈레톤에서 자연스럽게 전환되도록 하는 등장 애니메이션
+   (투명+살짝 아래 → 불투명+제자리, 0.25초. 카드에서 animate-[fade-in-up_...]으로 사용) */
+@keyframes fade-in-up {
+   from {
+      opacity: 0;
+      transform: translateY(4px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+/* 💡 전정 장애 등으로 모션에 민감한 사용자를 위해, OS에서 "동작 줄이기"를 켠 경우
+   전광판 스크롤/셰이머/등장 애니메이션을 전부 사실상 즉시-완료로 처리한다.
+   (0.01ms = 애니메이션을 없애는 대신 "순식간에 끝내는" 표준 테크닉 — display 깨짐 방지) */
+@media (prefers-reduced-motion: reduce) {
+   *,
+   *::before,
+   *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+   }
+}
