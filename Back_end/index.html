@@ -1014,8 +1014,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제를 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 미리 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-08-25</span>
-      <span>📅 수업 진도 16일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-08-28</span>
+      <span>📅 수업 진도 19일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -1076,7 +1076,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">16</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">18</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -5585,12 +5585,12 @@ java.lang.NumberFormatException: For input string: "오"
 <article class="note-card" id="class-day16">
   <div class="note-head">
     <span class="note-num">16일차</span>
-    <h3>2026-08-25 · 람다식 · Stream API · 파일 IO(바이트 단위 복사)</h3>
-    <div class="note-tags"><span class="tag">람다식</span><span class="tag">함수형 인터페이스</span><span class="tag">Stream</span><span class="tag">메서드 참조</span><span class="tag">병렬 스트림</span><span class="tag">InputStream/OutputStream</span></div>
+    <h3>2026-08-25 · 람다식 · Stream API · 파일 IO 심화 · 스레드 기초</h3>
+    <div class="note-tags"><span class="tag">람다식</span><span class="tag">함수형 인터페이스</span><span class="tag">Stream</span><span class="tag">메서드 참조</span><span class="tag">병렬 스트림</span><span class="tag">보조 스트림</span><span class="tag">try-with-resources</span><span class="tag">Thread</span></div>
   </div>
   <div class="note-body">
-    <p class="note-summary"><span class="summary-label">한 줄 요약</span>15일차 예외 처리에 이어 <b>짧게 쓰고, 읽고 쓰고, 동시에</b> 처리하는 문법을 훑은 날 — 익명 클래스 한 줄짜리를 <b>람다식</b>으로 줄이는 법, <code>List</code>를 <b>Stream</b>으로 바꿔 필터링·정렬·변환을 파이프라인으로 잇는 법(일반 스트림과 병렬 스트림 비교 포함), <b><code>InputStream</code>/<code>OutputStream</code>으로 파일을 1바이트씩 읽고 쓰는</b> 가장 기본적인 파일 복사를 실습했다.</p>
-    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>람다식은 <b>"포장지를 벗긴 코드"</b>입니다 — 클래스 이름, 메서드 이름, <code>@Override</code>까지 다 떼어내고 <b>"이 값들 받으면 이렇게 계산해"</b>만 남긴 겁니다. Stream은 <b>컨베이어 벨트</b>예요 — 리스트를 벨트에 올리고, 거르고(<code>filter</code>) 줄 세우고(<code>sorted</code>) 모양을 바꾸는(<code>map</code>) 공정을 죽 이어 붙인 뒤 마지막에 한 번에 꺼냅니다(<code>forEach</code>·<code>collect</code>). 딱 한 번만 쓸 수 있는 <b>일회용 벨트</b>라는 게 배열·리스트와 다른 점입니다.</p>
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>15일차 예외 처리에 이어 <b>짧게 쓰고, 읽고 쓰고, 동시에</b> 처리하는 문법을 훑은 날 — 익명 클래스 한 줄짜리를 <b>람다식</b>으로 줄이는 법, <code>List</code>를 <b>Stream</b>으로 바꿔 필터링·정렬·변환을 파이프라인으로 잇는 법(일반 스트림과 병렬 스트림 비교 포함)을 배웠고, <b>파일 IO를 try-with-resources로 정리한 뒤 보조 스트림(버퍼·데이터·문자 변환)까지 얹어 이미지 복사와 키보드 다이어리를 만들었으며</b>, 마지막엔 <code>Thread</code>를 <code>start()</code>해서 <b>여러 흐름이 동시에 실행되는 것</b>을 처음 눈으로 확인했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>람다식은 <b>"포장지를 벗긴 코드"</b>입니다 — 클래스 이름, 메서드 이름, <code>@Override</code>까지 다 떼어내고 <b>"이 값들 받으면 이렇게 계산해"</b>만 남긴 겁니다. Stream은 <b>컨베이어 벨트</b>고, IO의 보조 스트림은 <b>수도관에 필터를 하나씩 끼우는 것</b>입니다(문자로 바꾸는 필터, 모아서 보내는 필터...). 스레드는 <b>한 사람이 여러 일을 번갈아 하는 게 아니라 진짜 여러 사람이 동시에 일하는 것</b>이에요 — <code>순차 실행</code>은 "안안안안안녕녕녕녕녕"처럼 한 사람이 다 끝내고 다음으로 넘어가지만, <code>Thread</code>를 쓰면 "안녕녕안녕안..."처럼 두 사람이 진짜 동시에 떠듭니다.</p>
     <div class="note-concept">
       <div class="concept-block">
         <h4>① D1_LabdaTest — 익명 클래스 → 람다식 → 더 짧은 람다식</h4>
@@ -5605,8 +5605,24 @@ java.lang.NumberFormatException: For input string: "오"
         <p><code>list3.stream().forEach(...)</code>는 <b>전부 <code>main</code> 스레드</b>에서 순서대로 실행되지만, <code>list3.parallelStream().forEach(...)</code>는 <b><code>ForkJoinPool</code>의 여러 워커 스레드로 나뉘어 동시에</b> 처리됩니다 — 그래서 출력 순서가 <b>원본 리스트 순서와 달라질 수 있습니다</b>(13일차 <code>HashSet</code>처럼 "순서가 보장되지 않는" 또 다른 예). 데이터가 많고 순서가 중요하지 않을 때는 병렬 스트림이 빠를 수 있지만, <b>순서를 반드시 지켜야 하는 작업에는 적합하지 않다</b>는 게 이 비교의 핵심입니다.</p>
       </div>
       <div class="concept-block">
-        <h4>④ D3_IOTest — <code>InputStream</code>/<code>OutputStream</code>으로 파일을 1바이트씩 복사하기</h4>
-        <p><code>in.read()</code>는 <b>한 번에 딱 1바이트만</b> 읽고, 더 읽을 게 없으면 <code>-1</code>을 반환합니다 — 그래서 <code>while ((i = in.read()) != -1)</code>로 <b>반복해서 끝까지</b> 읽어야 합니다. 읽은 바이트를 그 자리에서 <code>out.write(i)</code>로 바로 써서 <b>한 파일을 다른 파일로 그대로 복사</b>합니다. <code>finally</code>에서 <b><code>out</code>을 먼저, <code>in</code>을 나중에 닫는 순서</b>도 주석에 명시되어 있는데, <b>나중에 연 자원(또는 마지막까지 데이터가 흘러가는 목적지)부터 닫는 게 안전</b>하기 때문입니다 — 15일차 try-with-resources를 쓰면 이 <code>finally</code> 블록 전체가 사라진다는 것도 비교해 볼 만합니다. → <a href="#util-09">🛠️ 09. 입출력(IO) 개요</a> · <a href="#util-10">🛠️ 10. InputStream · OutputStream과 close()</a></p>
+        <h4>④ D3_IOTest.test01 — 그대로지만 <code>try-with-resources</code>로 정리</h4>
+        <p>어제(15일차)와 <b>같은 1바이트씩 파일 복사</b> 로직인데, <code>InputStream</code>·<code>OutputStream</code>을 <code>try(...)</code> 괄호 안에서 선언하도록 고쳤습니다. 그 결과 <b><code>finally</code>에서 <code>close()</code>를 직접 호출하던 코드 블록 전체가 사라졌습니다</b> — <code>in.read()</code>는 여전히 <b>1바이트씩만</b> 읽고 더 읽을 게 없으면 <code>-1</code>을 반환하므로 <code>while ((i = in.read()) != -1)</code>로 반복하는 구조는 그대로입니다. → <a href="#util-09">🛠️ 09. 입출력(IO) 개요</a> · <a href="#util-10">🛠️ 10. InputStream · OutputStream과 close()</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>⑤ 보조 스트림 3종 — 버퍼(BufferedWriter) · 데이터(DataOutputStream) · 문자 변환(OutputStreamWriter)</h4>
+        <p><code>test02</code>는 <code>FileOutputStream</code>(바이트) 위에 <code>OutputStreamWriter</code>(문자로 변환, <code>"utf-8"</code> 지정)를 끼우고, 그 위에 다시 <code>BufferedWriter</code>(8KB씩 모았다가 한 번에 출력)를 끼웠습니다 — <b>파이프에 필터를 겹겹이 씌우는 구조</b>입니다. 주석에 남긴 3단계 비교가 핵심입니다: ① 원시 스트림(<code>out.write(s.getBytes())</code>)은 문자열을 직접 바이트로 쪼개야 하고, ② <code>Writer</code>를 끼우면 문자 단위로 알아서 처리되며, ③ <code>Buffered</code>까지 끼우면 <b>한 글자마다 출력하지 않고 모아서 출력해 성능이 좋아집니다</b>. <code>test02_2</code>의 <code>DataOutputStream</code>은 <b>기본 데이터 타입을 그대로 이진 데이터로</b> 내보내는 필터로, 자바 프로그램끼리 데이터를 주고받을 때 씁니다. → <a href="#util-10">🛠️ 10. InputStream · OutputStream과 close()</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>⑥ test03 — 이미지를 10바이트씩 묶어서 복사</h4>
+        <p>1바이트씩 읽던 <code>test01</code>과 달리 <code>byte[] b = new byte[10];</code>으로 <b>한 번에 10바이트씩</b> 읽습니다. 여기서 <code>in.read(b)</code>가 반환하는 <code>i</code>는 <b>"실제로 읽은 바이트 개수"</b>인데, 파일 끝에 다다르면 배열이 10칸을 다 못 채울 수 있습니다. 이때 <code>out.write(b)</code>(배열 전체를 쓰기)로 하면 <b>이전에 읽었던 찌꺼기 데이터까지 같이 써질 수 있어</b> 위험하고, <code>out.write(b, 0, i)</code>(딱 읽은 개수만큼만 쓰기)가 안전합니다 — 주석에도 "안정적(권장)"이라고 정확히 짚어 뒀습니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>⑦ test04 · test05 — 콘솔 입출력과 "다이어리" 과제(이어쓰기 모드)</h4>
+        <p><code>InputStreamReader(System.in, "MS949")</code>로 <b>키보드 입력을 문자로</b> 바꾸는데, 인코딩을 <code>"MS949"</code>로 명시한 이유는 <b>윈도우 콘솔의 기본 한글 인코딩</b>이 MS949이기 때문입니다(UTF-8로 읽으면 한글이 깨집니다). <code>out.flush()</code>는 <b>버퍼에 쌓인 걸 강제로 내보내는 것</b>인데, 콘솔 출력은 버퍼가 다 차기 전엔 안 나갈 수 있어서 매번 <code>flush()</code>를 호출합니다. 과제로 만든 <b>다이어리(test05)</b>는 <code>BufferedReader.readLine()</code>으로 <b>한 줄씩</b> 입력받아 <code>"exit"</code>가 나올 때까지 파일에 계속 씁니다 — <code>new FileOutputStream(경로, true)</code>의 <b>두 번째 인자 <code>true</code>가 "이어쓰기 모드"</b>라서, 프로그램을 다시 실행해도 <b>기존 내용 뒤에 새 줄이 추가</b>됩니다(덮어쓰지 않음). → <a href="#basic-11">☕ Scanner</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>⑧ D4_ThreadTest — <code>start()</code>로 진짜 동시에 실행하기</h4>
+        <p>먼저 <code>for</code>문 두 개를 순서대로 돌려 "안"을 5번, "녕"을 5번 찍었습니다 — <b>순차 실행이라 절대 섞이지 않습니다</b>(<code>안안안안안녕녕녕녕녕</code>). 그다음 같은 일을 하는 코드를 <b>익명 클래스로 <code>Thread</code>를 상속</b>해서 만들고(<code>new Thread() { @Override public void run() {...} }</code>), <code>t1.start()</code>·<code>t2.start()</code>를 호출하니 <b>"안"과 "녕"이 실행될 때마다 뒤섞여 찍힙니다</b> — 두 작업이 진짜 동시에(정확히는 아주 빠르게 번갈아) 실행된다는 증거입니다. 각 스레드 안의 <code>Thread.sleep(500)</code>은 <b>다음 글자를 찍기 전 0.5초씩 쉬는 것</b>으로, 다른 스레드가 끼어들 틈을 일부러 만들어 인터리빙을 눈에 잘 띄게 한 장치입니다. 그리고 <b><code>run()</code>을 직접 호출하면 그냥 평범한 메서드 호출</b>이라 스레드가 새로 생기지 않는다는 주석도 오늘의 함정 포인트입니다 — 반드시 <code>start()</code>를 불러야 합니다. → <a href="#util-11">🛠️ 11. 스레드(Thread)</a></p>
       </div>
     </div>
     <div class="note-code">
@@ -5737,7 +5753,7 @@ B-ForkJoinPool.commonPool-worker-1</pre>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D3_IOTest.java (수업 실습 원본 — 파일을 1바이트씩 복사)</span>
+        <span class="code-file">D3_IOTest.java (수업 실습 원본 — test01·test03·test05만 발췌, test02·02_2·04는 개념 설명으로 대체)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">package hk.edu20260825.day16;
@@ -5746,55 +5762,152 @@ import java.io.*;
 
 public class D3_IOTest {
     public static void main(String[] args) {
-        test01();
+        // test01(); test02(); test02_2(); test03(); test04();
+        test05();
     }
 
+    // try-with-resources 문법 사용으로 finally 생략가능
     private static void test01() {
-        InputStream in = null;   // 입력 스트림
-        OutputStream out = null; // 출력 스트림
-
-        try {
-            in = new FileInputStream(".../temp/test.txt");
-            out = new FileOutputStream(".../temp/test2.txt");
-
+        try (
+                InputStream in = new FileInputStream(".../temp/test.txt");
+                OutputStream out = new FileOutputStream(".../temp/test2.txt");) {
             int i = 0;
-            while ((i = in.read()) != -1) { // read()는 1바이트만 읽고 끝남 -&gt; while로 반복
-                System.out.println(i);      // 읽을게 없으면 -1을 리턴한다
-                out.write(i);                // 파일출력(byte 단위로)
+            while ((i = in.read()) != -1) {
+                System.out.println(i);
+                out.write(i);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // 마지막에 연(또는 마지막까지 쓰는) 스트림부터 닫는다
-                if (out != null) out.close();
-                if (in != null) in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        }
+    }
+
+    // 한번에 읽을 때 크기를 설정해서 읽고 쓰기(이미지 파일 복사)
+    private static void test03() {
+        try (
+                InputStream in = new FileInputStream(".../temp/images.jpg");
+                OutputStream out = new FileOutputStream(".../temp/copy.jpg");) {
+            byte[] b = new byte[10]; // 10바이트 단위로 읽기
+            int i = 0;
+            while ((i = in.read(b)) != -1) { // i에 저장되는 값은 읽은 개수
+                // out.write(b); // 그전에 읽었던 배열의 데이터가 남아있을수있음
+                out.write(b, 0, i); // 읽은 개수만큼만 출력 -&gt; 안정적(권장)
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 과제: 다이어리 구현하기 — 한 줄 입력하고 엔터 --&gt; 메모장에 이어서 출력, "exit" 입력 시 종료
+    private static void test05() {
+        try (
+                InputStreamReader in = new InputStreamReader(System.in, "MS949");
+                BufferedReader br = new BufferedReader(in);
+                // true: 기존 내용 뒤에 이어쓰기
+                FileOutputStream out = new FileOutputStream(".../temp/test5.txt", true);
+                OutputStreamWriter ow = new OutputStreamWriter(out, "utf-8");
+                BufferedWriter bw = new BufferedWriter(ow);) {
+            System.out.println("입력시작. (exit 입력 시 종료)");
+            String msg = "";
+            while ((msg = br.readLine()) != null) {
+                if (msg.equals("exit")) {
+                    System.out.println("종료합니다.");
+                    break;
+                }
+                bw.write(msg);
+                bw.newLine();
+                bw.flush(); // 버퍼 비우기(파일에 즉시 기록)
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }</code></pre>
     </div>
     <details class="run-output">
-      <summary><span class="run-tag">실행 결과</span>test.txt("예시 텍스트 입니다.\n두번째 예시 텍스트 입니다.")를 복사 — 앞 10바이트만 발췌(전체 66줄)</summary>
+      <summary><span class="run-tag">실행 결과</span>test05 다이어리에 "오늘은 람다와 스트림을 배웠다" → "다음엔 스레드를 배운다" → "exit" 순으로 입력</summary>
       <pre>
-236
-152
-136
-236
-139
-156
-32
-237
-133
-141
-...(총 66개 바이트, test2.txt로 그대로 복사됨)</pre>
-      <div class="run-note">한글 한 글자는 UTF-8에서 <b>보통 3바이트</b>라서, 짧은 두 줄짜리 텍스트도 바이트 값이 수십 개 찍힙니다(공백은 <code>32</code>, 줄바꿈은 별도 코드로 찍힙니다). 실행 후 <code>test2.txt</code>를 열어 보면 <code>test.txt</code>와 <b>내용이 완전히 똑같습니다</b> — 바이트를 하나씩 읽어서 그 자리에서 그대로 써넣었기 때문입니다.</div>
+입력시작. (exit 입력 시 종료)
+종료합니다.
+
+--- test5.txt (실행 전) ---
+안녕하세요
+테스트 입력
+입니다.
+
+--- test5.txt (실행 후) ---
+안녕하세요
+테스트 입력
+입니다.
+오늘은 람다와 스트림을 배웠다
+다음엔 스레드를 배운다</pre>
+      <div class="run-note">콘솔에는 입력한 내용이 그대로 안 보이고(그냥 키보드 입력을 받는 코드라 에코가 없습니다) "입력시작"과 "종료합니다"만 찍힙니다. 진짜 확인할 곳은 <code>test5.txt</code> — <b>실행 전 내용은 그대로 남아 있고 새로 입력한 두 줄만 뒤에 추가</b>됐습니다. <code>true</code> 옵션(이어쓰기 모드) 없이 <code>FileOutputStream</code>을 열었다면 이전 내용이 전부 지워지고 새 내용으로 덮어써졌을 것입니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D4_ThreadTest.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260825.day16;
+
+public class D4_ThreadTest {
+    public static void main(String[] args) {
+        // "안", "녕" 번갈아 가며 출력하기(순차 실행)
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.print("안");
+        }
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.print("녕");
+        }
+        System.out.println();
+        System.out.println("===============");
+
+        // 작업단위1
+        Thread t1 = new Thread() { // 익명클래스 방식으로...
+            @Override
+            public void run() {
+                for (int i = 0; i &lt; 5; i++) {
+                    System.out.print("안");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        // 작업단위2
+        Thread t2 = new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i &lt; 5; i++) {
+                    System.out.print("녕");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        // Thread의 run()을 실행시켜주는 메서드: start() --&gt; 실행대기 상태로 보냄
+        // 주의: .run()을 직접 호출하면 쓰레드가 생성되지 않는다!
+        t1.start();
+        t2.start();
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기(스레드 인터리빙 순서는 실행마다 달라질 수 있습니다)</summary>
+      <pre>
+안안안안안녕녕녕녕녕
+===============
+안녕녕안녕안녕안녕안</pre>
+      <div class="run-note">첫 줄은 <b>순차 실행</b>이라 "안"이 다 끝난 뒤에야 "녕"이 시작됩니다. 구분선 아래는 <code>t1</code>·<code>t2</code>를 <code>start()</code>한 결과인데, <b>"안"과 "녕"이 뒤섞여</b> 찍힙니다 — 두 스레드가 각자 0.5초씩 쉬며 번갈아 실행되기 때문입니다. 이 순서는 OS 스케줄러가 정하는 것이라 <b>실행할 때마다 조금씩 달라질 수 있습니다</b>.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">16일차에 배운 것 (시험 대비 체크리스트)</div>
@@ -5807,14 +5920,696 @@ public class D3_IOTest {
         <li><code>parallelStream()</code>은 <b>여러 스레드로 나눠 처리</b>해 빠를 수 있지만 <b>순서를 보장하지 않는다</b>.</li>
         <li><code>InputStream.read()</code>는 <b>1바이트씩만</b> 읽으며, 더 읽을 게 없으면 <code>-1</code>을 반환한다 — 그래서 <code>while</code>로 반복해야 한다.</li>
         <li>자원은 <b>열었던 순서의 반대(또는 나중까지 쓰는 것부터)</b>로 닫는 것이 안전하다 — try-with-resources를 쓰면 이 처리가 자동화된다.</li>
+        <li>보조 스트림(<code>Writer</code>·<code>Buffered</code>·<code>Data</code>)은 <b>원시 스트림을 감싸서 기능을 추가</b>한다(문자 변환, 성능 향상, 이진 데이터 처리).</li>
+        <li>한 번에 여러 바이트를 읽을 땐(<code>read(byte[])</code>) <b>실제로 읽은 개수만큼만</b> 써야 한다(<code>write(b, 0, i)</code>) — 배열 전체를 쓰면 이전 데이터가 섞일 수 있다.</li>
+        <li><code>FileOutputStream(경로, true)</code>의 <b><code>true</code>는 이어쓰기 모드</b> — 생략하면(기본값 false) 기존 내용을 덮어쓴다.</li>
+        <li>스레드는 <code>Thread</code>를 상속하거나 <code>Runnable</code>을 구현해서 만들고, <b><code>run()</code>이 아니라 반드시 <code>start()</code>를 호출</b>해야 새 스레드가 생긴다.</li>
+        <li>스레드를 <code>start()</code>하면 <b>여러 작업이 번갈아(인터리빙) 실행</b>되며, 그 순서는 실행할 때마다 달라질 수 있다.</li>
       </ul>
     </div>
-    <div class="note-tip"><span class="tip-label">TIP</span><code>D2_StreamTest</code>의 <code>Arrays.asList(...)</code>로 만든 <code>list</code>는 <b>크기가 고정</b>이라 <code>add()</code>·<code>remove()</code>는 못 쓰지만 <code>set()</code>은 됩니다(배열을 감싼 것이라 그렇습니다) — <code>List.of(...)</code>로 만든 <code>list3</code>은 그보다 더 엄격한 <b>완전 불변</b>이라 <code>set()</code>조차 안 됩니다. 둘 다 "<code>List</code>인데 왜 <code>add</code>가 안 되지?"라는 의문이 들 수 있는 지점이라 구분해서 기억해 두면 좋습니다. 그리고 <code>D3_IOTest</code>는 <b>절대 경로를 코드에 직접 박아 뒀는데</b>, 이런 코드를 다른 컴퓨터에서 그대로 돌리면 경로가 달라 <code>FileNotFoundException</code>이 납니다 — 실전에서는 상대 경로나 클래스패스 기준 경로를 쓰는 게 안전합니다.</div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>D2_StreamTest</code>의 <code>Arrays.asList(...)</code>로 만든 <code>list</code>는 <b>크기가 고정</b>이라 <code>add()</code>·<code>remove()</code>는 못 쓰지만 <code>set()</code>은 됩니다(배열을 감싼 것이라 그렇습니다) — <code>List.of(...)</code>로 만든 <code>list3</code>은 그보다 더 엄격한 <b>완전 불변</b>이라 <code>set()</code>조차 안 됩니다. <code>D3_IOTest.test04</code>·<code>test05</code>가 <code>InputStreamReader(System.in, "MS949")</code>로 인코딩을 명시하는 이유도 기억해 두세요 — <b>운영체제 콘솔의 기본 인코딩과 맞춰야</b> 한글이 안 깨집니다(리눅스 서버 콘솔은 보통 UTF-8이라 상황에 따라 인코딩을 바꿔야 할 수도 있습니다). 그리고 <code>D4_ThreadTest</code>의 <code>Thread.sleep(500)</code>은 <b>일부러 넣은 지연</b>입니다 — 없으면 한 스레드가 너무 빨리 끝나 버려서 인터리빙이 잘 안 보일 수 있습니다.</div>
     <div class="note-files">실습 파일:
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D1_ILambda.java" target="_blank" rel="noopener">D1_ILambda.java</a> ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D1_LabdaTest.java" target="_blank" rel="noopener">D1_LabdaTest.java</a> ·
       <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D2_StreamTest.java" target="_blank" rel="noopener">D2_StreamTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D3_IOTest.java" target="_blank" rel="noopener">D3_IOTest.java</a>
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D3_IOTest.java" target="_blank" rel="noopener">D3_IOTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D4_ThreadTest.java" target="_blank" rel="noopener">D4_ThreadTest.java</a>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day18">
+  <div class="note-head">
+    <span class="note-num">18일차</span>
+    <h3>2026-08-27 · 스레드 생성 2가지 · 동기화(synchronized) · 생산자-소비자 · TCP 기초</h3>
+    <div class="note-tags"><span class="tag">Runnable</span><span class="tag">Thread 상속</span><span class="tag">우선순위</span><span class="tag">synchronized</span><span class="tag">wait/notify</span><span class="tag">Socket</span><span class="tag">ServerSocket</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>16일차 스레드 맛보기에 이어 <b><code>Runnable</code> 구현과 <code>Thread</code> 상속 두 가지 생성 방식을 비교</b>하고 우선순위를 지정해 봤고, 여러 스레드가 <b>같은 객체를 동시에 건드릴 때 생기는 문제를 <code>synchronized</code>로 막는 법</b>과 <b><code>wait()</code>/<code>notifyAll()</code>로 빵 만드는 사람과 먹는 사람을 정확히 번갈아 실행시키는 생산자-소비자 패턴</b>을 실습했으며, 마지막엔 <code>Socket</code>·<code>ServerSocket</code>으로 <b>가장 기본적인 TCP 클라이언트-서버 대화</b>를 완성해 학습 여정의 마지막 단계(네트워크)에 들어섰다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오늘은 <b>여러 사람이 같이 일할 때 생기는 문제와 그 해결책</b>을 배운 날입니다. <code>synchronized</code>는 <b>"이 냄비 쓰는 동안 다른 사람은 손대지 마"</b>라고 잠그는 것이고, 생산자-소비자 패턴은 <b>빵집 진열대</b>와 같아요 — 진열대가 꽉 차면 만드는 사람이 잠깐 멈추고(<code>wait</code>), 손님이 하나 사 가면 다시 만들기 시작합니다(<code>notifyAll</code>). TCP 소켓은 <b>두 프로그램 사이에 놓인 전화선</b>이고, 서버는 <b>전화를 받을 준비를 하고 기다리는 쪽</b>, 클라이언트는 <b>그 번호로 거는 쪽</b>입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① Runnable 구현 vs Thread 상속 — 두 가지 생성법과 우선순위</h4>
+        <p><code>D1_RunableTest implements Runnable</code>은 <code>run()</code>만 구현한 뒤 <code>new Thread(runObj)</code>로 <b>작업 내용과 스레드를 분리</b>해서 씁니다. <code>D1_ThreadInheriTest extends Thread</code>는 <code>Thread</code> 자체를 상속해 <code>new D1_ThreadInheriTest()</code>로 바로 스레드가 됩니다(11일차의 "다른 클래스도 상속해야 한다면 <code>Runnable</code>을 써야 한다"는 이유가 여기서 실감 납니다 — 자바는 단일 상속이라 <code>Thread</code>를 상속하면 다른 클래스를 상속 못 하니까요). <code>tr1.setPriority(Thread.MAX_PRIORITY)</code>·<code>tr2.setPriority(Thread.MIN_PRIORITY)</code>로 <b>우선순위(1~10)</b>를 다르게 줬는데, 실제 실행 결과를 보면 <b>우선순위가 높다고 항상 먼저 끝나는 건 아니고</b> "더 자주 스케줄링될 가능성이 높다" 정도로 이해하는 게 정확합니다 — OS 스케줄러가 최종 결정을 하기 때문입니다. → <a href="#util-11">🛠️ 11. 스레드(Thread)</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② D2_ThreadSync — 공유 객체를 여러 스레드가 건드릴 때</h4>
+        <p>정적 필드 <code>StringBuffer sf</code>를 <code>tr1</code>·<code>tr2</code> 두 스레드가 <b>동시에</b> <code>sbTest("A")</code>·<code>sbTest("B")</code>로 각각 1000번씩 <code>append</code>합니다. 결과는 두 스레드 모두 <b>정확히 2000</b>을 출력했는데, 이건 <code>StringBuffer</code>가 <b>메서드 안에 이미 <code>synchronized</code>가 걸려 있어 스레드에 안전</b>하기 때문입니다(15일차에 다룬 "StringBuilder는 빠르지만 동기화가 없고, StringBuffer는 느리지만 안전하다"는 차이가 실전에서 확인된 셈입니다). <code>ShareObject.print()</code>를 감싸는 <code>synchronized(so) { ... }</code> 블록은 <b>"이 객체를 쓰는 동안 다른 스레드는 못 들어온다"</b>를 명시적으로 거는 방법입니다. → <a href="#oop-15">🧱 15. StringBuilder</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ D3_Cake — <code>wait()</code>/<code>notifyAll()</code>로 만드는 사람·먹는 사람 정확히 맞추기</h4>
+        <p><code>D3_CakePlate</code>는 <code>breadCount</code> 하나를 두 스레드(<code>D3_CakeMaker</code>·<code>D3_CakeEater</code>)가 공유합니다. <code>makeBread()</code>는 <b>10개가 되면</b> <code>wait()</code>으로 <b>자기 자신을 잠재우고</b>, <code>eatBread()</code>는 <b>0개가 되면</b> 마찬가지로 <code>wait()</code>합니다. 둘 다 작업을 하나 마칠 때마다 <code>notifyAll()</code>로 <b>기다리고 있던 다른 스레드를 깨웁니다</b>. 두 메서드 모두 <code>synchronized</code>인 이유는 <b><code>wait()</code>/<code>notifyAll()</code>이 반드시 동기화된 영역 안에서만 호출</b>될 수 있기 때문입니다. 실제로 돌려 보면 <b>만드는 쪽이 10개까지 채우고 멈췄다가, 먹는 쪽이 0개까지 비우고 멈추는 게 정확히 반복</b>됩니다 — 대표적인 생산자-소비자(Producer-Consumer) 패턴입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>④ D4_TCP — 서버는 기다리고, 클라이언트는 건다</h4>
+        <p><code>ServerSocket(9595)</code>로 <b>9595번 포트에 문을 열어 두고</b> <code>accept()</code>에서 <b>클라이언트가 올 때까지 멈춰서 기다립니다</b>(블로킹). 클라이언트가 <code>new Socket("localhost", 9595)</code>로 접속하면 <code>accept()</code>가 그 연결을 담은 <code>Socket</code>을 반환하고, 이제 서버·클라이언트 둘 다 <code>PrintWriter</code>(보내기)와 <code>BufferedReader</code>(받기)로 <b>같은 소켓을 통해 문장을 주고받습니다</b>. 서버의 <code>while ((inputLine = in.readLine()) != null)</code>은 <b>클라이언트가 연결을 끊기 전까지 계속 메시지를 받는</b> 구조입니다. 다만 이 서버는 <code>accept()</code>가 <b>한 번에 클라이언트 하나만</b> 처리할 수 있는 한계가 있는데, 이걸 스레드로 해결하는 게 19일차입니다. → <a href="#net-06">🌐 06. TCP/IP 소켓 프로그래밍</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_RunableTest.java + D1_ThreadInheriTest.java + D1_ThreadMain.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260827.day18;
+
+public class D1_RunableTest implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 50; i++) {
+            System.out.println("나는 Runnable을 구현한 스레드다");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class D1_ThreadInheriTest extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 50; i++) {
+            System.out.println("나는 Thread를 상속받은 스레드다");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class D1_ThreadMain {
+    public static void main(String[] args) {
+        // 1. Runnable을 구현
+        Runnable runObj = new D1_RunableTest();
+        Thread tr1 = new Thread(runObj);
+        tr1.start();
+        tr1.setPriority(Thread.MAX_PRIORITY); // 우선순위범위: 1~10까지
+
+        // 2. Thread 클래스 상속
+        Thread tr2 = new D1_ThreadInheriTest();
+        tr2.start();
+        tr2.setPriority(Thread.MIN_PRIORITY); // 가장 하위순위 설정
+
+        // 메인스레드
+        for (int i = 0; i &lt; 5; i++) {
+            System.out.println("나는 메인 스레드다");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>앞부분만 발췌(main 5회, 두 스레드 각 50회 반복이라 전체는 100줄 이상)</summary>
+      <pre>
+나는 메인 스레드다
+나는 Runnable을 구현한 스레드다
+나는 Thread를 상속받은 스레드다
+나는 Thread를 상속받은 스레드다
+나는 메인 스레드다
+나는 Runnable을 구현한 스레드다
+나는 메인 스레드다
+나는 Runnable을 구현한 스레드다
+나는 Thread를 상속받은 스레드다
+...(이하 반복, 세 스레드가 뒤섞여 출력됨)</pre>
+      <div class="run-note">메인 스레드는 5번만 찍고 먼저 끝나지만, <code>tr1</code>·<code>tr2</code>는 각각 50번씩 계속 찍습니다. 어느 줄이 먼저 나올지는 <b>우선순위와 상관없이 실행마다 달라질 수 있습니다</b> — <code>setPriority</code>는 "힌트"일 뿐 확정된 순서를 보장하지 않습니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_ThreadSync.java (수업 실습 원본 — sbTest 부분)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260827.day18;
+
+public class D2_ThreadSync {
+    public static StringBuilder sb = new StringBuilder();
+    public static StringBuffer sf = new StringBuffer();
+
+    public void sbTest(String s) {
+        for (int i = 0; i &lt; 1000; i++) {
+            sf.append(s);
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(sf.length()); // 1000인지 확인
+    }
+
+    public static void main(String[] args) {
+        D2_ThreadSync d2 = new D2_ThreadSync();
+        Thread tr1 = new Thread() {
+            @Override
+            public void run() {
+                d2.sbTest("A"); // A를 1,000번 추가
+            }
+        };
+        Thread tr2 = new Thread() {
+            @Override
+            public void run() {
+                d2.sbTest("B"); // B를 1,000번 추가
+            }
+        };
+        tr1.start();
+        tr2.start();
+    }
+
+    // 내부클래스: synchronized로 감싼 공유 자원 접근
+    class ShareObject {
+        public void print(String title) {
+            for (int i = 0; i &lt; 10; i++) {
+                System.out.println(title);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실제로 돌려 본 출력 보기</summary>
+      <pre>
+2000
+2000</pre>
+      <div class="run-note"><code>tr1</code>·<code>tr2</code>가 <b>같은</b> 정적 필드 <code>sf</code>에 각자 1000번씩 <code>append</code>했으니 최종 길이는 <b>2000</b>이어야 하는데, 두 스레드 모두 정확히 2000을 출력합니다 — <code>StringBuffer</code>의 내부 메서드들이 이미 <code>synchronized</code>라서 <b>두 스레드가 동시에 써도 데이터가 깨지지 않습니다</b>. 만약 <code>StringBuilder</code>(동기화 없음)로 같은 실험을 했다면 두 스레드의 쓰기가 겹치면서 <b>2000보다 작은 값</b>이 나올 수 있습니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D3_CakePlate.java + D3_CakeMaker.java + D3_CakeEater.java + D3_CakeMain.java (수업 실습 원본 — 생산자-소비자)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260827.day18;
+
+public class D3_CakePlate {
+    private int breadCount = 0;
+
+    // eatBread()가 10개 모두 소진(notifyAll) -&gt; wait()
+    // -&gt; makeBread()가 실행 10개 모두 만듦(notifyAll) -&gt; wait()
+    public synchronized void eatBread() {
+        if (breadCount &lt; 1) {
+            System.out.println("빵이 모자라서 기다려야 함");
+            try {
+                wait(); // 스레드를 일시정지
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        breadCount--;
+        System.out.println("빵을 1개 먹음. 총 " + breadCount + "개 남음");
+        notifyAll(); // 모든 스레드를 실행대기로 설정
+    }
+
+    public synchronized void makeBread() {
+        if (breadCount &gt;= 10) {
+            System.out.println("빵이 남아요!");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        breadCount++;
+        System.out.println("빵을 1개 더 만듦. 총 " + breadCount + "개");
+        notifyAll();
+    }
+}
+
+public class D3_CakeEater implements Runnable {
+    private D3_CakePlate cake;
+    public D3_CakeEater(D3_CakePlate cake) { this.cake = cake; }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 30; i++) cake.eatBread();
+    }
+}
+
+public class D3_CakeMaker implements Runnable {
+    private D3_CakePlate cake;
+    public D3_CakeMaker(D3_CakePlate cake) { this.cake = cake; }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 30; i++) cake.makeBread();
+    }
+}
+
+public class D3_CakeMain {
+    public static void main(String[] args) {
+        D3_CakePlate cake = new D3_CakePlate(); // 스레드들이 공유할 객체
+
+        D3_CakeEater eater = new D3_CakeEater(cake);
+        D3_CakeMaker maker = new D3_CakeMaker(cake);
+
+        Thread t1 = new Thread(eater);
+        Thread t2 = new Thread(maker);
+
+        t2.setPriority(10);
+        t1.setPriority(1);
+
+        t1.start();
+        t2.start();
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>앞부분만 발췌(30개씩 총 60번 오가는 전체 로그는 훨씬 깁니다)</summary>
+      <pre>
+빵이 모자라서 기다려야 함
+빵을 1개 더 만듦. 총 1개
+빵을 1개 더 만듦. 총 2개
+...(총 10개까지)
+빵을 1개 더 만듦. 총 10개
+빵이 남아요!
+빵을 1개 먹음. 총 9개 남음
+...(총 0개까지)
+빵을 1개 먹음. 총 0개 남음
+빵이 모자라서 기다려야 함
+빵을 1개 더 만듦. 총 1개
+...(이 패턴이 반복됨)</pre>
+      <div class="run-note">먹는 스레드가 먼저 시작돼 <code>breadCount</code>가 0이라 <b>바로 <code>wait()</code>로 잠듭니다</b>. 만드는 스레드(우선순위 10)가 10개를 채우면 <b>"빵이 남아요!"</b>로 스스로 멈추고, 그제야 먹는 스레드가 깨어나 0개까지 먹어치운 뒤 다시 잠듭니다 — <b>10개 만들고 → 10개 먹고를 정확히 번갈아 반복</b>하는 게 <code>wait()</code>/<code>notifyAll()</code>이 만든 결과입니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D4_TCPServer.java + D4_TCPClient.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260827.day18;
+
+public class D4_TCPServer {
+    public static void main(String[] args) {
+        try (
+                var serverSocket = new java.net.ServerSocket(9595);) {
+            System.out.println("서버가 클라이언트의 접속을 기다립니다...");
+            while (true) {
+                var clientSocket = serverSocket.accept(); // 접속할 때까지 대기(블로킹)
+                System.out.println("클라이언트 연결됨:" + clientSocket.getInetAddress().getHostName());
+
+                var out = new java.io.PrintWriter(clientSocket.getOutputStream(), true);
+                var in = new java.io.BufferedReader(
+                        new java.io.InputStreamReader(clientSocket.getInputStream()));
+
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    System.out.println("클라이언트 메시지:" + inputLine);
+                    out.println("메시지를 잘 전달받았습니다.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class D4_TCPClient {
+    public static void main(String[] args) {
+        try (
+                Socket socket = new Socket("localhost", 9595); // 요청 ip, port
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
+                BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in, "MS949"))) {
+            System.out.println("Client:Connetion to server...");
+            String inputLine;
+            while ((inputLine = userIn.readLine()) != null) {
+                out.println(inputLine);
+                System.out.println("서버에서 전달된 메시지:" + in.readLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>서버를 먼저 띄우고, 클라이언트에서 "안녕하세요" → "좋은 하루 되세요" 입력</summary>
+      <pre>
+[서버 콘솔]
+서버가 클라이언트의 접속을 기다립니다...
+클라이언트 연결됨:127.0.0.1
+클라이언트 메시지:안녕하세요
+클라이언트 메시지:좋은 하루 되세요
+
+[클라이언트 콘솔]
+Client:Connetion to server...
+서버에서 전달된 메시지:메시지를 잘 전달받았습니다.
+서버에서 전달된 메시지:메시지를 잘 전달받았습니다.</pre>
+      <div class="run-note">서버와 클라이언트를 <b>각각 다른 콘솔에서 동시에</b> 실행해야 하는 실습입니다(서버를 먼저 띄우고 기다리게 한 뒤 클라이언트를 실행). 클라이언트가 한 줄 보낼 때마다 서버가 받아 콘솔에 찍고, 곧바로 "메시지를 잘 전달받았습니다."를 돌려보내는 <b>왕복(요청-응답)</b> 구조가 그대로 확인됩니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">18일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li><code>Runnable</code> 구현은 <b>작업과 스레드를 분리</b>(다른 클래스 상속 중이어도 사용 가능), <code>Thread</code> 상속은 <b>간결하지만 다른 클래스를 상속 못 함</b>.</li>
+        <li><code>setPriority(1~10)</code>는 <b>힌트일 뿐</b> — 실행 순서를 확정 짓지 않는다.</li>
+        <li><code>StringBuffer</code>는 내부적으로 동기화되어 있어 <b>여러 스레드가 동시에 써도 안전</b>하지만, <code>StringBuilder</code>는 그렇지 않다.</li>
+        <li><code>synchronized</code>로 감싼 영역은 <b>한 번에 스레드 하나만</b> 들어갈 수 있다.</li>
+        <li><code>wait()</code>/<code>notifyAll()</code>은 <b>반드시 <code>synchronized</code> 블록/메서드 안에서만</b> 호출할 수 있다.</li>
+        <li>생산자-소비자 패턴: <b>조건이 안 맞으면 <code>wait()</code>으로 잠들고, 작업이 끝나면 <code>notifyAll()</code>로 깨운다</b>.</li>
+        <li><code>ServerSocket.accept()</code>는 <b>클라이언트가 접속할 때까지 그 자리에서 멈춰 기다린다</b>(블로킹).</li>
+        <li>기본 TCP 서버는 <code>accept()</code>가 <b>한 번에 하나씩만</b> 처리 — 동시에 여러 클라이언트를 받으려면 스레드가 필요하다(19일차로 이어짐).</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span><code>D2_ThreadSync</code>의 <code>ShareObject.print()</code>를 실행하는 <code>trA</code>·<code>trB</code> 코드는 <code>// trA.start(); // trB.start();</code>로 <b>주석 처리되어 있어 실제로는 실행되지 않습니다</b> — <code>synchronized(so) { so.print(...) }</code> 문법 자체를 보여주기 위한 예시로 남겨 둔 코드입니다. 실제로 돌아간 건 <code>sbTest()</code> 쪽입니다. 그리고 <code>D3_CakeMain</code>에서 <code>t2.setPriority(10)</code>(만드는 사람)·<code>t1.setPriority(1)</code>(먹는 사람)로 <b>일부러 만드는 쪽 우선순위를 높였는데도</b>, <code>wait()</code>/<code>notifyAll()</code> 로직이 <b>진짜로 순서를 강제</b>하기 때문에 우선순위와 무관하게 "10개 만들고 10개 먹고"가 정확히 지켜집니다 — 동기화 로직이 우선순위보다 훨씬 강한 규칙이라는 걸 보여주는 예입니다.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_RunableTest.java" target="_blank" rel="noopener">D1_RunableTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadInheriTest.java" target="_blank" rel="noopener">D1_ThreadInheriTest.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadMain.java" target="_blank" rel="noopener">D1_ThreadMain.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D2_ThreadSync.java" target="_blank" rel="noopener">D2_ThreadSync.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakePlate.java" target="_blank" rel="noopener">D3_CakePlate.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMaker.java" target="_blank" rel="noopener">D3_CakeMaker.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeEater.java" target="_blank" rel="noopener">D3_CakeEater.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMain.java" target="_blank" rel="noopener">D3_CakeMain.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPServer.java" target="_blank" rel="noopener">D4_TCPServer.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPClient.java" target="_blank" rel="noopener">D4_TCPClient.java</a>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="class-day19">
+  <div class="note-head">
+    <span class="note-num">19일차</span>
+    <h3>2026-08-28 · 멀티스레드 TCP 서버 · UDP 소켓 · 채팅 프로그램</h3>
+    <div class="note-tags"><span class="tag">멀티스레드 서버</span><span class="tag">ServerThread</span><span class="tag">DatagramSocket</span><span class="tag">DatagramPacket</span><span class="tag">브로드캐스트</span><span class="tag">synchronizedSet</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>18일차 TCP 서버의 "한 번에 클라이언트 하나만" 한계를 <b>접속마다 스레드를 하나씩 만들어</b> 풀었고, TCP와 대비되는 <b>UDP(연결 없이 패킷 하나씩 주고받기)</b>를 실습했으며, 마지막으로 두 가지를 합쳐 <b>여러 명이 동시에 접속해 대화하는 채팅 서버·클라이언트</b>를 완성해 <b>학습 여정 13단계(네트워크) 전체를 마무리</b>했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>18일차 서버가 <b>손님을 한 명씩만 받는 창구 하나짜리 가게</b>였다면, 오늘은 <b>손님이 올 때마다 새 직원을 배정하는 가게</b>로 바꿨습니다(멀티스레드 서버). UDP는 <b>등기 없는 일반 우편</b>이에요 — TCP처럼 "전화 연결"을 유지하지 않고 <b>편지(패킷) 한 장을 그냥 던지는</b> 방식이라 빠르지만 도착을 보장하지 않습니다. 채팅 서버는 오늘 배운 걸 다 합친 것 — <b>직원을 여러 명 두고(스레드), 한 사람이 말하면 전체 손님에게 방송(브로드캐스트)</b>하는 가게입니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① D1_MultiTcpServer — 접속마다 스레드를 하나씩</h4>
+        <p>18일차 서버는 <code>accept()</code> 한 번 받으면 그 클라이언트와 <b>대화가 끝날 때까지 다음 손님을 못 받았습니다</b>. 오늘은 <code>while(true)</code> 안에서 <code>accept()</code>를 받는 즉시 <code>new ServerThread(clientSocket).start();</code>로 <b>그 손님 전담 스레드를 만들어 넘기고, 서버는 곧바로 다음 <code>accept()</code>로 돌아갑니다</b>. 내부클래스 <code>ServerThread extends Thread</code>의 <code>run()</code>이 실제 대화(읽고 답장하기)를 처리합니다. <code>try (Socket autoCloseSocket = clientSocket; ...)</code>처럼 <b>이미 만들어진 소켓을 괄호 안 변수에 등록만 해도 try-with-resources가 자동으로 닫아 준다</b>는 것도 오늘의 새로운 문법입니다. → <a href="#net-08">🌐 08. 멀티스레드 서버와 채팅 프로그램</a> · <a href="#util-11">🛠️ 11. 스레드(Thread)</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② UDP — 연결 없이 패킷 하나씩, 그래서 주소를 매번 적어야 한다</h4>
+        <p>TCP는 <code>accept()</code>로 <b>미리 연결을 맺어 두고</b> 계속 주고받지만, UDP는 <code>DatagramSocket</code>·<code>DatagramPacket</code>으로 <b>편지 봉투(패킷)마다 받는 사람 주소(<code>InetAddress</code>·포트)를 직접 적어 보냅니다</b> — 그래서 <code>socket.receive(packet)</code>으로 받은 뒤 <code>packet.getAddress()</code>·<code>packet.getPort()</code>로 <b>"누가 보냈는지"를 매번 다시 확인</b>해야 그 사람에게 답장할 수 있습니다(TCP처럼 연결이 유지되지 않으니까요). <code>byte[] buffer = new byte[512];</code>처럼 <b>받을 크기를 미리 정해 둬야</b> 하는 것도 TCP의 스트림 방식과 다른 점입니다. → <a href="#net-07">🌐 07. UDP 소켓 프로그래밍</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ D3_ChatServer — 접속자 명단을 동기화된 Set으로 관리하고 방송하기</h4>
+        <p><code>Set&lt;PrintWriter&gt; clientWriters</code>에 <b>접속한 모든 클라이언트의 출력 스트림을 모아 두고</b>, <code>broadcast(message)</code>가 그 명단을 순회하며 <b>전체에게 같은 메시지를 뿌립니다</b>. 명단이 <code>Collections.synchronizedSet(new HashSet&lt;&gt;())</code>인 이유는 <b>여러 스레드(각 클라이언트 담당 스레드)가 동시에 명단을 추가·삭제</b>하기 때문 — 18일차의 <code>synchronized</code>를 컬렉션 레벨에서 적용한 형태입니다. <code>ClientHandler extends Thread</code>는 손님 1명을 전담하는 "직원"으로, <b>맨 처음 받은 한 줄을 닉네임으로 삼고</b>, 이후 들어오는 모든 줄을 <code>broadcast("[닉네임]" + message)</code>로 전체 방송합니다. <code>finally</code>에서 <b>연결이 끊기면 명단에서 자신을 빼고 퇴장 메시지를 방송</b>하는 정리까지 갖췄습니다. → <a href="#net-08">🌐 08. 멀티스레드 서버와 채팅 프로그램</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ D3_ChatClient — 보내는 스레드와 받는 스레드를 분리하기</h4>
+        <p>채팅은 <b>"내가 언제든 메시지를 보낼 수 있어야 하고, 동시에 남이 보낸 메시지도 언제든 받아야"</b> 하는 양방향 통신입니다. 그래서 클라이언트는 <b>메인 스레드는 계속 키보드 입력을 읽어 서버로 보내기만</b> 하고, 별도의 <code>Thread receiveThread = new Thread(() -&gt; { while ((serverMessage = in.readLine()) != null) {...} });</code>(<b>람다식으로 만든 익명 스레드</b>, 16일차 복습)가 <b>서버에서 오는 메시지를 계속 받아서 화면에 출력</b>합니다. 이 둘을 하나의 스레드로 합쳤다면 <code>readLine()</code>이 입력을 기다리는 동안 <b>받은 메시지를 화면에 못 찍는</b> 문제가 생겼을 것입니다 — "보내기"와 "받기"를 스레드로 분리하는 게 왜 필요한지 정확히 보여주는 예입니다.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D1_MultiTcpServer.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260828.day19;
+
+public class D1_MultiTcpServer {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(9595);) {
+            System.out.println("server is running now...");
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("클라이언트 연결됨:" + clientSocket.getInetAddress().getHostName());
+
+                new ServerThread(clientSocket).start(); // 접속마다 새 스레드
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 내부클래스로 스레드 클래스 작성(static으로 정의)
+    static class ServerThread extends Thread {
+        Socket clientSocket = null;
+
+        public ServerThread(Socket clientSocket) {
+            this.clientSocket = clientSocket;
+        }
+
+        @Override
+        public void run() {
+            try (
+                    // close() 생략하려면 괄호에 정의되어야 한다.
+                    // autoCloseSocket은 임의의 변수에다 등록만 해두면 됨
+                    Socket autoCloseSocket = clientSocket;
+                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));) {
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    System.out.println("클라이언트로부터 전달받은 메시지:" + inputLine);
+                    out.println("보낸 메시지:" + inputLine);
+                }
+            } catch (IOException e) {
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>서버 1개 + 클라이언트 2개(A·B)를 동시에 접속시켜 본 결과</summary>
+      <pre>
+[서버 콘솔]
+server is running now...
+클라이언트 연결됨:127.0.0.1
+클라이언트로부터 전달받은 메시지:A입니다
+클라이언트 연결됨:127.0.0.1
+클라이언트로부터 전달받은 메시지:B입니다
+
+[클라이언트 A 콘솔]          [클라이언트 B 콘솔]
+서버에서 전달된 메시지:      서버에서 전달된 메시지:
+보낸 메시지:A입니다          보낸 메시지:B입니다</pre>
+      <div class="run-note">두 클라이언트가 <b>동시에</b> 접속해도 서버는 각각을 독립된 <code>ServerThread</code>로 처리해서 <b>서로 간섭 없이</b> 자기 메시지를 돌려받습니다. 18일차 서버였다면 A가 연결을 안 끊는 한 B는 <code>accept()</code>조차 못 받고 대기해야 했을 상황입니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D2_UDPServer.java + D2_UDPClient.java (수업 실습 원본)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260828.day19;
+
+public class D2_UDPServer {
+    public static void main(String[] args) {
+        try (DatagramSocket socket = new DatagramSocket(5000);) {
+            byte[] buffer = new byte[512];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length); // 수신용 패킷
+            System.out.println("server is listening on port 5000");
+            while (true) {
+                socket.receive(packet); // 클라이언트에서 전송된 데이터를 패킷으로 받자
+                String received = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("받은 메시지:" + received);
+
+                InetAddress address = packet.getAddress(); // 보낸 사람 주소를 매번 다시 확인
+                int port = packet.getPort();
+                packet = new DatagramPacket(buffer, buffer.length, address, port);
+                socket.send(packet); // 클라이언트로 그대로 돌려보냄(에코)
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class D2_UDPClient {
+    public static void main(String[] args) {
+        String hostname = "192.168.22.2"; // 실습 환경의 서버 IP(로컬 테스트는 localhost)
+        int port = 5000;
+        try (DatagramSocket socket = new DatagramSocket();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "MS949"));) {
+            InetAddress address = InetAddress.getByName(hostname);
+            byte[] receiveBuffer = new byte[512];
+            String text = "";
+            while (true) {
+                System.out.println("입력하기:");
+                text = reader.readLine();
+                byte[] sendBuffer = text.getBytes();
+
+                DatagramPacket packet = new DatagramPacket(sendBuffer, sendBuffer.length, address, port);
+                socket.send(packet); // 서버로 전송
+
+                packet = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+                socket.receive(packet); // 서버에서 수신
+                String received = new String(packet.getData(), 0, packet.getLength());
+                System.out.println("받은 메시지:" + received);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>"핑퐁 테스트1" → "핑퐁 테스트2" 순으로 보내 본 결과</summary>
+      <pre>
+[서버 콘솔]
+server is listening on port 5000
+받은 메시지:핑퐁 테스트1
+address:/127.0.0.1,port:62320
+받은 메시지:핑퐁 테스트2
+address:/127.0.0.1,port:62320
+
+[클라이언트 콘솔]
+받은 메시지:핑퐁 테스트1(뒤에 공백처럼 보이는 여분 데이터가 붙어서 돌아옴)
+받은 메시지:핑퐁 테스트2(마찬가지)</pre>
+      <div class="run-note">서버가 받은 메시지는 정확했지만, <b>돌려보낼 때 문제가 있었습니다</b> — <code>packet = new DatagramPacket(buffer, buffer.length, address, port);</code>에서 <b><code>buffer.length</code>(항상 512)를 그대로 길이로 써서, 실제로 받은 글자 수(<code>packet.getLength()</code>)가 아니라 <code>buffer</code> 배열 512바이트 전체를 돌려보냅니다</b> — 짧은 메시지 뒤에 이전에 담겨 있던 찌꺼기 바이트까지 같이 전송되는 버그입니다. <code>new DatagramPacket(buffer, packet.getLength(), address, port)</code>로 고쳐야 정확히 받은 만큼만 돌려보낼 수 있습니다. test03에서 배운 "<code>read(b)</code>는 실제로 읽은 개수만큼만 써야 한다"는 교훈이 여기서도 그대로 적용되는 사례입니다.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D3_ChatServer.java (수업 실습 원본 — 핵심 부분)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260828.day19;
+
+public class D3_ChatServer {
+    // 채팅방에 접속한 모든 클라이언트의 출력 스트림을 모아두는 명단
+    // 여러 스레드가 동시에 추가/삭제하므로 동기화(synchronizedSet) 필수!
+    private static Set&lt;PrintWriter&gt; clientWriters = Collections.synchronizedSet(new HashSet&lt;&gt;());
+
+    public static void main(String[] args) {
+        int port = 12345;
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("채팅 서버가 " + port + "번 포트에서 시작됨");
+            while (true) {
+                Socket clientSocket = serverSocket.accept(); // 손님이 올 때까지 대기
+                new ClientHandler(clientSocket).start();     // 손님마다 전담 직원(스레드) 배정
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 접속 중인 모든 클라이언트에게 메시지를 전달하는 방송(브로드캐스트) 메서드
+    public static void broadcast(String message) {
+        synchronized (clientWriters) {
+            for (PrintWriter writer : clientWriters) {
+                writer.println(message);
+            }
+        }
+    }
+
+    // 손님 1명을 전담해서 처리할 스레드 클래스
+    static class ClientHandler extends Thread {
+        private Socket socket;
+        private PrintWriter out;
+        private BufferedReader in;
+        private String nickname;
+
+        public ClientHandler(Socket socket) { this.socket = socket; }
+
+        @Override
+        public void run() {
+            try {
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+                out = new PrintWriter(socket.getOutputStream(), true);
+                clientWriters.add(out); // 전체 명단에 내 마이크 등록
+
+                nickname = in.readLine(); // 맨 처음 받은 한 줄은 닉네임으로 사용
+                broadcast(nickname + "님이 입장하셨습니다.");
+
+                String message;
+                while ((message = in.readLine()) != null) {
+                    broadcast("[" + nickname + "]" + message);
+                }
+            } catch (IOException e) {
+                System.out.println(nickname + "님 연결 종료/오류: " + e.getMessage());
+            } finally {
+                if (out != null) clientWriters.remove(out); // 명단에서 제거
+                if (nickname != null) broadcast(nickname + "님이 나가셨습니다.");
+                try { socket.close(); } catch (IOException e) { e.printStackTrace(); }
+            }
+        }
+    }
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">D3_ChatClient.java (수업 실습 원본 — 보내기/받기 스레드 분리)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">package hk.edu20260828.day19;
+
+public class D3_ChatClient {
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket("localhost", 12345);
+            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in, "MS949"));
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+
+            System.out.print("사용할 대화명을 입력하세요: ");
+            String nickname = keyboard.readLine();
+            out.println(nickname); // 서버에 닉네임 전송(맨 처음 한 줄)
+
+            // 서버 메시지를 받는 전담 스레드(람다식) — 메인 스레드와 분리
+            Thread receiveThread = new Thread(() -&gt; {
+                try {
+                    String serverMessage;
+                    while ((serverMessage = in.readLine()) != null) {
+                        System.out.println(serverMessage);
+                    }
+                } catch (IOException e) {
+                    System.out.println("서버와의 연결이 끊어졌습니다.");
+                }
+            });
+            receiveThread.start();
+
+            // 메인 스레드는 키보드 입력만 계속 읽어서 서버로 전송(송신 전용)
+            String userInput;
+            while ((userInput = keyboard.readLine()) != null) {
+                out.println(userInput);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">동작 설명</span>채팅 서버는 실시간 다중 접속 시나리오라 터미널 캡처 대신 흐름으로 정리합니다</summary>
+      <pre>
+[서버] 채팅 서버가 12345번 포트에서 시작됨
+[클라이언트1] 사용할 대화명을 입력하세요: 태경
+[클라이언트2] 사용할 대화명을 입력하세요: 상원
+[서버 → 전체] 태경님이 입장하셨습니다.
+[서버 → 전체] 상원님이 입장하셨습니다.
+[클라이언트1 입력] 안녕하세요
+[서버 → 전체] [태경]안녕하세요   (클라이언트1·2 화면에 모두 출력)
+[클라이언트2 입력] 반갑습니다
+[서버 → 전체] [상원]반갑습니다   (클라이언트1·2 화면에 모두 출력)</pre>
+      <div class="run-note">클라이언트1이 보낸 메시지가 <b>클라이언트1 자신의 화면에도 다시 표시</b>됩니다 — <code>broadcast()</code>가 "명단 전체"에 뿌리기 때문에 보낸 사람도 예외가 아닙니다. 이건 실제 채팅 앱에서 흔한 방식(내가 보낸 메시지도 서버를 거쳐 돌아와서 화면에 찍힘)입니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">19일차에 배운 것 (시험 대비 체크리스트)</div>
+      <ul>
+        <li>여러 클라이언트를 동시에 받으려면 <b><code>accept()</code>마다 새 스레드를 만들어</b> 그 스레드에서 대화를 처리한다.</li>
+        <li>TCP는 <b>연결을 맺어 두고</b> 주고받지만, UDP는 <b>패킷마다 주소를 직접 지정</b>해서 보낸다(연결 없음).</li>
+        <li>UDP는 <code>DatagramSocket</code>·<code>DatagramPacket</code>을 쓰고, <b>받을 데이터 크기(버퍼)를 미리 정해야</b> 한다.</li>
+        <li>패킷을 돌려보낼 때는 <b>버퍼 전체 길이가 아니라 실제 받은 길이(<code>packet.getLength()</code>)</b>를 써야 여분의 데이터가 안 딸려 간다.</li>
+        <li>여러 스레드가 동시에 접근하는 컬렉션은 <code>Collections.synchronizedSet(...)</code> 같은 <b>동기화 래퍼</b>로 감싼다.</li>
+        <li>채팅처럼 <b>양방향 실시간 통신</b>은 "보내는 스레드"와 "받는 스레드"를 분리해야 한쪽이 막혀도 다른 쪽이 계속 동작한다.</li>
+        <li>서버가 접속자 전체에게 같은 메시지를 보내는 것을 <b>브로드캐스트</b>라고 한다.</li>
+      </ul>
+    </div>
+    <div class="note-tip"><span class="tip-label">TIP</span>오늘로 <b>🧭 학습 여정 13단계(네트워크)</b>까지 전부 도달했습니다 — 1일차 명명법부터 시작해 클래스·상속·컬렉션·예외·람다·스레드를 거쳐 <b>결국 "다른 컴퓨터와 대화하는 프로그램"</b>까지 왔습니다. 채팅 서버는 사실 이 여정 전체가 합쳐진 결과물입니다: 소켓(13단계) 위에 스레드(12단계)를 얹어 여러 명을 동시에 받고, 컬렉션(11단계)으로 접속자를 관리하고, 예외 처리(11단계)로 접속 종료를 감지합니다. 복습할 때 막히는 부분이 있다면 그 부분이 가리키는 이전 단계로 돌아가 보세요 — 이 표는 그러라고 만든 지도입니다.</div>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D1_MultiTcpServer.java" target="_blank" rel="noopener">D1_MultiTcpServer.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPServer.java" target="_blank" rel="noopener">D2_UDPServer.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPClient.java" target="_blank" rel="noopener">D2_UDPClient.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatServer.java" target="_blank" rel="noopener">D3_ChatServer.java</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatClient.java" target="_blank" rel="noopener">D3_ChatClient.java</a>
     </div>
   </div>
 </article>
@@ -11653,13 +12448,13 @@ public class CardMain {
             <div class="flow-box"><b>스레드</b><span>생성 · 동기화 · 생명주기</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>📅 지금 수업이 여기입니다</b> — 2026-08-25(16일차)까지 09~12단계를 지났고, 12단계는 <b>람다·Stream·IO까지 진행되고 스레드는 아직</b>입니다. 16일차에 익명 클래스를 람다식으로 줄이는 3단계, <code>filter</code>·<code>sorted</code>·<code>map</code>으로 이어 붙이는 Stream 파이프라인과 일반/병렬 스트림 비교, <code>InputStream</code>/<code>OutputStream</code>으로 파일을 1바이트씩 복사하는 실습까지 마쳤습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위가 딱 이 지점까지를 출제합니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li>Stream의 중간 연산은 <b>최종 연산이 호출돼야 실제로 돈다</b>(지연 연산).</li>
           <li>IO는 다 쓰면 <code>close()</code> — <code>try-with-resources</code>가 이걸 자동으로 해 줍니다.</li>
           <li>공유 자원을 여럿이 건드리면 <code>synchronized</code>가 필요 — 13단계 채팅 서버의 전제입니다.</li>
           <li>16일차 <code>D2_StreamTest</code>가 람다·Stream의 완성형 — 메서드 참조(<code>::</code>)와 일반/병렬 스트림의 스레드 차이까지 실습으로 확인했습니다.</li>
+          <li>18일차 <code>D3_CakePlate</code>가 스레드의 완성형 — <code>wait()</code>/<code>notifyAll()</code>로 생산자-소비자를 정확히 맞물려 돌렸습니다.</li>
         </ul>
       </article>
 
@@ -11684,11 +12479,13 @@ public class CardMain {
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 학습 여정 13단계 전체 완주</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했습니다. 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 이제 전 범위를 출제합니다 — 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리해 보세요.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
           <li>서버는 <code>accept()</code>에서 <b>접속이 올 때까지 멈춰 기다립니다</b>.</li>
           <li>여기까지 오면 자바 교안 전 범위가 한 바퀴 — <b>실습과제 12문제</b>로 종합 점검하세요. → <a href="#prac-01">🧪 실습과제 탭</a></li>
+          <li>19일차 <code>D3_ChatServer</code>가 이 단계의 완성형 — 접속마다 스레드, 공유 명단은 <code>synchronizedSet</code>, 방송은 <code>broadcast()</code>로 정리했습니다.</li>
         </ul>
       </article>
 

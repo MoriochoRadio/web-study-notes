@@ -30,7 +30,7 @@ public class D2_StreamTest {
                 .forEach(System.out::println);
         // 람다식이 단순히 기존 메서드에 값을 전달하기만 한다면 ::을 사용하면 편리 --> 메서드 참조 문법
 
-        // 람다식을 사용하지 않고 구현한다면?
+        // Stream을 사용하지 않고 구현한다면?
         List<String> list2 = new ArrayList<>();
         for (String s : list) {
             if (s.contains("김")) {
