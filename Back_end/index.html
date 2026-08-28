@@ -169,12 +169,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   .stat-card .n{font-size:27px;font-weight:800;}
   .stat-card .l{font-size:13px;color:var(--muted);margin-top:2px;}
-  .stat-card.html .n{color:var(--html);}
-  .stat-card.css .n{color:var(--css);}
-  .stat-card.js .n{color:var(--js);}
-  .stat-card.react .n{color:var(--react);}
-  .stat-card.concepts .n{color:var(--concepts);}
-  .stat-card.next .n{color:var(--next);}
+  .stat-card.concepts .n{color:var(--text);}
   .stat-card.progress .n{color:var(--good);}
   .progress-breakdown{
     display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;
@@ -444,40 +439,43 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     border:1px solid var(--border);padding:3px 9px;border-radius:8px;flex:none;
   }
   .note-head h3{margin:0;font-size:19px;font-weight:700;line-height:1.5;}
+  /* 헤더 한 줄에 배지가 6개까지 몰리던 걸(번호·토글·완료·별·링크·태그) 정리했다 —
+     번호만 눈에 띄는 칩으로 남기고, 나머지 보조 컨트롤은 "테두리 없는 조용한 버튼"으로
+     낮춰서 제목과 경쟁하지 않게 한다. 상태가 켜졌을 때만(체크·별표) 색이 붙는다. */
   .note-toggle{
-    flex:none;font-size:12.5px;font-weight:700;color:var(--c,var(--accent));
-    border:1px solid var(--border);border-radius:8px;padding:4px 10px;
-    background:var(--panel-2);white-space:nowrap;
+    flex:none;font-size:12.5px;font-weight:600;color:var(--muted);
+    white-space:nowrap;
   }
-  .note-toggle::before{content:"+ 펼쳐서 공부하기";}
-  .note-card:not(.collapsed) .note-toggle::before{content:"− 접기";}
-  .note-head:hover .note-toggle{border-color:var(--c,var(--accent));}
+  .note-toggle::before{content:"펼쳐서 보기";}
+  .note-card:not(.collapsed) .note-toggle::before{content:"접기";}
+  .note-head:hover .note-toggle{color:var(--c,var(--accent));}
 
   /* ---- 완료 체크 · 링크 복사 (카드 헤더의 항상-보이는 컨트롤) ---- */
   .note-done{
     display:inline-flex;align-items:center;gap:5px;flex:none;
     font-size:12.5px;color:var(--muted);cursor:pointer;-webkit-user-select:none;user-select:none;
-    padding:4px 10px;border:1px solid var(--border);border-radius:8px;background:var(--panel-2);
+    padding:4px 6px;border:1px solid transparent;border-radius:8px;
   }
+  .note-done:hover{background:var(--panel-2);}
   .note-done input{accent-color:var(--good);cursor:pointer;}
-  .note-done.checked{border-color:var(--good);color:var(--good);}
+  .note-done.checked{color:var(--good);}
   .note-card.is-done .note-num{
     background:color-mix(in srgb, var(--good) 16%, transparent);color:var(--good);
   }
   .link-copy-btn{
     flex:none;font-size:13px;line-height:1;color:var(--muted);
-    border:1px solid var(--border);border-radius:8px;padding:4px 9px;
-    background:var(--panel-2);cursor:pointer;font-family:inherit;
+    border:1px solid transparent;border-radius:8px;padding:4px 7px;
+    background:transparent;cursor:pointer;font-family:inherit;
   }
-  .link-copy-btn:hover{color:var(--text);border-color:var(--c,var(--accent));}
-  .link-copy-btn.done{color:var(--good);border-color:var(--good);}
+  .link-copy-btn:hover{color:var(--text);background:var(--panel-2);}
+  .link-copy-btn.done{color:var(--good);}
   .star-btn{
     flex:none;font-size:14px;line-height:1;color:var(--muted);
-    border:1px solid var(--border);border-radius:8px;padding:4px 8px;
-    background:var(--panel-2);cursor:pointer;font-family:inherit;
+    border:1px solid transparent;border-radius:8px;padding:4px 6px;
+    background:transparent;cursor:pointer;font-family:inherit;
   }
-  .star-btn:hover{border-color:#eab308;}
-  .star-btn.starred{color:#eab308;border-color:#eab308;}
+  .star-btn:hover{background:var(--panel-2);}
+  .star-btn.starred{color:#eab308;}
   .note-card.is-starred{border-color:#eab308;}
 
   /* ---- 내 메모: 카드마다 자유롭게 남기는 개인 노트 ---- */
@@ -514,12 +512,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     color:var(--accent);
   }
 
-  /* ---- 한 줄 요약 ---- */
+  /* ---- 한 줄 요약: 배경 없이 왼쪽 선 하나로만 — 바로 아래 '쉽게 말하면' 박스와
+     둘 다 색칠된 배경이면 상자가 겹겹이 쌓인 느낌이라 여기는 조용하게 둔다 ---- */
   .note-summary{
     display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;
-    background:var(--panel-2);border:1px solid var(--border);
-    border-left:3px solid var(--c,var(--accent));border-radius:10px;
-    padding:13px 15px;margin:0 0 12px;font-size:14.8px;line-height:1.85;
+    border-left:3px solid var(--c,var(--accent));
+    padding:2px 0 2px 15px;margin:0 0 14px;font-size:14.8px;line-height:1.85;
   }
   .summary-label{
     flex:none;font-size:10.5px;font-weight:800;color:var(--c,var(--accent));
@@ -988,21 +986,25 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   #net-section{--c:var(--net);}
   #prac-section{--c:var(--prac);}
   #codingtest-section{--c:var(--codingtest);}
-  .stat-card.class .n{color:var(--class);}
-  .stat-card.basic .n{color:var(--basic);}
-  .stat-card.oop .n{color:var(--oop);}
-  .stat-card.util .n{color:var(--util);}
-  .stat-card.net .n{color:var(--net);}
-  .stat-card.prac .n{color:var(--prac);}
-  .stat-card.journey .n{color:var(--journey);}
-  .stat-card.codingtest .n{color:var(--codingtest);}
+  /* 통계 카드 숫자는 과목마다 다른 색을 쓰지 않는다 — 한 화면에 10개가 동시에 보여서
+     색이 다 다르면 "무지개 스팸"처럼 보이고 눈이 피로해진다. 완료 진도(progress)만
+     "성취"라는 의미가 있어 초록을 유지하고, 나머지는 전부 같은 톤으로 통일한다. */
+  .stat-card.class .n,
+  .stat-card.basic .n,
+  .stat-card.oop .n,
+  .stat-card.util .n,
+  .stat-card.net .n,
+  .stat-card.prac .n,
+  .stat-card.journey .n,
+  .stat-card.codingtest .n{color:var(--text);}
   /* ---- 🧩 코딩테스트 오답노트 ---- */
-  .ct-meta{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px;font-size:13px;color:var(--muted);}
-  .ct-badge{display:inline-flex;align-items:center;gap:4px;font-weight:800;font-size:12.5px;padding:3px 11px;border-radius:999px;border:1px solid transparent;}
-  .ct-badge.ct-pass{background:color-mix(in srgb, var(--good) 16%, var(--panel));color:var(--good);border-color:color-mix(in srgb, var(--good) 35%, transparent);}
-  .ct-badge.ct-fail{background:color-mix(in srgb, var(--html) 14%, var(--panel));color:var(--html);border-color:color-mix(in srgb, var(--html) 32%, transparent);}
-  .ct-badge.ct-type{background:var(--panel-2);color:var(--text);border-color:var(--border);}
-  .ct-box{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:10px 0;}
+  /* 배지도 톤을 낮췄다 — PASS/FAIL만 색으로 의미를 전달하고(성공/실패라 색이 필요한
+     정보), 유형·회차 배지는 태그와 같은 무채색 칩으로 통일해 화면이 조용해지게 한다. */
+  .ct-meta{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 14px;font-size:13px;color:var(--muted);}
+  .ct-badge{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--border);background:var(--panel-2);color:var(--muted);}
+  .ct-badge.ct-pass{color:var(--good);border-color:color-mix(in srgb, var(--good) 40%, var(--border));}
+  .ct-badge.ct-fail{color:var(--html);border-color:color-mix(in srgb, var(--html) 40%, var(--border));}
+  .ct-box{border-left:3px solid var(--border);border-radius:0;padding:4px 0 4px 15px;margin:16px 0;}
   .ct-box-title{font-size:12.5px;font-weight:800;color:var(--codingtest);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
   .ct-box p{white-space:pre-wrap;margin:0;font-size:14.5px;line-height:1.75;}
   .ct-warn{background:color-mix(in srgb, var(--html) 8%, var(--panel));border:1px dashed color-mix(in srgb, var(--html) 40%, var(--border));border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--muted);margin:10px 0;}
