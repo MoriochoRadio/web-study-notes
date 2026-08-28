@@ -968,6 +968,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --prac:#c9541f;
     --class:#0c85ad;
     --journey:#0f766e;
+    --codingtest:#b91c5c;
   }
   [data-theme="dark"]{
     --basic:#f0b45c;
@@ -977,6 +978,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --prac:#ff8a5c;
     --class:#5cd6f2;
     --journey:#5eead4;
+    --codingtest:#f472b6;
   }
   #journey-section{--c:var(--journey);}
   #class-section{--c:var(--class);}
@@ -985,6 +987,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   #util-section{--c:var(--util);}
   #net-section{--c:var(--net);}
   #prac-section{--c:var(--prac);}
+  #codingtest-section{--c:var(--codingtest);}
   .stat-card.class .n{color:var(--class);}
   .stat-card.basic .n{color:var(--basic);}
   .stat-card.oop .n{color:var(--oop);}
@@ -992,7 +995,19 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .stat-card.net .n{color:var(--net);}
   .stat-card.prac .n{color:var(--prac);}
   .stat-card.journey .n{color:var(--journey);}
+  .stat-card.codingtest .n{color:var(--codingtest);}
+  /* ---- 🧩 코딩테스트 오답노트 ---- */
+  .ct-meta{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px;font-size:13px;color:var(--muted);}
+  .ct-badge{display:inline-flex;align-items:center;gap:4px;font-weight:800;font-size:12.5px;padding:3px 11px;border-radius:999px;border:1px solid transparent;}
+  .ct-badge.ct-pass{background:color-mix(in srgb, var(--good) 16%, var(--panel));color:var(--good);border-color:color-mix(in srgb, var(--good) 35%, transparent);}
+  .ct-badge.ct-fail{background:color-mix(in srgb, var(--html) 14%, var(--panel));color:var(--html);border-color:color-mix(in srgb, var(--html) 32%, transparent);}
+  .ct-badge.ct-type{background:var(--panel-2);color:var(--text);border-color:var(--border);}
+  .ct-box{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:10px 0;}
+  .ct-box-title{font-size:12.5px;font-weight:800;color:var(--codingtest);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+  .ct-box p{white-space:pre-wrap;margin:0;font-size:14.5px;line-height:1.75;}
+  .ct-warn{background:color-mix(in srgb, var(--html) 8%, var(--panel));border:1px dashed color-mix(in srgb, var(--html) 40%, var(--border));border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--muted);margin:10px 0;}
   .lang-java{background:rgba(240,180,92,.16);color:#f0b45c;}
+  .lang-sql{background:rgba(92,168,255,.16);color:#5ca8ff;}
   /* 프론트엔드 노트로 건너가는 링크 (두 과정이 한 저장소에 있으므로 서로 오갈 수 있게) */
   .cross-link{
     display:inline-flex;align-items:center;gap:6px;margin-top:12px;
@@ -1051,6 +1066,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">14</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1082,6 +1098,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
+      <div class="stat-card codingtest"><div class="n">14</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card journey"><div class="n">13</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">24</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
@@ -1114,6 +1131,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>순서대로 본다면 <strong>☕ 자바 기초 → 🧱 객체지향 → 🛠️ 자바 활용 → 🌐 네트워크</strong> 흐름을 따르세요. 기초는 "변수·연산·제어문", 객체지향은 "클래스가 메모리에 올라가는 방식", 활용은 "컬렉션·예외·입출력·스레드", 네트워크는 "소켓으로 서버 만들기"가 중심입니다.</li>
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
+        <li><strong>🧩 코딩테스트</strong> 탭은 학원에서 프로그래머스로 정기 실시하는 코딩테스트 오답노트입니다. 회차마다 JAVA·SQL 각 1문제씩 <strong>제출 코드 → 정답 풀이 → 주요 개념</strong> 순으로 정리했으니, 실전 문제 감각을 다질 때 훑어보세요.</li>
         <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 문제를 풀어보세요. 한 문제씩 <strong>고르는 즉시 정답·해설</strong>이 나오고, <strong>🔎 자세한 해설</strong>을 펼치면 보기 네 개를 하나씩 짚어 주는 풀이와 더 쉬운 정리가 이어집니다. <strong>⭐ 즐겨찾기 · 🔥 어려움</strong>으로 표시해 둔 문제나 틀린 문제만 골라 다시 푸는 것도 됩니다. 아직 진도가 안 나간 단원까지 섞여 나오는 게 부담이라면 범위에서 <strong>📅 배운 데까지</strong>를 고르세요 — 수업 진도 탭에 정리된 만큼만 출제됩니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>·<strong>☆ 버튼</strong>(헷갈리는 카드)·<strong>🔗 버튼</strong>(카드 링크 복사)을 활용하고, 하단 <strong>📝 내 메모</strong> 칸에 헷갈린 점을 적어두세요. 우하단 <strong>⚡ 5분 복습</strong>은 카드의 "쉽게 말하면"만 뽑아 플래시카드로 넘겨 줍니다.</li>
         <li>프론트엔드(HTML·CSS·JS·React) 노트는 <strong><a href="../Front_end/">🎨 프론트엔드 학습 노트</a></strong>에 따로 있습니다.</li>
@@ -12122,6 +12140,868 @@ public class CardMain {
     </div>
   </section>
 
+  <section id="codingtest-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>🧩 코딩테스트 오답노트 — 프로그래머스 정기 테스트</h2></div>
+    <p class="cat-desc">학원에서 <b>프로그래머스 사이트로 정기 실시하는 코딩테스트</b>를 회차별로 복기한 오답노트입니다. 매회 JAVA(프로그래밍) 문제 1개와 SQL 문제 1개를 풀고, <b>제출한 코드 → 정답 풀이 → 주요 개념</b> 순서로 정리했습니다. 수업 진도 카드가 "그날 배운 것"이라면, 이 탭은 <b>"그걸로 실전 문제를 풀어 본 기록"</b>입니다.</p>
+    <div class="notes-list" id="codingtest-notes">
+
+<article class="note-card" id="ct-01">
+  <div class="note-head">
+    <span class="note-num">1회차</span>
+    <h3>저주의 숫자3</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.11</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">1회차 · 2026.08.11</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int n){
+        int answer = 0;
+
+        for (int i = 1; i &lt;= n; i++){
+            answer++; 
+            
+            while (answer % 3 == 0 || (answer+"").contains("3")){
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>answer 변수를 만들어 n까지 반복해가며 1씩 증가시키다가, 3으로 나눠지거나, 3이 포함되었을 경우에는 계속 1을 더하게 해서 3이 포함되지 않을때까지 만든다.
+이후에 리턴하여준다.
+
+Int로 할때는 자리수별로 3인지 아닌지를 10으로 나누어서 나머지로 판단하는 해답도 있었다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>자바에서 연산자 하나가 String이면 String으로 변환된다.
+String.contains() 는 문자열 안에 특정 문자열이 있는지 검사해서 boolean으로 알려준다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-02">
+  <div class="note-head">
+    <span class="note-num">1회차</span>
+    <h3>인기있는 아이스크림</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.11</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">1회차 · 2026.08.11</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT FLAVOR 
+FROM FIRST_HALF 
+ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>FIRST_HALF테이블에서
+FLAVOR를 출력하는데
+TOTAL_ORDER 를 내림차순 기준으로 정렬한다.
+대신 TOTAL_ORDER이 같을때는 SHIPMENT_ID를 오름차순으로 정렬한다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>ORDER BY 는 , 기준으로 첫번째에 있는걸 1순위로 적용해서 정렬하고 앞의 기준값이 같을때는 ,  뒤에 있는 기준을2순위로 적용해서 정렬한다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-03">
+  <div class="note-head">
+    <span class="note-num">2회차</span>
+    <h3>두수의 연산값 비교하기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.13</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">2회차 · 2026.08.13</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int a, int b) {
+    
+        String aa = a+""+b;
+        int num1 = Integer.parseInt(aa);
+        int num2 = 2*a*b;
+        if(num1&gt;num2){
+            return num1;
+        }
+        else return num2;
+        
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>String변수를 만들어 Java에서는 문자열을 연산하면 문자열이 되는 점을 사용하여 두 숫자를 문자열형으로 이어붙였습니다.
+그 뒤 int변수에 parseInt를 사용하여 int형으로 바꿔 넣었습니다
+Int로 계산한 num2와 서로 비교하여 큰 숫자를 리턴하였습니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>문자열 결합 (a + "" + b)
+Java에서는 숫자에 빈 문자열("")을 더하면 전체가 String 타입으로 자동 형변환되어 이어 붙여집니다.
+문자열 -&gt; 정수 변환 (Integer.parseInt())
+결합된 String 형태의 숫자를 산술 연산 및 크기 비교가 가능하도록 int 타입으로 다시 변환합니다.
+값 비교 및 반환
+a ⊕ b의 결과(num1)와 2 * a * b의 결과(num2)를 비교하여 더 큰 값을 반환합니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-04">
+  <div class="note-head">
+    <span class="note-num">2회차</span>
+    <h3>조건에 맞는 도서 리스트 출력하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.13</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">2회차 · 2026.08.13</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT BOOK_ID, PUBLISHED_DATE
+FROM BOOK
+WHERE CATEGORY = '인문' AND PUBLISHED_DATE = '2021%'
+ORDER BY PUBLISHED_DATE;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>SELECT 
+    BOOK_ID, 
+    DATE_FORMAT(PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM BOOK
+WHERE CATEGORY = '인문' 
+  AND PUBLISHED_DATE LIKE '2021%'
+ORDER BY PUBLISHED_DATE ASC;
+정답 코드입니다
+
+%와일드카드는 = 이 아니라 LIKE를 사용하여야 합니다. 또한 PUBLISHED_DATE컬럼을 그대로 조회하면 DB설정에 따라 시/분/초 까지 출력될수도 있습니다. 이에 문제 조건에서 YYYY-MM-DD 형식 출력 을 정석적으로 맞추기 위해서는 DATE_FORMAT() 함수를 사용하여야 하며 AS별칭으로 PUBLISHED_DATE 까지 설정해주어야 합니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>LIKE 연산자와 와일드카드(%)
+부분 문자열/패턴을 검색할 때는 = 대신 LIKE 연산자를 사용합니다.
+패턴 검색 시에는 반드시 작은따옴표로 감싸야 문법 오류가 발생하지 않습니다. (예: LIKE '2021%')
+날짜 포맷 변환 (DATE_FORMAT)
+날짜 타입을 YYYY-MM-DD 형식으로 출력하려면 DATE_FORMAT(컬럼, '%Y-%m-%d') 함수를 사용합니다.
+%Y는 4자리 연도, %m은 2자리 월, %d는 2자리 일을 나타냅니다.
+컬럼 별칭 지정 (AS)
+함수를 사용하면 결과 컬럼 이름이 함수 표현식 자체로 변경됩니다.
+문제 요구사항에 맞는 컬럼명을 유지하기 위해 AS PUBLISHED_DATE 처럼 별칭을 지정해야 합니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-05">
+  <div class="note-head">
+    <span class="note-num">3회차</span>
+    <h3>하샤드 수</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.18</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">3회차 · 2026.08.18</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public boolean solution(int x) {
+        int num1 = x;
+        int sum = 0;
+        while(num1 != 0){
+            sum = sum + (num1%10);
+            num1 = num1/10;
+        }
+        if((x % sum) == 0){
+            return true;
+        }
+        else return false;
+        
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>자릿수를 10으로 잘라가며 더해나가기 위해 변수를 하나 만든다.
+자릿수를 전부 더한값을 저장하기 위해 sum변수를 만든다.
+자릿수를 잘라가는 변수가 0이 아닐때까지만 반복하며,
+10으로 자리수를 잘라가며 더하고 저장시킨다.
+While문을 빠져나와 하샤드 수인지 검사한다.
+결과값을 리턴해준다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>하샤드 수의 정의
+양의 정수 x가 자신의 각 자릿수 합으로 나누어떨어지는 수
+판별 조건: x % (각 자릿수의 합) == 0 
+
+   - 자릿수를 분리하는 과정에서 숫자가 0으로 줄어들므로, 
+      최종 나눗셈 판별을 위해 원본 x를 별도 변수에 복사해 둠.
+   - num % 10 : 마지막 일의 자리 추출 후 sum에 누적
+   - num / 10 : 일의 자리를 제거하여 다음 자릿수로 이동
+   - num &gt; 0 동안 반복</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-06">
+  <div class="note-head">
+    <span class="note-num">1회차</span>
+    <h3>가장 큰 물고기 10마리 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.11</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">1회차 · 2026.08.11</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT ID, LENGTH
+FROM FISH_INFO
+WHERE LENGTH 
+ORDER BY LENGTH DESC, ID ASC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>SELECT ID, LENGTH
+FROM FISH_INFO
+WHERE LENGTH IS NOT NULL
+ORDER BY LENGTH DESC, ID ASC
+LIMIT 10;
+
+
+NULL을 제외하기 위해 WHERE에서 IS NOT NULL 로 제외시킨다.
+1차기준 LENGTH DESC 다음에 2차기준으로 ID ASC설정한다.
+LIMIT 으로 10개만 출력시켜준다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>다중 컬럼 정렬 (ORDER BY col1, col2)
+여러 조건으로 정렬할 때는 쉼표(,)로 구분하여 나열
+앞에 적힌 컬럼이 우선순위를 가진다.
+상위 N개 데이터 추출 (LIMIT)
+전체 데이터를 원하는 정렬 기준으로 줄 세운 뒤, 필요한 개수만큼만 가져올 때 사용
+ORDER BY와 짝을 이루어 사용되는 경우가 많다.
+문법 구조: LIMIT [가져올 행의 개수] (MySQL 기준)
+NULL 처리 (IS NOT NULL)
+SQL에서 NULL은 값이 없는 특수 상태이므로 = NULL, != NULL 같은 비교 연산자로 비교할 수 없다.
+반드시 IS NULL (NULL인 것) 또는 IS NOT NULL (NULL이 아닌 것)을 사용해야 한다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-07">
+  <div class="note-head">
+    <span class="note-num">4회차</span>
+    <h3>행렬의 덧셈</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.20</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">4회차 · 2026.08.20</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int[][] solution(int[][] arr1, int[][] arr2) {
+        int[][] answer = {};
+        
+        
+        for(int i=0;i&lt;arr1.length;i++){
+            for(int j=0;j&lt;arr1[i].length;j++){
+                answer[i][j]=arr1[i][j]+arr2[i][j];
+            }
+        }
+        
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>int[][] answer = new int[arr1.length][arr1[0].length]; ← 리턴해주는 배열도 크기 설정 해줘야하는데 안해줘서 오류가 났다.
+
+입력되는 배열의 크기는 똑같다고 했으니 그냥 둘중 하나의 길이로 썼다.
+
+결과 배열 크기 할당: arr1.length는 행의 개수이고 arr1[0].length는 열의 개수이다.
+이를 이용해 answer 배열의 공간을 미리 설정한다.
+외부 반복문:각 행을 순회한다
+내부 반복문: 각 열을 순회한다.
+값 더하기: answer[i][j] = arr1[i][j] + arr2[i][j] 연산으로 같은 위치의 원소를 더해 저장한 뒤 반환한다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>자바 2차원 배열의 크기 확인 방법
+배열명.length: 전체 행의 개수
+배열명[i].length: i번째 행에 들어있는 열의 개수
+
+배열 공간 생성의 필요성
+자바의 배열은 크기가 고정되어 있으므로, 빈 배열로 두면 값을 넣을 때 인덱스 범위를 벗어나는 에러가 발생한다. 반드시 new int[행][열] 형태로 공간을 먼저 만들어야 한다</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-08">
+  <div class="note-head">
+    <span class="note-num">4회차</span>
+    <h3>가격대 별 상품 개수 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.20</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">4회차 · 2026.08.20</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT ?? AS PRICE_GROUP, PRODUCT_ID AS PRODUCTS
+FROM PRODUCT
+GROUP BY PRICE
+HAVING ?;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>[정답 코드 1 - TRUNCATE 함수 사용]
+SELECT TRUNCATE(PRICE, -4) AS PRICE_GROUP,
+COUNT(*) AS PRODUCTS
+FROM PRODUCT
+GROUP BY TRUNCATE(PRICE, -4)
+ORDER BY PRICE_GROUP ASC;
+
+[정답 코드 2 - 나눗셈 연산 사용]
+SELECT (PRICE DIV 10000) * 10000 AS PRICE_GROUP,
+COUNT(*) AS PRODUCTS
+FROM PRODUCT
+GROUP BY PRICE_GROUP
+ORDER BY PRICE_GROUP ASC;
+
+(오라클일 경우)
+SELECT FLOOR(PRICE / 10000) * 10000 AS PRICE_GROUP, COUNT(*) AS PRODUCTS
+FROM PRODUCT
+GROUP BY FLOOR(PRICE / 10000) * 10000
+ORDER BY PRICE_GROUP ASC;
+
+
+1. 만원 단위 가격대 생성:
+만원 단위 미만의 금액을 버려서 0, 10000, 20000 등의 최소 구간값으로 변환해야 한다.
+TRUNCATE(PRICE, -4)를 사용하면 1의 자리부터 천의 자리까지 4자리를 0으로 버림 처리할 수 있다.
+또는 (PRICE DIV 10000) * 10000 처럼 10000으로 나눈 몫을 구한 뒤 다시 10000을 곱해 구간값을 만들 수도 있다.
+2. 그룹화 및 개수 집계:
+가공된 가격대 컬럼을 기준으로 GROUP BY를 묶고, COUNT(*)를 통해 각 가격대에 속한 상품 수를 계산한다.
+3. 정렬:
+ORDER BY PRICE_GROUP ASC를 사용하여 가격대 기준으로 오름차순 정렬한다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>1. TRUNCATE(숫자, 자릿수) 함수:
+숫자의 특정 자릿수 이하를 버리는 내장 단일행 함수다.
+자릿수가 음수일 경우 정수부의 뒷자리를 0으로 만든다. (예: -4는 천의 자리까지 0 처리)
+참고로 DDL 문법인 TRUNCATE TABLE(테이블 전체 데이터 삭제)과는 이름만 같은 다른 기능
+
+2. GROUP BY 절:
+지정한 컬럼 또는 수식의 결과가 같은 행들을 하나의 그룹으로 묶어주는 구문.
+그룹화된 상태에서는 COUNT, SUM, AVG 등의 집계 함수를 통해 그룹별 계산 결과를 출력한다.
+
+3. HAVING 절의 역할:
+GROUP BY로 묶인 집계 결과에 대해 조건을 걸어 필터링할 때 사용하는 절.
+새로운 컬럼을 가공하거나 별칭을 생성하는 용도로는 사용할 수 없다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-09">
+  <div class="note-head">
+    <span class="note-num">5회차</span>
+    <h3>추억 점수</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.24</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">5회차 · 2026.08.24</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int[] solution(String[] name, int[] yearning, String[][] photo) {
+        int result[] = new int[photo.length];
+        for(int i=0;i&lt;photo.length;i++){
+            int sum=0;
+            for(int j =0; j&lt;photo[i].length;j++){
+                int k =0;
+                while(k&lt;yearning.length){
+                    if(photo[i][j].equals(name[k])){
+                        sum = sum+yearning[k];
+                        System.out.println(sum);
+                        break;
+                    } else k++;
+                }
+                
+                result[i] = sum;
+            }
+        }
+        return result;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>다른 추천 정답 코드
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int[] solution(String[] name, int[] yearning, String[][] photo) {
+        int[] result = new int[photo.length];
+        
+        // 1. 이름과 그리움 점수를 Map에 저장 (조회 속도 O(1))
+        Map&lt;String, Integer&gt; scoreMap = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; name.length; i++) {
+            scoreMap.put(name[i], yearning[i]);
+        }
+        
+        // 2. 각 사진별 점수 합산
+        for (int i = 0; i &lt; photo.length; i++) {
+            int sum = 0;
+            for (String person : photo[i]) {
+                sum += scoreMap.getOrDefault(person, 0);
+            }
+            result[i] = sum;
+        }
+        
+        return result;
+    }
+}
+
+(1) HashMap을 활용한 Key-Value 매핑 - 이름(String)을 통해 점수(Integer)를 빠르게 찾아야 할 때 유용합니다. - 배열 선형 탐색 시 O(N)의 시간이 걸리지만, HashMap을 사용하면 O(1)에 원하는 값을 찾을 수 있습니다. 
+(2) Map.getOrDefault(Object key, V defaultValue) - Map 안에 조회하려는 Key(사람 이름)가 존재하면 해당 Value(점수)를 반환하고, 존재하지 않으면 기본값(0)을 반환합니다. - 사진에 그리움 점수가 없는 인물이 포함되어 있을 때 if-else 분기 처리 없이 깔끔하게 처리할 수 있습니다. 
+(3) 향상된 for문 (Enhanced for Loop) - 인덱스(j)가 직접 필요하지 않고 원소 순회만 필요한 경우 'for (String person : photo[i])' 형태로 작성하면 가독성이 좋아지고 실수를 줄일 수 있습니다.
+
+
+저는 전체 사진을 하나씩 순회 하여 (photo[i]), 해당 사진 속 인물을 한 명씩 확인 (photo[i][j]) 하고 그리워하는 사람 목록(name)을 처음부터 끝까지 선형 탐색 하였습니다. 그 안에서 
+사진 속 인물과 그리워하는 사람의 이름이 일치하는지 비교하여 점수 누적 합산하였고, 
+일치하는 사람을 찾으면 탐색 중단 후 해당 사진의 총점을 결과 배열에 저장하는 방식으로 풀었습니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>(1) 2차원 배열 순회 및 다중 반복문 
+- photo는 사진(행)과 사진 속 인물(열)로 이루어진 2차원 배열입니다. 
+- 바깥쪽 for문(i)으로 사진을 선택하고, 안쪽 for문(j)으로 사진 속 인물을 하나씩 꺼내어 처리하는 다차원 배열 탐색 방식을 사용했습니다. 
+
+(2) 선형 탐색 (Linear Search) 
+- 사진 속 인물이 그리워하는 사람 목록에 있는지 확인하기 위해 while 루프를 사용하여 name 배열의 0번 인덱스부터 끝까지 순차적으로 비교했습니다.
+- 별도의 추가 라이브러리(Map 등)를 불러오지 않고 기본 배열을 사용했습니다.
+
+(3) 문자열 값 비교 (equals 메소드) 
+- 자바에서 String 객체의 문자열 내용이 같은지 비교할 때 '==' 연산자 대신 .equals() 메소드를 사용했습니다.
+
+(4) break 문을 통한 탐색 최적화 
+- name 배열에는 중복된 이름이 없으므로, 일치하는 이름을 찾았을 때 break로 while 루프를 즉시 탈출하여 불필요한 추가 비교 연산을 방지했습니다
+
+. (5) 누적 변수(sum)의 초기화 위치 
+- 각 사진마다 점수를 새로 계산해야 하므로, 바깥쪽 for문(i)이 시작될 때 sum 변수를 0으로 선언 및 초기화하여 사진 간 점수 간섭이 없도록 처리했습니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-10">
+  <div class="note-head">
+    <span class="note-num">5회차</span>
+    <h3>상품 별 오프라인 매출 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.20</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">5회차 · 2026.08.20</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT PRODUCT_CODE, (SALES_AMOUNT * PRICE) AS SALES
+FROM PRODUCT A, OFFLINE_SALE B
+WHERE A.PRODUCT_ID = B.PRODUCT_ID
+GROUP BY PRODUCT_CODE 
+ORDER BY SALES DESC, PRODUCT_CODE ASC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>SELECT PRODUCT_CODE, SUM(SALES_AMOUNT * PRICE) AS SALES
+FROM PRODUCT A, OFFLINE_SALE B
+WHERE A.PRODUCT_ID = B.PRODUCT_ID
+GROUP BY PRODUCT_CODE 
+ORDER BY SALES DESC, PRODUCT_CODE ASC;
+
+SUM을 안 써서 틀렸다.
+SELECT 절에서 SUM() 누락
+- 문제에서 요구한 것은 상품코드별 '매출액 합계'입니다.
+- OFFLINE_SALE 테이블에는 동일한 상품(PRODUCT_ID)이 여러 날짜에 걸쳐 여러 번 판매된 데이터가 존재합니다.
+- GROUP BY PRODUCT_CODE로 상품을 묶었지만, SUM()을 쓰지 않고 (SALES_AMOUNT * PRICE)만 적으면, 그룹 내의 전체 판매량 합계가 아니라 임의의 단일 행 판매량 하나만 가져와서 단가를 곱하게 됩니다. 따라서 총 매출이 아닌 엉뚱한 단일 판매건 매출이 계산됩니다.
+
+표준 ANSI JOIN 방법 해답
+SELECT 
+    A.PRODUCT_CODE, 
+    SUM(B.SALES_AMOUNT * A.PRICE) AS SALES
+FROM 
+PRODUCT A JOIN OFFLINE_SALE B ON A.PRODUCT_ID = B.PRODUCT_ID
+GROUP BY A.PRODUCT_CODE 
+ORDER BY SALES DESC, A.PRODUCT_CODE ASC;</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>(1) GROUP BY와 집계 함수 (Aggregate Functions)
+- GROUP BY를 수행하면 여러 행이 지정된 컬럼을 기준으로 하나의 그룹으로 압축됩니다.
+- 그룹화된 이후에는 개별 행의 원본 값을 직접 참조할 수 없으며, 그룹 전체를 대표하는 값(SUM, AVG, MAX, MIN, COUNT 등 집계 함수)만 SELECT 절이나 정렬에 사용할 수 있습니다.
+- 특정 상품에 판매 이력이 3건(각 2개, 3개, 1개 판매) 있다면 총 판매량은 6개이므로 반드시 SUM(SALES_AMOUNT) 형태로 합산해야 합니다.
+
+(2) SQL 쿼리 실행 순서 (Execution Order)
+1. FROM / JOIN : 데이터 테이블 참조 및 조인 수행
+2. WHERE       : 개별 행 단위 조건 필터링
+3. GROUP BY    : 지정된 컬럼 기준으로 행들을 그룹화
+4. HAVING      : 그룹화된 결과에 대한 조건 필터링
+5. SELECT      : 출력할 컬럼 및 집계 함수 계산, 별칭(Alias) 부여
+6. ORDER BY    : 최종 출력 결과를 정렬
+7. LIMIT       : 출력 행 수 제한
+
+* 중요: ORDER BY는 SELECT보다 나중에 실행되므로, SELECT 절에서 지정한 별칭(AS SALES)을 ORDER BY 절에서 그대로 정렬 기준으로 사용할 수 있습니다.
+
+(3) 조인(JOIN) 작성 방식
+- 암시적 조인(Implicit Join): FROM 절에 콤마(,)로 나열하고 WHERE 절에서 조인 조건을 주는 방식 (예: FROM A, B WHERE A.ID = B.ID)
+- 명시적 조인(Explicit / ANSI Join): JOIN 키워드와 ON 절을 사용하는 방식 (예: FROM A JOIN B ON A.ID = B.ID)
+- 실무 및 코딩테스트에서는 가독성과 유지보수, 실수 방지(WHERE 누락으로 인한 카티션 곱 방지)를 위해 명시적 ANSI 조인을 권장합니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-11">
+  <div class="note-head">
+    <span class="note-num">6회차</span>
+    <h3>진료순서 정하기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.26</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">6회차 · 2026.08.26</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">import java.util.Arrays;
+
+class Solution {
+    public int[] solution(int[] emergency) {
+        int[] sorted = new int[emergency.length];
+for(int i=0; i&lt;emergency.length; i++){
+            sorted[i]=emergency[i];
+        }
+ 
+        Arrays.sort(sorted);                     
+        int[] answer = new int[emergency.length];         
+        for (int i = 0; i &lt; emergency.length; i++) {
+            for (int j = 0; j &lt; sorted.length; j++) {
+                if (emergency[i] == sorted[j]) {
+                    answer[i] = j;
+                                  }
+            }
+        }
+        
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>다른 정답 코드
+1.순위 카운팅 방식
+import java.util.Arrays;
+class Solution { public int[] solution(int[] emergency) { int[] answer = new int[emergency.length];
+   for(int i = 0; i &lt; emergency.length; i++) {
+        answer[i] = 1;
+    }
+    
+    for(int i = 0; i &lt; emergency.length; i++) {
+        for(int j = 0; j &lt; emergency.length; j++) {
+            if(emergency[i] &lt; emergency[j]) {
+                answer[i]++;
+            }
+        }
+    }
+    
+    return answer;
+}
+
+}
+
+2. 나의 시도 보완 코드
+import java.util.Arrays;
+class Solution { public int[] solution(int[] emergency) { int[] sorted = emergency.clone(); Arrays.sort(sorted);
+   int[] answer = new int[emergency.length];
+    
+    for(int i = 0; i &lt; emergency.length; i++) {
+        for(int j = 0; j &lt; sorted.length; j++) {
+            if(emergency[i] == sorted[j]) {
+                answer[i] = emergency.length - j;
+                break;
+            }
+        }
+    }
+    
+    return answer;
+}
+
+}
+3. 대규모 데이터 기준 최고효율 코드
+import java.util.Arrays; import java.util.HashMap; import java.util.Map;
+class Solution { public int[] solution(int[] emergency) { int[] sorted = emergency.clone(); Arrays.sort(sorted);
+   Map&lt;Integer, Integer&gt; rankMap = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; sorted.length; i++) {
+        rankMap.put(sorted[i], sorted.length - i);
+    }
+    
+    int[] answer = new int[emergency.length];
+    for (int i = 0; i &lt; emergency.length; i++) {
+        answer[i] = rankMap.get(emergency[i]);
+    }
+    
+    return answer;
+}
+
+}
+순위 카운팅 코드 풀이
+모든 원소의 기본 등수를 1등으로 초기화합니다.
+2중 반복문으로 배열 내 모든 원소끼리 크기를 비교합니다.
+기준 원소보다 더 큰 원소가 나타날 때마다 기준 원소의 등수를 1씩 증가시킵니다.
+별도의 정렬이나 라이브러리 없이 순위를 바로 도출할 수 있어 N이 작은 문제(N &lt;= 10)에서 가장 가볍고 빠릅니다.
+
+나의 시도 코드(정렬 + 선형 탐색) 풀이
+원본 배열을 복제하여 오름차순으로 정렬된 배열을 만듭니다.
+원본 배열의 각 원소가 정렬된 배열의 어느 위치(j)에 있는지 찾습니다.
+오름차순 정렬 특성상 뒤쪽 인덱스일수록 큰 값이므로, 등수는 '배열 길이 - j'로 계산하여 저장합니다.
+
+정렬 + HashMap 코드 풀이
+원본 배열을 정렬한 뒤, 각 원소의 값과 그에 해당하는 등수를 Map 자료구조에 Key-Value 형태로 미리 저장합니다.
+원본 배열 순서대로 Map에서 등수를 O(1) 시간에 즉시 꺼내어 정답 배열을 만듭니다.
+N이 10만 개 이상으로 커지더라도 2중 루프 없이 정렬 시간(N log N)만으로 해결되는 가장 범용적인 최적화 구조입니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>[주요 개념 정리]
+얕은 복사(Shallow Copy) vs 깊은 복사(Deep Copy)
+int[] answer = emergency; 처럼 대입 연산자를 쓰면 배열의 주소값만 복사되어 두 변수가 동일한 배열을 가리킵니다. (answer를 수정하면 emergency도 수정됨)
+원본 배열을 보존하려면 new int[길이]로 새로 생성하거나 clone(), Arrays.copyOf()를 사용하여 독립된 메모리를 할당해야 합니다.
+순위(Rank) 결정의 기본 원리
+특정 값의 등수는 항상 '나보다 큰 값의 개수 + 1'입니다.
+오름차순 정렬 후 역순 인덱스 계산
+오름차순 정렬 시 가장 큰 원소는 배열의 마지막 인덱스(length - 1)에 위치합니다.
+따라서 가장 큰 원소를 1등으로 매기려면 'length - j' 공식을 적용합니다. (j가 length-1일 때 1이 됨)
+시간 복잡도와 선택 기준
+N이 10 이하일 때: O(N^2) 알고리즘(2중 루프)이 오버헤드가 없어 가장 단순하고 빠릅니다.
+N이 1,000 이상일 때: O(N^2)은 100만 번 이상 연산되므로, O(N log N) 정렬 및 O(1) 탐색이 가능한 Map 방식이 필수적입니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-12">
+  <div class="note-head">
+    <span class="note-num">6회차</span>
+    <h3>자동차 평균 대여 기간 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.26</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">6회차 · 2026.08.26</span></div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT 
+    CAR_ID, 
+    AVG(END_DATE-START_DATE)  AS AVERAGE_DURATION
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+GROUP BY CAR_ID
+ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>[정답 코드]
+(MySQL 기준) SELECT CAR_ID, ROUND(AVG(DATEDIFF(END_DATE, START_DATE) + 1), 1) AS AVERAGE_DURATION FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY GROUP BY CAR_ID HAVING AVG(DATEDIFF(END_DATE, START_DATE) + 1) &gt;= 7 ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;
+(Oracle 기준) SELECT CAR_ID, ROUND(AVG(END_DATE - START_DATE + 1), 1) AS AVERAGE_DURATION FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY GROUP BY CAR_ID HAVING AVG(END_DATE - START_DATE + 1) &gt;= 7 ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;
+FROM 절: CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블에서 대여 기록 데이터를 가져옵니다.
+GROUP BY 절: CAR_ID를 기준으로 묶어 자동차별 그룹을 생성합니다.
+날짜 차이 계산 (+1 처리): 대여 기간을 계산할 때 MySQL은 DATEDIFF(END_DATE, START_DATE) + 1, Oracle은 END_DATE - START_DATE + 1을 사용합니다. 시작일과 종료일이 같은 날(당일 대여 및 반납)도 대여 기간 1일로 포함되어야 하므로 반드시 1을 더해줍니다.
+AVG() 및 ROUND(): AVG 함수는 그룹화된 각 자동차별 대여 기간을 자동으로 합산하여 건수로 나눈 평균값을 구합니다. 소수점 두 번째 자리에서 반올림하여 첫째 자리까지 표시해야 하므로 ROUND(평균값, 1)로 감싸고 별칭을 AVERAGE_DURATION으로 지정합니다.
+HAVING 절: 평균 대여 기간이 7일 이상인 그룹만 필터링해야 하므로 GROUP BY 뒤에 HAVING AVG(...) &gt;= 7 조건을 적용합니다.
+ORDER BY 절: 평균 대여 기간(AVERAGE_DURATION) 내림차순(DESC)으로 정렬하고, 값이 같다면 CAR_ID 내림차순(DESC)으로 정렬합니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>AVG() 함수의 내부 동작과 SUM() 생략 이유
+AVG(컬럼 또는 연산식)는 내부적으로 해당 그룹 내 데이터의 합계(SUM)를 구한 뒤 개수(COUNT)로 나누는 연산을 자동으로 수행합니다.
+따라서 GROUP BY로 묶인 그룹의 평균을 구할 때는 SUM(AVG(...))처럼 중첩할 필요가 없으며, SQL 표준 문법에서도 집계 함수의 직접 중첩은 허용되지 않습니다.
+대여 기간 계산 시 당일 포함(+1) 규칙
+날짜 차이 계산 시 단순 종료일 - 시작일 또는 DATEDIFF 연산은 간격(Day difference)만을 계산합니다.
+예를 들어 9월 5일 대여 후 9월 5일 반납 시 단순 차이는 0이지만 실제 대여 일수는 1일입니다.
+이처럼 시작일이 기간에 포함되는 연속 기간 계산 시에는 반드시 +1 처리를 해주어야 합니다.
+WHERE 절과 HAVING 절의 차이점
+WHERE 절: 테이블의 개별 행 단위로 조건을 검사하며, GROUP BY로 그룹화하기 전에 먼저 실행됩니다. 집계 함수(AVG, SUM 등)를 사용할 수 없습니다.
+HAVING 절: GROUP BY로 그룹화되고 집계 함수가 계산된 이후에 그룹 단위로 조건을 검사합니다. 집계 함수를 조건으로 사용할 때 반드시 사용합니다.
+SQL 실행 순서 1단계: FROM (테이블 조회) 2단계: WHERE (개별 행 필터링) 3단계: GROUP BY (그룹화) 4단계: HAVING (그룹 조건 필터링) 5단계: SELECT (컬럼 조회, 집계 연산, 별칭 지정) 6단계: ORDER BY (정렬 수행)</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-13">
+  <div class="note-head">
+    <span class="note-num">7회차</span>
+    <h3>완주하지 못한 선수</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.08.28</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">7회차 · 2026.08.28</span></div>
+    <div class="ct-warn">⚠ 이 문제는 원본 노트에 제출 코드가 기록되어 있지 않습니다 — 정답 풀이와 개념만 정리합니다.</div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>(버전 1: HashMap 활용 - 권장 풀이) import java.util.HashMap;
+class Solution { public String solution(String[] participant, String[] completion) { HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+   for (String player : participant) {
+        map.put(player, map.getOrDefault(player, 0) + 1);
+    }
+    
+    for (String player : completion) {
+        map.put(player, map.get(player) - 1);
+    }
+    
+    for (String key : map.keySet()) {
+        if (map.get(key) != 0) {
+            return key;
+        }
+    }
+    
+    return "";
+}
+
+}
+(버전 2: Arrays.sort 활용 - 정렬 풀이) import java.util.Arrays;
+class Solution { public String solution(String[] participant, String[] completion) { Arrays.sort(participant); Arrays.sort(completion);
+   for (int i = 0; i &lt; completion.length; i++) {
+        if (!participant[i].equals(completion[i])) {
+            return participant[i];
+        }
+    }
+    
+    return participant[participant.length - 1];
+}
+
+}
+[풀이 1: HashMap 방식]
+1. 해시맵 생성: 선수 이름을 Key로, 해당 이름을 가진 선수 인원수를 Value(Integer)로 관리할 HashMap을 생성합니다.
+2. 참가자 카운팅: participant 배열을 순회하면서 map.getOrDefault(player, 0) + 1을 통해 처음 보는 선수는 1, 동명이인은 기존 값에 +1을 더해 저장합니다.
+3. 완주자 차감: completion 배열을 순회하면서 완주한 선수의 인원수를 map.get(player) - 1로 1씩 줄여줍니다.
+4. 미완주자 반환: map.keySet()으로 전체 이름을 확인하며 값이 0이 아닌(1로 남아있는) 선수를 찾아 반환합니다.
+
+[풀이 2: 정렬(Sorting) 방식]
+1. 배열 정렬: participant와 completion 두 배열을 Arrays.sort()를 이용해 알파벳 오름차순으로 정렬합니다.
+2. 일대일 비교: 동일한 인덱스 i에 대해 participant[i]와 completion[i]를 비교합니다. 완주하지 못한 선수가 있다면 그 순간 두 배열의 이름이 달라지게 되므로 그때의 participant[i]를 반환합니다.
+3. 마지막 원소 처리: completion 길이만큼 순회했는데도 다른 이름이 나오지 않았다면, 참가자 명단의 가장 마지막 인덱스에 있는 선수가 미완주자입니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>1. 시간 복잡도와 효율성 문제 (O(N^2) vs O(N))
+- 참가자 수가 최대 10만(100,000)명이므로, 2중 for문으로 하나씩 일치 여부를 비교하면 최악의 경우 100,000 * 100,000 = 100억 번의 연산이 발생하여 무조건 시간 초과가 발생합니다.
+- HashMap 방식은 탐색 및 삽입 시간이 평균 O(1)이므로 전체 시간 복잡도가 O(N)으로 매우 빠릅니다.
+- 정렬 방식은 정렬 시간 복잡도 O(N log N)을 따릅니다.
+
+2. HashMap의 핵심 메서드
+- map.put(key, value) : 맵에 Key-Value 쌍을 추가하거나 기존 값을 덮어씁니다.
+- map.get(key) : Key에 매핑된 Value를 조회합니다. 존재하지 않는 Key 조회 시 null을 반환합니다.
+- map.getOrDefault(key, defaultValue) : Key가 존재하면 해당 Value를 반환하고, 없으면 지정한 defaultValue를 반환하여 NullPointerException을 방지합니다.
+- map.keySet() : 맵에 저장된 모든 Key들을 Set 형태로 모아서 순회할 수 있게 합니다.
+
+3. 동명이인(중복 데이터) 처리 원리
+- 단순 boolean 체크 방식은 동명이인 중 1명이 완주해도 전체가 true로 바뀌는 논리적 오류가 생깁니다.
+- HashMap에 인원수를 누적(+1)하고 완주 시 차감(-1)하는 '카운팅 기법'을 사용하면 동명이인도 완벽하게 추적할 수 있습니다.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="ct-14">
+  <div class="note-head">
+    <span class="note-num">7회차</span>
+    <h3>연도 별 평균 미세먼지 농도 조회하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.08.28</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">7회차 · 2026.08.28</span></div>
+    <div class="ct-warn">⚠ 원본 노트의 "제출 코드" 칸에 직전 문제(자동차 평균 대여 기간 구하기)의 코드가 그대로 남아 있어(붙여넣기 실수로 보임) 이 문제 카드에서는 생략하고, 정답 풀이와 개념만 정리합니다.</div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>SELECT YEAR(YM) AS YEAR, ROUND(AVG(PM_VAL1), 2) AS PM10, ROUND(AVG(PM_VAL2), 2) AS "PM2.5" FROM AIR_POLLUTION WHERE LOCATION2 = '수원' GROUP BY YEAR(YM) ORDER BY YEAR ASC; 
+
+특수문자 별칭 처리: 마침표가 들어간 별칭 PM2.5는 식별자 오류를 방지하기 위해 "PM2.5"처럼 큰따옴표로 감싸야 합니다.
+연도별 그룹화: YM은 날짜 데이터이므로 YEAR(YM)으로 연도를 추출하여 GROUP BY에 전달해야 합니다.
+WHERE 절: LOCATION2 = '수원' 조건으로 수원 지역의 측정 데이터만 먼저 필터링합니다.
+GROUP BY 절: YEAR(YM)으로 연도만 추출하여 같은 연도끼리 그룹을 만듭니다.
+SELECT 절:
+YEAR(YM) AS YEAR : 연도를 출력합니다.
+ROUND(AVG(PM_VAL1), 2) AS PM10 : 미세먼지 평균을 계산하고 소수 셋째 자리에서 반올림하여 소수 둘째 자리까지 표시합니다.
+ROUND(AVG(PM_VAL2), 2) AS "PM2.5" : 초미세먼지 평균을 계산하고 소수 둘째 자리까지 반올림합니다.
+ORDER BY 절: 연도를 기준으로 오름차순(ASC) 정렬합니다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p>작은따옴표('')와 큰따옴표("")의 구분 (SQL 표준)
+작은따옴표(' '): 테이블 내부의 '데이터 값(문자열, 날짜)'을 표현할 때 사용합니다. (예: WHERE LOCATION2 = '수원')
+큰따옴표(" "): 컬럼명, 테이블명, 별칭(Alias) 같은 '식별자'를 감쌀 때 사용합니다. 특히 별칭에 특수문자(.), 공백이 들어갈 때 필수입니다. (예: AS "PM2.5")
+Oracle 등 표준 SQL 환경에서는 데이터 값에 큰따옴표를 쓰면 컬럼명으로 인식하여 에러가 발생합니다.
+MySQL 날짜 추출 함수
+YEAR(날짜): 연도 반환 (예: 2018)
+MONTH(날짜): 월 반환 (예: 1~12)
+DAY(날짜): 일 반환 (예: 1~31)
+ROUND(숫자, 자릿수) 반올림 규칙
+ROUND(숫자, 0): 소수 첫째 자리에서 반올림 (정수 형태)
+ROUND(숫자, 1): 소수 둘째 자리에서 반올림 (소수 첫째 자리까지 표시)
+ROUND(숫자, 2): 소수 셋째 자리에서 반올림 (소수 둘째 자리까지 표시)
+집계 함수와 함께 쓸 때는 반드시 ROUND(AVG(컬럼), 자릿수) 형태로 집계 함수 괄호를 먼저 닫아주어야 합니다.</p>
+    </div>
+  </div>
+</article>
+
+    </div>
+  </section>
+
   <section id="journey-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🧭 학습 여정 — 개념이 쌓이는 순서</h2></div>
     <p class="cat-desc">교안 54개 항목을 <b>"왜 이 순서로 배우는가"</b>라는 하나의 흐름으로 엮은 지도입니다. 📅 수업 진도 탭이 <b>날짜별 기록</b>이고 과목 탭이 <b>항목별 사전</b>이라면, 이 탭은 <b>앞에서 배운 것이 뒤에서 어떻게 다시 쓰이는지</b>를 이어서 보여 줍니다.</p>
@@ -13454,6 +14334,7 @@ const sections = {
   util: document.getElementById("util-section"),
   net: document.getElementById("net-section"),
   prac: document.getElementById("prac-section"),
+  codingtest: document.getElementById("codingtest-section"),
   journey: document.getElementById("journey-section"),
   concepts: document.getElementById("concepts-section"),
   exam: document.getElementById("exam-section"),
@@ -13534,7 +14415,7 @@ const memos = loadMemos();
 const PROGRESS_SECTION_LABEL = {
   "class-section":"수업 진도", "basic-section":"자바 기초", "oop-section":"객체지향",
   "util-section":"자바 활용", "net-section":"네트워크", "prac-section":"실습과제",
-  "concepts-section":"개념 사전",
+  "codingtest-section":"코딩테스트", "concepts-section":"개념 사전",
 };
 function updateProgressStat(){
   const cards = [...document.querySelectorAll(".note-card")];
@@ -13790,7 +14671,7 @@ document.querySelectorAll("section.cat").forEach(sec => {
 
 // ---- 검색: 모든 과목에서 제목·태그·본문에 키워드가 들어간 카드만 표시 ----
 const searchBox = document.getElementById("search-box");
-const catKeys = ["class", "basic", "oop", "util", "net", "prac", "concepts"];
+const catKeys = ["class", "basic", "oop", "util", "net", "prac", "codingtest", "concepts"];
 function clearCardFilter(){
   document.querySelectorAll(".note-card").forEach(c => { c.style.display = ""; });
   document.querySelectorAll("section.cat .toc").forEach(t => { t.style.display = ""; });
