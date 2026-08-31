@@ -15,14 +15,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 <style>
   /* ==== 학습 노트 테마: 밝은 종이 위에 어두운 코드 에디터 ==== */
   :root{
-    --bg:#f7f5ef;
-    --panel:#ffffff;
-    --panel-2:#f2efe6;
+    --bg:#eeece5;
+    --panel:#f8f6f1;
+    --panel-2:#e6e3da;
     --code-bg:#161a23;
     --code-head:#1f2430;
-    --border:#e4dfd1;
-    --text:#2d3038;
-    --muted:#6e7178;
+    --border:#d8d3c6;
+    --text:#33363d;
+    --muted:#63666e;
     --html:#c9541f;
     --css:#2b6cd4;
     --js:#a07600;
@@ -38,26 +38,26 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --shadow:0 1px 3px rgba(70,60,30,.07);
   }
   [data-theme="dark"]{
-    --bg:#0f1115;
-    --panel:#161922;
-    --panel-2:#1c2029;
-    --code-bg:#0a0c10;
-    --code-head:#1c2029;
-    --border:#272c38;
-    --text:#e7e9ee;
-    --muted:#9aa2b1;
-    --html:#ff8a5c;
-    --css:#5ca8ff;
-    --js:#f7d154;
-    --react:#5cd6f2;
-    --next:#8f97a8;
-    --concepts:#c4b5fd;
-    --accent:#7c9cff;
-    --good:#4ade80;
-    --hl:rgba(247,209,84,.30);
-    --easy-bg:rgba(247,209,84,.07);
-    --easy-border:rgba(247,209,84,.28);
-    --easy-label:#e8c96a;
+    --bg:#21242b;
+    --panel:#282c34;
+    --panel-2:#30353e;
+    --code-bg:#1c1f25;
+    --code-head:#2b2f38;
+    --border:#3a404b;
+    --text:#d2d6dd;
+    --muted:#99a0ac;
+    --html:#e09a78;
+    --css:#86ade0;
+    --js:#d5bd77;
+    --react:#83c3d3;
+    --next:#99a0ac;
+    --concepts:#b4a8e0;
+    --accent:#93a6e0;
+    --good:#74bf8f;
+    --hl:rgba(213,189,119,.22);
+    --easy-bg:rgba(213,189,119,.06);
+    --easy-border:rgba(213,189,119,.20);
+    --easy-label:#d5bd77;
     --shadow:none;
   }
   *{box-sizing:border-box;}
@@ -953,14 +953,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
   /* ---- 문서형 학습 노트 재설계: 장식보다 읽기 흐름과 정보 위계를 우선한다 ---- */
   :root{
-    --bg:#fbfbf9;--panel:#ffffff;--panel-2:#f5f6f5;--border:#d9dedc;
-    --text:#202825;--muted:#65706b;--accent:#245c52;--good:#20704a;
+    --bg:#eeefec;--panel:#f8f9f7;--panel-2:#e7e9e6;--border:#d3d8d5;
+    --text:#262e2b;--muted:#5d6863;--accent:#245c52;--good:#20704a;
     --html:#a94e2a;--css:#2e639f;--js:#876b12;--react:#257b83;--next:#5e6a66;--concepts:#6855a2;
     --shadow:none;
   }
   [data-theme="dark"]{
-    --bg:#121715;--panel:#181e1b;--panel-2:#222a26;--border:#34403a;
-    --text:#edf1ed;--muted:#a8b4ac;--accent:#8bc6b4;--good:#72d49b;
+    --bg:#232722;--panel:#2a2f29;--panel-2:#333830;--border:#3d4539;
+    --text:#d4d9d2;--muted:#9ba597;--accent:#84bda9;--good:#74bf8f;
   }
   body{font-size:15.5px;line-height:1.75;background:var(--bg);}
   .wrap{max-width:920px;}
@@ -1085,13 +1085,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   }
   /* ---- 프리미엄 학습 브랜드: 고급스러운 색상 깊이와 선택적 시각 포인트 ---- */
   :root{
-    --bg:#f5f6f8;--panel:#ffffff;--panel-2:#f0f3f5;--border:#d8e0e4;
-    --text:#1f2a35;--muted:#687582;--accent:#0f6c72;--good:#23825b;
+    --bg:#eaedf0;--panel:#f7f8fa;--panel-2:#e3e8ec;--border:#d2dade;
+    --text:#252f39;--muted:#5f6c78;--accent:#0f6c72;--good:#23825b;
     --html:#c5633e;--css:#316fb5;--js:#a1741c;--react:#187f89;--next:#5d6873;--concepts:#7657ad;
   }
   [data-theme="dark"]{
-    --bg:#101722;--panel:#17212c;--panel-2:#202d39;--border:#304152;
-    --text:#ecf2f5;--muted:#a6b4c0;--accent:#65c9c3;--good:#66d09b;
+    --bg:#212832;--panel:#29313c;--panel-2:#323b47;--border:#3c4653;
+    --text:#d1d8de;--muted:#97a3ae;--accent:#6ab8b3;--good:#74bf8f;
   }
   body{background:radial-gradient(900px 520px at 92% -6%,rgba(77,155,165,.11),transparent 65%),var(--bg);}
   header.hero{position:relative;overflow:hidden;border:0;background:linear-gradient(118deg,#101b2b 0%,#193847 55%,#205b5d 100%);color:#f7fbfc;}
@@ -1383,6 +1383,22 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     nav.tabs .wrap{padding:0 16px;}
     #search-box{width:106px;}
   }
+
+  /* 다크모드에서 강조색 칩은 배경이 밝아 흰 글씨가 안 읽힌다(2:1). 어두운 글씨로 뒤집는다. */
+  [data-theme="dark"] .skip-link{color:var(--bg);}
+  [data-theme="dark"] #star-filter-btn.active{color:var(--bg);}
+  [data-theme="dark"] .resume-banner button{color:var(--bg);}
+  [data-theme="dark"] #study-goal-save{color:var(--bg);}
+  [data-theme="dark"] #backup-confirm-btn{color:var(--bg);}
+  [data-theme="dark"] .journey-subtab-btn.active{color:var(--bg);}
+  [data-theme="dark"] .journey-num{color:var(--bg);}
+  [data-theme="dark"] .note-tags .tag:hover{color:var(--bg);}
+  [data-theme="dark"] .review-chip.active{color:var(--bg);}
+  [data-theme="dark"] .review-end-actions button.primary{color:var(--bg);}
+  [data-theme="dark"] .mobile-quickbar button.primary{color:var(--bg);}
+  [data-theme="dark"] .exam-chip.count-chip.active{color:var(--bg);}
+  [data-theme="dark"] .exam-btn{color:var(--bg);}
+  [data-theme="dark"] .exam-chip.scope-chip.active{color:var(--bg);}
 </style>
 </head>
 <body>

@@ -12,14 +12,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 <style>
   /* ==== 학습 노트 테마: 밝은 종이 위에 어두운 코드 에디터 ==== */
   :root{
-    --bg:#f7f5ef;
-    --panel:#ffffff;
-    --panel-2:#f2efe6;
+    --bg:#eeece5;
+    --panel:#f8f6f1;
+    --panel-2:#e6e3da;
     --code-bg:#161a23;
     --code-head:#1f2430;
-    --border:#e4dfd1;
-    --text:#2d3038;
-    --muted:#6e7178;
+    --border:#d8d3c6;
+    --text:#33363d;
+    --muted:#63666e;
     --html:#c9541f;
     --css:#2b6cd4;
     --js:#a07600;
@@ -35,26 +35,26 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --shadow:0 1px 3px rgba(70,60,30,.07);
   }
   [data-theme="dark"]{
-    --bg:#0f1115;
-    --panel:#161922;
-    --panel-2:#1c2029;
-    --code-bg:#0a0c10;
-    --code-head:#1c2029;
-    --border:#272c38;
-    --text:#e7e9ee;
-    --muted:#9aa2b1;
-    --html:#ff8a5c;
-    --css:#5ca8ff;
-    --js:#f7d154;
-    --react:#5cd6f2;
-    --next:#8f97a8;
-    --concepts:#c4b5fd;
-    --accent:#7c9cff;
-    --good:#4ade80;
-    --hl:rgba(247,209,84,.30);
-    --easy-bg:rgba(247,209,84,.07);
-    --easy-border:rgba(247,209,84,.28);
-    --easy-label:#e8c96a;
+    --bg:#21242b;
+    --panel:#282c34;
+    --panel-2:#30353e;
+    --code-bg:#1c1f25;
+    --code-head:#2b2f38;
+    --border:#3a404b;
+    --text:#d2d6dd;
+    --muted:#99a0ac;
+    --html:#e09a78;
+    --css:#86ade0;
+    --js:#d5bd77;
+    --react:#83c3d3;
+    --next:#99a0ac;
+    --concepts:#b4a8e0;
+    --accent:#93a6e0;
+    --good:#74bf8f;
+    --hl:rgba(213,189,119,.22);
+    --easy-bg:rgba(213,189,119,.06);
+    --easy-border:rgba(213,189,119,.20);
+    --easy-label:#d5bd77;
     --shadow:none;
   }
   *{box-sizing:border-box;}
@@ -969,14 +969,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     --codingtest:#b91c5c;
   }
   [data-theme="dark"]{
-    --basic:#f0b45c;
-    --oop:#c4b5fd;
-    --util:#4ade80;
-    --net:#5ca8ff;
-    --prac:#ff8a5c;
-    --class:#5cd6f2;
-    --journey:#5eead4;
-    --codingtest:#f472b6;
+    --basic:#d8ab73;
+    --oop:#b4a8e0;
+    --util:#74bf8f;
+    --net:#86ade0;
+    --prac:#e09a78;
+    --class:#83c3d3;
+    --journey:#77c2b7;
+    --codingtest:#dd93ac;
   }
   #journey-section{--c:var(--journey);}
   #class-section{--c:var(--class);}
@@ -1025,6 +1025,18 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .steps{margin:14px 0 0;padding:14px 16px;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;}
   .steps-title{font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;}
   .steps ol{margin:0;padding-left:19px;display:flex;flex-direction:column;gap:5px;font-size:14.4px;line-height:1.75;}
+
+  /* 다크모드에서 강조색 칩은 배경이 밝아 흰 글씨가 안 읽힌다(2:1). 어두운 글씨로 뒤집는다. */
+  [data-theme="dark"] #star-filter-btn.active{color:var(--bg);}
+  [data-theme="dark"] .resume-banner button{color:var(--bg);}
+  [data-theme="dark"] .journey-subtab-btn.active{color:var(--bg);}
+  [data-theme="dark"] .journey-num{color:var(--bg);}
+  [data-theme="dark"] .note-tags .tag:hover{color:var(--bg);}
+  [data-theme="dark"] .review-chip.active{color:var(--bg);}
+  [data-theme="dark"] .review-end-actions button.primary{color:var(--bg);}
+  [data-theme="dark"] .exam-chip.count-chip.active{color:var(--bg);}
+  [data-theme="dark"] .exam-btn{color:var(--bg);}
+  [data-theme="dark"] .exam-chip.scope-chip.active{color:var(--bg);}
 </style>
 </head>
 <body>
