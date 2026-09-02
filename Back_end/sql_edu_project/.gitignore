@@ -1,0 +1,10 @@
+# employees 샘플 DB의 데이터 덤프는 저장소에 넣지 않는다 (합계 약 372MB).
+# 스키마·테스트 스크립트만 커밋하고, 데이터는 필요할 때 원본에서 받는다.
+#   원본: https://github.com/datacharmer/test_db
+employees_all.sql
+*.dump
+*.zip
+
+# macOS가 남기는 리소스 포크 찌꺼기
+._*
+.DS_Store
