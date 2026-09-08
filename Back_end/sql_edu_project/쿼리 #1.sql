@@ -944,8 +944,124 @@ ON b.userid = u.userid
 WHERE b.userid = 'jyp';
 
 
+-- outer join하기
+USE sqldb;
+
+-- 기준테이블 usertbl일 경우
+SELECT u.userid,u.name,b.prodName, u.addr,
+      CONCAT(u.mobile1, u.mobile2) AS "연락처"
+FROM usertbl u
+	LEFT OUTER JOIN buytbl b
+	ON u.userID = b.userID
+ORDER BY u.userID;
+
+-- 기준 테이블 buytbl일 경우
+SELECT u.userid,u.name,b.prodName, u.addr,
+      CONCAT(u.mobile1, u.mobile2) AS "연락처"
+FROM  buytbl b
+	RIGHT OUTER JOIN usertbl u
+	ON u.userID = b.userID
+ORDER BY u.userID;
+
+-- 구매이력이 없는 회원 조회할 경우
+SELECT u.userid,u.name,b.prodName, u.addr,
+      CONCAT(u.mobile1, u.mobile2) AS "연락처"
+FROM usertbl u
+	LEFT OUTER JOIN buytbl b
+	ON u.userID = b.userID
+WHERE b.prodName IS NULL 
+ORDER BY u.userID;
+
+-- 실습 6
+CREATE TABLE stdtbl (stdname VARCHAR(10) NOT NULL PRIMARY KEY, addr CHAR(4) NOT NULL); 
+CREATE TABLE clubtbl( clubname VARCHAR(10) NOT NULL PRIMARY KEY,roomno CHAR(4) NOT NULL);
+CREATE TABLE stdclubtbl(num INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+								stdname VARCHAR(10) NOT NULL,
+								clubname VARCHAR(10) NOT NULL,
+								FOREIGN KEY (stdname) REFERENCES stdtbl(stdname),
+								FOREIGN KEY (clubname) REFERENCES clubtbl(clubname));
+
+INSERT INTO stdtbl VALUES('김범수', '경남'), 
+('성시경', '서울'),('조용필', '경기'),('은지원', '경북'),('바비킴', '서울');
+ 
+INSERT INTO clubtbl VALUES('수영', '101호'), 
+('바둑', '102호'),('축구', '103호'),('봉사', '104호');
+
+INSERT INTO stdclubtbl VALUES(NULL,'김범수', '바둑'), 
+(NULL,'김범수', '축구'),(NULL,'조용필', '축구'),(NULL,'은지원', '축구'),
+(NULL,'은지원', '봉사'),(NULL,'바비킴', '봉사'); 
+
+SELECT c.clubname, c.roomno,s.stdname,s.addr
+FROM stdtbl s JOIN stdclubtbl sc
+ON s.stdname = sc.stdname
+JOIN clubtbl c
+ON sc.clubname=c.clubname
+ORDER BY c.clubname;
+ 
+-- OUTER JOIN(외부조인)
+SELECT u.userID, NAME, addr, prodname, price, amount
+FROM usertbl u INNER JOIN buytbl b
+ON u.userID=b.userID;  
+ 
+SELECT u.userID, NAME, addr, prodname, price, amount
+FROM usertbl u left outer JOIN buytbl b
+ON u.userID=b.userID;  
+ 
+SELECT u.userID, NAME, addr, prodname, price, amount
+FROM usertbl u left outer JOIN buytbl b
+ON u.userID=b.userID
+WHERE b.prodName IS NULL; 
+
+
+-- 실습 7
+	-- 학생 기준
+	SELECT s.stdname, s.addr, c.clubname, c.roomno
+   FROM stdtbl s 
+	LEFT OUTER  JOIN stdclubtbl sc
+   ON s.stdname = sc.stdname
+   LEFT OUTER JOIN clubtbl c
+   ON sc.clubname=c.clubname
+   ORDER BY s.stdname;
+  
+  -- 동아리 기준
+	SELECT c.clubname,c.roomno, s.stdname, s.addr  
+   FROM stdtbl s 
+	LEFT OUTER  JOIN stdclubtbl sc
+   ON s.stdname = sc.stdname
+   RIGHT OUTER JOIN clubtbl c
+   ON sc.clubname=c.clubname
+   ORDER BY c.clubname;
+
+   -- full outer join : union 이용
+    SELECT s.stdname, s.addr, c.clubname, c.roomno
+   FROM stdtbl s 
+	LEFT OUTER  JOIN stdclubtbl sc
+   ON s.stdname = sc.stdname
+   LEFT OUTER JOIN clubtbl c
+   ON sc.clubname=c.clubname
+   
+  	UNION 
+  	
+	SELECT s.stdname, s.addr, c.clubname, c.roomno 
+   FROM stdtbl s 
+	LEFT OUTER  JOIN stdclubtbl sc
+   ON s.stdname = sc.stdname
+   RIGHT OUTER JOIN clubtbl c
+   ON sc.clubname=c.clubname ;
+   
+   -- self join 하기 
+   
+   SELECT e1.empno, e1.ename, e1.mgr, e2.empno, e2.ename
+   FROM emp e1 
+   JOIN emp e2
+	ON e1.mgr = e2.empno;   
+	
+
 
 -- /////
+
+
+
 --	12. join 이용하기
 USE scott;
 -- Q1) 사원테이블과 부서테이블에서 사원들의 이름, 부서번호, 부서이름을 출력하자.
@@ -1098,7 +1214,7 @@ SHOW index FROM buytbl;
 -- 부모 테이블에 데이터가 변경되면
 -- 자식 테이블에 내용도 자동으로 변경하는 옵션
 -- on delete cascade, on update cascade 쿼리 끝에 추가하면 됨
-
+-- ///교재실습
 USE TABLEdb;
 DROP TABLE if EXISTS buytbl, usertbl;
 
@@ -1170,6 +1286,9 @@ INSERT INTO usertbl VALUES('ejw', N'은지원', 1972, n'경북', '011' , '888888
 INSERT INTO usertbl VALUES('jkw', N'조관우', 1965, n'경기', '018' , '99999999', 172, '2010-10-10');
 INSERT INTO usertbl VALUES('bbk', N'바비킴', 1973, n'서울', '010' , '00000000', 176, '2013-5-5');
 
+USE tabledb;
+
+
 SET foreign_key_checks = 0;
 UPDATE usertbl SET userid = 'vvk' WHERE userid = 'bbk';
 SET foreign_key_checks = 1;
@@ -1180,7 +1299,37 @@ INNER JOIN usertbl u
 ON b.userid = u.userid;
 
 
+
 SELECT COUNT(*) FROM buytbl;
+
+
+SET foreign_key_checks = 0;
+UPDATE usertbl SET userid = 'bbk' WHERE userid = 'vvk';
+SET foreign_key_checks = 1;
+
+ALTER TABLE buytbl
+DROP FOREIGN KEY fk_usertbl_buytbl;
+
+ALTER TABLE buytbl
+ADD CONSTRAINT fk_usertbl_buytbl
+FOREIGN KEY(userid)
+REFERENCES usertbl (userid)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+UPDATE usertbl SET userid = 'vvk' WHERE userid = 'bbk';
+SELECT b.userid, u.name, b.prodname, u.addr, CONCAT(u.mobile1, u.mobile2) AS '연락처'
+FROM buytbl b
+INNER JOIN usertbl u 
+ON b.userid = u.userid
+ORDER BY b.userid;
+
+DELETE FROM usertbl WHERE userid = 'vvk';
+SELECT * FROM usertbl;
+
+ALTER TABLE usertbl
+DROP COLUMN birthyear;
+-- //////
 
 
 -- view 사용하기
@@ -1231,3 +1380,98 @@ ADD PRIMARY KEY (userid);
 -- 조회해보니 userid 값들이 오름차순 정렬되어 조회됨
 SELECT * FROM usertbl3;
 
+-- // 실습3
+USE sqldb;
+
+-- 1. 데이터베이스 초기화 및 재생성
+DROP DATABASE IF EXISTS sqlDB;
+CREATE DATABASE sqlDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE sqlDB;
+
+-- 2. 회원 테이블 (userTbl) 생성
+CREATE TABLE userTbl (
+    userID    CHAR(8)      NOT NULL PRIMARY KEY, -- 사용자 아이디(PK, 클러스터형 인덱스)
+    name      VARCHAR(10)  NOT NULL,             -- 이름
+    birthYear INT          NOT NULL,             -- 출생년도
+    addr      CHAR(2)      NOT NULL,             -- 지역
+    mobile1   CHAR(3),                           -- 휴대폰 국번
+    mobile2   CHAR(8),                           -- 휴대폰 뒷자리
+    height    SMALLINT,                          -- 키
+    mDate     DATE                               -- 가입일
+);
+
+-- 3. 구매 테이블 (buyTbl) 생성
+CREATE TABLE buyTbl (
+    num       INT AUTO_INCREMENT NOT NULL PRIMARY KEY, -- 순번(PK, 클러스터형 인덱스)
+    userID    CHAR(8)            NOT NULL,             -- 외래키(FK)
+    prodName  CHAR(6)            NOT NULL,             -- 물품명
+    groupName CHAR(4),                                 -- 분류
+    price     INT                NOT NULL,             -- 단가
+    amount    SMALLINT           NOT NULL,             -- 수량
+    FOREIGN KEY (userID) REFERENCES userTbl(userID)
+);
+
+-- 4. userTbl 데이터 입력 (10건)
+INSERT INTO userTbl VALUES('LSG', '이승기', 1987, '서울', '011', '11111111', 182, '2008-8-8');
+INSERT INTO userTbl VALUES('KBS', '김범수', 1979, '경남', '011', '22222222', 173, '2012-4-4');
+INSERT INTO userTbl VALUES('KKH', '김경호', 1971, '전남', '019', '33333333', 177, '2007-7-7');
+INSERT INTO userTbl VALUES('JYP', '조용필', 1950, '경기', '011', '44444444', 166, '2009-4-4');
+INSERT INTO userTbl VALUES('SSK', '성시경', 1979, '서울', NULL , NULL      , 186, '2013-12-12');
+INSERT INTO userTbl VALUES('LJB', '임재범', 1963, '서울', '016', '66666666', 182, '2009-9-9');
+INSERT INTO userTbl VALUES('YJS', '윤종신', 1969, '경남', NULL , NULL      , 170, '2005-5-5');
+INSERT INTO userTbl VALUES('EJW', '은지원', 1972, '경북', '011', '88888888', 174, '2014-3-3');
+INSERT INTO userTbl VALUES('JKW', '조관우', 1965, '경기', '018', '99999999', 172, '2010-10-10');
+INSERT INTO userTbl VALUES('BBK', '바비킴', 1973, '서울', '010', '00000000', 176, '2013-5-5');
+
+-- 5. buyTbl 데이터 입력 (12건)
+INSERT INTO buyTbl VALUES(NULL, 'KBS', '운동화', NULL  , 30,   2);
+INSERT INTO buyTbl VALUES(NULL, 'KBS', '노트북', '전자', 1000, 1);
+INSERT INTO buyTbl VALUES(NULL, 'JYP', '모니터', '전자', 200,  1);
+INSERT INTO buyTbl VALUES(NULL, 'BBK', '모니터', '전자', 200,  5);
+INSERT INTO buyTbl VALUES(NULL, 'KBS', '청바지', '의류', 50,   3);
+INSERT INTO buyTbl VALUES(NULL, 'BBK', '메모리', '전자', 80,  10);
+INSERT INTO buyTbl VALUES(NULL, 'SSK', '책'   , '서적', 15,   5);
+INSERT INTO buyTbl VALUES(NULL, 'EJW', '책'   , '서적', 15,   2);
+INSERT INTO buyTbl VALUES(NULL, 'EJW', '청바지', '의류', 50,   1);
+INSERT INTO buyTbl VALUES(NULL, 'BBK', '운동화', NULL  , 30,   2);
+INSERT INTO buyTbl VALUES(NULL, 'EJW', '책'   , '서적', 15,   1);
+INSERT INTO buyTbl VALUES(NULL, 'BBK', '운동화', NULL  , 30,   2);
+
+
+SELECT * FROM usertbl;
+SELECT * FROM buytbl;
+
+USE sqldb;
+SHOW INDEX FROM usertbl;
+
+SHOW TABLE STATUS LIKE 'usertbl';
+
+CREATE INDEX idx_usertbl_addr
+ON usertbl (addr);
+
+ANALYZE TABLE usertbl;
+SHOW TABLE STATUS LIKE 'usertbl';
+
+CREATE UNIQUE index idx_usertbl_birthyear
+ON usertbl (birthyear);
+
+CREATE UNIQUE INDEX idx_usertbl_name
+ON usertbl (NAME);
+
+CREATE INDEX idx_usertbl_name_birthyear
+ON usertbl (NAME,birthyear);
+
+DROP INDEX idx_usertbl_name ON usertbl;
+
+DROP INDEX idx_usertbl_addr ON usertbl;
+DROP INDEX idx_usertbl_name_birthyear ON usertbl;
+
+SELECT TABLE_NAME, CONSTRAINT_NAME
+FROM information_schema.referential_constraints
+WHERE CONSTRAINT_SCHEMA = 'sqldb';
+
+-- 1. 자식 테이블(buytbl)의 외래키 먼저 삭제 (백틱 필수)
+ALTER TABLE buytbl DROP FOREIGN KEY `1`;
+
+-- 2. 외래키가 사라졌으므로 부모 테이블(usertbl)의 기본키 삭제 가능
+ALTER TABLE usertbl DROP PRIMARY KEY;
