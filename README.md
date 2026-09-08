@@ -41,11 +41,38 @@
 | Java 실습 | `javac` 컴파일 및 실행 결과 확인 | `Back_end/` 코드와 백엔드 대시보드 |
 | React·Next.js 실습 | 의존성 설치 후 `npm run lint`, `npm run build`, 로컬 렌더링 확인 | `Front_end/4.react/lessons/` |
 | 정적 대시보드 | 링크·검색·테마·모바일 레이아웃 확인 | 루트 및 과정별 `index.html` |
+| DOM 구조 | `python3 scripts/verify_dom_structure.py`로 실제 파싱해 태그 중첩·이스케이프 검사 | `scripts/verify_dom_structure.py` |
 | 내부 링크·자원 | `python3 scripts/check_internal_links.py`로 로컬 경로 검사 | `scripts/check_internal_links.py` |
 | 프런트엔드 인벤토리 | `python3 scripts/verify_frontend_inventory.py`로 카드·헤더·통계 수 일치 검사 | `scripts/verify_frontend_inventory.py` |
 | 백엔드 인벤토리 | `python3 scripts/verify_backend_inventory.py`로 수업 진도·개념·과제·여정과 통계 수 일치 검사 | `scripts/verify_backend_inventory.py` |
 | 자동 검증 | HTML·문서·검사 스크립트 변경 시 링크·인벤토리 검사를 자동 실행 | `.github/workflows/verify-study-notes.yml` |
 | 형상 관리 | 소스·문서만 커밋하고 생성물·비밀 값은 제외 | `.gitignore`, `Front_end/.gitignore` |
+
+## DOM 구조 검사
+
+태그 **개수**가 맞아도 실제 문서 구조는 깨져 있을 수 있습니다. 예를 들어 `<b>내용</code>`처럼
+다른 태그로 잘못 닫으면 `<b>`와 `</b>` 개수는 그대로라 어떤 개수 검사도 통과하지만, 브라우저는
+뒤따르는 `<section>` 여러 개를 그 `<b>` 안으로 집어넣습니다. `List<String>`처럼 제네릭 표기를
+이스케이프하지 않은 경우도 `<string>`이라는 요소가 생겨 같은 일이 벌어집니다. 둘 다 화면은
+멀쩡해 보여서 눈으로는 찾기 어렵습니다.
+
+이 검사는 개수를 세지 않고 **실제로 파싱해 트리를 만들어** 다음을 확인합니다.
+
+- 닫히지 않았거나 다른 태그로 잘못 닫힌 태그, 짝 없는 끝 태그
+- 이스케이프하지 않아 생긴 알 수 없는 요소(`<String>`, `<Object>` 등)
+- 블록 요소가 인라인 요소 안에 들어간 구조 붕괴, `<section>`이 인라인 요소에 삼켜진 경우
+- 중복 `id`, 문서 안에 대상이 없는 `#앵커`
+
+```bash
+python3 scripts/verify_dom_structure.py
+```
+
+검사 규칙 자체가 동작하는지 확인하는 자체 테스트도 함께 들어 있습니다. 규칙을 고친 뒤에는
+아래 명령으로 11개 규칙이 모두 살아 있는지 확인할 수 있고, 자동 검증에서도 먼저 실행됩니다.
+
+```bash
+python3 scripts/verify_dom_structure.py --self-test
+```
 
 ## 내부 링크 검사
 
@@ -69,7 +96,7 @@ python3 scripts/verify_backend_inventory.py
 
 ## 자동 검증
 
-수동 검사는 그대로 사용할 수 있으며, 같은 검사가 HTML·Markdown·검사 스크립트·워크플로 변경을 포함한 `main` 푸시와 Pull Request에서 자동으로 실행됩니다. 자동 검증은 **읽기 전용**입니다. 저장소 파일, 배포 설정, 이슈·Pull Request에 변경을 쓰지 않고 링크와 대시보드 인벤토리만 검사합니다. 필요한 경우 저장소의 Actions 화면에서 수동 실행할 수도 있습니다.
+수동 검사는 그대로 사용할 수 있으며, 같은 검사가 HTML·Markdown·검사 스크립트·워크플로 변경을 포함한 `main` 푸시와 Pull Request에서 자동으로 실행됩니다. 자동 검증은 **읽기 전용**입니다. 저장소 파일, 배포 설정, 이슈·Pull Request에 변경을 쓰지 않고 링크와 DOM 구조, 대시보드 인벤토리만 검사합니다. 필요한 경우 저장소의 Actions 화면에서 수동 실행할 수도 있습니다.
 
 ## 폴더 구조
 
