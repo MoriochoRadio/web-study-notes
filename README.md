@@ -82,6 +82,15 @@ python3 scripts/verify_dom_structure.py --self-test
 python3 scripts/check_internal_links.py
 ```
 
+탐색은 `node_modules`·`dist` 같은 폴더에 **애초에 들어가지 않습니다**. 예전에는 결과만 걸러서
+`node_modules` 안까지 들어갔는데, npm이 만든 심볼릭 링크가 저장소 구조 변경으로 끊겨 있으면
+탐색 도중 `FileNotFoundError`로 검사 전체가 멈췄습니다. 지금은 가지치기와 오류 무시를 함께 두어
+끊긴 링크가 있어도 완주하며, 그만큼 속도도 빨라졌습니다. 탐색 규칙이 살아 있는지는 아래로 확인합니다.
+
+```bash
+python3 scripts/check_internal_links.py --self-test
+```
+
 프런트엔드에 새 수업 카드를 추가했다면 아래 명령도 실행합니다. HTML·CSS·JavaScript·React/Next.js의 **대시보드 카드 수**, 헤더 요약, 통계 카드가 같은 수치를 가리키는지 확인하며, React 졸업 과제는 14개 레슨과 별도로 검증합니다.
 
 ```bash
