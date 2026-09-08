@@ -30,7 +30,7 @@ RULES = (
     InventoryRule("prac-section", "prac", "실습과제", r'<article\s+class="[^"]*\bnote-card\b[^"]*"'),
     InventoryRule("codingtest-section", "codingtest", "코딩테스트", r'<article\s+class="[^"]*\bnote-card\b[^"]*"'),
     InventoryRule("sql-section", "sql", "SQL 기초", r'<article\s+class="[^"]*\bnote-card\b[^"]*"'),
-    InventoryRule("journey-section", "journey", "학습 여정", r'<div\s+class="[^"]*\bjourney-step\b[^"]*"'),
+    InventoryRule("journey-section", "journey", "학습 여정", r'<article\s+class="journey-step"'),
     InventoryRule("concepts-section", "concepts", "개념 사전", r'<article\s+class="[^"]*\bnote-card\b[^"]*"'),
 )
 

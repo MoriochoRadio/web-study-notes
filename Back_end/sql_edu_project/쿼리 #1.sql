@@ -767,3 +767,467 @@ SELECT ename,
          mod(mod(DATEDIFF(CURDATE(), hiredate) , 365) , 30), '일'
        ) AS 근무일수
 FROM emp;
+
+-- 윈도우 함수 사용하기
+-- 분류: 집계함수, 비집계함수(순위함수, 분석함수)
+-- over절과 함께 사용한다.
+
+-- 부서별 평균 급여 초회학
+USE scott;
+
+SELECT ename, deptno,ROUND( AVG(sal), 2) AS "avg_sal"
+FROM emp
+GROUP BY deptno, ename;
+
+
+-- 윈도우 함수 사용: 집계 대상 데이터외에 다른 데이터도 표현
+SELECT ename, deptno,
+ROUND( AVG(sal) OVER(PARTITION BY deptno), 2) AS "avg_sal"
+FROM emp
+GROUP BY deptno, ename;
+
+USE sqldb;
+
+SELECT *
+FROM(
+SELECT ROW_NUMBER() OVER(ORDER BY height DESC) `키큰순위`,
+NAME, addr, height
+FROM usertbl ) a
+WHERE `키큰순위` BETWEEN 3 AND 8;
+
+SELECT ROW_NUMBER() OVER(ORDER BY height DESC) `키큰순위`,
+NAME, addr, height
+FROM usertbl;
+
+SELECT ROW_NUMBER() OVER(PARTITION BY addr ORDER BY height DESC, NAME asc) `키큰순위`,
+NAME, addr, height
+FROM usertbl;
+
+-- dense_rank() 사용하기
+SELECT dense_rank() OVER(ORDER BY height DESC) `키큰순위`,
+NAME, addr, height
+FROM usertbl;
+
+-- rank() 사용하기
+SELECT rank() OVER(ORDER BY height DESC) `키큰순위`,
+NAME, addr, height
+FROM usertbl;
+
+-- NTILE() 사용하기
+SELECT NTILE(4) OVER(ORDER BY height DESC) `반번호`,
+NAME, addr, height
+FROM usertbl;
+
+-- lead() 함수: 다음행에 오는 값 구하기
+-- lag()함수: 이전행에 값 구하기
+SELECT NAME, addr, height AS "키",
+height - (LEAD(height,1) OVER(ORDER BY height DESC)) AS "다음 사람과 키차이"
+FROM usertbl;
+
+SELECT NAME, addr, height AS "키",
+height - (LAG(height,1) OVER(ORDER BY height DESC)) AS "이전 사람과 키차이"
+FROM usertbl;
+
+SELECT  addr, NAME, height AS "키",
+height - (FIRST_VALUE(height,1) OVER(partition by addr ORDER BY height DESC)) AS "지역별 최대키와 차이"
+FROM usertbl;
+
+SELECT  addr, NAME, height AS "키",
+CAST((CUME_DIST()over(partition by addr order by height DESC))*100 AS INTEGER) AS "누적인원백분율"
+FROM usertbl;
+
+-- 실습5번 피벗연습
+
+USE sqldb;
+
+-- 기존 테이블 삭제 후 재생성
+DROP TABLE IF EXISTS pivotTest;
+
+CREATE TABLE pivotTest(
+    uName CHAR(3),  
+    season CHAR(2),
+    amount INT 
+);
+
+INSERT INTO pivotTest VALUES
+('김범수','겨울',10), ('윤종신','여름',15), ('김범수','가을',25), ('김범수','봄',3),
+('김범수','봄',37), ('윤종신','겨울',40), ('김범수','여름',14), ('김범수','겨울',22),
+('윤종신','여름',64);
+
+
+SELECT * FROM pivotTest;
+-- 피벗 쿼리
+SELECT 
+    uName, 
+    SUM(IF(season = '봄', amount, 0)) AS '봄',
+    SUM(IF(season = '여름', amount, 0)) AS '여름',
+    SUM(IF(season = '가을', amount, 0)) AS '가을',
+    SUM(IF(season = '겨울', amount, 0)) AS '겨울',
+    SUM(amount) AS '합계' 
+FROM pivotTest 
+GROUP BY uName;
+
+
+-- 11. 함수 이용하기(윈도우함수)
+
+USE scott;
+
+-- 1.사원 테이블에서 각 사원에 급여(SAL)가 높은 순서대로 
+--   상위 5명을 아래 예제처럼 출력하세요
+
+SELECT * FROM emp ORDER BY sal DESC LIMIT 5;
+
+-- 2. 사원 테이블에서 각 사원에 급여(SAL)가 높은 순서대로 
+-- 순위를 부여 했을 때 6등~10등인 사람을 순위대로 아래 예제처럼 출력하세요
+SELECT *
+FROM (
+SELECT *, ROW_NUMBER() OVER (ORDER BY sal DESC) RN
+FROM emp
+) a
+WHERE RN BETWEEN 6 A.ND 10;
+
+
+-- 3.SALGRADE 테이블 데이터 세로 정보를 가로로 아래 예제처럼 출력하세요
+
+SELECT 
+    MAX(IF(grade = 1, CONCAT(losal, '-', hisal), NULL)) AS '1등급',
+    MAX(IF(grade = 2, CONCAT(losal, '-', hisal), NULL)) AS '2등급',
+    MAX(IF(grade = 3, CONCAT(losal, '-', hisal), NULL)) AS '3등급',
+    MAX(IF(grade = 4, CONCAT(losal, '-', hisal), NULL)) AS '4등급',
+    MAX(IF(grade = 5, CONCAT(losal, '-', hisal), NULL)) AS '5등급'
+FROM salgrade;
+
+-- 4. 사원 테이블에서 직업이 ‘SALESMAN’ 사원 중에 급여(SAL) 낮은 순서대로 -- 순위(RANK)를 아래 예제처럼 출력하세요
+
+SELECT JOB,ename,sal, ROW_NUMBER() OVER(ORDER BY sal ASC) `RANK` FROM emp;
+
+
+-- 5.사원 테이블에서 직업이 ‘SALESMAN’ 사원 중에 급여(SAL) 낮은 순서대로 -- 순위(RANK)를 아래 예제처럼 출력하세요
+
+SELECT job, ename, sal, RANK() OVER(ORDER BY sal ASC) `rank` FROM emp;
+
+-- 6.사원 테이블에서 직업이 ‘SALESMAN’ 사원 중에 급여(SAL) 낮은 순서대로
+-- 순위(RANK)를 아래 예제처럼 출력하세요
+
+SELECT job, ename, sal, DENSE_RANK() OVER(ORDER BY sal ASC) `rank` FROM emp;
+
+-- 7.EMP 테이블에서 사원들의 이름(ENAME), 입사일(HIREDATE), -- 급여(SAL)를 조회하세요. 단, 입사일이 빠른 순서(오름차순)로 정렬된 상태에서 -- 본인보다 바로 직전에 입사한 사원의 급여를 나란히 출력 하세요
+
+SELECT ename, hiredate, sal,
+LAG(sal,1) OVER(ORDER BY hiredate asc) AS "이전 사원 급여"
+FROM emp;
+
+-- 8.EMP 테이블에서 부서 번호(DEPTNO), 이름(ENAME), 급여(SAL)를 -- 
+-- 조회하세요.  단, 같은 부서 내에서, 나보다 급여가 딱 한 단계 낮은
+-- (바로 다음 순위인) 사원의 급여를 나란히 출력하세요
+
+SELECT deptno,ename, sal,
+LEAD(sal,1) OVER(partition by deptno ORDER BY sal desc) AS "한단계낮은 사원 급여"
+FROM emp;
+
+-- join하기
+-- 여러 테이블간에 연결해서 데이터를 조회하는 방법
+-- 방법: pk-fk 제약조건에 의해 관계가 설정되어 있는 테이블끼리 처리
+-- -> 정규화를 통해서 중복 제거등을 하면서 테이블을 분리
+-- ->원하는 컬럼의 정보들 조회하려면?
+-- 자주 사용하면 성능 저하
+USE sqldb;
+
+SELECT *
+FROM buytbl b JOIN usertbl u ON b.userid = u.userid;
+
+SELECT b.userid, NAME, prodname, addr,
+CONCAT(mobile1, mobile2) AS "연락처"
+FROM buytbl b
+JOIN usertbl u
+ON b.userid = u.userid
+WHERE b.userid = 'jyp';
+
+
+
+-- /////
+--	12. join 이용하기
+USE scott;
+-- Q1) 사원테이블과 부서테이블에서 사원들의 이름, 부서번호, 부서이름을 출력하자.
+	SELECT e.ename,e.deptno, d.deptno, d.dname
+	FROM emp e JOIN dept d
+	ON e.deptno = d.deptno;
+-- Q2) 사원테이블과 부서테이블에서 'DALLAS'에서 근무하는 사원의 이름, 직위, 부서번호, 부서이름을 출력하자.
+	SELECT e.ENAME, e.job, d.deptno, d.dname
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO
+	WHERE d.loc = 'dallas';
+-- Q3) 사원테이블과 부서테이블에서 이름에 'A'가 들어가는 사원들의 이름과 부서이름을 출력하자.
+	SELECT e.ENAME,  d.dname
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO
+	WHERE e.ename LIKE '%A%';
+-- Q4) 사원테이블과 부서테이블에서 사원이름과 그 사원이 속한 부서의 부서명, 월급을 출력하자.
+-- 단 월급이 3000 이상인 사원들을 출력하자.
+	SELECT e.ENAME,d.dname, e.sal
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO
+	WHERE e.sal >= 3000;
+-- Q5) 사원테이블과 부서테이블에서 직업이 'SALESMAN'인 사원들의 직업과 사원이름, 속한 부서이름을 출력하자.
+	SELECT e.job,e.ENAME,d.dname
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO
+	WHERE e.job = 'salesman';
+-- Q6) 사원테이블과 급여테이블(SALGRADE)에서 커미션이 책정된 사원들의 사원번호, 이름, 연봉, 연봉+커미션, 급여등급을 출력하자.
+-- 단, 각각의 컬럼명을 '사원번호', '사원이름', '연봉', '실급여', '급여등급'으로 출력하자.
+	SELECT e.empno, e.ENAME,e.sal, e.sal*12, e.sal*12+e.comm, s.grade
+	FROM emp e JOIN salgrade s
+	ON e.SAL BETWEEN s.LOSAL AND s.HISAL
+	WHERE e.comm IS NOT NULL;
+-- Q7) 사원테이블과 부서테이블, 급여테이블에서 부서번호가 10번인 사원들의 부서번호, 부서이름, 사원이름, 월급, 급여등급을 출력하자.
+	SELECT d.deptno, d.dname,e.ENAME,e.sal,s.grade
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO 
+	join salgrade s
+	ON e.SAL BETWEEN s.LOSAL AND s.HISAL
+	WHERE d.DEPTNO = 10;
+-- Q8) 사원테이블과 부서테이블, 급여테이블에서 부서번호가 10번이거나 20번인 사원들의 부서번호, 부서이름, 사원이름, 월급, 급여등급을 출력하자.
+-- 단, 부서번호가 낮은 순으로(오름차순), 월급이 높은 순으로(내림차순) 출력하자.
+	SELECT d.deptno, d.dname,e.ENAME,e.sal,s.grade
+	FROM emp e JOIN dept d
+	ON e.DEPTNO = d.DEPTNO 
+	join salgrade s
+	ON e.SAL BETWEEN s.LOSAL AND s.HISAL
+	WHERE d.DEPTNO IN (10,20)
+	ORDER BY d.deptno ASC , e.sal DESC ;
+-- Q9) 사원테이블에서 사원번호와 사원이름, 그리고 그 사원을 관리하는 관리자의 사원번호와 사원이름을 출력하자.
+-- 단, 각각의 컬렴명을 '사원번호', '사원이름', '관리자번호', '관리자이름'으로 출력하자.
+	SELECT e1.empno, e1.ename, e2.empno, e2.ename
+   FROM emp e1 
+   JOIN emp e2
+	ON e1.mgr = e2.empno; 
+-- Q10) 사원테이블과 부서테이블에서 해당 부서의 모든 사원에 대한 부서이름, 위치, 사원 수 및 평균 급여를 출력하자.
+-- 단, 각각의 컬럼명을 DNAME, LOC, NUMBER OF PEOPLE, SALARY 로 출력하자.
+
+SELECT d.dname "DNAME", d.loc "LOC", 
+	       COUNT(*) "NUMBER OF PEOPLE", round(AVG(sal)) "SALARY"
+	FROM emp e  JOIN dept d
+	ON e.deptno = d.deptno
+	GROUP BY d.dname;
+
+	SELECT d.dname "DNAME", d.loc "LOC", 
+	       COUNT(e.EName) "NUMBER OF PEOPLE", round(AVG(sal)) "SALARY"
+	FROM emp e RIGHT OUTER  JOIN dept d
+	ON e.deptno = d.deptno
+	GROUP BY d.dname;
+
+
+
+-- /////
+
+
+USE hr;
+-- 3번
+SELECT *
+FROM employees e JOIN job_history jh
+ON e.employee_id = jh.employee_id
+
+-- 테이블과 뷰
+DROP DATABASE if EXISTS tabledb;
+CREATE database tabledb;
+
+USE tabledb;
+DROP TABLE if EXISTS buytbl, usertbl;
+
+CREATE TABLE usertbl (
+    userID CHAR(8) NOT NULL PRIMARY KEY,
+    `name` VARCHAR(10) NOT NULL,
+    `birthYear` INT(11) NOT NULL,
+    `addr` CHAR(2) NOT NULL,
+    `mobile1` CHAR(3) NULL,
+    `mobile2` CHAR(8) NULL,
+    `height` SMALLINT(6) NULL,
+    `mDate` DATE NULL 
+);
+
+-- primary key 컬럼옆에 바로 정의하거나 마지막에 추가하거나
+-- foreign key 는 마지막에 추가
+CREATE TABLE `buytbl` (
+	`num` INT(11) AUTO_INCREMENT NOT null PRIMARY KEY ,
+	`userID` CHAR(8) NOT NULL ,
+	`prodName` CHAR(6) NOT NULL ,
+	`groupName` CHAR(4) NULL ,
+	`price` INT(11) NOT NULL,
+	`amount` SMALLINT(6) NOT NULL,
+	FOREIGN KEY (userid) REFERENCES usertbl(userid)
+	);
+
+CREATE TABLE usertbl2 (
+    userID CHAR(8) NOT NULL ,
+    `name` VARCHAR(10) NOT NULL,
+    `birthYear` INT(11) NOT NULL,
+    `addr` CHAR(2) NOT NULL,
+    `mobile1` CHAR(3) NULL,
+    `mobile2` CHAR(8) NULL,
+    `height` SMALLINT(6) NULL,
+    `mDate` DATE NULL 
+);
+
+DESC usertbl2;
+DESC buytbl;
+
+-- 기존에 생성된 테이블에 어떤 설정을 한다면
+ALTER TABLE usertbl2
+ ADD CONSTRAINT pk_usertbl_userid PRIMARY KEY (userid);
+ 
+ 
+CREATE TABLE `buytbl3` (
+	`num` INT(11) AUTO_INCREMENT NOT null PRIMARY KEY ,
+	`userID` CHAR(8) NOT NULL ,
+	`prodName` CHAR(6) NOT NULL ,
+	`groupName` CHAR(4) NULL ,
+	`price` INT(11) NOT NULL,
+	`amount` SMALLINT(6) NOT NULL
+	);
+	
+
+-- usertbl에 userid컬럼이 pk여야 참조 가능
+ALTER TABLE buytbl
+ADD CONSTRAINT fk_usertbl_buytbl_userid
+FOREIGN KEY (userid)
+REFERENCES usertbl(userid);
+
+DESC buytbl;
+SHOW index FROM buytbl;
+
+-- 부모 테이블에 데이터가 변경되면
+-- 자식 테이블에 내용도 자동으로 변경하는 옵션
+-- on delete cascade, on update cascade 쿼리 끝에 추가하면 됨
+
+USE TABLEdb;
+DROP TABLE if EXISTS buytbl, usertbl;
+
+CREATE TABLE usertbl (
+    userID CHAR(8)  ,
+    `name` nVARCHAR(10) ,
+    `birthYear` int ,
+    `addr` nCHAR(2) ,
+    `mobile1` CHAR(3) ,
+    `mobile2` CHAR(8) ,
+    `height` SMALLINT ,
+    `mDate` DATE  
+);
+
+CREATE TABLE `buytbl` (
+	`num` INT AUTO_INCREMENT PRIMARY KEY ,
+	`userID` CHAR(8) ,
+	`prodName` nCHAR(6)  ,
+	`groupName` nCHAR(4)  ,
+	`price` INT ,
+	`amount` SMALLINT
+	);
+	
+	INSERT INTO usertbl VALUES('lsg', N'이승기', 1987, n'서울', '011' , '11111111', 182, '2008-8-8');
+	INSERT INTO usertbl VALUES('kbs', N'김범수', null, n'서울', '011' , '11111111', 173, '2008-8-8');
+	INSERT INTO usertbl VALUES('khh', N'김경호', 1871, n'서울', '019' , '11111111', 177, '2008-8-8');
+	INSERT INTO usertbl VALUES('jyp', N'조용필', 1950, n'서울', '011' , '11111111', 166, '2008-8-8');
+	INSERT INTO buytbl VALUES(NULL, 'kbs', N'운동화' , NULL , 30, 2);
+	INSERT INTO buytbl VALUES(NULL, 'kbs', N'노트북' , N'전자' , 1000, 1);
+	INSERT INTO buytbl VALUES(NULL, 'jyp', N'모니터' , N'전자' , 200, 1);
+	INSERT INTO buytbl VALUES(NULL, 'bbk', N'모니터' , N'전자' , 200, 5);
+	
+	ALTER TABLE usertbl
+	ADD CONSTRAINT pk_usertbl_userid
+	PRIMARY KEY (userid);
+	
+	DELETE FROM buytbl WHERE userid = 'bbk';
+	
+	
+	ALTER TABLE buytbl
+	ADD CONSTRAINT fk_usertbl_buytbl
+	FOREIGN KEY (userid)
+	REFERENCES usertbl (userid);
+
+-- INSERT INTO buytbl VALUES(NULL, 'bbk', N'모니터', N'전자', 200, 5);
+
+SET foreign_key_checks = 0;
+INSERT INTO buytbl VALUES(NULL, 'bbk', N'모니터', N'전자', 200, 5);
+INSERT INTO buytbl VALUES(NULL, 'kbs', N'청바지', N'의류', 50, 3);
+INSERT INTO buytbl VALUES(NULL, 'bbk', N'메모리', N'전자', 80, 10);
+INSERT INTO buytbl VALUES(NULL, 'ssk', N'책', N'서적', 15, 5);
+INSERT INTO buytbl VALUES(NULL, 'ejw', N'책', N'서적', 15, 2);
+INSERT INTO buytbl VALUES(NULL, 'ejw', N'청바지', N'의류', 50, 1);
+INSERT INTO buytbl VALUES(NULL, 'bbk', N'운동화', N'null', 30, 2);
+INSERT INTO buytbl VALUES(NULL, 'ejw', N'책', N'서적', 15, 1);
+INSERT INTO buytbl VALUES(NULL, 'bbk', N'운동화', N'null', 30, 2);
+SET foreign_key_checks = 1;
+
+SET check_constraint_checks = 0;
+ALTER TABLE usertbl
+ADD CONSTRAINT ck_birthyear
+CHECK ( (birthyear >= 1900 AND birthyear <= 2020) AND (birthyear IS NOT NULL) );
+SET check_constraint_checks = 1;
+
+INSERT INTO usertbl VALUES('ssk', N'성시경', 1987, n'서울', null , null, 186, '2013-12-12');
+INSERT INTO usertbl VALUES('ljb', N'임재범', 1963, n'서울', '016' , '66666666', 182, '2009-9-9');
+INSERT INTO usertbl VALUES('yjs', N'윤종신', 1969, n'경남', null , NULL, 170, '2005-5-5');
+INSERT INTO usertbl VALUES('ejw', N'은지원', 1972, n'경북', '011' , '88888888', 174, '2014-3-3');
+INSERT INTO usertbl VALUES('jkw', N'조관우', 1965, n'경기', '018' , '99999999', 172, '2010-10-10');
+INSERT INTO usertbl VALUES('bbk', N'바비킴', 1973, n'서울', '010' , '00000000', 176, '2013-5-5');
+
+SET foreign_key_checks = 0;
+UPDATE usertbl SET userid = 'vvk' WHERE userid = 'bbk';
+SET foreign_key_checks = 1;
+
+SELECT b.userid, u.name, b.prodname, u.addr, CONCAT(u.mobile1, u.mobile2) AS '연락처'
+FROM buytbl b
+INNER JOIN usertbl u 
+ON b.userid = u.userid;
+
+
+SELECT COUNT(*) FROM buytbl;
+
+
+-- view 사용하기
+USE tabledb;
+
+CREATE VIEW V_USERtbl
+AS SELECT userid, NAME FROM usertbl;
+-- 뷰 조회하기: 일반 테이블 조회하는 방법과 동일
+SELECT * FROM v_usertbl;
+
+-- 뷰를 통해 데이터 주가
+-- 원본 테이블에 데이터가 추가된다 -> 제약조건을 잘 확인해야 한다.
+
+-- 뷰를 통한 대이터 수정 작업 시
+-- 집계함수,join,union등을 통한 뷰생성은 수정할 수 없다.
+-- 조회용으로 많이 사용
+-- 보안 강화
+-- 복잡한 쿼리 단순화
+
+SHOW INDEX FROM usertbl;
+
+CREATE TABLE tbl1 (a INT PRIMARY KEY, b INT, c INT);
+
+SHOW INDEX from tbl1;
+
+CREATE TABLE tbl2 (a INT PRIMARY KEY, b INT UNIQUE, c INT UNIQUE , d INT);
+
+SHOW INDEX FROM tbl2;
+
+CREATE TABLE tbl3(a INT UNIQUE, b INT UNIQUE, c INT UNIQUE, d INT);
+
+SHOW INDEX FROM tbl3;
+
+-- unique와 not null을 설정하면 클러스터형 인덱스가 됨
+CREATE TABLE tbl4(a INT UNIQUE NOT NULL , b INT UNIQUE, c INT UNIQUE, d INT);
+SHOW INDEX FROM tbl4;
+
+CREATE TABLE tbl5(a INT UNIQUE NOT NULL , b INT UNIQUE, c INT UNIQUE, d INT PRIMARY KEY );
+SHOW INDEX FROM tbl5;
+
+USE tabledb;
+
+-- 클러스터형 인덱스로 지정한 열을 기준으로 정렬된다.
+CREATE TABLE usertbl3(SELECT * FROM usertbl ORDER BY RAND());
+-- 생성한 테이블에 pk를 추가함
+ALTER TABLE usertbl3
+ADD PRIMARY KEY (userid);
+-- 조회해보니 userid 값들이 오름차순 정렬되어 조회됨
+SELECT * FROM usertbl3;
+
