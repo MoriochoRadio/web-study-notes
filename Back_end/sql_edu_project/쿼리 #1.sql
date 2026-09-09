@@ -1068,6 +1068,9 @@ USE scott;
 	SELECT e.ename,e.deptno, d.deptno, d.dname
 	FROM emp e JOIN dept d
 	ON e.deptno = d.deptno;
+	
+	SELECT e.ename, e.DEPTNO, d.DEPTNO, d.dname
+	FROM emp e JOIN dept d ON e.DEPTNO = d.deptno;
 -- Q2) 사원테이블과 부서테이블에서 'DALLAS'에서 근무하는 사원의 이름, 직위, 부서번호, 부서이름을 출력하자.
 	SELECT e.ENAME, e.job, d.deptno, d.dname
 	FROM emp e JOIN dept d
@@ -1475,3 +1478,174 @@ ALTER TABLE buytbl DROP FOREIGN KEY `1`;
 
 -- 2. 외래키가 사라졌으므로 부모 테이블(usertbl)의 기본키 삭제 가능
 ALTER TABLE usertbl DROP PRIMARY KEY;
+
+
+-- 연습문제
+USE hr;
+
+SELECT YEAR(e.hire_date) AS '입사연도', AVG(e.salary) AS '평균급여'
+FROM employees e JOIN jobs j
+ON e.job_id = j.job_id
+WHERE j.job_title = 'Sales Manager'
+GROUP BY year(hire_date)
+ORDER BY year(hire_date);
+
+SELECT 
+    l.city          AS "도시명", 
+    AVG(e.salary)   AS "평균연봉", 
+    COUNT(*)        AS "직원수"
+FROM employees e 
+JOIN departments d 
+  ON e.department_id = d.department_id
+JOIN locations l 
+  ON d.location_id = l.location_id
+GROUP BY l.city
+HAVING COUNT(*) < 10
+ORDER BY AVG(e.salary) ASC;
+
+
+-- 실습 4
+CREATE DATABASE indexdb;
+
+USE indexdb;
+
+CREATE TABLE emp SELECT * FROM employees.employees
+ORDER BY RAND();
+
+CREATE TABLE emp_c SELECT * FROM employees.employees
+ORDER BY RAND();
+
+CREATE TABLE emp_se SELECT * FROM employees.employees
+ORDER BY RAND();
+
+SHOW TABLE STATUS;
+
+-- index 생성하기 
+SELECT * FROM emp_c LIMIT 20;
+
+ALTER TABLE emp_c
+ADD PRIMARY KEY (emp_no);
+SELECT * FROM emp_c LIMIT 20; -- 데이터가 정렬된다
+
+ALTER TABLE emp_se
+ADD INDEX idx_emp_se_em_no (emp_no);
+SELECT * FROM emp_se LIMIT 20; -- 데이터가 정렬 안된다
+
+SHOW TABLE STATUS;
+
+-- 생성한 인덱스의 실제 적용을 하려면
+ANALYZE TABLE emp, emp_c, emp_se;
+
+-- 조회해서 성능 확인하기
+EXPLAIN SELECT * FROM emp WHERE emp_no < 11000;
+EXPLAIN SELECT * FROM emp_c WHERE emp_no < 11000;
+EXPLAIN SELECT * FROM emp_se WHERE emp_no < 11000;
+
+-- index를 강제로 실행 또는 실행 못하게 하려면 hint를 사용
+EXPLAIN SELECT * FROM emp_c
+USE INDEX(PRIMARY) WHERE emp_no < 11000;
+
+EXPLAIN SELECT * FROM emp_c
+IGNORE INDEX(PRIMARY) WHERE emp_no < 11000;
+
+-- index를 사용 못하는 경우
+-- 조회되는 데이터가 크면 인덱스를 사용하지 않을 수 있다.
+EXPLAIN SELECT * FROM emp_se WHERE emp_no < 400000;
+
+-- 쿼리문에 조건을 잘못 만들 경우
+EXPLAIN SELECT * FROM emp_c WHERE emp_no = 100000;
+EXPLAIN SELECT * FROM emp_c WHERE emp_no*1 = 100000; -- (x)
+EXPLAIN SELECT * FROM emp_c WHERE emp_no = 100000/1; -- (o)
+
+-- 데이터의 중복도가 높고, 종류가 적을 경우
+ALTER TABLE emp
+ADD INDEX idx_emp_gender (gender);
+EXPLAIN SELECT * FROM emp WHERE gender = 'M';
+
+-- 프로시저 사용하기
+USE sqldb;
+
+DROP PROCEDURE if EXISTS userProc;
+
+ 
+CALL userProc();
+
+
+-- 프로시저 안에서 변수, 제어문등을 사용할 수 있다.
+call ifProc();
+
+CALL ifProc2();
+
+CALL caseProc();
+
+CALL whileProc();
+
+CALL whileProc2();
+
+
+-- 스토어드 함수 사용하기
+USE sqldb;
+
+delimiter $$
+CREATE FUNCTION userfunc(VALUE1 INT, VALUE2 INT)
+	RETURNS INT 
+	begin
+		RETURN VALUE1+VALUE2;
+	END $$
+delimiter ;
+
+SELECT userFunc(100, 200);
+
+SELECT userFunc(100, 200) INTO @age;
+SELECT @age;
+
+--  연습문제13(프로시저)
+-- 문제 1 — 특정 부서의 사원 목록 조회
+-- 매개변수로 **부서번호(deptno)**를 입력받아 해당 부서 사원의
+-- ename, job, sal을 출력하는 프로시저(getDept_emp()) 작성
+-- 부서가 존재하지 않으면 "해당 부서가 없습니다." 메시지 출력
+DROP PROCEDURE IF EXISTS getDept_emp;
+
+delimiter $$
+CREATE PROCEDURE getDept_emp(IN p_deptno INT)
+BEGIN 
+    -- 부서 존재 여부를 체크할 변수 선언
+    DECLARE v_cnt INT DEFAULT 0;
+
+    -- dept 테이블에 전달받은 부서번호가 있는지 확인
+    SELECT COUNT(*) INTO v_cnt
+    FROM dept
+    WHERE deptno = p_deptno;
+
+    -- 조건 분기
+    IF v_cnt > 0 THEN
+        -- 부서가 존재할 경우: 사원 정보 출력
+        SELECT ename, job, sal
+        FROM emp
+        WHERE deptno = p_deptno;
+    ELSE
+        -- 부서가 존재하지 않을 경우: 메시지 출력
+        SELECT '해당 부서가 없습니다.' AS '메시지';
+    END IF;
+END $$
+delimiter ;
+
+-- 문제 2 — 급여 인상
+-- 매개변수로 **사원번호(empno)**와 **인상액(amount)**을 받아 
+-- 해당 사원의 급여(sal)를 증가시키는 프로시저(increase_salary()) 작성
+-- 인상 후 변경된 급여를 출력(update로 급여를 변경시킨 후)
+-- 사원번호가 존재하지 않으면 "사원을 찾을 수 없습니다." 메시지 출력
+
+-- 문제 3 — 부서별 평균 급여 계산
+-- 매개변수 없이 실행하면, 각 부서별 평균 급여를 계산하여 부서번호, 평균급여를 출력하는 프로시저 작성
+-- 평균 급여는 소수점 2자리까지 표시
+
+-- 문제 4 — 급여 등급 조회
+-- 매개변수로 **사원번호(empno)**를 입력받아 해당 사원의 급여 등급(salgrade)을 조회하는 프로시저 작성
+-- emp → salgrade 테이블을 조인하여 등급을 찾음
+-- 사원이 없으면 "사원 없음" 메시지 출력
+
+-- 문제 5 — 특정 직책(Job) 사원의 급여 일괄 인상
+-- 매개변수로 **직책(job)**과 **인상률(percent)**을 입력받아 해당 직책 사원들의 급여를 모두 일괄 인상하는 프로시저 작성
+-- 변경된 사원 수와 총 급여 변동액을 출력
+-- 해당 직책이 없으면 "해당 직책의 사원이 없습니다." 메시지 출력

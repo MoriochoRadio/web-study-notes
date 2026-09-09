@@ -1099,15 +1099,15 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제, 그리고 <b>2026-08-31부터 시작한 데이터베이스(SQL) 과정</b>까지 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-08</span>
-      <span>📅 수업 진도 26일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-09-09</span>
+      <span>📅 수업 진도 27일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
       <span>🌐 네트워크 8개</span>
       <span>🧪 실습과제 12문제</span>
       <span>🧭 학습 여정 17단계</span>
-      <span>🗄️ SQL 기초 41개</span>
+      <span>🗄️ SQL 기초 46개</span>
       <span>📖 개념 사전 32개</span>
       <span>✏️ 시험 대비 132문제</span>
     </div>
@@ -1137,8 +1137,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">22</span></button>
-      <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">41</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">24</span></button>
+      <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1164,14 +1164,14 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">25</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">26</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">22</div><div class="l">🧩 코딩테스트 오답노트</div></div>
-      <div class="stat-card sql"><div class="n">41</div><div class="l">🗄️ SQL 기초 항목</div></div>
+      <div class="stat-card codingtest"><div class="n">24</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
       <div class="stat-card journey"><div class="n">17</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
@@ -1214,7 +1214,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>순서대로 본다면 <strong>☕ 자바 기초 → 🧱 객체지향 → 🛠️ 자바 활용 → 🌐 네트워크</strong> 흐름을 따르세요. 기초는 "변수·연산·제어문", 객체지향은 "클래스가 메모리에 올라가는 방식", 활용은 "컬렉션·예외·입출력·스레드", 네트워크는 "소켓으로 서버 만들기"가 중심입니다.</li>
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
-        <li>🗄️ <strong>SQL 기초</strong> 탭은 2026-08-31부터 시작한 <strong>데이터베이스 과정</strong> 노트입니다. HeidiSQL로 MySQL에 접속하는 것부터 <strong>SELECT · WHERE · 집계 · JOIN · 윈도우 함수 · 제약조건 · 뷰 · 인덱스</strong>까지 41개 카드로 이어집니다. 각 카드의 <strong>실행 결과</strong>는 수업 자료를 실제 DB에 올려 돌려 본 출력이라, 쿼리를 직접 쳐 보기 전에 결과를 먼저 확인할 수 있어요. 자바와 마찬가지로 <strong>시험 대비</strong> 탭에 SQL 30문항이 들어 있습니다.</li>
+        <li>🗄️ <strong>SQL 기초</strong> 탭은 2026-08-31부터 시작한 <strong>데이터베이스 과정</strong> 노트입니다. HeidiSQL로 MySQL에 접속하는 것부터 <strong>SELECT · WHERE · 집계 · JOIN · 윈도우 함수 · 제약조건 · 뷰 · 인덱스 · 프로시저</strong>까지 46개 카드로 이어집니다. 각 카드의 <strong>실행 결과</strong>는 수업 자료를 실제 DB에 올려 돌려 본 출력이라, 쿼리를 직접 쳐 보기 전에 결과를 먼저 확인할 수 있어요. 자바와 마찬가지로 <strong>시험 대비</strong> 탭에 SQL 30문항이 들어 있습니다.</li>
         <li><strong>🧩 코딩테스트</strong> 탭은 학원에서 프로그래머스로 정기 실시하는 코딩테스트 오답노트입니다. 회차마다 JAVA·SQL 각 1문제씩 <strong>제출 코드 → 정답 풀이 → 주요 개념</strong> 순으로 정리했으니, 실전 문제 감각을 다질 때 훑어보세요.</li>
         <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 문제를 풀어보세요. 한 문제씩 <strong>고르는 즉시 정답·해설</strong>이 나오고, <strong>🔎 자세한 해설</strong>을 펼치면 보기 네 개를 하나씩 짚어 주는 풀이와 더 쉬운 정리가 이어집니다. <strong>⭐ 즐겨찾기 · 🔥 어려움</strong>으로 표시해 둔 문제나 틀린 문제만 골라 다시 푸는 것도 됩니다. 아직 진도가 안 나간 단원까지 섞여 나오는 게 부담이라면 범위에서 <strong>📅 배운 데까지</strong>를 고르세요 — 수업 진도 탭에 정리된 만큼만 출제됩니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>·<strong>☆ 버튼</strong>(헷갈리는 카드)·<strong>🔗 버튼</strong>(카드 링크 복사)을 활용하고, 하단 <strong>📝 내 메모</strong> 칸에 헷갈린 점을 적어두세요. 우하단 <strong>⚡ 5분 복습</strong>은 카드의 "쉽게 말하면"만 뽑아 플래시카드로 넘겨 줍니다.</li>
@@ -6985,6 +6985,48 @@ public class D3_ChatClient {
     </div>
   </div>
 </article>
+
+<article class="note-card" id="class-day27">
+  <div class="note-head">
+    <span class="note-num">27일차</span>
+    <h3>2026-09-09 · 인덱스 성능 측정과 스토어드 프로그램</h3>
+    <div class="note-tags"><span class="tag">EXPLAIN</span><span class="tag">인덱스 튜닝</span><span class="tag">PROCEDURE</span><span class="tag">FUNCTION</span><span class="tag">제어문</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>26일차에 배운 인덱스를 <b><code>EXPLAIN</code>으로 실제 측정</b>해 보고, 인덱스를 <b>만들어도 안 쓰이는 세 경우</b>를 확인했다. 그리고 SQL 안에서 변수·분기·반복을 쓰는 <b>스토어드 프로시저와 함수</b>로 넘어갔다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>어제가 <b>"인덱스가 뭔지"</b>였다면 오늘은 <b>"진짜 쓰이고 있는지 확인하는 법"</b>입니다. 인덱스를 걸어 두고 빨라졌겠거니 넘어가는 게 가장 흔한 실수인데, <code>EXPLAIN</code>은 <b>DB에게 "너 이거 어떻게 풀 거야?"라고 미리 물어보는</b> 도구예요. 후반부에는 SQL이 <b>반복문과 조건문을 쓸 수 있는 언어로</b> 잠깐 변신합니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>EXPLAIN — 숫자로 확인하는 인덱스 효과</h4>
+        <p>같은 3만 행 데이터를 세 벌(인덱스 없음 / PK / 보조 인덱스) 만들어 같은 조건으로 조회해 보면, <b>읽는 행 수가 30,014 → 999로 30배</b> 줄어듭니다. <code>type</code>이 <b><code>ALL</code>(전체 훑기)에서 <code>range</code>(범위 찾기)</b>로 바뀐 것이 그 증거입니다. → <a href="#sql-42">🗄️ 42. EXPLAIN</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>인덱스를 만들어도 안 쓰이는 세 경우</h4>
+        <p>① <b>조회 범위가 넓으면</b>(96% 조회 시 전체 훑기로 전환) ② <b>컬럼을 연산으로 감싸면</b>(<code>emp_no*1</code>은 못 쓰고 <code>20000/1</code>은 씀) ③ <b>값의 종류가 적으면</b>(성별은 인덱스가 있어도 무시). 특히 ②번은 <code>WHERE YEAR(날짜)=2020</code> 형태로 실무에서 자주 나오는 함정입니다. → <a href="#sql-43">🗄️ 43. 인덱스 미사용</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>프로시저와 함수 — 어디에 쓰느냐가 다르다</h4>
+        <p><b>프로시저는 <code>CALL</code>로 작업을 시키는 것</b>, <b>함수는 <code>SELECT</code> 안에서 값을 받아 쓰는 것</b>입니다. 프로시저를 <code>SELECT</code>에서 부르면 <code>ERROR 1305 FUNCTION ... does not exist</code>가 나는데, DB가 <b>그 자리에서는 함수만 찾기</b> 때문입니다. 본문에 세미콜론이 들어가므로 <b><code>DELIMITER</code>로 문장 끝 기호를 잠시 바꿔</b> 두고 만들어야 합니다. → <a href="#sql-44">🗄️ 44. 프로시저</a> · <a href="#sql-46">🗄️ 46. 함수</a></p>
+      </div>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">27일차에 배운 것 — 핵심 정리</div>
+      <ul>
+        <li><code>EXPLAIN</code>에서 볼 것은 <b><code>type</code></b>(<code>ALL</code>이면 전체 훑기)과 <b><code>rows</code></b>(읽을 행 수), 그리고 <b><code>key</code>가 <code>NULL</code>인지</b>.</li>
+        <li><b><code>ANALYZE TABLE</code>로 통계를 갱신</b>해야 옵티마이저가 제대로 판단한다.</li>
+        <li>인덱스 미사용 3대 원인: <b>넓은 범위 · 컬럼을 감싼 연산 · 낮은 카디널리티</b>.</li>
+        <li><b>컬럼은 왼쪽에 맨몸으로</b> 두어야 인덱스를 탄다. <code>YEAR(d)=2020</code> 대신 <b>범위 조건</b>으로.</li>
+        <li><code>USE INDEX</code>·<code>IGNORE INDEX</code> 힌트는 <b>진단용</b>으로 쓴다.</li>
+        <li><b><code>DELIMITER</code>를 빼면 <code>ERROR 1064</code></b> — 본문의 세미콜론에서 잘리기 때문.</li>
+        <li><code>DECLARE</code>는 <b><code>BEGIN</code> 바로 뒤</b>에서만. 대입은 <code>SET</code> 또는 <code>SELECT ... INTO</code>.</li>
+        <li><b>SELECT 안의 <code>CASE</code>(값을 만드는 식)와 프로시저의 <code>CASE</code>(흐름을 가르는 문장, <code>END CASE</code>)는 다른 것</b>이다.</li>
+        <li><b><code>RETURNS</code>는 선언, <code>RETURN</code>은 실행</b> — s 하나 차이로 자주 틀린다.</li>
+        <li>hr 데이터로 <b>3중 조인 + GROUP BY + HAVING</b> 연습문제도 함께 풀었다.</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
 
 
 
@@ -15181,6 +15223,185 @@ SQL의 점은 <b>객체의 속성 접근자가 아니다</b>. <code>테이블명
   </div>
 </article>
 
+<article class="note-card" id="ct-23">
+  <div class="note-head">
+    <span class="note-num">12회차</span>
+    <h3>수열과 구간 쿼리 3</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">2026.09.09</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">12회차 · 2026.09.09</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/181924" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>정수 배열 arr와 [i, j] 쌍이 담긴 queries가 주어질 때, 각 쿼리마다 arr[i]와 arr[j]의 값을 서로 바꾼 뒤 최종 배열을 반환하는 문제.</p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int[] solution(int[] arr, int[][] queries) {
+        int t = arr.length;
+
+        int[] answer = new int[arr.length];
+        for(int i=0;i&lt;arr.length;i++){
+            answer[i]=arr[i];
+        }
+
+        for(int i=0;i&lt;queries.length;i++){
+            int first = queries[i][0];
+            int second = queries[i][1];
+
+            int temp = answer[first];
+            answer[first] = answer[second];
+            answer[second] = temp;
+        }
+
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p>통과한 코드다. <b>swap의 정석</b>을 정확히 지켰다.
+
+<b>풀이 흐름</b>
+1. <b>원본 복사</b> — <code>arr</code>를 건드리지 않으려고 같은 크기의 <code>answer</code>를 만들어 값을 옮겼다.
+2. <b>쿼리 순회</b> — <code>queries[i][0]</code>과 <code>queries[i][1]</code>로 교환할 두 인덱스를 꺼낸다.
+3. <b>임시 변수로 교환</b> — <code>temp</code>에 한쪽을 먼저 담아 둬야 덮어써도 값이 사라지지 않는다.
+
+<b>더 짧게 쓸 수 있는 부분</b>
+· 복사는 <code>int[] answer = arr.clone();</code> 한 줄로 끝난다.
+· 순회는 향상된 for문이 더 읽기 좋다:
+  <code>for (int[] q : queries) { ... q[0], q[1] ... }</code>
+· 문제가 원본 수정을 막지 않으므로 <b>복사 없이 <code>arr</code>를 직접 바꿔 반환</b>해도 된다
+  (추가 배열 생성 비용을 아낄 수 있다).
+
+<b>[정리한 코드]</b>
+class Solution {
+    public int[] solution(int[] arr, int[][] queries) {
+        for (int[] q : queries) {
+            int temp = arr[q[0]];
+            arr[q[0]] = arr[q[1]];
+            arr[q[1]] = temp;
+        }
+        return arr;
+    }
+}
+
+참고로 <code>int t = arr.length;</code>는 <b>선언만 하고 쓰지 않은 변수</b>다. 지우는 편이 깔끔하다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 값 교환(swap)에 임시 변수가 필요한 이유</b>
+<code>a = b; b = a;</code>처럼 쓰면 <b>첫 줄에서 a의 원래 값이 이미 사라져</b> 둘 다 b가 된다. 그래서 <b>덮어쓰기 전에 한쪽을 <code>temp</code>에 보관</b>하는 3단계가 필요하다.
+자바에는 파이썬의 <code>a, b = b, a</code> 같은 동시 대입이 없으므로 이 방식이 정석이다.
+
+<b>(2) 2차원 배열 접근 — <code>queries[i][j]</code></b>
+· <b><code>i</code>는 몇 번째 쿼리인지(행)</b>, <b><code>j</code>는 그 쿼리 안의 위치(열)</b>를 가리킨다.
+· 향상된 for문 <code>for (int[] q : queries)</code>를 쓰면 <b><code>q[0]</code>, <code>q[1]</code></b>로 더 직관적으로 쓸 수 있다.
+
+<b>(3) 제자리(in-place) 연산 vs 복사</b>
+문제가 <b>원본 배열의 수정을 막지 않는다면</b>, 매개변수로 받은 배열을 직접 바꿔 반환하는 편이 <b>메모리와 시간을 아낀다</b>. 반대로 원본을 보존해야 하거나 여러 번 재사용해야 한다면 <code>clone()</code>으로 복사한 뒤 다루는 것이 안전하다.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>임시 변수 없이 두 값을 바꾸려 하면 왜 실패하는지 설명해보세요.</summary>
+        <div class="sc-a"><code>a = b;</code>를 하는 순간 <b>a의 원래 값이 덮여 사라지기</b> 때문입니다. 다음 줄 <code>b = a;</code>는 이미 b가 된 a를 넣는 셈이라 <b>둘 다 b</b>가 됩니다. 그래서 <b>덮어쓰기 전에 한쪽을 보관</b>하는 <code>temp</code>가 필요합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>이 문제에서 배열을 복사하지 않고 arr를 직접 바꿔도 되는 이유는?</summary>
+        <div class="sc-a">문제가 <b>원본 보존을 요구하지 않기</b> 때문입니다. 매개변수로 받은 배열을 직접 고쳐 반환하면 <b>추가 배열 생성 비용을 아낍니다</b>. 다만 실무에서는 <b>넘겨받은 것을 함부로 고치면</b> 호출한 쪽이 놀라므로, 보통은 복사하거나 최소한 문서에 명시합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>swap</b>은 정렬·셔플·회전 등 수많은 알고리즘의 기본 조각입니다. <b>2차원 배열을 <code>for (int[] q : queries)</code>로 순회</b>하는 패턴도 자주 나오니 손에 익혀 두면 좋습니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="ct-24">
+  <div class="note-head">
+    <span class="note-num">12회차</span>
+    <h3>특정 조건을 만족하는 물고기별 수와 최대 길이 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">2026.09.09</span></div>
+  </div>
+  <div class="note-body">
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">12회차 · 2026.09.09</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/298519" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>물고기 종류별로 마리 수와 최대 길이를 구하되, 10cm 이하(테이블에는 NULL로 저장됨)를 10으로 쳐서 계산한 평균 길이가 33cm 이상인 종류만 조회하는 문제.</p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">select count(*) as FISH_COUNT, max(LENGTH) as MAX_LENGTH, FISH_TYPE
+from FISH_INFO
+group by FISH_TYPE
+having avg(case
+           when length &lt;= 10 then 10
+           else length
+           end) &gt;= 33
+order by FISH_TYPE asc;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>틀린 곳은 하나 — <code>LENGTH IS NULL</code>을 빠뜨렸다.</b>
+
+문제 설명에 <b>10cm 이하는 LENGTH가 NULL로 저장된다</b>고 되어 있다. 즉 테이블에는 <b>10 이하의 숫자가 아예 없고 전부 NULL</b>이다. 그런데 제출 코드의 조건은 <code>length &lt;= 10</code>뿐이라 <b>NULL은 걸리지 않고</b> <code>ELSE length</code>로 빠져 그대로 NULL이 된다. 그리고 <code>AVG</code>는 <b>NULL을 분모에서도 빼 버리므로</b> 평균이 실제보다 높게 나온다.
+
+<b>[정답 1 — IFNULL]</b>
+SELECT COUNT(*) AS FISH_COUNT, MAX(LENGTH) AS MAX_LENGTH, FISH_TYPE
+FROM FISH_INFO
+GROUP BY FISH_TYPE
+HAVING AVG(IFNULL(LENGTH, 10)) >= 33
+ORDER BY FISH_TYPE ASC;
+
+테이블에 10 이하가 NULL로만 존재하므로, <b>NULL을 10으로 바꿔 주는 것만으로</b> "10 이하는 10으로 계산" 조건이 정확히 충족된다. <code>COALESCE(LENGTH, 10)</code>도 같다.
+
+<b>[정답 2 — CASE WHEN]</b>
+HAVING AVG(CASE WHEN LENGTH IS NULL OR LENGTH <= 10 THEN 10 ELSE LENGTH END) >= 33
+
+<b>NULL과 10 이하를 모두</b> 명시해 두면, 나중에 8·9 같은 실제 숫자가 데이터로 들어와도 안전하다. <b>테이블의 저장 방식에 덜 의존하는</b> 쪽이라 방어적으로는 이쪽이 낫다.
+
+<b>주의</b> — <code>CASE</code>를 <code>GROUP BY</code>와 <code>HAVING</code> 사이에 따로 떼어 놓으면 문법 에러다. <code>CASE</code>는 절(clause)이 아니라 <b>값을 만드는 식(expression)</b>이므로 <b><code>AVG()</code> 괄호 안</b>에 들어가야 한다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 집계 함수와 NULL — 분모에서도 빠진다</b>
+<code>AVG(컬럼)</code>은 NULL인 행을 <b>합계(분자)에서만이 아니라 개수(분모)에서도</b> 제외한다. 그래서 NULL이 많으면 평균이 <b>실제보다 높게</b> 나온다. 문제에서 "특정 값으로 쳐서 평균을 내라"고 하면 <b>반드시 집계 함수 안에서</b> NULL을 채운 뒤 계산해야 한다.
+
+<b>(2) <code>IFNULL(값, 대체값)</code></b>
+값이 NULL이면 대체값을, 아니면 원래 값을 그대로 돌려주는 MySQL 함수다. 표준 SQL인 <code>COALESCE</code>도 같은 일을 하며 <b>어느 DB에서나 동작</b>한다.
+
+<b>(3) <code>CASE</code>는 '절'이 아니라 '식'이다</b>
+<code>WHERE</code>·<code>GROUP BY</code>·<code>ORDER BY</code>는 <b>절(clause)</b>이라 문장의 정해진 자리에 오지만, <code>CASE</code>는 <b>값 하나를 돌려주는 식</b>이다. 따라서 <b>값이 들어갈 수 있는 자리</b>(SELECT 목록, WHERE 조건식 안, 집계 함수 괄호 안)에만 쓸 수 있다.
+
+<b>(4) <code>WHERE</code>와 <code>HAVING</code>의 차이 (다시)</b>
+<code>WHERE</code>는 <b>묶기 전 개별 행</b>을, <code>HAVING</code>은 <b>묶은 뒤 그룹</b>을 거른다. "종류별 평균 길이가 33 이상"은 <b>묶어 봐야 알 수 있는 값</b>이므로 <code>HAVING</code>이다. → <a href="#sql-19">🗄️ 19. HAVING vs WHERE</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>AVG가 NULL을 '분모에서도' 뺀다는 것이 왜 문제가 되나?</summary>
+        <div class="sc-a">값이 10개인데 그중 4개가 NULL이면 <b>6으로 나눈 평균</b>이 나오기 때문입니다. "NULL을 10으로 쳐서 평균을 내라"는 요구라면 <b>10으로 나눠야</b> 맞죠. 그래서 <code>IFNULL</code>로 <b>값을 채운 뒤</b> 평균을 내야 분모까지 제대로 잡힙니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>CASE를 GROUP BY와 HAVING 사이에 따로 쓰면 왜 에러인가?</summary>
+        <div class="sc-a"><code>CASE</code>는 <code>WHERE</code>·<code>GROUP BY</code> 같은 <b>절(clause)이 아니라 값을 만드는 식(expression)</b>이기 때문입니다. 값이 들어갈 자리에만 놓을 수 있죠. 이 문제에서는 <b><code>AVG()</code> 괄호 안</b>이 그 자리입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>"NULL을 특정 값으로 쳐서 집계하라"</b>는 코딩테스트 SQL의 단골 함정입니다. 조건에 <b>"~인 경우 NULL로 저장된다"</b>는 문장이 보이면 <b>즉시 <code>IFNULL</code>이나 <code>CASE</code>를 집계 함수 안에</b> 넣을 준비를 하세요.</p>
+  </div>
+</article>
+
+
 
 
     </div>
@@ -15188,7 +15409,7 @@ SQL의 점은 <b>객체의 속성 접근자가 아니다</b>. <code>테이블명
 
   <section id="sql-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🗄️ 6. SQL 기초 — MySQL · HeidiSQL</h2></div>
-    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>까지 다룹니다. 각 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql" target="_blank" rel="noopener">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
+    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>를 지나 <b>EXPLAIN 실행 계획 · 스토어드 프로시저와 함수</b>까지 다룹니다. 각 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql" target="_blank" rel="noopener">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
     <div class="notes-list" id="sql-notes">
 
 <article class="note-card" id="sql-01">
@@ -18085,6 +18306,414 @@ ALTER TABLE p DROP PRIMARY KEY;
   </div>
 </article>
 
+<article class="note-card" id="sql-42">
+  <div class="note-head">
+    <span class="note-num">42</span>
+    <h3>EXPLAIN — 인덱스가 실제로 쓰이는지 눈으로 확인하기</h3>
+    <div class="note-tags"><span class="tag">EXPLAIN</span><span class="tag">실행 계획</span><span class="tag">type</span><span class="tag">rows</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>EXPLAIN</code>을 쿼리 앞에 붙이면 <b>DB가 이 쿼리를 어떻게 실행할 계획인지</b> 보여준다. 인덱스를 만들었다고 쓰이는 게 아니므로, <b>추측하지 말고 확인</b>해야 한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>인덱스를 걸어 두고 "이제 빨라졌겠지" 하고 넘어가는 것이 가장 흔한 실수입니다. <code>EXPLAIN</code>은 <b>DB에게 "너 이거 어떻게 풀 거야?"라고 미리 물어보는 것</b>이에요. 실제로 실행하지 않고 <b>계획만</b> 알려주니 부담도 없습니다. 여기서 볼 것은 딱 두 개 — <b><code>type</code>(어떻게 찾을지)</b>과 <b><code>rows</code>(몇 행을 읽을지)</b>입니다.</p>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">indexdb 실습 — 같은 데이터로 세 테이블 만들어 비교</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">-- 같은 3만 행을 뒤죽박죽 섞어 세 벌 만든다
+CREATE TABLE emp    SELECT * FROM employees.employees ORDER BY RAND();  -- 인덱스 없음
+CREATE TABLE emp_c  SELECT * FROM employees.employees ORDER BY RAND();  -- PK(클러스터형)
+CREATE TABLE emp_se SELECT * FROM employees.employees ORDER BY RAND();  -- 보조 인덱스
+
+ALTER TABLE emp_c  ADD PRIMARY KEY (emp_no);
+ALTER TABLE emp_se ADD INDEX idx_emp_se_emp_no (emp_no);
+
+-- 통계를 갱신해야 옵티마이저가 제대로 판단한다
+ANALYZE TABLE emp, emp_c, emp_se;
+
+-- 같은 조건인데 실행 계획이 어떻게 다른지 본다
+EXPLAIN SELECT * FROM emp    WHERE emp_no &lt; 11000;
+EXPLAIN SELECT * FROM emp_c  WHERE emp_no &lt; 11000;
+EXPLAIN SELECT * FROM emp_se WHERE emp_no &lt; 11000;</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>3만 행으로 직접 측정한 결과 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>테이블      type    key                  rows
+--------------------------------------------------
+emp        ALL     (안 씀)            30014   ← 전체를 다 훑는다
+emp_c      range   PRIMARY              999   ← 30배 적게 읽는다
+emp_se     range   idx_emp_se_emp_no    999
+
+[저장 순서는 어떻게 달라지나 — SELECT * 로 앞 5행]
+emp    (인덱스 없음) : 19895, 28870, 14940, 28819, 16084   뒤죽박죽
+emp_c  (클러스터형)  : 10001, 10002, 10003, 10004, 10005   정렬됨
+emp_se (보조 인덱스) : 38087, 32393, 39430, 14438, 20825   뒤죽박죽</pre>
+      <div class="run-note"><b><code>rows</code>가 30014에서 999로 30배 줄었습니다.</b> 이것이 인덱스가 하는 일이고, <code>type</code>이 <b><code>ALL</code>(전체 훑기)에서 <code>range</code>(범위만 찾기)</b>로 바뀐 것이 그 증거입니다.<br><br><b>저장 순서에서 재미있는 것을 발견했습니다.</b> <code>emp_se</code>를 <code>SELECT emp_no</code>로만 조회하면 <b>정렬돼 보이는데</b>, <code>SELECT emp_no, first_name</code>으로 바꾸면 <b>뒤죽박죽</b>입니다. 앞의 경우는 <b>인덱스만 읽고 끝나서</b>(인덱스는 정렬돼 있으니까) 그렇게 보인 것뿐이죠. <b>실제 데이터 순서를 바꾸는 것은 클러스터형(PK)뿐</b>입니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">42번 정리 — 핵심 정리</div>
+      <ul>
+        <li><code>EXPLAIN 쿼리;</code> — 실제로 실행하지 않고 <b>실행 계획만</b> 보여준다.</li>
+        <li><b><code>type</code></b>이 핵심: <code>ALL</code>(전체 훑기, 나쁨) &lt; <code>range</code>(범위) &lt; <code>ref</code> &lt; <code>const</code>(한 건, 최고).</li>
+        <li><b><code>rows</code></b>는 <b>읽을 것으로 예상되는 행 수</b>다. 이 숫자가 줄면 빨라진 것이다.</li>
+        <li><code>key</code>가 <code>NULL</code>이면 <b>인덱스를 안 쓴 것</b> — 만들어 놨는데 <code>NULL</code>이면 이유를 찾아야 한다.</li>
+        <li><b><code>ANALYZE TABLE</code>로 통계를 갱신</b>해야 옵티마이저가 제대로 판단한다. 데이터를 대량으로 넣은 뒤에는 꼭 해 준다.</li>
+        <li><b>정렬돼 보인다고 클러스터형은 아니다</b> — 인덱스만 읽는 조회(커버링 인덱스)는 그냥 정렬된 인덱스를 순서대로 읽은 것이다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>EXPLAIN 결과에서 인덱스가 안 쓰이고 있다는 것을 어떻게 알아채나?</summary>
+        <div class="sc-a"><b><code>key</code> 열이 <code>NULL</code>이고 <code>type</code>이 <code>ALL</code></b>이면 인덱스를 안 쓰고 전체를 훑는 것입니다. <code>possible_keys</code>에는 후보가 떠 있는데 <code>key</code>가 비어 있다면, <b>쓸 수 있었지만 옵티마이저가 안 쓰기로 판단한</b> 것이라 이유를 따져 봐야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>보조 인덱스만 있는 테이블을 조회했더니 정렬돼 나왔다. 클러스터형이 된 걸까?</summary>
+        <div class="sc-a"><b>아닙니다.</b> 조회한 컬럼이 <b>인덱스에 들어 있는 것뿐이면</b> DB는 데이터를 안 보고 <b>정렬된 인덱스만 읽고 끝냅니다</b>(커버링 인덱스). 그래서 정렬돼 보이죠. <b>인덱스에 없는 컬럼을 함께 조회</b>해 보면 실제 저장 순서가 드러납니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span><b>"느린 쿼리를 어떻게 개선하나요?"</b>에 대한 실무의 첫 대답이 <code>EXPLAIN</code>입니다. 인덱스를 추가하기 <b>전에</b> 지금 계획이 어떤지 보고, 추가한 <b>뒤에</b> 실제로 쓰이는지 확인합니다. <b>추측으로 인덱스를 늘리는 것</b>이 성능을 오히려 해치는 흔한 경로라, 측정이 먼저입니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="sql-43">
+  <div class="note-head">
+    <span class="note-num">43</span>
+    <h3>인덱스를 만들어도 안 쓰이는 세 가지 경우</h3>
+    <div class="note-tags"><span class="tag">인덱스 미사용</span><span class="tag">함수 감싸기</span><span class="tag">카디널리티</span><span class="tag">힌트</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>인덱스가 있어도 ① <b>조회 범위가 너무 넓거나</b> ② <b>컬럼을 연산·함수로 감싸거나</b> ③ <b>값의 종류가 너무 적으면</b> 옵티마이저가 인덱스를 포기하고 전체를 훑는다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>인덱스는 <b>책 뒤의 찾아보기</b>인데, 세 상황에서는 쓸모가 없어집니다. ① <b>책의 90%를 읽어야 한다면</b> 찾아보기를 왔다 갔다 하느니 그냥 처음부터 읽는 게 빠릅니다. ② <b>"단어를 거꾸로 뒤집은 것"을 찾으라면</b> 찾아보기가 소용없죠 — 색인은 원래 단어로 정렬돼 있으니까요. ③ <b>남/여처럼 두 종류뿐이면</b> 찾아봐야 절반이라 의미가 없습니다.</p>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">indexdb 실습 — 세 가지 경우를 직접 확인</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">-- ① 조회 범위가 넓으면 인덱스를 포기한다
+EXPLAIN SELECT * FROM emp_se WHERE emp_no &lt; 11000;   -- 전체의 3%
+EXPLAIN SELECT * FROM emp_se WHERE emp_no &lt; 39000;   -- 전체의 96%
+
+-- ② 컬럼을 연산으로 감싸면 못 쓴다 (우변을 계산하는 것은 괜찮다)
+EXPLAIN SELECT * FROM emp_c WHERE emp_no   = 20000;    -- 그대로
+EXPLAIN SELECT * FROM emp_c WHERE emp_no*1 = 20000;    -- 좌변 연산 (x)
+EXPLAIN SELECT * FROM emp_c WHERE emp_no   = 20000/1;  -- 우변 연산 (o)
+
+-- ③ 값의 종류가 적으면 인덱스가 있어도 안 쓴다
+ALTER TABLE emp ADD INDEX idx_emp_gender (gender);
+EXPLAIN SELECT * FROM emp WHERE gender = 'M';
+
+-- 힌트로 강제하거나 못 쓰게 할 수 있다
+EXPLAIN SELECT * FROM emp_c USE INDEX(PRIMARY)    WHERE emp_no &lt; 11000;
+EXPLAIN SELECT * FROM emp_c IGNORE INDEX(PRIMARY) WHERE emp_no &lt; 11000;</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>직접 측정한 결과 (3만 행) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>조건                          type    key        rows
+------------------------------------------------------------
+emp_no &lt; 11000   (3%)         range   있음         999   ← 인덱스 사용
+emp_no &lt; 39000   (96%)        ALL     (안 씀)    30014   ← 포기
+
+emp_no   = 20000              const   PRIMARY        1   ← 사용
+emp_no*1 = 20000              ALL     (안 씀)    29970   ← 못 씀
+emp_no   = 20000/1            const   PRIMARY        1   ← 사용
+
+gender = 'M'  (값 2종류)      ALL     (안 씀)    30014   ← 포기
+
+USE INDEX(PRIMARY)            range   PRIMARY      999   ← 강제 사용
+IGNORE INDEX(PRIMARY)         ALL     (안 씀)    29970   ← 강제 금지</pre>
+      <div class="run-note"><b>②번이 특히 중요합니다.</b> <code>emp_no*1 = 20000</code>과 <code>emp_no = 20000/1</code>은 <b>수학적으로 같은 뜻인데 결과가 정반대</b>입니다. 인덱스는 <b><code>emp_no</code> 값 그대로</b> 정렬돼 있어서, 좌변을 건드리면 <b>정렬된 순서를 쓸 수 없게</b> 됩니다. 우변은 아무리 계산해도 결국 상수 하나가 되니 괜찮고요.<br><br>같은 이유로 <code>WHERE YEAR(hire_date) = 2020</code>도 인덱스를 못 씁니다. <b>컬럼은 왼쪽에 맨몸으로 두는 것</b>이 원칙입니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">43번 정리 — 핵심 정리</div>
+      <ul>
+        <li><b>① 조회 범위가 넓으면</b> 인덱스를 왔다 갔다 하는 비용이 더 커서 옵티마이저가 <b>일부러 전체 훑기를 고릅니다</b>(대략 20~30%가 분기점).</li>
+        <li><b>② 컬럼을 연산·함수로 감싸면 못 씁니다</b> — <code>col*1</code>, <code>YEAR(col)</code>, <code>SUBSTR(col,1,3)</code> 전부 해당.</li>
+        <li><b>우변을 계산하는 것은 괜찮습니다</b> — <code>col = 20000/1</code>은 상수로 정리되므로 인덱스를 씁니다.</li>
+        <li><b>③ 값의 종류가 적으면</b>(성별·Y/N) 인덱스 효과가 없습니다. 이를 <b>카디널리티가 낮다</b>고 합니다.</li>
+        <li><code>USE INDEX(이름)</code>·<code>IGNORE INDEX(이름)</code>로 <b>강제하거나 금지</b>할 수 있지만, 대부분 옵티마이저 판단이 옳으니 <b>진단용</b>으로 쓴다.</li>
+        <li><b>날짜 조건은 함수 대신 범위로</b> 쓰면 인덱스를 살릴 수 있다 — <code>YEAR(d)=2020</code> 대신 <code>d &gt;= '2020-01-01' AND d &lt; '2021-01-01'</code>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>emp_no*1 = 20000 은 안 되고 emp_no = 20000/1 은 되는 이유를 설명해보세요.</summary>
+        <div class="sc-a">인덱스는 <b><code>emp_no</code>의 값 그대로</b> 정렬해 둔 것이기 때문입니다. 좌변을 <code>*1</code>로 감싸면 <b>가공된 값</b>을 찾아야 하는데 그런 순서로 정렬된 색인은 없죠. 반면 우변 <code>20000/1</code>은 <b>실행 전에 20000이라는 상수</b>로 정리되므로 원래 값으로 찾는 것과 같습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>'WHERE YEAR(hire_date) = 2020' 을 인덱스가 쓰이게 고쳐보세요.</summary>
+        <div class="sc-a"><code>WHERE hire_date &gt;= '2020-01-01' AND hire_date &lt; '2021-01-01'</code>로 바꿉니다. <b>컬럼을 맨몸으로 두고 범위 조건</b>으로 표현하면 정렬된 인덱스를 그대로 탈 수 있습니다. 실무 튜닝에서 가장 자주 쓰는 교정입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>이 세 가지는 <b>면접에서 "인덱스를 걸었는데 왜 안 빨라지나요?"</b>에 대한 모범 답안 그대로입니다. 실무에서는 특히 <b>②번(함수로 감싸기)</b>이 자주 발견되는데, <b>날짜 컬럼에 <code>DATE()</code>·<code>YEAR()</code>를 씌운 조건</b>이 대표적입니다. 범위 조건으로 바꾸는 것만으로 극적으로 빨라지는 경우가 많습니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="sql-44">
+  <div class="note-head">
+    <span class="note-num">44</span>
+    <h3>스토어드 프로시저 — 자주 쓰는 작업을 DB에 저장해 두기</h3>
+    <div class="note-tags"><span class="tag">PROCEDURE</span><span class="tag">CALL</span><span class="tag">DELIMITER</span><span class="tag">IN 매개변수</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>여러 문장으로 이루어진 작업에 <b>이름을 붙여 DB에 저장</b>해 두고 <code>CALL 이름()</code>으로 실행한다. 매개변수를 받을 수 있어 <b>같은 로직을 값만 바꿔</b> 재사용한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>SQL로 쓰는 함수</b>라고 보면 됩니다. 지금까지는 쿼리를 매번 통째로 다시 쳤는데, 프로시저로 만들어 두면 <code>CALL getDept_emp(10)</code> 한 줄이면 되죠. 자바의 메서드와 발상이 같습니다 — <b>이름을 붙이고, 매개변수를 받고, 안에서 여러 일을 한다</b>는 점에서요. 다만 <b>실행 위치가 애플리케이션이 아니라 DB 서버</b>라는 점이 다릅니다.</p>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">scott 연습문제 13 — 부서별 사원 조회 프로시저</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">DROP PROCEDURE IF EXISTS getDept_emp;
+
+DELIMITER $$
+CREATE PROCEDURE getDept_emp(IN p_deptno INT)
+BEGIN
+    -- 부서 존재 여부를 담을 변수 (반드시 BEGIN 바로 뒤에 선언)
+    DECLARE v_cnt INT DEFAULT 0;
+
+    SELECT COUNT(*) INTO v_cnt
+    FROM dept
+    WHERE deptno = p_deptno;
+
+    IF v_cnt &gt; 0 THEN
+        SELECT ename, job, sal FROM emp WHERE deptno = p_deptno;
+    ELSE
+        SELECT '해당 부서가 없습니다.' AS '메시지';
+    END IF;
+END $$
+DELIMITER ;
+
+CALL getDept_emp(10);   -- 있는 부서
+CALL getDept_emp(99);   -- 없는 부서</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실행 결과 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>CALL getDept_emp(10);
++--------+-----------+------+
+| ename  | job       | sal  |
++--------+-----------+------+
+| CLARK  | MANAGER   | 2450 |
+| KING   | PRESIDENT | 5000 |
+| MILLER | CLERK     | 1300 |
++--------+-----------+------+
+
+CALL getDept_emp(99);
++--------------------------------+
+| 메시지                         |
++--------------------------------+
+| 해당 부서가 없습니다.          |
++--------------------------------+
+
+[DELIMITER 없이 만들면?]
+CREATE PROCEDURE bad() BEGIN SELECT 1; SELECT 2; END;
+  → ERROR 1064 (42000): You have an error in your SQL syntax</pre>
+      <div class="run-note"><b><code>DELIMITER</code>가 왜 필요한지</b>가 이 실습의 핵심입니다. 프로시저 <b>본문 안에도 세미콜론이 들어가는데</b>, DB는 세미콜론을 만나면 "문장이 끝났다"고 판단해 <b><code>BEGIN</code>까지만 읽고 잘라 버립니다</b>. 그래서 <code>DELIMITER $$</code>로 <b>문장 끝 기호를 잠시 바꿔 두고</b>, 다 만든 뒤 <code>DELIMITER ;</code>로 되돌립니다. 실제로 빼고 만들어 보니 <code>ERROR 1064</code>가 났습니다.<br><br><code>DECLARE</code>는 <b><code>BEGIN</code> 바로 뒤에서만</b> 쓸 수 있습니다. 중간에 선언하려 하면 문법 에러입니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">44번 정리 — 핵심 정리</div>
+      <ul>
+        <li><code>CREATE PROCEDURE 이름(IN 매개변수 타입) BEGIN ... END</code> 로 만들고 <code>CALL 이름(값)</code>으로 실행한다.</li>
+        <li><b><code>DELIMITER $$</code>로 문장 끝 기호를 바꿔 두고</b> 만든 뒤 <code>DELIMITER ;</code>로 되돌린다 — 빼면 <code>ERROR 1064</code>.</li>
+        <li><b><code>DECLARE</code>는 <code>BEGIN</code> 바로 뒤에서만</b> 쓸 수 있다.</li>
+        <li><code>SELECT ... INTO 변수</code>로 조회 결과를 변수에 담는다.</li>
+        <li>매개변수 종류: <b><code>IN</code></b>(받기, 기본) · <b><code>OUT</code></b>(돌려주기) · <b><code>INOUT</code></b>(둘 다).</li>
+        <li><code>DROP PROCEDURE IF EXISTS 이름;</code>을 앞에 두면 <b>다시 만들 때 충돌이 없다</b>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>DELIMITER가 필요한 이유를 설명해보세요.</summary>
+        <div class="sc-a">프로시저 <b>본문 안에도 세미콜론이 들어가기</b> 때문입니다. DB는 세미콜론을 문장의 끝으로 보므로, 그대로 두면 <code>BEGIN</code> 다음 첫 세미콜론에서 <b>잘라 버려</b> 미완성 문장이 됩니다. 그래서 <b>끝 기호를 잠시 <code>$$</code> 같은 것으로 바꿔</b> 두고, 다 만든 뒤 되돌립니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>프로시저를 쓰면 무엇이 좋고, 반대로 무엇이 불편해질까?</summary>
+        <div class="sc-a"><b>좋은 점</b> — 로직이 DB 안에 있어 <b>네트워크 왕복이 줄고</b>, 여러 애플리케이션이 <b>같은 로직을 공유</b>합니다. <b>불편한 점</b> — 코드가 애플리케이션 밖에 있어 <b>버전 관리·테스트·디버깅이 어렵고</b>, 특정 DB에 종속됩니다. 그래서 요즘은 <b>비즈니스 로직은 애플리케이션에 두는</b> 쪽이 우세합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>프로시저는 <b>레거시 시스템에서 아주 많이</b> 만나게 됩니다(특히 금융·공공). 새로 만드는 서비스는 <b>애플리케이션에 로직을 두는</b> 편이지만, <b>대량 배치 처리</b>처럼 데이터를 많이 오가야 하는 작업은 지금도 프로시저가 유리합니다. <b>왜 그렇게 갈리는지</b>를 설명할 수 있으면 좋습니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="sql-45">
+  <div class="note-head">
+    <span class="note-num">45</span>
+    <h3>프로시저 제어문 — IF · CASE · WHILE</h3>
+    <div class="note-tags"><span class="tag">IF</span><span class="tag">CASE</span><span class="tag">WHILE</span><span class="tag">DECLARE</span><span class="tag">SET</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>프로시저 안에서는 <b>변수를 선언하고 조건 분기와 반복</b>을 쓸 수 있다. SQL이 "무엇을 원하는지"만 말하는 언어인데, 프로시저 안에서만은 <b>절차적으로</b> 쓸 수 있는 셈이다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>SQL은 원래 <b>반복문도 조건문도 없는</b> 언어입니다. "조건에 맞는 행을 다 가져와"라고 하면 DB가 알아서 훑으니까요. 그런데 <b>"1부터 100까지 더해라"</b> 같은 절차적인 일은 그렇게 표현할 수 없죠. 프로시저 안에서는 <b>자바처럼 변수를 만들고 반복문을 돌릴 수</b> 있습니다 — SQL 속의 작은 프로그래밍 언어인 셈입니다.</p>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">sqlDB 실습 — 변수·반복·분기</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">DELIMITER $$
+
+-- WHILE : 1부터 100까지 더하기
+CREATE PROCEDURE whileProc()
+BEGIN
+    DECLARE i     INT DEFAULT 1;
+    DECLARE total INT DEFAULT 0;
+    WHILE i &lt;= 100 DO
+        SET total = total + i;
+        SET i = i + 1;
+    END WHILE;
+    SELECT total AS '1~100 합계';
+END $$
+
+-- CASE : 점수로 학점 구하기
+CREATE PROCEDURE caseProc(IN p_score INT)
+BEGIN
+    DECLARE v_grade CHAR(1);
+    CASE
+        WHEN p_score &gt;= 90 THEN SET v_grade = 'A';
+        WHEN p_score &gt;= 80 THEN SET v_grade = 'B';
+        ELSE                    SET v_grade = 'F';
+    END CASE;
+    SELECT p_score AS 점수, v_grade AS 학점;
+END $$
+
+DELIMITER ;
+
+CALL whileProc();
+CALL caseProc(85);</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실행 결과 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>CALL whileProc();
++--------------+
+| 1~100 합계   |
++--------------+
+|         5050 |
++--------------+
+
+CALL caseProc(85);
++--------+--------+
+| 점수   | 학점   |
++--------+--------+
+|     85 | B      |
++--------+--------+</pre>
+      <div class="run-note"><b>여기서 쓰는 <code>CASE</code>는 SELECT 안에서 쓰던 것과 다릅니다.</b> SELECT의 <code>CASE</code>는 <b>값을 만들어 내는 식</b>이라 <code>END</code>로 끝나지만, 프로시저의 <code>CASE</code>는 <b>실행 흐름을 가르는 문장</b>이라 <code>END CASE</code>로 끝나고 안에 <code>SET</code> 같은 <b>명령</b>이 들어갑니다. 이름이 같아 헷갈리기 쉬운 부분입니다.<br><br>변수 이름 앞에 <code>v_</code>, 매개변수에 <code>p_</code>를 붙이는 것은 문법이 아니라 <b>관례</b>입니다. 컬럼명과 헷갈리는 것을 막아 주므로 지키는 편이 좋습니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">45번 정리 — 핵심 정리</div>
+      <ul>
+        <li><code>DECLARE 변수 타입 DEFAULT 값;</code> — <b><code>BEGIN</code> 바로 뒤</b>에서만 선언할 수 있다.</li>
+        <li>값 대입은 <code>SET 변수 = 값;</code> 또는 <code>SELECT ... INTO 변수</code>.</li>
+        <li><b><code>IF 조건 THEN ... ELSEIF ... ELSE ... END IF;</code></b> — <code>ELSEIF</code>는 <b>붙여 쓴다</b>(ELSE IF 아님).</li>
+        <li><b><code>CASE WHEN ... THEN ... END CASE;</code></b> — SELECT 안의 <code>CASE ... END</code>(값을 만드는 식)와 <b>다른 것</b>이다.</li>
+        <li><b><code>WHILE 조건 DO ... END WHILE;</code></b> — 그 외에 <code>REPEAT ... UNTIL</code>, <code>LOOP ... LEAVE</code>도 있다.</li>
+        <li>관례상 <b>변수는 <code>v_</code>, 매개변수는 <code>p_</code></b>를 붙여 컬럼명과 구분한다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>SELECT 안의 CASE와 프로시저 안의 CASE는 무엇이 다른가?</summary>
+        <div class="sc-a"><b>SELECT의 <code>CASE</code>는 값을 만들어 내는 '식'</b>이라 <code>END</code>로 끝나고 <b>값이 들어갈 자리</b>에만 씁니다. <b>프로시저의 <code>CASE</code>는 흐름을 가르는 '문장'</b>이라 <code>END CASE</code>로 끝나고 안에 <code>SET</code> 같은 명령을 넣습니다. 이름만 같고 쓰임이 다릅니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>SQL에 원래 반복문이 없는데도 잘 돌아가는 이유는?</summary>
+        <div class="sc-a"><b>집합 단위로 처리하기</b> 때문입니다. "조건에 맞는 행을 전부"라고 말하면 DB가 알아서 훑으므로 <b>내가 한 행씩 돌 이유가 없죠</b>. 그래서 프로시저에서도 <b>반복문으로 한 행씩 처리하는 것은 대개 느립니다</b> — 가능하면 <b>한 문장의 집합 연산</b>으로 푸는 것이 원칙입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 <b>프로시저 안의 반복문은 조심해서</b> 씁니다. 한 행씩 도는 방식(커서 반복)은 <b>집합 연산 한 문장보다 수십 배 느린</b> 경우가 많거든요. <b>"반복문을 쓰기 전에 한 문장으로 표현할 수 없는지"</b>를 먼저 묻는 것이 SQL다운 사고방식입니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="sql-46">
+  <div class="note-head">
+    <span class="note-num">46</span>
+    <h3>스토어드 함수 — 값을 돌려주는 나만의 함수</h3>
+    <div class="note-tags"><span class="tag">FUNCTION</span><span class="tag">RETURNS</span><span class="tag">DETERMINISTIC</span><span class="tag">프로시저와 차이</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>CREATE FUNCTION</code>으로 만든 함수는 <b>값 하나를 돌려주며</b>, <code>ROUND()</code>처럼 <b><code>SELECT</code> 안에서 값처럼</b> 쓸 수 있다. 프로시저는 <code>CALL</code>로만 실행되고 SELECT 안에서는 쓸 수 없다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>프로시저와 함수는 비슷해 보이지만 <b>쓰는 자리가 완전히 다릅니다</b>. 프로시저는 <b>"이 작업을 해라"</b>고 시키는 것(<code>CALL</code>)이고, 함수는 <b>"이 값을 계산해 줘"</b> 하고 결과를 받아 쓰는 것입니다. 그래서 함수는 <code>SELECT ename, myFunc(sal) FROM emp</code>처럼 <b>컬럼 자리에 끼워 넣을 수</b> 있죠 — 회사마다 다른 계산 규칙(수수료·등급)을 함수로 만들어 두면 편합니다.</p>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">sqlDB 실습 — 함수 만들고 쓰기</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">DELIMITER $$
+CREATE FUNCTION userFunc(VALUE1 INT, VALUE2 INT)
+    RETURNS INT          -- 무엇을 돌려줄지 반드시 선언
+    DETERMINISTIC        -- 같은 입력이면 같은 결과임을 보장
+    BEGIN
+        RETURN VALUE1 + VALUE2;
+    END $$
+DELIMITER ;
+
+-- 내장 함수처럼 값 자리에 그대로 쓴다
+SELECT userFunc(100, 200);
+
+-- 컬럼과 섞어 쓸 수도 있다
+SELECT ename, userFunc(sal, 500) AS '500 더한 급여'
+FROM scott.emp;
+
+-- 결과를 변수에 담기
+SELECT userFunc(100, 200) INTO @age;
+SELECT @age;</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실행 결과와 프로시저와의 차이 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>SELECT userFunc(100, 200);        →  300
+
+SELECT ename, userFunc(sal, 500) FROM scott.emp LIMIT 3;
++-------+-------------------+
+| ename | 500 더한 급여     |
++-------+-------------------+
+| SMITH |              1300 |
+| ALLEN |              2100 |
+| WARD  |              1750 |
++-------+-------------------+
+
+[프로시저를 SELECT 안에서 부르면?]
+SELECT whileProc();
+  → ERROR 1305 (42000): FUNCTION sqldb.whileProc does not exist</pre>
+      <div class="run-note"><b>프로시저를 <code>SELECT</code> 안에서 부르니 "그런 함수가 없다"고 합니다.</b> DB가 <code>SELECT</code> 안의 이름을 <b>함수로만 찾기</b> 때문이죠 — 프로시저가 분명히 있는데도 못 찾는 것처럼 보이는 이유입니다. 이 에러 메시지를 만나면 <b>"함수와 프로시저를 헷갈렸구나"</b>로 읽으면 됩니다.<br><br><code>DETERMINISTIC</code>은 <b>"같은 입력에는 항상 같은 결과"</b>라는 약속입니다. 이걸 붙여야 DB가 <b>결과를 캐시하는 등 최적화</b>를 할 수 있고, 복제(replication) 환경에서도 안전합니다. 안 붙이면 설정에 따라 <b>생성이 거부</b>되기도 합니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">46번 정리 — 핵심 정리</div>
+      <ul>
+        <li><code>CREATE FUNCTION 이름(매개변수) RETURNS 타입 BEGIN ... RETURN 값; END</code>.</li>
+        <li><b>함수는 <code>SELECT</code> 안에서 값처럼</b> 쓰고, <b>프로시저는 <code>CALL</code>로만</b> 실행한다.</li>
+        <li>함수는 <b>값 하나만</b> 돌려준다. 여러 행을 결과로 내려면 <b>프로시저</b>를 써야 한다.</li>
+        <li><b><code>RETURNS</code>(선언, s 있음)와 <code>RETURN</code>(실제 반환, s 없음)</b>은 다른 키워드다 — 자주 틀린다.</li>
+        <li><b><code>DETERMINISTIC</code></b>은 같은 입력에 같은 결과임을 보장하는 표시. 안 붙이면 생성이 거부될 수 있다.</li>
+        <li><code>SELECT 함수() INTO @변수</code>로 결과를 세션 변수에 담아 재사용할 수 있다.</li>
+        <li>프로시저를 <code>SELECT</code>에서 부르면 <b><code>ERROR 1305 FUNCTION ... does not exist</code></b> — 함수와 헷갈린 것이다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>함수와 프로시저를 한 문장으로 구분해보세요.</summary>
+        <div class="sc-a"><b>함수는 값을 돌려받아 쓰는 것</b>(<code>SELECT myFunc(x)</code>), <b>프로시저는 작업을 시키는 것</b>(<code>CALL myProc()</code>)입니다. 그래서 함수는 <b>컬럼 자리에 끼워 넣을 수</b> 있고, 프로시저는 <b>여러 행을 결과로 낼 수</b> 있습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>RETURNS와 RETURN을 구분해 설명해보세요.</summary>
+        <div class="sc-a"><b><code>RETURNS INT</code></b>는 함수 <b>머리 부분의 선언</b>으로 "이 함수는 INT를 돌려준다"는 약속이고, <b><code>RETURN VALUE1+VALUE2;</code></b>는 <b>본문 안에서 실제로 값을 돌려주는 명령</b>입니다. <b>s가 붙으면 선언, 없으면 실행</b>이라고 기억하면 됩니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 함수는 <b>회사마다 다른 계산 규칙</b>(등급 산정, 수수료, 세금)을 한 곳에 모아 둘 때 유용합니다. 다만 <b><code>WHERE</code> 절에 함수를 쓰면 인덱스를 못 쓰므로</b>(42·43번 카드) 성능에 주의해야 합니다. <b>계산은 함수로, 검색 조건은 맨몸 컬럼으로</b>가 요령입니다.</p>
+  </div>
+</article>
+
+
 
 
 
@@ -18448,7 +19077,7 @@ ALTER TABLE p DROP PRIMARY KEY;
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 17단계 중 SQL 4단계(14~17)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 41개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 17단계 중 SQL 4단계(14~17)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
