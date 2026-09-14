@@ -180,12 +180,12 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 알아 둘 점 (직접 돌려 보고 확인한 것)
 
 학습용 프로젝트라 **일부러 고치지 않고 남겨 둔 부분**이 있습니다.
+(헤더 `<tr>` 을 닫지 않아 표가 중첩되던 문제는 `userList.jsp` · `buyList.jsp` 모두 수정했습니다.)
 정리된 설명은 대시보드의 [🖥️ 16. MVC1의 한계](https://moriochoradio.github.io/web-study-notes/Back_end/#web-16) 카드에 있습니다.
 
 | 위치 | 증상 |
 |---|---|
 | `userDetail.jsp` | 없는 아이디로 요청하면 `NullPointerException` (HTTP 500). `dto == null` 검사가 없다. |
 | `userInsert.jsp` | 파일 끝에 남은 `%>` 가 화면에 그대로 출력된다. |
-| `userList.jsp` | 헤더 `<tr>` 을 닫지 않아 `<tr>` 안에서 `<tr>` 이 다시 열린다. (`buyList.jsp` 에서는 수정됨) |
 | `buyList.jsp` | `groupName` 이 NULL 인 행에 `null` 이라는 글자가 그대로 나온다. |
 | 공통 | 실패 사유(외래키 위반·중복·연결 실패)가 전부 `error.jsp` 로 뭉뚱그려진다. |

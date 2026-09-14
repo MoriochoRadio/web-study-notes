@@ -20418,13 +20418,23 @@ function delBuy(num) {
         &lt;td&gt;null&lt;/td&gt;          ← groupName 이 NULL 인 운동화
     (&lt;%=dto.getGroupName()%&gt; 는 null 을 문자열 "null" 로 찍는다)
 
-[3] 표 구조가 어긋난다
-    userList.jsp:  &lt;tr&gt; 안에서 다시 &lt;tr&gt; 이 열린다 (헤더 줄을 안 닫음)
-    buyList.jsp :  같은 문제를 찾아서 &lt;/tr&gt; 를 추가해 고침  ← 직접 수정한 흔적
+[3] 표 구조가 어긋났었다 (두 파일 모두 수정 완료)
+    buyList.jsp :  헤더 줄 뒤에 &lt;/tr&gt; 추가  ← 직접 찾아 고친 흔적
+    userList.jsp:  같은 방식으로 수정함
+
+    고치기 전 — 브라우저가 받은 HTML
+        &lt;tr&gt;
+            &lt;th&gt;아이디&lt;/th&gt;...&lt;th&gt;삭제&lt;/th&gt;
+                &lt;tr&gt;            ← tr 안에서 tr 이 또 열린다
+                    &lt;td&gt;KBS&lt;/td&gt;...
+
+    고친 뒤 — 브라우저가 만든 DOM
+        중첩된 tr: 0개
+        행 5개, 칸 수: [4, 4, 4, 4, 1]     ← 반듯한 표가 됐다
 
 [4] 실패 사유가 사라진다
     외래키 위반 · 아이디 중복 · DB 연결 실패가 전부 error.jsp 로 간다</pre>
-      <div class="run-note"><b>네 가지가 전부 "한 파일이 너무 많은 일을 해서" 생긴 문제</b>입니다.<br><br><b>[1]</b> 처리 페이지가 <b>HTML 껍데기를 갖고 있어서</b> 실수로 남은 <code>%&gt;</code>가 화면에 찍혔습니다. 지우면 되는 사소한 일이지만, <b>컨트롤러였다면 애초에 HTML이 없어</b> 생길 수 없는 문제죠.<br><br><b>[2]</b> <code>&lt;%=null%&gt;</code>은 <b>문자열 "null"을 찍습니다</b>. EL의 <code>${dto.groupName}</code>은 같은 상황에서 <b>빈칸</b>을 찍어요 — <b>EL을 쓰는 이유 중 하나</b>가 바로 이것입니다.<br><br><b>[3]</b>은 <b>이미 직접 찾아 고치셨습니다</b> — <code>buyList.jsp</code>에 "헤더 줄 닫기(<code>&lt;/tr&gt;</code>) 추가"라는 주석이 남아 있죠. <b>자바 중괄호와 HTML 태그가 뒤섞이면</b> 이런 짝 맞추기 실수가 늘어납니다. <code>userList.jsp</code>에는 아직 남아 있으니 같이 고쳐 두면 좋겠습니다.<br><br><b>[4]</b>는 <a href="#web-15">15번 카드</a>에서 본 그대로입니다. <b>이 모든 것이 MVC2로 가는 이유</b>이고, 다음 진도에서 하나씩 해결됩니다.</div>
+      <div class="run-note"><b>네 가지가 전부 "한 파일이 너무 많은 일을 해서" 생긴 문제</b>입니다.<br><br><b>[1]</b> 처리 페이지가 <b>HTML 껍데기를 갖고 있어서</b> 실수로 남은 <code>%&gt;</code>가 화면에 찍혔습니다. 지우면 되는 사소한 일이지만, <b>컨트롤러였다면 애초에 HTML이 없어</b> 생길 수 없는 문제죠.<br><br><b>[2]</b> <code>&lt;%=null%&gt;</code>은 <b>문자열 "null"을 찍습니다</b>. EL의 <code>${dto.groupName}</code>은 같은 상황에서 <b>빈칸</b>을 찍어요 — <b>EL을 쓰는 이유 중 하나</b>가 바로 이것입니다.<br><br><b>[3]</b>은 <b>직접 찾아 고치신 것</b>입니다 — <code>buyList.jsp</code>에 "헤더 줄 닫기(<code>&lt;/tr&gt;</code>) 추가"라는 주석이 남아 있죠. 같은 자리가 <code>userList.jsp</code>에도 있어서 <b>지금은 둘 다 고쳐 두었습니다</b>.<br><br><b>브라우저가 알아서 고쳐 주기 때문에 화면은 멀쩡해 보였습니다.</b> 그래서 더 위험해요 — <b>내가 쓴 HTML과 실제 DOM이 다른</b> 상태가 되니까요. 자바스크립트로 <code>tr</code>을 세거나 특정 행을 찾을 때 <b>예상과 다른 결과</b>가 나오고, 브라우저마다 고쳐 주는 방식이 달라 <b>한쪽에서만 깨지기도</b> 합니다.<br><br>원인은 <b>자바 중괄호와 HTML 태그가 한 파일에 뒤섞여</b> 짝을 눈으로 맞추기 어려웠던 것입니다. <code>&lt;tr&gt;</code>을 연 자리와 닫을 자리 사이에 <code>&lt;%</code>와 <code>for</code>문이 끼어 있으면 <b>사람의 눈이 짝을 놓치기 쉽습니다</b>. MVC2에서 JSP에 자바가 사라지면 이 종류의 실수도 함께 줄어듭니다.<br><br><b>[4]</b>는 <a href="#web-15">15번 카드</a>에서 본 그대로입니다. <b>이 모든 것이 MVC2로 가는 이유</b>이고, 다음 진도에서 하나씩 해결됩니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">16번 정리 — 핵심 정리</div>

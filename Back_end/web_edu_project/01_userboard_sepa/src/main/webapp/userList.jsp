@@ -20,6 +20,7 @@
 <table border = "1">
 	<tr>
 		<th>아이디</th><th>이름</th><th>가입일</th><th>삭제</th>
+	</tr>
 		<%
 			for(userDto dto:list){
 				%>
@@ -32,7 +33,6 @@
 				<%
 			}
 		%>
-	</tr>
 	<tr>
 		<td colspan="5">
 		<a href="index.jsp">메인화면</a>
