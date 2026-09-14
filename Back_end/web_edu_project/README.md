@@ -27,23 +27,43 @@
 ```
 01_userboard_sepa/
 ├─ src/main/java/com/hk/board/
-│   ├─ dto/userDto.java      데이터를 담아 나르는 객체 (무엇을)
-│   ├─ dao/UserDao.java      DB 접근을 전담하는 객체 (어디서)
-│   └─ main/UserMain.java    시켜 보고 결과를 확인 (누가)
+│   ├─ dto/userDto.java      회원 한 명을 담는 상자
+│   ├─ dto/BuyDto.java       구매 한 건을 담는 상자
+│   ├─ dao/UserDao.java      회원 CRUD 5종
+│   ├─ dao/BuyDao.java       구매 CRUD 5종
+│   └─ main/UserMain.java    화면 없이 DAO 를 시켜 보는 테스트 클래스
 └─ src/main/webapp/
-    ├─ index.jsp
+    ├─ index.jsp             메인 — 회원 / 구매 두 갈래
+    ├─ userList.jsp          회원 목록 (이름 클릭 → 상세, 삭제 링크)
+    ├─ userDetail.jsp        회원 상세 + 수정 폼
+    ├─ userUpdate.jsp        수정 처리        (화면 없음)
+    ├─ userDel.jsp           삭제 처리        (화면 없음)
+    ├─ userInsertFrom.jsp    신규 회원 입력 폼
+    ├─ userInsert.jsp        등록 처리        (화면 없음)
+    ├─ buyList.jsp           구매 목록
+    ├─ buyDetail.jsp         구매 상세 + 수정 폼
+    ├─ buyUpdate.jsp         구매 수정 처리   (화면 없음)
+    ├─ buyDel.jsp            구매 삭제 처리   (화면 없음)
+    ├─ buyInsertForm.jsp     구매 등록 폼
+    ├─ buyInsert.jsp         구매 등록 처리   (화면 없음)
+    ├─ error.jsp             공통 에러 화면
     └─ WEB-INF/
         ├─ web.xml           배포 서술자 (Jakarta EE 6.0)
         └─ lib/              ← JDBC 드라이버 jar 를 여기에 (저장소에는 미포함)
 ```
 
+화면을 그리는 JSP와 **일만 하고 화면이 없는 처리 JSP**가 섞여 있습니다.
+이 구조를 **MVC1**이라 부르고, 다음 진도인 MVC2에서는 처리 부분이 **서블릿(컨트롤러)** 으로 빠집니다.
+
 | 클래스 | 하는 일 |
 |---|---|
-| `userDto` | 회원 한 명의 정보를 담는 상자. 멤버필드 8개 + 생성자 + getter/setter + `toString()`. `Serializable` 구현. |
-| `UserDao` | 생성자에서 드라이버를 로딩하고, `getAllUser()`로 목록을 조회하고 `insertUser(dto)`로 등록한다. |
-| `UserMain` | `dao.getAllUser()`를 불러 결과를 출력하는 테스트용 실행 클래스. **SQL도 커넥션도 모른다.** |
+| `userDto` | 회원 한 명의 정보를 담는 상자. 멤버필드 8개 + `toString()` + `Serializable`. 수정 화면용 **5개짜리 생성자**를 오버로딩해 두었다. |
+| `BuyDto` | 구매 한 건(`num`·`userId`·`proudName`·`groupName`·`price`·`amount`). |
+| `UserDao` | `getAllUser` · `getUser` · `insertUser` · `updateUser` · `deleteUser` |
+| `BuyDao` | `getAllBuy` · `getBuy` · `insertBuy` · `updateBuy` · `deleteBuy` |
+| `UserMain` | DAO 를 불러 결과를 출력하는 테스트용 실행 클래스. **SQL도 커넥션도 모른다.** |
 
-두 메서드가 **자원 반납 방식이 서로 달라서** 비교하기 좋습니다.
+`UserDao`의 두 메서드는 **자원 반납 방식이 서로 달라서** 비교하기 좋습니다.
 
 - `getAllUser()` — `finally`에서 직접 `close()`. JDBC 6단계를 `println`으로 하나씩 찍는다.
 - `insertUser()` — **try-with-resources**. `close()`를 쓴 곳이 없어 "6단계" 메시지도 없지만, 자바가 자동으로 닫아 준다.
@@ -69,11 +89,30 @@ CREATE TABLE userTbl (
   mDate     DATE
 );
 
+CREATE TABLE buyTbl (
+  num       INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  userID    CHAR(8)  NOT NULL,
+  prodName  CHAR(6)  NOT NULL,
+  groupName CHAR(4),
+  price     INT      NOT NULL,
+  amount    SMALLINT NOT NULL,
+  FOREIGN KEY (userID) REFERENCES userTbl(userID)   -- 이 제약이 삭제를 막는다
+);
+
 INSERT INTO userTbl VALUES
   ('LSG','이승기',1987,'서울','011','11111111',182,'2008-8-8'),
   ('KBS','김범수',1979,'경남','011','22222222',173,'2012-4-4'),
   ('KKH','김경호',1971,'전남','019','33333333',177,'2007-7-7');
+
+INSERT INTO buyTbl VALUES
+  (NULL,'KBS','운동화',NULL,   30, 2),
+  (NULL,'KBS','노트북','전자',1000,1),
+  (NULL,'LSG','모니터','전자', 200,1);
 ```
+
+> **외래키를 걸어 두었기 때문에**, 구매 이력이 있는 `KBS`는 화면에서 삭제하려 하면 거부됩니다
+> (`Cannot delete or update a parent row`). 이력이 없는 `KKH`는 정상적으로 지워집니다.
+> 의도된 동작이니 에러가 아니라 **DB가 데이터를 지켜 준 것**으로 읽으면 됩니다.
 
 ### 2) JDBC 드라이버 넣기
 
@@ -88,7 +127,7 @@ src/main/webapp/WEB-INF/lib/mariadb-java-client-3.3.3.jar
 
 ### 3) DB 비밀번호 채우기
 
-**공개 저장소라서 비밀번호를 뺐습니다.** `UserDao.java`의 두 곳을 채워야 동작합니다.
+**공개 저장소라서 비밀번호를 뺐습니다.** `UserDao.java`와 `BuyDao.java`의 **CRUD 메서드마다 한 곳씩, 모두 10곳**을 채워야 동작합니다.
 
 ```java
 String password = "";   // ← 여기에 DB 비밀번호
@@ -100,7 +139,7 @@ String password = "";   // ← 여기에 DB 비밀번호
 
 ### 4) 실행
 
-Eclipse에서 `UserMain.java` → 우클릭 → Run As → Java Application.
+**화면 없이 DAO 만 확인**하려면 `UserMain.java` → 우클릭 → Run As → Java Application.
 
 ```
 1단계: 드라이버 로딩 성공
@@ -117,6 +156,9 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 단계마다 출력을 찍어 둔 덕분에 **실패하면 몇 단계에서 막혔는지** 바로 보입니다.
 2단계에서 멈추면 접속 정보나 DB 기동 문제, 4단계에서 멈추면 SQL 문제입니다.
 
+**브라우저에서 쓰려면** 프로젝트 우클릭 → Run As → Run on Server (Tomcat v10.1) 후
+`http://localhost:8080/01_userboard_sepa/` 로 접속합니다.
+
 ## 저장소에 포함하지 않은 것
 
 | 제외 | 이유 |
@@ -130,7 +172,20 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 
 교육자료 기준 다음 진도입니다.
 
-1. **JSP 문법** — 실행 환경 · 구성요소 · Tag · Action Tag · 기본 객체
-2. **MVC1** — 기본 게시판, 회원 관리
-3. **MVC2** — Servlet · JSTL · EL · MyBatis
+1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차에 진행)
+2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차에 진행 — 지금 이 프로젝트)
+3. **MVC2** — Servlet · JSTL · EL · MyBatis ← 다음
 4. **심화** — 답변형 게시판, Connection Pool
+
+## 알아 둘 점 (직접 돌려 보고 확인한 것)
+
+학습용 프로젝트라 **일부러 고치지 않고 남겨 둔 부분**이 있습니다.
+정리된 설명은 대시보드의 [🖥️ 16. MVC1의 한계](https://moriochoradio.github.io/web-study-notes/Back_end/#web-16) 카드에 있습니다.
+
+| 위치 | 증상 |
+|---|---|
+| `userDetail.jsp` | 없는 아이디로 요청하면 `NullPointerException` (HTTP 500). `dto == null` 검사가 없다. |
+| `userInsert.jsp` | 파일 끝에 남은 `%>` 가 화면에 그대로 출력된다. |
+| `userList.jsp` | 헤더 `<tr>` 을 닫지 않아 `<tr>` 안에서 `<tr>` 이 다시 열린다. (`buyList.jsp` 에서는 수정됨) |
+| `buyList.jsp` | `groupName` 이 NULL 인 행에 `null` 이라는 글자가 그대로 나온다. |
+| 공통 | 실패 사유(외래키 위반·중복·연결 실패)가 전부 `error.jsp` 로 뭉뚱그려진다. |
