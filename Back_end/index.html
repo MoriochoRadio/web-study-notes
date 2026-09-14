@@ -19812,6 +19812,7 @@ DB를 다른 것으로 바꾼다 →  DAO 안 (드라이버·URL·일부 SQL)
         <li>반복문·조건문은 <b>여는 중괄호와 닫는 중괄호가 서로 다른 스크립틀릿</b>에 놓인다.</li>
         <li>브라우저가 받는 것은 <b>실행이 끝난 HTML뿐</b> — 자바 코드는 한 줄도 가지 않는다.</li>
         <li><code>import</code>는 <b>파일 맨 위 지시자</b>에 몰아 쓴다 — 스크립틀릿 안에는 쓸 수 없다.</li>
+        <li><b>자바 주석 안에 <code>%&gt;</code>를 쓰면 거기서 스크립틀릿이 끝나 버린다</b> — JSP는 주석인지 따지지 않고 <code>%&gt;</code>만 찾는다.</li>
       </ul>
     </div>
     <div class="self-check">
@@ -19824,6 +19825,10 @@ DB를 다른 것으로 바꾼다 →  DAO 안 (드라이버·URL·일부 SQL)
       <details class="sc-q">
         <summary>&lt;%= dto.getName(); %&gt; 처럼 세미콜론을 붙이면 왜 에러인가?</summary>
         <div class="sc-a"><b><code>out.print( ... )</code>의 괄호 안으로 통째로 들어가기</b> 때문입니다. 세미콜론까지 들어가면 <code>out.print(dto.getName(););</code>가 되어 <b>문법이 깨집니다</b>. "표현식은 값이지 문장이 아니다"라고 기억하면 헷갈리지 않습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>스크립틀릿 안에 <b>// 주석으로</b> <code>//아래 &lt;%=dto.getName()%&gt; 에서 터진다</code> 라고 적으면 어떻게 될까?</summary>
+        <div class="sc-a"><b>주석 안의 <code>%&gt;</code>에서 스크립틀릿이 끝나 버립니다.</b> JSP는 파일을 서블릿으로 바꿀 때 <b>자바 문법을 해석하지 않고 <code>&lt;%</code>와 <code>%&gt;</code>만 찾습니다</b>. 그래서 <code>//</code> 주석 안이든 문자열 <code>"%&gt;"</code> 안이든 가리지 않고 거기서 자바 영역을 닫아 버리죠.<br><br>뒷부분은 HTML로 취급되어 <b>화면에 코드가 그대로 찍히거나 컴파일 에러</b>가 납니다. 꼭 써야 하면 <code>%\&gt;</code>로 escape 하거나, <b>그냥 <code>%&gt;</code>를 안 쓰도록 문장을 바꾸는</b> 편이 안전합니다.</div>
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>JSP에 자바를 직접 쓰는 <b>스크립틀릿 방식은 실무에서 거의 쓰지 않습니다</b> — 화면과 로직이 뒤엉켜 유지보수가 어렵기 때문이죠. 요즘은 <b>EL(<code>${...}</code>)과 JSTL</b>로 대체하고, 그마저도 <b>Thymeleaf</b>나 <b>React 같은 프런트엔드</b>로 넘어가는 추세입니다. 다만 <b>레거시 프로젝트에는 여전히 스크립틀릿이 가득</b>하고, 그걸 읽어야 하는 일이 실무 초기에 자주 생깁니다.</p>
@@ -20405,36 +20410,62 @@ function delBuy(num) {
    → 화면에는 EL(${user.name}) 과 JSTL(&lt;c:forEach&gt;) 만 남는다</code></pre>
     </div>
     <details class="run-output">
-      <summary><span class="run-tag">실행 결과</span>실행해 보고 드러난, 지금 구조의 아픈 곳 네 가지 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
-      <pre>[1] 처리 페이지가 응답 본문을 만든다
+      <summary><span class="run-tag">실행 결과</span>모든 화면·모든 실패 경로를 눌러 보고 정리한 것 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>━━━ 고친 것 ━━━
+
+[1] 정상적인 사용 중에 HTTP 500 이 떴다
+    목록 → 상세를 보다가, 그 회원을 지운 뒤 뒤로가기로 상세를 다시 열면
+
+        HTTP 500 – 내부 서버 오류
+        java.lang.NullPointerException:
+          Cannot invoke "userDto.getUserId()" because "dto" is null
+
+    같은 형태로 500 이 나던 곳이 모두 6군데였다.
+        userDetail.jsp?userid=NOPE   500   (없는 회원)
+        userDetail.jsp               500   (파라미터 없음)
+        buyDetail.jsp?num=999        500   (없는 구매번호)
+        buyDetail.jsp                500   (파라미터 없음)
+        buyDetail.jsp?num=abc        500   (숫자가 아님)
+        buyDel.jsp?num=xyz           500   (숫자가 아님)
+
+    → 값을 쓰기 전에 확인하는 코드를 넣어 전부 error.jsp 로 보냈다.
+
+        if (dto == null) {
+            response.sendRedirect("error.jsp");
+            return;      // sendRedirect 는 아래 코드를 멈추지 않는다
+        }
+
+    고친 뒤: 위 6군데가 전부 302 → error.jsp. 정상 경로 8개는 그대로 200.
+
+[2] 화면에 쓰레기 문자가 찍혔다
     userInsert.jsp 응답 끝부분:
         &lt;/script&gt;
-    %&gt;            ← 실수로 남은 %&gt; 가 화면에 그대로 찍힌다
+    %&gt;            ← 짝 없이 남은 %&gt; 가 화면에 그대로 찍혔다
     &lt;/body&gt;
-    (화면 없는 페이지인데 HTML 껍데기를 갖고 있어서 생기는 일)
+    → 지웠다. (응답 본문에서 %&gt; 줄 개수 0 확인)
 
-[2] NULL 이 화면에 그대로 나온다
+[3] 표 구조가 어긋났다 — userList.jsp
+    헤더 &lt;tr&gt; 을 닫지 않아 &lt;tr&gt; 안에서 &lt;tr&gt; 이 또 열렸다.
+    표는 4열인데 아래쪽 칸은 colspan="5" 였다.
+    → &lt;/tr&gt; 추가, colspan="4" 로 수정.
+    고친 뒤 DOM: 중첩된 tr 0개, 행 5개, 칸 수 [4, 4, 4, 4, 1]
+
+
+━━━ 일부러 남긴 것 (다음 진도의 주제라서) ━━━
+
+[4] NULL 이 화면에 그대로 나온다
     buyList.jsp 의 그룹이름 칸:
         &lt;td&gt;null&lt;/td&gt;          ← groupName 이 NULL 인 운동화
     (&lt;%=dto.getGroupName()%&gt; 는 null 을 문자열 "null" 로 찍는다)
 
-[3] 표 구조가 어긋났었다 (두 파일 모두 수정 완료)
-    buyList.jsp :  헤더 줄 뒤에 &lt;/tr&gt; 추가  ← 직접 찾아 고친 흔적
-    userList.jsp:  같은 방식으로 수정함
+[5] 실패 사유가 사라진다
+    외래키 위반 · 아이디 중복 · DB 연결 실패가 전부 error.jsp 로 간다
+    (DAO 가 boolean 하나로 사유를 뭉개기 때문 — 예외 설계에서 다룬다)
 
-    고치기 전 — 브라우저가 받은 HTML
-        &lt;tr&gt;
-            &lt;th&gt;아이디&lt;/th&gt;...&lt;th&gt;삭제&lt;/th&gt;
-                &lt;tr&gt;            ← tr 안에서 tr 이 또 열린다
-                    &lt;td&gt;KBS&lt;/td&gt;...
-
-    고친 뒤 — 브라우저가 만든 DOM
-        중첩된 tr: 0개
-        행 5개, 칸 수: [4, 4, 4, 4, 1]     ← 반듯한 표가 됐다
-
-[4] 실패 사유가 사라진다
-    외래키 위반 · 아이디 중복 · DB 연결 실패가 전부 error.jsp 로 간다</pre>
-      <div class="run-note"><b>네 가지가 전부 "한 파일이 너무 많은 일을 해서" 생긴 문제</b>입니다.<br><br><b>[1]</b> 처리 페이지가 <b>HTML 껍데기를 갖고 있어서</b> 실수로 남은 <code>%&gt;</code>가 화면에 찍혔습니다. 지우면 되는 사소한 일이지만, <b>컨트롤러였다면 애초에 HTML이 없어</b> 생길 수 없는 문제죠.<br><br><b>[2]</b> <code>&lt;%=null%&gt;</code>은 <b>문자열 "null"을 찍습니다</b>. EL의 <code>${dto.groupName}</code>은 같은 상황에서 <b>빈칸</b>을 찍어요 — <b>EL을 쓰는 이유 중 하나</b>가 바로 이것입니다.<br><br><b>[3]</b>은 <b>직접 찾아 고치신 것</b>입니다 — <code>buyList.jsp</code>에 "헤더 줄 닫기(<code>&lt;/tr&gt;</code>) 추가"라는 주석이 남아 있죠. 같은 자리가 <code>userList.jsp</code>에도 있어서 <b>지금은 둘 다 고쳐 두었습니다</b>.<br><br><b>브라우저가 알아서 고쳐 주기 때문에 화면은 멀쩡해 보였습니다.</b> 그래서 더 위험해요 — <b>내가 쓴 HTML과 실제 DOM이 다른</b> 상태가 되니까요. 자바스크립트로 <code>tr</code>을 세거나 특정 행을 찾을 때 <b>예상과 다른 결과</b>가 나오고, 브라우저마다 고쳐 주는 방식이 달라 <b>한쪽에서만 깨지기도</b> 합니다.<br><br>원인은 <b>자바 중괄호와 HTML 태그가 한 파일에 뒤섞여</b> 짝을 눈으로 맞추기 어려웠던 것입니다. <code>&lt;tr&gt;</code>을 연 자리와 닫을 자리 사이에 <code>&lt;%</code>와 <code>for</code>문이 끼어 있으면 <b>사람의 눈이 짝을 놓치기 쉽습니다</b>. MVC2에서 JSP에 자바가 사라지면 이 종류의 실수도 함께 줄어듭니다.<br><br><b>[4]</b>는 <a href="#web-15">15번 카드</a>에서 본 그대로입니다. <b>이 모든 것이 MVC2로 가는 이유</b>이고, 다음 진도에서 하나씩 해결됩니다.</div>
+[6] 처리 페이지가 HTML 껍데기를 갖고 있다
+    userInsert.jsp 는 화면이 없는데도 &lt;html&gt;&lt;body&gt; 를 갖고 있다
+    (컨트롤러로 분리하면 사라지는 문제 — MVC2 에서 다룬다)</pre>
+      <div class="run-note"><b>[1]이 가장 중요합니다 — 평범하게 쓰다가 자바 에러 화면을 만나는</b> 상태였습니다.<br><br>목록에서 회원을 지우고 <b>뒤로가기를 누르는</b> 것만으로 HTTP 500이 떴습니다. DAO는 잘못이 없어요 — 못 찾았으니 약속대로 <code>null</code>을 돌려줬을 뿐입니다. <b>받는 쪽이 확인하지 않은 것</b>이 문제죠. 이런 자리가 6군데 있어서 전부 막았습니다. <b>공부하다가 갑자기 빨간 스택 트레이스를 만나면 진도가 멈추니까</b>, 이건 남겨 둘 이유가 없습니다.<br><br><b>[4]~[6]은 일부러 남겼습니다.</b> 고칠 수야 있지만, <b>지금 고치면 다음 진도에서 배울 것을 미리 써 버리는</b> 셈이라서요. <code>&lt;%=null%&gt;</code>이 "null"을 찍는 문제는 <b>EL의 <code>${dto.groupName}</code>이 빈칸을 찍는 것</b>과 비교해야 의미가 살고, 실패 사유가 뭉개지는 문제는 <b>예외 설계</b>를, 처리 페이지의 HTML 껍데기는 <b>컨트롤러 분리</b>를 배우고 나서 고치는 것이 자연스럽습니다.<br><br><b>고치면서 저도 한 번 걸렸습니다.</b> 주석에 <code>&lt;%=dto.getUserId()%&gt;</code>라고 적었더니 <b>그 안의 <code>%&gt;</code>가 스크립틀릿을 끝내 버려서</b> 페이지가 깨졌어요. JSP는 <b><code>//</code> 주석인지 아닌지 따지지 않고 <code>%&gt;</code>만 보면 무조건 거기서 자바 영역을 닫습니다</b>. → <a href="#web-09">🖥️ 09. JSP 3형제</a>에 정리해 두었습니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">16번 정리 — 핵심 정리</div>

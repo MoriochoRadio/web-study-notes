@@ -177,15 +177,35 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 3. **MVC2** — Servlet · JSTL · EL · MyBatis ← 다음
 4. **심화** — 답변형 게시판, Connection Pool
 
-## 알아 둘 점 (직접 돌려 보고 확인한 것)
+## 고친 것 · 남긴 것
 
-학습용 프로젝트라 **일부러 고치지 않고 남겨 둔 부분**이 있습니다.
-(헤더 `<tr>` 을 닫지 않아 표가 중첩되던 문제는 `userList.jsp` · `buyList.jsp` 모두 수정했습니다.)
-정리된 설명은 대시보드의 [🖥️ 16. MVC1의 한계](https://moriochoradio.github.io/web-study-notes/Back_end/#web-16) 카드에 있습니다.
+이 프로젝트는 수업에서 만든 그대로이지만, **평범하게 쓰다가 자바 에러 화면(HTTP 500)이
+뜨던 곳은 고쳐 두었습니다.** 공부하다 막히지 않기 위해서입니다.
 
-| 위치 | 증상 |
+### 고친 것
+
+| 위치 | 증상 | 조치 |
+|---|---|---|
+| `userDetail.jsp` | 없는(삭제된) 회원의 상세 주소를 열면 `NullPointerException` → 500 | `dto == null` 이면 `error.jsp` 로 |
+| `buyDetail.jsp` | 없는 구매번호·숫자 아닌 `num` → `NullPointerException` / `NumberFormatException` | 파라미터 검사 + `dto == null` 검사 |
+| `buyDel.jsp` | 숫자가 아닌 `num` → `NumberFormatException` | 파라미터 검사 |
+| `userInsert.jsp` | 짝 없이 남은 `%>` 가 화면에 그대로 찍힘 | 삭제 |
+| `userList.jsp` | 헤더 `<tr>` 미닫음으로 표가 중첩됨 / 4열인데 `colspan="5"` | `</tr>` 추가, `colspan="4"` |
+
+톰캣 10.1에 배포해 **정상 경로 8개(전부 200)와 실패 경로 8개(전부 302 → `error.jsp`)** 를
+확인했고, 회원·구매 CRUD를 한 바퀴 돌려 DB 반영까지 확인했습니다.
+
+### 일부러 남긴 것
+
+다음 진도에서 배울 내용이라, **지금 고치면 그 수업의 의미가 없어지는** 것들입니다.
+설명은 대시보드의 [🖥️ 16. MVC1의 한계](https://moriochoradio.github.io/web-study-notes/Back_end/#web-16) 카드에 있습니다.
+
+| 남긴 것 | 어디서 다루나 |
 |---|---|
-| `userDetail.jsp` | 없는 아이디로 요청하면 `NullPointerException` (HTTP 500). `dto == null` 검사가 없다. |
-| `userInsert.jsp` | 파일 끝에 남은 `%>` 가 화면에 그대로 출력된다. |
-| `buyList.jsp` | `groupName` 이 NULL 인 행에 `null` 이라는 글자가 그대로 나온다. |
-| 공통 | 실패 사유(외래키 위반·중복·연결 실패)가 전부 `error.jsp` 로 뭉뚱그려진다. |
+| `buyList.jsp` 의 `groupName` 이 NULL 일 때 `null` 이라는 글자가 나옴 | EL `${...}` 은 빈칸을 찍는다 — **EL·JSTL** |
+| 실패 사유(외래키 위반·중복·연결 실패)가 전부 `error.jsp` 로 뭉뚱그려짐 | **예외 설계** |
+| 처리 전용 JSP 가 `<html><body>` 껍데기를 갖고 있음 | 컨트롤러로 분리 — **MVC2** |
+| `buyInsertForm.jsp` 에서 `num`(AUTO_INCREMENT) 을 손으로 입력받음 | 중복 입력 시 등록 실패. 설계를 바꿀지는 수업 진행에 맞춰 판단 |
+
+> **JSP 주석의 함정** — 스크립틀릿 안 `//` 주석에 `%>` 를 쓰면 **거기서 자바 영역이 끝나 버립니다.**
+> JSP 는 주석인지 따지지 않고 `%>` 만 찾기 때문입니다. 이 수정 작업 중에 실제로 한 번 걸렸습니다.

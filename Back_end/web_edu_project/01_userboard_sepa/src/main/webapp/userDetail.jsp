@@ -22,6 +22,14 @@
 	String userId = request.getParameter("userid");
 	UserDao dao = new UserDao();
 	userDto dto = dao.getUser(userId); //회원한명에 대한 정보 저장
+	
+	//getUser는 못 찾으면 null을 돌려준다. 그대로 두면 아래에서 값을 꺼낼 때
+	//NullPointerException이 나면서 자바 에러 화면(HTTP 500)이 그대로 보인다.
+	//목록에서 지운 회원의 상세 주소를 뒤로가기로 다시 여는 경우가 여기에 해당한다.
+	if (dto == null) {
+		response.sendRedirect("error.jsp");
+		return; //sendRedirect는 아래 코드를 멈추지 않으므로 return이 꼭 필요하다
+	}
 %>
 <body>
 <h1>회원상세정보</h1>

@@ -11,11 +11,24 @@
 <%
 	// 1. 목록 화면에서 넘겨준 구매 고유번호(num) 수신
 	String sNum = request.getParameter("num");
+	
+	//num이 아예 없거나 숫자가 아니면 Integer.parseInt에서 NumberFormatException이 난다.
+	//주소를 직접 치거나 링크가 잘못된 경우이므로 파싱하기 전에 먼저 걸러낸다.
+	if (sNum == null || !sNum.matches("\\d+")) {
+		response.sendRedirect("error.jsp");
+		return;
+	}
 	int num = Integer.parseInt(sNum);
 
 	// 2. BuyDao를 통해 해당 구매 건 1개 조회
 	BuyDao dao = new BuyDao();
 	BuyDto dto = dao.getBuy(num);
+	
+	//없는 구매번호면 dto가 null이다. 확인하지 않으면 아래에서 NullPointerException.
+	if (dto == null) {
+		response.sendRedirect("error.jsp");
+		return;
+	}
 %>
 <body>
 <h1>구매상세정보</h1>

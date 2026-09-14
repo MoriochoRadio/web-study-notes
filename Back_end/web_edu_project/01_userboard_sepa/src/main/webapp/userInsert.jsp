@@ -36,8 +36,5 @@
 		response.sendRedirect("error.jsp");
 	}
 %>
-	
-
-%>
 </body>
 </html>

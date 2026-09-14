@@ -12,6 +12,12 @@
 	// 1. buyList.jsp에서 링크나 스크립트로 넘겨준 "num" 파라미터를 받습니다.
 	String sNum = request.getParameter("num");
 	
+	//숫자가 아니거나 값이 없으면 파싱에서 예외가 나므로 먼저 걸러낸다.
+	if (sNum == null || !sNum.matches("\\d+")) {
+		response.sendRedirect("error.jsp");
+		return;
+	}
+	
 	// 2. BuyDao의 deleteBuy(int num) 메서드 규격에 맞게 숫자로 변환(파싱)합니다.
 	int num = Integer.parseInt(sNum);
 

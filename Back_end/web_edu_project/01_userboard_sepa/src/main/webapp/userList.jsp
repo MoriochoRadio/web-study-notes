@@ -34,7 +34,7 @@
 			}
 		%>
 	<tr>
-		<td colspan="5">
+		<td colspan="4">
 		<a href="index.jsp">메인화면</a>
 		</td>
 	</tr>
