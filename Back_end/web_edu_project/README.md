@@ -6,6 +6,13 @@
 정리된 학습 노트는 대시보드의 **🖥️ 웹 개발** 탭에서 볼 수 있습니다
 → https://moriochoradio.github.io/web-study-notes/Back_end/#web-01
 
+## 프로젝트 목록
+
+| 폴더 | 무엇을 다루나 | 노트 |
+|---|---|---|
+| [`01_userboard_sepa`](01_userboard_sepa) | DTO·DAO·JDBC 6단계, JSP로 회원·구매 CRUD 화면 만들기 (파일 하나 = 화면 하나) | web-01~16 |
+| [`02_hkboard_MVC1`](02_hkboard_MVC1) | 상속으로 DAO 접속 코드 중복 없애기, `command` 파라미터로 분기하는 첫 컨트롤러 | web-17~18 |
+
 ## 개발 환경
 
 | 항목 | 버전 |
@@ -19,7 +26,7 @@
 > **Tomcat 10부터 패키지가 `javax.servlet` → `jakarta.servlet`으로 바뀌었습니다.**
 > 인터넷 예제에 `import javax.servlet.*`이 있으면 Tomcat 9 이하 기준이라 그대로는 컴파일되지 않습니다.
 
-## 프로젝트: 01_userboard_sepa
+## 01_userboard_sepa — 회원·구매 관리
 
 이름 끝의 `sepa`는 **separation(분리)** 입니다.
 데이터를 담는 일 · DB에 접근하는 일 · 실행해 보는 일을 각각 다른 패키지로 나눴습니다.
@@ -209,3 +216,68 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 
 > **JSP 주석의 함정** — 스크립틀릿 안 `//` 주석에 `%>` 를 쓰면 **거기서 자바 영역이 끝나 버립니다.**
 > JSP 는 주석인지 따지지 않고 `%>` 만 찾기 때문입니다. 이 수정 작업 중에 실제로 한 번 걸렸습니다.
+
+---
+
+## 02_hkboard_MVC1 — 게시판, 컨트롤러 패턴의 시작
+
+2026-09-15(31일차)부터 시작한 두 번째 프로젝트입니다. **01의 두 가지 불편함**을
+바로 이어서 개선했습니다 — DAO마다 반복되던 접속 코드, 그리고 기능마다 파일을 새로 만들던 구조.
+
+```
+02_hkboard_MVC1/
+├─ src/main/java/com/hk/board/
+│   ├─ datasource/DataBase.java   DB 연결 전담 부모 클래스 (JDBC 1·2단계만)
+│   ├─ dao/HkDao.java             DataBase 를 상속받아 CRUD (지금은 조회·등록만)
+│   ├─ dto/HkDto.java             게시글 한 건을 담는 상자 (생성자 3종 오버로딩)
+│   └─ test/MainTest.java         화면 없이 DAO 를 시켜 보는 테스트 클래스
+└─ src/main/webapp/
+    ├─ index.jsp                  메인 — 게시판목록 링크 하나
+    ├─ boardController.jsp        요청을 command 파라미터로 분기하는 첫 컨트롤러
+    ├─ boardlist.jsp              글 목록 화면 (컨트롤러가 forward 로 넘겨준다)
+    └─ WEB-INF/web.xml
+```
+
+### 핵심 변화 두 가지
+
+**1) DAO끼리 반복되던 접속 정보를 부모 클래스로 뺐다.**
+어제(`01_userboard_sepa`)는 DAO 메서드마다 `url`·`user`·`password`를 반복해서 썼고,
+비밀번호가 소스에 **10곳** 등장했습니다. 오늘은 `DataBase`라는 부모 클래스가
+드라이버 로딩(1단계)과 연결(2단계)을 전담하고, `HkDao extends DataBase`로 물려받아
+`getConnection()` 한 줄만 씁니다. 비밀번호가 등장하는 곳도 **1곳**으로 줄었습니다.
+
+**2) 여러 화면의 창구 역할을 하는 컨트롤러가 등장했다.**
+어제는 파일 하나가 화면 하나였습니다(`userList.jsp`, `userDetail.jsp`...).
+오늘은 `boardController.jsp` 하나가 `command` 파라미터로 "무엇을 할지" 정하고,
+실제 화면(`boardlist.jsp`)에는 `request.setAttribute` + `pageContext.forward`로
+값을 넘깁니다. `sendRedirect`(브라우저가 새로 요청 — 주소창이 바뀜)와 달리
+`forward`는 서버 안에서만 넘어가는 같은 요청이라 **주소창이 안 바뀝니다.**
+
+### 실습 DB — `hk.hkboard`
+
+```sql
+USE hk;
+
+CREATE TABLE hkboard (
+  seq     INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  id      VARCHAR(20)  NOT NULL,
+  title   VARCHAR(100) NOT NULL,
+  content TEXT,
+  regdate DATE
+);
+```
+
+> 수업 파일에는 스키마가 따로 없어서, `HkDto`·`HkDao`의 컬럼 구성(`SEQ, ID, TITLE, CONTENT, REGDATE`)과
+> 어제 `userTbl`의 관례를 참고해 위와 같이 만들어 검증했습니다. 실제 수업에서 만든 스키마와
+> 컬럼 길이가 다를 수 있습니다 — 다를 경우 이 파일을 알려 주시면 맞춰서 반영하겠습니다.
+
+### 고친 것
+
+| 위치 | 증상 | 조치 |
+|---|---|---|
+| `boardController.jsp` | `command` 파라미터 없이 열면(주소 오타 등) `NullPointerException` → 500 | `command == null` 이면 빈 문자열로 — 미구현 분기와 같은 방식으로 조용히 통과 |
+
+### 아직 비어 있는 부분 (일부러 둔 것)
+
+`command`가 `boardinsertform`·`boardinsert`일 때의 분기는 **코드 없이 주석만** 있습니다.
+진행 중인 수업 코드라 자연스러운 상태이고, **다음 수업에서 이어서 채울 부분**이라 건드리지 않았습니다.
