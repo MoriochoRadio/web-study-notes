@@ -7,6 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#boardList{
+		width:800px;
+		border-collapse: collapse;
+	}
+</style>
+<script type="text/javascript">
+	//글쓰기 폼 요청: controller를 통해 처리
+	function boardInsertForm(){
+		location.href="boardController.jsp?command=boardInsertForm";
+	}
+</script>
 </head>
 <%
 	//boardController.jsp 에서 전달된 scope객체로 부터 list객체를 가져온다.

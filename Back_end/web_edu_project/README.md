@@ -277,7 +277,19 @@ CREATE TABLE hkboard (
 |---|---|---|
 | `boardController.jsp` | `command` 파라미터 없이 열면(주소 오타 등) `NullPointerException` → 500 | `command == null` 이면 빈 문자열로 — 미구현 분기와 같은 방식으로 조용히 통과 |
 
-### 아직 비어 있는 부분 (일부러 둔 것)
+### 9월 15일 기준 진행 상태
 
 `command`가 `boardinsertform`·`boardinsert`일 때의 분기는 **코드 없이 주석만** 있습니다.
 진행 중인 수업 코드라 자연스러운 상태이고, **다음 수업에서 이어서 채울 부분**이라 건드리지 않았습니다.
+
+
+## 2026-09-16 — 최신 소스와 강조 개념
+
+- boardlist.jsp: 글쓰기 화면을 요청하는 JavaScript 함수와 표 스타일 추가.
+- boardController.jsp: boardinsertform 분기에서 boardInsertForm.jsp로 redirect.
+- boardInsertForm.jsp: POST form, hidden command, 작성자·제목 입력칸, 글내용 textarea 추가. **textarea의 name·제출 버튼·등록 분기는 아직 미구현**.
+- 목록의 글추가 버튼에는 아직 이벤트가 연결되지 않았다. 함수 선언만으로 버튼이 동작하지 않는다.
+- SQL 원본 5개는 저장소와 동일. Java 실행 코드는 비밀번호 제거·안내 주석 차이를 제외하고 동일.
+- [강조 개념 19~24번](https://moriochoradio.github.io/web-study-notes/Back_end/#web-19):
+  JSP 실행과 문법, 구현 패턴, scope, 파라미터와 객체 전달, 화면 이동, Web Server/WAS.
+- 개념 예시는 수업 코드의 현재 구현 상태와 구별한다. 빈 기능을 완성된 것으로 표시하지 않는다.

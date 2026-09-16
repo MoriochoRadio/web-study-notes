@@ -36,6 +36,7 @@
 		
 	}else if(command.equalsIgnoreCase("boardinsertform")){
 		//글쓰기 폼으로 이동 요청
+		response.sendRedirect("boardInsertForm.jsp");
 	}else if(command.equalsIgnoreCase("boardinsert")){
 		//글추가 요청
 	}

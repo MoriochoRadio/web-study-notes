@@ -841,7 +841,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     }
     nav.tabs.open .nav-groups{display:flex;}
     .nav-item{padding:11px 12px;font-size:15px;}
-    .main-content{padding-top:20px;}
+    .main-content{padding-top:20px;width:100%;}
+    .cat-head h2{min-width:0;overflow-wrap:anywhere;}
+    .note-body{overflow-wrap:anywhere;}
   }
   @media(max-width:600px){
     header.hero{padding:36px 16px 24px;}
@@ -1106,8 +1108,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제, <b>2026-08-31부터 시작한 데이터베이스(SQL) 과정</b>, 그리고 <b>2026-09-10부터 시작한 웹 개발(JSP·Servlet) 과정</b>까지 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-15</span>
-      <span>📅 수업 진도 31일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-09-16</span>
+      <span>📅 수업 진도 32일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -1147,7 +1149,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
       <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">26</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">18</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">24</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1173,7 +1175,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">30</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">31</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -1181,7 +1183,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
       <div class="stat-card codingtest"><div class="n">26</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">18</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card web"><div class="n">24</div><div class="l">🖥️ 웹 개발 항목</div></div>
       <div class="stat-card journey"><div class="n">18</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
@@ -7200,6 +7202,8 @@ public class D3_ChatClient {
     </div>
   </div>
 </article>
+<article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 글쓰기 화면 이동과 선생님 강조 개념</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>최신 Eclipse 소스의 글쓰기 폼 이동을 반영하고 정리.txt의 JSP·MVC·scope·흐름제어·서버 개념을 연결한다.</p><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL은 저장소와 동일하고 02 프로젝트의 JSP 3개에 미반영 변경이 있었습니다. Java는 공개본의 비밀번호 제거 안내 차이를 제외하고 실행 코드 변경이 없습니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. 글쓰기 폼의 command·작성자·제목 입력은 추가됐지만 글내용 name·제출 버튼·등록 분기는 아직 미구현입니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
+
 
 
     </div>
@@ -15789,7 +15793,7 @@ WHERE OPTIONS REGEXP '통풍시트|열선시트|가죽시트'
 
   <section id="sql-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🗄️ 6. SQL 기초 — MySQL · HeidiSQL</h2></div>
-    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>를 지나 <b>EXPLAIN 실행 계획 · 스토어드 프로시저와 함수</b>까지 다룹니다. 각 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql" target="_blank" rel="noopener">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
+    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>를 지나 <b>EXPLAIN 실행 계획 · 스토어드 프로시저와 함수</b>까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql" target="_blank" rel="noopener">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
     <div class="notes-list" id="sql-notes">
 
 <article class="note-card" id="sql-01">
@@ -19102,7 +19106,7 @@ SELECT whileProc();
 
   <section id="web-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🖥️ 7. 웹 개발 — JSP · Servlet · JDBC</h2></div>
-    <p class="cat-desc">SQL 과정을 마치고 <b>웹 애플리케이션 개발</b>로 넘어와 정리한 노트입니다. <b>Eclipse JEE + Tomcat 10.1</b> 환경을 만들고, 다이나믹 웹 프로젝트 구조를 익힌 뒤 <b>DTO · DAO로 계층을 나눠 JDBC 6단계</b>로 DB에 붙이는 것까지 다룹니다. 각 카드의 <b>실행 결과</b>는 수업에서 만든 <code>01_userboard_sepa</code> 프로젝트를 실제로 컴파일해 테스트 DB에 붙여 돌려 본 출력입니다. 이어서 <b>JSP 스크립틀릿 · request로 값 받기 · 페이지 사이 값 전달 · CRUD 완성 · 화면 이동 · 한글 인코딩 · 외래키</b>까지 다루고, <b>지금 구조(MVC1)의 한계</b>를 짚은 뒤, 두 번째 프로젝트에서 <b>DAO 상속으로 중복을 줄이고 command 파라미터로 분기하는 첫 컨트롤러</b>까지 다룹니다. 앞으로 MVC2 · Servlet · JSTL · MyBatis로 이어집니다. 원본 실습 프로젝트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/web_edu_project" target="_blank" rel="noopener">web_edu_project</a>에 있습니다 — <b>공개 저장소라 DB 비밀번호는 빼고</b> 올렸으니, 내려받아 쓸 때는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/README.md" target="_blank" rel="noopener">README</a>의 안내대로 채워 넣으면 됩니다.</p>
+    <p class="cat-desc">SQL 과정을 마치고 <b>웹 애플리케이션 개발</b>로 넘어와 정리한 노트입니다. <b>Eclipse JEE + Tomcat 10.1</b> 환경을 만들고, 다이나믹 웹 프로젝트 구조를 익힌 뒤 <b>DTO · DAO로 계층을 나눠 JDBC 6단계</b>로 DB에 붙이는 것까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업에서 만든 <code>01_userboard_sepa</code> 프로젝트를 실제로 컴파일해 테스트 DB에 붙여 돌려 본 출력입니다. 이어서 <b>JSP 스크립틀릿 · request로 값 받기 · 페이지 사이 값 전달 · CRUD 완성 · 화면 이동 · 한글 인코딩 · 외래키</b>까지 다루고, <b>지금 구조(MVC1)의 한계</b>를 짚은 뒤, 두 번째 프로젝트에서 <b>DAO 상속으로 중복을 줄이고 command 파라미터로 분기하는 첫 컨트롤러</b>까지 다룹니다. 9월 16일 강조 개념은 <a href="#web-19">19~24번 카드</a>에 정리했습니다. 새 카드의 코드는 개념 설명용 예시이며 실행 검증 로그와 구별합니다. 앞으로 MVC2 · Servlet · JSTL · MyBatis로 이어집니다. 원본 실습 프로젝트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/web_edu_project" target="_blank" rel="noopener">web_edu_project</a>에 있습니다 — <b>공개 저장소라 DB 비밀번호는 빼고</b> 올렸으니, 내려받아 쓸 때는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/README.md" target="_blank" rel="noopener">README</a>의 안내대로 채워 넣으면 됩니다.</p>
     <div class="notes-list" id="web-notes">
 
 <article class="note-card" id="web-01">
@@ -19775,11 +19779,11 @@ DB를 다른 것으로 바꾼다 →  DAO 안 (드라이버·URL·일부 SQL)
 <article class="note-card" id="web-09">
   <div class="note-head">
     <span class="note-num">09</span>
-    <h3>JSP 3형제 — 지시자 · 스크립틀릿 · 표현식</h3>
+    <h3>JSP 기초 — 지시자 · 스크립틀릿 · 표현식</h3>
     <div class="note-tags"><span class="tag">JSP</span><span class="tag">&lt;%@ %&gt;</span><span class="tag">&lt;% %&gt;</span><span class="tag">&lt;%= %&gt;</span><span class="tag">jsp</span></div>
   </div>
-  <div class="note-body">
-    <p class="note-summary"><span class="summary-label">한 줄 요약</span>JSP는 <b>HTML 안에 자바를 섞어 쓰는</b> 파일이다. 자바가 들어가는 괄호는 세 가지 — <b><code>&lt;%@ %&gt;</code> 지시자</b>(설정), <b><code>&lt;% %&gt;</code> 스크립틀릿</b>(실행만), <b><code>&lt;%= %&gt;</code> 표현식</b>(화면에 출력)이다.</p>
+  <div class="note-body"><p>선언부 <code>&lt;%! %&gt;</code>와 JSP 주석을 포함한 전체 비교는 <a href="#web-19">19번 핵심 개념</a>에서 이어집니다.</p>
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>JSP는 <b>HTML 안에 자바를 섞어 쓰는</b> 파일이다. 이 카드에서 먼저 다루는 문법은 세 가지 — <b><code>&lt;%@ %&gt;</code> 지시자</b>(설정), <b><code>&lt;% %&gt;</code> 스크립틀릿</b>(실행만), <b><code>&lt;%= %&gt;</code> 표현식</b>(화면에 출력)이다.</p>
     <p class="note-easy"><span class="easy-label">쉽게 말하면</span>가장 헷갈리는 건 <b><code>&lt;%</code>와 <code>&lt;%=</code></b>의 차이입니다. <b>등호 하나</b> 차이인데 하는 일이 완전히 달라요. <code>&lt;% %&gt;</code>는 <b>주방에서 조용히 요리하는 곳</b>이라 손님에게 아무것도 안 보이고, <code>&lt;%= %&gt;</code>는 <b>완성된 접시를 손님 앞에 내놓는 것</b>이라 화면에 글자가 찍힙니다. 실제로 수업 파일 주석에도 <b>"&lt;%는 조용히 실행만, &lt;%=는 결과를 화면에 직접 출력"</b>이라고 적어 두셨죠 — 정확한 정리입니다.</p>
     <div class="note-code">
       <div class="code-head">
@@ -20766,6 +20770,48 @@ HkDto [seq=3, id=hkadmin, title=테스트 글 등록, ...]</pre>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span><b>command 파라미터로 분기하는 이 패턴을 프론트 컨트롤러(Front Controller) 패턴</b>이라 부릅니다. 스프링 MVC의 <code>DispatcherServlet</code>이 정확히 이 역할을 자동화한 것이에요 — <b>지금 if-else로 손수 나누는 분기를, 스프링에서는 <code>@RequestMapping</code> 애너테이션 하나로 대신</b>합니다. <code>forward</code>·<code>request scope</code>는 실무에서도 <b>같은 요청 안에서 값을 넘길 때</b> 여전히 그대로 쓰입니다.</p>
   </div>
 </article>
+<article class="note-card" id="web-19"><div class="note-head"><span class="note-num">19</span><h3>JSP 실행 과정과 문법 — 선언·실행·표현·설정·주석</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>JSP는 서버에서 서블릿으로 번역·컴파일되어 실행되고, 브라우저는 그 결과로 만들어진 HTML 응답을 받는다.</p><p class="note-easy">JSP는 조리법, Tomcat은 주방, HTML 응답은 완성된 요리에 비유할 수 있습니다. 브라우저가 자바 코드를 실행하는 것은 아닙니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>test.jsp → test_jsp.java(서블릿 소스) → test_jsp.class
+→ 서버 JVM에서 요청 처리 → HTML 응답 → 브라우저 화면
+최초 접근이나 JSP 변경 시 번역·컴파일; 준비된 클래스는 이후 요청에 재사용 가능.</code></pre></div><div style="overflow-x:auto"><table><thead><tr><th scope="col">구분</th><th scope="col">문법</th><th scope="col">역할</th></tr></thead><tbody><tr><td>선언부</td><td><code>&lt;%! ... %&gt;</code></td><td>서블릿의 멤버 필드·메서드 선언</td></tr><tr><td>실행부(스크립틀릿)</td><td><code>&lt;% ... %&gt;</code></td><td>요청 처리 메서드 안에서 실행할 문장</td></tr><tr><td>표현부</td><td><code>&lt;%= ... %&gt;</code></td><td>표현식 값을 응답에 출력; 끝에 세미콜론을 붙이지 않음</td></tr><tr><td>지시자</td><td><code>&lt;%@ page ... %&gt;</code></td><td>인코딩·import 등 번역 단계 설정</td></tr><tr><td>JSP 주석</td><td><code>&lt;%-- ... --%&gt;</code></td><td>응답에 포함되지 않는 서버 측 주석</td></tr></tbody></table></div><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot; %&gt;
+&lt;%! int plus(int a, int b) { return a + b; } %&gt;
+&lt;% int result = plus(2, 3); %&gt;
+&lt;p&gt;&lt;%= result %&gt;&lt;/p&gt;
+&lt;%-- 예상 화면 출력: 5 --%&gt;</code></pre></div><p>선언부의 필드는 여러 요청이 공유할 수 있으므로 사용자별 값을 저장하지 않습니다. HTML 주석 <code>&lt;!-- --&gt;</code>은 응답에 남으며 그 안의 JSP 실행을 막지 않습니다. <a href="#web-09">기존 JSP 기초</a>와 함께 보세요.</p><p>근거: <a href="https://jakarta.ee/specifications/pages/3.1/jakarta-server-pages-spec-3.1" target="_blank" rel="noopener">Jakarta Pages 3.1 명세</a>, <a href="https://tomcat.apache.org/tomcat-10.1-doc/jasper-howto.html" target="_blank" rel="noopener">Tomcat Jasper</a>.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>브라우저의 페이지 소스에 자바 코드가 보여야 할까?</summary><div class="sc-a">아니요. 정상적으로 처리된 JSP의 실행 결과가 응답에 들어갑니다. 자바스크립트는 응답에 포함되어 브라우저에서 실행될 수 있습니다.</div></details><details class="sc-q"><summary>방문자 이름을 선언부 필드에 넣으면 왜 위험할까?</summary><div class="sc-a">같은 서블릿 인스턴스가 여러 요청을 처리할 수 있어 다른 사용자 값으로 덮일 수 있습니다. 요청별 값은 지역변수나 알맞은 scope에 둡니다.</div></details></div></div></article>
+
+<article class="note-card" id="web-20"><div class="note-head"><span class="note-num">20</span><h3>separation · MVC1 · MVC2 — 이름보다 책임 구분</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>데이터 처리(Model), 화면(View), 요청 판단·이동(Controller)을 누가 맡는지 따라간다.</p><p>수업의 <b>separation</b>은 DB 코드를 DAO로, 전달값을 DTO로 분리한 단계입니다. 별개의 표준 MVC 버전 이름보다 수업에서의 분리 단계를 뜻한다고 이해하세요.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">단계</th><th scope="col">요청 처리와 화면</th><th scope="col">DB 처리</th></tr></thead><tbody><tr><td>01_userboard_sepa</td><td>JSP가 파라미터 처리·DAO 호출·화면 출력</td><td>DAO로 분리, DTO로 값 전달</td></tr><tr><td>02_hkboard_MVC1 (현재)</td><td>boardController.jsp가 command 분기, boardlist.jsp가 화면</td><td>HkDao + HkDto + DataBase</td></tr><tr><td>MVC2 (다음 구조 비교)</td><td>서블릿 Controller가 요청 처리, JSP View가 출력</td><td>DAO/서비스 등 Model 영역이 데이터·업무 처리</td></tr></tbody></table></div><p>현재는 <b>JSP 컨트롤러로 역할을 나누는 중</b>이며 서블릿 컨트롤러로 전환한 상태는 아닙니다. DTO는 전달용 자료 구조, DAO는 DB 접근 담당입니다. Model 전체가 DTO 하나라는 뜻은 아닙니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>브라우저 → boardController.jsp?command=boardlist
+→ HkDao.getAllList() → DB 조회 → List&lt;HkDto&gt;
+→ request에 list 저장 → forward → boardlist.jsp → HTML 응답</code></pre></div><p class="practice-note"><span class="pn-label">💼 실무 연결</span>SQL을 바꿀 때 DAO, 화면 배치를 바꿀 때 View를 찾아가도록 변경 이유를 나눕니다. <a href="#web-17">DAO 상속</a>은 중복 제거이고 MVC는 역할 분리라는 점도 구별하세요.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>작성일 표시 형식만 바꾸려면 어디부터 볼까?</summary><div class="sc-a">View인 boardlist.jsp부터 봅니다. 조회 조건이 바뀌면 DAO, 요청 분기가 바뀌면 Controller를 확인합니다.</div></details><details class="sc-q"><summary>컨트롤러가 JSP 파일이면 이미 MVC2인가?</summary><div class="sc-a">현재 수업 기준에서는 아닙니다. 서블릿 Controller가 요청을 받고 JSP가 View를 맡는 구조와 구별합니다.</div></details></div></div></article>
+
+<article class="note-card" id="web-21"><div class="note-head"><span class="note-num">21</span><h3>네 가지 scope — 누구와 언제까지 공유할까?</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>같은 화면 처리, 같은 요청, 같은 사용자 세션, 같은 웹 앱 중 필요한 범위에만 객체를 둔다.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">scope / 객체</th><th scope="col">유효 범위</th><th scope="col">예시</th></tr></thead><tbody><tr><td>page / pageContext</td><td>현재 JSP 처리 안; 다른 JSP로 forward하면 page 속성은 이어지지 않음</td><td>현재 화면의 임시 표시값</td></tr><tr><td>request / request</td><td>요청 한 번; forward·include된 대상과 공유</td><td>조회한 목록</td></tr><tr><td>session / session</td><td>같은 웹 앱의 같은 세션에 속한 여러 요청; 만료·invalidate까지</td><td>로그인 상태</td></tr><tr><td>application / application</td><td>같은 웹 앱의 ServletContext를 사용하는 요청 사이 공유</td><td>앱 공통 설정</td></tr></tbody></table></div><p><b>TXT 설명 보완:</b> request는 “페이지 한 개”가 아니라 “요청 한 번”이 기준입니다. 브라우저 종료가 서버에 세션 삭제를 즉시 통보하는 것은 아닙니다. <b>브라우저의 세션 쿠키와 서버의 세션</b>을 구별해야 하며, 서버에서는 유휴 시간 만료나 <code>session.invalidate()</code> 등으로 끝납니다. 브라우저 복원 설정에 따라 쿠키가 복구될 수도 있습니다.</p><p>같은 브라우저의 탭은 보통 쿠키를 공유하므로 탭마다 독립 세션이라고 가정하지 마세요. application은 인터넷 전체에 하나가 아니라 <b>웹 앱별, 일반적으로 JVM별</b> 범위입니다. 앱 종료·재배포 시 사라질 수 있어 영구 저장소가 아닙니다. 사용자 개인정보를 application에 두면 다른 요청과 공유될 수 있습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>request.setAttribute(&quot;title&quot;, &quot;게시판&quot;);
+Object title = request.getAttribute(&quot;title&quot;);
+request.removeAttribute(&quot;title&quot;);
+pageContext.setAttribute(&quot;label&quot;, &quot;목록&quot;); // 기본은 page scope
+session.setAttribute(&quot;loginId&quot;, &quot;kim&quot;);
+session.invalidate(); // 로그아웃 시 세션 무효화</code></pre></div><p>pageContext는 다른 scope에 접근하는 API도 제공합니다. 근거: <a href="https://jakarta.ee/specifications/pages/3.1/apidocs/jakarta.servlet.jsp/jakarta/servlet/jsp/pagecontext" target="_blank" rel="noopener">PageContext</a> · <a href="https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/http/httpsession" target="_blank" rel="noopener">HttpSession 공식 문서</a>.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록을 전달하려고 session에 넣으면 어떤 불편함이 생길까?</summary><div class="sc-a">요청이 끝나도 목록이 남아 오래된 데이터가 보이거나 메모리를 더 쓸 수 있습니다. 같은 요청에서 View로 넘길 목록은 request가 적절합니다.</div></details><details class="sc-q"><summary>forward는 page와 request 속성을 모두 유지할까?</summary><div class="sc-a">request 속성은 같은 요청을 통해 이어지지만 다른 JSP의 page scope는 별개입니다.</div></details></div></div></article>
+
+<article class="note-card" id="web-22"><div class="note-head"><span class="note-num">22</span><h3>URL 파라미터와 request 속성 — List 객체 전달</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>파라미터는 요청에서 읽는 문자열이고 속성은 서버에서 이름을 붙여 보관하는 객체다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>boardlist.jsp?list=&lt;%= list %&gt;
+// list를 문자열로 출력할 뿐, Java List 객체 참조가 브라우저를 건너가지 않음</code></pre></div><p>객체의 <code>toString()</code> 결과를 URL에 넣어도 받는 쪽에서 원래 객체가 되지는 않습니다. JSON처럼 약속한 형식으로 직렬화·역직렬화할 수는 있지만 <code>getParameter</code>가 자동으로 해 주지는 않습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>// boardController.jsp (관련 import는 기존 파일 참고)
+List&lt;HkDto&gt; list = dao.getAllList();
+request.setAttribute(&quot;list&quot;, list);
+pageContext.forward(&quot;boardlist.jsp&quot;);
+return;
+
+// boardlist.jsp
+List&lt;HkDto&gt; list = (List&lt;HkDto&gt;) request.getAttribute(&quot;list&quot;);</code></pre></div><div style="overflow-x:auto"><table><thead><tr><th scope="col">메서드</th><th scope="col">반환값 / 출처</th></tr></thead><tbody><tr><td><code>request.getParameter("command")</code></td><td>String / URL 쿼리 또는 폼의 이름 있는 입력</td></tr><tr><td><code>request.getAttribute("list")</code></td><td>Object / 서버 코드가 setAttribute로 저장한 값</td></tr></tbody></table></div><p>둘은 별개의 저장 공간입니다. 속성에 list를 넣어도 같은 이름의 파라미터가 생기지 않습니다. 받는 JSP를 직접 열면 컨트롤러가 실행되지 않아 속성이 <code>null</code>일 수 있습니다. <b>현재 목록 진입 주소는 <code>boardController.jsp?command=boardlist</code></b>입니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>setAttribute("list", list) 다음 getParameter("list")로 읽을 수 있을까?</summary><div class="sc-a">아니요. getAttribute로 읽어야 합니다. getParameter는 파라미터 문자열을 읽는 별개의 API입니다.</div></details><details class="sc-q"><summary>왜 redirect하면 방금 담은 request 속성이 없어질까?</summary><div class="sc-a">브라우저가 새 요청을 보내기 때문입니다. 이전 요청의 속성이 자동 복사되지 않습니다.</div></details></div></div></article>
+
+<article class="note-card" id="web-23"><div class="note-head"><span class="note-num">23</span><h3>화면 이동 — HTML · JavaScript · JSP/Servlet</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>브라우저가 새 요청을 만드는지, 서버 안에서 같은 요청을 넘기는지 먼저 판단한다.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">방법</th><th scope="col">실행 위치</th><th scope="col">요청 / 주소창 / request 속성</th></tr></thead><tbody><tr><td>HTML 링크·form 제출</td><td>브라우저</td><td>새 요청 / 보통 주소 변경 / 기존 속성 전달 안 됨</td></tr><tr><td>JavaScript location.href</td><td>브라우저</td><td>새 요청 / 주소 변경 / 기존 속성 전달 안 됨</td></tr><tr><td>response.sendRedirect</td><td>서버가 이동 응답, 브라우저가 재요청</td><td>새 요청 / 주소 변경 / 기존 속성 전달 안 됨</td></tr><tr><td>pageContext.forward · RequestDispatcher.forward</td><td>서버 내부</td><td>같은 요청 / 원래 주소 유지 / 속성 전달</td></tr></tbody></table></div><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>// 9월 16일 boardlist.jsp에 추가된 함수
+function boardInsertForm() {
+    location.href = &quot;boardController.jsp?command=boardInsertForm&quot;;
+}
+// boardController.jsp의 해당 분기
+response.sendRedirect(&quot;boardInsertForm.jsp&quot;);</code></pre></div><p><b>현재 구현 상태:</b> 함수와 redirect 분기는 생겼지만 목록의 글추가 버튼에 이벤트 연결은 아직 없습니다. 새 <code>boardInsertForm.jsp</code>에는 POST form, 숨겨진 command, 작성자·제목 입력칸, 글내용 textarea가 있습니다. 다만 textarea의 <code>name</code>과 제출 버튼이 없고 <code>boardinsert</code> 분기도 비어 있습니다. “글 등록 완성”으로 오해하지 마세요. 폼 이동은 컨트롤러 URL을 직접 열어 확인할 수 있습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>// 다음 단계에서 연결하는 문법 예시 — 현재 원본에는 없음
+&lt;button type=&quot;button&quot; onclick=&quot;boardInsertForm()&quot;&gt;글추가&lt;/button&gt;</code></pre></div><p>forward·redirect는 응답이 이미 전송 완료(committed)된 뒤 호출하면 오류가 날 수 있으므로 처리 코드를 출력보다 먼저 둡니다. Java 메서드에서 호출한 뒤에는 <code>return;</code>으로 이후 처리·출력이 이어지지 않게 하는 것이 명확합니다. 등록 성공 뒤 redirect로 목록을 요청하는 패턴은 새로고침으로 인한 POST 재전송을 줄이는 데 쓰입니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>DAO 조회 결과를 보여 줄 때 forward가 잘 맞는 이유는?</summary><div class="sc-a">이미 얻은 객체를 request에 담아 같은 요청으로 View에 넘길 수 있기 때문입니다.</div></details><details class="sc-q"><summary>함수를 선언만 하면 버튼 클릭 시 실행될까?</summary><div class="sc-a">아니요. onclick이나 이벤트 리스너로 버튼과 함수를 연결해야 합니다.</div></details></div></div></article>
+
+<article class="note-card" id="web-24"><div class="note-head"><span class="note-num">24</span><h3>Web Server와 WAS — 역할과 요청 흐름</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>정적 파일 응답과 애플리케이션 코드 실행을 구별하되, 한 제품이 두 역할을 함께 할 수도 있다.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">역할</th><th scope="col">하는 일</th><th scope="col">수업 연결</th></tr></thead><tbody><tr><td>Web Server</td><td>정적 HTML·CSS·이미지 제공, HTTP 처리·역방향 프록시</td><td>브라우저의 정적 파일 요청에 응답</td></tr><tr><td>WAS / 애플리케이션 실행 환경</td><td>서버 코드 실행, 업무 처리·DB 연동</td><td>Tomcat에서 Servlet·JSP 실행</td></tr></tbody></table></div><p>Tomcat은 HTTP 요청과 정적 파일도 처리할 수 있는 <b>서블릿 컨테이너</b>입니다. 수업에서는 WAS 역할로 쓰지만 Jakarta EE의 모든 기능을 구현한 제품이라고 외우면 안 됩니다. 별도 웹 서버를 앞에 두기도 하고 Tomcat만으로 학습용 앱을 실행할 수도 있습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>수업 앱: 브라우저 → Tomcat → Controller → DAO → MariaDB
+                         ← HTML 응답 ← JSP View
+학습 노트: 브라우저 → GitHub Pages → HTML/CSS/JavaScript 파일
+           (GitHub Pages에서는 JSP·JDBC 서버 코드가 실행되지 않음)</code></pre></div><p class="practice-note"><span class="pn-label">💼 실무 연결</span>404라면 URL·배포 경로, 500이라면 서버 로그, DB 연결 실패라면 DAO 접속 설정·DB 상태를 확인하는 식으로 책임 구간을 좁히세요. <a href="https://tomcat.apache.org/tomcat-10.1-doc/" target="_blank" rel="noopener">Tomcat 공식 문서</a>에서 지원 명세를 확인할 수 있습니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>Tomcat 앞에 별도 웹 서버가 없으면 JSP를 실행할 수 없을까?</summary><div class="sc-a">실행할 수 있습니다. Tomcat 자체가 HTTP 요청을 받습니다.</div></details><details class="sc-q"><summary>GitHub Pages에 JSP를 올리면 게시판 DB까지 실행될까?</summary><div class="sc-a">아니요. 공개 학습 사이트는 정적 파일을 제공합니다. 실제 게시판은 로컬 Tomcat과 MariaDB에서 실행합니다.</div></details></div></div></article>
+
 
 
     </div>
@@ -20777,7 +20823,7 @@ HkDto [seq=3, id=hkadmin, title=테스트 글 등록, ...]</pre>
 
     <div class="journey-intro">
       <h3>💡 이 탭을 보는 법</h3>
-      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>지금 수업은 07단계 근처</b>(2026-08-06 기준 4일차)를 지나고 있습니다.</p>
+      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 Java·SQL을 연결한 웹 개발 단계</b>입니다. <a href="#class-day32">9월 16일 진도</a>에서 JSP·scope·요청 흐름을 복습하세요.</p>
     </div>
 
     <div class="journey-list">
