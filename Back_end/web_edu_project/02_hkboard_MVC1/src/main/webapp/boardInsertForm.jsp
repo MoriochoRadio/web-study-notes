@@ -21,7 +21,14 @@
 		</tr>
 		<tr>
 			<th>글내용</th>
-			<td><textarea rows="10" cols="60"></textarea></td>
+			<td><textarea rows="10" cols="60" name="content" required="required"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="글등록"/>
+				<input type="button" value="글목록"
+				onclick="location.href='boardController.jsp?command=boardlist'"/>
+			</td>
 		</tr>
 	</table>
 </form>

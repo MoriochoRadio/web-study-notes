@@ -283,7 +283,7 @@ CREATE TABLE hkboard (
 진행 중인 수업 코드라 자연스러운 상태이고, **다음 수업에서 이어서 채울 부분**이라 건드리지 않았습니다.
 
 
-## 2026-09-16 — 최신 소스와 강조 개념
+## 2026-09-16 오전 시점 — 글쓰기 폼과 강조 개념 (아래 수업 후 상태로 갱신)
 
 - boardlist.jsp: 글쓰기 화면을 요청하는 JavaScript 함수와 표 스타일 추가.
 - boardController.jsp: boardinsertform 분기에서 boardInsertForm.jsp로 redirect.
@@ -293,3 +293,26 @@ CREATE TABLE hkboard (
 - [강조 개념 19~24번](https://moriochoradio.github.io/web-study-notes/Back_end/#web-19):
   JSP 실행과 문법, 구현 패턴, scope, 파라미터와 객체 전달, 화면 이동, Web Server/WAS.
 - 개념 예시는 수업 코드의 현재 구현 상태와 구별한다. 빈 기능을 완성된 것으로 표시하지 않는다.
+
+
+## 2026-09-16 수업 후 — 게시판 CRUD와 전체 선택
+
+- HkDao: getBoard(seq), updateBoard(dto), deleteBoard(dto) 추가.
+- Controller: 등록 후 목록 재조회, 상세 dto 전달, 수정·단일 삭제 분기 추가.
+- boardInsertForm.jsp: content name, 제출 버튼 추가. 목록의 글추가 이벤트 연결.
+- boardDetail.jsp: 상세·수정 form, seq hidden, 단일 삭제 확인창.
+- boardlist.jsp: 제목의 상세 링크, this.checked로 전체 선택/해제.
+- 다중 삭제는 미구현: 목록 글삭제 버튼에 form·서버 다중 삭제 처리가 연결되지 않았다.
+- 원본 보존: 수업 소스 동기화이며 다음 사항은 해결된 것으로 표시하지 않는다.
+  getBoard의 미조회 결과가 빈 DTO여서 null 방어가 동작하지 않음, seq 숫자 검증 부재,
+  수정 성공 script 두 번 출력, POST 인코딩 설정 확인 필요, 02 프로젝트 error.jsp 부재.
+- DB 비밀번호는 공개본에서 계속 제외한다. Eclipse 원본은 이번에 수정하지 않았다.
+- 코딩테스트 15회차 파일: 전화번호 가리기(PASS), 중고거래 상태 CASE(FAIL).
+  SQL 표의 날짜/회차는 2026.09.14/14회차로 남아 있어 웹에 기록 불일치를 명시했다.
+
+### 이번 갱신의 검증 범위
+
+- 02 프로젝트 Java 소스 전체를 JDK 21로 컴파일했다. Tomcat에서 CRUD 전체를 다시 실행한 것은 아니다.
+- 전화번호 제출 코드와 개선 코드를 길이 4~20의 17개 입력으로 비교했다.
+- CASE 풀이를 별도 임시 MariaDB에서 세 상태·날짜 제외·ID 역순으로 확인했다. 수업 DB에는 접근하지 않았다.
+- 학습 웹의 카드 이동·답안 펼치기·390px/1280px 가로 폭과 로컬 검사 6개를 확인했다.

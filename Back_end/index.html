@@ -1147,9 +1147,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">26</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">28</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">24</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">26</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1181,9 +1181,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">26</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">28</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">24</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card web"><div class="n">26</div><div class="l">🖥️ 웹 개발 항목</div></div>
       <div class="stat-card journey"><div class="n">18</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
@@ -7202,7 +7202,7 @@ public class D3_ChatClient {
     </div>
   </div>
 </article>
-<article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 글쓰기 화면 이동과 선생님 강조 개념</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>최신 Eclipse 소스의 글쓰기 폼 이동을 반영하고 정리.txt의 JSP·MVC·scope·흐름제어·서버 개념을 연결한다.</p><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL은 저장소와 동일하고 02 프로젝트의 JSP 3개에 미반영 변경이 있었습니다. Java는 공개본의 비밀번호 제거 안내 차이를 제외하고 실행 코드 변경이 없습니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. 글쓰기 폼의 command·작성자·제목 입력은 추가됐지만 글내용 name·제출 버튼·등록 분기는 아직 미구현입니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
+<article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 게시판 CRUD·전체 선택·코딩테스트 15회차</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>게시판 등록·상세·수정·단일 삭제 코드와 전체 선택을 반영하고, 강조 개념 및 코딩테스트 15회차 파일의 새 문제 두 개를 연결한다.</p><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL 원본 5개는 저장소와 동일합니다. 02 프로젝트의 HkDao와 JSP 4개 변경, 새 boardDetail.jsp를 반영했습니다. 공개본의 DB 비밀번호 제거는 유지합니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. <a href="#web-25">등록·상세·수정·단일 삭제</a> 코드가 연결됐고 <a href="#web-26">전체 선택</a>도 추가되었습니다. 다중 삭제는 아직 미구현입니다. 코테는 <a href="#ct-27">핸드폰 번호 가리기(PASS)</a>와 <a href="#ct-28">중고거래 상태 조회(FAIL)</a>를 복습하세요.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
 
 
 
@@ -15786,6 +15786,64 @@ WHERE OPTIONS REGEXP '통풍시트|열선시트|가죽시트'
     <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>"여러 조건 중 하나라도"</b> 유형에서 가장 많이 나오는 실수입니다. 습관으로 <b><code>OR</code>를 칠 때마다 컬럼명부터 다시 쓰기</b>를 들이세요. 실무에서도 <b>필터가 여러 개인 검색 기능</b>을 만들 때 똑같은 형태가 나오고, 이때 조건이 하나 빠지면 <b>검색 결과가 조용히 누락</b>됩니다. 리뷰에서 <code>OR</code> 뒤에 컬럼명이 없는 줄이 보이면 바로 지적 대상입니다.</p>
   </div>
 </article>
+<article class="note-card" id="ct-27">
+<div class="note-head"><span class="note-num">15회차</span><h3>핸드폰 번호 가리기</h3><div class="note-tags"><span class="tag">JAVA · char[] · String</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>뒤쪽 네 글자는 유지하고 앞부분만 별표로 바꾼다. 핵심은 마지막 반복 인덱스를 정확히 정하는 것이다.</p>
+<div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.16 · 15회차</span></div><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12948" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a><p>전화번호 문자열에서 마지막 네 자리만 식별할 수 있는 표시 문자열을 만든다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">class Solution {
+    public String solution(String phone_number) {
+        char[] arr = new char[phone_number.length()];
+
+        for(int i=0;i&lt;phone_number.length();i++){
+            arr[i]=phone_number.charAt(i);
+            System.out.print(arr[i]);
+        }
+
+        for(int i=0;i&lt;arr.length-4;i++){
+            arr[i]=&#x27;*&#x27;;
+        }
+
+        String ans = &quot;&quot;;
+        for(int i=0;i&lt;arr.length;i++){
+            ans = ans+arr[i];
+        }
+
+
+        return ans;
+    }
+}</code></pre></div><p>제출 코드는 문자열을 배열로 복사 → 앞부분 치환 → 문자열 조립의 세 단계로 정답을 만들었습니다. 원래 문자열은 바뀌지 않고 배열의 원소를 바꿉니다. 다만 <code>System.out.print(arr[i])</code>는 가리기 전 번호를 콘솔에 남기므로 디버깅이 끝나면 제거하세요.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">같은 원리를 라이브러리로 간결하게 표현</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">class Solution {
+    public String solution(String phone_number) {
+        char[] ch = phone_number.toCharArray();
+        for (int i = 0; i &lt; ch.length - 4; i++) {
+            ch[i] = &#x27;*&#x27;;
+        }
+        return String.valueOf(ch);
+    }
+}</code></pre></div><p>길이가 n이면 바꿀 위치는 0부터 n−5까지, 즉 <code>i &lt; n - 4</code>입니다. n=4일 때는 반복이 0회여야 합니다. <code>&lt;=</code>로 쓰면 보존할 네 자리 중 첫 글자까지 가립니다.</p><p><code>toCharArray()</code>로 새 배열을 만들고 <code>String.valueOf(char[])</code>로 문자들을 하나의 문자열로 만듭니다. <code>ch.toString()</code>은 배열 내용 변환이 아닙니다. 반복적인 String 누적은 이미 만든 접두사를 다시 복사하며 길이가 커질수록 O(n²) 작업이 될 수 있습니다. 배열 방식은 O(n) 시간·O(n) 추가 공간입니다. 문제 입력은 4~20글자로 짧아, 통과 여부보다 동작 원리와 가독성 비교가 학습 목표입니다. “항상 가장 빠른 방법”으로 단정할 필요는 없습니다.</p><details class="run-output"><summary><span class="run-tag">검증 입력</span>경계값을 먼저 예측하기</summary><pre>1234 → 1234
+12345 → *2345
+01012345678 → *******5678
+00000000000000001234 → ****************1234</pre></details>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>길이가 4이면 별표는 몇 개일까?</summary><div class="sc-a">0개입니다. i &lt; 0이 처음부터 거짓이므로 원래 네 글자를 반환합니다.</div></details><details class="sc-q"><summary>원본 String과 char[]가 함께 바뀔까?</summary><div class="sc-a">아니요. toCharArray는 별도 배열을 만듭니다. 문자열은 불변이고 원본은 유지됩니다.</div></details></div></div></article>
+<article class="note-card" id="ct-28">
+<div class="note-head"><span class="note-num">15회차 파일</span><h3>조건에 부합하는 중고거래 상태 조회하기</h3><div class="note-tags"><span class="tag">SQL · CASE · DATE</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>WHERE는 행을 고르고, SELECT의 CASE는 표시값을 바꾼다. 조건 선택과 값 변환을 분리한다.</p>
+<div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL · 제출 기록</span><span class="ct-badge ct-type">SQL · 15회차 파일 수록</span></div><p><b>기록 주의:</b> 파일명은 15회차이지만 SQL 표의 날짜·회차는 <b>2026.09.14 / 14회차</b>로 적혀 있습니다. 이 문제는 기존 카드에 없어 새로 추가하되 시험 날짜를 임의로 고치지 않았습니다.</p><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/164672" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a><p>특정 날짜에 작성된 게시글을 골라 상태 코드를 한글 표시명으로 바꾸고 게시글 ID 역순으로 보여 준다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT BOARD_ID, WRITER_ID, TITLE, PRICE, STATUS
+from USED_GOODS_BOARD
+where CREATED_DATE like &quot;2022-10-05&quot;
+case STATUS
+when &#x27;DONE&#x27; = &quot;거래완료&quot;
+when &#x27;SALE&#x27; = &quot;판매중&quot;
+when &#x27;RESERVED&#x27; = &quot;예약중&quot;
+order by BOARD_ID desc;</code></pre></div><p>오류를 세 군데로 나눠 보세요. ① 상태를 출력용으로 바꾸는 CASE가 WHERE 뒤에 놓였습니다. ② <code>WHEN 값 THEN 결과</code>가 필요한 자리에 <code>=</code>를 썼습니다. ③ CASE를 마치는 <code>END</code>가 없습니다. CASE는 조건문을 별도 실행하는 문장이 아니라 여기서는 <b>값 하나를 계산하는 표현식</b>입니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">정리한 풀이 — MySQL 기준</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT BOARD_ID, WRITER_ID, TITLE, PRICE,
+       CASE STATUS
+           WHEN &#x27;SALE&#x27; THEN &#x27;판매중&#x27;
+           WHEN &#x27;RESERVED&#x27; THEN &#x27;예약중&#x27;
+           WHEN &#x27;DONE&#x27; THEN &#x27;거래완료&#x27;
+       END AS STATUS
+FROM USED_GOODS_BOARD
+WHERE CREATED_DATE = &#x27;2022-10-05&#x27;
+ORDER BY BOARD_ID DESC;</code></pre></div><p>CASE의 비교 기준은 STATUS이고 첫 일치 분기의 결과가 출력됩니다. 모든 분기가 불일치하고 ELSE가 없으면 NULL입니다. <code>AS STATUS</code>는 결과 열의 이름이며 DB 원본 상태 코드를 수정하지 않습니다. Java switch와 비슷하게 분기하지만 <code>break</code>나 fall-through를 그대로 적용하지 마세요.</p><p>이 문제는 DATE 열이므로 정확한 날짜를 <code>=</code>로 비교합니다. 실무의 DATETIME 열에 시각이 있다면 <code>CREATED_DATE &gt;= '2022-10-05' AND CREATED_DATE &lt; '2022-10-06'</code>처럼 하루 범위를 잡아야 합니다. 문자열은 작은따옴표를 사용해 SQL 모드에 따른 큰따옴표 해석 차이도 피합니다.</p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>CASE로 상태를 바꾸면 테이블 데이터도 바뀔까?</summary><div class="sc-a">아니요. SELECT 결과에 표시되는 값만 바뀝니다. 저장된 값을 바꾸려면 UPDATE가 필요합니다.</div></details><details class="sc-q"><summary>DATE를 DATETIME으로 바꿨는데 = 날짜 조건이면 무엇을 놓칠까?</summary><div class="sc-a">자정이 아닌 시간의 행을 놓칠 수 있습니다. 다음 날 미만의 범위 조건으로 하루를 표현합니다.</div></details></div></div></article>
+
 
 
     </div>
@@ -20804,13 +20862,49 @@ function boardInsertForm() {
     location.href = &quot;boardController.jsp?command=boardInsertForm&quot;;
 }
 // boardController.jsp의 해당 분기
-response.sendRedirect(&quot;boardInsertForm.jsp&quot;);</code></pre></div><p><b>현재 구현 상태:</b> 함수와 redirect 분기는 생겼지만 목록의 글추가 버튼에 이벤트 연결은 아직 없습니다. 새 <code>boardInsertForm.jsp</code>에는 POST form, 숨겨진 command, 작성자·제목 입력칸, 글내용 textarea가 있습니다. 다만 textarea의 <code>name</code>과 제출 버튼이 없고 <code>boardinsert</code> 분기도 비어 있습니다. “글 등록 완성”으로 오해하지 마세요. 폼 이동은 컨트롤러 URL을 직접 열어 확인할 수 있습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>// 다음 단계에서 연결하는 문법 예시 — 현재 원본에는 없음
+response.sendRedirect(&quot;boardInsertForm.jsp&quot;);</code></pre></div><p><b>9월 16일 수업 후 상태:</b> 글추가 버튼의 함수 연결, 폼의 name·제출 버튼, 등록·상세·수정·단일 삭제 분기가 추가됐습니다. 이어지는 <a href="#web-25">CRUD 카드</a>에서 요청 흐름을 확인하세요. 목록의 다중 삭제는 아직 연결되지 않았습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>// 현재 원본에 연결된 버튼
 &lt;button type=&quot;button&quot; onclick=&quot;boardInsertForm()&quot;&gt;글추가&lt;/button&gt;</code></pre></div><p>forward·redirect는 응답이 이미 전송 완료(committed)된 뒤 호출하면 오류가 날 수 있으므로 처리 코드를 출력보다 먼저 둡니다. Java 메서드에서 호출한 뒤에는 <code>return;</code>으로 이후 처리·출력이 이어지지 않게 하는 것이 명확합니다. 등록 성공 뒤 redirect로 목록을 요청하는 패턴은 새로고침으로 인한 POST 재전송을 줄이는 데 쓰입니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>DAO 조회 결과를 보여 줄 때 forward가 잘 맞는 이유는?</summary><div class="sc-a">이미 얻은 객체를 request에 담아 같은 요청으로 View에 넘길 수 있기 때문입니다.</div></details><details class="sc-q"><summary>함수를 선언만 하면 버튼 클릭 시 실행될까?</summary><div class="sc-a">아니요. onclick이나 이벤트 리스너로 버튼과 함수를 연결해야 합니다.</div></details></div></div></article>
 
 <article class="note-card" id="web-24"><div class="note-head"><span class="note-num">24</span><h3>Web Server와 WAS — 역할과 요청 흐름</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>정적 파일 응답과 애플리케이션 코드 실행을 구별하되, 한 제품이 두 역할을 함께 할 수도 있다.</p><div style="overflow-x:auto"><table><thead><tr><th scope="col">역할</th><th scope="col">하는 일</th><th scope="col">수업 연결</th></tr></thead><tbody><tr><td>Web Server</td><td>정적 HTML·CSS·이미지 제공, HTTP 처리·역방향 프록시</td><td>브라우저의 정적 파일 요청에 응답</td></tr><tr><td>WAS / 애플리케이션 실행 환경</td><td>서버 코드 실행, 업무 처리·DB 연동</td><td>Tomcat에서 Servlet·JSP 실행</td></tr></tbody></table></div><p>Tomcat은 HTTP 요청과 정적 파일도 처리할 수 있는 <b>서블릿 컨테이너</b>입니다. 수업에서는 WAS 역할로 쓰지만 Jakarta EE의 모든 기능을 구현한 제품이라고 외우면 안 됩니다. 별도 웹 서버를 앞에 두기도 하고 Tomcat만으로 학습용 앱을 실행할 수도 있습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">학습 예시</span><button class="copy-btn" type="button">복사</button></div><pre><code>수업 앱: 브라우저 → Tomcat → Controller → DAO → MariaDB
                          ← HTML 응답 ← JSP View
 학습 노트: 브라우저 → GitHub Pages → HTML/CSS/JavaScript 파일
            (GitHub Pages에서는 JSP·JDBC 서버 코드가 실행되지 않음)</code></pre></div><p class="practice-note"><span class="pn-label">💼 실무 연결</span>404라면 URL·배포 경로, 500이라면 서버 로그, DB 연결 실패라면 DAO 접속 설정·DB 상태를 확인하는 식으로 책임 구간을 좁히세요. <a href="https://tomcat.apache.org/tomcat-10.1-doc/" target="_blank" rel="noopener">Tomcat 공식 문서</a>에서 지원 명세를 확인할 수 있습니다.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>Tomcat 앞에 별도 웹 서버가 없으면 JSP를 실행할 수 없을까?</summary><div class="sc-a">실행할 수 있습니다. Tomcat 자체가 HTTP 요청을 받습니다.</div></details><details class="sc-q"><summary>GitHub Pages에 JSP를 올리면 게시판 DB까지 실행될까?</summary><div class="sc-a">아니요. 공개 학습 사이트는 정적 파일을 제공합니다. 실제 게시판은 로컬 Tomcat과 MariaDB에서 실행합니다.</div></details></div></div></article>
+<article class="note-card" id="web-25">
+<div class="note-head"><span class="note-num">25</span><h3>게시판 CRUD 연결 — 등록·상세·수정·단일 삭제</h3><div class="note-tags"><span class="tag">JSP · CRUD · PreparedStatement</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>command로 기능을 고르고, seq로 대상을 고른 뒤, DAO 결과에 따라 forward 또는 새 요청으로 이어 간다.</p>
+<p>오전의 빈 등록 분기 이후 <code>boardInsert</code>, <code>boardDetail</code>, <code>boardUpdate</code>, <code>boardDelete</code> 처리 코드가 추가되었습니다. HkDao에는 <code>getBoard</code>·<code>updateBoard</code>·<code>deleteBoard</code>가 생겼고 상세 화면에서 수정과 단일 삭제를 요청합니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">등록 성공 후 목록 JSP가 아니라 목록 Controller로 이동</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">String id = request.getParameter(&quot;id&quot;);
+String title = request.getParameter(&quot;title&quot;);
+String content = request.getParameter(&quot;content&quot;);
+boolean isS = dao.insertBoard(new HkDto(id, title, content));
+if (isS) {
+    response.sendRedirect(&quot;boardController.jsp?command=boardlist&quot;);
+}</code></pre></div><p>redirect는 새 요청입니다. 목록 Controller가 DAO를 다시 호출하고 list를 request에 넣어야 하므로 <code>boardlist.jsp</code>로 바로 이동하면 안 됩니다. 반면 상세 조회는 이미 얻은 dto를 <code>request.setAttribute("dto", dto)</code>에 넣어 forward합니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">수정 SQL의 물음표는 작성 순서대로 바인딩</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">String sql = &quot;UPDATE HKBOARD SET TITLE=?, CONTENT=? WHERE SEQ=?&quot;;
+psmt.setString(1, dto.getTitle());
+psmt.setString(2, dto.getContent());
+psmt.setInt(3, dto.getSeq());
+int count = psmt.executeUpdate();
+// count &gt; 0이면 적어도 한 행이 영향을 받았다는 뜻</code></pre></div><p><b>코드 검토에서 확인한 남은 부분:</b> 현재 원본의 수정 성공 분기는 script 태그와 out.println 예시가 함께 있어 알림·이동 코드가 중복됩니다. getBoard는 조회 결과가 없어도 빈 DTO를 반환하므로 상세 JSP의 null 검사가 이를 잡지 못합니다. seq의 숫자 검사와 POST 요청 인코딩 설정도 별도 확인이 필요하며, 실패 분기가 가리키는 error.jsp는 현재 02 프로젝트에 없습니다. 이번 기록은 <b>처리 코드가 추가되었다는 뜻이며 모든 실패 경로의 정상 동작을 뜻하지 않습니다.</b></p><p class="practice-note"><span class="pn-label">💼 실무 연결</span>hidden seq도 사용자가 바꿀 수 있는 입력입니다. 실제 서비스에서는 대상 확인·권한 검사와 서버 입력 검증이 필요합니다. 수업 코드의 GET 삭제는 요청 흐름을 배우는 예이며 운영 서비스 설계와 구분하세요.</p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>등록 후 목록 JSP로 바로 redirect하면 왜 list가 없을까?</summary><div class="sc-a">새 요청에는 이전 request 속성이 없고 DAO 조회도 실행되지 않았기 때문입니다. 목록 Controller를 거쳐 다시 조회해야 합니다.</div></details><details class="sc-q"><summary>제목·내용·번호 바인딩 순서를 바꾸면 어떻게 될까?</summary><div class="sc-a">SQL의 ? 위치와 다른 값을 넣어 잘못된 데이터나 대상 조건이 전달됩니다. WHERE SEQ=?는 여기서 세 번째입니다.</div></details></div></div></article>
+<article class="note-card" id="web-26">
+<div class="note-head"><span class="note-num">26</span><h3>form의 name과 hidden · 체크박스 전체 선택</h3><div class="note-tags"><span class="tag">HTML form · JavaScript · 다중 값</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>화면에 입력칸이 있다고 전송되는 것은 아니다. name으로 값을 식별하고 같은 이름의 다중 값을 구별한다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-html">HTML</span><span class="code-file">수업 폼의 핵심 입력</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-html">&lt;form action=&quot;boardController.jsp&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;command&quot; value=&quot;boardInsert&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;id&quot; required&gt;
+  &lt;input type=&quot;text&quot; name=&quot;title&quot; required&gt;
+  &lt;textarea name=&quot;content&quot; required&gt;&lt;/textarea&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;글등록&quot;&gt;
+&lt;/form&gt;</code></pre></div><p><code>name</code>은 서버에서 getParameter로 찾는 이름입니다. hidden은 보이지 않는 입력이지 안전하게 감춘 값이 아닙니다. textarea의 초기값은 value 속성이 아니라 시작·끝 태그 사이에 씁니다. required는 브라우저 검증이므로 서버 검증을 대신하지 않습니다.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-javascript">JAVASCRIPT</span><span class="code-file">현재 boardlist.jsp의 전체 선택 함수</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-javascript">function allSel(bool) {
+    const chkObj = document.getElementsByName(&quot;seq&quot;);
+    for (let i = 0; i &lt; chkObj.length; i++) {
+        chkObj[i].checked = bool;
+    }
+}
+// 헤더 체크박스: onclick=&quot;allSel(this.checked)&quot;</code></pre></div><p><code>this.checked</code>는 true/false입니다. 같은 name의 체크박스를 순회해 화면의 선택 상태를 바꾸지만 DB 삭제는 하지 않습니다. 현재 목록의 글삭제 버튼은 form·다중 삭제 분기와 연결되지 않았습니다. 상세 화면의 <b>한 글 삭제</b>와 구별하세요.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">다중 삭제를 배울 때의 수신 방식 — 아직 현재 컨트롤러에 없음</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">String[] selected = request.getParameterValues(&quot;seq&quot;);
+// 선택한 체크박스가 없다면 null일 수 있음
+// 각 번호 검증 → 삭제 처리 → 결과 확인이 별도로 필요</code></pre></div><p>체크되지 않은 체크박스는 일반적인 form 제출에 포함되지 않습니다. 선택한 값들을 실제 보내려면 해당 입력들이 제출하는 form에 속해야 합니다. 전체 선택 함수가 동작한다고 다중 삭제까지 구현된 것은 아닙니다.</p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>textarea에 id만 있고 name이 없으면 content를 읽을 수 있을까?</summary><div class="sc-a">일반적인 form 제출에서 id만으로는 전송 이름이 생기지 않습니다. name="content"가 필요합니다.</div></details><details class="sc-q"><summary>전체 선택을 해제하면 DB 데이터가 지워질까?</summary><div class="sc-a">아니요. 브라우저의 checked 상태만 바뀝니다. 서버 삭제 요청·검증·SQL 실행은 별도입니다.</div></details></div></div></article>
+
 
 
 
