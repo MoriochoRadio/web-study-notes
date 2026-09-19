@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	// 글쓰기 폼 요청: controller를 통해 처리
 	function boardInsertForm(){
-		location.href="boardController.jsp?command=boardInsertForm";
+		location.href="boardInsertForm.board";
 	}
 
 	//전체 선택 체크박스 기능

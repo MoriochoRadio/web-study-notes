@@ -171,4 +171,55 @@ public class HkDao extends DataBase{
 		// 1건 이상 반영되었다면(count > 0) 성공(true), 아니면 실패(false)를 반환
 		return count>0?true:false;
 	}
+
+	//여러글 삭제하기: 파라미터는 seq[] , delete문(여러개)
+	// --> Transaction 처리가 필요
+	// --> delete,delete,delete --> 모두 성공해야 성공으로 처리
+	// --> update, insert...
+	public boolean mulDel(String[] seqs) {
+		boolean isS = true;
+		int[] count= null;// 쿼리 실행 개수 저장
+
+		String sql = "DELETE FROM HKBOARD WHERE SEQ = ?";
+
+		try(Connection conn=getConnection();){
+			// 자동 commit 해제 --> rollback할 수 있음
+			conn.setAutoCommit(false);
+
+			try(PreparedStatement psmt=conn.prepareStatement(sql)){
+				//batch작업: 동일한 쿼리에 ?만 달라지면서 실행개수가 변하는 작업
+				for (int i = 0; i < seqs.length; i++) {
+					psmt.setString(1, seqs[i]);//쿼리 하나 완성
+					psmt.addBatch();//완성된 쿼리를 준비시켜줌
+				}
+				// delete from hkboard where seq in(1,2,3,5,7)
+
+				count = psmt.executeBatch();//batch 실행 후 결과는 배열반환
+				conn.commit();//DB에 반영
+			}catch (SQLException e) {
+				conn.rollback();// 오류가 나면 성공한 작업 되돌리기
+				e.printStackTrace();
+			}finally {
+				//원래 설정으로 되돌리기
+				conn.setAutoCommit(true);
+			}
+			// count[1,1,1,1,1] 각각의 쿼리가 성공하면 1
+			if(count!=null) {
+				for (int i = 0; i < count.length; i++) {
+					if(count[i]!=1) {
+						isS=false;
+						break;
+					}
+				}
+			}else {
+				isS=false;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isS=false;
+		}
+		return isS;
+	}
 }

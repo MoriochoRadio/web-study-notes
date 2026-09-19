@@ -1,5 +1,11 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
+> 최신 상태: 2026-09-18 강사 커밋 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day34)
+> 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
+
+
 🛠️ 새 컴퓨터라면 **[개발환경 준비 안내](https://moriochoradio.github.io/web-study-notes/setup/#java-web)**부터 진행하세요. Eclipse Import · JDK/Tomcat 연결 · [실습 DB 준비 SQL](../../setup/bootstrap-hk.sql) · JDBC 설정을 한 순서로 정리했습니다.
 
 취업아카데미 백엔드 과정의 **웹 개발(JSP · Servlet) 수업** 실습 프로젝트입니다.
@@ -318,3 +324,16 @@ CREATE TABLE hkboard (
 - 전화번호 제출 코드와 개선 코드를 길이 4~20의 17개 입력으로 비교했다.
 - CASE 풀이를 별도 임시 MariaDB에서 세 상태·날짜 제외·ID 역순으로 확인했다. 수업 DB에는 접근하지 않았다.
 - 학습 웹의 카드 이동·답안 펼치기·390px/1280px 가로 폭과 로컬 검사 6개를 확인했다.
+
+## 2026-09-17~18 보충 — 실행 안내
+
+- Eclipse에서 03_hello_servlet, 04_hkboard_MVC2를 Existing Projects로 불러온다. JDK 21, Tomcat 10.1을 사용한다.
+- 03: `/03_hello_servlet/HelloServlet.do?param=hello`로 기본 요청을 확인한다. DB가 필요하지 않다.
+- 04: Connector/J를 WEB-INF/lib에 둔다. DB는 기존 `hk.hkboard`를 공유한다.
+- 04의 실행 프로세스에 `STUDY_DB_USER`, `STUDY_DB_PASSWORD`를 전달한다. `STUDY_DB_URL`을 생략하면 로컬 hk에 연결한다. 실제 값은 소스나 저장소에 적지 않는다.
+- 04 시작 주소: `/04_hkboard_MVC2/boardlist.board`. 목록·등록까지 Servlet 전환 상태이며 상세·수정·삭제에는 기존 JSP 경로가 남아 있다.
+- GitHub Pages는 학습 노트만 제공한다. JSP 실행은 로컬 Tomcat에서 확인한다.
+
+### 검증 기록
+
+최종 실행 결과는 [검증 기록](../sync-validation-2026-09-20.md)에 정리한다. 컴파일 통과와 기능 전체 완료를 구분한다.

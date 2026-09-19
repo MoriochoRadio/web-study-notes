@@ -1108,8 +1108,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제, <b>2026-08-31부터 시작한 데이터베이스(SQL) 과정</b>, 그리고 <b>2026-09-10부터 시작한 웹 개발(JSP·Servlet) 과정</b>까지 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-16</span>
-      <span>📅 수업 진도 32일차</span>
+      <span id="updated-badge">마지막 업데이트: 2026-09-20</span>
+      <span>📅 수업 진도 34일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
       <span>🛠️ 자바 활용 11개</span>
@@ -1117,7 +1117,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <span>🧪 실습과제 12문제</span>
       <span>🧭 학습 여정 18단계</span>
       <span>🗄️ SQL 기초 46개</span>
-      <span>🖥️ 웹 개발 18개</span>
+      <span>🖥️ 웹 개발 31개</span>
       <span>📖 개념 사전 32개</span>
       <span>✏️ 시험 대비 160문제</span>
     </div>
@@ -1148,9 +1148,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">28</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">30</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">26</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">31</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1176,15 +1176,15 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">31</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">33</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">28</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">30</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">26</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card web"><div class="n">31</div><div class="l">🖥️ 웹 개발 항목</div></div>
       <div class="stat-card journey"><div class="n">18</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
@@ -5713,7 +5713,7 @@ java.lang.NumberFormatException: For input string: "오"
       </div>
       <div class="concept-block">
         <h4>② D2_StreamTest — filter·sorted·map으로 파이프라인 잇기, 메서드 참조 <code>::</code></h4>
-        <p><code>list.stream().filter(s -&gt; s.contains("김")).sorted().forEach(...)</code>처럼 <b>중간 연산(<code>filter</code>·<code>sorted</code>·<code>map</code>)을 이어 붙이고 최종 연산(<code>forEach</code>·<code>collect</code>)으로 마무리</b>합니다. <code>forEach(s -&gt; System.out.println(s))</code>가 <b>"값을 받아서 그대로 메서드에 넘기기만" 한다면 <code>forEach(System.out::println)</code>로 줄일 수 있는데</b>, 이게 <b>메서드 참조</b>입니다. <code>map(String::length)</code>도 같은 문법으로, <b>원본을 바꾸지 않고 새로운 값들의 리스트를 반환</b>합니다(<code>[3, 3, 3]</code> — "김태경"·"김상원"·"임종서" 모두 3글자). <code>Stream</code>은 <b>한 번 쓰면 끝나는 파이프</b>라서, 같은 리스트를 여러 번 다르게 처리하려면 <b>매번 <code>list.stream()</code>을 새로 호출</b>해야 합니다. → <a href="#util-08">🛠️ 08. Stream API</a></p>
+        <p><code>list.stream().filter(s -&gt; s.contains("김")).sorted().forEach(...)</code>처럼 <b>중간 연산(<code>filter</code>·<code>sorted</code>·<code>map</code>)을 이어 붙이고 최종 연산(<code>forEach</code>·<code>collect</code>)으로 마무리</b>합니다. <code>forEach(s -&gt; System.out.println(s))</code>가 <b>"값을 받아서 그대로 메서드에 넘기기만" 한다면 <code>forEach(System.out::println)</code>로 줄일 수 있는데</b>, 이게 <b>메서드 참조</b>입니다. <code>map(String::length)</code>도 같은 문법으로, <b>원본을 바꾸지 않고 새로운 값들의 리스트를 반환</b>합니다(<code>[3, 3, 3]</code> — "김태경"·"김상원"·"동료" 모두 3글자). <code>Stream</code>은 <b>한 번 쓰면 끝나는 파이프</b>라서, 같은 리스트를 여러 번 다르게 처리하려면 <b>매번 <code>list.stream()</code>을 새로 호출</b>해야 합니다. → <a href="#util-08">🛠️ 08. Stream API</a></p>
       </div>
       <div class="concept-block">
         <h4>③ 일반 스트림 vs 병렬 스트림 — 같은 코드, 다른 실행 스레드</h4>
@@ -5801,7 +5801,7 @@ import java.util.stream.Collectors;
 public class D2_StreamTest {
     public static void main(String[] args) {
         // asList() -&gt; 값을 한꺼번에 정의할때 편리함(단, 길이는 고정됨)
-        List&lt;String&gt; list = Arrays.asList("김태경", "김상원", "임종서");
+        List&lt;String&gt; list = Arrays.asList("김태경", "김상원", "동료");
 
         Stream&lt;String&gt; streamList = list.stream();
         streamList.filter(s -&gt; s.contains("김")).sorted()
@@ -5848,7 +5848,7 @@ public class D2_StreamTest {
       <pre>
 김상원
 김태경
-임종서
+동료
 김상원
 김태경
 [3, 3, 3]
@@ -5863,7 +5863,7 @@ C-main
 D-main
 A-ForkJoinPool.commonPool-worker-2
 B-ForkJoinPool.commonPool-worker-1</pre>
-      <div class="run-note">첫 줄은 <code>"김"</code>이 포함된 이름을 정렬해서 <b>김상원 → 김태경</b> 순으로, 둘째 묶음은 <code>"임"</code>으로 시작하는 이름(임종서 하나)을 찾아 출력합니다. <code>listNum</code>은 세 이름이 모두 3글자라 <code>[3, 3, 3]</code>입니다. <b>일반 스트림은 A·B·C·D가 전부 "main" 스레드</b>에서 순서대로 나오지만, <b>병렬 스트림은 C·D는 main, A·B는 ForkJoinPool의 다른 워커 스레드</b>에서 처리되어 <b>순서가 뒤섞인 채</b> 출력됩니다 — 실행할 때마다 이 순서는 달라질 수 있습니다.</div>
+      <div class="run-note">첫 줄은 <code>"김"</code>이 포함된 이름을 정렬해서 <b>김상원 → 김태경</b> 순으로, 둘째 묶음은 <code>"임"</code>으로 시작하는 이름(동료 하나)을 찾아 출력합니다. <code>listNum</code>은 세 이름이 모두 3글자라 <code>[3, 3, 3]</code>입니다. <b>일반 스트림은 A·B·C·D가 전부 "main" 스레드</b>에서 순서대로 나오지만, <b>병렬 스트림은 C·D는 main, A·B는 ForkJoinPool의 다른 워커 스레드</b>에서 처리되어 <b>순서가 뒤섞인 채</b> 출력됩니다 — 실행할 때마다 이 순서는 달라질 수 있습니다.</div>
     </details>
     <div class="note-code">
       <div class="code-head">
@@ -7204,6 +7204,10 @@ public class D3_ChatClient {
   </div>
 </article>
 <article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 게시판 CRUD·전체 선택·코딩테스트 15회차</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>게시판 등록·상세·수정·단일 삭제 코드와 전체 선택을 반영하고, 강조 개념 및 코딩테스트 15회차 파일의 새 문제 두 개를 연결한다.</p><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL 원본 5개는 저장소와 동일합니다. 02 프로젝트의 HkDao와 JSP 4개 변경, 새 boardDetail.jsp를 반영했습니다. 공개본의 DB 비밀번호 제거는 유지합니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. <a href="#web-25">등록·상세·수정·단일 삭제</a> 코드가 연결됐고 <a href="#web-26">전체 선택</a>도 추가되었습니다. 다중 삭제는 아직 미구현입니다. 코테는 <a href="#ct-27">핸드폰 번호 가리기(PASS)</a>와 <a href="#ct-28">중고거래 상태 조회(FAIL)</a>를 복습하세요.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
+<article class="note-card" id="class-day33"><div class="note-head"><span class="note-num">33일차</span><h3>2026-09-17 · 다중 삭제·트랜잭션·Servlet 시작</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: MVC1 다중 삭제와 Servlet 기본 요청 처리를 확인했다.</p><ul><li>선택된 seq 배열을 받고 JDBC batch로 삭제.</li><li>선택 유효값 검사와 오류 화면 추가.</li><li>03_hello_servlet 프로젝트에서 GET·POST 요청 처리 시작.</li></ul><p><a href="#web-27">다중 삭제와 트랜잭션</a> · <a href="#web-28">Servlet 생명주기</a> · <a href="teacher-sync-2026-09-18.md">강사 코드 대조 기록</a></p></div></article>
+
+<article class="note-card" id="class-day34"><div class="note-head"><span class="note-num">34일차</span><h3>2026-09-18 · Filter·Session·MVC2 전환</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: 설정·세션·인코딩 필터를 정리하고 MVC2 목록·등록 경로를 추가했다.</p><ul><li>ServletConfig, ServletContext, HttpSession 구분.</li><li>UTF-8 Filter의 전처리 → chain → 후처리.</li><li>04_hkboard_MVC2의 URL 기반 Controller 전환.</li></ul><p><a href="#web-29">설정과 세션</a> · <a href="#web-30">Filter</a> · <a href="#web-31">MVC2 구현 범위</a></p><p>미응시한 16회차는 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 별도로 보충했다. 기존 응시 기록에 PASS를 추가하지 않았다.</p></div></article>
+
 
 
 
@@ -15844,6 +15848,26 @@ FROM USED_GOODS_BOARD
 WHERE CREATED_DATE = &#x27;2022-10-05&#x27;
 ORDER BY BOARD_ID DESC;</code></pre></div><p>CASE의 비교 기준은 STATUS이고 첫 일치 분기의 결과가 출력됩니다. 모든 분기가 불일치하고 ELSE가 없으면 NULL입니다. <code>AS STATUS</code>는 결과 열의 이름이며 DB 원본 상태 코드를 수정하지 않습니다. Java switch와 비슷하게 분기하지만 <code>break</code>나 fall-through를 그대로 적용하지 마세요.</p><p>이 문제는 DATE 열이므로 정확한 날짜를 <code>=</code>로 비교합니다. 실무의 DATETIME 열에 시각이 있다면 <code>CREATED_DATE &gt;= '2022-10-05' AND CREATED_DATE &lt; '2022-10-06'</code>처럼 하루 범위를 잡아야 합니다. 문자열은 작은따옴표를 사용해 SQL 모드에 따른 큰따옴표 해석 차이도 피합니다.</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>CASE로 상태를 바꾸면 테이블 데이터도 바뀔까?</summary><div class="sc-a">아니요. SELECT 결과에 표시되는 값만 바뀝니다. 저장된 값을 바꾸려면 UPDATE가 필요합니다.</div></details><details class="sc-q"><summary>DATE를 DATETIME으로 바꿨는데 = 날짜 조건이면 무엇을 놓칠까?</summary><div class="sc-a">자정이 아닌 시간의 행을 놓칠 수 있습니다. 다음 날 미만의 범위 조건으로 하루를 표현합니다.</div></details></div></div></article>
+<article class="note-card" id="ct-29"><div class="note-head"><span class="note-num">16회차 보충</span><h3>약수의 합</h3></div><div class="note-body"><p class="note-summary">약수는 쌍으로 찾고, 완전제곱수의 제곱근은 한 번만 더한다.</p><p><b>2026-09-18 · 16회차 · 미응시 보충 학습.</b> 동료 자료로 문제를 확인한 뒤 별도로 작성한 풀이다. 본인 제출 PASS 기록은 없다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12928">문제 원문</a> · <a href="coding-tests/2026-09-18/">별도 보충 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>class Solution {
+    public int solution(int n) {
+        int sum = 0;
+        for (int divisor = 1; divisor &lt;= n / divisor; divisor++) {
+            if (n % divisor != 0) continue;
+            sum += divisor;
+            int pair = n / divisor;
+            if (pair != divisor) sum += pair;
+        }
+        return sum;
+    }
+}
+</code></pre></div><p>1~n 전수 탐색도 제한 안에서 충분하다. 위 풀이는 d와 n/d를 함께 더하므로 O(√n)이다. <code>pair != divisor</code>로 제곱근 중복을 막는다. n=0이면 반복이 없으므로 0이다.</p><details class="run-output"><summary>로컬 검증</summary><pre>0 → 0 / 1 → 1 / 5 → 6 / 12 → 28 / 36 → 91 / 3000 → 9360
+허용 범위 0~3000: 독립적으로 만든 기대값과 3,001개 비교</pre></details></div></article>
+
+<article class="note-card" id="ct-30"><div class="note-head"><span class="note-num">16회차 보충</span><h3>최댓값 구하기</h3></div><div class="note-body"><p class="note-summary">DATETIME의 최댓값이 가장 늦게 들어온 시각이다.</p><p><b>2026-09-18 · 16회차 · 미응시 보충 학습.</b> 참고 문서의 채점 결과는 본인의 결과로 기록하지 않는다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59415">문제 원문</a> · <a href="coding-tests/2026-09-18/">별도 보충 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">SQL</span><button class="copy-btn" type="button">복사</button></div><pre><code>SELECT MAX(DATETIME) AS 시간
+FROM ANIMAL_INS;
+</code></pre></div><p>GROUP BY 없이 전체 행을 집계한다. 최댓값이 중복되어도 결과는 한 행이다. 이름·ID를 함께 SELECT하면 어느 행의 값인지 불명확해진다. 빈 집합의 MAX 결과는 NULL이다.</p><details class="run-output"><summary>로컬 검증</summary><pre>MariaDB 임시 테이블: 날짜 순서 섞임·동일 최댓값·단일 행·빈 집합
+기존 수업 데이터 변경 없음 / 프로그래머스 채점은 하지 않음</pre></details></div></article>
+
 
 
 
@@ -19505,7 +19529,7 @@ Class.forName("org.mariadb.jdbc.Driver");
 
 String url      = "jdbc:mariadb://localhost:3306/hk";
 String user     = "root";
-String password = "****";          // 소스에 그대로 적으면 안 된다(아래 설명)
+String password = System.getenv("STUDY_DB_PASSWORD");          // 소스에 그대로 적으면 안 된다(아래 설명)
 
 Connection        conn = null;   // DB 연결
 PreparedStatement psmt = null;   // 쿼리 준비
@@ -20884,7 +20908,7 @@ psmt.setString(1, dto.getTitle());
 psmt.setString(2, dto.getContent());
 psmt.setInt(3, dto.getSeq());
 int count = psmt.executeUpdate();
-// count &gt; 0이면 적어도 한 행이 영향을 받았다는 뜻</code></pre></div><p><b>코드 검토에서 확인한 남은 부분:</b> 현재 원본의 수정 성공 분기는 script 태그와 out.println 예시가 함께 있어 알림·이동 코드가 중복됩니다. getBoard는 조회 결과가 없어도 빈 DTO를 반환하므로 상세 JSP의 null 검사가 이를 잡지 못합니다. seq의 숫자 검사와 POST 요청 인코딩 설정도 별도 확인이 필요하며, 실패 분기가 가리키는 error.jsp는 현재 02 프로젝트에 없습니다. 이번 기록은 <b>처리 코드가 추가되었다는 뜻이며 모든 실패 경로의 정상 동작을 뜻하지 않습니다.</b></p><p class="practice-note"><span class="pn-label">💼 실무 연결</span>hidden seq도 사용자가 바꿀 수 있는 입력입니다. 실제 서비스에서는 대상 확인·권한 검사와 서버 입력 검증이 필요합니다. 수업 코드의 GET 삭제는 요청 흐름을 배우는 예이며 운영 서비스 설계와 구분하세요.</p>
+// count &gt; 0이면 적어도 한 행이 영향을 받았다는 뜻</code></pre></div><p><b>코드 검토에서 확인한 남은 부분:</b> 현재 원본의 수정 성공 분기는 script 태그와 out.println 예시가 함께 있어 알림·이동 코드가 중복됩니다. getBoard는 조회 결과가 없어도 빈 DTO를 반환하므로 상세 JSP의 null 검사가 이를 잡지 못합니다. seq의 숫자 검사와 POST 요청 인코딩 설정도 별도 확인이 필요하며, error.jsp는 9월 17일 코드에 추가되었습니다. 이번 기록은 <b>처리 코드가 추가되었다는 뜻이며 모든 실패 경로의 정상 동작을 뜻하지 않습니다.</b></p><p class="practice-note"><span class="pn-label">💼 실무 연결</span>hidden seq도 사용자가 바꿀 수 있는 입력입니다. 실제 서비스에서는 대상 확인·권한 검사와 서버 입력 검증이 필요합니다. 수업 코드의 GET 삭제는 요청 흐름을 배우는 예이며 운영 서비스 설계와 구분하세요.</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>등록 후 목록 JSP로 바로 redirect하면 왜 list가 없을까?</summary><div class="sc-a">새 요청에는 이전 request 속성이 없고 DAO 조회도 실행되지 않았기 때문입니다. 목록 Controller를 거쳐 다시 조회해야 합니다.</div></details><details class="sc-q"><summary>제목·내용·번호 바인딩 순서를 바꾸면 어떻게 될까?</summary><div class="sc-a">SQL의 ? 위치와 다른 값을 넣어 잘못된 데이터나 대상 조건이 전달됩니다. WHERE SEQ=?는 여기서 세 번째입니다.</div></details></div></div></article>
 <article class="note-card" id="web-26">
 <div class="note-head"><span class="note-num">26</span><h3>form의 name과 hidden · 체크박스 전체 선택</h3><div class="note-tags"><span class="tag">HTML form · JavaScript · 다중 값</span></div></div>
@@ -20901,10 +20925,46 @@ int count = psmt.executeUpdate();
         chkObj[i].checked = bool;
     }
 }
-// 헤더 체크박스: onclick=&quot;allSel(this.checked)&quot;</code></pre></div><p><code>this.checked</code>는 true/false입니다. 같은 name의 체크박스를 순회해 화면의 선택 상태를 바꾸지만 DB 삭제는 하지 않습니다. 현재 목록의 글삭제 버튼은 form·다중 삭제 분기와 연결되지 않았습니다. 상세 화면의 <b>한 글 삭제</b>와 구별하세요.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">다중 삭제를 배울 때의 수신 방식 — 아직 현재 컨트롤러에 없음</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">String[] selected = request.getParameterValues(&quot;seq&quot;);
+// 헤더 체크박스: onclick=&quot;allSel(this.checked)&quot;</code></pre></div><p><code>this.checked</code>는 true/false입니다. 같은 name의 체크박스를 순회해 화면의 선택 상태를 바꾸지만 DB 삭제는 하지 않습니다. 9월 17일 코드에서 목록의 글삭제 버튼은 form·다중 삭제 분기와 연결되었습니다. 자세한 내용은 다음 카드에서 다룹니다. 상세 화면의 <b>한 글 삭제</b>와 구별하세요.</p><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">9월 17일 추가된 다중 값 수신 방식</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">String[] selected = request.getParameterValues(&quot;seq&quot;);
 // 선택한 체크박스가 없다면 null일 수 있음
 // 각 번호 검증 → 삭제 처리 → 결과 확인이 별도로 필요</code></pre></div><p>체크되지 않은 체크박스는 일반적인 form 제출에 포함되지 않습니다. 선택한 값들을 실제 보내려면 해당 입력들이 제출하는 form에 속해야 합니다. 전체 선택 함수가 동작한다고 다중 삭제까지 구현된 것은 아닙니다.</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>textarea에 id만 있고 name이 없으면 content를 읽을 수 있을까?</summary><div class="sc-a">일반적인 form 제출에서 id만으로는 전송 이름이 생기지 않습니다. name="content"가 필요합니다.</div></details><details class="sc-q"><summary>전체 선택을 해제하면 DB 데이터가 지워질까?</summary><div class="sc-a">아니요. 브라우저의 checked 상태만 바뀝니다. 서버 삭제 요청·검증·SQL 실행은 별도입니다.</div></details></div></div></article>
+<article class="note-card" id="web-27"><div class="note-head"><span class="note-num">27</span><h3>다중 삭제 · JDBC batch와 트랜잭션</h3></div><div class="note-body"><p class="note-summary">같은 name의 선택값을 배열로 받고, 같은 SQL의 파라미터를 바꿔 batch로 실행한다.</p><p>9월 17일 추가: form → command=muldel → getParameterValues → HkDao.mulDel → 목록 재조회. 선택하지 않은 체크박스는 전송되지 않는다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>String[] seqs = request.getParameterValues(&quot;seq&quot;);
+// 강사 코드의 순서
+conn.setAutoCommit(false);
+for (String seq : seqs) {
+    psmt.setString(1, seq);
+    psmt.addBatch();
+}
+int[] counts = psmt.executeBatch();
+conn.commit();
+// SQLException이면 rollback, finally에서 autoCommit 복원</code></pre></div><p><b>주의:</b> 원본은 영향 행 수를 commit 뒤에 검사한다. 존재하지 않는 번호가 섞이면 이미 일부 삭제가 반영될 수 있다. 업무상 전부 성공해야 한다면 입력 검사와 실행 결과 판정을 commit 전에 해야 한다. 브라우저의 미선택 검사도 서버 검사를 대신하지 않는다.</p></div></article>
+
+<article class="note-card" id="web-28"><div class="note-head"><span class="note-num">28</span><h3>Servlet 요청 처리와 생명주기</h3></div><div class="note-body"><p class="note-summary">URL을 Servlet에 매핑하고 요청 방식에 따라 doGet 또는 doPost로 처리한다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>@WebServlet(&quot;/HelloServlet.do&quot;)
+public class HelloServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        doGet(req, resp);
+    }
+}</code></pre></div><p>컨테이너가 인스턴스를 만들고 init으로 초기화한다. 요청마다 service가 실행되어 doGet/doPost로 분기한다. destroy는 컨테이너가 서비스를 종료할 때 호출하며, 사용자가 잠깐 요청하지 않는다고 매번 객체가 사라지는 것은 아니다. 여러 요청이 같은 인스턴스를 사용할 수 있어 요청값을 인스턴스 필드에 저장하지 않는다.</p><p>수업의 init(ServletConfig)는 super 호출이 빠져 있다. 올바른 오버라이드는 먼저 <code>super.init(config)</code>로 상위 클래스에 설정을 전달한다. 상위 초기화가 인자 없는 init()을 호출한다. <a href="https://jakarta.ee/specifications/servlet/6.0/apidocs/jakarta.servlet/jakarta/servlet/genericservlet">Jakarta Servlet 6.0 문서</a>에서 호출 관계를 확인할 수 있다.</p></div></article>
+
+<article class="note-card" id="web-29"><div class="note-head"><span class="note-num">29</span><h3>ServletConfig · ServletContext · Session</h3></div><div class="note-body"><p class="note-summary">서블릿별 설정, 앱 공통 상태, 사용자 세션을 구분한다.</p><ul><li>ServletConfig: 특정 Servlet의 init-param. @WebInitParam 또는 web.xml로 선언.</li><li>ServletContext: 웹 앱 단위 공유 객체. context-param과 application 속성을 제공.</li><li>HttpSession: 요청을 넘어 사용자 세션의 값을 보관. request.getSession()으로 접근.</li></ul><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>String name = config.getInitParameter(&quot;name&quot;);
+ServletContext application = config.getServletContext();
+String driver = application.getInitParameter(&quot;driver&quot;);
+HttpSession session = request.getSession();
+session.setAttribute(&quot;id&quot;, &quot;hk&quot;);</code></pre></div><p>초기화 파라미터는 설정 문자열이고 속성은 실행 중 저장한 객체다. 세션의 id 예제는 로그인 기능 자체가 아니다. 공유 application 속성에 사용자별 비밀번호나 개인 상태를 저장하지 않는다.</p></div></article>
+
+<article class="note-card" id="web-30"><div class="note-head"><span class="note-num">30</span><h3>인코딩 Filter와 요청 흐름</h3></div><div class="note-body"><p class="note-summary">공통 처리를 Filter에 두고 chain.doFilter로 다음 처리에 넘긴다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>request.setCharacterEncoding(&quot;UTF-8&quot;);
+response.setContentType(&quot;text/html;charset=UTF-8&quot;);
+chain.doFilter(request, response);</code></pre></div><p>문자 인코딩은 파라미터를 읽기 전에, 응답 형식은 writer를 얻기 전에 정한다. chain 호출 앞은 요청 전처리, 뒤는 다음 처리에서 돌아온 뒤의 작업이다. 호출을 생략하면 Servlet까지 도달하지 않는다.</p><p>수업 예제는 HTML 응답 실습이다. 실제 API·이미지 응답에도 text/html을 일괄 강제하는 방식은 그대로 쓰지 않는다.</p></div></article>
+
+<article class="note-card" id="web-31"><div class="note-head"><span class="note-num">31</span><h3>MVC2 전환 — 9월 18일 구현 범위</h3></div><div class="note-body"><p class="note-summary">JSP의 요청 분기를 Servlet으로 옮기는 단계다. 목록·등록까지 전환되었다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>String uri = request.getRequestURI();
+String command = uri.substring(request.getContextPath().length());
+// /boardlist.board → 조회 → request 속성 → forward
+request.setAttribute(&quot;list&quot;, dao.getAllList());
+request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, response);</code></pre></div><ul><li>전환 완료: /boardlist.board, /boardInsertForm.board, /boardInsert.board.</li><li>전환 중: 상세·수정·단일 삭제·다중 삭제. 기존 JSP 컨트롤러 링크가 남아 있다.</li><li>Servlet의 뒤쪽 분기는 아직 boardDetail처럼 이전 command 이름을 비교한다. /boardDetail.board 요청과 일치하지 않는다.</li></ul><p>forward는 같은 request의 객체를 화면으로 넘기고, 등록 후 redirect는 목록 URL에 새 요청을 보낸다. <a href="teacher-sync-2026-09-18.md">소스 대조·남은 부분</a>에서 기준 커밋을 확인할 수 있다.</p></div></article>
+
 
 
 
@@ -20918,7 +20978,7 @@ int count = psmt.executeUpdate();
 
     <div class="journey-intro">
       <h3>💡 이 탭을 보는 법</h3>
-      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 Java·SQL을 연결한 웹 개발 단계</b>입니다. <a href="#class-day32">9월 16일 진도</a>에서 JSP·scope·요청 흐름을 복습하세요.</p>
+      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 Java·SQL을 연결한 웹 개발 단계</b>입니다. <a href="#class-day34">9월 18일 진도</a>에서 Filter·Session·MVC2 전환을 복습하세요.</p>
     </div>
 
     <div class="journey-list">
