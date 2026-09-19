@@ -6,6 +6,10 @@
 
 👉 **[학습 정리 대시보드 바로가기](https://moriochoradio.github.io/web-study-notes/)**
 
+🛠️ **[새 노트북에서 수업 시작하기 — 개발환경 준비](https://moriochoradio.github.io/web-study-notes/setup/)**
+
+JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러오기, DB 준비와 첫 실행을 과목별로 안내합니다. [점검 도구와 실습 SQL](setup/README.md)도 함께 제공합니다.
+
 ## ❓ 왜 만들었나
 
 수업에서 실습한 코드는 그날그날 폴더에 쌓이는데, **한 달 뒤에 열어 보면 뭘 했는지 기억나지 않았다.** 파일명만 보고는 어느 개념을 연습한 것인지 알 수 없고, 커리큘럼 어디쯤 와 있는지도 감이 안 왔다.

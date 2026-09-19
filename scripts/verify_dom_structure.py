@@ -28,11 +28,12 @@ from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
 
-# 검사 대상 — 직접 손으로 쓰는 대시보드 3종
+# 검사 대상 — 직접 작성하는 학습 대시보드와 환경 준비 안내
 TARGET_FILES = (
     Path("index.html"),
     Path("Front_end") / "index.html",
     Path("Back_end") / "index.html",
+    Path("setup") / "index.html",
 )
 
 # 끝 태그가 없는 요소. 스택에 쌓지 않는다.

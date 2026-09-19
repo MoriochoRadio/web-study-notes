@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="새 노트북에서 취업아카데미 실습 시작하기. JDK 21, Eclipse, Tomcat, MariaDB, React 설치와 첫 실행 안내.">
+  <title>개발환경 준비 | 취업아카데미 학습 노트</title>
+  <link rel="stylesheet" href="setup.css">
+  <script src="setup.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<header class="topbar">
+  <a class="brand" href="../">취업아카데미 <span>/ 학습 노트</span></a>
+  <nav aria-label="학습 과정">
+    <a href="../Front_end/">프론트엔드</a>
+    <a href="../Back_end/">백엔드</a>
+    <a href="./" aria-current="page">개발환경 준비</a>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero" aria-labelledby="page-title">
+    <div class="eyebrow">SETUP GUIDE · 2026.09.19 확인</div>
+    <h1 id="page-title">노트북이 바뀌어도,<br>수업은 이어서.</h1>
+    <p class="intro">필요한 도구를 설치하고, 저장소를 받아 첫 실습까지.<br>수업 코드에 맞춘 개발환경을 이 페이지에서 준비하세요.</p>
+    <div class="pills"><span>Windows 11 기준</span><span>공식 다운로드</span><span>과목별 첫 실행</span></div>
+    <div class="hero-actions"><a class="primary" href="#start">준비 시작하기 ↓</a><a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/setup">GitHub에서 안내 보기 ↗</a></div>
+  </section>
+
+  <div class="guide-layout">
+    <aside class="contents" aria-label="이 페이지 목차">
+      <p class="eyebrow">이 순서로 준비하세요</p>
+      <a href="#start">01 · 과목 선택</a>
+      <a href="#downloads">02 · 도구 설치</a>
+      <a href="#clone">03 · 수업 코드 받기</a>
+      <a href="#java-web">04 · Java 웹 실행</a>
+      <a href="#other-tracks">05 · 다른 과목 실행</a>
+      <a href="#verify">06 · 준비 상태 확인</a>
+      <a href="#troubleshoot">막혔을 때</a>
+      <a href="#evidence">버전 근거 · 다른 OS</a>
+      <div class="progress-box">
+        <label for="progress">이 브라우저의 준비 기록</label>
+        <progress id="progress" max="6" value="0">0 / 6</progress>
+        <p id="progress-text" aria-live="polite">0 / 6 단계 확인</p>
+        <button id="reset-progress" type="button" hidden>체크 표시 초기화</button>
+        <small>체크는 직접 확인한 내용입니다.<br>다른 노트북과 동기화되지 않습니다.</small>
+      </div>
+    </aside>
+
+    <div class="guide-body">
+      <section id="start" class="panel">
+        <div class="section-number">01 / START</div>
+        <h2>오늘 실습할 과목부터 선택하세요</h2>
+        <p>Java 웹 수업을 이어간다면 <strong>JSP · Servlet</strong> 순서로 진행하세요. 모든 도구를 한 번에 설치할 필요는 없습니다.</p>
+        <div class="tracks">
+          <a href="#java-web"><strong>JSP · Servlet</strong><span>JDK + Eclipse + Tomcat + DB</span><span class="track-link">현재 웹 실습 준비 →</span></a>
+          <a href="#java-basics"><strong>Java 기초</strong><span>JDK 21 + VS Code</span><span class="track-link">자바 실행 →</span></a>
+          <a href="#sql"><strong>SQL</strong><span>MariaDB + HeidiSQL</span><span class="track-link">DB 실습 →</span></a>
+          <a href="#frontend"><strong>프론트엔드</strong><span>VS Code · React는 Node 추가</span><span class="track-link">웹 실습 →</span></a>
+        </div>
+        <p class="note">JDK 안에 자바 컴파일러 <code>javac</code>가 들어 있습니다. 자바 실습용으로 C/C++ 컴파일러를 따로 설치하지 않아도 됩니다.</p>
+        <label class="check"><input type="checkbox" data-step="track"> 실습할 과목과 필요한 도구를 확인했다</label>
+      </section>
+
+      <section id="downloads" class="panel">
+        <div class="section-number">02 / INSTALL</div>
+        <h2>수업에 맞는 버전으로 설치하기</h2>
+        <p><strong>JDK 21 · Tomcat 10.1</strong> 조합을 유지하세요. 그 계열 안의 최신 안정 패치를 선택하면 됩니다. 아래 링크는 공식 배포처입니다. 설치 파일은 저장소에 포함하지 않습니다.</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="프로그램 다운로드 표, 작은 화면에서는 가로 스크롤">
+          <table>
+            <thead><tr><th scope="col">도구</th><th scope="col">선택할 항목</th><th scope="col">필요한 수업 / 확인</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://git-scm.com/downloads">Git ↗</a></td><td>내 OS용 안정 버전</td><td>코드 내려받기 · <code>git --version</code></td></tr>
+              <tr><td><a href="https://code.visualstudio.com/Download">VS Code ↗</a></td><td>Windows User Installer x64</td><td>Java 기초 · 프론트엔드</td></tr>
+              <tr><td><a href="https://adoptium.net/temurin/releases/?version=21&amp;os=windows&amp;arch=x64&amp;package=jdk">Temurin JDK ↗</a></td><td><strong>21 LTS / JDK / Windows / x64 / MSI</strong></td><td>Java 전체 · JRE만 받으면 안 됨</td></tr>
+              <tr><td><a href="https://www.eclipse.org/downloads/packages/release/2026-03/r/eclipse-ide-enterprise-java-and-web-developers">Eclipse Enterprise ↗</a></td><td><strong>2026-03 / Enterprise Java and Web Developers / Windows x86_64</strong></td><td>JSP · Servlet · 수업에 기록된 에디션</td></tr>
+              <tr><td><a href="https://tomcat.apache.org/download-10.cgi">Apache Tomcat ↗</a></td><td><strong>10.1.x → Binary Distributions → Core → zip</strong></td><td>JSP · Servlet · 서비스 설치 대신 압축 해제</td></tr>
+              <tr><td><a href="https://mariadb.org/download/">MariaDB Server ↗</a></td><td><strong>12.3.3 / Windows / x86_64 / MSI</strong></td><td>SQL · Java 웹 · DB 서버</td></tr>
+              <tr><td><a href="https://www.heidisql.com/download.php">HeidiSQL ↗</a></td><td>안정 버전 설치 파일</td><td>SQL 편집기 · MariaDB 설치에 포함됐다면 중복 설치 불필요</td></tr>
+              <tr><td><a href="https://mariadb.org/connector-java/all-releases/">MariaDB Connector/J ↗</a></td><td>수업: <strong>3.3.3</strong> / 새 설치: <strong>3.3.x 최신 안정 패치</strong></td><td>Java 웹 · <code>mariadb-java-client-*.jar</code></td></tr>
+              <tr><td><a href="https://nodejs.org/en/download">Node.js ↗</a></td><td><strong>24 LTS / Windows / x64 / MSI</strong></td><td>React · Next.js · npm 함께 설치</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Temurin과 Node 24는 새 설치 권장값입니다. 예전 JDK 공급사·세부 패치, Node 정확한 버전은 기록에 없습니다. Connector/J는 확인일 기준 3.3.6이 같은 계열의 안정 패치입니다. 3.3.3 그대로 비교 실습할 수 있지만 최신 보안 패치를 우선하세요.</p>
+        <details>
+          <summary>설치 화면에서는 무엇을 선택하나요?</summary>
+          <ol>
+            <li><strong>JDK:</strong> 설치 옵션에서 <code>Add to PATH</code>와 <code>Set JAVA_HOME</code>을 켭니다. 설치 후 터미널·IDE를 새로 여세요.</li>
+            <li><strong>Eclipse:</strong> ZIP을 예를 들어 <code>C:\dev\eclipse</code>에 풀고 <code>eclipse.exe</code>를 실행합니다. Workspace는 <code>C:\dev\workspace-class</code>처럼 저장소와 별개 폴더로 정합니다. 일반 Java Developers 패키지에는 웹 서버 도구가 부족할 수 있으니 Enterprise 패키지를 고릅니다.</li>
+            <li><strong>Tomcat:</strong> 예를 들어 <code>C:\dev\apache-tomcat-10.1.xx</code>에 풉니다. <code>xx</code>는 실제 다운로드한 패치 번호입니다. Eclipse가 서버를 실행하므로 별도로 Windows 서비스 설치를 하지 않아도 됩니다.</li>
+            <li><strong>MariaDB:</strong> DB 인스턴스와 Windows 서비스를 설치하고 포트는 <code>3306</code>, 문자셋은 UTF-8 계열을 선택합니다. root 비밀번호를 직접 정해 보관하고 원격 root 접속은 켜지 않습니다. 기존 MySQL/MariaDB가 같은 포트를 쓰면 새 서버를 겹쳐 설치하지 말고 기존 서버를 먼저 확인하세요.</li>
+            <li><strong>Node:</strong> npm과 PATH 옵션을 유지합니다. 이 안내의 첫 React 실습에는 추가 C++ 빌드 도구 묶음을 먼저 설치할 필요가 없습니다.</li>
+          </ol>
+        </details>
+        <label class="check"><input type="checkbox" data-step="tools"> 내 과목에 필요한 프로그램을 설치했다</label>
+      </section>
+
+      <section id="clone" class="panel">
+        <div class="section-number">03 / SOURCE</div>
+        <h2>수업 코드를 이 노트북에 가져오기</h2>
+        <p>Git 설치 후 <strong>새 PowerShell 창</strong>에서 아래 명령을 실행하세요. 저장소 전체를 한 번 받으면 모든 과목 폴더를 사용할 수 있습니다.</p>
+        <pre><code>New-Item -ItemType Directory -Force "$HOME\source" | Out-Null
+Set-Location "$HOME\source"
+git clone https://github.com/MoriochoRadio/web-study-notes.git
+Set-Location web-study-notes</code></pre>
+        <p>Git 없이 받으려면 <a href="https://github.com/MoriochoRadio/web-study-notes/archive/refs/heads/main.zip">저장소 ZIP 다운로드</a> 후 압축을 풀어도 됩니다. 이미 받았다면 해당 폴더에서 <code>git status</code>로 작업을 확인한 뒤 <code>git pull --ff-only</code>로 갱신하세요. 충돌이나 로컬 수정 경고가 나면 작업을 보존하고 먼저 해결합니다.</p>
+        <p class="note">Git에는 실습 코드와 설정 안내가 있습니다. JDK·DB 서버·JDBC JAR·npm 의존성·개인 DB 비밀번호는 새 노트북에서 준비해야 합니다.</p>
+        <label class="check"><input type="checkbox" data-step="source"> 저장소를 내려받고 과목 폴더를 찾았다</label>
+      </section>
+
+      <section id="java-web" class="panel">
+        <div class="section-number">04 / JAVA WEB</div>
+        <h2>JSP · Servlet 수업 바로 이어가기</h2>
+        <p>대상: <code>Back_end/web_edu_project</code>의 두 Eclipse 프로젝트. 아래 순서를 위에서부터 진행하세요.</p>
+        <h3>1. Java 21을 확인하고 Eclipse에 연결</h3>
+        <pre><code>java -version
+javac -version
+$env:JAVA_HOME
+where.exe java
+where.exe javac</code></pre>
+        <p><code>java</code>와 <code>javac</code> 모두 <strong>21.x</strong>여야 합니다. JAVA_HOME은 실제 JDK 설치 폴더이며 끝에 <code>\bin</code>을 붙이지 않습니다.</p>
+        <ol>
+          <li>Eclipse → <strong>Window → Preferences → Java → Installed JREs → Add → Standard VM</strong>에서 JDK 21 폴더를 등록합니다.</li>
+          <li><strong>Java → Installed JREs → Execution Environments → JavaSE-21</strong>을 같은 JDK에 연결합니다.</li>
+          <li><strong>Server → Runtime Environments → Add → Apache Tomcat v10.1</strong>에서 Tomcat 압축 해제 폴더와 JDK 21을 선택합니다. 이름은 프로젝트 설정과 같은 <code>Apache Tomcat v10.1</code>로 둡니다.</li>
+        </ol>
+        <p class="note">Eclipse 자체를 구동하는 Java와 수업 프로젝트의 Java는 별개입니다. Eclipse가 다른 실행용 JVM을 요구해도 프로젝트의 JavaSE-21·컴파일러 21 설정은 유지하세요.</p>
+        <h3>2. 기존 프로젝트 두 개 불러오기</h3>
+        <ol>
+          <li><strong>File → Import → General → Existing Projects into Workspace</strong>를 선택합니다.</li>
+          <li>Root directory로 받은 저장소의 <code>Back_end\web_edu_project</code>를 지정하고 <code>01_userboard_sepa</code>, <code>02_hkboard_MVC1</code>을 선택합니다.</li>
+          <li><strong>Copy projects into workspace는 끕니다.</strong> 받은 저장소의 소스를 그대로 편집합니다.</li>
+          <li>프로젝트 우클릭 → Properties에서 <strong>Java Compiler 21</strong>, <strong>Project Facets: Java 21 / Dynamic Web Module 6.0</strong>, <strong>Targeted Runtimes: Tomcat v10.1</strong>을 확인합니다. 텍스트 인코딩은 UTF-8입니다.</li>
+        </ol>
+        <h3>3. MariaDB 접속과 실습 테이블 만들기</h3>
+        <p>HeidiSQL에서 새 세션을 만들고 네트워크 유형 <strong>MariaDB or MySQL (TCP/IP)</strong>, 호스트 <code>127.0.0.1</code>, 사용자 <code>root</code>, 포트 <code>3306</code>, 설치할 때 정한 비밀번호로 연결합니다.</p>
+        <p><a class="file-link" href="bootstrap-hk.sql" download>실습 DB 준비 SQL 다운로드 ↓</a></p>
+        <ol>
+          <li>로컬 실습 서버에 연결했는지 확인합니다. HeidiSQL의 <strong>File → Load SQL file</strong>로 저장소의 <code>setup/bootstrap-hk.sql</code>을 UTF-8로 엽니다.</li>
+          <li>내용을 확인한 뒤 실행(F9)합니다. <code>hk</code> DB에 <code>userTbl</code>, <code>buyTbl</code>, <code>hkboard</code>와 첫 화면 확인용 회원 한 명을 만듭니다.</li>
+          <li>결과 표에 <code>DEMO01 / 실습회원</code>이 보이면 성공입니다. 구매·게시글 목록은 처음에는 비어 있어도 정상입니다.</li>
+        </ol>
+        <p class="note">이 SQL에는 삭제 명령이 없고 다시 실행해도 같은 샘플 회원을 중복 추가하지 않습니다. 기존 스키마를 자동 수정하거나 수업 당시 데이터를 복원하지는 않습니다. <code>hkboard</code> 컬럼 길이는 수업 DAO/DTO와 README를 바탕으로 한 값입니다.</p>
+        <h3>4. JDBC 드라이버와 접속 정보 준비</h3>
+        <p>Connector/J의 <code>mariadb-java-client-3.3.x.jar</code>를 아래 <strong>두 위치에 각각 한 개씩</strong> 넣고 Eclipse에서 프로젝트를 선택해 F5로 새로고침합니다. 폴더가 없으면 만드세요. <code>sources</code>·<code>javadoc</code> JAR는 실행용이 아닙니다.</p>
+        <pre><code>Back_end/web_edu_project/01_userboard_sepa/src/main/webapp/WEB-INF/lib/
+Back_end/web_edu_project/02_hkboard_MVC1/src/main/webapp/WEB-INF/lib/</code></pre>
+        <p>공개 수업 소스는 <code>jdbc:mariadb://localhost:3306/hk</code>, 사용자 <code>root</code>, 빈 비밀번호로 저장되어 있습니다. 아래 파일의 <code>String password = "";</code>에 <strong>이 노트북에서 정한 DB 비밀번호</strong>를 로컬에서 입력합니다.</p>
+        <ul>
+          <li>01 프로젝트: <code>com/hk/board/dao/UserDao.java</code>, <code>BuyDao.java</code>의 각 메서드, 총 10곳.</li>
+          <li>02 프로젝트: <code>com/hk/board/datasource/DataBase.java</code> 1곳.</li>
+        </ul>
+        <p class="callout"><strong>비밀번호를 GitHub에 올리지 마세요.</strong> 현재 수업 원본은 소스에 직접 채우는 방식입니다. 커밋 전 변경 내역을 보고 실제 비밀번호가 들어간 줄은 제외하세요. 파일이 이미 추적 중이면 <code>.gitignore</code>만 추가해도 숨겨지지 않습니다. DB 계정을 바꿨다면 사용자 값도 맞춰야 합니다.</p>
+        <h3>5. 첫 웹 실습 실행</h3>
+        <ol>
+          <li><strong>Window → Show View → Servers</strong>에서 Tomcat v10.1 서버를 만들고 두 프로젝트를 추가합니다.</li>
+          <li>01 프로젝트 우클릭 → <strong>Run As → Run on Server</strong>를 선택합니다.</li>
+          <li><a href="http://localhost:8080/01_userboard_sepa/">http://localhost:8080/01_userboard_sepa/</a>의 회원 목록에서 <code>DEMO01</code>을 확인합니다.</li>
+          <li>02 프로젝트는 <a href="http://localhost:8080/02_hkboard_MVC1/">http://localhost:8080/02_hkboard_MVC1/</a>에서 게시판 목록까지 확인합니다.</li>
+        </ol>
+        <p>주소의 localhost는 <strong>서버를 실행한 노트북</strong>입니다. GitHub Pages는 JSP/DB를 실행하지 않습니다. 자세한 수업 동작과 남은 미구현 기능은 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/README.md">웹 실습 README</a>를 참고하세요.</p>
+        <label class="check"><input type="checkbox" data-step="config"> 내 과목의 IDE·프로젝트·접속 설정을 마쳤다</label>
+      </section>
+
+      <section id="other-tracks" class="panel">
+        <div class="section-number">05 / OTHER TRACKS</div>
+        <h2>다른 과목의 첫 실행</h2>
+        <h3 id="java-basics">Java 기초 — JDK 21 + VS Code</h3>
+        <p>VS Code에서 <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Extension Pack for Java</a>를 설치합니다. <strong>File → Open Folder</strong>로 <code>Back_end/java_edu_project</code>를 열고 <code>main</code> 메서드 위의 <strong>Run</strong>을 누릅니다. 프로젝트의 JDK는 명령 팔레트 <strong>Java: Configure Java Runtime</strong>에서 21로 확인하세요.</p>
+        <p>컴파일러 자체를 확인하려면 빈 실습 폴더에 아래 파일을 <code>Hello.java</code>라는 이름으로 저장합니다.</p>
+        <pre><code>public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Java 21 ready");
+    }
+}</code></pre>
+        <pre><code>javac -encoding UTF-8 Hello.java
+java Hello</code></pre>
+        <p><code>Java 21 ready</code>가 출력되면 컴파일·실행 성공입니다. 날짜별 수업 파일에는 패키지와 다른 클래스 의존성이 있으므로 전체를 확인 없이 한 번에 컴파일하기보다 IDE에서 해당 main을 실행합니다.</p>
+        <h3 id="sql">SQL — DB 서버와 편집기는 서로 다른 프로그램</h3>
+        <p>MariaDB가 데이터를 저장하는 서버이고 HeidiSQL은 쿼리를 보내는 편집기입니다. 접속한 쿼리 탭에서 아래 결과를 확인하세요.</p>
+        <pre><code>SELECT VERSION();
+SHOW DATABASES;</code></pre>
+        <p><code>Back_end/sql_edu_project</code>의 해당 일자 파일을 열고 필요한 문장만 선택해 실행합니다. <code>쿼리 #1.sql</code> 등 수업 원본은 삭제·변경 실습도 섞여 있으므로 전체를 일괄 실행하지 않습니다. SQL 과목의 <code>sqldb</code>·<code>hr</code>·<code>scott</code>은 Java 웹의 <code>hk</code>와 별개입니다.</p>
+        <p><code>employees</code> 대용량 데이터는 저장소에 전부 포함되지 않습니다. 해당 수업에서 필요하면 <a href="https://github.com/datacharmer/test_db">원본 test_db</a>와 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/README.md">SQL 수업 README</a>의 설명에 따라 별도로 준비하세요.</p>
+        <h3 id="frontend">HTML · CSS · JavaScript</h3>
+        <p><code>Front_end</code>의 해당 실습 HTML을 브라우저로 엽니다. fetch/AJAX처럼 HTTP가 필요한 단원은 VS Code 확장 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server">Microsoft Live Preview</a>로 폴더를 열어 실행합니다. 정적 실습에는 Node가 필수는 아닙니다.</p>
+        <h3 id="react">React · Next.js — 프로젝트마다 의존성 설치</h3>
+        <p>Node <strong>24 LTS</strong>를 설치하고 새 PowerShell 창에서 <code>node --version</code>, <code>npm.cmd --version</code>을 확인합니다. <strong>아래 cd 명령은 저장소 루트에서</strong> 실행합니다.</p>
+        <p><strong>첫 React/Vite 실습 (레슨 01):</strong></p>
+        <pre><code>cd Front_end\4.react\lessons\01_react_jsx_props
+npm.cmd ci
+npm.cmd run dev</code></pre>
+        <p>터미널에 표시된 Local 주소(보통 <code>http://localhost:5173</code>)를 엽니다. 서버를 멈출 때는 Ctrl+C입니다.</p>
+        <p><strong>Next.js 졸업 과제:</strong> 저장소 루트에서 새 터미널을 열고 실행합니다.</p>
+        <pre><code>cd Front_end\4.react\stock-dashboard
+npm.cmd ci
+npm.cmd run dev</code></pre>
+        <p>터미널의 Local 주소(보통 <code>http://localhost:3000</code>)를 엽니다. macOS/Linux에서는 <code>npm.cmd</code> 대신 <code>npm</code>, 경로 구분자는 <code>/</code>를 사용합니다.</p>
+        <details>
+          <summary>다른 레슨은 npm ci와 npm install 중 무엇을 쓰나요?</summary>
+          <p>해당 레슨 폴더의 <strong>package-lock.json이 있으면 <code>npm.cmd ci</code></strong>, 없으면 <strong><code>npm.cmd install</code></strong>입니다. <code>package.json</code>이 있는 폴더에서 실행해야 합니다. 레슨 01~06은 Vite, 07~13과 졸업 과제는 Next.js 기반입니다.</p>
+          <p><code>ci</code>가 lockfile 불일치로 실패하면 원인을 확인하세요. lockfile을 삭제하거나 <code>npm update</code>/<code>npm audit fix --force</code>를 바로 실행하면 수업 의존성이 달라질 수 있습니다. 준비 완료 후 프로젝트가 제공하는 <code>npm.cmd run build</code>와 <code>npm.cmd run lint</code>도 확인하면 됩니다.</p>
+        </details>
+        <label class="check"><input type="checkbox" data-step="run"> 내 과목의 첫 실습 화면 또는 실행 결과를 확인했다</label>
+      </section>
+
+      <section id="verify" class="panel">
+        <div class="section-number">06 / READY</div>
+        <h2>설치 상태를 한 번에 확인하기</h2>
+        <p>Windows용 점검 도구를 넣었습니다. <strong>설치·삭제·시스템 설정 변경 없이</strong> 현재 터미널의 도구 버전, JDBC 파일 유무, 로컬 포트만 확인합니다. 비밀번호는 읽지 않으며 관리자 권한도 필요하지 않습니다.</p>
+        <p><a class="file-link" href="Check-Environment.ps1" download>점검 스크립트 다운로드 ↓</a> <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/setup/Check-Environment.ps1">실행 전 코드 보기 ↗</a></p>
+        <p>저장소 루트에서 필요한 과목 명령 하나를 실행하세요. 실행 정책에 막히면 정책을 바꾸지 않고 위의 개별 확인 명령을 사용해도 됩니다.</p>
+        <pre><code>powershell -NoProfile -File .\setup\Check-Environment.ps1 -Track Web</code></pre>
+        <p><code>Web</code> 대신 <code>Java</code>, <code>SQL</code>, <code>React</code>, <code>Static</code>, <code>All</code>도 가능합니다. 다운로드한 파일만 따로 실행하면 버전은 확인할 수 있지만 저장소의 JDBC 경로를 찾지 못할 수 있습니다.</p>
+        <ul>
+          <li><strong>PASS:</strong> 그 검사 항목을 통과했습니다.</li>
+          <li><strong>CHECK / MISSING:</strong> 버전·경로를 확인하거나 필요한 도구를 설치합니다.</li>
+          <li><strong>INFO:</strong> 참고 정보입니다. 열린 포트는 다른 프로그램일 수도 있어 DB 인증 성공을 뜻하지 않습니다.</li>
+        </ul>
+        <p class="note">자동 점검만으로 실습 준비 완료를 판단하지 않습니다. Java 웹은 <strong>Java 21 확인 → DB 쿼리 성공 → Tomcat 회원 목록 표시</strong>, React는 <strong>의존성 설치 → 개발 서버 실행 → 브라우저 화면 표시</strong>까지 확인하세요.</p>
+        <label class="check"><input type="checkbox" data-step="verify"> 필요한 버전과 첫 실행을 확인해 수업할 준비가 됐다</label>
+      </section>
+
+      <section id="troubleshoot" class="panel">
+        <h2>여기에서 막혔다면</h2>
+        <details><summary>java는 되는데 javac가 없거나 버전이 다릅니다</summary><p>JRE가 아닌 JDK 21을 설치했는지 확인합니다. <code>where.exe java</code>, <code>where.exe javac</code>에서 어떤 경로가 먼저 나오는지 보고 사용자 환경 변수의 JAVA_HOME과 PATH를 실제 JDK 21로 맞춘 뒤 터미널을 다시 엽니다. 다른 프로젝트용 JDK를 무조건 삭제하지 않습니다.</p></details>
+        <details><summary>Eclipse에서 Tomcat / Servers / Dynamic Web Project가 안 보입니다</summary><p>Enterprise Java and Web Developers 패키지인지 확인합니다. Window → Show View → Other → Server → Servers를 열고 서버 런타임 v10.1을 등록합니다. 프로젝트 Properties → Targeted Runtimes와 Java Build Path도 확인하세요.</p></details>
+        <details><summary>ClassNotFoundException: org.mariadb.jdbc.Driver</summary><p>실행할 프로젝트의 WEB-INF/lib에 실행용 Connector/J JAR 한 개가 있는지 확인하고 Eclipse F5 → Project → Clean을 실행합니다. Java Application 실행에서만 발생하면 Run Configurations → Classpath/Dependencies에 같은 JAR가 포함됐는지 확인합니다. 다른 버전의 JAR 여러 개를 동시에 넣지 않습니다.</p></details>
+        <details><summary>DB connection refused / Access denied / Unknown database</summary><p>순서대로 Windows 서비스의 MariaDB 실행 여부와 3306 포트, HeidiSQL 접속 성공, 코드의 사용자·비밀번호, <code>hk</code> DB와 테이블을 확인합니다. 드라이버 로딩 성공은 DB 접속 성공과 다릅니다.</p></details>
+        <details><summary>웹 페이지가 404 또는 500을 표시합니다</summary><p>404는 서버에 프로젝트가 추가됐는지와 주소의 프로젝트명을 먼저 확인합니다. 500은 Eclipse Console의 첫 예외를 봅니다. JDBC 파일·DB 접속·테이블이 우선입니다. Java 웹에는 수업 진행 중인 미구현 기능도 있으므로 README의 현재 상태를 함께 확인하세요.</p></details>
+        <details><summary>8080 / 3306 / 3000 / 5173 포트가 이미 사용 중입니다</summary><p>기존 Tomcat·DB·개발 서버가 실행 중인지 확인합니다. Eclipse와 별도 Tomcat 서비스를 동시에 켜지 않습니다. 임의 프로세스를 강제 종료하지 말고 사용 중인 프로그램에서 정상 종료하거나 개발 서버 포트를 바꾼 뒤 표시된 주소로 접속하세요.</p></details>
+        <details><summary>npm.ps1 실행이 차단되거나 package.json을 못 찾습니다</summary><p>Windows PowerShell에서는 이 페이지처럼 <code>npm.cmd</code>를 사용하면 스크립트 실행 정책을 변경하지 않아도 됩니다. package.json 오류는 해당 레슨 폴더로 이동했는지 확인하세요. 저장소 최상위에서 npm install을 실행하지 않습니다.</p></details>
+      </section>
+
+      <section id="evidence" class="panel">
+        <h2>무엇을 근거로 정한 환경인가요?</h2>
+        <p>과거 설치 목록을 전부 복원한 문서가 아니라, <strong>GitHub에 남은 수업 자료와 프로젝트 설정으로 다시 준비할 수 있게 만든 안내</strong>입니다.</p>
+        <ul>
+          <li><a href="../Back_end/index.html#web-01">웹 개발 개념 01</a>: JDK 21, Tomcat 10.1, MariaDB 12.3.3, Connector 3.3.x 기록.</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/README.md">웹 실습 README</a>: Eclipse 2026-03 및 JDBC 3.3.3 기록, DB 스키마와 실행 절차.</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/01_userboard_sepa/.classpath">Eclipse .classpath</a>와 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/01_userboard_sepa/.settings/org.eclipse.wst.common.project.facet.core.xml">Project Facets</a>: JavaSE-21, Tomcat v10.1, Web 6.0 설정.</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/lessons/01_react_jsx_props/package.json">React 첫 레슨 package.json</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/package.json">졸업 과제 package.json</a>: 프런트엔드 의존성 근거. 과거 Node 버전은 확정하지 않습니다.</li>
+        </ul>
+        <p>노트에 Maven 3.9.16, Spring Framework 6.1.x / Boot 3.2~3.3, MyBatis 3.5.15+ 조합도 있지만, 현재 두 Eclipse 웹 프로젝트에는 Maven/Gradle 빌드 파일이 없습니다. <strong>해당 수업에서 필요해질 때 추가</strong>하면 됩니다.</p>
+        <details><summary>macOS / Linux / ARM 노트북에서도 사용할 수 있나요?</summary><p>공식 다운로드에서 OS와 CPU(x64 또는 ARM64/AArch64)를 맞춰 선택하세요. JDK 21·Tomcat 10.1·Node 24의 기준은 같습니다. Windows용 MSI·.exe·점검 스크립트는 사용하지 않습니다. MariaDB는 해당 OS용 공식 설치 안내를 따르고 HeidiSQL 대신 MariaDB CLI 등 접속 도구를 사용할 수 있습니다.</p><p>Linux는 테이블명의 대소문자를 구분할 수 있습니다. 수업 코드가 사용하는 <code>USERTBL</code>, <code>BUYTBL</code>, <code>HKBOARD</code>와 실제 이름을 맞춰야 합니다. 기존 DB의 전역 설정을 함부로 바꾸지 말고 로컬 실습 스키마·쿼리 이름을 함께 점검하세요. Windows 기준 동작을 그대로 보장하는 안내는 아닙니다.</p></details>
+        <p class="sources">공식 기준: <a href="https://tomcat.apache.org/whichversion.html">Tomcat 호환 표</a> · <a href="https://adoptium.net/temurin/releases/?version=21">JDK 21</a> · <a href="https://nodejs.org/en/about/previous-releases">Node LTS 현황</a> · <a href="https://mariadb.org/mariadb/all-releases/">MariaDB 릴리스</a> · <a href="https://mariadb.org/connector-java/all-releases/">Connector/J 릴리스</a> · <a href="https://code.visualstudio.com/docs/java/java-tutorial">VS Code Java 안내</a></p>
+      </section>
+      <footer>준비가 끝났다면 <a href="../Back_end/">백엔드 학습 노트</a> 또는 <a href="../Front_end/">프론트엔드 학습 노트</a>로 이어가세요.<br>수업 환경 기준과 공식 배포 정보 확인: 2026-09-19.</footer>
+    </div>
+  </div>
+</main>
+</body>
+</html>

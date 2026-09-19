@@ -1,5 +1,7 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
+🛠️ 새 컴퓨터라면 **[개발환경 준비 안내](https://moriochoradio.github.io/web-study-notes/setup/#java-web)**부터 진행하세요. Eclipse Import · JDK/Tomcat 연결 · [실습 DB 준비 SQL](../../setup/bootstrap-hk.sql) · JDBC 설정을 한 순서로 정리했습니다.
+
 취업아카데미 백엔드 과정의 **웹 개발(JSP · Servlet) 수업** 실습 프로젝트입니다.
 2026-09-10(28일차)부터 **Eclipse JEE + Tomcat 10.1** 환경에서 진행하고 있습니다.
 
