@@ -418,6 +418,14 @@ Tomcat 10부터 `javax` → `jakarta`로 바뀐 여파가 taglib URI에도 온�
 - 이클립스 편집기에 `Unknown tag (c:forEach)` 표시가 남는 것은 **검증기가 jar를 아직 못 읽은 것**이다. 프로젝트 Refresh · Clean 으로 없어지며 실제 실행과는 별개다.
 - `<c:forEach>`가 조용히 0번 반복하기 때문에, 목록이 비어 보일 때 **DB가 비었는지 Scope 이름이 틀렸는지**를 따로 확인해야 한다.
 
+### 아직 남아 있는 것 (2026-09-21 시점)
+
+"EL·JSTL로 바꿨다"와 "스크립틀릿이 한 줄도 없다"는 다른 이야기다. 현재 상태를 그대로 적어 둔다.
+
+- `boardDetail.jsp` 맨 위에 `<%@page import="…HkDto"%>`와 `HkDto dto = (HkDto)request.getAttribute("dto");`가 아직 살아 있다. 본문은 이미 `${requestScope.dto.*}`로 바꿔서 **이 선언은 쓰이지 않는다.** 두 줄을 지우면 이 파일에서도 자바가 완전히 빠진다.
+- `boardlist.jsp`의 같은 선언은 주석 처리되어 있고, `import` 지시자 두 줄이 남아 있다. 마찬가지로 지울 수 있다.
+- `index.jsp`에 선언해 둔 `fmt` 태그 라이브러리는 아직 쓰지 않는다.
+
 ### 실행하기
 
 01~04와 같다. `WEB-INF/lib`에 Connector/J와 JSTL jar 2개를 넣고, DB는 기존 `hk.hkboard`를 쓴다.
