@@ -1,6 +1,8 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
 
+**2026-09-21 갱신:** 35일차 EL·JSTL 진도를 반영했다. [`05_hkboard_MVC2_JSTL`](Back_end/web_edu_project/05_hkboard_MVC2_JSTL) 추가 — 04를 복사해 화면만 EL·JSTL로 바꾼 프로젝트라 [04와의 차이](Back_end/web_edu_project/README.md)가 그대로 학습 포인트가 된다. 대시보드에 수업 35일차 · 웹 개발 카드 6개 · 학습 여정 19단계 · 시험 대비 4문항을 추가했다.
+
 **2026-09-20 갱신:** [9월 17~18일 수업 보충](Back_end/teacher-sync-2026-09-18.md) · [16회차 코딩테스트 보충 풀이](Back_end/coding-tests/2026-09-18/). MVC1 다중 삭제, Servlet·Filter·Session, MVC2 목록·등록 진도를 반영했다.
 
 🇰🇷 한국어 · 🇬🇧 [English](README.en.md)

@@ -15,28 +15,28 @@
 	<h1>글 상세보기</h1>
 	<form action="boardUpdate.board" method="post">
 <!-- 		<input type="hidden" name="command" value="boardUpdate"/> -->
-		<input type="hidden" name="seq" value="<%=dto.getSeq()%>" />
+		<input type="hidden" name="seq" value="${requestScope.dto.seq}"/>
 		<table border="1">
 			<tr>
 				<th>작성자(ID)</th>
-				<td><%=dto.getId()%></td>
+				<td>${requestScope.dto.id}</td>
 			</tr>
 			<tr>
 				<th>글제목</th>
-				<td><input type="text" name="title" value="<%=dto.getTitle()%>"
+				<td><input type="text" name="title" value="${requestScope.dto.title}"
 					required="required" /></td>
 			</tr>
 			<tr>
 				<th>글내용</th>
 				<td><textarea rows="10" cols="60" name="content"
-						required="required"><%=dto.getContent()%></textarea></td>
+						required="required">${requestScope.dto.content}</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">
 				<input type="submit" value="글수정" />
 
 				<input type="button" value="글삭제"
-				       onclick="boardDelete(<%=dto.getSeq()%>)"/>
+				       onclick="boardDelete(${requestScope.dto.seq})"/>
 
 				<input type="button" value="글목록"
 					onclick="location.href='boardlist.board'" />

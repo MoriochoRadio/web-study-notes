@@ -1176,7 +1176,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">33</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">34</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -1184,8 +1184,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
       <div class="stat-card codingtest"><div class="n">30</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">31</div><div class="l">🖥️ 웹 개발 항목</div></div>
-      <div class="stat-card journey"><div class="n">18</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card web"><div class="n">37</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card journey"><div class="n">19</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -7207,6 +7207,7 @@ public class D3_ChatClient {
 <article class="note-card" id="class-day33"><div class="note-head"><span class="note-num">33일차</span><h3>2026-09-17 · 다중 삭제·트랜잭션·Servlet 시작</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: MVC1 다중 삭제와 Servlet 기본 요청 처리를 확인했다.</p><ul><li>선택된 seq 배열을 받고 JDBC batch로 삭제.</li><li>선택 유효값 검사와 오류 화면 추가.</li><li>03_hello_servlet 프로젝트에서 GET·POST 요청 처리 시작.</li></ul><p><a href="#web-27">다중 삭제와 트랜잭션</a> · <a href="#web-28">Servlet 생명주기</a> · <a href="teacher-sync-2026-09-18.md">강사 코드 대조 기록</a></p></div></article>
 
 <article class="note-card" id="class-day34"><div class="note-head"><span class="note-num">34일차</span><h3>2026-09-18 · Filter·Session·MVC2 전환</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: 설정·세션·인코딩 필터를 정리하고 MVC2 목록·등록 경로를 추가했다.</p><ul><li>ServletConfig, ServletContext, HttpSession 구분.</li><li>UTF-8 Filter의 전처리 → chain → 후처리.</li><li>04_hkboard_MVC2의 URL 기반 Controller 전환.</li></ul><p><a href="#web-29">설정과 세션</a> · <a href="#web-30">Filter</a> · <a href="#web-31">MVC2 구현 범위</a></p><p>미응시한 16회차는 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 별도로 보충했다. 기존 응시 기록에 PASS를 추가하지 않았다.</p></div></article>
+<article class="note-card" id="class-day35"><div class="note-head"><span class="note-num">35일차</span><h3>2026-09-21 · EL·JSTL 도입 (05 프로젝트)</h3></div><div class="note-body"><p class="note-summary">04를 복사해 05_hkboard_MVC2_JSTL을 만들고, JSP의 스크립틀릿을 EL과 JSTL로 바꿨다.</p><ul><li>JSTL jar 2개를 WEB-INF/lib에 넣고 <code>jakarta.tags.core</code>로 taglib 선언.</li><li><code>&lt;%= dto.getTitle() %&gt;</code> → <code>${dto.title}</code>, 스크립틀릿 for → <code>&lt;c:forEach&gt;</code>.</li><li>빈 목록 안내를 <code>&lt;c:choose&gt;</code> · <code>${empty list}</code>로 분기.</li><li>자바 코드(Controller · DAO · DTO)는 그대로 두고 화면만 바꿨다.</li></ul><p><a href="#web-32">EL</a> · <a href="#web-33">JSTL 설치</a> · <a href="#web-34">c:forEach</a> · <a href="#web-35">c:choose</a> · <a href="#web-36">04→05 핵심 정리</a></p><p>실행 중 글쓰기가 error.jsp로 튕기는 문제와 <code>&lt;c:choose&gt;</code> 중첩 오류를 차례로 잡았다. 과정은 <a href="#web-37">디버깅 기록</a>에 남겼다.</p></div></article>
 
 
 
@@ -20964,6 +20965,54 @@ String command = uri.substring(request.getContextPath().length());
 // /boardlist.board → 조회 → request 속성 → forward
 request.setAttribute(&quot;list&quot;, dao.getAllList());
 request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, response);</code></pre></div><ul><li>전환 완료: /boardlist.board, /boardInsertForm.board, /boardInsert.board.</li><li>전환 중: 상세·수정·단일 삭제·다중 삭제. 기존 JSP 컨트롤러 링크가 남아 있다.</li><li>Servlet의 뒤쪽 분기는 아직 boardDetail처럼 이전 command 이름을 비교한다. /boardDetail.board 요청과 일치하지 않는다.</li></ul><p>forward는 같은 request의 객체를 화면으로 넘기고, 등록 후 redirect는 목록 URL에 새 요청을 보낸다. <a href="teacher-sync-2026-09-18.md">소스 대조·남은 부분</a>에서 기준 커밋을 확인할 수 있다.</p></div></article>
+<article class="note-card" id="web-32"><div class="note-head"><span class="note-num">32</span><h3>EL — 화면에서 <code>${ }</code>로 값 꺼내기</h3></div><div class="note-body"><p class="note-summary">Scope에 담긴 객체를 자바 코드 없이 꺼낸다. import도 형변환도 사라진다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;%-- 04_hkboard_MVC2 : 스크립틀릿 --%&gt;
+&lt;%@page import="com.hk.board.dto.HkDto"%&gt;
+&lt;% HkDto dto = (HkDto)request.getAttribute("dto"); %&gt;
+&lt;%= dto.getTitle() %&gt;
+
+&lt;%-- 05_hkboard_MVC2_JSTL : EL --%&gt;
+${dto.title}
+${requestScope.dto.title}   &lt;%-- 스코프를 직접 지정할 수도 있다 --%&gt;</code></pre></div><ul><li><b>${이름}</b>은 page → request → session → application 순으로 찾는다. 못 찾아도 예외가 아니라 빈 문자열이다.</li><li><b>${dto.title}은 필드가 아니라 getTitle()을 호출한다.</b> getter 이름 규칙이 그대로 화면 문법이 된다.</li><li>값이 null일 때 <code>&lt;%= %&gt;</code>는 화면에 "null"이라고 찍지만, EL은 아무것도 출력하지 않는다.</li><li>서블릿이 <code>request.setAttribute("list", ...)</code>로 담아 둔 이름을 그대로 쓴다. 담는 쪽 이름과 꺼내는 쪽 이름이 화면 연결의 전부다.</li></ul></div></article>
+<article class="note-card" id="web-33"><div class="note-head"><span class="note-num">33</span><h3>JSTL 설치 — jar 2개와 <code>jakarta.tags.core</code></h3></div><div class="note-body"><p class="note-summary">JSTL은 표준이지만 Tomcat에 들어 있지 않다. jar를 직접 넣고 taglib URI도 새 이름을 쓴다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><button class="copy-btn" type="button">복사</button></div><pre><code>src/main/webapp/WEB-INF/lib/
+  jakarta.servlet.jsp.jstl-api-3.0.1.jar   &lt;-- 규격(API)
+  jakarta.servlet.jsp.jstl-3.0.1.jar       &lt;-- 구현체
+
+&lt;%@ taglib prefix="c" uri="jakarta.tags.core" %&gt;
+
+&lt;%-- Tomcat 9 이하 예제에 나오는 옛 URI (10에서는 태그를 못 찾는다) --%&gt;
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;</code></pre></div><ul><li>Tomcat 10부터 <b>javax → jakarta</b>로 바뀐 여파가 taglib URI에도 온다. 인터넷 예제를 그대로 붙이면 태그가 문자 그대로 출력되거나 오류가 난다.</li><li><b>API jar만 넣으면 실행 시점에 구현이 없어 실패한다.</b> 두 개를 함께 넣는다.</li><li>이클립스 편집기에 <code>Unknown tag (c:forEach)</code> 표시가 남는 건 검증기가 jar를 아직 못 읽은 것이다. Refresh · Clean 으로 없어지며 실제 실행과는 별개다.</li></ul></div></article>
+<article class="note-card" id="web-34"><div class="note-head"><span class="note-num">34</span><h3><code>&lt;c:forEach&gt;</code> — 목록 반복에서 for문 걷어내기</h3></div><div class="note-body"><p class="note-summary">HTML 사이에 끼어 있던 자바 중괄호가 사라지고, 여닫는 태그 짝이 눈에 보인다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;%-- 04 : 스크립틀릿 for --%&gt;
+&lt;% List&lt;HkDto&gt; list = (List&lt;HkDto&gt;)request.getAttribute("list"); %&gt;
+&lt;% for(HkDto dto : list){ %&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;%= dto.getSeq() %&gt;&lt;/td&gt;&lt;td&gt;&lt;%= dto.getTitle() %&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;% } %&gt;
+
+&lt;%-- 05 : JSTL --%&gt;
+&lt;c:forEach items="${list}" var="dto"&gt;
+    &lt;tr&gt;&lt;td&gt;${dto.seq}&lt;/td&gt;&lt;td&gt;${dto.title}&lt;/td&gt;&lt;/tr&gt;
+&lt;/c:forEach&gt;</code></pre></div><ul><li><code>var="dto"</code>가 만드는 변수는 <b>page 스코프</b>다. forEach 블록 밖에서는 쓸 수 없다.</li><li><code>varStatus="st"</code>를 붙이면 <code>${st.index}</code>(0부터) · <code>${st.count}</code>(1부터)를 쓸 수 있다.</li><li><b>items가 null이면 JSTL은 0번 반복하고 넘어간다.</b> 스크립틀릿 for문은 같은 상황에서 NullPointerException이 난다.</li><li>닫는 태그가 <code>&lt;/c:forEach&gt;</code>라서 HTML 태그와 중첩 관계가 한눈에 맞춰진다. <code>&lt;% } %&gt;</code>는 어느 블록을 닫는지 보이지 않는다.</li></ul></div></article>
+<article class="note-card" id="web-35"><div class="note-head"><span class="note-num">35</span><h3><code>&lt;c:choose&gt;</code>와 <code>empty</code> — 글이 없을 때</h3></div><div class="note-body"><p class="note-summary">빈 목록 안내 문구를 분기로 처리한다. 태그 중첩 규칙을 어기면 500 오류가 난다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;c:choose&gt;
+    &lt;c:when test="${empty list}"&gt;
+        &lt;tr&gt;&lt;td colspan="5"&gt;--작성된 글이 없습니다.--&lt;/td&gt;&lt;/tr&gt;
+    &lt;/c:when&gt;
+    &lt;c:otherwise&gt;
+        &lt;c:forEach items="${list}" var="dto"&gt; ... &lt;/c:forEach&gt;
+    &lt;/c:otherwise&gt;
+&lt;/c:choose&gt;</code></pre></div><ul><li><code>empty</code>는 null · 빈 문자열 · 빈 컬렉션을 모두 true로 본다. 크기를 따로 재지 않는다.</li><li><b><code>&lt;c:when&gt;</code>과 <code>&lt;c:otherwise&gt;</code>는 <code>&lt;c:choose&gt;</code>의 직속 자식이어야 한다.</b> <code>&lt;/c:choose&gt;</code>를 <code>&lt;c:otherwise&gt;</code>보다 먼저 닫으면 <code>Illegal use of &lt;when&gt;-style tag without &lt;choose&gt; as its direct parent</code> 500 오류가 난다. 2026-09-21에 실제로 겪었다.</li><li>분기가 하나뿐이면 <code>&lt;c:if test="..."&gt;</code>를 쓴다. JSTL에는 else가 없어서 양쪽이 필요하면 choose를 쓴다.</li></ul></div></article>
+<article class="note-card" id="web-36"><div class="note-head"><span class="note-num">36</span><h3>04 → 05 핵심 정리 — 바뀐 것은 View 계층뿐</h3></div><div class="note-body"><p class="note-summary">05는 기능 추가가 아니라 화면을 그리는 방법만 바꾼 리팩터링이다. 그래서 비교 대상이 선명하다.</p><ul><li><b>Controller · DAO · DTO · Filter의 자바 코드는 바뀌지 않았다.</b> 두 프로젝트의 컴파일된 클래스 파일이 바이트 단위로 같다는 것을 확인했다. 05에서 늘어난 것은 WEB-INF/lib의 JSTL jar 2개뿐이다.</li><li>값 출력: <code>&lt;%= dto.getTitle() %&gt;</code> → <code>${dto.title}</code></li><li>반복: 스크립틀릿 <code>for</code> → <code>&lt;c:forEach&gt;</code></li><li>분기: 스크립틀릿 <code>if</code> → <code>&lt;c:choose&gt; · &lt;c:when&gt; · &lt;c:otherwise&gt;</code></li><li>import 지시자와 <code>(List&lt;HkDto&gt;)</code> 형변환: 필요 → <b>불필요</b></li><li>null 값: 화면에 "null" 출력 → <b>아무것도 출력하지 않음</b></li><li>필요한 라이브러리: 없음 → <b>JSTL API · 구현 jar 2개</b></li><li>그래서 배우는 점은 <b>"화면에서 자바 문법을 빼면 무엇이 좋아지는가"</b> 하나로 모인다. 디자이너가 열어도 HTML 구조가 보이고, 태그 짝이 맞는지 편집기가 검사해 줄 수 있다.</li></ul><p>MVC2가 <b>요청 분기를 JSP 밖으로</b> 뺀 단계였다면, JSTL은 <b>화면 로직을 자바 밖으로</b> 빼는 단계다. 같은 "분리"를 서로 다른 축에서 한 번씩 한 셈이다. → <a href="#web-31">MVC2 전환</a> · <a href="#web-32">EL</a></p></div></article>
+<article class="note-card" id="web-37"><div class="note-head"><span class="note-num">37</span><h3>디버깅 기록 — 조용히 실패하는 코드 고치기</h3></div><div class="note-body"><p class="note-summary">글쓰기가 계속 error.jsp로 튕겼다. 원인은 JSTL이 아니라 DB 접속과 예외 처리였다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>// getenv는 '값'이 아니라 '환경변수 이름'으로 찾는다 -> 항상 null
+String password = System.getenv("내가쓰는비밀번호");
+
+// 예외를 삼키면 "조회 실패"와 "글 0건"이 화면상 똑같아 보인다
+} catch (SQLException e) {
+    e.printStackTrace();          // 원인이 스택에 묻힌다
+}
+
+// 고친 뒤 : 어떤 작업에서 무슨 오류인지 한 줄로 남긴다
+System.err.println("[DB오류] " + step
+                 + " | SQLState=" + e.getSQLState()
+                 + " | 오류코드=" + e.getErrorCode()
+                 + " | " + e.getMessage());</code></pre></div><ul><li><b>같은 요청을 04 프로젝트에도 보내 보니 똑같이 실패했다.</b> 새로 만진 05의 문제가 아니라는 것이 그 자리에서 갈렸다. 바뀐 쪽과 안 바뀐 쪽을 같이 돌려 보는 것이 범위를 좁히는 가장 빠른 방법이다.</li><li>이클립스를 탐색기에서 직접 실행하면 실행기가 넣어 주던 <code>STUDY_DB_PASSWORD</code>가 프로세스에 없다. Tomcat은 이클립스의 환경을 물려받으므로 접속이 전부 실패한다.</li><li><code>INSERT INTO HKBOARD VALUES(NULL,?,?,?,SYSDATE())</code>처럼 컬럼 목록을 생략하면 테이블 컬럼이 바뀌는 순간 깨진다. <code>INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) VALUES(?,?,?,SYSDATE())</code>로 명시하고 AUTO_INCREMENT인 SEQ는 DB에 맡긴다.</li><li>교훈: <b>catch에서 조용히 false를 돌려주면 화면은 같은 얼굴을 한다.</b> 로그에 작업 이름과 SQLState를 남겨 두면 다음 사람이 5분 만에 찾는다.</li></ul></div></article>
 
 
 
@@ -21329,7 +21378,7 @@ request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, respons
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 17단계 중 SQL 4단계(14~17)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 19단계 중 웹 개발 2단계(18~19)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>까지 왔습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
@@ -21417,6 +21466,24 @@ request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, respons
           <li>값은 <b><code>?</code>로 바인딩</b>한다 — 문자열로 이어 붙이면 SQL 인젝션에 뚫린다.</li>
           <li><b>DTO는 데이터를 담고, DAO는 DB에 접근한다</b> — 바뀔 이유가 다르면 클래스를 나눈다.</li>
           <li>이 단계가 <b>📅 28일차 수업</b>입니다. → <a href="#class-day28">28일차 진도 보기</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-web-02">
+        <div class="journey-step-head">
+          <span class="journey-num">19</span>
+          <h3>화면에서 자바를 걷어낸다 — MVC2와 EL·JSTL</h3>
+          <a class="journey-jump" href="#web-36">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">앞 단계에서 JSP 한 장이 <b>요청을 받고 · DB를 부르고 · 화면까지 그렸습니다</b>. 여기서는 그 덩어리를 두 번에 걸쳐 쪼갭니다. 먼저 <b>MVC2</b>가 "무엇을 할지 정하는 일"을 서블릿(Controller)으로 빼내고, 그다음 <b>EL과 JSTL</b>이 "화면에 뿌리는 일"에서 자바 문법을 걷어냅니다. 같은 <b>분리</b>를 서로 다른 축에서 한 번씩 하는 셈이에요.</p>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li>Controller는 <b>URL로 요청을 구분</b>한다 — <code>*.board</code> 매핑 + <code>getRequestURI()</code>. 파라미터 <code>command</code>로 나누던 방식을 대체한다.</li>
+          <li>화면으로 객체를 넘길 땐 <b>Scope에 담고 forward</b>, 저장 뒤에는 <b>redirect</b> — 새로고침으로 같은 등록이 반복되지 않게 한다.</li>
+          <li>JSP에 자바를 쓰지 않아도 된다 — <b><code>${ }</code>는 Scope에서 찾아 getter를 부른다.</b></li>
+          <li>반복과 분기는 <b>태그</b>로 쓴다 — <code>&lt;c:forEach&gt;</code> · <code>&lt;c:choose&gt;</code>. 여닫는 짝이 HTML과 같은 모양이라 구조가 보인다.</li>
+          <li>04와 05를 가르는 것은 기능이 아니라 <b>화면을 그리는 방법</b> 하나다 — 자바 코드는 그대로다.</li>
+          <li>이 단계가 <b>📅 34~35일차 수업</b>입니다. → <a href="#class-day35">35일차 진도 보기</a></li>
         </ul>
       </article>
 
@@ -22884,7 +22951,7 @@ request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, respons
 
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java · SQL 객관식 연습문제</h2></div>
-    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 28문항</b>까지, 총 <b>160문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
+    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 32문항</b>까지, 총 <b>164문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
 
     <div class="exam-box" id="exam-setup">
       <div class="exam-setup-row">
@@ -23997,6 +24064,11 @@ document.querySelectorAll(".note-code").forEach(box => {
     {id:"w26",cat:"WEB",q:"request.setAttribute로 담은 값이 forward된 페이지에서도 살아 있는 이유는?",ch:["세션에 자동으로 복사되기 때문","forward는 같은 요청 하나가 이어지므로 request 객체 자체가 그대로이기 때문","JSP가 값을 파일로 임시 저장하기 때문","request scope는 애플리케이션 전체에서 공유되기 때문"],a:1,ex:"forward는 새 요청을 만들지 않는다. 같은 request 객체가 다음 페이지까지 이어지므로, 그 안에 담아 둔 값도 그대로 남아 있다.",link:["#web-18","컨트롤러의 시작 — command 분기와 forward"]},
     {id:"w27",cat:"WEB",q:"request.getAttribute(\"list\")의 반환 타입과, 그것을 List<HkDto>로 쓰려면 해야 할 일은?",ch:["List<HkDto> 그대로 반환되므로 아무 것도 안 해도 된다","Object로 반환되므로 (List<HkDto>)로 형변환해야 한다","String으로 반환되므로 파싱해야 한다","반환 타입은 setAttribute에 넣은 타입에 따라 자동으로 바뀐다"],a:1,ex:"request scope는 어떤 타입이든 담을 수 있는 대신 꺼낼 때는 Object로 돌아온다. 원래 타입으로 쓰려면 직접 형변환해야 하고, 담을 때와 다른 타입으로 캐스팅하면 ClassCastException이 난다.",link:["#web-18","컨트롤러의 시작 — command 분기와 forward"]},
     {id:"w28",cat:"WEB",q:"boardController.jsp처럼 command 파라미터로 요청을 분기하는 구조를 무엇이라 부르나?",ch:["옵서버 패턴","프론트 컨트롤러 패턴","싱글턴 패턴","팩토리 패턴"],a:1,ex:"하나의 진입점이 요청을 받아 무엇을 할지 분기하는 구조를 프론트 컨트롤러 패턴이라 한다. 스프링 MVC의 DispatcherServlet이 이를 자동화한 것이다.",link:["#web-18","컨트롤러의 시작 — command 분기와 forward"]},
+    // ---- 웹 개발 3 (EL·JSTL) ----
+    {id:"w29",cat:"WEB",q:"JSP에서 ${dto.title}이 실제로 하는 일은?",ch:["dto의 title 필드를 직접 읽는다","dto.getTitle()을 호출한다","dto.toString()을 호출한다","title이라는 이름의 파라미터를 읽는다"],a:1,ex:"EL은 필드가 아니라 getter를 부른다. getTitle()이 없으면 값을 읽지 못한다. DTO의 getter 이름 규칙이 그대로 화면 문법이 되는 셈이다.",link:["#web-32","EL — 화면에서 값 꺼내기"]},
+    {id:"w30",cat:"WEB",q:"Tomcat 10에서 JSTL core 태그를 쓰기 위한 taglib URI는?",ch:["http://java.sun.com/jsp/jstl/core","jakarta.tags.core","javax.tags.core","jstl/core"],a:1,ex:"Tomcat 10부터 javax가 jakarta로 바뀌면서 taglib URI도 jakarta.tags.core가 되었다. 옛 URI를 그대로 쓰면 태그를 찾지 못한다. jar도 API와 구현 두 개를 WEB-INF/lib에 넣어야 한다.",link:["#web-33","JSTL 설치 — jar 2개와 jakarta.tags.core"]},
+    {id:"w31",cat:"WEB",q:"list가 null일 때 <c:forEach items=\"${list}\">는 어떻게 되나?",ch:["NullPointerException이 난다","0번 반복하고 그냥 지나간다","빈 문자열을 출력한다","컴파일 에러가 난다"],a:1,ex:"JSTL은 items가 null이면 반복을 0번 하고 넘어간다. 같은 상황에서 스크립틀릿 for문은 NullPointerException으로 페이지가 죽는다. 이것이 태그로 바꿨을 때 얻는 안전장치다.",link:["#web-34","c:forEach — 목록 반복에서 for문 걷어내기"]},
+    {id:"w32",cat:"WEB",q:"</c:choose>를 <c:otherwise>보다 먼저 닫으면 어떻게 되나?",ch:["otherwise가 조용히 무시된다","when-style 태그의 부모가 choose가 아니라는 예외로 500이 난다","경고만 나고 정상 동작한다","JSP가 알아서 교정한다"],a:1,ex:"<c:when>과 <c:otherwise>는 <c:choose>의 직속 자식이어야 한다. 어기면 Illegal use of <when>-style tag without <choose> as its direct parent 예외가 나며 페이지가 500을 돌려준다.",link:["#web-35","c:choose와 empty — 글이 없을 때"]},
   ];
 
   // ═══════════ 자세한 해설 표 ═══════════
@@ -24822,6 +24894,30 @@ document.querySelectorAll(".note-code").forEach(box => {
       "싱글턴 패턴은 객체를 하나만 만드는 패턴으로 관계가 없다.",
       "팩토리 패턴은 객체 생성을 담당하는 패턴으로 이것과 다르다."],
       deep:"boardController.jsp 하나가 모든 게시판 요청의 '문지기' 역할을 합니다. command 값에 따라 목록을 보여줄지, 등록 폼으로 보낼지, 등록을 처리할지 결정하죠. 이렇게 요청을 한 곳으로 모아 분기하는 구조를 프론트 컨트롤러(Front Controller) 패턴이라 부릅니다.\n지금은 if-else로 손수 나누고 있지만, 다음 시간에 배울 서블릿 컨트롤러(MVC2)에서는 이 역할을 서블릿이 맡고, 더 나아가 스프링에서는 DispatcherServlet이라는 프레임워크 차원의 프론트 컨트롤러가 @RequestMapping 애너테이션만으로 이 분기를 자동화합니다. 지금 손으로 짜 보는 이 코드가 그 개념의 뿌리입니다."},
+    w29:{why:[
+      "필드를 직접 읽지 않는다. private 필드에는 접근할 수 없다.",
+      "정답. EL은 title → getTitle()로 이름을 만들어 getter를 호출한다.",
+      "toString()은 객체 자체를 ${dto}처럼 쓸 때의 이야기다.",
+      "파라미터는 ${param.title}로 따로 읽는다. 여기서는 Scope의 객체다."],
+      deep:"EL의 점(.)은 '필드를 열어 본다'가 아니라 '규칙대로 만든 getter를 부른다'는 뜻입니다.\n그래서 DTO에 getTitle()이 없으면 ${dto.title}은 값을 가져오지 못합니다. 반대로 말하면, getter 이름만 규칙대로 지어 두면 화면에서는 아무 준비 없이 바로 쓸 수 있다는 뜻이기도 합니다.\n스크립틀릿 시절에는 import 지시자와 (HkDto) 형변환을 먼저 써야 했는데, EL은 그 두 가지를 모두 없애 줍니다."},
+    w30:{why:[
+      "Tomcat 9 이하에서 쓰던 옛 URI다. 10에서는 태그를 찾지 못한다.",
+      "정답. Jakarta EE 10 기준의 새 URI다.",
+      "javax.tags.core라는 URI는 존재하지 않는다.",
+      "축약형 jstl/core 같은 URI는 없다."],
+      deep:"Tomcat 10부터 패키지가 javax.servlet에서 jakarta.servlet으로 바뀐 여파가 taglib URI까지 이어집니다.\n인터넷 예제 대부분이 아직 옛 URI라서, 복사해 붙이면 태그가 동작하지 않거나 문자 그대로 화면에 찍힙니다.\n그리고 JSTL은 '표준'이라는 이름과 달리 Tomcat에 들어 있지 않습니다. jakarta.servlet.jsp.jstl-api(규격)와 jakarta.servlet.jsp.jstl(구현) 두 개를 WEB-INF/lib에 직접 넣어야 하고, API만 넣으면 실행 시점에 구현이 없어서 실패합니다."},
+    w31:{why:[
+      "예외가 나지 않는다. 이것이 스크립틀릿과 갈리는 지점이다.",
+      "정답. items가 null이면 반복 횟수가 0이 되고 넘어간다.",
+      "빈 문자열을 찍는 것이 아니라 아예 아무것도 출력하지 않는다.",
+      "태그 문법이 맞으면 컴파일 단계에서는 문제가 없다."],
+      deep:"Controller가 Scope에 담는 것을 깜빡했거나 이름을 잘못 적으면 ${list}는 null이 됩니다.\n스크립틀릿 for문이라면 그 순간 NullPointerException으로 페이지 전체가 500이 되지만, <c:forEach>는 조용히 0번 반복하고 넘어갑니다.\n장점이자 함정입니다. 화면은 '글이 없습니다'처럼 멀쩡해 보이므로, 목록이 비어 보일 때는 DB가 비었는지 Scope 이름이 틀렸는지를 따로 확인해야 합니다."},
+    w32:{why:[
+      "무시되지 않는다. 태그 자체가 예외를 던진다.",
+      "정답. 부모가 choose가 아니면 when 계열 태그는 예외를 낸다.",
+      "경고로 끝나지 않는다. 페이지가 열리지 않는다.",
+      "JSP는 태그 중첩을 교정해 주지 않는다."],
+      deep:"<c:when>과 <c:otherwise>는 <c:choose> 안에서만 의미가 있습니다. 둘 다 '여러 갈래 중 하나'를 뜻하는 태그라서, 갈래를 관리하는 부모가 바로 위에 있어야 하죠.\n</c:choose>를 한 줄 위에서 닫아 버리면 <c:otherwise>는 부모를 잃고, 화면 대신 Illegal use of <when>-style tag without <choose> as its direct parent 라는 500 오류를 만납니다.\n오류 메시지에 otherwise가 아니라 when이라고 나오는 이유는, otherwise가 내부적으로 when과 같은 계열로 처리되기 때문입니다."}
   });
 
   const BANK_BY_ID = Object.fromEntries(EXAM_BANK.map(q => [q.id, q]));

@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 <style type="text/css">
 	#boardList{
 		width:800px;
-		border-collapse: collapse;
+		border-collapse: collapse;	
 	}
 </style>
 <script type="text/javascript">
@@ -49,7 +50,7 @@
 </head>
 <%
 	//boardController.jsp에서 전달된 scope객체로부터 list객체를 가져온다.
-	List<HkDto> list =(List<HkDto>)request.getAttribute("list");//저장된 객체의 타입은 Object임
+	//List<HkDto> list =(List<HkDto>)request.getAttribute("list");//저장된 객체의 타입은 Object임
 %>
 <body>
 <h1>게시판</h1>
@@ -64,24 +65,33 @@
 			<th>제목</th>
 			<th>작성일</th>
 		</tr>
-		<%
-			for(HkDto dto:list){
-				%>
+		<c:choose>
+			<c:when test="${empty list}">
+				<tr>
+					<td colspan="5">--작성된 글이 없습니다.--</td>
+				</tr>
+			</c:when>
+			
+			
+			
+			
+		<c:otherwise>
+		<c:forEach items="${list}" var="dto">
 				<tr>
 					<td><input type="checkbox" name="seq"
-					                           value="<%=dto.getSeq()%>" /></td>
-					<td><%=dto.getSeq()%></td>
-					<td><%=dto.getId()%></td>
+					                           value="${dto.seq}" /></td>
+					<td>${dto.seq}</td>
+					<td>${dto.id}</td>
 					<td>
-						<a href="boardDetail.board?seq=<%=dto.getSeq()%>">
-					    <%=dto.getTitle()%>
+						<a href="boardDetail.board?seq=${dto.seq}">
+					    ${dto.title}
 					    </a>
 					</td>
-					<td><%=dto.getRegDate()%></td>
+					<td>${dto.regDate}</td>
 				</tr>
-				<%
-			}
-		%>
+		</c:forEach>
+		</c:otherwise>
+		</c:choose>
 		<tr>
 			<td colspan="5">
 				<button type="button" onclick="boardInsertForm()">글추가</button>

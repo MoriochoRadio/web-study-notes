@@ -45,10 +45,10 @@ public class UserDao {
 		
 		// DB 접속을 위한 3가지 필수 정보 (위치/계정/비밀번호)
 		String url = "jdbc:mariadb://localhost:3306/hk"; // 내 컴퓨터(localhost)의 3306 포트에 있는 'hk' 데이터베이스
-		String user = "root";                            // DB 최고 관리자 아이디
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");                            // DB 최고 관리자 아이디
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호                        // DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호                        // DB 비밀번호
 		
 		// DB에 던질 질문(SQL문)을 작성합니다. (최근 가입한 사람 순서대로 정렬)
 		String sql = " SELECT "
@@ -129,10 +129,10 @@ public class UserDao {
 		int count = 0; // DB에서 영향을 받은 행(줄)의 개수를 셀 변수
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// ?(물음표)는 나중에 자바 변수를 안전하게 꽂아 넣을 "빈칸 홀더"입니다.
 		// 맨 마지막 가입일(MDATE)은 DB 서버의 현재 시각을 찍어주는 SYSDATE() 함수를 사용합니다.
@@ -178,10 +178,10 @@ public class UserDao {
 		userDto dto = null;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 아이디가 일치하는 1명만 꼭 집어서 가져오는 쿼리입니다.
 		String sql = " SELECT userid, NAME, birthyear, addr, mobile1, mobile2, height, mdate "
@@ -228,10 +228,10 @@ public class UserDao {
 		int count = 0; // 수정된 행의 개수를 저장할 변수
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 특정 유저(WHERE userid = ?)를 찾아 주소, 전화번호, 키를 바꿉니다.
 		String sql = " UPDATE usertbl "
@@ -268,10 +268,10 @@ public class UserDao {
 		int count = 0;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 아이디가 일치하는 행을 테이블에서 완전히 지웁니다.
 		String sql = " DELETE FROM usertbl WHERE userid = ? ";

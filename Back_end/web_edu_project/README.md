@@ -1,9 +1,10 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-09-18 강사 커밋 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day34)
+> 최신 상태: 2026-09-21(35일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day35)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
+> 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에 따로 정리했다.
 
 
 🛠️ 새 컴퓨터라면 **[개발환경 준비 안내](https://moriochoradio.github.io/web-study-notes/setup/#java-web)**부터 진행하세요. Eclipse Import · JDK/Tomcat 연결 · [실습 DB 준비 SQL](../../setup/bootstrap-hk.sql) · JDBC 설정을 한 순서로 정리했습니다.
@@ -20,6 +21,9 @@
 |---|---|---|
 | [`01_userboard_sepa`](01_userboard_sepa) | DTO·DAO·JDBC 6단계, JSP로 회원·구매 CRUD 화면 만들기 (파일 하나 = 화면 하나) | web-01~16 |
 | [`02_hkboard_MVC1`](02_hkboard_MVC1) | 상속으로 DAO 접속 코드 중복 없애기, `command` 파라미터로 분기하는 첫 컨트롤러 | web-17~18 |
+| [`03_hello_servlet`](03_hello_servlet) | Servlet 기초 — 요청 처리와 생명주기, `@WebServlet` 매핑, DB 없이 동작 확인 | web-26~28 |
+| [`04_hkboard_MVC2`](04_hkboard_MVC2) | 요청 분기를 JSP에서 Servlet으로. `*.board` URL 매핑 + `getRequestURI()`, Filter로 UTF-8 처리 | web-29~31 |
+| [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
 
 ## 개발 환경
 
@@ -337,3 +341,105 @@ CREATE TABLE hkboard (
 ### 검증 기록
 
 최종 실행 결과는 [검증 기록](../sync-validation-2026-09-20.md)에 정리한다. 컴파일 통과와 기능 전체 완료를 구분한다.
+
+
+## 05_hkboard_MVC2_JSTL — EL · JSTL로 스크립틀릿 걷어내기
+
+2026-09-21(35일차). **04를 그대로 복사해 화면 그리는 방법만 바꾼 프로젝트**다.
+기능이 늘지 않았기 때문에, 04와 나란히 놓으면 EL·JSTL이 무엇을 대신해 주는지가 그대로 드러난다.
+
+### 먼저 확인해 둘 것 — 자바 코드는 바뀌지 않았다
+
+`BoardController` · `HkDao` · `HkDto` · `EncodeFilter`를 04와 05에서 각각 컴파일해
+클래스 파일을 바이트 단위로 비교했더니 **다섯 개 모두 동일**했다.
+05에서 늘어난 것은 `WEB-INF/lib`의 JSTL jar 2개뿐이다.
+
+즉 **05는 View 계층만 손댄 리팩터링**이고, 04와의 차이는 전부 `.jsp` 안에 있다.
+
+### 04 ↔ 05 비교
+
+| 관점 | 04_hkboard_MVC2 | 05_hkboard_MVC2_JSTL |
+|---|---|---|
+| Scope에서 값 꺼내기 | `<% HkDto dto=(HkDto)request.getAttribute("dto"); %>` | `${dto.title}` — 선언도 형변환도 없음 |
+| 값 출력 | `<%= dto.getTitle() %>` | `${dto.title}` (내부적으로 `getTitle()` 호출) |
+| 목록 반복 | `<% for(HkDto dto : list){ %> … <% } %>` | `<c:forEach items="${list}" var="dto"> … </c:forEach>` |
+| 조건 분기 | 스크립틀릿 `if` | `<c:choose>` · `<c:when>` · `<c:otherwise>` |
+| `import` 지시자 | `<%@page import="...HkDto"%>` 필요 | 불필요 |
+| 필요한 라이브러리 | 없음 | JSTL **API + 구현** jar 2개 |
+| 값이 `null`일 때 | 화면에 `null`이라고 찍힘 | 아무것도 출력하지 않음 |
+| `list`가 `null`일 때 | `for`에서 NullPointerException | `<c:forEach>`가 0번 반복하고 지나감 |
+| 태그 짝 확인 | `<% } %>`가 어느 블록을 닫는지 안 보임 | HTML과 같은 모양이라 중첩이 보임 |
+
+### 핵심 학습 포인트 넷
+
+**1. EL의 `${이름}`은 Scope를 순서대로 뒤진다**
+page → request → session → application 순으로 찾고, 없으면 예외 대신 빈 문자열이다.
+`${requestScope.dto.seq}`처럼 스코프를 직접 지정할 수도 있다.
+Controller가 `request.setAttribute("list", …)`로 담은 **이름**이 화면 연결의 전부다.
+
+**2. `${dto.title}`은 필드가 아니라 `getTitle()`을 부른다**
+DTO의 getter 이름 규칙이 그대로 화면 문법이 된다. getter가 없으면 값을 읽지 못한다.
+
+**3. JSTL은 표준이지만 Tomcat에 들어 있지 않다**
+
+```
+src/main/webapp/WEB-INF/lib/
+  jakarta.servlet.jsp.jstl-api-3.0.1.jar   ← 규격(API)
+  jakarta.servlet.jsp.jstl-3.0.1.jar       ← 구현체
+```
+
+```jsp
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+```
+
+Tomcat 10부터 `javax` → `jakarta`로 바뀐 여파가 taglib URI에도 온다.
+인터넷 예제의 `http://java.sun.com/jsp/jstl/core`를 그대로 쓰면 태그를 찾지 못한다.
+**API jar만 넣으면 실행 시점에 구현이 없어 실패**하므로 두 개를 함께 넣는다.
+
+**4. `<c:when>`·`<c:otherwise>`는 `<c:choose>`의 직속 자식이어야 한다**
+
+```jsp
+<c:choose>
+    <c:when test="${empty list}">
+        <tr><td colspan="5">--작성된 글이 없습니다.--</td></tr>
+    </c:when>
+    <c:otherwise>
+        <c:forEach items="${list}" var="dto"> … </c:forEach>
+    </c:otherwise>
+</c:choose>
+```
+
+`</c:choose>`를 `<c:otherwise>`보다 먼저 닫으면
+`Illegal use of <when>-style tag without <choose> as its direct parent` 예외로 500이 난다.
+`empty`는 null · 빈 문자열 · 빈 컬렉션을 모두 true로 본다.
+
+### 자주 걸리는 곳
+
+- 이클립스 편집기에 `Unknown tag (c:forEach)` 표시가 남는 것은 **검증기가 jar를 아직 못 읽은 것**이다. 프로젝트 Refresh · Clean 으로 없어지며 실제 실행과는 별개다.
+- `<c:forEach>`가 조용히 0번 반복하기 때문에, 목록이 비어 보일 때 **DB가 비었는지 Scope 이름이 틀렸는지**를 따로 확인해야 한다.
+
+### 실행하기
+
+01~04와 같다. `WEB-INF/lib`에 Connector/J와 JSTL jar 2개를 넣고, DB는 기존 `hk.hkboard`를 쓴다.
+실행 프로세스에 `STUDY_DB_USER` · `STUDY_DB_PASSWORD`를 전달한다(`STUDY_DB_URL`을 생략하면 로컬 `hk`).
+시작 주소는 `/05_hkboard_MVC2_JSTL/boardlist.board`.
+
+
+## 2026-09-21 기록 — 조용히 실패하던 것들
+
+같은 날 실행이 막혔던 원인과 조치다. **JSTL과는 무관한 문제였다.**
+
+- **글쓰기가 계속 `error.jsp`로 튕겼다.** 같은 요청을 04에도 보내 보니 04도 똑같이 실패했다. 바뀐 쪽과 안 바뀐 쪽을 같이 돌려 보는 것으로 "05 코드 문제가 아니다"가 그 자리에서 갈렸다.
+- 원인은 **DB 비밀번호 환경변수 부재**였다. 이클립스를 실행기 대신 탐색기에서 직접 켜면 `STUDY_DB_PASSWORD`가 프로세스에 없고, Tomcat은 이클립스의 환경을 물려받는다.
+- `System.getenv("내가쓰는비밀번호")`처럼 이름 자리에 **값**을 적어 둔 코드가 있었다. `getenv`는 **환경변수 이름**으로 찾으므로 언제나 `null`이다. 01·02·04·05를 모두 `System.getenv("STUDY_DB_PASSWORD")`로 맞췄다.
+- **DAO가 `SQLException`을 `printStackTrace()`로만 삼키고 있었다.** 그래서 "조회 실패"와 "글 0건"이 화면상 구분되지 않았다. `DataBase.printSqlError(step, e)`를 만들어 작업 이름 · SQLState · 벤더 오류코드 · 메시지를 한 줄로 남기도록 DAO의 catch 7곳을 바꿨다.
+- `INSERT INTO HKBOARD VALUES(NULL,?,?,?,SYSDATE())`처럼 컬럼 목록을 생략하면 테이블이 바뀌는 순간 깨진다. `INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) VALUES(?,?,?,SYSDATE())`로 명시하고 AUTO_INCREMENT인 `SEQ`는 DB에 맡겼다.
+- `<c:choose>` 중첩 오류로 목록 화면이 500이었다. `</c:choose>`의 위치를 바로잡았다.
+
+### 이번 갱신의 검증 범위
+
+- 05의 Java 소스 전체를 **JDK 21로 컴파일**했다.
+- 로컬 Tomcat 10.1에서 **목록 · 상세 · 글쓰기 폼 · 메인 페이지의 응답 코드와 렌더링 결과를 확인**했다. 글 3건이 표에 출력되는 것까지 확인했다.
+- **수정 · 단일 삭제 · 다중 삭제는 이번에 실행으로 확인하지 않았다.** 04에서 동작하던 코드가 그대로이고 화면만 바뀌었지만, 실행 확인과 코드 동일성은 구분해 둔다.
+- 04와 05의 클래스 파일 동일성은 컴파일 산출물 비교로 확인했다.
+- 저장소 공개본에는 비밀번호를 적지 않는다. 로컬에서만 쓸 기본값이 필요하면 `getOrDefault`의 두 번째 인자로 두되, 공개 저장소에 올리지 않는다.

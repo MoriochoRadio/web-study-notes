@@ -29,11 +29,11 @@ public class DataBase {
 		
 		// 접속할 DB 경로 (내 컴퓨터 localhost:3306 포트의 hk 데이터베이스)
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";                            // 관리자 아이디
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");                            // 관리자 아이디
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// (어제와 달리 이 값을 고칠 곳이 딱 한 군데다 — DataBase 부모 클래스로
 		//  묶어 둔 덕분이다.)
-		String password = "";                            // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");                            // ← 여기에 DB 비밀번호
 		
 		// 실제 DB 서버와 네트워크로 악수(Handshake)하여 연결 고리를 만듭니다.
 		conn = DriverManager.getConnection(url, user, password);

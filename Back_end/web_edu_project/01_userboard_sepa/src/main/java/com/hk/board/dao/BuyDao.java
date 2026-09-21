@@ -38,10 +38,10 @@ public class BuyDao {
 		List<BuyDto> list = new ArrayList<>();
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 마지막 컬럼 뒤에 콤마(,)가 없도록 주의합니다.
 		String sql = " SELECT num, userID, prodName, groupName, price, amount "
@@ -108,10 +108,10 @@ public class BuyDao {
 		int count = 0;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// num, userID, prodName, groupName, price, amount 순서에 맞춤
 		String sql = " INSERT INTO BUYTBL (num, userID, prodName, groupName, price, amount) "
@@ -148,10 +148,10 @@ public class BuyDao {
 		BuyDto dto = null;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		String sql = " SELECT num, userID, prodName, groupName, price, amount "
 				   + " FROM BUYTBL "
@@ -191,10 +191,10 @@ public class BuyDao {
 		int count = 0;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 주석에 적혀있던 기획 기준: price와 amount를 수정하고 num을 식별자로 사용
 		String sql = " UPDATE BUYTBL "
@@ -229,10 +229,10 @@ public class BuyDao {
 		int count = 0;
 		
 		String url = "jdbc:mariadb://localhost:3306/hk";
-		String user = "root";
+		String user = System.getenv().getOrDefault("STUDY_DB_USER", "study");
 		// 공개 저장소에 올리면서 실제 값을 뺐다. 내 환경의 비밀번호를 넣고 쓸 것.
 		// 원래는 소스에 직접 적지 않고 WEB-INF 안의 설정 파일로 빼는 것이 맞다.
-		String password = "";   // ← 여기에 DB 비밀번호
+		String password = System.getenv("STUDY_DB_PASSWORD");   // ← 여기에 DB 비밀번호
 		
 		// 특정 구매 건(1건)만 삭제하기 위해 고유키(PK)인 num을 조건으로 사용
 		String sql = " DELETE FROM BUYTBL WHERE num = ? ";
