@@ -10,3 +10,6 @@ src/main/webapp/WEB-INF/lib/*.jar
 # 이클립스 워크스페이스 개인 설정
 .metadata/
 Servers/
+
+# Maven 빌드 산출물 (06 이후 Spring 프로젝트)
+target/

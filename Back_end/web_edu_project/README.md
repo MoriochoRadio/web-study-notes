@@ -1,10 +1,11 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-09-21(35일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day35)
+> 최신 상태: 2026-09-22(36일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day36)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
-> 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에 따로 정리했다.
+> 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
+> 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
 
 
 🛠️ 새 컴퓨터라면 **[개발환경 준비 안내](https://moriochoradio.github.io/web-study-notes/setup/#java-web)**부터 진행하세요. Eclipse Import · JDK/Tomcat 연결 · [실습 DB 준비 SQL](../../setup/bootstrap-hk.sql) · JDBC 설정을 한 순서로 정리했습니다.
@@ -24,6 +25,7 @@
 | [`03_hello_servlet`](03_hello_servlet) | Servlet 기초 — 요청 처리와 생명주기, `@WebServlet` 매핑, DB 없이 동작 확인 | web-26~28 |
 | [`04_hkboard_MVC2`](04_hkboard_MVC2) | 요청 분기를 JSP에서 Servlet으로. `*.board` URL 매핑 + `getRequestURI()`, Filter로 UTF-8 처리 | web-29~31 |
 | [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
+| [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
 
 ## 개발 환경
 
@@ -451,3 +453,80 @@ Tomcat 10부터 `javax` → `jakarta`로 바뀐 여파가 taglib URI에도 온�
 - **수정 · 단일 삭제 · 다중 삭제는 이번에 실행으로 확인하지 않았다.** 04에서 동작하던 코드가 그대로이고 화면만 바뀌었지만, 실행 확인과 코드 동일성은 구분해 둔다.
 - 04와 05의 클래스 파일 동일성은 컴파일 산출물 비교로 확인했다.
 - 저장소 공개본에는 비밀번호를 적지 않는다. 로컬에서만 쓸 기본값이 필요하면 `getOrDefault`의 두 번째 인자로 두되, 공개 저장소에 올리지 않는다.
+
+
+## 06_spring_template — 스프링 MVC 첫 프로젝트
+
+2026-09-22(36일차)에 만든 **Maven 기반 스프링 웹 프로젝트**다. 게시판 기능은 아직 없고,
+`/home.do` 요청 하나가 화면까지 도달하는 **최소 경로**만 갖춘 상태다.
+
+```
+06_spring_template/
+├─ pom.xml                                   의존성 선언 (jar를 직접 넣지 않는다)
+└─ src/main/
+    ├─ java/com/hk/board/controller/
+    │   └─ HomeController.java               @Controller + @RequestMapping
+    └─ webapp/
+        ├─ index.jsp                          home.do 로 가는 링크 한 줄
+        └─ WEB-INF/
+            ├─ web.xml                        리스너 · DispatcherServlet · 인코딩 필터
+            ├─ spring/root-context.xml        전역 설정 (아직 비어 있다 — DB 자리)
+            ├─ spring/appServlet/servlet-context.xml   component-scan · ViewResolver
+            └─ views/home.jsp                 브라우저가 직접 열 수 없는 위치
+```
+
+### 05에서 06으로 — 내가 하던 일 중 무엇이 사라졌나
+
+| 하던 일 | 05까지 | 06부터 |
+|---|---|---|
+| 라이브러리 챙기기 | jar를 받아 `WEB-INF/lib`에 직접 복사 | `pom.xml`에 **선언만** (의존성의 의존성까지 따라온다) |
+| 요청 분기 | 내가 만든 `BoardController` 서블릿 + `getRequestURI()` + 조건문 | 스프링의 `DispatcherServlet` + `@RequestMapping` **표시** |
+| 화면 이동 | `getRequestDispatcher("boardlist.jsp").forward(…)` — 경로를 직접 | `return "home"` — **이름만**, 경로는 ViewResolver가 조립 |
+| 객체 생성 | 필요할 때 `new` | 컨테이너가 만들어 보관 (`@Controller` + `component-scan`) |
+| 한글 인코딩 | 직접 작성한 `EncodeFilter` | 스프링의 `CharacterEncodingFilter`를 `web.xml`에 등록 |
+
+DAO·DTO는 아직 그대로다. **바뀐 것은 "요청을 받아 화면까지 넘기는" 구간뿐**이다.
+
+### 설정이 두 벌인 이유
+
+`web.xml`이 XML 두 개를 가리킨다. 나누는 기준은 **"화면과 상관있는가"** 다.
+
+- `root-context.xml` — `ContextLoaderListener`가 읽는다. DB·서비스처럼 **애플리케이션 전체**가 쓰는 것. 지금은 `<beans>` 껍데기만 있다.
+- `servlet-context.xml` — `DispatcherServlet`이 읽는다. Controller·ViewResolver처럼 **화면에 딸린 것**.
+
+`servlet-context.xml`의 네 줄이 각각 하는 일:
+
+| 설정 | 하는 일 |
+|---|---|
+| `<mvc:annotation-driven/>` | `@Controller` 애너테이션 방식을 쓰겠다는 선언 |
+| `<mvc:resources location="/resources/" mapping="/**"/>` | 정적 파일(js·css·img) 경로 |
+| `InternalResourceViewResolver` | `prefix` + 이름 + `suffix` → `/WEB-INF/views/home.jsp` |
+| `<context:component-scan base-package="com.hk.board"/>` | 이 패키지에서 `@Controller`를 찾아 컨테이너에 등록 |
+
+`@Controller`는 **"등록해 달라"는 표시**일 뿐이고, 실제로 찾아 등록하는 것은 `component-scan`이다.
+둘 중 하나만 있으면 동작하지 않는다.
+
+### 눈여겨볼 것 두 가지
+
+- **`/WEB-INF/views/` 아래의 JSP는 브라우저가 직접 열 수 없다.** 01~05에서는 JSP가 webapp 바로 아래에 있어 주소창에 쳐서 열 수 있었는데, 06부터는 **반드시 Controller를 거치도록** 구조가 강제한다.
+- **`<scope>provided</scope>`** 는 "컴파일할 때는 필요하지만 서버가 이미 갖고 있으니 war에 넣지 말라"는 뜻이다. 서블릿·JSP API가 여기 해당하고, 넣으면 톰캣 것과 충돌한다.
+
+### 아직인 것 (2026-09-22 시점)
+
+수업 진도 그대로 두고, 무엇이 왜 미완인지만 적어 둔다.
+
+- **`main.do`는 화면을 찾지 못한다.** `HomeController.main()`이 `"main"`을 돌려주도록 작성돼 있는데 `/WEB-INF/views/main.jsp`가 없다. "이름만 돌려주면 된다"의 뒷면으로, **이름과 파일이 어긋나도 컴파일 시점에는 아무도 알려 주지 않는다.**
+- **`root-context.xml`이 비어 있다.** 반면 `pom.xml`에는 MyBatis·spring-jdbc·commons-dbcp2·MariaDB 드라이버가 이미 들어 있다 — **다음 진도가 DB 연동**이라는 예고다.
+- **`<mvc:resources>`의 `mapping`이 `/**` 다.** 보통은 `/resources/**`처럼 좁게 잡는다. 지금은 매핑이 `*.do`뿐이고 핸들러 매핑이 먼저 조회되어 문제가 없지만, 범위를 좁히는 편이 의도가 분명하다.
+
+### 실행하기
+
+01~05와 달리 **Maven 프로젝트**라 `WEB-INF/lib`에 jar를 넣지 않는다. Eclipse에서 Import 후
+`Maven > Update Project`로 의존성을 받고, Tomcat 10.1에 올린 뒤 `/06_spring_template/home.do`로 연다.
+DB를 쓰지 않으므로 `STUDY_DB_*` 환경변수도 필요 없다.
+
+### 이번 갱신의 검증 범위
+
+- **확인함** — 이클립스 m2e가 `pom.xml`의 의존성을 내려받아 `HomeController`를 컴파일했다(`target/classes`에 `.class` 생성). 저장소에 넣은 소스 7개는 워크스페이스 원본과 동일하다.
+- **확인하지 않음** — 톰캣에 배포해 `/home.do`를 브라우저로 열어 본 기록은 이번 정리에 없다. 위 설명은 **설정을 읽고 따진 결과**다.
+- `target/`은 빌드 산출물이라 저장소에 넣지 않는다(`.gitignore`에 추가).

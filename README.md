@@ -1,6 +1,8 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
 
+**2026-09-22 갱신:** 36일차 스프링 MVC 진도를 반영했다. [`06_spring_template`](Back_end/web_edu_project/06_spring_template) 추가 — Maven으로 의존성을 선언하고, 직접 짜던 URL 분기·forward 경로·객체 생성을 각각 `@RequestMapping`·ViewResolver·컨테이너가 대신한다. [05에서 무엇이 사라졌는지](Back_end/web_edu_project/README.md#06_spring_template--스프링-mvc-첫-프로젝트)를 표로 정리했다. [17회차 코딩테스트](Back_end/coding-tests/2026-09-21/) 4문제(3 PASS · 1 FAIL)를 추가했고, FAIL 한 문제는 **제출본의 실패를 실제로 재현해** 원인 셋으로 나눴다. 16회차는 이후 직접 풀어 제출해 PASS 한 기록으로 보정했다. 대시보드에 수업 36일차 · 웹 개발 카드 3개 · 코딩테스트 카드 4개 · 학습 여정 20단계를 반영했다.
+
 **2026-09-21 갱신:** 35일차 EL·JSTL 진도를 반영했다. [`05_hkboard_MVC2_JSTL`](Back_end/web_edu_project/05_hkboard_MVC2_JSTL) 추가 — 04를 복사해 화면만 EL·JSTL로 바꾼 프로젝트라 [04와의 차이](Back_end/web_edu_project/README.md)가 그대로 학습 포인트가 된다. 대시보드에 수업 35일차 · 웹 개발 카드 6개 · 학습 여정 19단계 · 시험 대비 4문항을 추가했다.
 
 **2026-09-20 갱신:** [9월 17~18일 수업 보충](Back_end/teacher-sync-2026-09-18.md) · [16회차 코딩테스트 보충 풀이](Back_end/coding-tests/2026-09-18/). MVC1 다중 삭제, Servlet·Filter·Session, MVC2 목록·등록 진도를 반영했다.
@@ -36,7 +38,7 @@ JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러�
 | 과정 | 반영 범위 | 상태 |
 | --- | --- | --- |
 | 프런트엔드 | HTML 7 · CSS 12 · JavaScript 18(AJAX까지) · React/Next.js 14단원 · StockDash 졸업 과제 | ✅ 완료 |
-| 백엔드 | Java 날짜별 수업 실습 · 개념 카드 · 실습과제 12문제 · 시험 대비 102문제 | 🔄 진행 중 (2026-08-03 시작) |
+| 백엔드 | Java 날짜별 수업 실습 36일차 · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 40항목(JSP·Servlet·MVC2·EL/JSTL·스프링 입문) · 코딩테스트 34문제 · 시험 대비 102문제 | 🔄 진행 중 (2026-08-03 시작) |
 | 저장소 위생 | 의존성·Next.js 빌드 캐시·환경 변수·IDE 파일 제외 규칙 적용 | ✅ 점검 완료 |
 
 > **노트 작성 원칙:** 모든 학습 카드는 “한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리”의 순서로 구성합니다. 실행 가능한 원본 코드는 단원 폴더에 남기고, 대시보드는 개념과 코드 흐름을 빠르게 복습하는 용도로 사용합니다.
@@ -130,6 +132,9 @@ python3 scripts/verify_backend_inventory.py
 └── Back_end/     # 백엔드(Java) 과정
     ├── index.html            # Java 백엔드 학습 노트 대시보드
     ├── java_edu_project/     # 날짜별 수업 실습 코드
+    ├── sql_edu_project/      # SQL 과정 실습 스크립트
+    ├── web_edu_project/      # 웹 개발 실습 프로젝트 01~06 (JSP → MVC2 → 스프링)
+    ├── coding-tests/         # 회차별 코딩테스트 기록 (제출 코드 · 정정 풀이 · 로컬 검증)
     └── *.pptx / *.pdf        # 교안 · 실습과제
 ```
 

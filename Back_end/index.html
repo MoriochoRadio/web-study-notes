@@ -1108,7 +1108,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 교안 전 범위(기초 문법 → 객체지향 → 활용 → 네트워크)와 실습과제 12문제, <b>2026-08-31부터 시작한 데이터베이스(SQL) 과정</b>, 그리고 <b>2026-09-10부터 시작한 웹 개발(JSP·Servlet) 과정</b>까지 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리해 둔 예습·복습 노트입니다. 카드는 처음엔 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 항목만 펼치면 됩니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-20</span>
+      <span id="updated-badge">마지막 업데이트: 2026-09-22</span>
       <span>📅 수업 진도 34일차</span>
       <span>☕ 자바 기초 11개</span>
       <span>🧱 객체지향 24개</span>
@@ -1148,9 +1148,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">30</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">34</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">31</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">40</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1176,16 +1176,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button id="resume-btn" type="button">이어보기 →</button>
     </div>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">34</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">35</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">30</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">34</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">37</div><div class="l">🖥️ 웹 개발 항목</div></div>
-      <div class="stat-card journey"><div class="n">19</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card web"><div class="n">40</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card journey"><div class="n">20</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -1228,7 +1228,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
         <li>🗄️ <strong>SQL 기초</strong> 탭은 2026-08-31부터 시작한 <strong>데이터베이스 과정</strong> 노트입니다. HeidiSQL로 MySQL에 접속하는 것부터 <strong>SELECT · WHERE · 집계 · JOIN · 윈도우 함수 · 제약조건 · 뷰 · 인덱스 · 프로시저</strong>까지 46개 카드로 이어집니다. 각 카드의 <strong>실행 결과</strong>는 수업 자료를 실제 DB에 올려 돌려 본 출력이라, 쿼리를 직접 쳐 보기 전에 결과를 먼저 확인할 수 있어요. 자바와 마찬가지로 <strong>시험 대비</strong> 탭에 SQL 30문항이 들어 있습니다.</li>
-        <li><strong>🧩 코딩테스트</strong> 탭은 학원에서 프로그래머스로 정기 실시하는 코딩테스트 오답노트입니다. 회차마다 JAVA·SQL 각 1문제씩 <strong>제출 코드 → 정답 풀이 → 주요 개념</strong> 순으로 정리했으니, 실전 문제 감각을 다질 때 훑어보세요.</li>
+        <li><strong>🧩 코딩테스트</strong> 탭은 학원에서 프로그래머스로 정기 실시하는 코딩테스트 오답노트입니다. 회차마다 JAVA·SQL 문제를 <strong>제출 코드 → 정답 풀이 → 주요 개념</strong> 순으로 정리했으니, 실전 문제 감각을 다질 때 훑어보세요.</li>
         <li>객관식 시험을 앞두고 있다면 <strong>✏️ 시험 대비</strong> 탭에서 문제를 풀어보세요. 한 문제씩 <strong>고르는 즉시 정답·해설</strong>이 나오고, <strong>🔎 자세한 해설</strong>을 펼치면 보기 네 개를 하나씩 짚어 주는 풀이와 더 쉬운 정리가 이어집니다. <strong>⭐ 즐겨찾기 · 🔥 어려움</strong>으로 표시해 둔 문제나 틀린 문제만 골라 다시 푸는 것도 됩니다. 아직 진도가 안 나간 단원까지 섞여 나오는 게 부담이라면 범위에서 <strong>📅 배운 데까지</strong>를 고르세요 — 수업 진도 탭에 정리된 만큼만 출제됩니다.</li>
         <li>카드 제목 옆 <strong>완료 체크박스</strong>·<strong>☆ 버튼</strong>(헷갈리는 카드)·<strong>🔗 버튼</strong>(카드 링크 복사)을 활용하고, 하단 <strong>📝 내 메모</strong> 칸에 헷갈린 점을 적어두세요. 우하단 <strong>⚡ 5분 복습</strong>은 카드의 "쉽게 말하면"만 뽑아 플래시카드로 넘겨 줍니다.</li>
         <li>프론트엔드(HTML·CSS·JS·React) 노트는 <strong><a href="../Front_end/">🎨 프론트엔드 학습 노트</a></strong>에 따로 있습니다.</li>
@@ -7206,8 +7206,17 @@ public class D3_ChatClient {
 <article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 게시판 CRUD·전체 선택·코딩테스트 15회차</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>게시판 등록·상세·수정·단일 삭제 코드와 전체 선택을 반영하고, 강조 개념 및 코딩테스트 15회차 파일의 새 문제 두 개를 연결한다.</p><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL 원본 5개는 저장소와 동일합니다. 02 프로젝트의 HkDao와 JSP 4개 변경, 새 boardDetail.jsp를 반영했습니다. 공개본의 DB 비밀번호 제거는 유지합니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. <a href="#web-25">등록·상세·수정·단일 삭제</a> 코드가 연결됐고 <a href="#web-26">전체 선택</a>도 추가되었습니다. 다중 삭제는 아직 미구현입니다. 코테는 <a href="#ct-27">핸드폰 번호 가리기(PASS)</a>와 <a href="#ct-28">중고거래 상태 조회(FAIL)</a>를 복습하세요.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
 <article class="note-card" id="class-day33"><div class="note-head"><span class="note-num">33일차</span><h3>2026-09-17 · 다중 삭제·트랜잭션·Servlet 시작</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: MVC1 다중 삭제와 Servlet 기본 요청 처리를 확인했다.</p><ul><li>선택된 seq 배열을 받고 JDBC batch로 삭제.</li><li>선택 유효값 검사와 오류 화면 추가.</li><li>03_hello_servlet 프로젝트에서 GET·POST 요청 처리 시작.</li></ul><p><a href="#web-27">다중 삭제와 트랜잭션</a> · <a href="#web-28">Servlet 생명주기</a> · <a href="teacher-sync-2026-09-18.md">강사 코드 대조 기록</a></p></div></article>
 
-<article class="note-card" id="class-day34"><div class="note-head"><span class="note-num">34일차</span><h3>2026-09-18 · Filter·Session·MVC2 전환</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: 설정·세션·인코딩 필터를 정리하고 MVC2 목록·등록 경로를 추가했다.</p><ul><li>ServletConfig, ServletContext, HttpSession 구분.</li><li>UTF-8 Filter의 전처리 → chain → 후처리.</li><li>04_hkboard_MVC2의 URL 기반 Controller 전환.</li></ul><p><a href="#web-29">설정과 세션</a> · <a href="#web-30">Filter</a> · <a href="#web-31">MVC2 구현 범위</a></p><p>미응시한 16회차는 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 별도로 보충했다. 기존 응시 기록에 PASS를 추가하지 않았다.</p></div></article>
+<article class="note-card" id="class-day34"><div class="note-head"><span class="note-num">34일차</span><h3>2026-09-18 · Filter·Session·MVC2 전환</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: 설정·세션·인코딩 필터를 정리하고 MVC2 목록·등록 경로를 추가했다.</p><ul><li>ServletConfig, ServletContext, HttpSession 구분.</li><li>UTF-8 Filter의 전처리 → chain → 후처리.</li><li>04_hkboard_MVC2의 URL 기반 Controller 전환.</li></ul><p><a href="#web-29">설정과 세션</a> · <a href="#web-30">Filter</a> · <a href="#web-31">MVC2 구현 범위</a></p><p>16회차는 시험 당일 노트북 고장으로 응시하지 못해 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 먼저 보충 풀이로 정리했고, 이후 <b>직접 풀어 제출해 둘 다 PASS</b> 했다. 제출 코드는 2026-09-22 정리에서 반영했다.</p></div></article>
 <article class="note-card" id="class-day35"><div class="note-head"><span class="note-num">35일차</span><h3>2026-09-21 · EL·JSTL 도입 (05 프로젝트)</h3></div><div class="note-body"><p class="note-summary">04를 복사해 05_hkboard_MVC2_JSTL을 만들고, 목록·상세 화면의 스크립틀릿을 EL과 JSTL로 바꿨다.</p><ul><li>JSTL jar 2개를 WEB-INF/lib에 넣고 <code>jakarta.tags.core</code>로 taglib 선언.</li><li><code>&lt;%= dto.getTitle() %&gt;</code> → <code>${dto.title}</code>, 스크립틀릿 for → <code>&lt;c:forEach&gt;</code>.</li><li>빈 목록 안내를 <code>&lt;c:choose&gt;</code> · <code>${empty list}</code>로 분기.</li><li>자바 코드(Controller · DAO · DTO)는 그대로 두고 화면만 바꿨다.</li><li>boardDetail.jsp 위쪽에는 쓰이지 않는 스크립틀릿 선언이 아직 남아 있다.</li></ul><p><a href="#web-32">EL</a> · <a href="#web-33">JSTL 설치</a> · <a href="#web-34">c:forEach</a> · <a href="#web-35">c:choose</a> · <a href="#web-36">04→05 핵심 정리</a></p><p>실행 중 글쓰기가 error.jsp로 튕기는 문제와 <code>&lt;c:choose&gt;</code> 중첩 오류를 차례로 잡았다. 과정은 <a href="#web-37">디버깅 기록</a>에 남겼다.</p></div></article>
+
+<article class="note-card" id="class-day36"><div class="note-head"><span class="note-num">36일차</span><h3>2026-09-22 · 스프링 입문 — 06_spring_template</h3><div class="note-tags"><span class="tag">Spring MVC</span><span class="tag">Maven</span><span class="tag">2026-09-22</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>Maven 기반 스프링 웹 프로젝트를 새로 만들어, <code>/home.do</code> 하나가 화면까지 도달하는 최소 경로를 구성했다.</p><ul>
+<li><b>Maven 프로젝트</b>로 전환 — jar를 <code>WEB-INF/lib</code>에 직접 넣던 방식에서 <code>pom.xml</code> 선언으로. Spring 6.1.13 · Java 21 · jakarta 네임스페이스.</li>
+<li><code>web.xml</code>에 설정 두 벌 — <code>ContextLoaderListener</code> + <code>root-context.xml</code>(전역), <code>DispatcherServlet</code> + <code>servlet-context.xml</code>(화면). <code>*.do</code> 매핑.</li>
+<li><code>servlet-context.xml</code>에 <code>component-scan</code> · <code>annotation-driven</code> · <code>InternalResourceViewResolver</code>.</li>
+<li><code>HomeController</code>에 <code>@Controller</code> + <code>@RequestMapping</code> — <b>URL 분기 코드를 직접 쓰지 않는다</b>. 04·05에서 <code>getRequestURI()</code>로 갈라내던 자리다.</li>
+<li>스프링이 제공하는 <code>CharacterEncodingFilter</code>로 한글 인코딩 — 05까지 직접 만들던 <code>EncodeFilter</code>와 같은 일.</li>
+<li><code>pom.xml</code>에 MyBatis·DBCP·MariaDB 드라이버가 미리 들어 있고 <code>root-context.xml</code>은 비어 있다 — <b>다음 진도가 DB 연동</b>이다.</li>
+</ul><p><a href="#web-38">스프링을 왜 쓰나</a> · <a href="#web-39">요청이 지나는 길</a> · <a href="#web-40">오늘 프로젝트의 상태</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/web_edu_project/06_spring_template" target="_blank" rel="noopener">06_spring_template 소스</a></p><p>전날 17회차 코딩테스트 결과도 함께 정리했다 — <a href="#ct-31">자릿수 더하기</a>(PASS) · <a href="#ct-32">두 개 뽑아서 더하기</a>(FAIL) · <a href="#ct-33">이름이 없는 동물의 아이디</a>(PASS) · <a href="#ct-34">있었는데요 없었습니다</a>(PASS).</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>04·05에서 내가 짰던 코드 중 06에서 사라진 것은 무엇인가?</summary><div class="sc-a"><b>URL을 읽어 분기하는 코드</b>와 <b>forward 경로를 직접 적는 코드</b>, 그리고 <b>인코딩 필터 구현</b>입니다. 각각 <code>@RequestMapping</code> · ViewResolver · <code>CharacterEncodingFilter</code>가 대신합니다. DAO·DTO는 아직 그대로 남아 있습니다.</div></details><details class="sc-q"><summary>root-context.xml과 servlet-context.xml을 나누는 기준은?</summary><div class="sc-a"><b>화면과 상관있는가</b>입니다. Controller·ViewResolver는 servlet-context, DB·서비스처럼 애플리케이션 전체가 쓰는 것은 root-context에 둡니다. 오늘 root-context가 비어 있는 이유도 <b>아직 DB 설정을 하지 않았기</b> 때문입니다.</div></details></div></div></article>
 
 
 
@@ -13581,7 +13590,7 @@ public class CardMain {
 
   <section id="codingtest-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🧩 코딩테스트 오답노트 — 프로그래머스 정기 테스트</h2></div>
-    <p class="cat-desc">학원에서 <b>프로그래머스 사이트로 정기 실시하는 코딩테스트</b>를 회차별로 복기한 오답노트입니다. 매회 JAVA(프로그래밍) 문제 1개와 SQL 문제 1개를 풀고, <b>제출한 코드 → 정답 풀이 → 주요 개념</b> 순서로 정리했습니다. 수업 진도 카드가 "그날 배운 것"이라면, 이 탭은 <b>"그걸로 실전 문제를 풀어 본 기록"</b>입니다.</p>
+    <p class="cat-desc">학원에서 <b>프로그래머스 사이트로 정기 실시하는 코딩테스트</b>를 회차별로 복기한 오답노트입니다. 보통 JAVA(프로그래밍) 문제 1개와 SQL 문제 1개를 풀고(17회차는 각 2문제), <b>제출한 코드 → 정답 풀이 → 주요 개념</b> 순서로 정리했습니다. 수업 진도 카드가 "그날 배운 것"이라면, 이 탭은 <b>"그걸로 실전 문제를 풀어 본 기록"</b>입니다.</p>
     <div class="notes-list" id="codingtest-notes">
 
 <article class="note-card" id="ct-01">
@@ -15849,7 +15858,22 @@ FROM USED_GOODS_BOARD
 WHERE CREATED_DATE = &#x27;2022-10-05&#x27;
 ORDER BY BOARD_ID DESC;</code></pre></div><p>CASE의 비교 기준은 STATUS이고 첫 일치 분기의 결과가 출력됩니다. 모든 분기가 불일치하고 ELSE가 없으면 NULL입니다. <code>AS STATUS</code>는 결과 열의 이름이며 DB 원본 상태 코드를 수정하지 않습니다. Java switch와 비슷하게 분기하지만 <code>break</code>나 fall-through를 그대로 적용하지 마세요.</p><p>이 문제는 DATE 열이므로 정확한 날짜를 <code>=</code>로 비교합니다. 실무의 DATETIME 열에 시각이 있다면 <code>CREATED_DATE &gt;= '2022-10-05' AND CREATED_DATE &lt; '2022-10-06'</code>처럼 하루 범위를 잡아야 합니다. 문자열은 작은따옴표를 사용해 SQL 모드에 따른 큰따옴표 해석 차이도 피합니다.</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>CASE로 상태를 바꾸면 테이블 데이터도 바뀔까?</summary><div class="sc-a">아니요. SELECT 결과에 표시되는 값만 바뀝니다. 저장된 값을 바꾸려면 UPDATE가 필요합니다.</div></details><details class="sc-q"><summary>DATE를 DATETIME으로 바꿨는데 = 날짜 조건이면 무엇을 놓칠까?</summary><div class="sc-a">자정이 아닌 시간의 행을 놓칠 수 있습니다. 다음 날 미만의 범위 조건으로 하루를 표현합니다.</div></details></div></div></article>
-<article class="note-card" id="ct-29"><div class="note-head"><span class="note-num">16회차 보충</span><h3>약수의 합</h3></div><div class="note-body"><p class="note-summary">약수는 쌍으로 찾고, 완전제곱수의 제곱근은 한 번만 더한다.</p><p><b>2026-09-18 · 16회차 · 미응시 보충 학습.</b> 동료 자료로 문제를 확인한 뒤 별도로 작성한 풀이다. 본인 제출 PASS 기록은 없다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12928">문제 원문</a> · <a href="coding-tests/2026-09-18/">별도 보충 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><button class="copy-btn" type="button">복사</button></div><pre><code>class Solution {
+<article class="note-card" id="ct-29"><div class="note-head"><span class="note-num">16회차</span><h3>약수의 합</h3></div><div class="note-body"><p class="note-summary">n 자신을 먼저 더해 두면 나머지 약수는 n/2 이하에만 있다. 쌍으로 찾으면 √n까지만 봐도 된다.</p><div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.18 · 16회차</span></div><p><b>시험 당일에는 노트북 고장으로 응시하지 못했다.</b> 동료 자료로 문제와 회차만 확인해 보충 풀이를 먼저 써 두었고, 이후 <b>직접 풀어 제출해 PASS</b> 했다. 아래에 제출 코드와 보충 풀이를 함께 둔다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12928">문제 원문</a> · <a href="coding-tests/2026-09-18/">회차 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><span class="code-file">제출 코드 (PASS)</span><button class="copy-btn" type="button">복사</button></div><pre><code>class Solution {
+    public int solution(int n) {
+        if (n == 0) return 0;
+
+        int answer = n; // 자기 자신을 먼저 더함
+
+        for (int i = 1; i &lt;= n / 2; i++) {
+            if (n % i == 0) {
+                answer += i;
+            }
+        }
+
+        return answer;
+    }
+}
+</code></pre></div><p>n 자신을 뺀 약수 중 가장 큰 것은 <code>n/2</code>를 넘을 수 없다 — n을 2보다 작은 수로 나누면 몫이 n보다 커지기 때문이다. 그래서 n을 먼저 더해 두면 나머지는 <code>1 ~ n/2</code>에서만 찾으면 된다. 전수 탐색의 절반이고, 제한(3000) 안에서는 충분하다.</p><div class="note-code"><div class="code-head"><span class="code-lang">JAVA</span><span class="code-file">보충 풀이 (미제출)</span><button class="copy-btn" type="button">복사</button></div><pre><code>class Solution {
     public int solution(int n) {
         int sum = 0;
         for (int divisor = 1; divisor &lt;= n / divisor; divisor++) {
@@ -15861,13 +15885,158 @@ ORDER BY BOARD_ID DESC;</code></pre></div><p>CASE의 비교 기준은 STATUS이�
         return sum;
     }
 }
-</code></pre></div><p>1~n 전수 탐색도 제한 안에서 충분하다. 위 풀이는 d와 n/d를 함께 더하므로 O(√n)이다. <code>pair != divisor</code>로 제곱근 중복을 막는다. n=0이면 반복이 없으므로 0이다.</p><details class="run-output"><summary>로컬 검증</summary><pre>0 → 0 / 1 → 1 / 5 → 6 / 12 → 28 / 36 → 91 / 3000 → 9360
-허용 범위 0~3000: 독립적으로 만든 기대값과 3,001개 비교</pre></details></div></article>
+</code></pre></div><p>보충 풀이는 d와 n/d를 함께 더하므로 O(√n)이다. <code>pair != divisor</code>로 제곱근 중복을 막는다. 두 코드 모두 n=0이면 반복이 없으므로 0이다.</p><details class="run-output"><summary>로컬 검증</summary><pre>0 → 0 / 1 → 1 / 5 → 6 / 12 → 28 / 36 → 91 / 3000 → 9360
+허용 범위 0~3000: 독립적으로 만든 기대값과 3,001개 비교
+제출 코드·보충 풀이 둘 다 전 구간 일치 (JDK 21)</pre></details></div></article>
 
-<article class="note-card" id="ct-30"><div class="note-head"><span class="note-num">16회차 보충</span><h3>최댓값 구하기</h3></div><div class="note-body"><p class="note-summary">DATETIME의 최댓값이 가장 늦게 들어온 시각이다.</p><p><b>2026-09-18 · 16회차 · 미응시 보충 학습.</b> 참고 문서의 채점 결과는 본인의 결과로 기록하지 않는다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59415">문제 원문</a> · <a href="coding-tests/2026-09-18/">별도 보충 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">SQL</span><button class="copy-btn" type="button">복사</button></div><pre><code>SELECT MAX(DATETIME) AS 시간
+<article class="note-card" id="ct-30"><div class="note-head"><span class="note-num">16회차</span><h3>최댓값 구하기</h3></div><div class="note-body"><p class="note-summary">DATETIME의 최댓값이 가장 늦게 들어온 시각이다.</p><div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">SQL · 2026.09.18 · 16회차</span></div><p><b>시험 당일 미응시, 이후 직접 풀어 제출해 PASS.</b> 동료 자료는 문제와 회차를 확인하는 데만 썼고, 그 문서의 채점 결과를 옮겨 적지 않았다.</p><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59415">문제 원문</a> · <a href="coding-tests/2026-09-18/">회차 노트</a></p><div class="note-code"><div class="code-head"><span class="code-lang">SQL</span><span class="code-file">제출 코드 (PASS)</span><button class="copy-btn" type="button">복사</button></div><pre><code>SELECT MAX(DATETIME) AS 시간
 FROM ANIMAL_INS;
-</code></pre></div><p>GROUP BY 없이 전체 행을 집계한다. 최댓값이 중복되어도 결과는 한 행이다. 이름·ID를 함께 SELECT하면 어느 행의 값인지 불명확해진다. 빈 집합의 MAX 결과는 NULL이다.</p><details class="run-output"><summary>로컬 검증</summary><pre>MariaDB 임시 테이블: 날짜 순서 섞임·동일 최댓값·단일 행·빈 집합
-기존 수업 데이터 변경 없음 / 프로그래머스 채점은 하지 않음</pre></details></div></article>
+</code></pre></div><p>GROUP BY 없이 전체 행을 집계한다. 최댓값이 중복되어도 결과는 한 행이다. 이름·ID를 함께 SELECT하면 어느 행의 값인지 불명확해진다. 빈 집합의 MAX 결과는 NULL이다. → <a href="#sql-17">🗄️ 17. 집계 함수와 NULL</a></p><details class="run-output"><summary>로컬 검증</summary><pre>MariaDB 임시 테이블: 날짜 순서 섞임·동일 최댓값·단일 행·빈 집합
+기존 수업 데이터 변경 없음 / 프로그래머스 채점 화면을 재현한 것은 아님</pre></details></div></article>
+
+<article class="note-card" id="ct-31"><div class="note-head"><span class="note-num">17회차</span><h3>자릿수 더하기</h3><div class="note-tags"><span class="tag">JAVA · % · 정수 나눗셈</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>10으로 나눈 나머지가 지금의 1의 자리, 10으로 나누면 그 자리를 버린다. 0이 될 때까지 반복한다.</p>
+<div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.21 · 17회차</span></div><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12931" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a> · <a href="coding-tests/2026-09-21/">📝 17회차 회차 노트</a><p>자연수 n의 각 자리 숫자를 모두 더해 돌려준다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+
+        while (n &gt; 0) {
+            answer += n % 10;
+            n /= 10;
+        }
+
+        return answer;
+    }
+}</code></pre></div><p><b>정수 나눗셈이 소수점을 버린다는 성질</b>을 그대로 쓴 풀이라 문자열로 바꿀 필요가 없습니다. <code>1234 % 10 = 4</code>로 맨 뒷자리를 꺼내고, <code>1234 / 10 = 123</code>으로 그 자리를 버립니다. n이 0이 되면 더 꺼낼 자리가 없습니다.</p><p>문제에서 n은 1 이상이라 <code>while (n &gt; 0)</code>으로 충분합니다. 다만 <b>매개변수 <code>n</code>을 직접 깎아 쓰고 있다</b>는 점은 의식해 두면 좋습니다 — 여기서는 뒤에서 n을 다시 쓰지 않아 괜찮지만, 원본 값이 또 필요한 코드였다면 따로 담아 두어야 합니다. → <a href="#basic-06">☕ 06. 형 변환과 타입 변환</a></p><details class="run-output"><summary><span class="run-tag">로컬 검증</span>기댓값은 문자열로 따로 만들어 비교</summary><pre>1~1,000,000 전수 + 상한 부근(9,999,999 · 10,000,000) 통과
+기댓값: Integer.toString(n)의 각 문자를 더하는 다른 방법으로 생성
+(JDK 21 · 이 저장소에서 실행 / 프로그래머스 채점 화면은 아님)</pre></details>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>n이 0이면 while이 몇 번 도는가?</summary><div class="sc-a">0번입니다. 조건이 처음부터 거짓이라 <code>answer</code>가 0으로 그대로 반환됩니다. 이 문제는 n이 1 이상이라 해당 사항이 없지만, 0을 허용하는 문제였다면 "자릿수 합 0"이 맞는 답인지 먼저 따져야 합니다.</div></details><details class="sc-q"><summary>n /= 10 을 n / 10 으로 쓰면 어떻게 되나?</summary><div class="sc-a"><b>무한 루프</b>입니다. <code>n / 10</code>은 계산만 하고 <b>결과를 어디에도 대입하지 않습니다</b>. n이 줄지 않으니 <code>n &gt; 0</code>이 영원히 참이죠. 같은 실수가 <code>s.replace(...)</code>에서도 나옵니다 — 반환값을 다시 대입해야 반영됩니다.</div></details></div>
+<p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>"각 자리 숫자를 다룬다"</b>는 신호가 보이면 <code>% 10</code>과 <code>/ 10</code> 한 쌍을 먼저 떠올리면 됩니다. 진법이 바뀌면 10 대신 그 진법을 쓰면 되고요(<code>% 2</code>, <code>/ 2</code>). 문자열로 바꿔 <code>charAt(i) - '0'</code>으로 푸는 방법도 있는데, <b>자릿수를 거꾸로 만들거나 자리별로 조작</b>해야 하면 나눗셈 쪽이, <b>자리 순서를 그대로 보면서 처리</b>해야 하면 문자열 쪽이 편합니다.</p></div></article>
+
+<article class="note-card" id="ct-32"><div class="note-head"><span class="note-num">17회차</span><h3>두 개 뽑아서 더하기</h3><div class="note-tags"><span class="tag">JAVA · 배열 기본값</span><span class="tag">Arrays.copyOf</span><span class="tag">TreeSet</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>접근은 맞았다. 고정 크기 배열을 중복 제거 장치로 쓰려다 <b>크기 · 빈칸 · 유효 길이</b> 세 곳에서 어긋났다.</p>
+<div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL · 제출 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.21 · 17회차</span></div><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/68644" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a> · <a href="coding-tests/2026-09-21/">📝 17회차 회차 노트</a><p>배열에서 서로 다른 두 수를 뽑아 더해 만들 수 있는 모든 값을 <b>중복 없이 오름차순</b>으로 돌려준다. 원소는 0 이상 100 이하, 길이는 2 이상 100 이하다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public boolean same(int num, int[] answer){
+    for(int i=0;i&lt;answer.length;i++){      // ← 빈칸까지 훑는다
+        if(num == answer[i]){ return false; }
+    }
+    return true;
+}
+
+public int[] solution(int[] numbers) {
+    int[] temp = new int[100];             // ← 최대 201가지를 담을 수 없다
+    int count = 0;
+    for(int i=0;i&lt;numbers.length-1;i++){
+        for(int j=i+1;j&lt;numbers.length;j++){
+            int num = numbers[i]+numbers[j];
+            if(same(num,temp)==true){
+                temp[count] = numbers[i]+numbers[j];
+                count++;
+            }else{ continue; }
+        }
+    }
+
+    Arrays.sort(temp);                     // ← 빈칸 0이 전부 앞으로 몰린다
+
+    int[] answer = new int[count];
+    int count2=0;
+    for(int i=0; i&lt;temp.length; i++){
+        if(temp[i]!=0){                    // ← 정답인 0까지 버린다
+            answer[count2]=temp[i];
+            count2++;
+        }
+    }
+
+    return answer;
+}</code></pre></div>
+<div class="ct-box"><div class="ct-box-title">💡 정답 풀이 — 세 곳을 고친다</div><p><b>① 배열 크기가 모자랐다 (런타임 에러).</b> 원소가 0~100이므로 두 수의 합은 0~200, 즉 <b>최대 201가지</b>다. <code>new int[100]</code>은 이걸 담지 못한다. 넉넉하게 <code>new int[300]</code>으로 잡는다.
+
+<b>② 중복 검사가 빈칸까지 훑었다 (합이 0이면 사라진다).</b> <code>int</code> 배열은 생성과 동시에 전부 0으로 채워진다. 제출한 <code>same</code>은 <code>answer.length</code> 전체를 돌기 때문에, 합이 0일 때 <b>아직 쓰지 않은 뒤쪽 칸의 0과 마주쳐</b> "이미 있는 값"으로 착각하고 건너뛴다. 실제로 채운 개수인 <code>count</code>까지만 검사하도록 범위를 좁힌다.
+
+<b>③ 0을 빈칸으로 오해하고 지웠다.</b> 배열 전체를 <code>Arrays.sort</code>하면 남아 있던 빈칸 0들이 <b>전부 앞으로 몰린다</b>. 그 뒤 "0이 아닌 값만 골라 담기"로 빈칸을 걸러 내려 했는데, 이 방식은 <b>정답인 0까지 같이 버린다</b>. <code>Arrays.copyOf(temp, count)</code>로 <b>유효 구간만 잘라낸 뒤 정렬</b>하면 빈칸이 애초에 섞이지 않는다.</p></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">정정본 — 세 가지를 반영</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public boolean same(int num, int[] arr, int count){
+    for(int i = 0; i &lt; count; i++){        // 채운 데까지만 본다
+        if(num == arr[i]){ return false; }
+    }
+    return true;
+}
+
+public int[] solution(int[] numbers) {
+    int[] temp = new int[300];             // 201가지를 넉넉히 담는다
+    int count = 0;
+
+    for(int i = 0; i &lt; numbers.length - 1; i++){
+        for(int j = i + 1; j &lt; numbers.length; j++){
+            int num = numbers[i] + numbers[j];
+            if(same(num, temp, count)){
+                temp[count] = num;
+                count++;
+            }
+        }
+    }
+
+    int[] answer = Arrays.copyOf(temp, count);  // 유효 구간만 잘라내고
+    Arrays.sort(answer);                        // 그것만 정렬한다
+
+    return answer;
+}</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">같은 요구사항을 컬렉션으로</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">TreeSet&lt;Integer&gt; sums = new TreeSet&lt;&gt;();
+for (int i = 0; i &lt; numbers.length - 1; i++)
+    for (int j = i + 1; j &lt; numbers.length; j++)
+        sums.add(numbers[i] + numbers[j]);
+return sums.stream().mapToInt(Integer::intValue).toArray();</code></pre></div><p><b>중복 제거 + 오름차순 정렬</b>은 <code>TreeSet</code>의 기본 동작이라 위 세 함정이 처음부터 생기지 않습니다. 배열 풀이를 알아 두는 것은 <b>"자료구조가 대신해 주던 일이 무엇이었나"</b>를 알기 위해서예요 — 크기 산정·중복 검사·유효 길이 관리가 전부 직접 해야 할 일이었다는 것이 위 세 실수로 드러납니다. → <a href="#util-03">🛠️ 03. Set 계열 — HashSet vs LinkedHashSet vs TreeSet</a></p>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>제출본의 실패를 실제로 재현했다 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>--- ② 합이 0인 값이 사라지는가 ---
+[0,0,1] 기대 [0, 1] / 제출본 [1]
+
+--- ① 고유한 합이 100개를 넘으면 ---
+0~99 (길이 100) 고유한 합 197개
+제출본 → ArrayIndexOutOfBoundsException: Index 100 out of bounds for length 100
+
+--- 정정본 · TreeSet본 ---
+공식 예제 2건 / 원소 0~3·길이 2~5 조합 전수 1,360건
+제한 범위 안 무작위 5,000건 / 전부 0 · 전부 100 · 길이 상한 경계
+모두 통과</pre><div class="run-note"><b>기댓값은 <code>TreeSet</code>도 배열 누적도 아닌 <code>boolean[201]</code> 존재표로 따로 만들었습니다.</b> 검증 대상과 검증 방식이 같은 원리를 쓰면, 같은 착각을 양쪽이 공유해 "통과"가 나올 수 있기 때문입니다.<br><br>
+①은 <b>바로 터지는 실패</b>라 오히려 찾기 쉽습니다. 무서운 쪽은 ②예요 — <b>에러 없이 답에서 0 하나만 빠집니다.</b> 입력에 0이 두 개 이상 없으면 재현조차 안 되니, 테스트 케이스를 잘못 고르면 "왜 틀렸는지 모르겠다"로 끝납니다.</div></details>
+<div class="ct-box"><div class="ct-box-title">📌 주요 개념 정리</div><ul style="margin:0;padding-left:18px;">
+<li style="margin:6px 0;"><b><code>int[]</code>의 기본값은 0</b> — "아직 안 씀"과 "값이 0"을 구분하지 못한다. 그래서 <code>count</code>를 따로 들고 다녀야 한다.</li>
+<li style="margin:6px 0;">고정 크기 배열을 쓰려면 <b>담을 수 있는 최대 개수를 먼저 계산</b>한다. 여기서는 0~200 = 201가지.</li>
+<li style="margin:6px 0;"><b>오름차순 정렬은 0을 맨 앞으로 보낸다</b> — 빈칸이 섞인 배열 전체를 정렬하면 유효 데이터와 뒤섞인다.</li>
+<li style="margin:6px 0;"><code>Arrays.copyOf(원본, 길이)</code>는 <b>0번부터 지정 길이만큼</b> 잘라 새 배열을 만든다. 정렬은 잘라낸 뒤에 한다.</li>
+<li style="margin:6px 0;"><b>중복 제거는 <code>HashSet</code>, 중복 제거 + 정렬은 <code>TreeSet</code></b> — 이 문제는 후자에 정확히 해당한다.</li>
+<li style="margin:6px 0;"><code>Set&lt;Integer&gt;</code>를 <code>int[]</code>로 바꿀 때는 <code>stream().mapToInt(Integer::intValue).toArray()</code>를 쓴다.</li>
+</ul></div>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+<details class="sc-q"><summary>numbers = [0, 0, 1] 일 때 제출본은 왜 0을 빠뜨리나?</summary><div class="sc-a">합 0을 넣으려는 순간 <code>same(0, temp)</code>가 <b>temp 전체</b>를 훑습니다. temp는 아직 거의 비어 있고 그 빈칸은 전부 0이죠. 그래서 "0은 이미 있다"고 판단해 건너뜁니다. <b>검사 범위를 <code>count</code>까지로 좁히면</b> 아직 아무것도 안 넣었으니 0을 정상적으로 추가합니다.</div></details>
+<details class="sc-q"><summary>temp를 넉넉히 500으로만 키우면 이 문제가 다 풀릴까?</summary><div class="sc-a">아니요. 크기는 ①만 해결합니다. <b>②(빈칸을 값으로 오인)와 ③(정답 0을 버림)은 그대로</b>예요. 오히려 배열이 클수록 빈칸이 많아져 ②가 더 잘 터집니다. 세 가지는 <b>원인이 각각 다른 버그</b>입니다.</div></details>
+<details class="sc-q"><summary>왜 정렬을 copyOf 뒤에 하나? 순서를 바꾸면?</summary><div class="sc-a">먼저 정렬하면 <b>빈칸 0들이 앞으로 몰려</b> 유효 데이터가 뒤로 밀립니다. 그 상태에서 앞에서 <code>count</code>개를 잘라내면 <b>빈칸만 가져오게</b> 되죠. 잘라내기 → 정렬 순서여야 유효 구간이 보존됩니다.</div></details></div>
+<p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>코딩테스트에서 <b>"중복 없이" + "오름차순"</b>이라는 두 단어가 같이 나오면 <code>TreeSet</code>을 반사적으로 떠올리면 됩니다. 배열로 직접 관리하겠다고 결정했다면 <b>①담을 최대 개수 ②유효 길이 변수 ③잘라내기 시점</b> 세 가지를 시작 전에 정해 두세요. 실무에서도 같은 함정이 나옵니다 — <b>0·빈 문자열·<code>null</code>을 "값이 없음"의 표시로 재사용하면</b> 진짜 0과 구분할 수 없게 됩니다. 그래서 별도의 길이 필드나 <code>Optional</code>, DB라면 <code>NULL</code>을 따로 두는 것이죠.</p></div></article>
+
+<article class="note-card" id="ct-33"><div class="note-head"><span class="note-num">17회차</span><h3>이름이 없는 동물의 아이디</h3><div class="note-tags"><span class="tag">SQL · IS NULL</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>NULL은 값이 아니라 "값이 없음"이라 <code>=</code>로 비교할 수 없다. <code>IS NULL</code>만 통한다.</p>
+<div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">SQL · 2026.09.21 · 17회차</span></div><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59039" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a> · <a href="coding-tests/2026-09-21/">📝 17회차 회차 노트</a><p>보호소에 들어올 당시 이름이 없었던 동물의 ID를 아이디 순으로 조회한다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT ANIMAL_ID
+FROM ANIMAL_INS
+WHERE NAME IS NULL
+ORDER BY ANIMAL_ID ASC;</code></pre></div><p><code>NULL</code>은 어떤 값과도 <b>같다고도 다르다고도 판정되지 않습니다.</b> 그래서 <code>NAME = NULL</code>은 에러가 아니라 <b>0건</b>이 나옵니다 — 조용히 빈 결과가 나오는 쪽이라 오히려 찾기 어렵죠. 반드시 <code>IS NULL</code> · <code>IS NOT NULL</code>을 씁니다.</p><p>또 <b>빈 문자열 <code>''</code>은 NULL이 아닙니다.</b> 이름 칸을 비워 저장한 데이터와 아예 이름이 없는 데이터를 같이 묶고 싶다면 조건을 따로 써 줘야 합니다. → <a href="#sql-14">🗄️ 14. NULL 함정</a></p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>WHERE NAME = NULL 은 에러인가, 0건인가?</summary><div class="sc-a"><b>0건</b>입니다. 문법은 맞아서 에러가 나지 않고, <code>NULL</code>과의 비교 결과가 참도 거짓도 아닌 <b>UNKNOWN</b>이라 어떤 행도 통과하지 못합니다. 같은 이유로 <code>NAME != NULL</code>도 0건입니다.</div></details><details class="sc-q"><summary>이름 칸에 빈 문자열이 저장된 행은 이 쿼리에 걸릴까?</summary><div class="sc-a">아니요. <code>''</code>는 <b>길이가 0인 값</b>이지 "값이 없음"이 아닙니다. 둘을 함께 찾으려면 <code>WHERE NAME IS NULL OR NAME = ''</code>처럼 조건을 따로 적어야 합니다.</div></details></div></div></article>
+
+<article class="note-card" id="ct-34"><div class="note-head"><span class="note-num">17회차</span><h3>있었는데요 없었습니다</h3><div class="note-tags"><span class="tag">SQL · INNER JOIN</span><span class="tag">DATETIME 비교</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>두 테이블에 모두 있는 개체만 비교하면 되므로 INNER JOIN이면 충분하다. 날짜는 과거가 작은 값이다.</p>
+<div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS · 제출 기록</span><span class="ct-badge ct-type">SQL · 2026.09.21 · 17회차</span></div><div class="ct-src"><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59043" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a> · <a href="coding-tests/2026-09-21/">📝 17회차 회차 노트</a><p>입양일이 보호 시작일보다 앞서는 잘못된 기록을 찾아, 보호 시작일이 빠른 순으로 조회한다.</p></div><div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 — DOCX 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT I.ANIMAL_ID, I.NAME
+FROM ANIMAL_INS I JOIN ANIMAL_OUTS O ON I.ANIMAL_ID = O.ANIMAL_ID
+WHERE O.DATETIME &lt; I.DATETIME
+ORDER BY I.DATETIME ASC;</code></pre></div>
+<ul><li><b>INNER JOIN</b> — 보호 기록과 입양 기록이 <b>둘 다 있는</b> 개체만 비교 대상입니다. 한쪽에만 있는 행은 애초에 비교할 짝이 없으므로 <code>JOIN</code>(= INNER JOIN)이 맞습니다. <code>LEFT JOIN</code>을 써도 짝 없는 행의 <code>NULL</code>이 <code>WHERE</code>에서 어차피 탈락해 결과는 같지만, <b>불필요한 행을 만들었다가 버리는</b> 셈이죠. → <a href="#sql-24">🗄️ 24. JOIN</a> · <a href="#sql-33">🗄️ 33. OUTER JOIN</a></li>
+<li><b>날짜 비교</b> — <code>DATETIME</code>은 <b>과거가 작은 값</b>입니다. "입양일이 보호 시작일보다 앞선다"가 곧 <code>O.DATETIME &lt; I.DATETIME</code>이에요. 날짜를 문자열처럼 따로 다룰 필요 없이 비교 연산자를 그대로 씁니다.</li>
+<li><b>정렬</b> — "보호 시작일이 빠른 순"이므로 <code>I.DATETIME</code> 오름차순입니다. <code>ASC</code>는 기본값이라 생략해도 되지만, 의도를 드러내려고 적었습니다.</li>
+<li><b>별칭(alias)</b> — 두 테이블에 <code>ANIMAL_ID</code>·<code>DATETIME</code>이라는 <b>같은 이름의 컬럼</b>이 있습니다. <code>I</code>·<code>O</code>로 짧은 별칭을 주지 않으면 어느 쪽 컬럼인지 매번 테이블 이름을 다 써야 하고, 빠뜨리면 <b>모호한 컬럼</b> 에러가 납니다.</li></ul>
+<details class="run-output"><summary><span class="run-tag">SQL 검증</span>스크립트만 제공한다 — 이번 정리에서는 실행하지 않았다</summary><pre>coding-tests/2026-09-21/verify-shelter-queries.sql
+  세션 임시 테이블만 사용, 수업 데이터·문제 원본은 건드리지 않음
+  ① IS NULL 이 고르는 건수   ② = NULL 은 0건   ③ 빈 문자열은 NULL 이 아니다
+  ④ INNER JOIN 이 짝 없는 행을 버린다   ⑤ 뒤집힌 기록만 골라낸다   ⑥ 정렬 순서
+
+이번 정리에서는 실행하지 않았다 — DB 접속 비밀번호가 환경에 없어 연결 실패
+위 설명은 손으로 따져 본 결과다.</pre></details>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인</div><details class="sc-q"><summary>ANIMAL_OUTS에만 있고 ANIMAL_INS에는 없는 동물은 결과에 나올까?</summary><div class="sc-a">아니요. INNER JOIN은 <b>양쪽 모두에서 짝을 찾은 행만</b> 남깁니다. 그런 "들어온 기록 없이 나간 기록"을 찾는 것이 목적이라면 그때는 <code>LEFT JOIN</code> + <code>IS NULL</code>을 써야 합니다 — 다른 문제죠.</div></details><details class="sc-q"><summary>ORDER BY를 O.DATETIME으로 바꾸면 무엇이 달라지나?</summary><div class="sc-a"><b>입양일 순</b>으로 정렬됩니다. 문제가 요구한 것은 "보호 시작일이 빠른 순"이라 <code>I.DATETIME</code>이 맞습니다. 두 컬럼 이름이 똑같아서 <b>별칭을 빼먹으면 어느 쪽인지 알 수 없게</b> 되는, 실수하기 좋은 자리입니다.</div></details></div>
+<p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>"데이터가 이상한 것을 찾아라"</b> 유형입니다 — 종료일이 시작일보다 빠르다, 수정 시각이 생성 시각보다 이르다 같은 <b>순서가 뒤집힌 기록</b>을 잡는 쿼리는 실무에서 자주 씁니다. 데이터 정합성 점검 배치가 대개 이 모양이에요. 포인트는 <b>두 시각을 같은 행에 놓는 것</b>이고, 그래서 거의 항상 JOIN이 먼저 나옵니다.</p></div></article>
 
 
 
@@ -21014,6 +21183,118 @@ System.err.println("[DB오류] " + step
                  + " | 오류코드=" + e.getErrorCode()
                  + " | " + e.getMessage());</code></pre></div><ul><li><b>같은 요청을 04 프로젝트에도 보내 보니 똑같이 실패했다.</b> 새로 만진 05의 문제가 아니라는 것이 그 자리에서 갈렸다. 바뀐 쪽과 안 바뀐 쪽을 같이 돌려 보는 것이 범위를 좁히는 가장 빠른 방법이다.</li><li>이클립스를 탐색기에서 직접 실행하면 실행기가 넣어 주던 <code>STUDY_DB_PASSWORD</code>가 프로세스에 없다. Tomcat은 이클립스의 환경을 물려받으므로 접속이 전부 실패한다.</li><li><code>INSERT INTO HKBOARD VALUES(NULL,?,?,?,SYSDATE())</code>처럼 컬럼 목록을 생략하면 테이블 컬럼이 바뀌는 순간 깨진다. <code>INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) VALUES(?,?,?,SYSDATE())</code>로 명시하고 AUTO_INCREMENT인 SEQ는 DB에 맡긴다.</li><li>교훈: <b>catch에서 조용히 false를 돌려주면 화면은 같은 얼굴을 한다.</b> 로그에 작업 이름과 SQLState를 남겨 두면 다음 사람이 5분 만에 찾는다.</li></ul></div></article>
 
+<article class="note-card" id="web-38"><div class="note-head"><span class="note-num">38</span><h3>스프링 첫 프로젝트 — 내가 하던 일을 누가 대신하는가</h3><div class="note-tags"><span class="tag">Spring 6.1</span><span class="tag">Maven</span><span class="tag">pom.xml</span><span class="tag">IoC</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>05까지 직접 손으로 하던 세 가지 — <b>jar 챙기기 · 요청 분기 코드 짜기 · 객체 만들기</b> — 를 각각 Maven · DispatcherServlet · 스프링 컨테이너가 대신 맡는다.</p>
+<p class="note-easy"><span class="easy-label">쉽게 말하면</span>04·05에서는 <b>내가 주방장이자 웨이터</b>였습니다. 재료(jar)를 직접 사다 넣고, 주문서(URL)를 읽어 어느 요리를 할지 직접 갈라내고, 그릇(객체)도 직접 꺼냈죠. 스프링은 <b>주방 설비가 이미 갖춰진 가게</b>입니다. 재료는 목록만 적어 주면 들어오고, 주문 분배는 정해진 직원이 하고, 그릇은 달라고 하면 나옵니다. 내가 쓰는 건 <b>"이 주문에는 이 요리"</b>라는 메뉴판 한 장뿐이에요.</p>
+<div class="note-concept">
+<div class="concept-block"><h4>① 라이브러리 — WEB-INF/lib 복사에서 pom.xml 선언으로</h4><p>05에서는 JSTL jar 2개를 <b>직접 내려받아 <code>WEB-INF/lib</code>에 넣었습니다</b>. 06은 Maven 프로젝트라 <code>pom.xml</code>에 <b>무엇이 필요한지만 적고</b>, 실제 jar는 Maven이 받아 옵니다. 게다가 그 jar가 또 필요로 하는 것(의존성의 의존성)까지 따라옵니다 — <code>spring-webmvc</code> 하나를 적으면 <code>spring-core</code>·<code>spring-beans</code>·<code>spring-web</code>이 함께 들어오죠.</p></div>
+<div class="concept-block"><h4>② 요청 분기 — 내가 만든 Controller 서블릿에서 DispatcherServlet으로</h4><p>04·05의 <code>BoardController</code>는 <b>내가 작성한 서블릿</b>이었습니다. <code>getRequestURI()</code>로 URL을 읽고 <code>if</code>·<code>switch</code>로 갈라 DAO를 부르고 forward 했죠. 스프링에서는 그 자리에 <b>이미 만들어진 <code>DispatcherServlet</code></b>이 들어섭니다. 나는 분기 코드를 쓰지 않고 <b><code>@RequestMapping</code>으로 "이 URL은 이 메서드"라고 표시만</b> 합니다.</p></div>
+<div class="concept-block"><h4>③ 객체 생성 — new 에서 컨테이너로 (IoC)</h4><p>지금까지는 필요한 객체를 <code>new</code>로 직접 만들었습니다. 스프링에서는 <b>컨테이너가 객체를 만들어 보관하고, 필요할 때 꺼내 줍니다</b>. <code>@Controller</code>가 붙은 클래스를 <code>component-scan</code>이 찾아 컨테이너에 등록하죠. 제어의 주도권이 내 코드에서 프레임워크로 넘어간다고 해서 <b>IoC(제어의 역전)</b>라고 부릅니다. — <b>05의 "WAS가 내 코드를 대신 실행한다"와 같은 이야기가 한 겹 더 안쪽에서 반복되는 것</b>입니다.</p></div>
+</div>
+<div class="note-code"><div class="code-head"><span class="code-lang">XML</span><span class="code-file">pom.xml — 무엇이 필요한지만 적는다</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;properties&gt;
+  &lt;java-version&gt;21&lt;/java-version&gt;
+  &lt;org.springframework-version&gt;6.1.13&lt;/org.springframework-version&gt;
+  &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+&lt;/properties&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+  &lt;version&gt;${org.springframework-version}&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!-- Tomcat 10.1 = jakarta 네임스페이스. javax 버전을 쓰면 안 된다 --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;jakarta.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;6.0.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;   &lt;!-- 톰캣이 이미 갖고 있으므로 war에 넣지 않는다 --&gt;
+&lt;/dependency&gt;</code></pre></div>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul>
+<li><b><code>${...}</code>로 버전을 한곳에</b> 모아 두면 스프링 버전을 올릴 때 <code>properties</code> 한 줄만 고치면 된다.</li>
+<li><b><code>&lt;scope&gt;provided&lt;/scope&gt;</code></b>는 "컴파일할 때는 필요하지만 <b>서버가 이미 갖고 있으니 war에는 넣지 말라</b>"는 뜻이다. 서블릿·JSP API가 여기 해당한다. 넣으면 톰캣 것과 충돌한다.</li>
+<li>패키징이 <code>war</code>다 — 톰캣에 올리는 웹 애플리케이션이라는 뜻이다.</li>
+<li>오늘 pom에는 <b>MyBatis · spring-jdbc · commons-dbcp2 · MariaDB 드라이버</b>가 미리 들어 있다. 아직 쓰지 않지만 <b>다음 진도가 DB 연동</b>이라는 예고다.</li>
+</ul></div>
+<p class="practice-note"><span class="pn-label">💼 실무·면접에서는</span><b>"스프링을 왜 쓰나"</b>는 면접 단골입니다. "편해서"보다 <b>"객체의 생성·연결을 내가 아니라 컨테이너가 하기 때문에, 바꿔 끼우기 쉽고 테스트하기 쉬워진다"</b>로 답하는 게 좋습니다. 05까지 <b>직접 만들어 본 Controller·DAO가 있다는 것이 여기서 강점</b>이 됩니다 — 프레임워크가 무엇을 대신해 주는지 비교할 대상이 있으니까요.</p></div></article>
+
+<article class="note-card" id="web-39"><div class="note-head"><span class="note-num">39</span><h3>요청이 스프링 안에서 지나는 길 — web.xml · DispatcherServlet · ViewResolver</h3><div class="note-tags"><span class="tag">DispatcherServlet</span><span class="tag">component-scan</span><span class="tag">ViewResolver</span><span class="tag">@RequestMapping</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span><code>*.do</code> 요청을 DispatcherServlet이 받아 <code>@RequestMapping</code>이 붙은 메서드를 찾고, 메서드가 돌려준 <b>이름</b>에 ViewResolver가 앞뒤를 붙여 JSP 경로를 만든다.</p>
+<div class="note-concept">
+<div class="concept-block"><h4>web.xml에 설정이 두 벌인 이유</h4><p><b>root-context.xml</b>은 <code>ContextLoaderListener</code>가 읽고, <b>servlet-context.xml</b>은 <code>DispatcherServlet</code>이 읽습니다. 나누는 기준은 <b>"화면과 상관있는가"</b>예요. Controller·ViewResolver처럼 <b>웹 화면에 딸린 것</b>은 servlet-context에, DB·서비스처럼 <b>화면과 무관하게 애플리케이션 전체가 쓰는 것</b>은 root-context에 둡니다. 오늘 root-context.xml은 <code>&lt;beans&gt;</code>만 있고 비어 있는데, <b>DB 설정이 들어올 자리</b>이기 때문입니다.</p></div>
+<div class="concept-block"><h4><code>*.do</code> 매핑 — 04의 <code>*.board</code>와 같은 발상</h4><p>04에서 <code>*.board</code>로 끝나는 요청을 내 Controller 서블릿에 몰아줬던 것과 <b>똑같은 방식</b>입니다. 다만 받는 쪽이 내 클래스가 아니라 스프링의 <code>DispatcherServlet</code>이라는 점만 다르죠. <code>*.do</code>로 끝나지 않는 요청(정적 파일 등)은 애초에 스프링을 거치지 않습니다.</p></div>
+<div class="concept-block"><h4>ViewResolver — "이름"만 돌려주면 경로는 붙여 준다</h4><p>04·05에서는 <code>request.getRequestDispatcher("boardlist.jsp").forward(...)</code>처럼 <b>경로를 직접</b> 적었습니다. 스프링에서는 메서드가 <code>"home"</code>이라는 <b>이름만</b> 돌려주면, <code>InternalResourceViewResolver</code>가 <b>prefix + 이름 + suffix</b>를 조립해 <code>/WEB-INF/views/home.jsp</code>를 찾습니다. 화면 폴더 구조가 바뀌어도 <b>Controller는 그대로</b>인 것이 이 구조의 이점입니다.</p></div>
+<div class="concept-block"><h4>한글 깨짐 — 05의 EncodeFilter가 이미 만들어져 있다</h4><p>04·05에서 직접 작성했던 <code>EncodeFilter</code>와 같은 일을 하는 <code>CharacterEncodingFilter</code>가 스프링에 들어 있습니다. <code>web.xml</code>에 등록만 하면 되죠. <code>forceEncoding=true</code>는 <b>요청뿐 아니라 응답 인코딩까지</b> 강제한다는 뜻입니다.</p></div>
+</div>
+<div class="note-code"><div class="code-head"><span class="code-lang">XML</span><span class="code-file">web.xml — 설정 두 벌과 *.do 매핑</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;!-- ① 전역 설정: 리스너가 읽는다 (DB 등 화면과 무관한 것) --&gt;
+&lt;context-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;/WEB-INF/spring/root-context.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;listener&gt;
+  &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+
+&lt;!-- ② 화면 설정: DispatcherServlet이 읽는다 (Controller · ViewResolver) --&gt;
+&lt;servlet&gt;
+  &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/spring/appServlet/servlet-context.xml&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;  &lt;!-- 첫 요청을 기다리지 않고 시작할 때 미리 만든다 --&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang">XML</span><span class="code-file">servlet-context.xml — 네 줄이 하는 일</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;mvc:annotation-driven/&gt;                     &lt;!-- @Controller 방식을 쓰겠다 --&gt;
+&lt;mvc:resources location="/resources/" mapping="/**"/&gt;  &lt;!-- 정적 파일 경로 --&gt;
+
+&lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+  &lt;property name="prefix" value="/WEB-INF/views/" /&gt;
+  &lt;property name="suffix" value=".jsp" /&gt;
+&lt;/bean&gt;
+
+&lt;context:component-scan base-package="com.hk.board" /&gt;  &lt;!-- 이 패키지에서 @Controller를 찾아 등록 --&gt;</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">HomeController.java — 분기 코드가 사라졌다</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@Controller
+public class HomeController {
+
+    @RequestMapping(value = "/home.do", method = RequestMethod.GET)
+    public String home() {
+        // 페이지 이름만 작성한다
+        // --&gt; WEB-INF/views + home + .jsp : ViewResolver가 해 준다
+        return "home";
+    }
+}</code></pre></div>
+<div class="flow-diagram"><div class="flow-row">
+<div class="flow-box leaf"><b>/home.do</b><span>브라우저 요청</span></div>
+<div class="flow-arrow">*.do 매핑</div>
+<div class="flow-box"><b>DispatcherServlet</b><span>스프링이 제공</span></div>
+<div class="flow-arrow">@RequestMapping</div>
+<div class="flow-box"><b>home()</b><span>"home" 반환</span></div>
+<div class="flow-arrow">ViewResolver</div>
+<div class="flow-box leaf"><b>/WEB-INF/views/home.jsp</b><span>prefix + 이름 + suffix</span></div>
+</div></div>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul>
+<li><b><code>@Controller</code>는 "컨테이너야 이 클래스를 등록해"라는 표시</b>이고, 실제로 찾아 등록하는 것은 <code>component-scan</code>이다. 둘 중 하나만 있으면 동작하지 않는다.</li>
+<li><b>메서드가 돌려주는 것은 경로가 아니라 이름</b>이다. 경로는 ViewResolver의 prefix·suffix가 만든다.</li>
+<li><b><code>/WEB-INF/</code> 아래는 브라우저가 직접 열 수 없다.</b> 그래서 JSP를 그 안에 두면 <b>반드시 Controller를 거치게</b> 강제할 수 있다 — 04·05에서 JSP가 밖에 있어 직접 호출이 가능했던 것과 달라진 점이다.</li>
+<li><code>load-on-startup</code>은 <b>첫 요청 때 초기화하느라 느려지는 것</b>을 막는다. 설정 오류도 배포 시점에 바로 드러난다.</li>
+</ul></div></div></article>
+
+<article class="note-card" id="web-40"><div class="note-head"><span class="note-num">40</span><h3>오늘 프로젝트의 상태 — 확인한 것과 아직 아닌 것</h3><div class="note-tags"><span class="tag">2026-09-22</span><span class="tag">알려진 한계</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>06은 "한 화면이 뜨는 것까지"의 뼈대다. 미완인 부분을 고치지 않고 그대로 두되, 무엇이 왜 미완인지는 적어 둔다.</p>
+<ul>
+<li><b><code>main.do</code>는 아직 화면을 찾지 못한다.</b> <code>HomeController</code>에 <code>main()</code>이 <code>"main"</code>을 돌려주도록 작성돼 있지만, <code>/WEB-INF/views/</code>에는 <code>home.jsp</code>만 있고 <code>main.jsp</code>가 없다. ViewResolver가 만든 경로에 파일이 없으니 화면을 찾지 못한다 — <b>"이름만 돌려주면 된다"의 뒷면</b>으로, 이름과 파일이 어긋나도 <b>컴파일 시점에는 아무도 알려 주지 않는다</b>.</li>
+<li><b><code>root-context.xml</code>은 비어 있다.</b> <code>&lt;beans&gt;</code> 껍데기만 있는 상태다. 반면 <code>pom.xml</code>에는 MyBatis·spring-jdbc·DBCP·MariaDB 드라이버가 이미 들어 있어, <b>DB 설정이 여기 들어올 예정</b>임을 알 수 있다.</li>
+<li><b><code>mvc:resources</code>의 mapping이 <code>/**</code>다.</b> 보통은 <code>/resources/**</code>처럼 좁게 잡는다. <code>/**</code>는 <b>DispatcherServlet이 받은 요청 전부</b>를 정적 자원 후보로 본다는 뜻인데, 지금은 매핑이 <code>*.do</code>뿐이고 핸들러 매핑이 먼저 조회되어 동작에 문제가 없다. 다만 <b>범위를 좁히는 편이 의도가 분명하다</b>.</li>
+<li><b><code>web.xml</code>의 <code>metadata-complete="true"</code></b>는 "애너테이션(<code>@WebServlet</code> 등)을 스캔하지 말고 이 파일만 보라"는 뜻이다. 03에서 <code>@WebServlet</code>으로 등록하던 방식과 반대인데, 스프링에서는 <b>등록을 DispatcherServlet 하나에 몰아 두기</b> 때문에 문제가 없다. 템플릿이 만들어 준 설정은 손대지 않았다 — 수업 진도 그대로 남기는 것이 이 저장소의 원칙이다.</li>
+</ul>
+<div class="note-points"><div class="note-points-title">이번 정리에서 확인한 범위</div><ul>
+<li><b>확인함</b> — 이클립스 m2e가 <code>pom.xml</code>의 의존성을 내려받아 <code>HomeController</code>를 컴파일했다(<code>target/classes</code>에 <code>.class</code> 생성). 소스 7개 파일은 워크스페이스 원본과 동일하다.</li>
+<li><b>확인하지 않음</b> — 톰캣에 배포해 <code>/home.do</code>를 브라우저로 열어 본 기록은 이 정리에 없다. 위 "화면이 뜬다"는 설명은 <b>설정을 읽고 따진 결과</b>다.</li>
+</ul></div>
+<p class="practice-note"><span class="pn-label">💼 실무에서는</span>"이름으로 화면을 찾는" 구조는 <b>오타가 실행 시점까지 숨는다</b>는 대가를 치릅니다. <code>return "hom"</code>이라고 써도 컴파일은 통과하고, 그 URL을 눌러 봐야 알 수 있죠. 그래서 실무에서는 <b>화면 이름을 상수로 모아 두거나</b>, 최소한 <b>컨트롤러마다 한 번은 실제로 열어 보는</b> 것으로 대응합니다.</p></div></article>
+
 
 
 
@@ -21027,7 +21308,7 @@ System.err.println("[DB오류] " + step
 
     <div class="journey-intro">
       <h3>💡 이 탭을 보는 법</h3>
-      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 Java·SQL을 연결한 웹 개발 단계</b>입니다. <a href="#class-day34">9월 18일 진도</a>에서 Filter·Session·MVC2 전환을 복습하세요.</p>
+      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 직접 만든 웹 구조를 프레임워크로 넘기는 단계</b>입니다. <a href="#class-day36">9월 22일 진도</a>에서 스프링 MVC 첫 프로젝트를 복습하세요.</p>
     </div>
 
     <div class="journey-list">
@@ -21378,7 +21659,7 @@ System.err.println("[DB오류] " + step
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 19단계 중 웹 개발 2단계(18~19)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>까지 왔습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 20단계 중 웹 개발 3단계(18~20)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
@@ -21484,6 +21765,32 @@ System.err.println("[DB오류] " + step
           <li>반복과 분기는 <b>태그</b>로 쓴다 — <code>&lt;c:forEach&gt;</code> · <code>&lt;c:choose&gt;</code>. 여닫는 짝이 HTML과 같은 모양이라 구조가 보인다.</li>
           <li>04와 05를 가르는 것은 기능이 아니라 <b>화면을 그리는 방법</b> 하나다 — 자바 코드는 그대로다.</li>
           <li>이 단계가 <b>📅 34~35일차 수업</b>입니다. → <a href="#class-day35">35일차 진도 보기</a></li>
+        </ul>
+      </article>
+
+      <article class="journey-step" id="journey-web-03">
+        <div class="journey-step-head">
+          <span class="journey-num">20</span>
+          <h3>만들던 것을 프레임워크에 넘긴다 — 스프링 MVC</h3>
+          <a class="journey-jump" href="#web-38">전체 카드 보기 →</a>
+        </div>
+        <p class="journey-recap">앞 두 단계에서 <b>요청 분기는 서블릿으로, 화면 로직은 태그로</b> 각각 빼냈습니다. 그런데 그 서블릿은 <b>여전히 내가 직접 짠 것</b>이었어요 — URL을 읽고, 조건문으로 갈라내고, forward 경로를 적는 일이 매 프로젝트마다 반복됐습니다. 스프링은 <b>그 반복되는 부분을 통째로 가져갑니다.</b> 내가 남기는 것은 "이 URL은 이 메서드"라는 표시와 화면 이름뿐입니다.</p>
+        <div class="flow-diagram">
+          <div class="flow-row">
+            <div class="flow-box leaf"><b>JSP 한 장</b><span>받고 · 조회하고 · 그린다</span></div>
+            <div class="flow-arrow">MVC2</div>
+            <div class="flow-box"><b>내 Controller</b><span>분기를 직접 짠다</span></div>
+            <div class="flow-arrow">Spring</div>
+            <div class="flow-box leaf"><b>@RequestMapping</b><span>표시만 하면 된다</span></div>
+          </div>
+        </div>
+        <div class="journey-label">여기서 잡는 감각</div>
+        <ul class="journey-points">
+          <li><b>제어의 주도권이 한 겹 더 넘어간다</b> — 28일차에 "WAS가 내 코드를 실행한다"를 배웠고, 여기서는 <b>객체를 만드는 일까지</b> 컨테이너가 가져갑니다(IoC).</li>
+          <li>라이브러리는 <b>가져다 넣는 것이 아니라 선언하는 것</b>이 됩니다 — <code>pom.xml</code>에 적으면 의존성까지 따라옵니다.</li>
+          <li><b>화면은 경로가 아니라 이름으로</b> 부릅니다 — prefix·suffix를 ViewResolver가 붙입니다.</li>
+          <li>직접 만들어 본 04·05가 있어야 <b>"무엇이 사라졌는지"</b>가 보입니다. 프레임워크부터 배우면 이 비교 대상이 없습니다.</li>
+          <li>이 단계가 <b>📅 36일차 수업</b>입니다. → <a href="#class-day36">36일차 진도 보기</a></li>
         </ul>
       </article>
 
