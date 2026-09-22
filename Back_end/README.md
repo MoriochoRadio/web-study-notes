@@ -1,7 +1,7 @@
 # Back_end — 백엔드(Java) 과정
 
 
-**2026-09-22 갱신:** 36일차 [스프링 MVC 첫 프로젝트](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day36) 진도를 반영했다. [`06_spring_template`](web_edu_project/06_spring_template) 추가 — Maven·DispatcherServlet·ViewResolver가 05까지 직접 짜던 코드를 대신하기 시작한다. [17회차 코딩테스트](coding-tests/2026-09-21/)(JAVA 2 · SQL 2, 3 PASS 1 FAIL)도 함께 정리했고, 16회차는 이후 직접 풀어 제출해 PASS 한 기록을 반영했다.
+**2026-09-22 갱신:** 36일차 [스프링 MVC 첫 프로젝트](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day36) 진도를 반영했다. [`06_spring_template`](web_edu_project/06_spring_template) 추가 — Maven·DispatcherServlet·ViewResolver가 05까지 직접 짜던 코드를 대신하기 시작한다. [17회차 코딩테스트](coding-tests/2026-09-21/)(JAVA 2 · SQL 2, 3 PASS 1 FAIL)도 함께 정리했다 — FAIL 한 문제는 제출본의 실패를 실제로 재현했고, SQL 두 문제는 제출 쿼리를 임시 테이블 픽스처에 그대로 돌려 결과를 확인했다. 16회차는 이후 직접 풀어 제출해 PASS 한 기록을 반영했다.
 
 **2026-09-21 갱신:** 35일차 [EL·JSTL](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day35) 진도를 반영했다. [`05_hkboard_MVC2_JSTL`](web_edu_project/05_hkboard_MVC2_JSTL) 추가 — 04를 복사해 화면만 EL·JSTL로 바꾼 프로젝트라 [04와의 차이](web_edu_project/README.md)가 그대로 학습 포인트가 된다.
 
