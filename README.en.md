@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-09-23 update:** Added [day 37 Spring MVC/MyBatis notes](Back_end/index.html#class-day37), the current 06/07 class sources, and [coding-test round 18](Back_end/coding-tests/2026-09-23/). The original results remain two Java FAILs and two SQL PASSes. Missing Java submissions are explicitly marked; local checks cover the supplied solutions, not a regrading of those submissions. Database credentials and build artifacts are excluded.
+
 🇰🇷 [한국어](README.md) · 🇬🇧 English
 
 This repository keeps both the original practice code from a job academy course and review notes reorganized for rapid study. Since 2026-08, the frontend and backend tracks have been separated; each track contains source exercises, a dashboard, and its own guide.
@@ -13,7 +15,7 @@ As of the repository review on 2026-08-13, the frontend curriculum is reflected 
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Java daily exercises · concept cards · 12 practice problems · 102 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Java daily exercises · concept cards · 12 practice problems · 170 exam-prep questions | 🔄 In progress (started 2026-08-03) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.

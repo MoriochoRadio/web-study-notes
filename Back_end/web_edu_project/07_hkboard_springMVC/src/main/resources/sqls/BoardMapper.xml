@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성: 반드시 정의하자 -->
+<mapper namespace="com.hk.board.dao">
+ <!-- id는 쿼리 이름정의
+      resultType은 쿼리의 결과에 대한 타입 정의
+  -->
+ 	<select id="boardList" resultType="HkDto">
+ 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE 
+		FROM HKBOARD ORDER BY REGDATE DESC 
+ 	</select>
+ 	
+ 	<insert id="insertBoard" parameterType="HkDto">
+ 		INSERT INTO HKBOARD
+ 		VALUES(NULL,#{id},#{title},#{content},SYSDATE()) 
+ 	</insert>
+ 	
+ 	<select id ="getBoard" parameterType="Integer" resultType="HkDto">
+ 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE 
+		FROM HKBOARD WHERE SEQ = #{seq}
+ 	</select>
+ 	
+ 	<update id="updateBoard" parameterType="HkDto">
+ 		UPDATE HKBOARD SET TITLE=#{title},CONTENT=#{content}
+				   WHERE SEQ = #{seq}
+ 	</update>
+ 	
+ 	<delete id="deleteBoard" parameterType="HkDto">
+ 		DELETE FROM HKBOARD WHERE SEQ = #{seq}
+ 	</delete>
+ 	
+<!-- 여러글 삭제
+	다이나믹쿼리(동적쿼리)
+	파라미터: String[]seqs={1,2,3,4,5}
+	이렇게 되어있는걸 갖다가 Map{"seqs",seqs} 로 전달하겠다는 얘기임
+ -->
+ 	<delete id="mulDel" parameterType="Map">
+ 		DELETE FROM HKBOARD WHERE SEQ IN
+ 		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
+ 		#{seq}
+ 		</foreach>
+ 	</delete>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  
+<!-- 변수 설정: Mapper.xml에서 DTO객체를 쉽게 정의하기 위해 설정
+com.hk.board.dtos.TestDto : 길어서 매번 작성 불편함 -->
+  <typeAliases>
+  	<typeAlias type="com.hk.board.dtos.TestDto" alias="TestDto"/>
+  </typeAliases>
+<!-- datasource 설정은 root-content.xml에서 설정하자 -->
+  <mappers>
+    <mapper resource="sqls/BoardMapper.xml"/>
+  </mappers>
+</configuration>

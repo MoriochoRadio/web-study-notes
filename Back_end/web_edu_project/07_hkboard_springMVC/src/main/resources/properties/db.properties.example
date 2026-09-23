@@ -1,0 +1,5 @@
+# Copy to db.properties and fill in your local database account.
+driver=org.mariadb.jdbc.Driver
+url=jdbc:mariadb://localhost:3306/hk
+username=YOUR_DB_USER
+password=YOUR_DB_PASSWORD

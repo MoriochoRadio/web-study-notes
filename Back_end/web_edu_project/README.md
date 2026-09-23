@@ -1,8 +1,8 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-09-22(36일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day36)
+> 최신 상태: 2026-09-23(37일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 목록 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day37)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
 > 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
@@ -26,6 +26,7 @@
 | [`04_hkboard_MVC2`](04_hkboard_MVC2) | 요청 분기를 JSP에서 Servlet으로. `*.board` URL 매핑 + `getRequestURI()`, Filter로 UTF-8 처리 | web-29~31 |
 | [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
 | [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
+| [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시.** Controller 요청은 목록까지만 구현 | web-41~46 |
 
 ## 개발 환경
 
@@ -457,6 +458,8 @@ Tomcat 10부터 `javax` → `jakarta`로 바뀐 여파가 taglib URI에도 온�
 
 ## 06_spring_template — 스프링 MVC 첫 프로젝트
 
+**2026-09-23 추가:** 오늘 `TestDto`, MyBatis Configuration·빈 Mapper, root-context의 DataSource·SqlSessionFactory·SqlSessionTemplate 설정이 추가됐다. 아래 9월 22일 기록의 "DB 미연결"은 그날의 상태다. 현재 소스를 실행할 때는 `src/main/resources/properties/db.properties.example`을 `db.properties`로 복사하고 로컬 접속 정보를 채운다. 실제 접속 정보는 공개하지 않는다.
+
 2026-09-22(36일차)에 만든 **Maven 기반 스프링 웹 프로젝트**다. 게시판 기능은 아직 없고,
 `/home.do` 요청 하나가 화면까지 도달하는 **최소 경로**만 갖춘 상태다.
 
@@ -523,10 +526,19 @@ DAO·DTO는 아직 그대로다. **바뀐 것은 "요청을 받아 화면까지 
 
 01~05와 달리 **Maven 프로젝트**라 `WEB-INF/lib`에 jar를 넣지 않는다. Eclipse에서 Import 후
 `Maven > Update Project`로 의존성을 받고, Tomcat 10.1에 올린 뒤 `/06_spring_template/home.do`로 연다.
-DB를 쓰지 않으므로 `STUDY_DB_*` 환경변수도 필요 없다.
+9월 22일에는 DB를 쓰지 않았지만, 9월 23일 소스부터는 위의 `db.properties` 준비가 필요하다.
 
 ### 이번 갱신의 검증 범위
 
 - **확인함** — 이클립스 m2e가 `pom.xml`의 의존성을 내려받아 `HomeController`를 컴파일했다(`target/classes`에 `.class` 생성). 저장소에 넣은 소스 7개는 워크스페이스 원본과 동일하다.
 - **확인하지 않음** — 톰캣에 배포해 `/home.do`를 브라우저로 열어 본 기록은 이번 정리에 없다. 위 설명은 **설정을 읽고 따진 결과**다.
 - `target/`은 빌드 산출물이라 저장소에 넣지 않는다(`.gitignore`에 추가).
+
+
+## 07_hkboard_springMVC — Spring과 MyBatis 게시판 목록
+
+[프로젝트 실행 안내와 구현 범위](07_hkboard_springMVC/README.md) · [37일차](../index.html#class-day37)
+
+06에서 설정한 DB 연결을 07의 실제 게시판에 사용한다. 인터페이스 기반 Service·DAO, `@Autowired`, `SqlSessionTemplate`, `namespace.id`, DTO 별칭, `foreach` 다중 삭제 SQL이 오늘의 핵심이다. 원본 Java·JSP·XML·pom.xml을 보존하고 DB 설정은 예제 파일로 대체했다.
+
+Controller는 `/boardlist.do` 하나만 처리한다. DAO·Service·Mapper에 등록·상세·수정·삭제 메서드가 있어도, 아직 웹 요청에 연결되지 않았으므로 CRUD 완성으로 표시하지 않았다. 오늘 확인한 오류는 Maven 클래스패스 누락, `.board`와 `.do` 불일치, 로컬 DB 인증, 이전 리소스가 남은 배포 문제다. 메인·목록은 로컬 HTTP 200까지 검증했다.
