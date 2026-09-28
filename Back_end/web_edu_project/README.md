@@ -192,12 +192,21 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 
 ## 앞으로
 
-교육자료 기준 다음 진도입니다.
+> 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 이번에 교육과정 전체
+> 자료를 기준으로 다시 맞췄다. **지금(2026-09-23, 37일차·07번 프로젝트)까지 3번
+> 항목이 끝났다.** 4번부터는 아직 수업 전이라 프로젝트도 없다.
 
-1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차에 진행)
-2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차에 진행 — 지금 이 프로젝트)
-3. **MVC2** — Servlet · JSTL · EL · MyBatis ← 다음
-4. **심화** — 답변형 게시판, Connection Pool
+1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
+2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차, 01~02 프로젝트)
+3. ~~**MVC2 → Spring MVC 전환** — Servlet · Filter · EL · JSTL · MyBatis · Spring 첫 프로젝트~~
+   (34~37일차, 03~07 프로젝트) ← **여기까지 완료**
+4. **답변형 게시판 심화** — 페이징 처리, Connection Pool(DBCP), 조회수 ← 다음
+5. **Spring 답변형 게시판** — log4j 로깅, AOP, `@Transactional` 트랜잭션 전파, JUnit 단위테스트
+6. **파일 업로드 · 다운로드**
+7. **일정관리(캘린더) 게시판** — Spring MVC로 월별 달력·일정 CRUD
+8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환
+9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수
+10. **Spring Security + Spring Boot 회원관리·게시판 종합**
 
 ## 고친 것 · 남긴 것
 
