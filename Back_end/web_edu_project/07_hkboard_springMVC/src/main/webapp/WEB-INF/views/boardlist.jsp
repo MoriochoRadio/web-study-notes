@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	// 글쓰기 폼 요청: controller를 통해 처리
 	function boardInsertForm(){
-		location.href="boardInsertForm.board";
+		location.href="boardInsertForm.do";
 	}
 	
 	//전체 선택 체크박스 기능
@@ -51,7 +51,7 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<form action="muldel.board" method="post" onsubmit="return isAllCheck()">
+<form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
 <!-- <input type="hidden" name="command" value="muldel"/> -->
 	<table border="1" id="boardList">
 		<tr>
@@ -76,11 +76,12 @@
 						<td>${dto.seq}</td>
 						<td>${dto.id}</td>
 						<td>
-							<a href="boardDetail.board?seq=${dto.seq}">
+							<a href="boardDetail.do?seq=${dto.seq}">
 						    ${dto.title}
 						    </a>
 						</td>
-						<td>${dto.regDate}</td>
+						<td><fmt:formatDate value="${dto.regDate}"
+						                    pattern="yyyy년 MM월 dd일"/> </td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

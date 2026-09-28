@@ -42,4 +42,6 @@
  		#{seq}
  		</foreach>
  	</delete>
+ 	
+ 	
 </mapper>

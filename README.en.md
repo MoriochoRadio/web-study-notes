@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-09-28 update:** Added [day 38 notes](Back_end/index.html#class-day38) — the 07 board now maps insert, detail, update and multi-delete requests to controller methods — and [coding-test round 19](Back_end/coding-tests/2026-09-28/) (3 PASS, 1 FAIL with no submitted code). The class source for `home.do` fails on this machine because the build does not use `-parameters`, so Spring 6.1 cannot resolve an unannotated `String` parameter name; this was reproduced by calling Spring's resolver directly. CRUD requests were not executed against Tomcat and the database in this update.
+
 **2026-09-23 update:** Added [day 37 Spring MVC/MyBatis notes](Back_end/index.html#class-day37), the current 06/07 class sources, and [coding-test round 18](Back_end/coding-tests/2026-09-23/). The original results remain two Java FAILs and two SQL PASSes. Missing Java submissions are explicitly marked; local checks cover the supplied solutions, not a regrading of those submissions. Database credentials and build artifacts are excluded.
 
 🇰🇷 [한국어](README.md) · 🇬🇧 English

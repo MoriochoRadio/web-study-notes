@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>글 추가하기</h1>
-<form action="boardInsert.board" method="post">
+<form action="boardInsert.do" method="post">
 <!-- 	<input type="hidden" name="command" value="boardInsert"/> -->
 	<table border="1">
 		<tr>
@@ -29,7 +29,7 @@
 			<td colspan="2">
 				<input type="submit" value="글등록"/>
 				<input type="button" value="글목록"
-				 onclick="location.href='boardController.jsp?command=boardlist'"/>
+				 onclick="location.href='boardlist.do'"/>
 			</td>
 		</tr>
 	</table>

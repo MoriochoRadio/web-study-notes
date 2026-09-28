@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>글 상세보기</h1>
-	<form action="boardUpdate.board" method="post">
+	<form action="boardUpdate.do" method="post">
 <!-- 		<input type="hidden" name="command" value="boardUpdate"/> -->
 		<input type="hidden" name="seq" value="${requestScope.dto.seq}" />
 		<table border="1">
@@ -42,7 +42,7 @@
 	<script type="text/javascript">
 		function boardDelete(seq){
 			if(confirm("정말 삭제하겠습니까?")){
-				location.href='boardDelete.board?seq='+seq;
+				location.href='mulDel.do?seq='+seq;
 			}
 		}
 	</script>

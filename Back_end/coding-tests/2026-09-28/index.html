@@ -1,0 +1,81 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>19회차 코딩테스트 · 2026-09-28</title><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}.copy-btn{display:none}.code-head{font-size:.8rem;color:#586c89}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}.warn{border-left:4px solid #d68a00;background:#fff7e6;padding:10px 14px;border-radius:6px}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num,.code-head{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}.warn{background:#2b2314;border-left-color:#e0a83a}}</style></head><body><main><nav><a href="../../index.html#class-day38">38일차 수업</a> / <a href="../../index.html#ct-39">백엔드 코딩테스트</a> / <a href="README.md">Markdown 기록</a></nav><h1>19회차 코딩테스트</h1><p>2026-09-28 · Java 2문제 · SQL 2문제 · <b>3 PASS / 1 FAIL</b></p><p>FAIL 한 크레인 문제는 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. 나머지 세 문제는 제출 코드를 그대로 보존했다. 아래 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-39"><div class="note-head"><span class="note-num">19회차</span><h3>나머지가 1이 되는 수 찾기</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>n을 x로 나눈 나머지가 1이면 x는 n−1을 나누어떨어지게 한다. 답은 n−1의 약수 중 1을 뺀 가장 작은 것.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>사탕 n개를 x명에게 똑같이 나눠 주고 1개가 남으려면, 1개를 빼 둔 n−1개가 딱 나눠떨어져야 한다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge">2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/87389" target="_blank" rel="noopener">문제 원문</a> · <a href="RemainderOne.java">제출 코드</a></p>
+<pre><code>class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        for(int i=1;i&lt;=n;i++){
+            if(n%i==1){
+                answer = i;
+                break;
+            }
+        }
+        return answer;
+    }
+}</code></pre>
+<ul><li><code>i=1</code>부터 시작해도 괜찮다 — <code>n % 1</code>은 항상 0이라 조건에 걸리지 않는다.</li><li>처음 걸린 <code>i</code>에서 <code>break</code> 하므로 <b>가장 작은</b> x가 답이다.</li><li>가장 오래 도는 경우는 n−1이 소수일 때(약 n번). n ≤ 1,000,000이라 제한 안이다.</li></ul>
+<details><summary>로컬 검증</summary><pre>3~50,000 전수 + 무작위 20,000 + 최악(n−1이 소수) 20개 → 70,020개 통과
+기댓값: 에라토스테네스 체로 만든 "n−1의 가장 작은 소인수" 표 (제출 코드와 계산 방식이 다름)</pre></details></div></article>
+
+<article class="note-card" id="ct-40"><div class="note-head"><span class="note-num">19회차</span><h3>크레인 인형뽑기 게임</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>열은 고정하고 행을 위에서 아래로 내려가 처음 만난 인형 하나만 집는다. 바구니는 스택 — 맨 위와 같으면 둘 다 사라진다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>뽑기 기계의 크레인은 한 번에 하나만 집고, 바구니에서는 맨 위에 올려둔 인형만 보인다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge">2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/64061" target="_blank" rel="noopener">문제 원문</a> · <a href="CraneGame.java">정답 풀이</a></p>
+<p><b>제출 코드: 원문에 없음.</b> FAIL 결과와 정답 풀이만 남아 있다. 아래는 "어디서 틀렸는가"가 아니라 "무엇을 알아야 풀 수 있는가"의 정리다.</p>
+<pre><code>Stack&lt;Integer&gt; basket = new Stack&lt;&gt;();
+for (int m : moves) {
+    int col = m - 1;                          // moves는 1부터 센 번호
+    for (int row = 0; row &lt; board.length; row++) {
+        if (board[row][col] != 0) {
+            int doll = board[row][col];
+            board[row][col] = 0;              // 집은 자리는 비운다
+            if (!basket.isEmpty() &amp;&amp; basket.peek() == doll) {
+                basket.pop();
+                answer += 2;                  // 사라진 인형은 2개
+            } else {
+                basket.push(doll);
+            }
+            break;                            // 하나 집었으면 다음 명령으로
+        }
+    }
+}</code></pre>
+<table><tr><th>놓치기 쉬운 곳</th><th>이유</th></tr><tr><td><code>m - 1</code></td><td>사람 기준 1번 칸 → 배열 0번 인덱스</td></tr><tr><td><code>board[row][col] = 0</code></td><td>비우지 않으면 같은 열을 다시 뽑을 때 같은 인형이 또 나온다</td></tr><tr><td><code>break</code></td><td>없으면 그 열의 인형을 한 번에 전부 집는다. <b>공식 예제에서 break만 빼면 4가 아니라 6</b>(비교용 시연)</td></tr><tr><td><code>answer += 2</code></td><td>세는 것은 터진 횟수가 아니라 사라진 인형 수</td></tr></table>
+<p><code>basket.peek() == doll</code>은 <code>Integer</code>와 <code>int</code>의 비교라 값을 풀어서(언박싱) 비교한다. 둘 다 <code>Integer</code>였다면 <code>==</code>는 주소 비교다. 이 문제는 인형 번호가 100 이하라 캐시 범위 안에서 우연히 맞겠지만, 객체끼리는 <code>equals</code>가 안전하다.</p>
+<p>오답노트의 개념 정리에는 배열과 <code>ArrayList</code>의 문법 차이도 있다 — <code>arr.length</code> vs <code>list.size()</code>, <code>arr[i]</code> vs <code>list.get(i)</code>.</p>
+<details><summary>로컬 검증</summary><pre>공식 예제 = 4 (기대 4)
+비교: break 를 뺀 형태는 같은 예제에서 6 — 한 번에 여러 개를 집는다
+무작위 보드 20,000개 통과 (N 5~30, moves 1~1000)
+기댓값: 열마다 인형을 ArrayDeque에 담아 두고 꺼내는 별도 시뮬레이션</pre></details></div></article>
+
+<article class="note-card" id="ct-41"><div class="note-head"><span class="note-num">19회차</span><h3>어린 동물 찾기 <small>(원문 제목: 이름이 있는 동물의 아이디)</small></h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>"어린 것"을 찾는 대신 "Aged가 아닌 것"으로 조건을 뒤집는다. <code>&lt;&gt;</code>는 "같지 않다".</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>늙은 동물만 빼고 나머지를 전부 고른다. 다만 상태가 비어 있는(NULL) 동물도 같이 빠진다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge">2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59037" target="_blank" rel="noopener">문제 원문 (어린 동물 찾기)</a> · <a href="intake-not-aged.sql">제출 코드</a></p>
+<p class="warn"><b>기록 주의.</b> 오답노트의 제목은 "이름이 있는 동물의 아이디"다. 하지만 그 문제는 <a href="../2026-09-23/">18회차</a>에서 이미 풀었고, 이번 제출 SQL(ANIMAL_ID·NAME 조회, <code>INTAKE_CONDITION &lt;&gt; 'Aged'</code>, ID순)은 <b>"어린 동물 찾기"의 요구사항과 정확히 일치</b>한다. 제목 칸이 지난 회차 양식에서 남은 것으로 보고 공식 문제명을 썼다.</p>
+<pre><code>SELECT ANIMAL_ID, NAME
+from ANIMAL_INS
+where INTAKE_CONDITION &lt;&gt; 'Aged'
+order by ANIMAL_ID;</code></pre>
+<p><code>&lt;&gt; 'Aged'</code>는 <b>INTAKE_CONDITION이 NULL인 행도 함께 뺀다.</b> NULL과의 비교는 "알 수 없음"이라 WHERE를 통과하지 못한다. 이 문제는 해당 컬럼이 NOT NULL이라 상관없지만, NULL이 섞일 수 있다면 <code>OR INTAKE_CONDITION IS NULL</code>을 따로 적는다.</p>
+<details><summary>로컬 검증 (SQLite)</summary><pre>제출 SQL → A100|NULL, A300|보리, A400|두부     (Aged인 A200 제외)
+&lt;&gt; 'Aged' 결과 3행 — INTAKE_CONDITION이 NULL인 A500도 빠짐
+OR ... IS NULL 추가 → A100, A300, A400, A500
+(비교) '이름이 있는 동물의 아이디' 정답 형태 → A200, A300, A400, A500</pre></details></div></article>
+
+<article class="note-card" id="ct-42"><div class="note-head"><span class="note-num">19회차</span><h3>없어진 기록 찾기</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>OUTS를 기준으로 외부 조인하고 INS 쪽이 NULL인 행만 남기면 "OUTS에만 있는 것"이 된다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>입양 명단 옆에 입소 명단을 나란히 붙였을 때, 옆 칸이 비어 있는 동물이 기록이 없어진 동물이다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge">2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59042" target="_blank" rel="noopener">문제 원문</a> · <a href="missing-intake-records.sql">제출 코드</a></p>
+<pre><code>SELECT O.ANIMAL_ID, O.NAME
+from ANIMAL_INS I RIGHT JOIN ANIMAL_OUTS O ON I.ANIMAL_ID = O.ANIMAL_ID
+where I.ANIMAL_ID is null
+ORDER BY O.ANIMAL_ID;</code></pre>
+<ul><li><b>INNER JOIN으로는 못 찾는다</b> — 짝이 없는 행은 조인 단계에서 이미 사라진다.</li><li><code>INS I RIGHT JOIN OUTS O</code> = <code>OUTS O LEFT JOIN INS I</code>. 기준 테이블을 왼쪽에 두는 LEFT JOIN을 더 자주 쓴다. <code>NOT EXISTS</code>로도 같다.</li><li><b>SELECT는 O 쪽 컬럼.</b> 짝이 없는 행의 I 쪽 컬럼은 전부 NULL이다.</li><li><a href="../2026-09-21/">17회차 "있었는데요 없었습니다"</a>는 양쪽에 <b>다 있는</b> 동물을 비교했다. 이번에는 <b>한쪽에만 있는</b> 동물을 찾는다.</li></ul>
+<details><summary>로컬 검증 (SQLite)</summary><pre>제출 SQL                 → A700|해피, A900|누리
+OUTS LEFT JOIN INS       → A700|해피, A900|누리
+NOT EXISTS               → A700|해피, A900|누리
+INNER JOIN + IS NULL     → 0행
+SELECT I.ANIMAL_ID, I.NAME → NULL|NULL, NULL|NULL</pre></details></div></article>
+
+<article><h2>로컬 검증과 범위</h2><p>Java는 <code>CodingTest19Test.java</code>, SQL은 <code>verify-sql19.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB)로 확인했다. SQL 파일을 그대로 읽어 실행한다. 여기서 쓴 문법과 NULL 비교 규칙은 MySQL·MariaDB와 같으며, 대소문자 비교·문자셋처럼 DB마다 다른 부분은 검사하지 않았다. 로컬 MariaDB 접속 정보는 쓰지 않았다.</p></article>
+
+<footer><p><a href="RemainderOne.java">나머지가 1</a> · <a href="CraneGame.java">크레인 정답 풀이</a> · <a href="CodingTest19Test.java">Java 검증</a> · <a href="intake-not-aged.sql">SQL 1</a> · <a href="missing-intake-records.sql">SQL 2</a> · <a href="verify-sql19.mjs">SQL 검증</a></p></footer></main></body></html>

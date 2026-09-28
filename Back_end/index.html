@@ -1166,10 +1166,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 · SQL · 웹(JSP·Servlet·Spring) 수업을 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리한 노트입니다. <b>복습하러 왔다면 왼쪽 맨 위 🔁 복습 탭</b>에서 바로 시작하세요.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-23</span>
-      <span>📅 수업 37일차</span>
-      <span>🗂️ 노트 카드 264장</span>
-      <span>✏️ 시험 대비 170문제</span>
+      <span id="updated-badge">마지막 업데이트: 2026-09-28</span>
+      <span>📅 수업 38일차</span>
+      <span>🗂️ 노트 카드 274장</span>
+      <span>✏️ 시험 대비 175문제</span>
     </div>
     <a class="cross-link" href="../Front_end/">🎨 프론트엔드 학습 노트로 이동 →</a>
     <a class="cross-link" href="../setup/">🛠️ 새 노트북 · 개발환경 준비 →</a>
@@ -1199,9 +1199,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">38</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">42</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">46</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">51</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1280,16 +1280,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <details class="overview-fold">
       <summary>📊 전체 분량 한눈에 보기</summary>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">36</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">37</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">38</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">42</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">46</div><div class="l">🖥️ 웹 개발 항목</div></div>
-      <div class="stat-card journey"><div class="n">21</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card web"><div class="n">51</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card journey"><div class="n">22</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -7327,6 +7327,13 @@ public class D3_ChatClient {
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>어제 만든 Spring MVC 뼈대에 DB 조회를 붙이고 역할을 Controller·Service·DAO로 나눴다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>어제는 화면 이름만 돌려줬고, 오늘은 실제 DB에서 꺼낸 목록을 화면에 보낸다.</div>
 <p>오전 06에서 DB 연결 설정과 MyBatis 별칭·Mapper 등록을 연습한 뒤, 07에서 게시판 목록을 연결했다.</p><ol><li><code>root-context.xml</code>에 접속 정보·DBCP·SqlSessionFactory·SqlSessionTemplate 등록.</li><li><code>IHkDao / HkDao</code>, <code>IHKService / HkService</code> 계층 분리.</li><li>Mapper XML에 목록·등록·상세·수정·삭제·다중 삭제 SQL 작성.</li><li><code>BoardController</code>의 목록 메서드에서 Model로 JSP에 전달.</li></ol><p><a href="#web-41">요청 흐름</a> · <a href="#web-42">의존성 주입</a> · <a href="#web-43">DB 연결</a> · <a href="#web-44">Mapper 이름</a> · <a href="#web-45">foreach</a> · <a href="#web-46">오늘의 오류</a></p><p>18회차: <a href="#ct-35">정수 내림차순(FAIL)</a> · <a href="#ct-36">폰켓몬(FAIL)</a> · <a href="#ct-37">이름이 있는 동물(PASS)</a> · <a href="#ct-38">헤비 유저(PASS)</a>.</p><p><b>구현 범위:</b> Controller의 웹 요청은 목록 하나까지다. DAO에 메서드가 있다는 사실과 화면 버튼까지 동작한다는 사실을 구분한다. <a href="web_edu_project/07_hkboard_springMVC/README.md">원본 소스·실행 안내</a></p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>목록에 글이 나오려면 무엇이 모두 맞아야 할까?</summary><div class="sc-a">JSP의 링크, DispatcherServlet 매핑, Controller 주소, Service·DAO 주입, Mapper 전체 이름, DB 접속, Model 이름과 JSP의 EL이 연결되어야 한다.</div></details></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>06의 설정 연습과 07의 실제 목록 구현을 둘 다 보존했다.</li><li>등록·수정·삭제의 Controller 연결은 다음 구현 범위다.</li></ul></div></div></article>
+<article class="note-card" id="class-day38"><div class="note-head"><span class="note-num">38일차</span><h3>2026-09-28 · Spring MVC 게시판 CRUD 요청 연결</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>37일차에 목록만 연결했던 07 게시판에 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 하나씩 붙였다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>04·05에서 <code>getRequestURI()</code>와 if문으로 갈라내던 요청을, 이제는 메서드마다 주소표(<code>@RequestMapping</code>)를 붙여 스프링이 알아서 찾아가게 했다.</div>
+<ol><li>JSP의 링크·폼 주소를 <code>.board</code>에서 <code>.do</code>로 바꿨다 — 글쓰기 폼, 상세, 수정, 삭제, 목록 버튼.</li><li><code>BoardController</code>에 <code>boardInsertForm</code>·<code>boardInsert</code>·<code>boardDetail</code>·<code>boardUpdate</code>·<code>mulDel</code> 메서드 추가.</li><li>폼 값은 <code>HkDto</code>로 한 번에 받고(커맨드 객체), 체크박스 여러 개는 <code>@RequestParam("seq") String[]</code>로 받았다.</li><li>저장·수정·삭제가 끝나면 <code>redirect:</code>로 목록이나 상세로 다시 보낸다.</li><li>같은 URL을 GET·POST로 나누는 <code>@GetMapping</code>·<code>@PostMapping</code>을 빈 메서드로 연습했다.</li><li>목록의 작성일을 <code>&lt;fmt:formatDate&gt;</code>로 "yyyy년 MM월 dd일" 형식으로 바꿨다.</li></ol>
+<p><a href="#web-47">요청 매핑표</a> · <a href="#web-48">파라미터 바인딩</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a> · <a href="#web-51">GET·POST와 삭제</a> · <a href="web_edu_project/07_hkboard_springMVC/README.md">07 소스와 실행 안내</a></p>
+<p>19회차 코딩테스트 — <a href="#ct-39">나머지가 1이 되는 수 찾기</a>(PASS) · <a href="#ct-40">크레인 인형뽑기 게임</a>(FAIL) · <a href="#ct-41">어린 동물 찾기</a>(PASS) · <a href="#ct-42">없어진 기록 찾기</a>(PASS)</p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>글을 저장한 뒤 return "boardlist" 가 아니라 "redirect:boardlist.do" 인 이유는?</summary><div class="sc-a">forward로 목록을 보여 주면 주소창이 여전히 <code>boardInsert.do</code>(POST)라서 새로고침하면 같은 글이 또 저장됩니다. redirect는 브라우저가 목록 주소로 새 GET 요청을 보내게 하므로 새로고침해도 목록만 다시 읽습니다.</div></details><details class="sc-q"><summary>home.do 의 String param 에 @RequestParam 을 붙이지 않으면 이 PC에서 어떻게 되나?</summary><div class="sc-a">이 PC의 Eclipse·Maven 설정은 <code>-parameters</code> 옵션 없이 컴파일합니다. 그러면 Spring 6.1은 매개변수 이름을 알 수 없어 <code>IllegalArgumentException</code>을 냅니다. <code>@RequestParam("param")</code>으로 이름을 적어 주거나 컴파일 옵션을 켜야 합니다.</div></details></div>
+<div class="note-points"><div class="note-points-title">오늘 코드의 상태</div><ul><li>확인함 — 오늘 수정한 Java 6개 파일이 JDK 21로 컴파일된다(<code>-parameters</code>가 있을 때와 없을 때 모두).</li><li>확인함 — <code>home.do</code>의 <code>String param</code>은 이 PC의 빌드 설정에서 이름을 읽지 못해 예외가 난다. 스프링의 매개변수 해석기에 직접 넣어 재현했다(<a href="#web-49">자세히</a>).</li><li>확인하지 않음 — 톰캣에서 글쓰기·상세·수정·삭제를 실제 DB로 눌러 본 기록은 이번 정리에 없다.</li><li>미완 — <code>mulDel2.do</code>의 GET·POST 메서드는 빈 문자열을 돌려주는 연습용 자리다. 실패 시 <code>redirect:error.jsp</code>는 <code>error.jsp</code>가 <code>/WEB-INF/views</code> 안에 있어 브라우저가 열 수 없다(파일 위치로 따진 결과).</li></ul></div></div></article>
 </div>
   </section>
 
@@ -16233,6 +16240,81 @@ ORDER BY ID ASC;</code></pre></div><p><code>GROUP BY HOST_ID</code>로 사람별
 각 호스트가 1개씩만 남은 경우: 0건
 빈 테이블: 0건</code></pre></div><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>COUNT(*) &gt;= 2를 WHERE에 바로 적으면 될까?</summary><div class="sc-a">같은 쿼리 단계의 WHERE는 개별 행을 거르고, HAVING은 그룹의 집계 결과를 거른다. 이 풀이에서는 HAVING에 써야 한다.</div></details></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li><code>&gt;= 2</code>이므로 정확히 2개인 호스트도 포함한다.</li><li>결과가 여러 호스트일 수 있어 <code>=</code> 대신 <code>IN</code>으로 비교한다.</li><li>두 SQL 합계 8개 검증 통과. 실제 수업 테이블은 변경하지 않았다.</li></ul></div></div></article>
+<article class="note-card" id="ct-39"><div class="note-head"><span class="note-num">19회차</span><h3>나머지가 1이 되는 수 찾기</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>n을 x로 나눈 나머지가 1이면 x는 n−1을 나누어떨어지게 한다. 답은 n−1의 약수 중 1을 뺀 가장 작은 것.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>사탕 n개를 x명에게 똑같이 나눠 주고 1개가 남으려면, 1개를 빼 둔 n−1개가 딱 나눠떨어져야 한다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/87389" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-09-28/">19회차 전체 기록</a></p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        for(int i=1;i&lt;=n;i++){
+            if(n%i==1){
+                answer = i;
+                break;
+            }
+        }
+        return answer;
+    }
+}</code></pre></div>
+<p><code>i=1</code>부터 시작해도 괜찮다 — <code>n % 1</code>은 항상 0이라 조건에 걸리지 않는다. 처음 걸린 <code>i</code>에서 <code>break</code> 하므로 <b>가장 작은</b> x가 답이다. 가장 오래 도는 경우는 n−1이 소수일 때(약 n번)지만 n ≤ 1,000,000이라 제한 안이다. 원문 제목은 '나머지가 1이 되는 수'로 축약되어 있어 공식 문제명을 썼다.</p>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>기댓값을 다른 방식으로 만들어 비교</summary><pre>3~50,000 전수 + 무작위 20,000 + 최악(n−1이 소수) 20개 → 70,020개 통과
+기댓값: 에라토스테네스 체로 만든 "n−1의 가장 작은 소인수" 표</pre></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>"나머지가 r" ⇔ "(n−r)이 나누어떨어진다" — 나머지 문제를 약수 문제로 바꾼다.</li><li>가장 작은 값을 찾을 때는 작은 쪽부터 돌다가 처음 찾으면 <code>break</code>.</li></ul></div></div></article>
+<article class="note-card" id="ct-40"><div class="note-head"><span class="note-num">19회차</span><h3>크레인 인형뽑기 게임</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>열은 고정하고 행을 위에서 아래로 내려가 처음 만난 인형 하나만 집는다. 바구니는 스택 — 맨 위와 같으면 둘 다 사라진다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>뽑기 기계의 크레인은 한 번에 하나만 집고, 바구니에서는 맨 위에 올려둔 인형만 보인다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/64061" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-09-28/">19회차 전체 기록</a></p>
+<p><b>제출 코드: 원문에 없음.</b> FAIL 결과와 정답 풀이만 남아 있다. 아래는 "어디서 틀렸는가"가 아니라 "무엇을 알아야 풀 수 있는가"의 정리다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">정답 풀이 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">Stack&lt;Integer&gt; basket = new Stack&lt;&gt;();
+for (int m : moves) {
+    int col = m - 1;                          // moves는 1부터 센 번호
+    for (int row = 0; row &lt; board.length; row++) {
+        if (board[row][col] != 0) {
+            int doll = board[row][col];
+            board[row][col] = 0;              // 집은 자리는 비운다
+            if (!basket.isEmpty() &amp;&amp; basket.peek() == doll) {
+                basket.pop();
+                answer += 2;                  // 사라진 인형은 2개
+            } else {
+                basket.push(doll);
+            }
+            break;                            // 하나 집었으면 다음 명령으로
+        }
+    }
+}</code></pre></div>
+<table><thead><tr><th>놓치기 쉬운 곳</th><th>이유</th></tr></thead><tbody><tr><td><code>m - 1</code></td><td>사람 기준 1번 칸 → 배열 0번 인덱스</td></tr><tr><td><code>board[row][col] = 0</code></td><td>비우지 않으면 같은 열을 다시 뽑을 때 같은 인형이 또 나온다</td></tr><tr><td><code>break</code></td><td>없으면 그 열의 인형을 한 번에 전부 집는다. 공식 예제에서 break만 빼면 4가 아니라 6</td></tr><tr><td><code>answer += 2</code></td><td>세는 것은 터진 횟수가 아니라 사라진 인형 수</td></tr></tbody></table>
+<p><code>basket.peek() == doll</code>은 <code>Integer</code>와 <code>int</code>의 비교라 값을 풀어서(언박싱) 비교한다. 둘 다 <code>Integer</code>였다면 <code>==</code>는 주소 비교가 된다 — 이 문제는 인형 번호가 100 이하라 캐시 범위 안에서 우연히 맞겠지만, 객체끼리는 <code>equals</code>가 안전하다. → <a href="#oop-10">🧱 10. final · 상수와 Wrapper 클래스</a></p>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>정답 풀이를 별도 시뮬레이션과 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>공식 예제 = 4 (기대 4)
+비교: break 를 뺀 형태는 같은 예제에서 6 — 한 번에 여러 개를 집는다
+무작위 보드 20,000개 통과 (N 5~30, moves 1~1000)
+기댓값: 열마다 인형을 ArrayDeque에 담아 두고 꺼내는 별도 구현</pre><div class="run-note">"break를 뺀 형태"는 비교를 위해 만든 시연이다. 실제 제출본이 아니며, 실패 원인이라고 단정하지 않는다.</div></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>바깥 반복은 명령(moves), 안쪽은 탐색. 하나를 찾으면 <code>break</code>.</li><li>"마지막에 넣은 것과 비교"는 스택의 <code>peek</code> · <code>pop</code> · <code>push</code>.</li><li>오답노트 개념 정리: 배열은 <code>arr.length</code>·<code>arr[i]</code>, ArrayList는 <code>list.size()</code>·<code>list.get(i)</code>.</li></ul></div></div></article>
+<article class="note-card" id="ct-41"><div class="note-head"><span class="note-num">19회차</span><h3>어린 동물 찾기 (원문 제목: 이름이 있는 동물의 아이디)</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>"어린 것"을 찾는 대신 "Aged가 아닌 것"으로 조건을 뒤집는다. <code>&lt;&gt;</code>는 "같지 않다".</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>늙은 동물만 빼고 나머지를 전부 고른다. 다만 상태가 비어 있는(NULL) 동물도 같이 빠진다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59037" target="_blank" rel="noopener">문제 원문 (어린 동물 찾기)</a> · <a href="coding-tests/2026-09-28/">19회차 전체 기록</a></p>
+<p><b>기록 주의.</b> 오답노트의 제목은 "이름이 있는 동물의 아이디"다. 하지만 그 문제는 <a href="#ct-37">18회차</a>에서 이미 풀었고, 이번 제출 SQL(ANIMAL_ID·NAME 조회, <code>INTAKE_CONDITION &lt;&gt; 'Aged'</code>, ID순)은 <b>"어린 동물 찾기"의 요구사항과 정확히 일치</b>한다. 제목 칸이 지난 회차 양식에서 남은 것으로 보고 공식 문제명을 썼다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT ANIMAL_ID, NAME
+from ANIMAL_INS
+where INTAKE_CONDITION &lt;&gt; 'Aged'
+order by ANIMAL_ID;</code></pre></div>
+<p><code>&lt;&gt; 'Aged'</code>는 <b>INTAKE_CONDITION이 NULL인 행도 함께 뺀다.</b> NULL과의 비교는 "알 수 없음"이라 WHERE를 통과하지 못한다. 이 문제는 해당 컬럼이 NOT NULL이라 상관없지만, NULL이 섞일 수 있다면 <code>OR INTAKE_CONDITION IS NULL</code>을 따로 적는다. → <a href="#sql-14">🗄️ 14. NULL 함정</a></p>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>제출 SQL을 파일에서 그대로 읽어 SQLite에서 실행</summary><pre>제출 SQL → A100|NULL, A300|보리, A400|두부     (Aged인 A200 제외)
+&lt;&gt; 'Aged' 결과 3행 — INTAKE_CONDITION이 NULL인 A500도 빠짐
+OR ... IS NULL 추가 → A100, A300, A400, A500
+(비교) '이름이 있는 동물의 아이디' 정답 형태 → A200, A300, A400, A500</pre></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li><code>&lt;&gt;</code>와 <code>!=</code>는 같다.</li><li>NULL은 <code>=</code>에도 <code>&lt;&gt;</code>에도 걸리지 않는다. 없는 값은 <code>IS NULL</code>로만 찾는다.</li></ul></div></div></article>
+<article class="note-card" id="ct-42"><div class="note-head"><span class="note-num">19회차</span><h3>없어진 기록 찾기</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>OUTS를 기준으로 외부 조인하고 INS 쪽이 NULL인 행만 남기면 "OUTS에만 있는 것"이 된다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>입양 명단 옆에 입소 명단을 나란히 붙였을 때, 옆 칸이 비어 있는 동물이 기록이 없어진 동물이다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.09.28 · 19회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59042" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-09-28/">19회차 전체 기록</a></p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT O.ANIMAL_ID, O.NAME
+from ANIMAL_INS I RIGHT JOIN ANIMAL_OUTS O ON I.ANIMAL_ID = O.ANIMAL_ID
+where I.ANIMAL_ID is null
+ORDER BY O.ANIMAL_ID;</code></pre></div>
+<ul><li><b>INNER JOIN으로는 못 찾는다</b> — 짝이 없는 행은 조인 단계에서 이미 사라진다.</li><li><code>INS I RIGHT JOIN OUTS O</code> = <code>OUTS O LEFT JOIN INS I</code>. 기준 테이블을 왼쪽에 두는 LEFT JOIN을 더 자주 쓴다. <code>NOT EXISTS</code>로도 같다.</li><li><b>SELECT는 O 쪽 컬럼.</b> 짝이 없는 행의 I 쪽 컬럼은 전부 NULL이다.</li><li><a href="#ct-34">17회차 "있었는데요 없었습니다"</a>는 양쪽에 <b>다 있는</b> 동물을 비교했다. 이번에는 <b>한쪽에만 있는</b> 동물을 찾는다. → <a href="#sql-38">🗄️ 38. OUTER JOIN 실전</a></li></ul>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>같은 뜻의 쿼리 세 가지를 나란히 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>제출 SQL (RIGHT JOIN)       → A700|해피, A900|누리
+OUTS LEFT JOIN INS          → A700|해피, A900|누리
+NOT EXISTS                  → A700|해피, A900|누리
+INNER JOIN + IS NULL        → 0행
+SELECT I.ANIMAL_ID, I.NAME  → NULL|NULL, NULL|NULL</pre><div class="run-note">SQLite(Node 내장, 메모리 DB)로 확인했다. 여기서 쓴 JOIN·IS NULL·NOT EXISTS의 동작은 MySQL·MariaDB와 같다. 로컬 DB 접속 정보는 쓰지 않았다.</div></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>차집합 A − B = A 기준 외부 조인 + <code>WHERE B.키 IS NULL</code>.</li><li>조인하면 같은 이름의 컬럼이 두 개 생긴다. 항상 별칭(<code>O.</code>, <code>I.</code>)을 붙인다.</li></ul></div></div></article>
 </div>
   </section>
 
@@ -21581,6 +21663,103 @@ public HkDto getBoard(int seq) {
 GET /07_hkboard_springMVC/boardlist.do → 200
 목록 JSP + 실제 DB 조회까지 확인 (로컬 Tomcat 10.1)</code></pre></div><p>위 결과는 로컬 수업 환경에서 확인했다. GitHub Pages는 이 학습 노트를 보여 주는 정적 사이트이며 JSP·Spring 서버를 실행하지 않는다. 공개 소스를 실행하려면 예제 DB 설정을 본인 환경에 맞춰 채워야 한다.</p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>boardDetail.jsp 파일이 있는데 주소창으로 WEB-INF/views/boardDetail.jsp를 열면 되는가?</summary><div class="sc-a">안 된다. WEB-INF 아래의 자원은 직접 요청할 수 없다. 연결된 Controller가 뷰 이름을 반환해야 한다. 오늘 Controller에는 목록 메서드만 있다.</div></details></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>코드가 컴파일된다고 모든 URL이 존재하는 것은 아니다.</li><li>07의 등록·상세·수정·삭제 화면 링크는 아직 이전 구조가 남아 있다. 완성된 CRUD로 소개하지 않는다.</li><li><a href="web_edu_project/07_hkboard_springMVC/README.md">구현 범위와 실행 안내</a>를 먼저 확인한다.</li></ul></div></div></article>
+<article class="note-card" id="web-47"><div class="note-head"><span class="note-num">47</span><h3>요청 하나에 메서드 하나 — 게시판 CRUD 매핑표</h3><div class="note-tags"><span class="tag">@RequestMapping</span><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>MVC2의 Controller 서블릿이 URL을 보고 if문으로 갈라내던 일을, 스프링에서는 메서드마다 붙인 @RequestMapping이 대신한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>예전엔 안내 데스크 한 명이 모든 손님의 용건을 듣고 부서를 정해 줬다면, 이제는 문마다 부서 이름표가 붙어 있어 손님이 바로 찾아간다.</div>
+<table><thead><tr><th>URL</th><th>방식</th><th>받는 값</th><th>하는 일</th><th>돌려주는 것</th></tr></thead><tbody><tr><td><code>/boardlist.do</code></td><td>GET</td><td>—</td><td>목록 조회 → Model</td><td><code>"boardlist"</code> (forward)</td></tr><tr><td><code>/boardInsertForm.do</code></td><td>GET</td><td>—</td><td>빈 폼 보여 주기</td><td><code>"boardInsertForm"</code></td></tr><tr><td><code>/boardInsert.do</code></td><td>POST</td><td>id·title·content → <code>HkDto</code></td><td>글 저장</td><td><code>redirect:boardlist.do</code></td></tr><tr><td><code>/boardDetail.do</code></td><td>GET</td><td>seq → <code>HkDto pdto</code></td><td>한 건 조회 → Model</td><td><code>"boardDetail"</code></td></tr><tr><td><code>/boardUpdate.do</code></td><td>POST</td><td>seq·title·content → <code>HkDto</code></td><td>글 수정</td><td><code>redirect:boardDetail.do?seq=…</code></td></tr><tr><td><code>/mulDel.do</code></td><td>GET·POST</td><td><code>@RequestParam("seq") String[]</code></td><td>한 건 또는 여러 건 삭제</td><td><code>redirect:boardlist.do</code></td></tr></tbody></table>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.java — 글쓰기는 두 요청</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@RequestMapping(value = "boardInsertForm.do", method = RequestMethod.GET)
+public String boardInsertForm() {
+    return "boardInsertForm";               // 폼 화면만 보여 준다
+}
+
+@RequestMapping(value = "/boardInsert.do", method = RequestMethod.POST)
+public String boardInsert(HkDto dto) {      // id, title, content 가 dto 로 들어온다
+    boolean isS = hkService.insertBoard(dto);
+    if (isS) {
+        return "redirect:boardlist.do";
+    } else {
+        return "redirect:error.jsp";
+    }
+}</code></pre></div>
+<p>화면 쪽도 함께 바꿨다. 폼의 <code>action</code>과 링크를 <code>*.board</code>에서 <code>*.do</code>로 옮겨야 요청이 <code>web.xml</code>의 <code>*.do</code> 매핑을 거쳐 DispatcherServlet에 닿는다. 37일차에 목록 링크 하나를 고쳤던 것을 나머지 화면에 모두 적용한 것이다.</p>
+<p>글쓰기는 <b>폼을 보여 주는 GET</b>과 <b>저장하는 POST</b> 두 요청으로 나뉜다. 둘 다 "글쓰기"지만 하는 일이 다르므로 메서드도 다르다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>URL 하나당 메서드 하나. 분기 코드는 사라지고 메서드 목록이 곧 기능 목차가 된다.</li><li>화면을 보여 주는 요청은 GET, 데이터를 바꾸는 요청은 POST.</li><li>JSP의 주소와 <code>@RequestMapping</code> 값이 어긋나면 404다 — 37일차 <a href="#web-46">오류 좁히기</a>와 같은 원리.</li></ul></div></div></article>
+<article class="note-card" id="web-48"><div class="note-head"><span class="note-num">48</span><h3>폼 값이 자바 객체로 들어오는 방법 — 커맨드 객체와 @RequestParam</h3><div class="note-tags"><span class="tag">데이터 바인딩</span><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>매개변수를 DTO로 선언하면 스프링이 요청 파라미터 이름과 같은 필드를 setter로 채워 준다. 값 하나나 배열은 @RequestParam으로 이름을 적어 받는다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>택배 상자(HkDto)에 칸 이름(id·title·content)이 적혀 있어서, 같은 이름표가 붙은 물건(폼 값)이 알아서 제 칸에 들어간다.</div>
+<div class="note-concept"><div class="concept-block"><h4>① 커맨드 객체 — HkDto dto</h4><p>폼의 <code>&lt;input name="title"&gt;</code>은 <code>title=…</code>로 전송된다. 매개변수가 <code>HkDto dto</code>면 스프링이 <code>new HkDto()</code>를 만들고 <code>setTitle(…)</code>을 부른다. 이름이 필드와 같아야 하고 setter가 있어야 한다. <b>숫자 필드도 자동으로 변환</b>된다 — <code>seq=10</code>이 <code>int seq</code>로 들어간다. <a href="#web-10">getParameter는 전부 String</a>이라 <code>Integer.parseInt</code>를 직접 하던 때와 비교해 보자.</p></div>
+<div class="concept-block"><h4>② 값 하나 — 상세보기의 seq</h4><p>상세보기는 <code>?seq=10</code> 하나만 받는다. 오늘 코드는 <code>HkDto pdto</code>로 받아 <code>pdto.getSeq()</code>를 썼고, 주석으로 <code>@RequestParam("seq") int seq</code>도 남겨 두었다. 둘 다 동작한다. DTO는 받는 값이 늘어나도 매개변수가 그대로라는 장점이, <code>@RequestParam</code>은 무엇을 받는지 한눈에 보이는 장점이 있다.</p></div>
+<div class="concept-block"><h4>③ 같은 이름이 여러 개 — 체크박스</h4><p>목록의 체크박스는 모두 <code>name="seq"</code>라서 <code>seq=3&amp;seq=5&amp;seq=9</code>처럼 전송된다. <code>@RequestParam("seq") String[] seq</code>로 받으면 배열이 된다. 이 배열이 Service → DAO를 거쳐 Mapper의 <code>&lt;foreach&gt;</code>로 넘어가 <code>DELETE FROM HKBOARD WHERE SEQ IN (3, 5, 9)</code>가 된다.</p></div></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.java</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@RequestMapping(value = "/boardDetail.do", method = RequestMethod.GET)
+public String boardDetail(Model model,
+        //@RequestParam("seq") int seq) {
+        HkDto pdto) {                       // ?seq=10 → pdto.setSeq(10)
+    HkDto dto = hkService.getBoard(pdto.getSeq());
+    model.addAttribute("dto", dto);
+    return "boardDetail";
+}
+
+@RequestMapping(value = "/mulDel.do", method = {RequestMethod.GET, RequestMethod.POST})
+public String mulDel(@RequestParam("seq") String[] seq) {   // 체크박스 여러 개 → 배열
+    boolean isS = hkService.mulDel(seq);
+    ...
+}</code></pre></div>
+<p>DAO의 주석에는 <b>MyBatis로 값을 여러 개 넘기는 방법</b>도 적혀 있다. <code>sqlSession.insert(id, 파라미터)</code>는 파라미터를 하나만 받으므로, 여러 값은 DTO에 담고, DTO에 없는 이름이면 <code>Map</code>에 <code>put("num1", 5)</code>처럼 담아 넘긴다. Mapper의 <code>#{num1}</code>이 그 키를 읽는다. 다중 삭제도 배열을 Map의 <code>seqs</code> 키에 담아 넘긴다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>DTO 매개변수 = 이름이 같은 필드를 setter로 채움. 타입 변환도 스프링이 한다.</li><li>같은 name이 여러 개면 배열로 받는다.</li><li>MyBatis에 여러 값을 넘길 때는 DTO 또는 Map 하나로 묶는다.</li></ul></div></div></article>
+<article class="note-card" id="web-49"><div class="note-head"><span class="note-num">49</span><h3>이름을 안 적으면 왜 터지나 — Spring 6.1과 -parameters</h3><div class="note-tags"><span class="tag">@RequestParam</span><span class="tag">실제 재현</span><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>@RequestParam 없이 <code>String param</code>처럼 받으면 스프링은 매개변수 이름으로 요청 값을 찾는다. 그 이름은 -parameters 옵션으로 컴파일해야 class 파일에 남는데, 이 PC의 빌드는 그 옵션이 꺼져 있다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>"param이라고 적힌 상자를 줘"라고 해야 하는데, 컴파일하면서 이름표가 떨어져 나가 스프링이 무엇을 찾아야 할지 모르는 상태다.</div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.home — 오늘 코드 그대로</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@RequestMapping(value = "/home.do", method = RequestMethod.GET )
+public String home(Model model,
+            String param,   //"param"이라는 이름의 값이 넘어오면
+            HkDto dto,      // dto에 맴버필드명과 일치하는 값이 넘어오면
+            HttpServletRequest request) {
+    model.addAttribute("param", "파람");
+    return "home";//forward
+}</code></pre></div>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>스프링의 매개변수 해석기에 오늘 코드를 직접 넣어 봤다 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>── -parameters 없이 컴파일 (이 PC의 Eclipse·pom 설정과 같음) ──
+스프링이 읽은 매개변수 이름: null (이름 정보 없음)
+String param 해석 결과: IllegalArgumentException
+  메시지: Name for argument of type [java.lang.String] not specified,
+          and parameter name information not available via reflection.
+          Ensure that the compiler uses the '-parameters' flag.
+
+── -parameters 로 컴파일 ──
+스프링이 읽은 매개변수 이름: model, param, dto, request
+String param 해석 결과: null  → 정상 (값이 없으니 null)</pre><div class="run-note">Eclipse가 실제로 배포한 <code>BoardController.class</code>에도 매개변수 이름 정보(<code>MethodParameters</code>)가 <b>0건</b>이었다. 즉 이 PC에서 <code>/home.do</code>를 열면 이 예외로 요청이 실패한다. <b>강사님이 주석으로 남긴 "Spring6 에서는 파라미터 받을때 @RequestParam 명시하기"가 바로 이 상황</b>이다.<br><br>Spring 5까지는 디버그 정보에서 이름을 읽어 오는 방법도 함께 썼기 때문에 옵션 없이도 대부분 동작했다. Spring 6.1에서 그 방법이 빠졌다.</div></details>
+<table><thead><tr><th>매개변수</th><th>이름이 필요한가</th><th>이 PC에서</th></tr></thead><tbody><tr><td><code>String param</code> (애너테이션 없음)</td><td>필요 — 이름으로 요청 값을 찾음</td><td>❌ 예외</td></tr><tr><td><code>@RequestParam("seq") String[] seq</code></td><td>괄호 안에 적었음</td><td>✅</td></tr><tr><td><code>HkDto dto</code> (커맨드 객체)</td><td>불필요 — 필드 이름으로 채움</td><td>✅</td></tr><tr><td><code>Model</code>·<code>HttpServletRequest</code></td><td>불필요 — 타입으로 넣어 줌</td><td>✅</td></tr></tbody></table>
+<p><b>고치는 방법 두 가지.</b> ① 이름을 직접 적는다 — <code>@RequestParam(value = "param", required = false) String param</code>. 값이 없어도 되면 <code>required = false</code>를 함께 쓴다(기본값 true라 없으면 400). ② 컴파일 옵션을 켠다 — Maven은 <code>maven-compiler-plugin</code>에 <code>&lt;parameters&gt;true&lt;/parameters&gt;</code>, Eclipse는 Java Compiler 설정의 "Store information about method parameters". 수업 주석처럼 <b>①로 명시하는 습관</b>이 어느 빌드에서나 안전하다.</p>
+<p>하나 더 — <code>model.addAttribute("param", …)</code>의 이름 <code>param</code>은 JSP EL의 <b>내장 객체 이름과 같다</b>. JSP에서 <code>${param}</code>이라고 쓰면 모델 값이 아니라 요청 파라미터 묶음이 나온다. 오늘 <code>home.jsp</code>는 이 값을 출력하지 않아 드러나지 않았지만, 모델 이름으로 <code>param</code>·<code>header</code>·<code>cookie</code> 같은 EL 내장 이름은 피하는 편이 좋다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>Spring 6.1 + -parameters 없음 → 애너테이션 없는 단순 타입 매개변수는 예외.</li><li><code>@RequestParam("이름")</code>으로 적으면 빌드 설정과 무관하게 동작한다.</li><li>DTO·Model·request는 이름이 필요 없어 영향이 없다.</li></ul></div></div></article>
+<article class="note-card" id="web-50"><div class="note-head"><span class="note-num">50</span><h3>저장한 뒤엔 왜 redirect인가 — forward와 redirect</h3><div class="note-tags"><span class="tag">redirect:</span><span class="tag">PRG</span><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>뷰 이름만 돌려주면 forward, <code>redirect:</code>를 붙이면 브라우저에게 다른 주소로 새로 요청하라고 알린다. 데이터를 바꾼 뒤에는 redirect를 쓴다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>forward는 창구 직원이 안쪽 서류를 대신 가져다주는 것이고, redirect는 "저쪽 창구로 가세요"라며 번호표를 새로 뽑게 하는 것이다.</div>
+<table><thead><tr><th></th><th>forward — <code>return "boardlist"</code></th><th>redirect — <code>return "redirect:boardlist.do"</code></th></tr></thead><tbody><tr><td>요청 수</td><td>1번 (서버 안에서 JSP로 넘김)</td><td>2번 (브라우저가 새 주소로 다시 요청)</td></tr><tr><td>주소창</td><td>처음 주소 그대로</td><td>새 주소로 바뀜</td></tr><tr><td>Model 값</td><td>JSP에서 그대로 사용</td><td>사라짐 — 필요한 값은 주소에 실어 보냄</td></tr><tr><td>새로고침하면</td><td>처음 요청을 다시 보냄</td><td>마지막 GET만 다시 보냄</td></tr></tbody></table>
+<p><b>글을 저장한 뒤 forward로 목록을 보여 주면</b> 주소창은 여전히 <code>boardInsert.do</code>(POST)다. 새로고침하면 같은 글이 한 번 더 저장된다. 그래서 저장·수정·삭제 뒤에는 redirect로 GET 주소를 새로 열게 한다. 이 순서를 <b>PRG(Post → Redirect → Get)</b>라고 부른다. <a href="#web-13">sendRedirect</a>를 직접 부르던 것을 이제 문자열 한 줄로 쓴다.</p>
+<p>수정 뒤에는 <code>"redirect:boardDetail.do?seq=" + dto.getSeq()</code>로 보낸다. redirect는 Model이 사라지므로 <b>어느 글을 보여 줄지 seq를 주소에 실어</b> 다시 조회하게 한다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">실패했을 때의 경로 — 오늘 코드</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">} else {
+    return "redirect:error.jsp";   // 브라우저가 /07_hkboard_springMVC/error.jsp 를 새로 연다
+}</code></pre></div>
+<p>여기에는 함정이 있다. <code>error.jsp</code>는 <code>/WEB-INF/views/error.jsp</code>에 있다. redirect는 브라우저가 그 주소를 <b>직접</b> 여는 것이라 <code>WEB-INF</code> 안으로 들어갈 수 없고, 웹앱 바로 아래에는 <code>error.jsp</code>가 없다. 이 파일 배치 그대로라면 실패 시 화면을 찾지 못한다. <b>실행해서 확인한 것은 아니고</b> 파일 위치로 따진 결과다. 뷰 폴더의 화면을 보여 주려면 <code>return "error";</code>처럼 뷰 이름(forward)을 돌려주면 된다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>조회 결과를 보여 줄 때 → forward(뷰 이름).</li><li>데이터를 바꾼 뒤 → redirect(새 GET 요청). 새로고침 중복 저장 방지.</li><li>redirect는 Model이 사라진다. 필요한 값은 주소에 싣는다.</li><li><code>WEB-INF</code> 안의 JSP는 redirect로 열 수 없다.</li></ul></div></div></article>
+<article class="note-card" id="web-51"><div class="note-head"><span class="note-num">51</span><h3>같은 주소를 GET·POST로 나누기 — 그리고 삭제는 왜 POST인가</h3><div class="note-tags"><span class="tag">@GetMapping</span><span class="tag">@PostMapping</span><span class="tag">fmt:formatDate</span><span class="tag">2026-09-28</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>@GetMapping·@PostMapping은 @RequestMapping(method=…)의 줄임말이다. 주소가 같아도 방식이 다르면 다른 메서드로 보낼 수 있다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>같은 문이라도 "구경하러 온 손님(GET)"과 "물건을 맡기러 온 손님(POST)"을 다른 직원이 맞는다.</div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.java — 오늘 연습한 형태</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">//url패턴은 같으면서 로직을 다르게 처리할 경우
+@GetMapping("/mulDel2.do")
+public String mulDelGet(){ return ""; }
+
+@PostMapping("/mulDel2.do")
+public String mulDelPost() { return ""; }
+
+//삭제하는 기능은 post방식을 권장함
+// mulDel.do?seq=10 주소창에 노출되면 위험하다.
+@RequestMapping(value = "/mulDel.do", method = {RequestMethod.GET, RequestMethod.POST})
+public String mulDel(@RequestParam("seq") String[] seq) { ... }</code></pre></div>
+<p><code>mulDel2.do</code>의 두 메서드는 모양만 잡아 둔 <b>연습용 자리</b>다. 둘 다 빈 문자열을 돌려주고 연결된 화면이 없다.</p>
+<p>실제로 쓰는 <code>mulDel.do</code>는 <b>GET과 POST를 모두 받는다.</b> 목록에서는 체크박스 폼을 POST로 보내고, 상세보기의 삭제 버튼은 <code>location.href='mulDel.do?seq='+seq</code>로 GET을 보내기 때문이다. 그런데 주석에는 "삭제는 POST 권장"이라고 적혀 있다. 왜일까?</p>
+<ul><li><b>GET은 링크만 열어도 실행된다.</b> 주소를 공유하거나, 방문 기록에서 다시 열거나, 브라우저·메신저가 미리보기로 주소를 먼저 불러와도 삭제가 일어날 수 있다.</li><li><b>GET 주소는 기록에 남는다.</b> 브라우저 방문 기록과 서버 로그에 <code>seq=10</code>이 그대로 남는다.</li><li>그래서 데이터를 바꾸는 요청은 POST로 받고, 상세보기의 삭제 버튼도 폼을 POST로 제출하는 방식이 권장된다. 지금은 두 화면을 모두 살리려고 둘 다 열어 둔 상태다.</li></ul>
+<h4>작성일 형식 바꾸기 — fmt:formatDate</h4>
+<div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><span class="code-file">boardlist.jsp</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;%@taglib uri="jakarta.tags.fmt" prefix="fmt" %&gt;
+…
+&lt;td&gt;&lt;fmt:formatDate value="${dto.regDate}" pattern="yyyy년 MM월 dd일"/&gt;&lt;/td&gt;</code></pre></div>
+<p><code>fmt:formatDate</code>는 <code>java.util.Date</code>를 원하는 글자 모양으로 바꾼다. <code>HkDto</code>의 <code>regDate</code>가 <code>Date</code> 타입이라 바로 쓸 수 있다. 문자열 필드였다면 이 태그로는 바꿀 수 없다. 패턴의 <code>MM</code>은 월, <code>mm</code>은 분이다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li><code>@GetMapping("/x")</code> = <code>@RequestMapping(value="/x", method=GET)</code>.</li><li>같은 URL도 방식이 다르면 다른 메서드가 처리한다.</li><li>데이터를 바꾸는 요청(삭제 포함)은 POST로 받는 것이 원칙이다.</li><li><code>fmt:formatDate</code>는 Date 타입에만. <code>MM</code>(월)과 <code>mm</code>(분)을 헷갈리지 않는다.</li></ul></div></div></article>
 </div>
   </section>
 
@@ -21941,7 +22120,7 @@ GET /07_hkboard_springMVC/boardlist.do → 200
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 21단계 중 웹 개발 4단계(18~21)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 22단계 중 웹 개발 5단계(18~22)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다. <b>2026-09-28(38일차)에는 <a href="#journey-web-05">22단계 — CRUD 요청 연결</a></b>로 글쓰기·상세·수정·삭제를 Controller 메서드에 붙였습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
@@ -22078,6 +22257,7 @@ GET /07_hkboard_springMVC/boardlist.do → 200
 
 
 <article class="journey-step" id="journey-web-04"><div class="journey-step-head"><span class="journey-num">21</span><h3>Spring MVC에 DB 연결하기</h3><a class="journey-jump" href="#web-41">전체 카드 보기 →</a></div><p>20단계에서 만든 요청과 화면 사이의 길에 실제 DB 조회를 붙인다. Controller가 Service를 부르고, Service가 DAO를 부르며, DAO는 MyBatis의 statement 이름으로 SQL을 실행한다.</p><ul><li>수동 JDBC의 연결·문장·결과 매핑 중 반복 작업을 MyBatis와 DataSource에 맡긴다.</li><li>객체는 직접 new 하지 않고 인터페이스 타입으로 주입받는다.</li><li>아직 완성된 CRUD가 아니라 목록 요청까지 연결한 단계다.</li></ul><p><a href="#class-day37">37일차 진도</a> · <a href="#web-43">DB 연결 설정</a> · <a href="#web-46">404와 500 구분</a></p></article>
+<article class="journey-step" id="journey-web-05"><div class="journey-step-head"><span class="journey-num">22</span><h3>요청마다 메서드 하나 — 스프링 MVC로 CRUD 연결하기</h3><a class="journey-jump" href="#web-47">전체 카드 보기 →</a></div><p>21단계에서 목록 하나를 DB까지 연결했다. 이번에는 글쓰기·상세·수정·삭제를 같은 방식으로 붙인다. 요청 분기는 <code>@RequestMapping</code>이, 폼 값을 객체로 옮기는 일은 스프링의 바인딩이 맡는다. 남은 선택은 "저장한 뒤 어디로 보낼까"이고, 그 답이 redirect다.</p><ul><li>URL 하나에 메서드 하나 — MVC2의 if문 분기가 사라진다.</li><li>폼 값은 DTO로 한 번에, 같은 이름 여러 개는 배열로 받는다.</li><li>데이터를 바꾼 뒤에는 redirect(PRG) — 새로고침 중복 저장을 막는다.</li><li>Spring 6.1에서는 이름으로 받는 매개변수에 <code>@RequestParam("이름")</code>을 적는다.</li></ul><p><a href="#class-day38">38일차 진도</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a></p></article>
 </div>
   </section>
 
@@ -23542,7 +23722,7 @@ GET /07_hkboard_springMVC/boardlist.do → 200
 
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java · SQL 객관식 연습문제</h2></div>
-    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 32문항</b>까지, 총 <b>164문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
+    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 43문항</b>까지, 총 <b>175문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
 
     <div class="exam-box" id="exam-setup">
       <div class="exam-setup-row">
@@ -24815,6 +24995,11 @@ document.querySelectorAll(".note-code").forEach(box => {
     {"id": "w36", "cat": "WEB", "q": "selectList(\"com.hk.board.dao.boardList\")가 찾아야 하는 것은?", "ch": ["boardList.jsp", "HkDto의 boardList 필드", "namespace가 com.hk.board.dao이고 id가 boardList인 SQL", "boardList라는 DB"], "a": 2, "ex": "namespace.id 전체 문자열과 대소문자가 맞아야 한다. Java 패키지 이름과 자동으로 연결되는 방식이 아니다.", "link": ["#web-44", "37일차 복습"]},
     {"id": "w37", "cat": "WEB", "q": "foreach collection=\"seqs\"에서 seqs가 가리키는 것은?", "ch": ["이번 반복 원소", "Map에 넣은 배열의 키", "DB 컬럼 수", "삭제 결과 건수"], "a": 1, "ex": "map.put(\"seqs\", seqs)의 키와 collection을 맞춘다. item=\"seq\"는 현재 원소의 이름이다.", "link": ["#web-45", "37일차 복습"]},
     {"id": "w38", "cat": "WEB", "q": "Controller는 /boardlist.do인데 링크가 boardlist.board라면 먼저 볼 것은?", "ch": ["SQL 정렬", "DTO 생성자", "DB 비밀번호", "링크와 Servlet URL 매핑"], "a": 3, "ex": "요청이 Controller까지 도달하는지 먼저 본다. .board와 .do가 어긋난 404는 DB 접속 단계 전의 문제다.", "link": ["#web-46", "37일차 복습"]},
+    {"id": "w39", "cat": "WEB", "q": "Spring 6.1에서 -parameters 옵션 없이 컴파일했다. @RequestParam 없이 String param으로 받는 메서드를 호출하면?", "ch": ["param에 항상 null이 들어간다", "매개변수 이름을 알 수 없다는 IllegalArgumentException이 난다", "컴파일 오류가 난다", "첫 번째 요청 파라미터가 들어간다"], "a": 1, "ex": "Spring 6.1은 매개변수 이름을 -parameters로 컴파일된 정보에서만 읽는다. 이름을 모르면 어떤 요청 값을 넣을지 정할 수 없어 예외를 낸다. @RequestParam(\"param\")으로 이름을 적거나 컴파일 옵션을 켠다.", "link": ["#web-49", "38일차 복습"]},
+    {"id": "w40", "cat": "WEB", "q": "글을 저장한 뒤 return \"redirect:boardlist.do\"를 쓰는 가장 큰 이유는?", "ch": ["속도가 더 빠르다", "Model 값을 JSP에 넘기기 위해", "새로고침했을 때 같은 글이 다시 저장되는 것을 막기 위해", "WEB-INF 안의 JSP를 열기 위해"], "a": 2, "ex": "forward로 목록을 보여 주면 주소창이 POST 주소 그대로라 새로고침 시 저장이 반복된다. redirect는 브라우저가 목록 GET을 새로 요청하게 한다(PRG).", "link": ["#web-50", "38일차 복습"]},
+    {"id": "w41", "cat": "WEB", "q": "폼에서 name=\"title\", name=\"content\"로 보낸 값을 Controller 매개변수 HkDto dto로 받을 수 있는 조건은?", "ch": ["HkDto에 같은 이름의 필드와 setter가 있다", "HkDto가 인터페이스다", "폼이 반드시 GET이다", "매개변수에 @Autowired를 붙인다"], "a": 0, "ex": "스프링은 커맨드 객체를 만들고 요청 파라미터 이름과 같은 필드를 setter로 채운다. 숫자 필드는 타입 변환도 해 준다.", "link": ["#web-48", "38일차 복습"]},
+    {"id": "w42", "cat": "WEB", "q": "error.jsp가 /WEB-INF/views/ 안에만 있을 때 return \"redirect:error.jsp\"의 결과로 알맞은 것은?", "ch": ["error.jsp가 정상적으로 보인다", "브라우저가 WEB-INF 안을 직접 열 수 없어 화면을 찾지 못한다", "자동으로 forward로 바뀐다", "목록 화면으로 돌아간다"], "a": 1, "ex": "redirect는 브라우저가 새 주소를 직접 요청하는 것이다. WEB-INF 아래 파일은 외부에서 직접 요청할 수 없다. 뷰 폴더의 화면은 return \"error\"처럼 뷰 이름으로 돌려준다.", "link": ["#web-50", "38일차 복습"]},
+    {"id": "w43", "cat": "WEB", "q": "목록의 체크박스가 모두 name=\"seq\"일 때 선택한 여러 값을 한 번에 받는 매개변수는?", "ch": ["@RequestParam(\"seq\") String seq", "@RequestParam(\"seq\") String[] seq", "HttpSession seq", "Model seq"], "a": 1, "ex": "같은 이름의 파라미터가 여러 개 오면 배열로 받는다. 이 배열이 Mapper의 foreach로 넘어가 IN 조건이 된다.", "link": ["#web-48", "38일차 복습"]},
   ];
 
   // ═══════════ 자세한 해설 표 ═══════════

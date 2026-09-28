@@ -1,5 +1,7 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
+**2026-09-28 갱신:** [38일차 Spring MVC 게시판 CRUD 요청 연결](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day38)과 [19회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-09-28/)를 반영했다. 07에 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 붙인 수업 소스를 그대로 보존하고, 웹 개념 5개·코딩테스트 4개·학습 여정 22단계·시험 문제 5개를 추가했다. 오늘 코드의 `home.do`는 **이 PC의 빌드 설정(`-parameters` 없음)에서 Spring 6.1이 매개변수 이름을 읽지 못해 예외가 나는 것**을 스프링 해석기에 직접 넣어 재현했다 — 강사님 주석 "Spring6에서는 @RequestParam 명시"의 이유다. 19회차 SQL 1번은 원문 제목(이름이 있는 동물의 아이디)과 제출 코드(어린 동물 찾기)가 달라 공식 문제명으로 기록하고 이유를 남겼다. CRUD를 톰캣·DB로 실제 실행한 기록은 이번 정리에 없다. [검증 기록](Back_end/sync-validation-2026-09-28.md)
+
 **2026-09-23 갱신:** [37일차 Spring MVC·MyBatis 게시판](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day37)과 [18회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-09-23/)를 반영했다. 06의 DB 설정 연습과 07의 Controller → Service → DAO → Mapper → JSP 흐름을 보존하고, 웹 개념 6개·코딩테스트 4개·학습 여정 21단계·시험 문제 6개를 추가했다. Java 두 문제는 원문 FAIL 기록을 유지하고 제출본 누락을 명시했다. 정답 풀이 검증은 정수 정렬 20,008건·폰켓몬 7,385건, SQL은 임시 테이블 8개 검사 통과. 07은 목록 요청까지 연결된 상태다.
 
 
@@ -42,7 +44,7 @@ JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러�
 | 과정 | 반영 범위 | 상태 |
 | --- | --- | --- |
 | 프런트엔드 | HTML 7 · CSS 12 · JavaScript 18(AJAX까지) · React/Next.js 14단원 · StockDash 졸업 과제 | ✅ 완료 |
-| 백엔드 | Java 날짜별 수업 실습 37일차 · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 46항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis) · 코딩테스트 38문제 · 시험 대비 170문제 | 🔄 진행 중 (2026-08-03 시작) |
+| 백엔드 | Java 날짜별 수업 실습 38일차 · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 51항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis) · 코딩테스트 42문제 · 시험 대비 175문제 | 🔄 진행 중 (2026-08-03 시작) |
 | 저장소 위생 | 의존성·Next.js 빌드 캐시·환경 변수·IDE 파일 제외 규칙 적용 | ✅ 점검 완료 |
 
 > **노트 작성 원칙:** 모든 학습 카드는 “한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리”의 순서로 구성합니다. 실행 가능한 원본 코드는 단원 폴더에 남기고, 대시보드는 개념과 코드 흐름을 빠르게 복습하는 용도로 사용합니다.

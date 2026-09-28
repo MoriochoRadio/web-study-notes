@@ -1,19 +1,25 @@
 # 07_hkboard_springMVC — Spring과 MyBatis로 게시판 목록 연결
 
-2026-09-23, 37일차 수업의 로컬 소스다. 전날 만든 Spring MVC 뼈대에 Service·DAO·MyBatis를 연결해 실제 게시판 목록을 JSP에 표시했다. [37일차 학습 카드](../../index.html#class-day37) · [개념 카드 41~46](../../index.html#web-41)
+2026-09-23(37일차)에 시작해 2026-09-28(38일차)까지 이어진 수업의 로컬 소스다. 37일차에 목록을, 38일차에 글쓰기·상세·수정·다중 삭제 요청을 연결했다. [38일차 학습 카드](../../index.html#class-day38) · [개념 카드 47~51](../../index.html#web-47)
+
+아래 "현재 구현 범위"는 38일차 기준이다. 37일차 당시의 설명은 그다음 절부터 그대로 남겨 둔다.
+
+37일차 수업 설명: 전날 만든 Spring MVC 뼈대에 Service·DAO·MyBatis를 연결해 실제 게시판 목록을 JSP에 표시했다. [37일차 학습 카드](../../index.html#class-day37) · [개념 카드 41~46](../../index.html#web-41)
 
 ## 현재 구현 범위
 
 | 구간 | 상태 |
 |---|---|
-| index.jsp → boardlist.do → 목록 JSP | 로컬 Tomcat에서 HTTP 200 확인 |
-| Controller | GET /boardlist.do 메서드 1개 |
-| Service·DAO | 목록·등록·상세·수정·삭제·다중 삭제 메서드 작성 |
-| MyBatis Mapper | 위 6개 statement 작성 |
-| 등록·상세·수정·삭제 요청 | Controller 연결 전. 완성된 CRUD가 아님 |
-| JSP의 나머지 링크 | 이전 .board 및 boardController.jsp 경로가 남아 있음 |
+| index.jsp → boardlist.do → 목록 JSP | 37일차에 로컬 Tomcat HTTP 200 확인 |
+| Controller | 목록 · 글쓰기 폼 · 글쓰기 · 상세 · 수정 · 다중 삭제 요청 연결 (38일차) |
+| Service·DAO·Mapper | 목록·등록·상세·수정·삭제·다중 삭제 |
+| JSP 링크·폼 주소 | `.board` → `.do`로 모두 전환 (38일차) |
+| 글쓰기·상세·수정·삭제 실제 실행 | **이번 정리에서 톰캣·DB로 확인하지 않음** |
+| `home.do` | 이 PC 빌드 설정(`-parameters` 없음)에서 `String param` 해석 실패 — 재현함 |
+| 실패 시 `redirect:error.jsp` | `error.jsp`가 `WEB-INF/views` 안이라 브라우저가 열 수 없음 (파일 위치로 따진 결과) |
+| `mulDel2.do` | GET·POST 빈 메서드. 같은 URL을 방식별로 나누는 연습용 |
 
-수업 당시 진행 상태를 보존했다. 목록 이외 버튼이 동작한다고 가정하지 않는다. 브라우저에서 WEB-INF 아래 JSP를 직접 여는 것도 지원되지 않는다.
+수업 당시 진행 상태를 보존했다. 코드에 요청이 연결됐다는 것과 실제로 실행해 확인했다는 것을 구분해 적는다. 브라우저에서 WEB-INF 아래 JSP를 직접 여는 것은 지원되지 않는다.
 
 ## 한 번의 목록 요청
 
@@ -61,7 +67,42 @@ GitHub Pages는 HTML 학습 노트만 제공한다. 이 Java 서버를 Pages에�
 - 로컬 DB의 root 인증 실패를 접속 가능한 수업용 계정으로 해결했다. 공개본에는 계정 비밀값이 없는 예제 설정만 있다.
 - 파일 복사 후 예전 수정 시각 때문에 리소스가 갱신되지 않은 경우를 확인했고, 빌드·배포본을 다시 맞춘 뒤 검증했다.
 
+## 9월 28일 — CRUD 요청 연결
+
+| URL | 방식 | 받는 값 | 돌려주는 것 |
+|---|---|---|---|
+| `/boardInsertForm.do` | GET | — | `"boardInsertForm"` |
+| `/boardInsert.do` | POST | id·title·content → `HkDto` | `redirect:boardlist.do` |
+| `/boardDetail.do` | GET | seq → `HkDto pdto` | `"boardDetail"` |
+| `/boardUpdate.do` | POST | seq·title·content → `HkDto` | `redirect:boardDetail.do?seq=…` |
+| `/mulDel.do` | GET·POST | `@RequestParam("seq") String[]` | `redirect:boardlist.do` |
+| `/home.do` | GET | `String param` · `HkDto` · request | `"home"` |
+| `/mulDel2.do` | GET / POST 각각 | — | `""` (연습용) |
+
+### -parameters와 home.do
+
+`home(Model model, String param, HkDto dto, HttpServletRequest request)`의 `String param`에는 `@RequestParam`이 없다. 이런 매개변수는 스프링이 **매개변수 이름**으로 요청 값을 찾는데, Spring 6.1은 그 이름을 `-parameters` 옵션으로 컴파일된 정보에서만 읽는다.
+
+이 PC의 `pom.xml`(maven-compiler-plugin에 `<release>`만 있음)과 Eclipse 설정은 이 옵션을 켜지 않는다. Eclipse가 배포한 `BoardController.class`에도 매개변수 이름 정보가 없었다. 같은 조건으로 컴파일한 클래스를 스프링의 `RequestParamMethodArgumentResolver`에 넣으면:
+
+```
+-parameters 없음 → IllegalArgumentException: Name for argument of type [java.lang.String] not specified,
+                   and parameter name information not available via reflection.
+                   Ensure that the compiler uses the '-parameters' flag.
+-parameters 있음 → 매개변수 이름 model, param, dto, request / param = null (정상)
+```
+
+해결은 `@RequestParam(value = "param", required = false)`처럼 이름을 적거나, `maven-compiler-plugin`에 `<parameters>true</parameters>`를 넣는 것이다. 수업 주석 "Spring6 에서는 파라미터 받을때 @RequestParam 명시하기"가 이 상황을 가리킨다. `@RequestParam("seq")`로 이름을 적은 `mulDel`과 커맨드 객체(`HkDto`)는 영향이 없다.
+
 ## 확인한 것과 남은 것
+
+38일차:
+
+- 오늘 바뀐 Java 6개 파일(수업 원본과 바이트 단위 동일)을 JDK 21로 컴파일했다 — `-parameters`가 있을 때와 없을 때 모두.
+- `home.do`의 매개변수 해석 실패를 위와 같이 재현했다. DB·서버 없이 스프링 해석기만 호출한 확인이다.
+- 글쓰기·상세·수정·삭제를 톰캣과 실제 DB로 실행하지는 않았다.
+
+37일차:
 
 - 원본 07의 Java 6개 파일을 컴파일했고 Maven WAR 빌드가 성공했다.
 - 로컬 Tomcat 10.1 임시 서버에서 메인과 `/boardlist.do`가 모두 HTTP 200을 반환했다. 실제 DB 조회 결과가 목록 JSP에 전달되는 경로를 확인했다.

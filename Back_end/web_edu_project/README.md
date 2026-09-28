@@ -1,8 +1,8 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-09-23(37일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 목록 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day37)
+> 최신 상태: 2026-09-28(38일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day38)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
 > 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
@@ -26,7 +26,7 @@
 | [`04_hkboard_MVC2`](04_hkboard_MVC2) | 요청 분기를 JSP에서 Servlet으로. `*.board` URL 매핑 + `getRequestURI()`, Filter로 UTF-8 처리 | web-29~31 |
 | [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
 | [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
-| [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시.** Controller 요청은 목록까지만 구현 | web-41~46 |
+| [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시(37일차), 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 연결(38일차).** | web-41~51 |
 
 ## 개발 환경
 
@@ -551,3 +551,13 @@ DAO·DTO는 아직 그대로다. **바뀐 것은 "요청을 받아 화면까지 
 06에서 설정한 DB 연결을 07의 실제 게시판에 사용한다. 인터페이스 기반 Service·DAO, `@Autowired`, `SqlSessionTemplate`, `namespace.id`, DTO 별칭, `foreach` 다중 삭제 SQL이 오늘의 핵심이다. 원본 Java·JSP·XML·pom.xml을 보존하고 DB 설정은 예제 파일로 대체했다.
 
 Controller는 `/boardlist.do` 하나만 처리한다. DAO·Service·Mapper에 등록·상세·수정·삭제 메서드가 있어도, 아직 웹 요청에 연결되지 않았으므로 CRUD 완성으로 표시하지 않았다. 오늘 확인한 오류는 Maven 클래스패스 누락, `.board`와 `.do` 불일치, 로컬 DB 인증, 이전 리소스가 남은 배포 문제다. 메인·목록은 로컬 HTTP 200까지 검증했다.
+
+### 9월 28일 (38일차) — CRUD 요청 연결
+
+[38일차](../index.html#class-day38) · [개념 카드 47~51](../index.html#web-47)
+
+Controller에 `boardInsertForm.do`(GET) · `boardInsert.do`(POST) · `boardDetail.do`(GET) · `boardUpdate.do`(POST) · `mulDel.do`(GET·POST)를 추가했고, JSP의 링크와 폼 주소를 `.board`에서 `.do`로 모두 옮겼다. 폼 값은 `HkDto` 커맨드 객체로, 체크박스 여러 개는 `@RequestParam("seq") String[]`로 받는다. 저장·수정·삭제 뒤에는 `redirect:`로 목록이나 상세를 다시 연다. 목록의 작성일은 `fmt:formatDate`로 형식을 바꿨다.
+
+- **확인함** — 오늘 바뀐 Java 6개 파일을 JDK 21로 컴파일했다. `home.do`의 `String param`(애너테이션 없음)은 이 PC의 Eclipse·Maven 설정처럼 `-parameters` 없이 컴파일하면 Spring 6.1이 이름을 읽지 못해 `IllegalArgumentException`이 나는 것을 스프링 해석기에 직접 넣어 재현했다.
+- **확인하지 않음** — 톰캣에서 글쓰기·상세·수정·삭제를 실제 DB로 실행한 기록은 이번 정리에 없다.
+- **미완** — `mulDel2.do`는 GET·POST 빈 메서드(연습용)다. 실패 시 `redirect:error.jsp`는 `error.jsp`가 `WEB-INF/views` 안에 있어 브라우저가 직접 열 수 없다(파일 위치로 따진 결과).
