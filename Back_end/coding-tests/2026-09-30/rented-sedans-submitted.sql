@@ -1,0 +1,7 @@
+-- 20회차 SQL 2번 — 대여 기록이 존재하는 자동차 리스트 구하기 (프로그래머스 157341) · 제출 코드 그대로 (FAIL)
+-- 오답노트의 정답 풀이와 비교하면 SELECT 뒤의 DISTINCT 한 단어만 다르다.
+SELECT H.CAR_ID
+FROM CAR_RENTAL_COMPANY_CAR C JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY H ON
+C.CAR_ID = H.CAR_ID
+WHERE C.CAR_TYPE = '세단' AND MONTH(H.START_DATE) = 10
+ORDER BY H.CAR_ID DESC;

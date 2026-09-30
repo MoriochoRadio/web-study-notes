@@ -1,8 +1,8 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-09-28(38일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day38)
+> 최신 상태: 2026-09-30(40일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day40)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
 > 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
@@ -27,6 +27,7 @@
 | [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
 | [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
 | [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시(37일차), 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 연결(38일차).** | web-41~51 |
+| [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기는 아직 | web-52~56 |
 
 ## 개발 환경
 
@@ -561,3 +562,14 @@ Controller에 `boardInsertForm.do`(GET) · `boardInsert.do`(POST) · `boardDetai
 - **확인함** — 오늘 바뀐 Java 6개 파일을 JDK 21로 컴파일했다. `home.do`의 `String param`(애너테이션 없음)은 이 PC의 Eclipse·Maven 설정처럼 `-parameters` 없이 컴파일하면 Spring 6.1이 이름을 읽지 못해 `IllegalArgumentException`이 나는 것을 스프링 해석기에 직접 넣어 재현했다.
 - **확인하지 않음** — 톰캣에서 글쓰기·상세·수정·삭제를 실제 DB로 실행한 기록은 이번 정리에 없다.
 - **미완** — `mulDel2.do`는 GET·POST 빈 메서드(연습용)다. 실패 시 `redirect:error.jsp`는 `error.jsp`가 `WEB-INF/views` 안에 있어 브라우저가 직접 열 수 없다(파일 위치로 따진 결과).
+
+## 08_answerboard_springMVC — 답변형 게시판
+
+[프로젝트 실행 안내와 구현 범위](08_answerboard_springMVC/README.md) · [39일차](../index.html#class-day39) · [40일차](../index.html#class-day40) · [개념 카드 52~56](../index.html#web-52)
+
+07을 복사해 패키지를 `com.hk.ansboard`로 바꾸고, 답글을 같은 테이블에 줄 세우는 게시판을 시작했다. 글마다 `refer`(묶음) · `step`(묶음 안 순서) · `depth`(들여쓰기)를 두고, 목록은 `ORDER BY refer DESC, step ASC`에 `ROW_NUMBER()`로 번호를 붙여 10개씩 자른다. 삭제는 `delflag='Y'`로 바꾸는 논리 삭제이고, 조회수는 목록에서 `review=y`로 들어올 때만 올린 뒤 redirect 한다. 화면은 `header.jsp`·`footer.jsp`를 `<jsp:include>`로 불러오고 Bootstrap을 입혔다.
+
+- **확인함** — Java 4개 파일을 JDK 21로, `-parameters` 없이 컴파일했다. 단순 타입 매개변수는 모두 이름을 적어(`@RequestParam("seq")` 등) 38일차의 `home.do` 같은 문제가 없다.
+- **확인함** — 08과 같은 라이브러리로 로거를 만들어, Logback이 `logback.xml`을 찾지 못해 기본 설정(콘솔·전체 DEBUG)으로 동작하고 `log4j.xml`은 읽지 않는 것을 재현했다. 날짜별 로그 파일도 생기지 않는다.
+- **확인하지 않음** — 톰캣에서 실제 DB로 목록·글쓰기·상세·수정·삭제를 실행한 기록은 없다.
+- **미완** — 페이지 번호 링크, 답글 달기. 실패 시 `return "error.jsp"`는 `/WEB-INF/views/error.jsp.jsp`를 찾고 08에는 `error.jsp`가 없다(파일로 따진 결과).

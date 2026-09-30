@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DB연결에 관련된 작업을 설정 -->
+	
+	<!-- db.properties 파일을 관리하는 객체 등록 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+		          value="classpath:properties/db.properties"></property>
+	</bean>
+	
+	<!-- datasource에 대한 관리를 하는 객체 등록 -->
+	<!-- autoCommit=false의 의미: 커밋시점을 프레임워크가 정한다. -->
+	<bean id="dataSource" 
+	   class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="defaultAutoCommit" value="false"/>
+	</bean>
+	
+	<!-- sqlSessionTemplate를 생성해주는 객체 등록 -->
+	<bean id="sqlSessionFactory"
+	     class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation"
+		          value="classpath:sqls/Configuration.xml"/>		
+	</bean>
+	
+	<!-- 쿼리를 실행할 객체 등록 -->
+	<bean id="sqlSessionTemplate"
+	      class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+</beans>

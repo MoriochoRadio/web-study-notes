@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 속성: 반드시 정의하자	 -->
+<mapper namespace="com.hk.ansboard.dao">
+
+	
+	<select id="boardList" parameterType="Map" resultType="AnsDto" >
+	SELECT rn, seq, id, title, content, regdate, refer, step, depth, readcount, delflag
+	FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY refer DESC, step ASC) AS rn,
+	       seq, id, title, content, regdate, refer, step, depth, readcount, delflag
+			FROM answerboard
+			) a
+		WHERE ceil(rn/10) = #{pnum}
+	</select>
+	
+	<insert id="boardInsert" parameterType="AnsDto">
+		INSERT INTO answerboard
+		VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
+		(SELECT nvl(MAX(refer),0)+1 FROM answerboard)
+		,0,0,0,'N')
+	</insert>
+	
+	<select id="boardDetail" parameterType="Integer" resultType="AnsDto">
+	select seq, id, title, content, regdate
+	from answerboard
+	where seq = #{seq}
+	</select>
+	
+	<update id="boardUpdate" parameterType="AnsDto">
+	 update answerboard
+	 set title=#{title}, content=#{content}
+	 where seq = #{seq}
+	</update>
+	
+<!-- 	동적쿼리 사용시 파라미터는 map에 담아서 전달하자 -->
+	<update id="mulDel" parameterType="Map">
+		update answerboard set delflag='Y'
+		where seq in
+		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
+		#{seq}
+		</foreach>
+	</update>
+	
+<!-- 조회수 올리기 -->
+<update id="readCount" parameterType="Integer">
+	update answerboard set readcount = readcount+1
+	where seq = #{seq}
+</update>
+
+<!-- 답글달기 -->
+
+
+
+
+</mapper>
