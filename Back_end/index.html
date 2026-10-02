@@ -1502,8 +1502,8 @@ long타입 표현범위: 1000000000000000000
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>실습 코드 주석 중 <b>사실만 살짝 다르게 적힌 두 곳</b>이 있어 시험 전에 바로잡아 두면 좋습니다 — ① <code>byte bb = (byte) i;</code>의 주석은 "byte → int"로 되어 있지만 실제 방향은 <b>int → byte</b>입니다(큰 타입에서 작은 타입으로 가야 다운캐스팅이므로 값 손실도 이때 생깁니다). ② <code>float f = 15.77f;</code>의 주석 "8byte크기라 f 붙여줌"에서, <b>float은 4byte이고 8byte는 double</b>입니다 — <code>f</code>를 붙이는 이유는 "실수 리터럴의 기본 타입이 double(8byte)이라서 그대로 두면 float에 담을 수 없기 때문"입니다. 코드 동작에는 영향이 없지만 객관식에서 정확히 갈리는 부분입니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260803/day01/HelloJava.java" target="_blank" rel="noopener">HelloJava.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260803/day01/VariableTest.java" target="_blank" rel="noopener">VariableTest.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260803/day01/HelloJava.java">HelloJava.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260803/day01/VariableTest.java">VariableTest.java</a>
     </div>
   </div>
 </article>
@@ -1959,9 +1959,9 @@ public class prac01 {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>D1의 <code>isLeapYear(int year)</code> 메서드는 <b>만들어만 두고 main에서 쓰지 않았습니다</b>. main의 <code>if</code>를 <code>if (isLeapYear(year))</code>로, for문 안의 조건도 <code>if (isLeapYear(i))</code>로 바꾸면 같은 조건식을 세 번 쓰지 않아도 되고, 이게 바로 <b>메서드로 분리하는 이유</b>입니다. 덧붙여 <code>if (조건) return true; else return false;</code>는 그냥 <code>return 조건;</code> 한 줄로 줄일 수 있습니다 — 조건식 자체가 이미 true/false이기 때문입니다. 시험에서도 자주 나오는 축약이니 눈에 익혀 두세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260804/day02/D1_isLeapYear.java" target="_blank" rel="noopener">D1_isLeapYear.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260804/day02/D2_ControlEx.java" target="_blank" rel="noopener">D2_ControlEx.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/practice/prac01.java" target="_blank" rel="noopener">prac01.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260804/day02/D1_isLeapYear.java">D1_isLeapYear.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260804/day02/D2_ControlEx.java">D2_ControlEx.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/practice/prac01.java">prac01.java</a>
     </div>
   </div>
 </article>
@@ -2253,8 +2253,8 @@ non-static 메서드</pre>
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>test03()</code> 위에 달린 주석 <code>// 매개변수 없음, 반환값 없음</code>은 실제 코드(<code>public int test03()</code>)와 어긋납니다 — 매개변수는 없지만 <b>반환값은 있는</b> 형이죠. 주석을 코드와 함께 고치는 습관이 시험에서도, 나중 협업에서도 그대로 점수가 됩니다. 그리고 <code>test05</code>의 <code>if~else</code>는 삼항연산자로 <code>return a &gt; b ? a : b;</code> 한 줄로 줄일 수 있습니다. 2일차 별 찍기에서 <code>(i == a) ? i : i + ","</code>를 이미 써 봤으니, 같은 도구를 <b>반환에도 쓸 수 있다</b>는 걸 기억해 두세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260805/day03/D1_StarView.java" target="_blank" rel="noopener">D1_StarView.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260805/day03/D2_MethodTest.java" target="_blank" rel="noopener">D2_MethodTest.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260805/day03/D1_StarView.java">D1_StarView.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260805/day03/D2_MethodTest.java">D2_MethodTest.java</a>
     </div>
   </div>
 </article>
@@ -2661,13 +2661,13 @@ public class D1_divisor {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘 코드에서 눈여겨볼 곳 세 군데. ① <code>D4_Constructor</code>의 필드 초기값이 <code>"검정석"</code>으로 <b>오타</b>가 나 있는데, <code>new D4_Constructor(70)</code>처럼 <b>size만 받는 생성자</b>로 만들면 color가 그 오타 값 그대로 남습니다. 이 생성자도 <code>this(size, "검정색");</code>으로 위임하면 기본값을 한 곳에서만 관리할 수 있어요. ② <code>getSize(int pw)</code>는 "조건을 걸 수 있다"는 걸 보여주기엔 좋지만, <b>getter의 일반 규약은 "파라미터 없이 값만 반환"</b>입니다 — 시험에서는 <code>public int getSize() { return size; }</code> 형태를 기억하세요. ③ 뺄셈 방식 <code>getGcd1(a, b)</code>은 <code>a</code>나 <code>b</code>에 <b>0이 들어오면 <code>a != b</code>가 끝나지 않아 무한 루프</b>에 빠집니다. 나눗셈 버전 <code>getGcd</code>·재귀 버전 <code>getGcd2</code>는 <code>b == 0</code>에서 정상 종료하니, 실전에서는 이쪽이 안전합니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D1_divisor.java" target="_blank" rel="noopener">D1_divisor.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTest.java" target="_blank" rel="noopener">D2_ClassTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTestMain.java" target="_blank" rel="noopener">D2_ClassTestMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D3_ObjectTest.java" target="_blank" rel="noopener">D3_ObjectTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D4_Constructor.java" target="_blank" rel="noopener">D4_Constructor.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260806/day04/D1_ConstructioMain.java" target="_blank" rel="noopener">D1_ConstructioMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/practice/prac02.java" target="_blank" rel="noopener">prac02.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D1_divisor.java">D1_divisor.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTest.java">D2_ClassTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D2_ClassTestMain.java">D2_ClassTestMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D3_ObjectTest.java">D3_ObjectTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D4_Constructor.java">D4_Constructor.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D1_ConstructioMain.java">D1_ConstructioMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/practice/prac02.java">prac02.java</a>
     </div>
   </div>
 </article>
@@ -2968,11 +2968,11 @@ java</pre>
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_ImmutableTest.change02</code>를 시험 직전에 다시 보세요. <code>aa = imTest.bb;</code>로 꺼낸 <code>aa</code>는 <b>int 지역변수라 이후 아무리 바꿔도(<code>aa = 15</code>) 원본과 무관</b>합니다. 원본이 바뀌는 건 오직 <code>imTest.bb = 10;</code>처럼 <b>객체의 참조를 타고 들어가 필드에 직접 대입</b>할 때뿐입니다. "참조타입을 넘기면 항상 원본이 바뀐다"고 외우면 이 문제에서 틀립니다 — <b>"필드에 직접 대입했는가"</b>가 진짜 기준입니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260807/day05/D1_ImmutableTest.java" target="_blank" rel="noopener">D1_ImmutableTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260807/day05/D2_FinalTest.java" target="_blank" rel="noopener">D2_FinalTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260807/day05/D3_SingletomTest.java" target="_blank" rel="noopener">D3_SingletomTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260807/day05/D3_Singleton.java" target="_blank" rel="noopener">D3_Singleton.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260807/day05/D4_StringCompare.java" target="_blank" rel="noopener">D4_StringCompare.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D1_ImmutableTest.java">D1_ImmutableTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D2_FinalTest.java">D2_FinalTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D3_SingletomTest.java">D3_SingletomTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D3_Singleton.java">D3_Singleton.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D4_StringCompare.java">D4_StringCompare.java</a>
     </div>
   </div>
 </article>
@@ -3355,16 +3355,16 @@ public class D3_CalculatorMain {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D3_Calculator.paramInt</code>의 <code>num2 = Integer.parseInt(s.substring(s.indexOf(cal) + cal.length()));</code> 한 줄이 오늘의 시험 단골 함정입니다. <code>cal</code>이 <code>"+"</code>처럼 한 글자면 <code>cal.length()</code>가 1이라 <code>s.length()</code>를 더한 것과 헷갈리기 쉽지만, <b>연산자가 여러 글자(예: 나중에 <code>"=="</code> 같은 걸 다룬다면)일 때는 반드시 <code>cal.length()</code>를 더해야</b> 정확한 시작 위치가 나옵니다. 그리고 <code>D1_CalculatorCompare</code>처럼 <b>클래스를 매번 새로 <code>new</code>하는 구조</b>는 클래스 하나(<code>D3_Calculator</code>)에 메서드 4개를 몰아넣은 구조보다 객체가 더 많이 생기지만, 대신 <b>연산자별로 클래스를 나눠 관리하기 쉽다</b>는 트레이드오프가 있다는 것도 함께 기억해 두세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorA.java" target="_blank" rel="noopener">D1_CalculatorA.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorB.java" target="_blank" rel="noopener">D1_CalculatorB.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorC.java" target="_blank" rel="noopener">D1_CalculatorC.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorD.java" target="_blank" rel="noopener">D1_CalculatorD.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorCompare.java" target="_blank" rel="noopener">D1_CalculatorCompare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorMain.java" target="_blank" rel="noopener">D1_CalculatorMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D2_StringMethodTest.java" target="_blank" rel="noopener">D2_StringMethodTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D2_StringMethonMain.java" target="_blank" rel="noopener">D2_StringMethonMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D3_Calculator.java" target="_blank" rel="noopener">D3_Calculator.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260810/day06/D3_CalculatorMain.java" target="_blank" rel="noopener">D3_CalculatorMain.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorA.java">D1_CalculatorA.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorB.java">D1_CalculatorB.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorC.java">D1_CalculatorC.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorD.java">D1_CalculatorD.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorCompare.java">D1_CalculatorCompare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorMain.java">D1_CalculatorMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D2_StringMethodTest.java">D2_StringMethodTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D2_StringMethonMain.java">D2_StringMethonMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D3_Calculator.java">D3_Calculator.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D3_CalculatorMain.java">D3_CalculatorMain.java</a>
     </div>
   </div>
 </article>
@@ -3593,8 +3593,8 @@ aa의 배열의 내부 배열의 길이:3
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>Arrays.sort(b3)</code>처럼 배열을 정렬하는 메서드는 <b>원본을 바로 바꿉니다</b>(mutable) — 5·6일차에서 본 <code>String.replace()</code>(원본 불변, 재할당 필요)와 정반대라 자주 헷갈립니다. "이 메서드가 원본을 바꾸는가, 새 걸 반환하는가"를 항상 구분해서 외우세요: <b>배열·StringBuilder는 원본을 바꾸고, String은 항상 새 걸 반환</b>합니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260811/day07/D1_Ant.java" target="_blank" rel="noopener">D1_Ant.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260811/day07/D2_ArrayTest.java" target="_blank" rel="noopener">D2_ArrayTest.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260811/day07/D1_Ant.java">D1_Ant.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260811/day07/D2_ArrayTest.java">D2_ArrayTest.java</a>
     </div>
   </div>
 </article>
@@ -3865,15 +3865,15 @@ D2_Parent [a=0]
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_ChildMain</code>의 <code>test(D2_Parent p)</code>를 다시 보세요. 이 메서드는 <b>딱 한 번만 정의됐는데도</b> <code>child</code>·<code>child2</code>·<code>child3</code> 세 가지 서로 다른 변수(타입은 제각각이지만 실제로는 전부 <code>D2_Child</code> 객체)를 다 받아 처리했습니다. <b>파라미터를 부모 타입으로 선언해 두면, 그 부모를 상속한 어떤 자식이 오더라도 같은 코드로 처리할 수 있다</b>는 것 — 이게 다형성을 실전에서 쓰는 이유입니다. 나중에 자식 클래스가 늘어나도 <code>test()</code> 메서드는 고칠 필요가 없습니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_Lotto.java" target="_blank" rel="noopener">D1_Lotto.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoStore.java" target="_blank" rel="noopener">D1_LottoStore.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoCompare.java" target="_blank" rel="noopener">D1_LottoCompare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoCompareT.java" target="_blank" rel="noopener">D1_LottoCompareT.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoUtil.java" target="_blank" rel="noopener">D1_LottoUtil.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoMain.java" target="_blank" rel="noopener">D1_LottoMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D2_Parent.java" target="_blank" rel="noopener">D2_Parent.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D2_Child.java" target="_blank" rel="noopener">D2_Child.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260812/day08/D2_ChildMain.java" target="_blank" rel="noopener">D2_ChildMain.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_Lotto.java">D1_Lotto.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoStore.java">D1_LottoStore.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoCompare.java">D1_LottoCompare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoCompareT.java">D1_LottoCompareT.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoUtil.java">D1_LottoUtil.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_LottoMain.java">D1_LottoMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D2_Parent.java">D2_Parent.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D2_Child.java">D2_Child.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D2_ChildMain.java">D2_ChildMain.java</a>
     </div>
   </div>
 </article>
@@ -4087,10 +4087,10 @@ public class D2_Calendar {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_VIPCustomer</code>의 두 생성자를 비교해 보세요. 파라미터 없는 기본 생성자는 <code>customerID</code>·<code>customerName</code>을 <b>안 채웁니다</b>(등급·적립률만 세팅) — 8일차 <code>D4_Constructor</code>에서처럼 <b>기본 생성자가 파라미터 있는 생성자에 위임하지 않고 따로 로직을 들고 있는</b> 경우라, 나중에 등급 정책이 바뀌면 두 생성자를 <b>둘 다 고쳐야 하는 함정</b>이 있습니다. <code>this(...)</code>로 위임하는 6~8일차 패턴과 비교하며 "어느 쪽이 유지보수하기 편한가"를 생각해 보면 좋은 복습이 됩니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260813/day09/D1_Customer.java" target="_blank" rel="noopener">D1_Customer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260813/day09/D1_VIPCustomer.java" target="_blank" rel="noopener">D1_VIPCustomer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260813/day09/D1_CustomerMain.java" target="_blank" rel="noopener">D1_CustomerMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260813/day09/D2_Calendar.java" target="_blank" rel="noopener">D2_Calendar.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260813/day09/D1_Customer.java">D1_Customer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260813/day09/D1_VIPCustomer.java">D1_VIPCustomer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260813/day09/D1_CustomerMain.java">D1_CustomerMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260813/day09/D2_Calendar.java">D2_Calendar.java</a>
     </div>
   </div>
 </article>
@@ -4410,18 +4410,18 @@ public class D3_OddMagicSquare {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_AnimalMain</code>에 <code>moveAnimal(D1_Human)</code>·<code>moveAnimal(D1_Tiger)</code>·<code>moveAnimal(D1_Eagle)</code>처럼 <b>같은 이름, 다른 파라미터 타입의 오버로딩 버전들도 같이 정의</b>되어 있습니다. 하지만 실제 <code>main</code>에서 호출한 건 전부 <code>moveAnimal(D1_Animal animal)</code> 하나뿐이었죠 — <b>다형성을 쓰면 오버로딩으로 자식 타입별 메서드를 따로 만들 필요가 없어진다</b>는 걸 대비시켜 보여주는 코드입니다. 오버로딩(6일차)과 다형성(오늘)을 같은 예제 안에서 비교해 두면 두 개념이 헷갈리지 않습니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Animal.java" target="_blank" rel="noopener">D1_Animal.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Human.java" target="_blank" rel="noopener">D1_Human.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Tiger.java" target="_blank" rel="noopener">D1_Tiger.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Eagle.java" target="_blank" rel="noopener">D1_Eagle.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D1_AnimalMain.java" target="_blank" rel="noopener">D1_AnimalMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D2_Computer.java" target="_blank" rel="noopener">D2_Computer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D2_DeskTop.java" target="_blank" rel="noopener">D2_DeskTop.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D2_NoteBook.java" target="_blank" rel="noopener">D2_NoteBook.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D2_MyNoteBook.java" target="_blank" rel="noopener">D2_MyNoteBook.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D2_ComputerMain.java" target="_blank" rel="noopener">D2_ComputerMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D3_OddMagicSquare.java" target="_blank" rel="noopener">D3_OddMagicSquare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260814/day10/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Animal.java">D1_Animal.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Human.java">D1_Human.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Tiger.java">D1_Tiger.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Eagle.java">D1_Eagle.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_AnimalMain.java">D1_AnimalMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D2_Computer.java">D2_Computer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D2_DeskTop.java">D2_DeskTop.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D2_NoteBook.java">D2_NoteBook.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D2_MyNoteBook.java">D2_MyNoteBook.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D2_ComputerMain.java">D2_ComputerMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D3_OddMagicSquare.java">D3_OddMagicSquare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D3_MagicSquareMain.java">D3_MagicSquareMain.java</a>
     </div>
   </div>
 </article>
@@ -4703,19 +4703,19 @@ public class D3_MagicSquareMain {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span> 오늘 나온 세 가지 "빈 몸체" 문법을 비교해서 기억하세요. ① 인터페이스의 <code>void make();</code>(몸체 자체가 없음 — 자동 abstract), ② 추상 클래스의 <code>public abstract void make();</code>(명시적으로 abstract, 몸체 없음), ③ <code>MagicSquare</code>의 <code>public void make() { }</code>(몸체는 있지만 <b>텅 비어 있음</b> — 이건 abstract가 <b>아니라서</b> 자식이 안 고쳐도 컴파일은 되지만, 실제로 호출하면 아무 일도 안 일어나는 함정). 시험에서 "이 메서드는 자식이 반드시 재정의해야 하는가?"를 물으면, <b>①·②는 그렇다(YES), ③은 아니다(NO, 구현을 잊으면 조용히 아무것도 안 하는 버그가 된다)</b>는 걸 구분해야 합니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceTest.java" target="_blank" rel="noopener">D1_InterfaceTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceChild.java" target="_blank" rel="noopener">D1_InterfaceChild.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceMain.java" target="_blank" rel="noopener">D1_InterfaceMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D2_Calc.java" target="_blank" rel="noopener">D2_Calc.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D2_Calculator.java" target="_blank" rel="noopener">D2_Calculator.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D2_CalculatorChild.java" target="_blank" rel="noopener">D2_CalculatorChild.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/D2_CalculatorMain.java" target="_blank" rel="noopener">D2_CalculatorMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/Interface_Magic.java" target="_blank" rel="noopener">Interface_Magic.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java" target="_blank" rel="noopener">OddMagicSquare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java" target="_blank" rel="noopener">EvenMagicSquare.java</a>(12일차에 추가) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/practice/prac03.java" target="_blank" rel="noopener">prac03.java</a>(9번 마방진 풀이)
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceTest.java">D1_InterfaceTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceChild.java">D1_InterfaceChild.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceMain.java">D1_InterfaceMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D2_Calc.java">D2_Calc.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D2_Calculator.java">D2_Calculator.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D2_CalculatorChild.java">D2_CalculatorChild.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D2_CalculatorMain.java">D2_CalculatorMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/Interface_Magic.java">Interface_Magic.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java">MagicSquare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java">OddMagicSquare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java">D3_MagicSquareMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java">EvenMagicSquare.java</a>(12일차에 추가) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/practice/prac03.java">prac03.java</a>(9번 마방진 풀이)
     </div>
   </div>
 </article>
@@ -5081,13 +5081,13 @@ Hello~~~
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘 마방진 리팩터링은 <b>"컴파일이 되는 것"과 "이름이 맞는 것"은 다르다</b>는 걸 보여주는 좋은 예입니다. <code>sumRow</code>가 사실은 세로 합을 계산해도 자바는 에러를 내지 않습니다 — 메서드 이름은 그냥 식별자일 뿐, 실제 의미는 사람이 붙인 주석과 문서로만 전달되니까요. <code>isCheck()</code> 안에서 <code>ma[i] = sumRow(i)</code>처럼 <b>이름이 잘못된 메서드를 그대로 호출해도 결과가 우연히 맞을 수 있다</b>는 점(가로세로 합을 전부 비교하는 로직이라 순서가 바뀌어도 검증 자체는 통과)도 이런 종류의 버그가 오래 숨어 있기 쉬운 이유입니다. 코드 리뷰에서 <b>이름과 동작을 한 번씩 대조</b>해 보는 습관을 들이세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D1_NestedClassTest.java" target="_blank" rel="noopener">D1_NestedClassTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D2_EvenMagicSquare.java" target="_blank" rel="noopener">D2_EvenMagicSquare.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260819/day12/D3_GBox.java" target="_blank" rel="noopener">D3_GBox.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a>(수정) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java" target="_blank" rel="noopener">OddMagicSquare.java</a>(수정) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java" target="_blank" rel="noopener">EvenMagicSquare.java</a>(신규) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java" target="_blank" rel="noopener">D3_MagicSquareMain.java</a>(수정)
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260819/day12/D1_NestedClassTest.java">D1_NestedClassTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260819/day12/D2_EvenMagicSquare.java">D2_EvenMagicSquare.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260819/day12/D3_GBox.java">D3_GBox.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java">MagicSquare.java</a>(수정) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/OddMagicSquare.java">OddMagicSquare.java</a>(수정) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/EvenMagicSquare.java">EvenMagicSquare.java</a>(신규) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D3_MagicSquareMain.java">D3_MagicSquareMain.java</a>(수정)
     </div>
   </div>
 </article>
@@ -5377,12 +5377,12 @@ public class D2_CardMain {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_Card.hashCode()</code>가 <code>card.hashCode() + 137</code>처럼 <b>임의의 숫자(137)를 더한 것</b>이 눈에 띕니다. <code>hashCode()</code>의 규약은 <b>"같은 <code>equals</code> 결과라면 같은 값"</b>만 지키면 되고, 정확히 어떤 계산식을 쓰는지는 자유입니다 — <code>card.hashCode()</code>만 써도 되지만, 상수를 더해 "이 클래스만의" 해시 분포를 살짝 바꿔 보는 것도 흔한 습관입니다. 다만 반대로 <b>서로 다른 카드인데 우연히 <code>hashCode()</code>가 같아도 괜찮습니다</b> — <code>HashSet</code>·<code>HashMap</code>은 해시가 같으면 그다음에 <code>equals()</code>로 한 번 더 확인하기 때문입니다. "해시가 같다 = 반드시 같은 객체"가 아니라 <b>"해시가 다르면 반드시 다른 객체"</b>라는 방향으로만 성립한다는 걸 기억하세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_ListTest.java" target="_blank" rel="noopener">D1_ListTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_SetTest.java" target="_blank" rel="noopener">D1_SetTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D1_MapTest.java" target="_blank" rel="noopener">D1_MapTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_Card.java" target="_blank" rel="noopener">D2_Card.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardCase.java" target="_blank" rel="noopener">D2_CardCase.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardMain.java" target="_blank" rel="noopener">D2_CardMain.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D1_ListTest.java">D1_ListTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D1_SetTest.java">D1_SetTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D1_MapTest.java">D1_MapTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D2_Card.java">D2_Card.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardCase.java">D2_CardCase.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D2_CardMain.java">D2_CardMain.java</a>
     </div>
   </div>
 </article>
@@ -5632,11 +5632,11 @@ ma결과:[505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>6×6이 대각선 검증에 실패한 건 <b>버그가 아니라 이 알고리즘의 한계</b>입니다 — n=6은 <code>n/2=3</code>이라 4영역이 서로 너무 작아서 단순한 3↔0·1↔2 맞바꿈만으로는 대각선까지 맞추지 못하는, 마방진 이론에서도 유명한 예외 케이스입니다(실제로 6×6 마방진은 손으로 푸는 표준 알고리즘이 따로 있을 만큼 까다롭기로 유명합니다). <b>"코드가 컴파일되고 대부분의 입력에서 잘 동작한다"</b>고 해서 <b>모든 경계 케이스까지 검증된 건 아니라는 것</b>을 이 사례로 기억해 두면 좋습니다 — <code>isCheck()</code>처럼 <b>결과를 스스로 검증하는 코드를 같이 짜 두면</b> 이런 예외를 바로 발견할 수 있습니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260821/day14/D1_SixMagicSquare.java" target="_blank" rel="noopener">D1_SixMagicSquare.java</a>(독립형) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_SixMagicSquare.java" target="_blank" rel="noopener">day11_2/D1_SixMagicSquare.java</a>(상속형) ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D2_MagicFactory.java" target="_blank" rel="noopener">D2_MagicFactory.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_MagicUtil.java" target="_blank" rel="noopener">D1_MagicUtil.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java" target="_blank" rel="noopener">MagicSquare.java</a>(getMagic 추가)
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260821/day14/D1_SixMagicSquare.java">D1_SixMagicSquare.java</a>(독립형) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_SixMagicSquare.java">day11_2/D1_SixMagicSquare.java</a>(상속형) ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D2_MagicFactory.java">D2_MagicFactory.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/D1_MagicUtil.java">D1_MagicUtil.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/day11_2/MagicSquare.java">MagicSquare.java</a>(getMagic 추가)
     </div>
   </div>
 </article>
@@ -5790,11 +5790,11 @@ java.lang.NumberFormatException: For input string: "오"
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>exTest2</code>에서 <b><code>substring(0, 2)</code>가 <code>try</code> 안과 <code>finally</code> 안에 똑같이 등장</b>합니다. 예외가 나면 <code>try</code> 안의 <code>substring</code>은 실행되지 못하고 건너뛰지만, <code>finally</code> 안의 같은 코드는 <b>무조건 실행</b>되어 "스트"라는 결과를 만들어 냅니다 — <b>같은 코드라도 어느 블록에 있느냐에 따라 "실행이 보장되는지"가 완전히 달라진다</b>는 걸 보여주는 좋은 예입니다. 그리고 <code>D1_Exception.exTest4()</code>의 <code>new FileInputStream("url")</code>은 <b>"url"이라는 실제 파일이 없으므로 열자마자 <code>IOException</code>(정확히는 <code>FileNotFoundException</code>)이 납니다</b> — try-with-resources는 "자원을 안전하게 닫아 주는 것"이지 "파일이 존재하게 만들어 주는 것"은 아니라는 점도 기억해 두세요.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/D1_Exception.java" target="_blank" rel="noopener">D1_Exception.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/D1_UserException.java" target="_blank" rel="noopener">D1_UserException.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_Card.java" target="_blank" rel="noopener">cardgame/D2_Card.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardCase.java" target="_blank" rel="noopener">cardgame/D2_CardCase.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardMain.java" target="_blank" rel="noopener">cardgame/D2_CardMain.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/D1_Exception.java">D1_Exception.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/D1_UserException.java">D1_UserException.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_Card.java">cardgame/D2_Card.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardCase.java">cardgame/D2_CardCase.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/cardgame/D2_CardMain.java">cardgame/D2_CardMain.java</a>
     </div>
   </div>
 </article>
@@ -6146,11 +6146,11 @@ public class D4_ThreadTest {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_StreamTest</code>의 <code>Arrays.asList(...)</code>로 만든 <code>list</code>는 <b>크기가 고정</b>이라 <code>add()</code>·<code>remove()</code>는 못 쓰지만 <code>set()</code>은 됩니다(배열을 감싼 것이라 그렇습니다) — <code>List.of(...)</code>로 만든 <code>list3</code>은 그보다 더 엄격한 <b>완전 불변</b>이라 <code>set()</code>조차 안 됩니다. <code>D3_IOTest.test04</code>·<code>test05</code>가 <code>InputStreamReader(System.in, "MS949")</code>로 인코딩을 명시하는 이유도 기억해 두세요 — <b>운영체제 콘솔의 기본 인코딩과 맞춰야</b> 한글이 안 깨집니다(리눅스 서버 콘솔은 보통 UTF-8이라 상황에 따라 인코딩을 바꿔야 할 수도 있습니다). 그리고 <code>D4_ThreadTest</code>의 <code>Thread.sleep(500)</code>은 <b>일부러 넣은 지연</b>입니다 — 없으면 한 스레드가 너무 빨리 끝나 버려서 인터리빙이 잘 안 보일 수 있습니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D1_ILambda.java" target="_blank" rel="noopener">D1_ILambda.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D1_LabdaTest.java" target="_blank" rel="noopener">D1_LabdaTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D2_StreamTest.java" target="_blank" rel="noopener">D2_StreamTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D3_IOTest.java" target="_blank" rel="noopener">D3_IOTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260825/day16/D4_ThreadTest.java" target="_blank" rel="noopener">D4_ThreadTest.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D1_ILambda.java">D1_ILambda.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D1_LabdaTest.java">D1_LabdaTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D2_StreamTest.java">D2_StreamTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D3_IOTest.java">D3_IOTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D4_ThreadTest.java">D4_ThreadTest.java</a>
     </div>
   </div>
 </article>
@@ -6502,16 +6502,16 @@ Client:Connetion to server...
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_ThreadSync</code>의 <code>ShareObject.print()</code>를 실행하는 <code>trA</code>·<code>trB</code> 코드는 <code>// trA.start(); // trB.start();</code>로 <b>주석 처리되어 있어 실제로는 실행되지 않습니다</b> — <code>synchronized(so) { so.print(...) }</code> 문법 자체를 보여주기 위한 예시로 남겨 둔 코드입니다. 실제로 돌아간 건 <code>sbTest()</code> 쪽입니다. 그리고 <code>D3_CakeMain</code>에서 <code>t2.setPriority(10)</code>(만드는 사람)·<code>t1.setPriority(1)</code>(먹는 사람)로 <b>일부러 만드는 쪽 우선순위를 높였는데도</b>, <code>wait()</code>/<code>notifyAll()</code> 로직이 <b>진짜로 순서를 강제</b>하기 때문에 우선순위와 무관하게 "10개 만들고 10개 먹고"가 정확히 지켜집니다 — 동기화 로직이 우선순위보다 훨씬 강한 규칙이라는 걸 보여주는 예입니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_RunableTest.java" target="_blank" rel="noopener">D1_RunableTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadInheriTest.java" target="_blank" rel="noopener">D1_ThreadInheriTest.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadMain.java" target="_blank" rel="noopener">D1_ThreadMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D2_ThreadSync.java" target="_blank" rel="noopener">D2_ThreadSync.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakePlate.java" target="_blank" rel="noopener">D3_CakePlate.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMaker.java" target="_blank" rel="noopener">D3_CakeMaker.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeEater.java" target="_blank" rel="noopener">D3_CakeEater.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMain.java" target="_blank" rel="noopener">D3_CakeMain.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPServer.java" target="_blank" rel="noopener">D4_TCPServer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPClient.java" target="_blank" rel="noopener">D4_TCPClient.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D1_RunableTest.java">D1_RunableTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadInheriTest.java">D1_ThreadInheriTest.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D1_ThreadMain.java">D1_ThreadMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D2_ThreadSync.java">D2_ThreadSync.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakePlate.java">D3_CakePlate.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMaker.java">D3_CakeMaker.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeEater.java">D3_CakeEater.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D3_CakeMain.java">D3_CakeMain.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPServer.java">D4_TCPServer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D4_TCPClient.java">D4_TCPClient.java</a>
     </div>
   </div>
 </article>
@@ -6822,11 +6822,11 @@ public class D3_ChatClient {
     </div>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘로 <b>🧭 학습 여정 13단계(네트워크)</b>까지 전부 도달했습니다 — 1일차 명명법부터 시작해 클래스·상속·컬렉션·예외·람다·스레드를 거쳐 <b>결국 "다른 컴퓨터와 대화하는 프로그램"</b>까지 왔습니다. 채팅 서버는 사실 이 여정 전체가 합쳐진 결과물입니다: 소켓(13단계) 위에 스레드(12단계)를 얹어 여러 명을 동시에 받고, 컬렉션(11단계)으로 접속자를 관리하고, 예외 처리(11단계)로 접속 종료를 감지합니다. 복습할 때 막히는 부분이 있다면 그 부분이 가리키는 이전 단계로 돌아가 보세요 — 이 표는 그러라고 만든 지도입니다.</div>
     <div class="note-files">실습 파일:
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D1_MultiTcpServer.java" target="_blank" rel="noopener">D1_MultiTcpServer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPServer.java" target="_blank" rel="noopener">D2_UDPServer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPClient.java" target="_blank" rel="noopener">D2_UDPClient.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatServer.java" target="_blank" rel="noopener">D3_ChatServer.java</a> ·
-      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatClient.java" target="_blank" rel="noopener">D3_ChatClient.java</a>
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D1_MultiTcpServer.java">D1_MultiTcpServer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPServer.java">D2_UDPServer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D2_UDPClient.java">D2_UDPClient.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatServer.java">D3_ChatServer.java</a> ·
+      <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D3_ChatClient.java">D3_ChatClient.java</a>
     </div>
   </div>
 </article>
@@ -7306,7 +7306,7 @@ public class D3_ChatClient {
   </div>
 </article>
 <article class="note-card" id="class-day32"><div class="note-head"><span class="note-num">32일차</span><h3>2026-09-16 · 게시판 CRUD·전체 선택·코딩테스트 15회차</h3><div class="note-tags"><span class="tag">핵심 개념</span><span class="tag">2026-09-16</span></div></div><div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>게시판 등록·상세·수정·단일 삭제 코드와 전체 선택을 반영하고, 강조 개념 및 코딩테스트 15회차 파일의 새 문제 두 개를 연결한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>게시판의 글 쓰기·읽기·고치기·지우기 버튼을 하나씩 실제 배선에 연결한 날이다. 체크박스 전체 선택 스위치도 달았지만, 여러 개를 한꺼번에 지우는 기능은 아직이다.</div><p>확인 범위: 두 Eclipse 수업 프로젝트의 Java/JSP/XML과 SQL 원본 5개. SQL 원본 5개는 저장소와 동일합니다. 02 프로젝트의 HkDao와 JSP 4개 변경, 새 boardDetail.jsp를 반영했습니다. 공개본의 DB 비밀번호 제거는 유지합니다.</p><ul><li><a href="#web-19">JSP 실행과 문법</a></li><li><a href="#web-20">separation · MVC1 · MVC2</a></li><li><a href="#web-21">네 가지 scope</a></li><li><a href="#web-22">파라미터와 객체 전달</a></li><li><a href="#web-23">화면 이동과 오늘의 소스 상태</a></li><li><a href="#web-24">Web Server · WAS</a></li></ul><p>요청 시작 → Controller가 읽는 값 → DAO 결과를 담는 곳 → View로 넘기는 방법 순으로 설명해 보세요. <a href="#web-25">등록·상세·수정·단일 삭제</a> 코드가 연결됐고 <a href="#web-26">전체 선택</a>도 추가되었습니다. 다중 삭제는 아직 미구현입니다. 코테는 <a href="#ct-27">핸드폰 번호 가리기(PASS)</a>와 <a href="#ct-28">중고거래 상태 조회(FAIL)</a>를 복습하세요.</p><div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>목록 요청의 전체 과정을 화면 없이 말할 수 있을까?</summary><div class="sc-a">command 수신 → DAO 조회 → List 객체 → request 속성 저장 → forward → JSP의 HTML 출력 → 브라우저 표시 순서입니다.</div></details></div></div></article>
-<article class="note-card" id="class-day33"><div class="note-head"><span class="note-num">33일차</span><h3>2026-09-17 · 다중 삭제·트랜잭션·Servlet 시작</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: MVC1 다중 삭제와 Servlet 기본 요청 처리를 확인했다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>체크한 글들을 한 바구니에 담아 한 번에 버리는 법(다중 삭제)을 배우고, 요청을 전담해 받는 직원인 Servlet을 처음 만난 날이다.</div><ul><li>선택된 seq 배열을 받고 JDBC batch로 삭제.</li><li>선택 유효값 검사와 오류 화면 추가.</li><li>03_hello_servlet 프로젝트에서 GET·POST 요청 처리 시작.</li></ul><p><a href="#web-27">다중 삭제와 트랜잭션</a> · <a href="#web-28">Servlet 생명주기</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/teacher-sync-2026-09-18.md" target="_blank" rel="noopener">강사 코드 대조 기록</a></p></div></article>
+<article class="note-card" id="class-day33"><div class="note-head"><span class="note-num">33일차</span><h3>2026-09-17 · 다중 삭제·트랜잭션·Servlet 시작</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: MVC1 다중 삭제와 Servlet 기본 요청 처리를 확인했다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>체크한 글들을 한 바구니에 담아 한 번에 버리는 법(다중 삭제)을 배우고, 요청을 전담해 받는 직원인 Servlet을 처음 만난 날이다.</div><ul><li>선택된 seq 배열을 받고 JDBC batch로 삭제.</li><li>선택 유효값 검사와 오류 화면 추가.</li><li>03_hello_servlet 프로젝트에서 GET·POST 요청 처리 시작.</li></ul><p><a href="#web-27">다중 삭제와 트랜잭션</a> · <a href="#web-28">Servlet 생명주기</a> · <a href="../view.html?f=Back_end/teacher-sync-2026-09-18.md">강사 코드 대조 기록</a></p></div></article>
 
 <article class="note-card" id="class-day34"><div class="note-head"><span class="note-num">34일차</span><h3>2026-09-18 · Filter·Session·MVC2 전환</h3></div><div class="note-body"><p class="note-summary">누락 수업 보충: 설정·세션·인코딩 필터를 정리하고 MVC2 목록·등록 경로를 추가했다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>건물 입구에 공통 검사대(Filter)를 세우고 손님별 사물함(Session)을 구분한 뒤, 접수 창구를 JSP에서 Servlet 직원에게 옮기기 시작한 날이다.</div><ul><li>ServletConfig, ServletContext, HttpSession 구분.</li><li>UTF-8 Filter의 전처리 → chain → 후처리.</li><li>04_hkboard_MVC2의 URL 기반 Controller 전환.</li></ul><p><a href="#web-29">설정과 세션</a> · <a href="#web-30">Filter</a> · <a href="#web-31">MVC2 구현 범위</a></p><p>16회차는 시험 당일 노트북 고장으로 응시하지 못해 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 먼저 보충 풀이로 정리했고, 이후 <b>직접 풀어 제출해 둘 다 PASS</b> 했다. 제출 코드는 2026-09-22 정리에서 반영했다.</p></div></article>
 <article class="note-card" id="class-day35"><div class="note-head"><span class="note-num">35일차</span><h3>2026-09-21 · EL·JSTL 도입 (05 프로젝트)</h3></div><div class="note-body"><p class="note-summary">04를 복사해 05_hkboard_MVC2_JSTL을 만들고, 목록·상세 화면의 스크립틀릿을 EL과 JSTL로 바꿨다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>가구(자바 코드)는 그대로 두고 벽지(화면)만 새로 바른 날이다. 화면 속 자바 문법을 ${ }와 JSTL 태그로 바꿔 HTML처럼 읽히게 했다.</div><ul><li>JSTL jar 2개를 WEB-INF/lib에 넣고 <code>jakarta.tags.core</code>로 taglib 선언.</li><li><code>&lt;%= dto.getTitle() %&gt;</code> → <code>${dto.title}</code>, 스크립틀릿 for → <code>&lt;c:forEach&gt;</code>.</li><li>빈 목록 안내를 <code>&lt;c:choose&gt;</code> · <code>${empty list}</code>로 분기.</li><li>자바 코드(Controller · DAO · DTO)는 그대로 두고 화면만 바꿨다.</li><li>boardDetail.jsp 위쪽에는 쓰이지 않는 스크립틀릿 선언이 아직 남아 있다.</li></ul><p><a href="#web-32">EL</a> · <a href="#web-33">JSTL 설치</a> · <a href="#web-34">c:forEach</a> · <a href="#web-35">c:choose</a> · <a href="#web-36">04→05 핵심 정리</a></p><p>실행 중 글쓰기가 error.jsp로 튕기는 문제와 <code>&lt;c:choose&gt;</code> 중첩 오류를 차례로 잡았다. 과정은 <a href="#web-37">디버깅 기록</a>에 남겼다.</p></div></article>
@@ -7326,32 +7326,32 @@ public class D3_ChatClient {
 
 <article class="note-card" id="class-day37"><div class="note-head"><span class="note-num">37일차</span><h3>2026-09-23 · Spring MVC와 MyBatis로 게시판 목록 연결</h3><div class="note-tags"><span class="tag">2026-09-23</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>어제 만든 Spring MVC 뼈대에 DB 조회를 붙이고 역할을 Controller·Service·DAO로 나눴다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>어제는 화면 이름만 돌려줬고, 오늘은 실제 DB에서 꺼낸 목록을 화면에 보낸다.</div>
-<p>오전 06에서 DB 연결 설정과 MyBatis 별칭·Mapper 등록을 연습한 뒤, 07에서 게시판 목록을 연결했다.</p><ol><li><code>root-context.xml</code>에 접속 정보·DBCP·SqlSessionFactory·SqlSessionTemplate 등록.</li><li><code>IHkDao / HkDao</code>, <code>IHKService / HkService</code> 계층 분리.</li><li>Mapper XML에 목록·등록·상세·수정·삭제·다중 삭제 SQL 작성.</li><li><code>BoardController</code>의 목록 메서드에서 Model로 JSP에 전달.</li></ol><p><a href="#web-41">요청 흐름</a> · <a href="#web-42">의존성 주입</a> · <a href="#web-43">DB 연결</a> · <a href="#web-44">Mapper 이름</a> · <a href="#web-45">foreach</a> · <a href="#web-46">오늘의 오류</a></p><p>18회차: <a href="#ct-35">정수 내림차순(FAIL)</a> · <a href="#ct-36">폰켓몬(FAIL)</a> · <a href="#ct-37">이름이 있는 동물(PASS)</a> · <a href="#ct-38">헤비 유저(PASS)</a>.</p><p><b>구현 범위:</b> Controller의 웹 요청은 목록 하나까지다. DAO에 메서드가 있다는 사실과 화면 버튼까지 동작한다는 사실을 구분한다. <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/07_hkboard_springMVC/README.md" target="_blank" rel="noopener">원본 소스·실행 안내</a></p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>목록에 글이 나오려면 무엇이 모두 맞아야 할까?</summary><div class="sc-a">JSP의 링크, DispatcherServlet 매핑, Controller 주소, Service·DAO 주입, Mapper 전체 이름, DB 접속, Model 이름과 JSP의 EL이 연결되어야 한다.</div></details></div>
+<p>오전 06에서 DB 연결 설정과 MyBatis 별칭·Mapper 등록을 연습한 뒤, 07에서 게시판 목록을 연결했다.</p><ol><li><code>root-context.xml</code>에 접속 정보·DBCP·SqlSessionFactory·SqlSessionTemplate 등록.</li><li><code>IHkDao / HkDao</code>, <code>IHKService / HkService</code> 계층 분리.</li><li>Mapper XML에 목록·등록·상세·수정·삭제·다중 삭제 SQL 작성.</li><li><code>BoardController</code>의 목록 메서드에서 Model로 JSP에 전달.</li></ol><p><a href="#web-41">요청 흐름</a> · <a href="#web-42">의존성 주입</a> · <a href="#web-43">DB 연결</a> · <a href="#web-44">Mapper 이름</a> · <a href="#web-45">foreach</a> · <a href="#web-46">오늘의 오류</a></p><p>18회차: <a href="#ct-35">정수 내림차순(FAIL)</a> · <a href="#ct-36">폰켓몬(FAIL)</a> · <a href="#ct-37">이름이 있는 동물(PASS)</a> · <a href="#ct-38">헤비 유저(PASS)</a>.</p><p><b>구현 범위:</b> Controller의 웹 요청은 목록 하나까지다. DAO에 메서드가 있다는 사실과 화면 버튼까지 동작한다는 사실을 구분한다. <a href="../view.html?f=Back_end/web_edu_project/07_hkboard_springMVC/README.md">원본 소스·실행 안내</a></p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>목록에 글이 나오려면 무엇이 모두 맞아야 할까?</summary><div class="sc-a">JSP의 링크, DispatcherServlet 매핑, Controller 주소, Service·DAO 주입, Mapper 전체 이름, DB 접속, Model 이름과 JSP의 EL이 연결되어야 한다.</div></details></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>06의 설정 연습과 07의 실제 목록 구현을 둘 다 보존했다.</li><li>등록·수정·삭제의 Controller 연결은 다음 구현 범위다.</li></ul></div></div></article>
 <article class="note-card" id="class-day38"><div class="note-head"><span class="note-num">38일차</span><h3>2026-09-28 · Spring MVC 게시판 CRUD 요청 연결</h3><div class="note-tags"><span class="tag">2026-09-28</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>37일차에 목록만 연결했던 07 게시판에 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 하나씩 붙였다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>04·05에서 <code>getRequestURI()</code>와 if문으로 갈라내던 요청을, 이제는 메서드마다 주소표(<code>@RequestMapping</code>)를 붙여 스프링이 알아서 찾아가게 했다.</div>
 <ol><li>JSP의 링크·폼 주소를 <code>.board</code>에서 <code>.do</code>로 바꿨다 — 글쓰기 폼, 상세, 수정, 삭제, 목록 버튼.</li><li><code>BoardController</code>에 <code>boardInsertForm</code>·<code>boardInsert</code>·<code>boardDetail</code>·<code>boardUpdate</code>·<code>mulDel</code> 메서드 추가.</li><li>폼 값은 <code>HkDto</code>로 한 번에 받고(커맨드 객체), 체크박스 여러 개는 <code>@RequestParam("seq") String[]</code>로 받았다.</li><li>저장·수정·삭제가 끝나면 <code>redirect:</code>로 목록이나 상세로 다시 보낸다.</li><li>같은 URL을 GET·POST로 나누는 <code>@GetMapping</code>·<code>@PostMapping</code>을 빈 메서드로 연습했다.</li><li>목록의 작성일을 <code>&lt;fmt:formatDate&gt;</code>로 "yyyy년 MM월 dd일" 형식으로 바꿨다.</li></ol>
-<p><a href="#web-47">요청 매핑표</a> · <a href="#web-48">파라미터 바인딩</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a> · <a href="#web-51">GET·POST와 삭제</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/07_hkboard_springMVC/README.md" target="_blank" rel="noopener">07 소스와 실행 안내</a></p>
+<p><a href="#web-47">요청 매핑표</a> · <a href="#web-48">파라미터 바인딩</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a> · <a href="#web-51">GET·POST와 삭제</a> · <a href="../view.html?f=Back_end/web_edu_project/07_hkboard_springMVC/README.md">07 소스와 실행 안내</a></p>
 <p>19회차 코딩테스트 — <a href="#ct-39">나머지가 1이 되는 수 찾기</a>(PASS) · <a href="#ct-40">크레인 인형뽑기 게임</a>(FAIL) · <a href="#ct-41">어린 동물 찾기</a>(PASS) · <a href="#ct-42">없어진 기록 찾기</a>(PASS)</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>글을 저장한 뒤 return "boardlist" 가 아니라 "redirect:boardlist.do" 인 이유는?</summary><div class="sc-a">forward로 목록을 보여 주면 주소창이 여전히 <code>boardInsert.do</code>(POST)라서 새로고침하면 같은 글이 또 저장됩니다. redirect는 브라우저가 목록 주소로 새 GET 요청을 보내게 하므로 새로고침해도 목록만 다시 읽습니다.</div></details><details class="sc-q"><summary>home.do 의 String param 에 @RequestParam 을 붙이지 않으면 이 PC에서 어떻게 되나?</summary><div class="sc-a">이 PC의 Eclipse·Maven 설정은 <code>-parameters</code> 옵션 없이 컴파일합니다. 그러면 Spring 6.1은 매개변수 이름을 알 수 없어 <code>IllegalArgumentException</code>을 냅니다. <code>@RequestParam("param")</code>으로 이름을 적어 주거나 컴파일 옵션을 켜야 합니다.</div></details></div>
 <div class="note-points"><div class="note-points-title">오늘 코드의 상태</div><ul><li>확인함 — 오늘 수정한 Java 6개 파일이 JDK 21로 컴파일된다(<code>-parameters</code>가 있을 때와 없을 때 모두).</li><li>확인함 — <code>home.do</code>의 <code>String param</code>은 이 PC의 빌드 설정에서 이름을 읽지 못해 예외가 난다. 스프링의 매개변수 해석기에 직접 넣어 재현했다(<a href="#web-49">자세히</a>).</li><li>확인하지 않음 — 톰캣에서 글쓰기·상세·수정·삭제를 실제 DB로 눌러 본 기록은 이번 정리에 없다.</li><li>미완 — <code>mulDel2.do</code>의 GET·POST 메서드는 빈 문자열을 돌려주는 연습용 자리다. 실패 시 <code>redirect:error.jsp</code>는 <code>error.jsp</code>가 <code>/WEB-INF/views</code> 안에 있어 브라우저가 열 수 없다(파일 위치로 따진 결과).</li></ul></div></div></article>
 <article class="note-card" id="class-day39"><div class="note-head"><span class="note-num">39일차</span><h3>2026-09-29 · 답변형 게시판 시작 — 08 프로젝트와 로그</h3><div class="note-tags"><span class="tag">2026-09-29</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>07을 바탕으로 답글을 달 수 있는 게시판(08)을 새로 시작했다. DTO에 답글 위치를 나타내는 refer·step·depth를 넣고, System.out 대신 로거로 기록을 남기기 시작했다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>게시판 틀은 07과 같지만, 이번 글에는 "몇 번째 글 묶음의 몇 번째 줄, 몇 칸 들여쓰기"라는 자리표가 붙는다.</div>
 <ol><li>07을 복사해 <code>08_answerboard_springMVC</code>를 만들고 패키지를 <code>com.hk.ansboard</code>로, 컴포넌트 스캔 범위도 그에 맞게 바꿨다.</li><li><code>pom.xml</code>에 로깅(SLF4J·Logback), AOP(AspectJ), <code>spring-tx</code>를 추가하고 MariaDB 드라이버·MyBatis 버전을 올렸다.</li><li><code>AnsDto</code>에 <code>refer · step · depth · readCount · delflag</code> 필드 추가.</li><li>Controller에서 <code>LoggerFactory.getLogger(...)</code>로 로거를 만들고 <code>logger.info</code>·<code>logger.debug</code>를 썼다. 설정 파일로 <code>log4j.xml</code>을 넣었다.</li></ol>
-<p><a href="#web-52">07에서 08로 — 무엇이 바뀌었나</a> · <a href="#web-53">로그와 log4j.xml</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/08_answerboard_springMVC/README.md" target="_blank" rel="noopener">08 소스와 실행 안내</a></p>
+<p><a href="#web-52">07에서 08로 — 무엇이 바뀌었나</a> · <a href="#web-53">로그와 log4j.xml</a> · <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a></p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>코드는 LoggerFactory(SLF4J)를 쓰는데 실제로 글자를 찍는 건 누구인가?</summary><div class="sc-a">SLF4J는 "로그를 남기는 창구"일 뿐이고, 실제로 출력하는 구현체는 클래스패스에 있는 라이브러리가 정합니다. 08의 pom에는 <code>logback-classic</code>이 있으므로 Logback이 출력합니다. 그래서 설정 파일도 Logback의 <code>logback.xml</code>이어야 하고, 지금 있는 <code>log4j.xml</code>은 읽히지 않습니다.</div></details></div>
 <div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — 08의 Java 4개 파일이 JDK 21로, 이 PC처럼 <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08과 같은 라이브러리로 로거를 만들면 Logback이 <code>logback.xml</code>을 찾지 못해 기본 설정(콘솔 · 전체 DEBUG)으로 동작하고 <code>log4j.xml</code>은 무시된다. 날짜별 로그 파일도 생기지 않는다(<a href="#web-53">자세히</a>).</li><li>9/29과 9/30의 구분은 파일 수정 시각으로 나눴다. 9/29에 만들고 9/30에 고친 파일은 40일차 쪽에 들어가 있을 수 있다.</li></ul></div></div></article>
 <article class="note-card" id="class-day40"><div class="note-head"><span class="note-num">40일차</span><h3>2026-09-30 · 답변형 게시판 목록·글쓰기·상세·수정·삭제</h3><div class="note-tags"><span class="tag">2026-09-30</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>08에 공통 머리·꼬리 화면과 Bootstrap을 붙이고, 페이지 단위 목록·글쓰기·상세(조회수)·수정·논리 삭제를 연결했다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>07에서 만든 CRUD를 "답글을 달 수 있는 판"으로 옮겨 다시 세웠다. 이번엔 글을 진짜로 지우지 않고 "삭제됨" 표시만 한다.</div>
 <ol><li><code>header.jsp</code>·<code>footer.jsp</code>를 만들어 모든 화면에서 <code>&lt;jsp:include&gt;</code>로 불러오고, Bootstrap 5를 CDN으로 붙였다.</li><li>목록 SQL에 <code>ROW_NUMBER() OVER(ORDER BY refer DESC, step ASC)</code>와 <code>ceil(rn/10) = #{pnum}</code>으로 10개씩 페이지 나누기. 페이지 번호 링크는 아직 자리만 있다.</li><li>새 글은 <code>refer = MAX(refer)+1</code>, <code>step·depth = 0</code>으로 저장한다.</li><li>상세보기: 목록에서 올 때만 <code>review=y</code>로 조회수를 올리고 redirect 한다.</li><li>삭제는 <code>DELETE</code>가 아니라 <code>delflag='Y'</code>로 바꾸는 논리 삭제. 상세보기의 삭제 버튼도 숨은 폼을 POST로 보낸다.</li></ol>
-<p><a href="#web-54">refer·step·depth와 페이징</a> · <a href="#web-55">논리 삭제와 조회수</a> · <a href="#web-56">공통 화면과 남은 것</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/08_answerboard_springMVC/README.md" target="_blank" rel="noopener">08 소스와 실행 안내</a></p>
+<p><a href="#web-54">refer·step·depth와 페이징</a> · <a href="#web-55">논리 삭제와 조회수</a> · <a href="#web-56">공통 화면과 남은 것</a> · <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a></p>
 <p>20회차 코딩테스트 — <a href="#ct-43">x만큼 간격이 있는 n개의 숫자</a>(PASS) · <a href="#ct-44">숫자 문자열과 영단어</a>(FAIL) · <a href="#ct-45">동물의 아이디와 이름</a>(PASS) · <a href="#ct-46">대여 기록이 존재하는 자동차 리스트 구하기</a>(FAIL)</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>9/28의 home.do 문제(-parameters)가 08에서는 왜 안 생기나?</summary><div class="sc-a">08 Controller의 단순 타입 매개변수가 모두 <code>@RequestParam("seq")</code>·<code>@RequestParam(value="pnum", defaultValue="1")</code>처럼 이름을 적고 있기 때문입니다. 이름을 적으면 컴파일 옵션과 상관없이 스프링이 어떤 요청 값을 넣을지 압니다.</div></details><details class="sc-q"><summary>상세보기 링크에 review=y 를 붙이는 이유는?</summary><div class="sc-a">조회수는 "목록에서 눌러 들어왔을 때"만 올려야 합니다. review=y일 때만 조회수를 올리고 <code>review</code> 없는 주소로 redirect 하므로, 상세 화면에서 새로고침하거나 수정 후 돌아와도 조회수가 다시 오르지 않습니다.</div></details></div>
 <div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — Java 소스 컴파일, 그리고 9/28에 문제였던 이름 없는 단순 타입 매개변수가 08 Controller에는 없다.</li><li>확인하지 않음 — 톰캣에서 실제 DB로 목록·글쓰기·상세·수정·삭제를 눌러 본 기록은 이번 정리에 없다.</li><li>미완 — 페이지 번호 링크, 답글 달기(Mapper에 주석 자리만 있음). 실패 시 <code>return "error.jsp"</code>는 뷰 이름으로 해석되어 <code>/WEB-INF/views/error.jsp.jsp</code>를 찾는데, 08에는 <code>error.jsp</code> 자체가 없다(파일로 따진 결과).</li></ul></div></div></article>
 <article class="note-card" id="class-day41"><div class="note-head"><span class="note-num">41일차</span><h3>2026-10-01 · 페이지 번호와 답글 달기</h3><div class="note-tags"><span class="tag">2026-10-01</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>9/30에 자리만 있던 페이지 번호와 답글 달기를 채웠다. 페이지 번호는 Paging 유틸이 5개씩 묶어 계산하고, 모든 화면이 지금 몇 쪽인지(pnum)를 들고 다닌다. 답글은 "아래 글들 한 칸씩 밀기 → 빈자리에 넣기" 두 쿼리로 만든다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>책 목차처럼 쪽 번호를 "1 2 3 4 5 다음"으로 보여 주고, 8쪽에서 글을 열었으면 목록으로 돌아올 때도 8쪽으로 돌아오게 했다. 답글은 줄 서 있는 사람들 사이에 끼어들 자리를 먼저 만든 뒤 들어간다.</div>
 <ol><li><code>index.jsp</code>에 <code>boardList.do?pnum=1</code> 게시판 링크를 달았다.</li><li><code>util/Paging.java</code> — 총 페이지 수·현재 쪽·한 번에 보일 개수(5)로 시작·끝·이전·다음 번호를 계산한다. Mapper에 총 페이지 수 <code>getPcount</code>(<code>ceil(count(*)/10)</code>)를 더했다.</li><li>글쓰기 폼·상세·수정·삭제가 <code>pnum</code>을 주소나 숨은 입력칸으로 넘겨받아, 끝나면 보던 쪽 목록으로 돌아간다.</li><li>상세 화면 아래에 답글 폼(부모 글 번호를 숨은 입력칸으로)을 붙이고, Mapper에 <code>replyUpdate</code>·<code>replyInsert</code>, DAO에 같은 이름의 메서드를 만들었다.</li><li><code>servlet-context.xml</code>의 스캔 범위를 <code>com.hk.ansboard.controller</code>로 좁혔다 — 42일차 트랜잭션 설정의 준비다.</li></ol>
-<p><a href="#web-57">페이지 번호 — Paging과 pnum</a> · <a href="#web-58">답글 달기 — step 밀고 끼워 넣기</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/08_answerboard_springMVC/README.md" target="_blank" rel="noopener">08 소스와 실행 안내</a></p>
+<p><a href="#web-57">페이지 번호 — Paging과 pnum</a> · <a href="#web-58">답글 달기 — step 밀고 끼워 넣기</a> · <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a></p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>답글을 저장할 때 INSERT보다 UPDATE를 먼저 하는 이유는?</summary><div class="sc-a">새 답글은 부모 글 바로 아래(<code>부모 step + 1</code>)에 들어가야 합니다. 그 자리에 이미 다른 답글이 있을 수 있으니, 같은 묶음(refer)에서 부모보다 아래에 있는 글들의 step을 먼저 1씩 밀어 자리를 비웁니다. 그래서 같은 글에 달린 답글은 나중에 단 것이 위에 옵니다.</div></details><details class="sc-q"><summary>5개씩 보여 줄 때 8쪽을 보고 있으면 번호는 몇부터 몇까지 나오나?</summary><div class="sc-a">6~10입니다. 8은 두 번째 묶음(6~10)에 속하고, "이전"은 앞 묶음의 끝인 5, "다음"은 다음 묶음의 첫 번호인 11을 가리킵니다(총 페이지가 11 이상일 때).</div></details></div>
 <div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — Mapper의 답글 SQL을 원문 그대로 SQLite 메모리 DB에 실행해 답글 순서와 step 중복 없음을 확인했다(<a href="#web-58">결과</a>). <code>Paging.pagingValue</code>는 13가지 경우를 계산해 봤다(<a href="#web-57">결과</a>).</li><li>10/1과 10/2의 구분은 파일 수정 시각으로 나눴다. Controller·Service는 10/2 오전에 마지막으로 고쳐져, 답글 요청을 연결한 날이 10/1인지 10/2인지는 파일로 가를 수 없다.</li></ul></div></div></article>
 <article class="note-card" id="class-day42"><div class="note-head"><span class="note-num">42일차</span><h3>2026-10-02 · 트랜잭션과 AOP 로그</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
@@ -16220,7 +16220,7 @@ public class DescendingDigitsString {
         }
         return Long.parseLong(sb.toString());
     }
-}</code></pre></div><p>또 다른 풀이는 <code>% 10</code>으로 맨 끝 자리를 꺼내고 <code>/ 10</code>으로 버린 다음 정렬한다. <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-09-23/DescendingDigitsArithmetic.java" target="_blank" rel="noopener">수학적 분리 방식</a>을 함께 보자.</p><p>숫자 자체에는 길이 속성이 없고, 배열은 <code>arr.length</code>, 문자열은 <code>str.length()</code>다. 입력이 최대 80억이므로 반환형과 파싱은 <code>long</code> 및 <code>Long.parseLong</code>을 사용한다. 반복해서 문자열을 조립할 때는 <code>StringBuilder</code>로 누적할 수 있다.</p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>7999999999를 정렬하면 입력 상한인 80억보다 커져도 괜찮을까?</summary><div class="sc-a">결과는 9999999997이다. 입력의 상한이 결과의 상한인 것은 아니다. long 범위에는 들어가며, int로 바꾸면 범위를 벗어난다.</div></details></div>
+}</code></pre></div><p>또 다른 풀이는 <code>% 10</code>으로 맨 끝 자리를 꺼내고 <code>/ 10</code>으로 버린 다음 정렬한다. <a href="../view.html?f=Back_end/coding-tests/2026-09-23/DescendingDigitsArithmetic.java">수학적 분리 방식</a>을 함께 보자.</p><p>숫자 자체에는 길이 속성이 없고, 배열은 <code>arr.length</code>, 문자열은 <code>str.length()</code>다. 입력이 최대 80억이므로 반환형과 파싱은 <code>long</code> 및 <code>Long.parseLong</code>을 사용한다. 반복해서 문자열을 조립할 때는 <code>StringBuilder</code>로 누적할 수 있다.</p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>7999999999를 정렬하면 입력 상한인 80억보다 커져도 괜찮을까?</summary><div class="sc-a">결과는 9999999997이다. 입력의 상한이 결과의 상한인 것은 아니다. long 범위에는 들어가며, int로 바꾸면 범위를 벗어난다.</div></details></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>Java 두 풀이 모두 20,008개 입력 통과: 1~10,000 전수·무작위 10,000·경계 8개.</li><li>기댓값은 정렬 대신 숫자 빈도표로 만들었다.</li><li>제출 당시 FAIL과 로컬 정답 풀이 PASS는 서로 다른 기록이다.</li></ul></div></div></article>
 <article class="note-card" id="ct-36"><div class="note-head"><span class="note-num">18회차</span><h3>폰켓몬</h3><div class="note-tags"><span class="tag">2026-09-23</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>정답은 종류 수와 선택 가능한 마릿수 N/2 중 작은 값이다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>종류가 많아도 두 마리만 고를 수 있으면 두 종류가 한계다. 세 마리를 골라도 종류가 두 개뿐이면 두 종류가 한계다.</div>
@@ -16411,7 +16411,7 @@ GROUP BY H.CAR_ID          → 3, 1
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>1:N 조인 뒤 "1" 쪽 컬럼만 뽑으면 중복이 생긴다.</li><li>문제에 "중복 없이"가 있으면 <code>SELECT DISTINCT</code>.</li></ul></div></div></article>
 <article class="note-card" id="ct-47"><div class="note-head"><span class="note-num">21회차</span><h3>문자열을 정수로 바꾸기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>Integer.parseInt는 맨 앞의 부호(+, -)까지 읽어 int로 바꿔 준다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>종이에 적힌 "-1234"라는 글자를 계산기에 넣을 수 있는 숫자 -1234로 옮겨 적는 일이다.</div>
-<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12925" target="_blank" rel="noopener">문제 원문</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-10-02/StringToInt.java" target="_blank" rel="noopener">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12925" target="_blank" rel="noopener">문제 원문</a> · <a href="../view.html?f=Back_end/coding-tests/2026-10-02/StringToInt.java">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
 <div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">class Solution {
     public int solution(String s) {
         int answer = 0;
@@ -16425,7 +16425,7 @@ GROUP BY H.CAR_ID          → 3, 1
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>문자열 → 정수: <code>Integer.parseInt</code>(부호 포함).</li><li>숫자가 아닌 글자가 있으면 예외가 난다.</li></ul></div></div></article>
 <article class="note-card" id="ct-48"><div class="note-head"><span class="note-num">21회차</span><h3>모의고사</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>찍는 패턴은 i % 패턴길이로 돌려 쓰고, 한 번의 반복으로 세 사람을 같이 채점한 뒤, 최고점과 같은 사람을 번호 순으로 모은다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>세 친구가 정해진 순서로 찍기를 반복한다. 답안지를 한 번 훑으며 셋을 동시에 채점하고, 1등이 여럿이면 모두 상을 준다.</div>
-<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42840" target="_blank" rel="noopener">문제 원문</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-10-02/MockExam.java" target="_blank" rel="noopener">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42840" target="_blank" rel="noopener">문제 원문</a> · <a href="../view.html?f=Back_end/coding-tests/2026-10-02/MockExam.java">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
 <p><b>제출 코드: 원문에 없음.</b> FAIL 결과와 정답 풀이만 남아 있다. 실패 원인을 단정하지 않는다.</p>
 <div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">정답 풀이 · 오답노트 원문 (핵심 부분)</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">int[] p1 = {1, 2, 3, 4, 5};
 int[] p2 = {2, 1, 2, 3, 2, 4, 2, 5};
@@ -16450,7 +16450,7 @@ for (int i = 0; i &lt; list.size(); i++) result[i] = list.get(i);</code></pre></
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>반복 패턴은 <code>배열[i % 길이]</code>.</li><li>동점자를 모두 고를 때는 <code>else if</code>가 아니라 독립된 <code>if</code>.</li></ul></div></div></article>
 <article class="note-card" id="ct-49"><div class="note-head"><span class="note-num">21회차</span><h3>여러 기준으로 정렬하기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>ORDER BY에 기준을 쉼표로 이어 쓰면 앞 기준이 같을 때만 다음 기준을 본다. 기준마다 ASC·DESC를 따로 정한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>이름순으로 줄을 세우되, 이름이 같은 사람끼리는 늦게 온 사람이 앞에 선다.</div>
-<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59404" target="_blank" rel="noopener">문제 원문</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-10-02/multi-sort.sql" target="_blank" rel="noopener">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59404" target="_blank" rel="noopener">문제 원문</a> · <a href="../view.html?f=Back_end/coding-tests/2026-10-02/multi-sort.sql">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
 <div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT ANIMAL_ID, NAME, DATETIME
 FROM ANIMAL_INS
 ORDER BY NAME ASC, DATETIME DESC;</code></pre></div>
@@ -16459,7 +16459,7 @@ ORDER BY NAME ASC, DATETIME DESC;</code></pre></div>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li><code>ORDER BY A ASC, B DESC</code> — 정렬 방향은 기준마다 따로.</li></ul></div></div></article>
 <article class="note-card" id="ct-50"><div class="note-head"><span class="note-num">21회차</span><h3>조건에 맞는 사용자 정보 조회하기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>전화번호 앞 세 자리를 '010'으로 고정하면 다른 번호가 틀어진다. 번호는 TLNO에서 SUBSTR로 잘라 붙이고, 주소는 CONCAT_WS로 이어 붙인다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>전화번호부를 옮겨 적으면서 앞자리를 전부 "010"으로 써 버리면, 011을 쓰던 사람 번호가 틀린다. 원래 적힌 그대로 잘라 옮겨야 한다.</div>
-<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/164670" target="_blank" rel="noopener">문제 원문</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-10-02/user-info-submitted.sql" target="_blank" rel="noopener">제출 코드</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/coding-tests/2026-10-02/user-info-answer.sql" target="_blank" rel="noopener">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/164670" target="_blank" rel="noopener">문제 원문</a> · <a href="../view.html?f=Back_end/coding-tests/2026-10-02/user-info-submitted.sql">제출 코드</a> · <a href="../view.html?f=Back_end/coding-tests/2026-10-02/user-info-answer.sql">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
 <div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT DISTINCT U.USER_ID, U.NICKNAME,
        CONCAT(U.CITY, ' ', U.STREET_ADDRESS1, ' ', U.STREET_ADDRESS2) AS 전체주소,
        CONCAT('010','-',SUBSTR(U.TLNO,4,4),'-',SUBSTR(U.TLNO,8,4)) AS 전화번호
@@ -16488,7 +16488,7 @@ ORDER BY U.USER_ID DESC;</code></pre></div>
 
   <section id="sql-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🗄️ 6. SQL 기초 — MySQL · HeidiSQL</h2></div>
-    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>를 지나 <b>EXPLAIN 실행 계획 · 스토어드 프로시저와 함수</b>까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql" target="_blank" rel="noopener">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
+    <p class="cat-desc">자바 교안을 마치고 <b>데이터베이스 과정</b>으로 넘어와 정리한 노트입니다. <b>HeidiSQL로 MySQL에 접속</b>해 <code>scott</code>·<code>hr</code>·<code>employees</code> 실습 DB를 조회하고, 직접 <code>sqlDB</code>를 만들어 데이터를 넣어 보면서 <b>SELECT · WHERE · 연산자 · 테이블 생성 · 서브쿼리</b>에서 시작해 <b>정렬 · 집계 함수 · GROUP BY · JOIN · DML/DDL · 인라인 뷰 · CTE · 내장 함수</b>를 거쳐 <b>윈도우 함수 · 피벗 · 조인 심화 · 제약조건 · 뷰 · 인덱스</b>를 지나 <b>다대다 관계 · OUTER JOIN 실전 · CASCADE · 인덱스 관리</b>를 지나 <b>EXPLAIN 실행 계획 · 스토어드 프로시저와 함수</b>까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업 자료를 실제 DB에 그대로 올려 돌려 본 출력이고, 수업 파일에서 발견한 <b>함정 세 가지</b>(정렬되지 않는 ORDER BY · 와일드카드 없는 LIKE · NOT IN의 NULL 함정)도 함께 검증해 정리했습니다. 원본 실습 스크립트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/sql_edu_project" target="_blank" rel="noopener">sql_edu_project</a>에 있고, 수업 중 작성한 쿼리는 <a href="../view.html?f=Back_end/sql_edu_project/%EC%BF%BC%EB%A6%AC%20%231.sql">쿼리 #1.sql</a>에서 통째로 볼 수 있습니다.</p>
     <div class="notes-list" id="sql-notes">
 
 <article class="note-card" id="sql-01">
@@ -19801,7 +19801,7 @@ SELECT whileProc();
 
   <section id="web-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>🖥️ 7. 웹 개발 — JSP · Servlet · JDBC</h2></div>
-    <p class="cat-desc">SQL 과정을 마치고 <b>웹 애플리케이션 개발</b>로 넘어와 정리한 노트입니다. <b>Eclipse JEE + Tomcat 10.1</b> 환경을 만들고, 다이나믹 웹 프로젝트 구조를 익힌 뒤 <b>DTO · DAO로 계층을 나눠 JDBC 6단계</b>로 DB에 붙이는 것까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업에서 만든 <code>01_userboard_sepa</code> 프로젝트를 실제로 컴파일해 테스트 DB에 붙여 돌려 본 출력입니다. 이어서 <b>JSP 스크립틀릿 · request로 값 받기 · 페이지 사이 값 전달 · CRUD 완성 · 화면 이동 · 한글 인코딩 · 외래키</b>까지 다루고, <b>지금 구조(MVC1)의 한계</b>를 짚은 뒤, 두 번째 프로젝트에서 <b>DAO 상속으로 중복을 줄이고 command 파라미터로 분기하는 첫 컨트롤러</b>까지 다룹니다. 9월 16일 강조 개념은 <a href="#web-19">19~24번 카드</a>에 정리했습니다. 새 카드의 코드는 개념 설명용 예시이며 실행 검증 로그와 구별합니다. 앞으로 MVC2 · Servlet · JSTL · MyBatis로 이어집니다. 원본 실습 프로젝트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/web_edu_project" target="_blank" rel="noopener">web_edu_project</a>에 있습니다 — <b>공개 저장소라 DB 비밀번호는 빼고</b> 올렸으니, 내려받아 쓸 때는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/README.md" target="_blank" rel="noopener">README</a>의 안내대로 채워 넣으면 됩니다.</p>
+    <p class="cat-desc">SQL 과정을 마치고 <b>웹 애플리케이션 개발</b>로 넘어와 정리한 노트입니다. <b>Eclipse JEE + Tomcat 10.1</b> 환경을 만들고, 다이나믹 웹 프로젝트 구조를 익힌 뒤 <b>DTO · DAO로 계층을 나눠 JDBC 6단계</b>로 DB에 붙이는 것까지 다룹니다. 초기 실습 카드의 <b>실행 결과</b>는 수업에서 만든 <code>01_userboard_sepa</code> 프로젝트를 실제로 컴파일해 테스트 DB에 붙여 돌려 본 출력입니다. 이어서 <b>JSP 스크립틀릿 · request로 값 받기 · 페이지 사이 값 전달 · CRUD 완성 · 화면 이동 · 한글 인코딩 · 외래키</b>까지 다루고, <b>지금 구조(MVC1)의 한계</b>를 짚은 뒤, 두 번째 프로젝트에서 <b>DAO 상속으로 중복을 줄이고 command 파라미터로 분기하는 첫 컨트롤러</b>까지 다룹니다. 9월 16일 강조 개념은 <a href="#web-19">19~24번 카드</a>에 정리했습니다. 새 카드의 코드는 개념 설명용 예시이며 실행 검증 로그와 구별합니다. 앞으로 MVC2 · Servlet · JSTL · MyBatis로 이어집니다. 원본 실습 프로젝트는 <a href="https://github.com/MoriochoRadio/web-study-notes/tree/main/Back_end/web_edu_project" target="_blank" rel="noopener">web_edu_project</a>에 있습니다 — <b>공개 저장소라 DB 비밀번호는 빼고</b> 올렸으니, 내려받아 쓸 때는 <a href="../view.html?f=Back_end/web_edu_project/README.md">README</a>의 안내대로 채워 넣으면 됩니다.</p>
     <div class="notes-list" id="web-notes">
 
 <article class="note-card" id="web-01">
@@ -21575,7 +21575,7 @@ chain.doFilter(request, response);</code></pre></div><p>문자 인코딩은 파�
 String command = uri.substring(request.getContextPath().length());
 // /boardlist.board → 조회 → request 속성 → forward
 request.setAttribute(&quot;list&quot;, dao.getAllList());
-request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, response);</code></pre></div><ul><li>전환 완료: /boardlist.board, /boardInsertForm.board, /boardInsert.board.</li><li>전환 중: 상세·수정·단일 삭제·다중 삭제. 기존 JSP 컨트롤러 링크가 남아 있다.</li><li>Servlet의 뒤쪽 분기는 아직 boardDetail처럼 이전 command 이름을 비교한다. /boardDetail.board 요청과 일치하지 않는다.</li></ul><p>forward는 같은 request의 객체를 화면으로 넘기고, 등록 후 redirect는 목록 URL에 새 요청을 보낸다. <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/teacher-sync-2026-09-18.md" target="_blank" rel="noopener">소스 대조·남은 부분</a>에서 기준 커밋을 확인할 수 있다.</p></div></article>
+request.getRequestDispatcher(&quot;boardlist.jsp&quot;).forward(request, response);</code></pre></div><ul><li>전환 완료: /boardlist.board, /boardInsertForm.board, /boardInsert.board.</li><li>전환 중: 상세·수정·단일 삭제·다중 삭제. 기존 JSP 컨트롤러 링크가 남아 있다.</li><li>Servlet의 뒤쪽 분기는 아직 boardDetail처럼 이전 command 이름을 비교한다. /boardDetail.board 요청과 일치하지 않는다.</li></ul><p>forward는 같은 request의 객체를 화면으로 넘기고, 등록 후 redirect는 목록 URL에 새 요청을 보낸다. <a href="../view.html?f=Back_end/teacher-sync-2026-09-18.md">소스 대조·남은 부분</a>에서 기준 커밋을 확인할 수 있다.</p></div></article>
 <article class="note-card" id="web-32"><div class="note-head"><span class="note-num">32</span><h3>EL — 화면에서 <code>${ }</code>로 값 꺼내기</h3></div><div class="note-body"><p class="note-summary">Scope에 담긴 객체를 자바 코드 없이 꺼낸다. import도 형변환도 사라진다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>${dto.title}은 보관함에서 dto를 꺼내 제목을 보여 달라는 주문서다. 꺼내는 과정(import·형변환)은 EL이 알아서 하고, 못 찾으면 조용히 빈칸으로 둔다.</div><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;%-- 04_hkboard_MVC2 : 스크립틀릿 --%&gt;
 &lt;%@page import="com.hk.board.dto.HkDto"%&gt;
 &lt;% HkDto dto = (HkDto)request.getAttribute("dto"); %&gt;
@@ -21752,7 +21752,7 @@ public String boardList(Model model) {
 }</code></pre></div><div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><span class="code-file">핵심 코드</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-jsp">&lt;c:forEach items=&quot;${list}&quot; var=&quot;dto&quot;&gt;
     &lt;tr&gt;&lt;td&gt;${dto.seq}&lt;/td&gt;&lt;td&gt;${dto.title}&lt;/td&gt;&lt;/tr&gt;
 &lt;/c:forEach&gt;</code></pre></div><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>model.addAttribute("list", list)의 두 list는 같은 뜻인가?</summary><div class="sc-a">첫 번째 문자열은 JSP에서 찾을 이름이고 두 번째는 실제 조회 결과 변수다. 문자열을 바꾸면 JSP의 <code>${list}</code>도 맞춰야 한다.</div></details></div>
-<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>요청 URL은 <code>boardlist.do</code>, 뷰 이름은 <code>boardlist</code>다.</li><li>ViewResolver가 <code>/WEB-INF/views/boardlist.jsp</code>로 연결한다.</li><li>실제 수업 코드는 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/07_hkboard_springMVC/README.md" target="_blank" rel="noopener">07 프로젝트 안내</a>에서 확인한다.</li></ul></div></div></article>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>요청 URL은 <code>boardlist.do</code>, 뷰 이름은 <code>boardlist</code>다.</li><li>ViewResolver가 <code>/WEB-INF/views/boardlist.jsp</code>로 연결한다.</li><li>실제 수업 코드는 <a href="../view.html?f=Back_end/web_edu_project/07_hkboard_springMVC/README.md">07 프로젝트 안내</a>에서 확인한다.</li></ul></div></div></article>
 <article class="note-card" id="web-42"><div class="note-head"><span class="note-num">42</span><h3>인터페이스와 의존성 주입</h3><div class="note-tags"><span class="tag">2026-09-23</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>객체를 직접 new 하지 않고, 필요한 타입을 선언하면 Spring이 등록된 빈을 연결한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>식당에서 주문을 받을 때 주방장을 직접 고용하지 않는 것처럼, Controller는 서비스를 쓸 준비만 한다. 어떤 객체를 연결할지는 컨테이너가 맡는다.</div>
 <div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">핵심 코드</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@Controller
@@ -21830,7 +21830,7 @@ public HkDto getBoard(int seq) {
 <table><thead><tr><th>증상</th><th>확인한 원인</th><th>수정</th></tr></thead><tbody><tr><td>Spring·MyBatis import와 JSTL 인식 오류</td><td>Eclipse의 Maven 클래스패스 연결 누락</td><td>Maven Dependencies·resources 경로 복구</td></tr><tr><td>목록 클릭 시 404</td><td>링크는 boardlist.board, Controller는 boardlist.do</td><td>index.jsp 링크를 boardlist.do로 수정</td></tr><tr><td>올바른 URL에서 500</td><td>로컬 DB의 root 인증 실패</td><td>접속을 확인한 수업용 계정 설정 사용</td></tr><tr><td>설정 수정 후에도 옛 오류</td><td>빌드·배포본에 예전 DB 설정 잔존</td><td>리소스 다시 반영 후 HTTP 재검증</td></tr></tbody></table><div class="note-code"><div class="code-head"><span class="code-lang">TEXT</span><span class="code-file">2026-09-23 실행 확인</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-text">GET /07_hkboard_springMVC/             → 200
 GET /07_hkboard_springMVC/boardlist.do → 200
 목록 JSP + 실제 DB 조회까지 확인 (로컬 Tomcat 10.1)</code></pre></div><p>위 결과는 로컬 수업 환경에서 확인했다. GitHub Pages는 이 학습 노트를 보여 주는 정적 사이트이며 JSP·Spring 서버를 실행하지 않는다. 공개 소스를 실행하려면 예제 DB 설정을 본인 환경에 맞춰 채워야 한다.</p><div class="self-check"><div class="self-check-title">스스로 확인</div><details class="sc-q"><summary>boardDetail.jsp 파일이 있는데 주소창으로 WEB-INF/views/boardDetail.jsp를 열면 되는가?</summary><div class="sc-a">안 된다. WEB-INF 아래의 자원은 직접 요청할 수 없다. 연결된 Controller가 뷰 이름을 반환해야 한다. 오늘 Controller에는 목록 메서드만 있다.</div></details></div>
-<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>코드가 컴파일된다고 모든 URL이 존재하는 것은 아니다.</li><li>07의 등록·상세·수정·삭제 화면 링크는 아직 이전 구조가 남아 있다. 완성된 CRUD로 소개하지 않는다.</li><li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/07_hkboard_springMVC/README.md" target="_blank" rel="noopener">구현 범위와 실행 안내</a>를 먼저 확인한다.</li></ul></div></div></article>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>코드가 컴파일된다고 모든 URL이 존재하는 것은 아니다.</li><li>07의 등록·상세·수정·삭제 화면 링크는 아직 이전 구조가 남아 있다. 완성된 CRUD로 소개하지 않는다.</li><li><a href="../view.html?f=Back_end/web_edu_project/07_hkboard_springMVC/README.md">구현 범위와 실행 안내</a>를 먼저 확인한다.</li></ul></div></div></article>
 <article class="note-card" id="web-47"><div class="note-head"><span class="note-num">47</span><h3>요청 하나에 메서드 하나 — 게시판 CRUD 매핑표</h3><div class="note-tags"><span class="tag">@RequestMapping</span><span class="tag">2026-09-28</span></div></div>
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>MVC2의 Controller 서블릿이 URL을 보고 if문으로 갈라내던 일을, 스프링에서는 메서드마다 붙인 @RequestMapping이 대신한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>예전엔 안내 데스크 한 명이 모든 손님의 용건을 듣고 부서를 정해 줬다면, 이제는 문마다 부서 이름표가 붙어 있어 손님이 바로 찾아간다.</div>
 <table><thead><tr><th>URL</th><th>방식</th><th>받는 값</th><th>하는 일</th><th>돌려주는 것</th></tr></thead><tbody><tr><td><code>/boardlist.do</code></td><td>GET</td><td>—</td><td>목록 조회 → Model</td><td><code>"boardlist"</code> (forward)</td></tr><tr><td><code>/boardInsertForm.do</code></td><td>GET</td><td>—</td><td>빈 폼 보여 주기</td><td><code>"boardInsertForm"</code></td></tr><tr><td><code>/boardInsert.do</code></td><td>POST</td><td>id·title·content → <code>HkDto</code></td><td>글 저장</td><td><code>redirect:boardlist.do</code></td></tr><tr><td><code>/boardDetail.do</code></td><td>GET</td><td>seq → <code>HkDto pdto</code></td><td>한 건 조회 → Model</td><td><code>"boardDetail"</code></td></tr><tr><td><code>/boardUpdate.do</code></td><td>POST</td><td>seq·title·content → <code>HkDto</code></td><td>글 수정</td><td><code>redirect:boardDetail.do?seq=…</code></td></tr><tr><td><code>/mulDel.do</code></td><td>GET·POST</td><td><code>@RequestParam("seq") String[]</code></td><td>한 건 또는 여러 건 삭제</td><td><code>redirect:boardlist.do</code></td></tr></tbody></table>

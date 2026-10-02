@@ -1,6 +1,6 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
-**2026-10-02 웹 QA:** 사이트 전체를 점검해 고쳤다 — 원본 코드 링크의 한글 깨짐(GitHub 저장소 화면으로 연결), 검색 결과 0건일 때 빈 화면, 5분 복습에서 빠지던 카드 59장, 해설이 없던 시험 문제 53개, 낡은 안내 문구. 원본이 있어야 채울 수 있는 것(17일차 수업, 코딩테스트 13회차)은 [QA 기록](qa-2026-10-02.md)에 남겼다.
+**2026-10-02 웹 QA:** 사이트 전체를 점검해 고쳤다 — 원본 코드 링크의 한글 깨짐(사이트 안의 원본 파일 뷰어 `view.html`로 연결), 검색 결과 0건일 때 빈 화면, 5분 복습에서 빠지던 카드 59장, 해설이 없던 시험 문제 53개, 낡은 안내 문구. 원본이 있어야 채울 수 있는 것(17일차 수업, 코딩테스트 13회차)은 [QA 기록](qa-2026-10-02.md)에 남겼다.
 
 **2026-10-02 갱신:** [41일차](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day41)·[42일차](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day42) — 08 답변형 게시판에 페이지 번호(Paging 유틸·Bootstrap)와 답글 달기를 완성하고, 답글 저장에 트랜잭션(`@Transactional`), DAO 로그에 AOP를 붙인 수업을 반영했다. 웹 개념 5개(페이지 번호 · 답글 SQL · 트랜잭션과 root/servlet 컨텍스트 · AOP · 생성자 주입), 학습 여정 24단계, 시험 문제 6개를 추가했다. 답글 SQL은 Mapper 원문을 SQLite에서 돌려 순서를 확인했고, 트랜잭션은 08 설정 그대로(DB만 가짜 연결) 스프링을 띄워 commit·rollback과 **servlet-context가 전체를 스캔하면 트랜잭션이 걸리지 않는 것**을 재현했다. [21회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-02/)(2 PASS · 2 FAIL)도 반영했다 — SQL FAIL은 전화번호 앞자리를 '010'으로 고정한 것이 정답 풀이와의 가장 큰 차이다. 톰캣·DB로 화면을 눌러 본 기록은 이번에도 없다. [검증 기록](Back_end/sync-validation-2026-10-02.md)
 

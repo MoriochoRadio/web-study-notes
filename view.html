@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>원본 파일 보기 | 취업아카데미 학습 노트</title>
+<meta name="description" content="저장소의 원본 코드·SQL·Markdown 파일을 UTF-8로 읽어 보여 주는 뷰어">
+<!--
+  GitHub Pages는 .java를 charset 없이(한글이 깨짐), .sql을 application/sql(다운로드)로,
+  .md를 원문 텍스트로 내보낸다. 이 페이지는 같은 사이트의 파일을 fetch로 읽어
+  (Response.text()는 항상 UTF-8로 해석) 코드는 색을 입혀, Markdown은 문서로 보여 준다.
+  사용법: view.html?f=Back_end/coding-tests/2026-10-02/MockExam.java
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<style>
+  :root{--bg:#f4f6fa;--panel:#fff;--text:#202939;--muted:#5a6d84;--border:#dce3ed;--accent:#255ec7;--code-bg:#162132;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--bg:#111827;--panel:#192334;--text:#e5eaf2;--muted:#b5c4d8;--border:#344054;--accent:#91baff;--code-bg:#0d1520;}
+  }
+  :root[data-theme="dark"]{--bg:#111827;--panel:#192334;--text:#e5eaf2;--muted:#b5c4d8;--border:#344054;--accent:#91baff;--code-bg:#0d1520;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75}
+  main{max-width:960px;margin:auto;padding:24px 16px 48px}
+  a{color:var(--accent)}
+  .bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:14px;color:var(--muted);margin-bottom:12px}
+  .bar button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+  h1.file{font-size:1.15rem;margin:0 0 14px;word-break:break-all}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;overflow:auto}
+  pre.code{margin:0;background:var(--code-bg);color:#d9dee8;padding:18px;border-radius:10px;overflow:auto;font-size:13.5px;line-height:1.6;tab-size:4}
+  .md pre{background:var(--code-bg);color:#d9dee8;padding:16px;border-radius:10px;overflow:auto;font-size:13.5px}
+  .md code{font-family:ui-monospace,Consolas,monospace}
+  .md :not(pre)>code{background:rgba(127,127,127,.15);padding:1px 5px;border-radius:5px;font-size:.92em}
+  .md table{border-collapse:collapse;display:block;overflow:auto;font-size:.93rem}
+  .md th,.md td{border:1px solid var(--border);padding:6px 10px;text-align:left;vertical-align:top}
+  .md h1{font-size:1.6rem}.md h2{margin-top:32px}
+  .md img{max-width:100%}
+  .msg{color:var(--muted)}
+  .hljs{color:#d9dee8;background:transparent;}
+  .hljs-comment,.hljs-quote{color:#8bd9a3;font-style:italic;}
+  .hljs-keyword,.hljs-literal,.hljs-section{color:#c792ea;}
+  .hljs-string,.hljs-regexp,.hljs-template-string{color:#ecc48d;}
+  .hljs-number{color:#f78c6c;}
+  .hljs-title,.hljs-title.function_{color:#82aaff;}
+  .hljs-title.class_{color:#ffcb6b;}
+  .hljs-tag{color:#8a93a5;}
+  .hljs-name{color:#ff8a5c;}
+  .hljs-attr,.hljs-attribute{color:#82aaff;}
+  .hljs-built_in{color:#7fdbca;}
+  .hljs-variable,.hljs-template-variable,.hljs-params{color:#d9dee8;}
+  .hljs-doctag,.hljs-meta{color:#8f97a8;}
+</style>
+</head>
+<body>
+<main>
+  <div class="bar">
+    <button type="button" id="back">← 돌아가기</button>
+    <a href="./">학습 노트 첫 화면</a>
+    <a id="gh" href="https://github.com/MoriochoRadio/web-study-notes" target="_blank" rel="noopener">GitHub에서 보기</a>
+    <a id="raw" href="#" download>파일 내려받기</a>
+  </div>
+  <h1 class="file" id="name">파일을 불러오는 중…</h1>
+  <div class="panel" id="out"><p class="msg">잠시만 기다려 주세요.</p></div>
+</main>
+<script>
+(() => {
+  const REPO = "https://github.com/MoriochoRadio/web-study-notes/blob/main/";
+  const LANG = { java:"java", sql:"sql", mjs:"javascript", js:"javascript", jsx:"javascript", xml:"xml", jsp:"xml", html:"xml", css:"css", properties:"properties", json:"json", ps1:"powershell", sh:"bash" };
+  const out = document.getElementById("out"), nameEl = document.getElementById("name");
+  document.getElementById("back").addEventListener("click", () => {
+    if (history.length > 1) history.back(); else location.href = "./";
+  });
+  const f = new URLSearchParams(location.search).get("f") || "";
+  // 같은 저장소 안의 상대 경로만 허용 (다른 사이트 주소·상위 폴더 탈출 금지)
+  const safe = f !== "" && !/^[a-z][a-z0-9+.-]*:/i.test(f) && !f.startsWith("/") && !f.includes("\\") && !f.split("/").includes("..");
+  if (!safe) { nameEl.textContent = "열 수 없는 경로"; out.innerHTML = '<p class="msg">주소의 <code>?f=</code> 뒤에 저장소 안의 파일 경로를 적어 주세요.</p>'; return; }
+  document.title = f.split("/").pop() + " | 원본 파일 보기";
+  nameEl.textContent = f;
+  document.getElementById("gh").href = REPO + f.split("/").map(encodeURIComponent).join("/");
+  const raw = document.getElementById("raw");
+  const fUrl = f.split("/").map(encodeURIComponent).join("/");
+  raw.href = fUrl; raw.setAttribute("download", f.split("/").pop());
+  const ext = (f.match(/\.([a-z0-9]+)$/i) || [])[1]?.toLowerCase() || "";
+  const dir = f.includes("/") ? f.slice(0, f.lastIndexOf("/") + 1) : "";
+
+  fetch(fUrl).then(r => { if (!r.ok) throw new Error(r.status); return r.text(); }).then(text => {
+    if (ext === "md") {
+      out.className = "panel md";
+      out.innerHTML = marked.parse(text);
+      // Markdown 안의 상대 링크를 원래 파일 위치 기준으로 다시 잇는다. 코드·문서 파일은 이 뷰어로 연다.
+      out.querySelectorAll("a[href]").forEach(a => {
+        const h = a.getAttribute("href");
+        if (/^([a-z]+:|#)/i.test(h)) { if (/^https?:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; } return; }
+        const url = new URL(h, new URL(dir, location.href.split("view.html")[0]));
+        const rel = decodeURIComponent(url.pathname.slice(new URL("./", location.href).pathname.length));
+        if (/\.(java|sql|mjs|md|jsp|xml|properties|txt)$/i.test(rel)) a.href = "view.html?f=" + encodeURI(rel) + url.hash;
+        else a.href = url.pathname + url.search + url.hash;
+      });
+      out.querySelectorAll("img[src]").forEach(img => {
+        const s = img.getAttribute("src");
+        if (!/^[a-z]+:/i.test(s)) img.src = new URL(s, new URL(dir, location.href.split("view.html")[0])).href;
+      });
+      out.querySelectorAll("pre code").forEach(c => { try { hljs.highlightElement(c); } catch (e) {} });
+    } else {
+      out.className = "panel";
+      const pre = document.createElement("pre"); pre.className = "code";
+      const code = document.createElement("code");
+      code.textContent = text;
+      if (LANG[ext]) code.className = "language-" + LANG[ext];
+      pre.appendChild(code); out.replaceChildren(pre);
+      try { hljs.highlightElement(code); } catch (e) {}
+    }
+  }).catch(err => {
+    out.innerHTML = '<p class="msg">파일을 불러오지 못했습니다 (' + String(err.message).replace(/[<>&]/g, "") + '). 경로를 확인하거나 위의 "GitHub에서 보기"를 이용하세요.</p>';
+  });
+})();
+</script>
+</body>
+</html>
