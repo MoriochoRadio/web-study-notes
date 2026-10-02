@@ -1166,10 +1166,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 · SQL · 웹(JSP·Servlet·Spring) 수업을 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리한 노트입니다. <b>복습하러 왔다면 왼쪽 맨 위 🔁 복습 탭</b>에서 바로 시작하세요.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-09-30</span>
-      <span>📅 수업 40일차</span>
-      <span>🗂️ 노트 카드 285장</span>
-      <span>✏️ 시험 대비 181문제</span>
+      <span id="updated-badge">마지막 업데이트: 2026-10-02</span>
+      <span>📅 수업 42일차</span>
+      <span>🗂️ 노트 카드 292장</span>
+      <span>✏️ 시험 대비 187문제</span>
     </div>
     <a class="cross-link" href="../Front_end/">🎨 프론트엔드 학습 노트로 이동 →</a>
     <a class="cross-link" href="../setup/">🛠️ 새 노트북 · 개발환경 준비 →</a>
@@ -1201,7 +1201,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
       <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">46</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">56</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">61</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1280,7 +1280,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <details class="overview-fold">
       <summary>📊 전체 분량 한눈에 보기</summary>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">39</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">41</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
@@ -1288,8 +1288,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
       <div class="stat-card codingtest"><div class="n">46</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">56</div><div class="l">🖥️ 웹 개발 항목</div></div>
-      <div class="stat-card journey"><div class="n">23</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card web"><div class="n">61</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card journey"><div class="n">24</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -7347,6 +7347,18 @@ public class D3_ChatClient {
 <p>20회차 코딩테스트 — <a href="#ct-43">x만큼 간격이 있는 n개의 숫자</a>(PASS) · <a href="#ct-44">숫자 문자열과 영단어</a>(FAIL) · <a href="#ct-45">동물의 아이디와 이름</a>(PASS) · <a href="#ct-46">대여 기록이 존재하는 자동차 리스트 구하기</a>(FAIL)</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>9/28의 home.do 문제(-parameters)가 08에서는 왜 안 생기나?</summary><div class="sc-a">08 Controller의 단순 타입 매개변수가 모두 <code>@RequestParam("seq")</code>·<code>@RequestParam(value="pnum", defaultValue="1")</code>처럼 이름을 적고 있기 때문입니다. 이름을 적으면 컴파일 옵션과 상관없이 스프링이 어떤 요청 값을 넣을지 압니다.</div></details><details class="sc-q"><summary>상세보기 링크에 review=y 를 붙이는 이유는?</summary><div class="sc-a">조회수는 "목록에서 눌러 들어왔을 때"만 올려야 합니다. review=y일 때만 조회수를 올리고 <code>review</code> 없는 주소로 redirect 하므로, 상세 화면에서 새로고침하거나 수정 후 돌아와도 조회수가 다시 오르지 않습니다.</div></details></div>
 <div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — Java 소스 컴파일, 그리고 9/28에 문제였던 이름 없는 단순 타입 매개변수가 08 Controller에는 없다.</li><li>확인하지 않음 — 톰캣에서 실제 DB로 목록·글쓰기·상세·수정·삭제를 눌러 본 기록은 이번 정리에 없다.</li><li>미완 — 페이지 번호 링크, 답글 달기(Mapper에 주석 자리만 있음). 실패 시 <code>return "error.jsp"</code>는 뷰 이름으로 해석되어 <code>/WEB-INF/views/error.jsp.jsp</code>를 찾는데, 08에는 <code>error.jsp</code> 자체가 없다(파일로 따진 결과).</li></ul></div></div></article>
+<article class="note-card" id="class-day41"><div class="note-head"><span class="note-num">41일차</span><h3>2026-10-01 · 페이지 번호와 답글 달기</h3><div class="note-tags"><span class="tag">2026-10-01</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>9/30에 자리만 있던 페이지 번호와 답글 달기를 채웠다. 페이지 번호는 Paging 유틸이 5개씩 묶어 계산하고, 모든 화면이 지금 몇 쪽인지(pnum)를 들고 다닌다. 답글은 "아래 글들 한 칸씩 밀기 → 빈자리에 넣기" 두 쿼리로 만든다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>책 목차처럼 쪽 번호를 "1 2 3 4 5 다음"으로 보여 주고, 8쪽에서 글을 열었으면 목록으로 돌아올 때도 8쪽으로 돌아오게 했다. 답글은 줄 서 있는 사람들 사이에 끼어들 자리를 먼저 만든 뒤 들어간다.</div>
+<ol><li><code>index.jsp</code>에 <code>boardList.do?pnum=1</code> 게시판 링크를 달았다.</li><li><code>util/Paging.java</code> — 총 페이지 수·현재 쪽·한 번에 보일 개수(5)로 시작·끝·이전·다음 번호를 계산한다. Mapper에 총 페이지 수 <code>getPcount</code>(<code>ceil(count(*)/10)</code>)를 더했다.</li><li>글쓰기 폼·상세·수정·삭제가 <code>pnum</code>을 주소나 숨은 입력칸으로 넘겨받아, 끝나면 보던 쪽 목록으로 돌아간다.</li><li>상세 화면 아래에 답글 폼(부모 글 번호를 숨은 입력칸으로)을 붙이고, Mapper에 <code>replyUpdate</code>·<code>replyInsert</code>, DAO에 같은 이름의 메서드를 만들었다.</li><li><code>servlet-context.xml</code>의 스캔 범위를 <code>com.hk.ansboard.controller</code>로 좁혔다 — 42일차 트랜잭션 설정의 준비다.</li></ol>
+<p><a href="#web-57">페이지 번호 — Paging과 pnum</a> · <a href="#web-58">답글 달기 — step 밀고 끼워 넣기</a> · <a href="web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a></p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>답글을 저장할 때 INSERT보다 UPDATE를 먼저 하는 이유는?</summary><div class="sc-a">새 답글은 부모 글 바로 아래(<code>부모 step + 1</code>)에 들어가야 합니다. 그 자리에 이미 다른 답글이 있을 수 있으니, 같은 묶음(refer)에서 부모보다 아래에 있는 글들의 step을 먼저 1씩 밀어 자리를 비웁니다. 그래서 같은 글에 달린 답글은 나중에 단 것이 위에 옵니다.</div></details><details class="sc-q"><summary>5개씩 보여 줄 때 8쪽을 보고 있으면 번호는 몇부터 몇까지 나오나?</summary><div class="sc-a">6~10입니다. 8은 두 번째 묶음(6~10)에 속하고, "이전"은 앞 묶음의 끝인 5, "다음"은 다음 묶음의 첫 번호인 11을 가리킵니다(총 페이지가 11 이상일 때).</div></details></div>
+<div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — Mapper의 답글 SQL을 원문 그대로 SQLite 메모리 DB에 실행해 답글 순서와 step 중복 없음을 확인했다(<a href="#web-58">결과</a>). <code>Paging.pagingValue</code>는 13가지 경우를 계산해 봤다(<a href="#web-57">결과</a>).</li><li>10/1과 10/2의 구분은 파일 수정 시각으로 나눴다. Controller·Service는 10/2 오전에 마지막으로 고쳐져, 답글 요청을 연결한 날이 10/1인지 10/2인지는 파일로 가를 수 없다.</li></ul></div></div></article>
+<article class="note-card" id="class-day42"><div class="note-head"><span class="note-num">42일차</span><h3>2026-10-02 · 트랜잭션과 AOP 로그</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>쿼리 두 개가 한 묶음이어야 하는 답글 저장에 트랜잭션(@Transactional)을 걸고, DAO 메서드마다 로그를 남기는 일을 AOP로 DAO 바깥에 뺐다. Controller는 생성자 주입으로 바꾸고, 페이징 조립은 Service로 옮겼다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>트랜잭션은 송금처럼 "빼기와 넣기가 둘 다 되거나 둘 다 안 되거나"를 보장한다. AOP는 방마다 출입 기록기를 다는 대신 복도 입구에 하나만 달아 두는 것이다.</div>
+<ol><li>Controller: <code>@Autowired</code> 필드 대신 <b>생성자</b>로 AnsService를 받는다. 목록은 <code>ansService.getBoardListWithPaging(pnum)</code>이 돌려준 Map을 <code>model.addAllAttributes</code>로 한 번에 담는다.</li><li>목록 화면: depth만큼 들여쓰고 답글 화살표 그림(<code>resources/img/arrow.png</code>)을 붙였다. 페이지 번호는 Bootstrap pagination으로, 지금 쪽은 <code>active</code>.</li><li><code>root-context.xml</code>: <code>DataSourceTransactionManager</code> 등록, <code>&lt;tx:annotation-driven proxy-target-class="true"/&gt;</code>, service·dao 스캔. <code>AnsService.boardReply</code>에 <code>@Transactional</code>.</li><li><code>aop/LogExecute</code>와 <code>aop-context.xml</code>: 모든 <code>*Dao</code> 메서드의 실행 전·정상 종료 후·오류 시 로그. <code>web.xml</code>이 root-context와 aop-context를 함께 읽는다. 같은 일을 애너테이션으로 쓴 <code>LogExecuteNoXML</code>은 주석 처리된 참고용이다.</li><li><code>log4j.xml</code>의 root 수준을 info → debug로 바꿨다.</li></ol>
+<p><a href="#web-59">트랜잭션과 컨텍스트 나누기</a> · <a href="#web-60">AOP로 남기는 로그</a> · <a href="#web-61">생성자 주입과 Service로 옮긴 조립</a> · <a href="#journey-web-07">학습 여정 24단계</a></p>
+<div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>servlet-context가 다시 com.hk.ansboard 전체를 스캔하면 @Transactional은 어떻게 되나?</summary><div class="sc-a">자식(servlet) 컨텍스트에 트랜잭션 설정이 없는 AnsService가 하나 더 만들어지고, Controller는 가까운 자식 쪽 것을 주입받습니다. 그래서 트랜잭션이 걸리지 않습니다. 같은 설정으로 재현해 보니 "트랜젝션 활성 상태:false"가 찍히고 rollback도 일어나지 않았습니다(<a href="#web-59">자세히</a>).</div></details><details class="sc-q"><summary>log4j.xml을 debug로 바꾸면 로그가 달라지나?</summary><div class="sc-a">아닙니다. 08의 구현체는 여전히 Logback이라 <code>log4j.xml</code>은 읽히지 않습니다(<a href="#web-53">39일차 재현</a>). 원래부터 Logback 기본 설정으로 전체 DEBUG가 출력되고 있었습니다. 워크스페이스의 <code>log/</code> 폴더도 10/2 현재 비어 있습니다.</div></details></div>
+<div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — 08의 Java 7개 파일이 JDK 21로, <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08의 <code>aop-context.xml</code> 원본과 <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링 컨테이너를 띄웠다. 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, 스캔을 잘못 나누면 트랜잭션이 아예 없다(<a href="#web-59">결과</a>).</li><li>확인하지 않음 — 톰캣과 실제 DB로 답글·페이지 이동을 눌러 본 기록은 이번 정리에 없다.</li></ul></div></div></article>
 </div>
   </section>
 
@@ -21956,8 +21968,191 @@ function boardDelete(seq){
 &lt;jsp:include page="footer.jsp"/&gt;</code></pre></div>
 <ul><li><b><code>&lt;jsp:include page&gt;</code>(동적)</b> — 요청할 때마다 그 JSP를 따로 실행해 결과를 끼워 넣는다. 반면 <b><code>&lt;%@ include file %&gt;</code>(정적)</b>는 번역 단계에서 소스를 그대로 붙여 한 JSP로 만든다. 공통 화면처럼 독립적인 조각은 보통 동적 include를 쓴다.</li><li>지금 <code>header.jsp</code>·<code>footer.jsp</code>는 각각 <code>&lt;!DOCTYPE html&gt;&lt;html&gt;…&lt;body&gt;…&lt;/html&gt;</code>을 가진 <b>완전한 문서</b>다. 그래서 목록 화면의 결과 HTML에는 <code>&lt;html&gt;</code>·<code>&lt;body&gt;</code>가 세 번씩 나온다. 브라우저가 너그럽게 처리해 보이긴 하지만, 조각 파일에는 <code>&lt;nav&gt;…&lt;/nav&gt;</code>처럼 필요한 부분만 두는 편이 맞다(소스를 읽고 따진 결과).</li><li>Bootstrap은 <code>table table-striped</code>, <code>btn btn-primary</code>, <code>form-control</code>처럼 <b>클래스 이름만 붙이면</b> 모양이 입혀지는 CSS 모음이다. CDN 주소로 불러왔다.</li></ul>
 <h4>아직 남은 것 (2026-09-30 기준)</h4>
+<p>→ 페이지 번호와 답글 달기는 41일차에 채워졌다: <a href="#web-57">페이지 번호</a> · <a href="#web-58">답글 달기</a>. <code>error.jsp</code> 문제는 10/2 기준으로도 그대로다.</p>
 <ul><li><b>페이지 번호</b> — 목록 SQL은 10개씩 자르지만, 화면에는 "--페이지 번호가 들어갈 부분--" 자리만 있다. 지금은 주소에 <code>?pnum=2</code>를 직접 붙여야 다음 쪽이 보인다.</li><li><b>답글 달기</b> — Mapper에 <code>&lt;!-- 답글달기 --&gt;</code> 주석 자리만 있다. 답글은 같은 refer를 쓰고, 끼어드는 자리 뒤의 step을 한 칸씩 미는 작업이 필요하다.</li><li><b>실패했을 때의 화면</b> — Controller는 실패 시 <code>return "error.jsp";</code>를 돌려준다. 이것은 뷰 <b>이름</b>으로 해석되어 <code>/WEB-INF/views/error.jsp.jsp</code>를 찾는다. 게다가 08의 views에는 <code>error.jsp</code> 파일이 없다. 07처럼 <code>redirect:</code>를 붙여도 WEB-INF 안은 열 수 없으니(<a href="#web-50">자세히</a>) <code>error.jsp</code>를 views에 두고 <code>return "error"</code>로 쓰는 것이 맞다(파일로 따진 결과).</li></ul>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>반복되는 화면 조각은 파일로 빼고 include 한다. 조각에는 필요한 태그만.</li><li>뷰 이름에는 확장자를 붙이지 않는다 — ViewResolver가 <code>.jsp</code>를 붙인다.</li><li>코드에 자리만 있는 기능(페이지 번호·답글)은 완성으로 소개하지 않는다.</li></ul></div></div></article>
+<article class="note-card" id="web-57"><div class="note-head"><span class="note-num">57</span><h3>페이지 번호 — Paging 유틸과 pnum 들고 다니기</h3><div class="note-tags"><span class="tag">페이징</span><span class="tag">Bootstrap</span><span class="tag">2026-10-01</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>페이지 번호를 5개씩 묶어 보여 준다. 현재 쪽이 속한 묶음의 끝 번호를 먼저 구하고, 거기서 시작·끝·이전·다음을 계산한다. 화면을 옮겨 다녀도 보던 쪽을 잃지 않도록 pnum을 계속 넘긴다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>엘리베이터 버튼판이 5층씩 한 장이라고 생각하자. 8층에 있으면 6~10층 판이 보이고, "이전"은 5층, "다음"은 11층으로 간다.</div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">util/Paging.java (주석 일부 생략)</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public static Map&lt;String, Integer&gt; pagingValue(int pcount,String pNum,int pageRange){
+    Map&lt;String, Integer&gt; map=new HashMap&lt;String, Integer&gt;();
+    int pNumber=Integer.parseInt(pNum);
+    // 현재 쪽이 속한 묶음의 마지막 번호 (8쪽 → 10)
+    int pageEndNum=((pNumber-1)/pageRange+1)==1?pageRange:((pNumber-1)/pageRange+1)*pageRange;
+    int prePageNum=pageEndNum-pageRange==0?1:pageEndNum-pageRange;   // 앞 묶음의 끝 (첫 묶음이면 1)
+    int nextPageNum=pageEndNum&gt;=pcount?pcount:pageEndNum+1;          // 다음 묶음의 처음 (마지막 묶음이면 pcount)
+    int startPage=pageEndNum-(pageRange-1);                          // 10-(5-1) = 6
+    int endPage=pageEndNum&gt;pcount?pcount:pageEndNum;                 // 총 페이지를 넘지 않게
+    map.put("prePageNum", prePageNum);  map.put("nextPageNum", nextPageNum);
+    map.put("startPage", startPage);    map.put("endPage", endPage);
+    return map;
+}</code></pre></div>
+<ul><li><b><code>(pNumber-1)/pageRange+1</code></b> — 몇 번째 묶음인지. 자바의 <code>int / int</code>는 소수점을 버리므로 1~5쪽은 1, 6~10쪽은 2가 된다. 거기에 <code>pageRange</code>를 곱하면 묶음의 끝 번호다.</li><li>첫 줄의 삼항 연산자는 두 갈래가 같은 값이다(첫 묶음이면 <code>1 × 5 = 5</code>). <code>((pNumber-1)/pageRange+1)*pageRange</code> 하나로 충분하다.</li><li>SQL의 <code>ceil(count(*)/10)</code>은 반대로 MariaDB가 <code>/</code>를 소수 나눗셈으로 하므로 <code>ceil</code>로 올려야 23개 → 3쪽이 된다.</li></ul>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>pagingValue(pcount, pnum, 5)를 여러 경우로 호출 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>pcount pnum | 이전  시작~끝  다음
+   14    1 |   1     1~5      6
+   14    5 |   1     1~5      6
+   14    6 |   5     6~10    11
+   14    8 |   5     6~10    11
+   14   11 |  10    11~14    14
+   14   14 |  10    11~14    14
+    3    1 |   1     1~3      3
+    6    6 |   5     6~6      6
+    1    1 |   1     1~1      1
+    0    1 |   1     1~0      0</pre><div class="run-note">08의 <code>Paging.java</code>를 그대로 컴파일해 호출했다. 마지막 묶음에서 "다음"은 마지막 쪽(14)을, 첫 묶음에서 "이전"은 1을 가리킨다. 글이 하나도 없으면(pcount 0) 번호 반복이 <code>1~0</code>이라 번호는 안 나오고, "Next"가 <code>pnum=0</code>을 가리킨다.</div></details>
+<div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><span class="code-file">boardList.jsp — Bootstrap 페이지 번호 (10/2)</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;ul class="pagination justify-content-center"&gt;
+  &lt;li class="page-item"&gt;
+    &lt;a class="page-link" href="boardList.do?pnum=${pMap.prePageNum}"&gt;Previous&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;c:forEach begin="${pMap.startPage}" end="${pMap.endPage}" var="i" step="1"&gt;
+    &lt;li class="page-item ${pnum==i?'active':''}"&gt;
+      &lt;a class="page-link" href="boardList.do?pnum=${i}"&gt;${i}&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/c:forEach&gt;
+  &lt;li class="page-item"&gt;
+    &lt;a class="page-link" href="boardList.do?pnum=${pMap.nextPageNum}"&gt;Next&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre></div>
+<ul><li><code>${pnum==i}</code> — pnum은 요청에서 온 문자열 "8", i는 숫자다. EL은 한쪽이 숫자면 둘 다 숫자로 바꿔 비교하므로 현재 쪽에 <code>active</code>가 붙는다.</li><li>JSP 안에는 단계별로 써 본 흔적(1부터 끝까지 전부 → pre/next 글자 링크 → Bootstrap)이 주석으로 남아 있다.</li></ul>
+<p><b>pnum 들고 다니기</b> — 목록의 글쓰기 버튼은 <code>boardInsertForm.do?pnum=${pnum}</code>, 상세 링크는 <code>…&amp;review=y&amp;pnum=${pnum}</code>, 상세·삭제·답글 폼에는 <code>&lt;input type="hidden" name="pnum"&gt;</code>가 있다. Controller는 끝나면 <code>redirect:boardList.do?pnum=</code>처럼 같은 쪽으로 돌려보낸다. 단 이 메서드들의 <code>@RequestParam("pnum")</code>은 필수라서, pnum 없이 <code>boardDetail.do?seq=3</code>을 직접 열면 400 오류가 난다(소스로 따진 결과). 새 글 저장만은 <code>redirect:boardList.do</code>로 1쪽에 간다 — 새 글은 refer가 가장 커서 1쪽 맨 위에 있기 때문이다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>묶음 끝 = <code>((현재-1)/범위 + 1) × 범위</code>, 시작 = 끝 − (범위 − 1), 끝은 총 페이지를 넘지 않게.</li><li>정수 나눗셈(자바)과 소수 나눗셈(MariaDB의 <code>/</code>)을 구분한다.</li><li>목록으로 돌아오는 모든 길에 pnum을 실어 보낸다.</li></ul></div></div></article>
+<article class="note-card" id="web-58"><div class="note-head"><span class="note-num">58</span><h3>답글 달기 — 아래 글들 step을 밀고 그 자리에 끼워 넣기</h3><div class="note-tags"><span class="tag">답변형 게시판</span><span class="tag">CDATA</span><span class="tag">실제 재현</span><span class="tag">2026-10-01</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>답글은 부모와 같은 refer, 부모 step + 1, 부모 depth + 1로 저장한다. 그 전에 같은 묶음에서 부모보다 아래에 있는 글의 step을 모두 1씩 밀어 자리를 만든다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>줄 선 사람들 사이에 끼어들려면, 들어갈 자리 뒤의 사람들이 한 걸음씩 물러나 줘야 한다. 그다음 빈자리에 들어가면서 한 칸 안쪽으로 선다.</div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">BoardMapper.xml — 답글달기</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">&lt;update id="replyUpdate" parameterType="AnsDto"&gt;
+    &lt;![CDATA[
+    UPDATE answerboard SET step = step+1
+    WHERE refer=(SELECT refer FROM answerboard WHERE seq=#{seq})
+    AND step &gt; (SELECT step FROM answerboard WHERE seq=#{seq})
+    ]]&gt;
+&lt;/update&gt;
+
+&lt;insert id="replyInsert" parameterType="AnsDto"&gt;
+    INSERT INTO answerboard
+    VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
+    (SELECT refer FROM answerboard WHERE seq=#{seq}),     -- 부모와 같은 묶음
+    (SELECT step FROM answerboard WHERE seq=#{seq})+1,    -- 부모 바로 아래 줄
+    (SELECT depth FROM answerboard WHERE seq=#{seq})+1, 0, 'N')   -- 한 칸 더 안쪽
+&lt;/insert&gt;</code></pre></div>
+<ul><li><b><code>#{seq}</code>는 부모 글 번호다.</b> 상세 화면의 답글 폼에 <code>&lt;input type="hidden" name="seq" value="${dto.seq}"/&gt;</code>가 있어서, 한 <code>AnsDto</code>에 부모 seq와 새 답글의 id·title·content가 함께 담긴다.</li><li><b><code>&lt;![CDATA[ … ]]&gt;</code></b> — XML 안에서 <code>&gt;</code>·<code>&lt;</code>를 SQL 기호 그대로 쓰기 위한 감싸개. 감싸지 않으면 <code>&lt;</code>는 태그 시작으로 읽힌다.</li><li>UPDATE가 자기 테이블을 서브쿼리로 다시 읽는다. 이 PC의 MariaDB(12.3)는 10.3.2부터 이를 허용하지만, MySQL에서는 같은 문장이 1093 오류(<i>You can't specify target table … for update in FROM clause</i>)를 낸다(문서 기준, 이번에 MySQL로 실행해 보지는 않았다).</li></ul>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>원글 A·B를 쓰고 → A에 답글1 → A에 답글2 → 답글1에 답글 → B에 답글 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>rn seq refer step depth
+ 1   2    2    0    0   원글B
+ 2   6    2    1    1     └ B의 답글
+ 3   1    1    0    0   원글A
+ 4   4    1    1    1     └ A의 답글2(나중)
+ 5   3    1    2    1     └ A의 답글1
+ 6   5    1    3    2         └ 답글1의 답글
+
+같은 refer 안에서 겹치는 step: 없음</pre><div class="run-note">Mapper의 <code>boardInsert</code>·<code>replyUpdate</code>·<code>replyInsert</code>·<code>boardList</code>를 XML에서 그대로 꺼내 Node 내장 SQLite(메모리 DB)에서 실행했다. 바꾼 것은 <code>#{seq}</code> → 바인딩 표기, 그리고 SQLite의 <code>/</code>가 정수 나눗셈이라 <code>ceil(rn/10)</code> → <code>ceil(rn/10.0)</code> 한 곳이다. <code>SYSDATE()</code>·<code>nvl()</code>은 같은 이름의 함수를 등록했다. 같은 글에 단 답글은 <b>나중 것이 위</b>에 오고(답글2가 답글1보다 위), 답글의 답글은 바로 아래에 한 칸 더 들어간다.</div></details>
+<div class="note-code"><div class="code-head"><span class="code-lang">JSP</span><span class="code-file">boardList.jsp — depth만큼 들여쓰기 (10/2)</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;c:forEach begin="1" end="${dto.depth}" var="i" step="1"&gt;
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+    &lt;c:if test="${i==dto.depth}"&gt;   &lt;!-- 마지막 칸에만 화살표 --&gt;
+        &lt;img class="arrow" alt="답글" src="${pageContext.request.contextPath}/resources/img/arrow.png"&gt;
+    &lt;/c:if&gt;
+&lt;/c:forEach&gt;</code></pre></div>
+<p>원글은 depth가 0이라 <code>begin="1" end="0"</code>으로 반복이 한 번도 돌지 않는다. 그림 주소에 <code>contextPath</code>를 붙여 프로젝트 이름이 바뀌어도 경로가 맞는다. 참고로 <code>arrow.png</code>는 이름과 달리 실제 내용이 JPEG(640×360)이다 — 브라우저는 내용을 보고 그리므로 표시에는 문제가 없다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>답글 = ① 같은 refer에서 부모 step보다 큰 글들 step + 1 → ② refer 같게, step·depth는 부모 + 1로 INSERT.</li><li>두 쿼리는 한 묶음이어야 한다 — 그래서 42일차에 트랜잭션을 건다(<a href="#web-59">다음 카드</a>).</li><li>XML 매퍼에서 비교 기호를 쓰면 CDATA로 감싼다.</li></ul></div></div></article>
+<article class="note-card" id="web-59"><div class="note-head"><span class="note-num">59</span><h3>트랜잭션 — 둘 다 되거나 둘 다 안 되거나, 그리고 컨텍스트 나누기</h3><div class="note-tags"><span class="tag">@Transactional</span><span class="tag">root/servlet</span><span class="tag">실제 재현</span><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>@Transactional을 붙인 메서드는 하나의 작업 단위가 된다. 끝까지 성공하면 commit, 중간에 RuntimeException이 나면 그때까지 한 일을 rollback 한다. 단, 트랜잭션 설정이 있는 컨텍스트(root)에 서비스가 등록돼 있어야 걸린다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>은행 송금은 "내 통장에서 빼기"와 "상대 통장에 넣기"가 한 몸이다. 하나만 되면 돈이 사라진다. 답글 저장의 "step 밀기"와 "답글 넣기"도 한 몸이다.</div>
+<p><b>왜 필요한가</b> — 답글은 UPDATE 다음 INSERT다. 트랜잭션이 없으면 쿼리마다 바로 확정(auto commit)되므로, INSERT만 실패해도 이미 밀린 step은 그대로 남는다. 아래는 그 상황을 SQLite로 만든 결과다.</p>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>B 묶음에서 UPDATE만 실행되고 INSERT가 실패했다면</summary><pre>refer=2 (seq:step)  전 → 2:0, 6:1   /   후 → 2:0, 6:2
+step 1 자리가 비었다 → true</pre><div class="run-note">답글은 안 들어갔는데 기존 답글만 한 칸 내려가 빈자리가 생겼다. Service 주석의 "결론은 step만 올라가고 답글은 추가되지 않는 상황"이 바로 이것이다.</div></details>
+<div class="note-code"><div class="code-head"><span class="code-lang">XML</span><span class="code-file">root-context.xml — 트랜잭션 설정</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+    &lt;property name="dataSource" ref="dataSource" /&gt;
+&lt;/bean&gt;
+&lt;!-- 선언적 트랜젝션 처리: @transactoinal 사용 --&gt;
+&lt;tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" /&gt;
+&lt;!-- 트랜젝션이 적용되려면 root-context.xml에서 service,dao를 스캔해야됨 --&gt;
+&lt;context:component-scan base-package="com.hk.ansboard.service,com.hk.ansboard.dao" /&gt;</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">AnsService.java</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">@Transactional(propagation = Propagation.REQUIRED)
+public boolean boardReply(AnsDto dto) {
+    boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
+    logger.info("트랜젝션 활성 상태:{}",txActive);
+    ansDao.replyUpdate(dto);//step 증가시키는 쿼리
+//  if(true) { throw new RuntimeException("트랜젝션 롤백 테스트"); }
+    int count=ansDao.replyInsert(dto);//답글 추가하는 쿼리
+    return count&gt;0;
+}</code></pre></div>
+<ul><li><b>트랜잭션 매니저</b> — 실제로 연결의 auto commit을 끄고, 끝에 commit/rollback 하는 일꾼. MyBatis(<code>SqlSessionTemplate</code>)는 같은 DataSource의 그 연결을 함께 쓴다.</li><li><b><code>REQUIRED</code></b>(기본값) — 이미 진행 중인 트랜잭션이 있으면 거기에 합류하고, 없으면 새로 시작한다.</li><li><b>무엇에 rollback 하나</b> — 기본은 RuntimeException과 Error. <code>SQLException</code> 같은 checked 예외는 기본적으로 commit 되므로 필요하면 <code>rollbackFor = Exception.class</code>를 적는다.</li><li><b>프록시로 동작한다</b> — 스프링이 AnsService를 감싼 대리 객체(<code>AnsService$SpringCGLIB$0</code>)를 만들어 Controller에 넣고, 대리 객체가 메서드 앞뒤에서 트랜잭션을 연다·닫는다. 그래서 같은 클래스 안에서 <code>this.boardReply()</code>처럼 직접 부르면 대리 객체를 거치지 않아 걸리지 않는다. <code>proxy-target-class="true"</code>는 인터페이스가 아니라 클래스를 상속해 대리 객체를 만들라는 뜻이다(08의 Service는 인터페이스가 없다).</li></ul>
+<p><b>root와 servlet, 두 컨텍스트</b> — <code>web.xml</code>의 리스너가 <code>root-context.xml</code>(+<code>aop-context.xml</code>)로 <b>부모</b> 컨텍스트를, DispatcherServlet이 <code>servlet-context.xml</code>로 <b>자식</b> 컨텍스트를 만든다. 자식은 부모의 빈을 쓸 수 있지만 반대는 안 된다. <code>tx:annotation-driven</code>은 <b>자기가 선언된 컨텍스트의 빈에만</b> 적용된다. 그래서 08은 servlet은 controller만, root는 service·dao를 스캔하도록 나눴다.</p>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>08 설정 그대로(DB만 가짜 연결) 스프링을 띄워 boardReply 호출 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>② 42일차 설정 (자식 = controller만)
+  자식에도 ansService 빈이 있나? false
+  [DB연결] setAutoCommit(false)
+  트랜젝션 활성 상태:true
+  [SQL] UPDATE replyUpdate / INSERT replyInsert
+  [DB연결] commit()
+  → redirect:boardList.do?pnum=1
+
+③ 같은 설정, replyInsert가 실패하면
+  [DB연결] setAutoCommit(false)
+  트랜젝션 활성 상태:true
+  [SQL] UPDATE replyUpdate / INSERT replyInsert ← 예외
+  [DB연결] rollback()
+
+④ 자식이 com.hk.ansboard 전체를 스캔하면 (40일차까지의 servlet-context)
+  자식에도 ansService 빈이 있나? true
+  트랜젝션 활성 상태:false
+  [SQL] UPDATE replyUpdate / INSERT replyInsert ← 예외
+  (commit도 rollback도 없음 — UPDATE는 이미 확정)</pre><div class="run-note">08의 <code>AnsController</code>·<code>AnsService</code>·<code>AnsDao</code>와 <code>aop-context.xml</code> 원본, <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 썼다. DB 대신 호출을 기록하는 가짜 연결과 가짜 <code>SqlSessionTemplate</code>을 넣었으므로, <b>스프링이 언제 commit·rollback을 부르는지</b>를 확인한 것이고 MariaDB의 실제 되돌리기를 본 것은 아니다. ④에서 실패해도 UPDATE가 남는 것은 위의 SQLite 결과와 같은 상황이다.</div></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>여러 쿼리가 한 업무면 Service 메서드에 <code>@Transactional</code>. 성공 commit, RuntimeException rollback.</li><li>트랜잭션은 대리 객체(프록시)를 거쳐야 걸린다.</li><li>트랜잭션 설정은 root에, service·dao 스캔도 root에. servlet은 controller만.</li></ul></div></div></article>
+<article class="note-card" id="web-60"><div class="note-head"><span class="note-num">60</span><h3>AOP — DAO를 고치지 않고 모든 DAO 메서드에 로그 남기기</h3><div class="note-tags"><span class="tag">AOP</span><span class="tag">JoinPoint</span><span class="tag">실제 재현</span><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>여러 클래스에 똑같이 들어가는 일(로그·트랜잭션)을 따로 떼어 한 곳(Advice)에 쓰고, "어디에 끼울지"(Pointcut)를 설정으로 정한다. 스프링이 대상 객체를 대리 객체로 감싸 메서드 앞뒤에 그 일을 끼워 넣는다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>DAO 메서드마다 "시작합니다·끝났습니다" 일기를 손으로 쓰는 대신, 복도 입구에 자동 출입 기록기를 하나 달았다. DAO 코드에는 로그 한 줄 없는데 로그가 남는다.</div>
+<table><thead><tr><th>용어</th><th>뜻</th><th>08에서</th></tr></thead><tbody><tr><td>Advice</td><td>끼워 넣을 일</td><td><code>LogExecute</code>의 <code>before</code>·<code>afterReturning</code>·<code>daoError</code></td></tr><tr><td>Pointcut</td><td>어느 메서드에 끼울지</td><td><code>execution(* com.hk.ansboard.dao.*Dao.*(..))</code></td></tr><tr><td>JoinPoint</td><td>지금 끼워진 그 실행 지점의 정보</td><td>메서드 이름·인자·대상 객체</td></tr><tr><td>Aspect</td><td>Advice + Pointcut 묶음</td><td><code>&lt;aop:aspect id="logAspect" ref="logAop"&gt;</code></td></tr></tbody></table>
+<div class="note-code"><div class="code-head"><span class="code-lang">XML</span><span class="code-file">aop-context.xml</span><button class="copy-btn" type="button">복사</button></div><pre><code>&lt;bean id="logAop" class="com.hk.ansboard.aop.LogExecute" /&gt;
+&lt;aop:config&gt;
+    &lt;aop:pointcut expression="execution(* com.hk.ansboard.dao.*Dao.*(..))" id="daoLogPoint"/&gt;
+    &lt;aop:aspect id="logAspect" ref="logAop"&gt;
+        &lt;aop:before          method="before"         pointcut-ref="daoLogPoint"/&gt;  &lt;!-- 실행 전 --&gt;
+        &lt;aop:after-returning method="afterReturning" pointcut-ref="daoLogPoint"/&gt;  &lt;!-- 정상 종료 후 --&gt;
+        &lt;aop:after-throwing  method="daoError"       pointcut-ref="daoLogPoint"/&gt;  &lt;!-- 예외 시 --&gt;
+    &lt;/aop:aspect&gt;
+&lt;/aop:config&gt;</code></pre></div>
+<p><b>포인트컷 읽기</b> — <code>execution(반환형 패키지.클래스.메서드(매개변수))</code>. <code>*</code>는 "아무거나 하나", 매개변수의 <code>..</code>는 "개수·타입 상관없이". 그래서 "반환형 상관없이, <code>com.hk.ansboard.dao</code> 패키지에서 이름이 <code>Dao</code>로 끝나는 클래스의, 모든 메서드"다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">LogExecute.java — before</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public void before(JoinPoint join) {
+    Logger logger=
+    LoggerFactory.getLogger(join.getTarget().getClass()+"");
+    logger.info("before실행(info):시작:{}", join.getSignature().getName());
+    logger.debug("before실행(debug):시작:{}",join.toLongString());
+}</code></pre></div>
+<details class="run-output"><summary><span class="run-tag">실행 결과</span>답글 저장 한 번에 찍힌 AOP 로그 (web-59와 같은 실행) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary><pre>INFO  class com.hk.ansboard.dao.AnsDao - before실행(info):시작:replyUpdate
+DEBUG class com.hk.ansboard.dao.AnsDao - before실행(debug):시작:execution(public int com.hk.ansboard.dao.AnsDao.replyUpdate(com.hk.ansboard.dtos.AnsDto))
+INFO  class com.hk.ansboard.dao.AnsDao - afterReturning실행(info):시작:replyUpdate
+DEBUG class com.hk.ansboard.dao.AnsDao - 전달 파라미터:[AnsDto [seq=1, id=kim, title=re, …]]
+INFO  class com.hk.ansboard.dao.AnsDao - before실행(info):시작:replyInsert
+…
+(replyInsert가 실패한 경우)
+INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert</pre><div class="run-note">로그 이름이 <code>class com.hk.ansboard.dao.AnsDao</code>로 <b>"class " 글자가 앞에 붙었다.</b> <code>getClass()+""</code>는 Class 객체를 문자열로 바꾼 것이라 <code>"class 패키지.이름"</code>이 되기 때문이다. 로그 설정은 보통 <code>com.hk.ansboard</code>처럼 패키지 이름으로 수준을 정하므로, 이 이름은 그런 설정에 걸리지 않는다. 주석 처리된 <code>LogExecuteNoXML</code>처럼 <code>LoggerFactory.getLogger(join.getTarget().getClass())</code>로 Class를 그대로 넘기면 된다. 출력 모양은 검증용 Logback 설정으로 스프링 내부 로그만 줄인 것이다.</div></details>
+<p><b>XML 방식과 애너테이션 방식</b> — 같은 일을 <code>LogExecuteNoXML</code>은 <code>@Aspect</code>·<code>@Pointcut</code>·<code>@Before</code>·<code>@AfterReturning(returning="result")</code>·<code>@AfterThrowing(throwing="ex")</code>로 쓴다. 이쪽은 반환값과 예외 객체도 받아 로그에 남긴다. 다만 지금은 <code>@Aspect</code>·<code>@Component</code>가 주석이고, 켜려면 <code>&lt;aop:aspectj-autoproxy/&gt;</code>(또는 <code>@EnableAspectJAutoProxy</code>)와 <code>aop</code> 패키지를 포함하는 스캔이 필요하다. 지금 08의 스캔 범위(controller / service·dao)에는 aop 패키지가 없다(소스로 따진 결과). 포인트컷도 XML 쪽은 DAO, 애너테이션 쪽은 service 패키지로 다르다.</p>
+<p>트랜잭션도 같은 원리다 — <code>@Transactional</code> 역시 대리 객체가 메서드 앞뒤에 "시작·commit·rollback"을 끼워 넣는 AOP다. <code>aop-context.xml</code>의 주석 부분(<code>tx:advice</code>)은 애너테이션 대신 포인트컷으로 트랜잭션을 거는 방법의 참고용이다.</p>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>AOP = 공통 기능(Advice)을 떼어 두고, 끼울 곳(Pointcut)을 설정으로 정한다.</li><li>before / after-returning / after-throwing — 실행 전, 정상 종료 후, 예외 시.</li><li><code>execution(* 패키지.*Dao.*(..))</code> 형태를 읽을 수 있어야 한다.</li><li>로거 이름은 <code>getLogger(클래스)</code>로 — <code>getClass()+""</code>는 "class "가 붙는다.</li></ul></div></div></article>
+<article class="note-card" id="web-61"><div class="note-head"><span class="note-num">61</span><h3>생성자 주입, 그리고 Controller는 얇게 — 페이징 조립을 Service로</h3><div class="note-tags"><span class="tag">생성자 주입</span><span class="tag">addAllAttributes</span><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>필드에 @Autowired를 붙이는 대신 생성자로 의존 객체를 받는다. 생성자가 하나뿐이면 @Autowired를 적지 않아도 스프링이 그 생성자로 넣어 준다. 목록·페이지 수·페이지 번호를 모으는 일은 Service가 하고 Controller는 결과를 Model에 담기만 한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>입사할 때 필요한 장비를 첫날 손에 쥐여 주는 것(생성자)과, 일하다 누가 책상에 슬쩍 놓고 가는 것(필드 주입)의 차이다. 앞의 방식이면 장비 없이는 아예 입사가 안 된다.</div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">AnsController.java</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">//  @Autowired
+    private AnsService ansService;
+
+    public AnsController(AnsService ansService) {
+        this.ansService=ansService;
+    }
+
+    @RequestMapping(value = "/boardList.do", method = RequestMethod.GET)
+    public String boardList(Model model,
+                            @RequestParam(value="pnum", defaultValue = "1") String pnum) {
+        //위 코드 작업을 AnsService에서 처리하자
+        Map&lt;String, Object&gt;result=ansService.getBoardListWithPaging(pnum);
+        model.addAllAttributes(result);
+        model.addAttribute("pnum", pnum);//현재 페이지상태를 유지하기 위해 전달
+        return "boardList";
+    }</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">AnsService.java</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">public Map&lt;String, Object&gt; getBoardListWithPaging(String pnum){
+    Map&lt;String, Object&gt; resultMap=new HashMap&lt;&gt;();
+    List&lt;AnsDto&gt; list=ansDao.getAllList(pnum);                    // 글목록
+    int pCount = ansDao.getPcount();                               // 페이지 개수
+    Map&lt;String, Integer&gt;pMap = Paging.pagingValue(pCount, pnum, 5); // 페이징 처리
+    resultMap.put("list", list);
+    resultMap.put("pCount", pCount);
+    resultMap.put("pMap", pMap);
+    return resultMap;
+}</code></pre></div>
+<ul><li><b>생성자 주입의 장점</b> — 필요한 객체가 없으면 객체 자체가 만들어지지 않아 문제를 일찍 알 수 있다. 필드에 <code>final</code>을 붙여 바뀌지 않게 할 수 있고(08은 아직 안 붙였다), 테스트에서 <code>new AnsController(가짜서비스)</code>처럼 스프링 없이 만들 수 있다. 실제로 web-59의 재현에서 Controller는 이 생성자로 프록시 Service를 받았다.</li><li><b><code>model.addAllAttributes(map)</code></b> — Map의 키마다 <code>addAttribute</code>를 한 것과 같다. 그래서 JSP에서 <code>${list}</code>·<code>${pCount}</code>·<code>${pMap.startPage}</code>로 꺼낸다.</li><li><b>왜 Service로 옮기나</b> — "목록 + 페이지 수 + 번호 계산"은 화면 이동이 아니라 업무 규칙이다. Controller는 요청을 받고 화면을 고르는 일만 하면 읽기 쉽고, 같은 조립을 다른 곳에서도 다시 쓸 수 있다.</li></ul>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>생성자가 하나면 <code>@Autowired</code> 생략 가능(Spring 4.3부터).</li><li>필드 주입보다 생성자 주입 — 빠진 의존성을 일찍 발견, final 가능, 테스트 쉬움.</li><li>Controller는 얇게, 조립은 Service에서.</li></ul></div></div></article>
 </div>
   </section>
 
@@ -22318,7 +22513,7 @@ function boardDelete(seq){
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 23단계 중 웹 개발 6단계(18~23)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다. <b>2026-09-28(38일차)에는 <a href="#journey-web-05">22단계 — CRUD 요청 연결</a></b>로 글쓰기·상세·수정·삭제를 Controller 메서드에 붙였습니다. <b>2026-09-29~30(39~40일차)에는 <a href="#journey-web-06">23단계 — 답변형 게시판</a></b>을 시작해 refer·step·depth 구조와 논리 삭제, 로그를 다뤘습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 24단계 중 웹 개발 7단계(18~24)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다. <b>2026-09-28(38일차)에는 <a href="#journey-web-05">22단계 — CRUD 요청 연결</a></b>로 글쓰기·상세·수정·삭제를 Controller 메서드에 붙였습니다. <b>2026-09-29~30(39~40일차)에는 <a href="#journey-web-06">23단계 — 답변형 게시판</a></b>을 시작해 refer·step·depth 구조와 논리 삭제, 로그를 다뤘습니다. <b>2026-10-01~02(41~42일차)에는 <a href="#journey-web-07">24단계 — 트랜잭션과 AOP</a></b>로 페이지 번호·답글을 완성하고 여러 쿼리를 한 작업으로 묶었습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
@@ -22457,6 +22652,7 @@ function boardDelete(seq){
 <article class="journey-step" id="journey-web-04"><div class="journey-step-head"><span class="journey-num">21</span><h3>Spring MVC에 DB 연결하기</h3><a class="journey-jump" href="#web-41">전체 카드 보기 →</a></div><p>20단계에서 만든 요청과 화면 사이의 길에 실제 DB 조회를 붙인다. Controller가 Service를 부르고, Service가 DAO를 부르며, DAO는 MyBatis의 statement 이름으로 SQL을 실행한다.</p><ul><li>수동 JDBC의 연결·문장·결과 매핑 중 반복 작업을 MyBatis와 DataSource에 맡긴다.</li><li>객체는 직접 new 하지 않고 인터페이스 타입으로 주입받는다.</li><li>아직 완성된 CRUD가 아니라 목록 요청까지 연결한 단계다.</li></ul><p><a href="#class-day37">37일차 진도</a> · <a href="#web-43">DB 연결 설정</a> · <a href="#web-46">404와 500 구분</a></p></article>
 <article class="journey-step" id="journey-web-05"><div class="journey-step-head"><span class="journey-num">22</span><h3>요청마다 메서드 하나 — 스프링 MVC로 CRUD 연결하기</h3><a class="journey-jump" href="#web-47">전체 카드 보기 →</a></div><p>21단계에서 목록 하나를 DB까지 연결했다. 이번에는 글쓰기·상세·수정·삭제를 같은 방식으로 붙인다. 요청 분기는 <code>@RequestMapping</code>이, 폼 값을 객체로 옮기는 일은 스프링의 바인딩이 맡는다. 남은 선택은 "저장한 뒤 어디로 보낼까"이고, 그 답이 redirect다.</p><ul><li>URL 하나에 메서드 하나 — MVC2의 if문 분기가 사라진다.</li><li>폼 값은 DTO로 한 번에, 같은 이름 여러 개는 배열로 받는다.</li><li>데이터를 바꾼 뒤에는 redirect(PRG) — 새로고침 중복 저장을 막는다.</li><li>Spring 6.1에서는 이름으로 받는 매개변수에 <code>@RequestParam("이름")</code>을 적는다.</li></ul><p><a href="#class-day38">38일차 진도</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a></p></article>
 <article class="journey-step" id="journey-web-06"><div class="journey-step-head"><span class="journey-num">23</span><h3>답글이 달리는 게시판 — 한 테이블에 글과 답글을 줄 세우기</h3><a class="journey-jump" href="#web-54">전체 카드 보기 →</a></div><p>22단계까지 만든 CRUD 흐름은 그대로 두고, 데이터 쪽을 바꾼다. 답글은 따로 테이블을 두지 않고 같은 테이블에 넣되, refer·step·depth 세 숫자로 "어느 묶음의 몇 번째 줄, 몇 칸 들여쓰기"를 표시한다. 글을 지울 때도 행을 없애지 않고 표시만 바꾼다. 그래야 답글 구조가 무너지지 않는다.</p><ul><li>목록은 refer 내림차순 · step 오름차순 — 새 묶음이 위, 묶음 안에서는 원글 다음에 답글.</li><li>페이지 나누기는 ROW_NUMBER로 번호를 붙인 뒤 번호로 거른다.</li><li>논리 삭제(delflag)와 조회수 redirect — 상태를 바꾼 뒤엔 새로고침을 안전하게.</li><li>로그는 SLF4J로 남기고, 설정 파일은 실제 구현체(Logback) 양식이어야 한다.</li></ul><p><a href="#class-day39">39일차</a> · <a href="#class-day40">40일차 진도</a> · <a href="#web-53">log4j.xml이 안 읽히는 이유</a></p></article>
+<article class="journey-step" id="journey-web-07"><div class="journey-step-head"><span class="journey-num">24</span><h3>여러 쿼리를 한 작업으로, 공통 기능은 바깥으로 — 트랜잭션과 AOP</h3><a class="journey-jump" href="#web-59">전체 카드 보기 →</a></div><p>23단계에서 세운 refer·step·depth 구조로 실제로 답글을 달자, 쿼리 두 개(step 밀기·답글 넣기)가 함께 성공해야 하는 문제가 생겼다. 스프링은 이 문제와 "모든 DAO에 로그 남기기"를 같은 방법으로 푼다 — 객체를 대리 객체(프록시)로 감싸고, 메서드 앞뒤에 필요한 일을 끼워 넣는다.</p><ul><li>페이지 번호는 유틸로 계산하고, 모든 화면이 pnum을 들고 다닌다.</li><li>답글 = 같은 묶음에서 아래 글 step 밀기 → 부모 바로 아래에 넣기.</li><li><code>@Transactional</code> — 성공하면 commit, RuntimeException이면 rollback.</li><li>트랜잭션 설정은 root 컨텍스트에, service·dao도 root에서 스캔.</li><li>AOP — Advice(할 일) + Pointcut(끼울 곳). 코드를 고치지 않고 공통 기능을 붙인다.</li></ul><p><a href="#class-day41">41일차</a> · <a href="#class-day42">42일차 진도</a> · <a href="#web-58">답글 달기</a> · <a href="#web-60">AOP</a></p></article>
 </div>
   </section>
 
@@ -23921,7 +24117,7 @@ function boardDelete(seq){
 
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java · SQL 객관식 연습문제</h2></div>
-    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 49문항</b>까지, 총 <b>181문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
+    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 55문항</b>까지, 총 <b>187문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
 
     <div class="exam-box" id="exam-setup">
       <div class="exam-setup-row">
@@ -25205,6 +25401,12 @@ document.querySelectorAll(".note-code").forEach(box => {
     {"id": "w47", "cat": "WEB", "q": "삭제 버튼을 누르면 UPDATE ... SET delflag='Y'를 실행하는 방식을 무엇이라 하나?", "ch": ["물리 삭제", "논리 삭제", "캐스케이드 삭제", "트랜잭션 롤백"], "a": 1, "ex": "행은 남기고 삭제 표시만 바꾸는 논리 삭제다. 답글 구조와 기록을 보존할 수 있지만, 조회할 때마다 삭제된 글을 어떻게 보여 줄지 챙겨야 한다.", "link": ["#web-55", "40일차 복습"]},
     {"id": "w48", "cat": "WEB", "q": "목록에서 review=y로 들어오면 조회수를 올린 뒤 redirect:boardDetail.do?seq=…로 보내는 이유는?", "ch": ["상세 화면에서 새로고침해도 조회수가 다시 오르지 않게 하려고", "Model 값을 두 번 쓰려고", "WEB-INF 안의 JSP를 열려고", "seq를 숨기려고"], "a": 0, "ex": "조회수를 올린 주소가 주소창에 남지 않도록 review가 없는 주소로 다시 요청하게 한다. 저장 뒤 redirect(PRG)와 같은 생각이다.", "link": ["#web-55", "40일차 복습"]},
     {"id": "w49", "cat": "WEB", "q": "ViewResolver의 prefix가 /WEB-INF/views/, suffix가 .jsp일 때 Controller가 return \"error.jsp\"를 돌려주면 찾는 파일은?", "ch": ["/WEB-INF/views/error.jsp", "/error.jsp", "/WEB-INF/views/error.jsp.jsp", "error.do"], "a": 2, "ex": "돌려준 문자열은 뷰 이름이라 앞뒤로 prefix와 suffix가 붙는다. 뷰 이름에는 확장자를 쓰지 않고 return \"error\"로 쓴다.", "link": ["#web-56", "40일차 복습"]},
+    {"id": "w50", "cat": "WEB", "q": "페이지 번호를 5개씩 묶어 보여 준다. 총 14쪽이고 지금 8쪽을 보고 있으면 화면에 나오는 번호는?", "ch": ["1~5", "6~10", "8~12", "6~14"], "a": 1, "ex": "묶음 끝 = ((8-1)/5+1)×5 = 10, 시작 = 10-(5-1) = 6. 이전 버튼은 5, 다음 버튼은 11을 가리킨다.", "link": ["#web-57", "41일차 복습"]},
+    {"id": "w51", "cat": "WEB", "q": "답변형 게시판에서 답글을 INSERT 하기 전에 UPDATE ... SET step = step+1 을 먼저 실행하는 이유는?", "ch": ["조회수를 올리려고", "같은 묶음에서 부모보다 아래에 있는 글들을 한 칸씩 밀어 부모 바로 아래 자리를 비우려고", "삭제된 글을 되살리려고", "refer를 새 번호로 바꾸려고"], "a": 1, "ex": "새 답글은 부모 step+1 자리에 들어간다. 그 자리와 그 아래 글들을 먼저 한 칸씩 밀어 둔다. 그래서 같은 글에 단 답글은 나중 것이 위에 온다.", "link": ["#web-58", "41일차 복습"]},
+    {"id": "w52", "cat": "WEB", "q": "@Transactional을 붙인 Service 메서드에서 첫 쿼리는 성공하고 두 번째 쿼리에서 RuntimeException이 났다. 결과는?", "ch": ["첫 쿼리만 확정된다", "두 쿼리 모두 되돌려진다(rollback)", "예외가 무시되고 commit 된다", "서버가 종료된다"], "a": 1, "ex": "트랜잭션 안의 작업은 한 묶음이다. RuntimeException이 나면 그때까지 한 일을 rollback 한다. checked 예외는 기본적으로 commit 되므로 필요하면 rollbackFor를 적는다.", "link": ["#web-59", "42일차 복습"]},
+    {"id": "w53", "cat": "WEB", "q": "root-context에 tx:annotation-driven이 있는데 servlet-context가 com.hk.ansboard 전체를 스캔하면 어떻게 되나?", "ch": ["트랜잭션이 두 번 걸린다", "서버가 뜨지 않는다", "자식(servlet) 컨텍스트에 트랜잭션 없는 Service가 또 만들어지고 Controller가 그것을 받아 트랜잭션이 걸리지 않는다", "아무 차이 없다"], "a": 2, "ex": "tx:annotation-driven은 선언된 컨텍스트의 빈에만 적용된다. Controller는 가까운 자식 컨텍스트의 Service를 주입받는다. 그래서 servlet은 controller만, root는 service·dao를 스캔한다.", "link": ["#web-59", "42일차 복습"]},
+    {"id": "w54", "cat": "WEB", "q": "AOP 포인트컷 execution(* com.hk.ansboard.dao.*Dao.*(..)) 가 가리키는 것은?", "ch": ["dao 패키지의 Dao 인터페이스 하나", "dao 패키지에서 이름이 Dao로 끝나는 클래스의 모든 메서드(반환형·매개변수 무관)", "매개변수가 없는 메서드만", "반환형이 void인 메서드만"], "a": 1, "ex": "execution(반환형 패키지.클래스.메서드(매개변수)). *는 아무거나 하나, 매개변수 자리의 ..은 개수·타입 상관없음.", "link": ["#web-60", "42일차 복습"]},
+    {"id": "w55", "cat": "WEB", "q": "Controller에 생성자가 public AnsController(AnsService s) 하나뿐이다. @Autowired를 적지 않으면?", "ch": ["주입되지 않아 NullPointerException이 난다", "스프링이 그 생성자로 AnsService를 넣어 준다", "기본 생성자가 없어서 컴파일 오류가 난다", "필드에 @Autowired를 꼭 함께 써야 한다"], "a": 1, "ex": "Spring 4.3부터 생성자가 하나면 @Autowired를 생략해도 그 생성자로 주입한다. 생성자 주입은 빠진 의존성을 일찍 알 수 있고 final 필드도 쓸 수 있다.", "link": ["#web-61", "42일차 복습"]},
   ];
 
   // ═══════════ 자세한 해설 표 ═══════════

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
@@ -7,15 +6,15 @@
   version="6.0"
   metadata-complete="true">
 
-  <display-name>08</display-name>
-  <description>
-     Welcome to Tomcat
-  </description>
-<!-- context-param 설정: root-context.xml의 경로: DB관련 내용 설정 -->
+  <display-name>08_answerboard_springMVC</display-name>
+  <!-- context-param 설정: root-context.xml의 경로: DB관련 내용 설정 -->
 	<!-- contextConfigLocation라는 이름을 리스너가 찾는다 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+					 /WEB-INF/spring/root-context.xml
+					 /WEB-INF/spring/aop-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- 리스너 설정: contextConfigLocation라는 이름의 값을 찾아서 읽어들인다. -->
@@ -30,7 +29,9 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -55,5 +56,5 @@
 	    <filter-name>encodingFilter</filter-name> 
 	    <url-pattern>/*</url-pattern> 
 	</filter-mapping>
-
+  
 </web-app>

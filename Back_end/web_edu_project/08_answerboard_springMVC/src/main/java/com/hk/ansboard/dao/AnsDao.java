@@ -28,6 +28,11 @@ public class AnsDao {
 		map.put("pnum", pnum);
 		return sqlSession.selectList(namespace+"boardList",map);
 	}
+	//페이지 개수
+	public int getPcount() {
+		return sqlSession.selectOne(namespace+"getPcount");
+	}
+	
 	//새글 추가하기
 	public boolean boardInsert(AnsDto dto) {
 		int count = sqlSession.insert(namespace+"boardInsert",dto);
@@ -53,5 +58,13 @@ public class AnsDao {
 	public boolean readCount(int seq) {
 		int count = sqlSession.update(namespace+"readCount",seq);
 		return count>0;
+	}
+	
+	public int replyUpdate(AnsDto dto) {
+		return sqlSession.update(namespace+"replyUpdate", dto);
+	}
+	
+	public int replyInsert(AnsDto dto) {
+		return sqlSession.insert(namespace+"replyInsert", dto);
 	}
 }

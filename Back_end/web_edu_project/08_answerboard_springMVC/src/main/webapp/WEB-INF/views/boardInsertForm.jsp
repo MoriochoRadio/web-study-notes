@@ -31,7 +31,7 @@
 			<td colspan="2">
 				<input class="btn btn-primary" type="submit" value="글등록"/>
 				<input class="btn btn-primary" type="button" value="글목록" 
-			        onclick="location.href='boardList.do'"/>
+			        onclick="location.href='boardList.do?pnum=${pnum}'"/>
 			</td>
 		</tr>
 	</table>

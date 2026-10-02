@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"	
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xmlns:context="http://www.springframework.org/schema/context"	
 	xsi:schemaLocation="http://www.springframework.org/schema/beans	
-						http://www.springframework.org/schema/beans/spring-beans.xsd">
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DB연결에 관련된 작업을 설정 -->
 	
@@ -36,5 +42,27 @@
 	      class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	<!-- Transactoin처리를 위한 객체 등록 -->
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 선언적 트랜젝션 처리: @transactoinal 사용 -->
+	<tx:annotation-driven transaction-manager="transactionManager" 
+						  proxy-target-class="true"	/>
+	<!-- 트랜젝션이 적용되려면 root-context.xml에서 service,dao를 스캔해야됨 -->					  
+	<context:component-scan 
+	    base-package="com.hk.ansboard.service,com.hk.ansboard.dao" />
 
+<!-- 	<import resource="aop-context.xml"/> -->
 </beans>
+
+
+
+
+
+
+

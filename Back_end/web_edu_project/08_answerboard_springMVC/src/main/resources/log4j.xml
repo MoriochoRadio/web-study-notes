@@ -9,9 +9,6 @@
 		</layout>
 	</appender>
 	<!-- Appenders 날짜별 로그 파일 생성 -->
-	
-	
-	
 	<appender name="rollingFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="${user.dir}/src/main/resources/log/log.log" />
 		<param name="Append" value="true"/>
@@ -41,7 +38,7 @@
 	<!-- Root Logger -->
 	<root>
 <!-- 		<priority value="TRACE" />  -->
-		<priority value="info" />
+		<priority value="debug" />
 		<appender-ref ref="rollingFile" /> 
 		<appender-ref ref="console" />
 	</root>

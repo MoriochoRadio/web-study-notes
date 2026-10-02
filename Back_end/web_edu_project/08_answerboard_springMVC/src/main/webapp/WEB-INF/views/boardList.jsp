@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="jakarta.tags.core" prefix="c" %>
 <%@taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%@taglib uri="jakarta.tags.functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 <script type="text/javascript">
 	// 글쓰기 폼 요청: controller를 통해 처리
 	function boardInsertForm(){
-		location.href="boardInsertForm.do";
+		location.href="boardInsertForm.do?pnum=${pnum}";
 	}
 	
 	//전체 선택 체크박스 기능
@@ -54,6 +55,7 @@
 <h1>게시판</h1>
 <h2>글목록</h2>   
 <form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
+	<input type="hidden" name="pnum" value="${pnum}"/>
 	<table class="table table-striped" border="1" id="boardList">
 		<colgroup>
 			<col style="width: 2%;"> <!-- 체크박스 -->
@@ -99,8 +101,14 @@
 									---삭제된 글입니다.---
 								</c:when>
 								<c:otherwise>
-									<a href="boardDetail.do?seq=${dto.seq}&review=y">
-								    ${dto.title}
+									<c:forEach begin="1" end="${dto.depth}" var="i" step="1">
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<c:if test="${i==dto.depth}">
+											<img class="arrow" alt="답글" src="${pageContext.request.contextPath}/resources/img/arrow.png">
+										</c:if>
+									</c:forEach>
+									<a href="boardDetail.do?seq=${dto.seq}&review=y&pnum=${pnum}">
+								    ${fn:length(dto.title)>10?fn:substring(dto.title,0,10)+='...':dto.title}
 								    </a>									
 								</c:otherwise>
 							</c:choose>
@@ -116,8 +124,40 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		<!-- 페이지 번호가 들어갈 부분 -->
 		<tr>
-			<td colspan="10">--페이지 번호가 들어갈 부분--</td>
+			<td colspan="10" style="text-align: center;">
+<%-- 				<c:forEach begin="1" end="${pCount}" var="i" step="1"> --%>
+<%-- 					<a href="boardList.do?pnum=${i}">${i}</a> --%>
+<%-- 				</c:forEach> --%>
+
+<%-- 				<a href="boardList.do?pnum=${pMap.prePageNum}">pre</a> --%>
+				
+<%-- 				<c:forEach begin="${pMap.startPage}"  --%>
+<%-- 				           end="${pMap.endPage}" var="i" step="1"> --%>
+<%-- 					<a href="boardList.do?pnum=${i}">${i}</a> --%>
+<%-- 				</c:forEach> --%>
+				
+<%-- 				<a href="boardList.do?pnum=${pMap.nextPageNum}">next</a> --%>
+			
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+						 	<a class="page-link" href="boardList.do?pnum=${pMap.prePageNum}">Previous</a>
+						</li>
+						<c:forEach begin="${pMap.startPage}"
+							end="${pMap.endPage}" var="i" step="1">
+							<li
+								class="page-item ${pnum==i?'active':''}">
+								<a class="page-link" href="boardList.do?pnum=${i}">${i}</a>
+							</li>
+						</c:forEach>
+						<li class="page-item">
+							<a class="page-link" href="boardList.do?pnum=${pMap.nextPageNum}">Next</a>
+						</li>
+					</ul>
+				</nav>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="10">

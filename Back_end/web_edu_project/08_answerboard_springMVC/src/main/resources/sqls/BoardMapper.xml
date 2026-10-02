@@ -16,6 +16,12 @@
 		WHERE ceil(rn/10) = #{pnum}
 	</select>
 	
+<!-- 	page 개수 구하기 -->
+	<select id="getPcount" resultType="int">
+		select ceil(count(*)/10)
+		from answerboard
+	</select>
+	
 	<insert id="boardInsert" parameterType="AnsDto">
 		INSERT INTO answerboard
 		VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
@@ -51,7 +57,21 @@
 </update>
 
 <!-- 답글달기 -->
+<update id="replyUpdate" parameterType="AnsDto">
+	<![CDATA[
+	UPDATE answerboard SET step = step+1
+	WHERE refer=(SELECT refer FROM answerboard WHERE seq=#{seq})
+	AND step > (SELECT step FROM answerboard WHERE seq=#{seq})	
+	]]>
+</update>
 
+<insert id="replyInsert" parameterType="AnsDto">
+	INSERT INTO answerboard 
+	VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
+	(SELECT refer FROM answerboard WHERE seq=#{seq}),
+	(SELECT step FROM answerboard WHERE seq=#{seq})+1,
+	(SELECT depth FROM answerboard WHERE seq=#{seq})+1, 0, 'N')
+</insert>
 
 
 

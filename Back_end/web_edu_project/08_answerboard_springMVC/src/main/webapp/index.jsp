@@ -8,5 +8,6 @@
 </head>
 <body>
 <a href="home.do">home</a>
+<a href="boardList.do?pnum=1">게시판</a>
 </body>
 </html>

@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-10-02 update:** Added days 41–42 — the 08 answer board now has page-number navigation (a `Paging` utility with Bootstrap pagination) and replies (shift `step`, then insert under the parent), the reply is wrapped in `@Transactional`, and DAO calls are logged through Spring AOP. The reply SQL was run from the mapper file in SQLite to check ordering, and the transaction setup was reproduced by starting the project's own Spring configuration with a fake connection: commit on success, rollback on failure, and no transaction at all when the servlet context scans every package. Nothing was executed against Tomcat and the real database.
+
 **2026-09-30 update:** Added days 39–40 — the new [08 answer-board project](Back_end/web_edu_project/08_answerboard_springMVC/) (refer/step/depth threading, paged list query, view-count redirect, soft delete, shared header/footer) — and [coding-test round 20](Back_end/coding-tests/2026-09-30/). The project's `log4j.xml` is not read: the POM brings Logback, which looks for `logback.xml` and falls back to its default console/DEBUG setup; this was reproduced with the same libraries. CRUD requests were not executed against Tomcat and the database.
 
 **2026-09-28 update:** Added [day 38 notes](Back_end/index.html#class-day38) — the 07 board now maps insert, detail, update and multi-delete requests to controller methods — and [coding-test round 19](Back_end/coding-tests/2026-09-28/) (3 PASS, 1 FAIL with no submitted code). The class source for `home.do` fails on this machine because the build does not use `-parameters`, so Spring 6.1 cannot resolve an unannotated `String` parameter name; this was reproduced by calling Spring's resolver directly. CRUD requests were not executed against Tomcat and the database in this update.
@@ -19,7 +21,7 @@ As of the repository review on 2026-08-13, the frontend curriculum is reflected 
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Java daily exercises · concept cards · 12 practice problems · 170 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Java daily exercises · concept cards · 12 practice problems · 187 exam-prep questions | 🔄 In progress (started 2026-08-03) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
