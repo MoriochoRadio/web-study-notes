@@ -1,0 +1,80 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>21회차 코딩테스트 · 2026-10-02</title><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}}</style></head><body><main><nav><a href="../../index.html#class-day42">42일차 수업</a> / <a href="../../index.html#ct-47">백엔드 코딩테스트</a> / <a href="README.md">Markdown 기록</a></nav><h1>21회차 코딩테스트</h1><p>2026-10-02 · Java 2문제 · SQL 2문제 · <b>2 PASS / 2 FAIL</b></p><p>Java FAIL(모의고사)은 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. SQL FAIL은 제출 코드와 정답 풀이가 모두 있어 차이를 직접 비교했다. 아래 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-47"><div class="note-head"><span class="note-num">21회차</span><h3>문자열을 정수로 바꾸기</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>Integer.parseInt는 맨 앞의 부호(+, -)까지 읽어 int로 바꿔 준다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>종이에 적힌 "-1234"라는 글자를 계산기에 넣을 수 있는 숫자 -1234로 옮겨 적는 일이다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge">2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12925" target="_blank" rel="noopener">문제 원문</a> · <a href="StringToInt.java">제출 코드</a></p>
+<h4>제출 코드 · 오답노트 원문</h4><pre><code>class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        answer=Integer.parseInt(s);
+        return answer;
+    }
+}</code></pre>
+<ul><li><code>Integer.parseInt("+1234")</code> → 1234, <code>"-1234"</code> → -1234. 부호를 따로 처리할 필요가 없다.</li><li>숫자가 아닌 글자가 섞이면 <code>NumberFormatException</code>. int 범위를 넘는 수는 <code>Long.parseLong</code>.</li><li>반대 방향(정수 → 문자열)은 <code>String.valueOf(n)</code> 또는 <code>Integer.toString(n)</code>.</li></ul>
+<details><summary>로컬 검증 — 가능한 입력 전부</summary><pre>가능한 입력 119,998개 전부 통과 (-9999 ~ 99999, "+1234" 꼴 포함)
+"12a4" → NumberFormatException: For input string: "12a4"</pre></details>
+</div></article>
+<article class="note-card" id="ct-48"><div class="note-head"><span class="note-num">21회차</span><h3>모의고사</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>찍는 패턴은 i % 패턴길이로 돌려 쓰고, 한 번의 반복으로 세 사람을 같이 채점한 뒤, 최고점과 같은 사람을 번호 순으로 모은다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>세 친구가 정해진 순서로 찍기를 반복한다. 답안지를 한 번 훑으며 셋을 동시에 채점하고, 1등이 여럿이면 모두 상을 준다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge">2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42840" target="_blank" rel="noopener">문제 원문</a> · <a href="MockExam.java">정답 풀이</a></p>
+<p><b>제출 코드: 원문에 없음.</b> FAIL 결과와 정답 풀이만 남아 있다. 실패 원인을 단정하지 않는다.</p>
+<h4>정답 풀이 · 오답노트 원문 (핵심 부분)</h4><pre><code>int[] p1 = {1, 2, 3, 4, 5};
+int[] p2 = {2, 1, 2, 3, 2, 4, 2, 5};
+int[] p3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+int score1 = 0, score2 = 0, score3 = 0;
+for (int i = 0; i &lt; answers.length; i++) {
+    if (answers[i] == p1[i % p1.length]) score1++;   // 패턴이 끝나면 0번으로 돌아간다
+    if (answers[i] == p2[i % p2.length]) score2++;
+    if (answers[i] == p3[i % p3.length]) score3++;
+}
+int maxScore = Math.max(score1, Math.max(score2, score3));
+ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+if (score1 == maxScore) list.add(1);   // else if 가 아니라 if 세 개 — 동점자를 모두 담는다
+if (score2 == maxScore) list.add(2);
+if (score3 == maxScore) list.add(3);
+int[] result = new int[list.size()];
+for (int i = 0; i &lt; list.size(); i++) result[i] = list.get(i);</code></pre>
+<ul><li><b><code>i % 길이</code></b> — 인덱스를 0 ~ 길이-1 안에서 계속 돌린다. 반복되는 패턴 문제의 기본 도구.</li><li><b>독립된 <code>if</code> 세 개</b> — <code>else if</code>로 쓰면 첫 번째 최고점자만 담기고 동점자가 빠진다. 1→2→3 순으로 검사하니 오름차순도 저절로 맞는다.</li><li><b>정렬하지 않는다</b> — 점수 배열을 정렬하면 누가 몇 번이었는지 사라진다. 최고점 값만 <code>Math.max</code>로 구한다.</li><li>크기를 모르는 결과는 <code>ArrayList</code>에 모은 뒤 <code>int[]</code>로 옮긴다.</li></ul>
+<details><summary>로컬 검증 — 공식 예제 + 무작위 20,000개</summary><pre>공식 예제 2개 통과
+무작위 20,000개 통과 (길이 10,000 짜리 200개 포함, 동점자 있는 경우 4,931개)
+동점 예제 [1,3,2,4,2]: 정답 풀이 [1, 2, 3] / else if 로 고르면 [1]</pre><p>기댓값은 사람마다 따로 채점하는 별도 코드로 계산했다.</p></details>
+</div></article>
+<article class="note-card" id="ct-49"><div class="note-head"><span class="note-num">21회차</span><h3>여러 기준으로 정렬하기</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>ORDER BY에 기준을 쉼표로 이어 쓰면 앞 기준이 같을 때만 다음 기준을 본다. 기준마다 ASC·DESC를 따로 정한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>이름순으로 줄을 세우되, 이름이 같은 사람끼리는 늦게 온 사람이 앞에 선다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge">2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59404" target="_blank" rel="noopener">문제 원문</a> · <a href="multi-sort.sql">제출 코드</a></p>
+<h4>제출 코드 · 오답노트 원문</h4><pre><code>SELECT ANIMAL_ID, NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY NAME ASC, DATETIME DESC;</code></pre>
+<details><summary>로컬 검증 — SQLite 메모리 DB</summary><pre>A120|Bella|2015-07-09, A002|Bella|2013-01-01, A900|Lucy|2017-11-21, A350|Lucy|2014-03-01
+→ 이름 오름차순, 같은 이름 안에서는 보호 시작이 나중인 쪽이 먼저</pre></details>
+</div></article>
+<article class="note-card" id="ct-50"><div class="note-head"><span class="note-num">21회차</span><h3>조건에 맞는 사용자 정보 조회하기</h3></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>전화번호 앞 세 자리를 '010'으로 고정하면 다른 번호가 틀어진다. 번호는 TLNO에서 SUBSTR로 잘라 붙이고, 주소는 CONCAT_WS로 이어 붙인다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>전화번호부를 옮겨 적으면서 앞자리를 전부 "010"으로 써 버리면, 011을 쓰던 사람 번호가 틀린다. 원래 적힌 그대로 잘라 옮겨야 한다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge">2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/164670" target="_blank" rel="noopener">문제 원문</a> · <a href="user-info-submitted.sql">제출 코드</a> · <a href="user-info-answer.sql">정답 풀이</a></p>
+<h4>제출 코드 · 오답노트 원문</h4><pre><code>SELECT DISTINCT U.USER_ID, U.NICKNAME,
+       CONCAT(U.CITY, ' ', U.STREET_ADDRESS1, ' ', U.STREET_ADDRESS2) AS 전체주소,
+       CONCAT('010','-',SUBSTR(U.TLNO,4,4),'-',SUBSTR(U.TLNO,8,4)) AS 전화번호
+FROM USED_GOODS_BOARD G JOIN USED_GOODS_USER U ON G.WRITER_ID = U.USER_ID
+WHERE G.WRITER_ID IN (SELECT WRITER_ID from USED_GOODS_BOARD
+                      group by WRITER_ID having count(*) &gt;= 3)
+ORDER BY U.USER_ID DESC;</code></pre>
+<h4>정답 풀이 · 오답노트 원문</h4><pre><code>SELECT U.USER_ID, U.NICKNAME,
+       CONCAT_WS(' ', U.CITY, U.STREET_ADDRESS1, U.STREET_ADDRESS2) AS 전체주소,
+       CONCAT(SUBSTR(U.TLNO, 1, 3), '-', SUBSTR(U.TLNO, 4, 4), '-', SUBSTR(U.TLNO, 8, 4)) AS 전화번호
+FROM USED_GOODS_USER U
+JOIN USED_GOODS_BOARD B ON U.USER_ID = B.WRITER_ID
+GROUP BY U.USER_ID
+HAVING COUNT(*) &gt;= 3
+ORDER BY U.USER_ID DESC;</code></pre>
+<p>"글 3개 이상 쓴 사람" 고르기는 제출 코드(<code>WHERE IN</code> 서브쿼리 + <code>DISTINCT</code>)와 정답 풀이(<code>GROUP BY</code> + <code>HAVING</code>)가 같은 결과를 낸다. 차이는 출력 형식이다.</p>
+<ul><li><b>전화번호</b> — 제출 코드는 앞 세 자리를 <code>'010'</code>으로 고정했다. TLNO가 011로 시작하면 <code>010-…</code>으로 잘못 찍힌다. 실제 채점 데이터를 볼 수 없어 이것이 FAIL의 원인이라고 단정할 수는 없지만, 가장 분명한 차이다.</li><li><b>주소</b> — MySQL의 <code>CONCAT</code>은 인자 하나라도 NULL이면 결과 전체가 NULL이다. <code>CONCAT_WS(구분자, …)</code>는 사이사이에 구분자를 넣고 NULL은 건너뛴다.</li><li><b><code>SUBSTR(문자열, 시작, 길이)</code></b> — SQL은 <b>1부터</b> 센다(자바 <code>substring</code>은 0부터).</li><li><b>WHERE vs HAVING</b> — WHERE는 묶기 전의 행을, HAVING은 <code>GROUP BY</code>로 묶은 뒤의 그룹을 거른다. 집계 함수 조건은 HAVING에.</li><li>정답 풀이는 <code>GROUP BY U.USER_ID</code>만 쓰고 닉네임·주소를 SELECT한다. USER_ID가 기본 키라 MySQL 5.7 이상은 나머지 컬럼이 USER_ID로 정해진다고 보고 허용한다. 기본 키가 아닌 컬럼으로 묶을 때는 SELECT의 컬럼을 GROUP BY에도 적는다.</li></ul>
+<details><summary>로컬 검증 — SQLite, MySQL의 CONCAT 규칙으로 등록</summary><pre>제출 코드: user011|엘사|…|010-9876-5432   (실제 번호 011-9876-5432)
+          noaddr2|널|NULL|010-1111-2222    (상세 주소 NULL → 주소 전체 NULL)
+정답 풀이: user011|엘사|…|011-9876-5432
+          noaddr2|널|서울시 종로구 종로 1|010-1111-2222
+고르는 사람 4명은 두 방식이 같음 · 글 2개인 사람은 둘 다 제외</pre><p>SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행했다. SQLite의 <code>CONCAT</code>은 NULL을 빈 문자열로 치므로 MySQL처럼 NULL을 돌려주는 같은 이름의 함수를 등록했다. 011 번호·NULL 상세 주소는 차이를 보이려고 넣은 데이터다.</p></details>
+</div></article>
+
+<article><h2>로컬 검증과 범위</h2><p>Java는 <code>CodingTest21Test.java</code>, SQL은 <code>verify-sql21.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB)로 확인했다. SQL 파일을 그대로 읽어 실행한다. SQLite의 <code>CONCAT</code>은 NULL을 빈 문자열로 치므로, MySQL처럼 NULL이면 NULL을 돌려주는 같은 이름의 함수를 등록해 제출 SQL을 바꾸지 않았다. 로컬 MariaDB 접속 정보는 쓰지 않았다.</p></article>
+
+<footer><p><a href="StringToInt.java">문자열을 정수로</a> · <a href="MockExam.java">모의고사</a> · <a href="CodingTest21Test.java">Java 검증</a> · <a href="multi-sort.sql">SQL 1</a> · <a href="user-info-submitted.sql">SQL 2 제출</a> · <a href="user-info-answer.sql">SQL 2 정답</a> · <a href="verify-sql21.mjs">SQL 검증</a></p></footer></main></body></html>

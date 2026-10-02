@@ -1168,7 +1168,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <div class="meta-row">
       <span id="updated-badge">마지막 업데이트: 2026-10-02</span>
       <span>📅 수업 42일차</span>
-      <span>🗂️ 노트 카드 292장</span>
+      <span>🗂️ 노트 카드 296장</span>
       <span>✏️ 시험 대비 187문제</span>
     </div>
     <a class="cross-link" href="../Front_end/">🎨 프론트엔드 학습 노트로 이동 →</a>
@@ -1199,7 +1199,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">46</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">50</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
       <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">61</span></button>
     </div>
@@ -1286,7 +1286,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">46</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">50</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
       <div class="stat-card web"><div class="n">61</div><div class="l">🖥️ 웹 개발 항목</div></div>
       <div class="stat-card journey"><div class="n">24</div><div class="l">🧭 학습 여정 단계</div></div>
@@ -7357,6 +7357,7 @@ public class D3_ChatClient {
 <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>쿼리 두 개가 한 묶음이어야 하는 답글 저장에 트랜잭션(@Transactional)을 걸고, DAO 메서드마다 로그를 남기는 일을 AOP로 DAO 바깥에 뺐다. Controller는 생성자 주입으로 바꾸고, 페이징 조립은 Service로 옮겼다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>트랜잭션은 송금처럼 "빼기와 넣기가 둘 다 되거나 둘 다 안 되거나"를 보장한다. AOP는 방마다 출입 기록기를 다는 대신 복도 입구에 하나만 달아 두는 것이다.</div>
 <ol><li>Controller: <code>@Autowired</code> 필드 대신 <b>생성자</b>로 AnsService를 받는다. 목록은 <code>ansService.getBoardListWithPaging(pnum)</code>이 돌려준 Map을 <code>model.addAllAttributes</code>로 한 번에 담는다.</li><li>목록 화면: depth만큼 들여쓰고 답글 화살표 그림(<code>resources/img/arrow.png</code>)을 붙였다. 페이지 번호는 Bootstrap pagination으로, 지금 쪽은 <code>active</code>.</li><li><code>root-context.xml</code>: <code>DataSourceTransactionManager</code> 등록, <code>&lt;tx:annotation-driven proxy-target-class="true"/&gt;</code>, service·dao 스캔. <code>AnsService.boardReply</code>에 <code>@Transactional</code>.</li><li><code>aop/LogExecute</code>와 <code>aop-context.xml</code>: 모든 <code>*Dao</code> 메서드의 실행 전·정상 종료 후·오류 시 로그. <code>web.xml</code>이 root-context와 aop-context를 함께 읽는다. 같은 일을 애너테이션으로 쓴 <code>LogExecuteNoXML</code>은 주석 처리된 참고용이다.</li><li><code>log4j.xml</code>의 root 수준을 info → debug로 바꿨다.</li></ol>
 <p><a href="#web-59">트랜잭션과 컨텍스트 나누기</a> · <a href="#web-60">AOP로 남기는 로그</a> · <a href="#web-61">생성자 주입과 Service로 옮긴 조립</a> · <a href="#journey-web-07">학습 여정 24단계</a></p>
+<p>21회차 코딩테스트 — <a href="#ct-47">문자열을 정수로 바꾸기</a>(PASS) · <a href="#ct-48">모의고사</a>(FAIL) · <a href="#ct-49">여러 기준으로 정렬하기</a>(PASS) · <a href="#ct-50">조건에 맞는 사용자 정보 조회하기</a>(FAIL)</p>
 <div class="self-check"><div class="self-check-title">🤔 스스로 확인 — 답을 열기 전에 설명해 보기</div><details class="sc-q"><summary>servlet-context가 다시 com.hk.ansboard 전체를 스캔하면 @Transactional은 어떻게 되나?</summary><div class="sc-a">자식(servlet) 컨텍스트에 트랜잭션 설정이 없는 AnsService가 하나 더 만들어지고, Controller는 가까운 자식 쪽 것을 주입받습니다. 그래서 트랜잭션이 걸리지 않습니다. 같은 설정으로 재현해 보니 "트랜젝션 활성 상태:false"가 찍히고 rollback도 일어나지 않았습니다(<a href="#web-59">자세히</a>).</div></details><details class="sc-q"><summary>log4j.xml을 debug로 바꾸면 로그가 달라지나?</summary><div class="sc-a">아닙니다. 08의 구현체는 여전히 Logback이라 <code>log4j.xml</code>은 읽히지 않습니다(<a href="#web-53">39일차 재현</a>). 원래부터 Logback 기본 설정으로 전체 DEBUG가 출력되고 있었습니다. 워크스페이스의 <code>log/</code> 폴더도 10/2 현재 비어 있습니다.</div></details></div>
 <div class="note-points"><div class="note-points-title">이 날 코드의 상태</div><ul><li>확인함 — 08의 Java 7개 파일이 JDK 21로, <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08의 <code>aop-context.xml</code> 원본과 <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링 컨테이너를 띄웠다. 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, 스캔을 잘못 나누면 트랜잭션이 아예 없다(<a href="#web-59">결과</a>).</li><li>확인하지 않음 — 톰캣과 실제 DB로 답글·페이지 이동을 눌러 본 기록은 이번 정리에 없다.</li></ul></div></div></article>
 </div>
@@ -16407,6 +16408,80 @@ GROUP BY H.CAR_ID          → 3, 1
 9월 시작 · 10월 종료 대여   → 제외 (시작일 기준)</pre><div class="run-note">SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행했다. SQLite에 없는 <code>MONTH()</code>는 같은 이름의 함수를 등록해 제출 SQL을 바꾸지 않았다. 로컬 DB 접속 정보는 쓰지 않았다.</div></details>
 <ul><li><b>DISTINCT vs GROUP BY</b> — 목록에서 중복만 없애면 <code>DISTINCT</code>, 묶어서 개수·합계를 구하면 <code>GROUP BY</code>.</li><li><code>MONTH(START_DATE) = 10</code>은 시작일 기준이다. 여러 해가 섞이면 <code>YEAR</code>도 보거나 <code>DATE_FORMAT(START_DATE, '%Y-%m') = '2022-10'</code>으로 연·월을 함께 비교한다.</li></ul>
 <div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>1:N 조인 뒤 "1" 쪽 컬럼만 뽑으면 중복이 생긴다.</li><li>문제에 "중복 없이"가 있으면 <code>SELECT DISTINCT</code>.</li></ul></div></div></article>
+<article class="note-card" id="ct-47"><div class="note-head"><span class="note-num">21회차</span><h3>문자열을 정수로 바꾸기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>Integer.parseInt는 맨 앞의 부호(+, -)까지 읽어 int로 바꿔 준다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>종이에 적힌 "-1234"라는 글자를 계산기에 넣을 수 있는 숫자 -1234로 옮겨 적는 일이다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/12925" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-10-02/StringToInt.java">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        answer=Integer.parseInt(s);
+        return answer;
+    }
+}</code></pre></div>
+<ul><li><code>Integer.parseInt("+1234")</code> → 1234, <code>"-1234"</code> → -1234. 부호를 따로 처리할 필요가 없다.</li><li>숫자가 아닌 글자가 섞이면 <code>NumberFormatException</code>. int 범위를 넘는 수는 <code>Long.parseLong</code>.</li><li>반대 방향(정수 → 문자열)은 <code>String.valueOf(n)</code> 또는 <code>Integer.toString(n)</code>. → <a href="#basic-06">☕ 06. 형 변환</a></li></ul>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>가능한 입력 전부</summary><pre>가능한 입력 119,998개 전부 통과 (-9999 ~ 99999, "+1234" 꼴 포함)
+"12a4" → NumberFormatException: For input string: "12a4"</pre></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>문자열 → 정수: <code>Integer.parseInt</code>(부호 포함).</li><li>숫자가 아닌 글자가 있으면 예외가 난다.</li></ul></div></div></article>
+<article class="note-card" id="ct-48"><div class="note-head"><span class="note-num">21회차</span><h3>모의고사</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>찍는 패턴은 i % 패턴길이로 돌려 쓰고, 한 번의 반복으로 세 사람을 같이 채점한 뒤, 최고점과 같은 사람을 번호 순으로 모은다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>세 친구가 정해진 순서로 찍기를 반복한다. 답안지를 한 번 훑으며 셋을 동시에 채점하고, 1등이 여럿이면 모두 상을 준다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">JAVA · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42840" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-10-02/MockExam.java">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<p><b>제출 코드: 원문에 없음.</b> FAIL 결과와 정답 풀이만 남아 있다. 실패 원인을 단정하지 않는다.</p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">정답 풀이 · 오답노트 원문 (핵심 부분)</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-java">int[] p1 = {1, 2, 3, 4, 5};
+int[] p2 = {2, 1, 2, 3, 2, 4, 2, 5};
+int[] p3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+int score1 = 0, score2 = 0, score3 = 0;
+for (int i = 0; i &lt; answers.length; i++) {
+    if (answers[i] == p1[i % p1.length]) score1++;   // 패턴이 끝나면 0번으로 돌아간다
+    if (answers[i] == p2[i % p2.length]) score2++;
+    if (answers[i] == p3[i % p3.length]) score3++;
+}
+int maxScore = Math.max(score1, Math.max(score2, score3));
+ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+if (score1 == maxScore) list.add(1);   // else if 가 아니라 if 세 개 — 동점자를 모두 담는다
+if (score2 == maxScore) list.add(2);
+if (score3 == maxScore) list.add(3);
+int[] result = new int[list.size()];
+for (int i = 0; i &lt; list.size(); i++) result[i] = list.get(i);</code></pre></div>
+<ul><li><b><code>i % 길이</code></b> — 인덱스를 0 ~ 길이-1 안에서 계속 돌린다. 반복되는 패턴 문제의 기본 도구.</li><li><b>독립된 <code>if</code> 세 개</b> — <code>else if</code>로 쓰면 첫 번째 최고점자만 담기고 동점자가 빠진다. 1→2→3 순으로 검사하니 오름차순도 저절로 맞는다.</li><li><b>정렬하지 않는다</b> — 점수 배열을 정렬하면 누가 몇 번이었는지 사라진다. 최고점 값만 <code>Math.max</code>로 구한다.</li><li>크기를 모르는 결과는 <code>ArrayList</code>에 모은 뒤 <code>int[]</code>로 옮긴다. → <a href="#util-02">🛠️ 02. List 계열</a></li></ul>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>공식 예제 + 무작위 20,000개</summary><pre>공식 예제 2개 통과
+무작위 20,000개 통과 (길이 10,000 짜리 200개 포함, 동점자 있는 경우 4,931개)
+동점 예제 [1,3,2,4,2]: 정답 풀이 [1, 2, 3] / else if 로 고르면 [1]</pre><div class="run-note">기댓값은 사람마다 따로 채점하는 별도 코드로 계산했다.</div></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>반복 패턴은 <code>배열[i % 길이]</code>.</li><li>동점자를 모두 고를 때는 <code>else if</code>가 아니라 독립된 <code>if</code>.</li></ul></div></div></article>
+<article class="note-card" id="ct-49"><div class="note-head"><span class="note-num">21회차</span><h3>여러 기준으로 정렬하기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>ORDER BY에 기준을 쉼표로 이어 쓰면 앞 기준이 같을 때만 다음 기준을 본다. 기준마다 ASC·DESC를 따로 정한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>이름순으로 줄을 세우되, 이름이 같은 사람끼리는 늦게 온 사람이 앞에 선다.</div>
+<div class="ct-meta"><span class="ct-badge ct-pass">PASS · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/59404" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-10-02/multi-sort.sql">제출 코드</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT ANIMAL_ID, NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY NAME ASC, DATETIME DESC;</code></pre></div>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>SQLite 메모리 DB</summary><pre>A120|Bella|2015-07-09, A002|Bella|2013-01-01, A900|Lucy|2017-11-21, A350|Lucy|2014-03-01
+→ 이름 오름차순, 같은 이름 안에서는 보호 시작이 나중인 쪽이 먼저</pre></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li><code>ORDER BY A ASC, B DESC</code> — 정렬 방향은 기준마다 따로.</li></ul></div></div></article>
+<article class="note-card" id="ct-50"><div class="note-head"><span class="note-num">21회차</span><h3>조건에 맞는 사용자 정보 조회하기</h3><div class="note-tags"><span class="tag">2026-10-02</span></div></div>
+<div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>전화번호 앞 세 자리를 '010'으로 고정하면 다른 번호가 틀어진다. 번호는 TLNO에서 SUBSTR로 잘라 붙이고, 주소는 CONCAT_WS로 이어 붙인다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>전화번호부를 옮겨 적으면서 앞자리를 전부 "010"으로 써 버리면, 011을 쓰던 사람 번호가 틀린다. 원래 적힌 그대로 잘라 옮겨야 한다.</div>
+<div class="ct-meta"><span class="ct-badge ct-fail">FAIL · 원문 기록</span><span class="ct-badge ct-type">SQL · 2026.10.02 · 21회차</span></div><p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/164670" target="_blank" rel="noopener">문제 원문</a> · <a href="coding-tests/2026-10-02/user-info-submitted.sql">제출 코드</a> · <a href="coding-tests/2026-10-02/user-info-answer.sql">정답 풀이</a> · <a href="coding-tests/2026-10-02/">21회차 전체 기록</a></p>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">제출 코드 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT DISTINCT U.USER_ID, U.NICKNAME,
+       CONCAT(U.CITY, ' ', U.STREET_ADDRESS1, ' ', U.STREET_ADDRESS2) AS 전체주소,
+       CONCAT('010','-',SUBSTR(U.TLNO,4,4),'-',SUBSTR(U.TLNO,8,4)) AS 전화번호
+FROM USED_GOODS_BOARD G JOIN USED_GOODS_USER U ON G.WRITER_ID = U.USER_ID
+WHERE G.WRITER_ID IN (SELECT WRITER_ID from USED_GOODS_BOARD
+                      group by WRITER_ID having count(*) &gt;= 3)
+ORDER BY U.USER_ID DESC;</code></pre></div>
+<div class="note-code"><div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">정답 풀이 · 오답노트 원문</span><button class="copy-btn" type="button">복사</button></div><pre><code class="language-sql">SELECT U.USER_ID, U.NICKNAME,
+       CONCAT_WS(' ', U.CITY, U.STREET_ADDRESS1, U.STREET_ADDRESS2) AS 전체주소,
+       CONCAT(SUBSTR(U.TLNO, 1, 3), '-', SUBSTR(U.TLNO, 4, 4), '-', SUBSTR(U.TLNO, 8, 4)) AS 전화번호
+FROM USED_GOODS_USER U
+JOIN USED_GOODS_BOARD B ON U.USER_ID = B.WRITER_ID
+GROUP BY U.USER_ID
+HAVING COUNT(*) &gt;= 3
+ORDER BY U.USER_ID DESC;</code></pre></div>
+<p>"글 3개 이상 쓴 사람" 고르기는 제출 코드(<code>WHERE IN</code> 서브쿼리 + <code>DISTINCT</code>)와 정답 풀이(<code>GROUP BY</code> + <code>HAVING</code>)가 같은 결과를 낸다. 차이는 출력 형식이다.</p>
+<ul><li><b>전화번호</b> — 제출 코드는 앞 세 자리를 <code>'010'</code>으로 고정했다. TLNO가 011로 시작하면 <code>010-…</code>으로 잘못 찍힌다. 실제 채점 데이터를 볼 수 없어 이것이 FAIL의 원인이라고 단정할 수는 없지만, 가장 분명한 차이다.</li><li><b>주소</b> — MySQL의 <code>CONCAT</code>은 인자 하나라도 NULL이면 결과 전체가 NULL이다. <code>CONCAT_WS(구분자, …)</code>는 사이사이에 구분자를 넣고 NULL은 건너뛴다.</li><li><b><code>SUBSTR(문자열, 시작, 길이)</code></b> — SQL은 <b>1부터</b> 센다(자바 <code>substring</code>은 0부터).</li><li><b>WHERE vs HAVING</b> — WHERE는 묶기 전의 행을, HAVING은 <code>GROUP BY</code>로 묶은 뒤의 그룹을 거른다. 집계 함수 조건은 HAVING에.</li><li>정답 풀이는 <code>GROUP BY U.USER_ID</code>만 쓰고 닉네임·주소를 SELECT한다. USER_ID가 기본 키라 MySQL 5.7 이상은 나머지 컬럼이 USER_ID로 정해진다고 보고 허용한다. 기본 키가 아닌 컬럼으로 묶을 때는 SELECT의 컬럼을 GROUP BY에도 적는다.</li></ul>
+<details class="run-output"><summary><span class="run-tag">로컬 검증</span>SQLite, MySQL의 CONCAT 규칙으로 등록</summary><pre>제출 코드: user011|엘사|…|010-9876-5432   (실제 번호 011-9876-5432)
+          noaddr2|널|NULL|010-1111-2222    (상세 주소 NULL → 주소 전체 NULL)
+정답 풀이: user011|엘사|…|011-9876-5432
+          noaddr2|널|서울시 종로구 종로 1|010-1111-2222
+고르는 사람 4명은 두 방식이 같음 · 글 2개인 사람은 둘 다 제외</pre><div class="run-note">SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행했다. SQLite의 <code>CONCAT</code>은 NULL을 빈 문자열로 치므로 MySQL처럼 NULL을 돌려주는 같은 이름의 함수를 등록했다. 011 번호·NULL 상세 주소는 차이를 보이려고 넣은 데이터다.</div></details>
+<div class="note-points"><div class="note-points-title">핵심 정리</div><ul><li>값을 하드코딩하지 말고 원본 컬럼에서 잘라 쓴다.</li><li>구분자로 이어 붙일 땐 <code>CONCAT_WS</code> — NULL에 안전.</li><li>집계 조건은 HAVING, SQL 문자열 위치는 1부터.</li></ul></div></div></article>
 </div>
   </section>
 
