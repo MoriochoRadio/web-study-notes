@@ -233,6 +233,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     border:1px solid var(--border);padding:2px 7px;border-radius:7px;
   }
   .today-empty{margin:0;color:var(--muted);font-size:14px;line-height:1.8;}
+  #filter-empty{margin:24px 0;padding:28px 20px;border:1px dashed var(--border);border-radius:12px;text-align:center;color:var(--muted);font-size:15px;line-height:1.8;}
   .study-goal{
     background:var(--panel);border:1px solid var(--border);border-radius:14px;
     padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
@@ -12927,28 +12928,40 @@ document.querySelectorAll("section.cat").forEach(sec => {
 // ---- 검색: 모든 과목에서 제목·태그·본문에 키워드가 들어간 카드만 표시 ----
 const searchBox = document.getElementById("search-box");
 const catKeys = ["html", "css", "js", "react", "concepts"];
+// 필터 결과가 하나도 없을 때 빈 화면 대신 보여 줄 안내 (msg가 비면 숨긴다)
+function showFilterEmpty(msg){
+  let box = document.getElementById("filter-empty");
+  if (!box) {
+    box = document.createElement("p");
+    box.id = "filter-empty";
+    box.setAttribute("role", "status");
+    sections[catKeys[0]].before(box);
+  }
+  box.textContent = msg || "";
+  box.hidden = !msg;
+}
 function clearCardFilter(){
   document.querySelectorAll(".note-card").forEach(c => { c.style.display = ""; });
   document.querySelectorAll("section.cat .toc").forEach(t => { t.style.display = ""; });
+  showFilterEmpty("");
   showTab(document.querySelector("nav.tabs button.active")?.dataset.target || "overview");
 }
-function filterCardsBy(matchFn){
-  sections.review?.classList.add("hidden");
-  sections.overview.classList.add("hidden");
-  sections.journey.classList.add("hidden");
-  sections.next.classList.add("hidden");
-  sections.materials.classList.add("hidden");
+function filterCardsBy(matchFn, emptyMsg){
+  // 카드 섹션이 아닌 탭(복습·개요·시험·학습 여정·강의자료 등)은 필터 중에 모두 숨긴다
+  Object.entries(sections).forEach(([k, el]) => { if (el && !catKeys.includes(k)) el.classList.add("hidden"); });
+  let total = 0;
   catKeys.forEach(k => {
     const sec = sections[k];
     let any = false;
     sec.querySelectorAll(".note-card").forEach(c => {
       const hit = matchFn(c);
       c.style.display = hit ? "" : "none";
-      if (hit) any = true;
+      if (hit) { any = true; total++; }
     });
     sec.querySelectorAll(".toc").forEach(t => { t.style.display = "none"; });
     sec.classList.toggle("hidden", !any);
   });
+  showFilterEmpty(total ? "" : emptyMsg);
 }
 // 검색어를 카드 본문 텍스트 안에서 <mark>로 감싸 눈에 띄게 표시 (코드 블록은 hljs 구조 보호를 위해 제외)
 function clearHighlights(scope){
@@ -12997,7 +13010,7 @@ searchBox.addEventListener("input", () => {
   document.querySelectorAll(".note-card").forEach(c => clearHighlights(c));
   const q = searchBox.value.trim().toLowerCase();
   if (!q) { clearCardFilter(); return; }
-  filterCardsBy(c => c.textContent.toLowerCase().includes(q));
+  filterCardsBy(c => c.textContent.toLowerCase().includes(q), `"${searchBox.value.trim()}"이(가) 들어간 카드가 없어요. 다른 낱말로 찾아보세요.`);
   document.querySelectorAll(".note-card").forEach(c => {
     if (c.style.display !== "none") highlightText(c, q);
   });
@@ -13038,7 +13051,7 @@ starFilterBtn.addEventListener("click", () => {
   starFilterBtn.setAttribute("aria-pressed", String(starFilterActive));
   searchBox.value = "";
   document.querySelectorAll(".note-card").forEach(c => clearHighlights(c));
-  if (starFilterActive) filterCardsBy(c => starSet.has(c.id));
+  if (starFilterActive) filterCardsBy(c => starSet.has(c.id), "아직 헷갈린다고 표시한 카드가 없어요. 카드 제목 옆 ☆를 누르면 여기에 모입니다.");
   else clearCardFilter();
 });
 

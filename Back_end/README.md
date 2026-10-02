@@ -57,9 +57,24 @@ python3 ../scripts/verify_backend_inventory.py
 
 - `java_edu_project/` — 수업 실습 프로젝트 (날짜별 패키지 `hk.edu2026MMDD.dayNN`, 개인 연습은 `hk.practice`)
   - `edu20260803/day01` — 명명법 · 메모리 영역 · 기본타입과 형 변환
-  - `edu20260804/day02` — 조건문 · 반복문 · 난수 · switch 메뉴
-  - `edu20260805/day03` — 별 찍기 8종 · 메서드의 유형(static / 매개변수 / 반환값)
-  - `edu20260806/day04` — 클래스와 객체 · 생성자 오버로딩 · 캡슐화 · Object 클래스 · 약수/최대공약수/친화수/완전수
+  - `edu20260804/day02` — 조건문 · 반복문 · 난수 · switch 메뉴 · 별 찍기
+  - `edu20260805/day03` — 별 찍기 심화 · 메서드의 유형
+  - `edu20260806/day04` — 클래스와 객체 · 생성자 오버로딩 · 캡슐화 · Object 클래스
+  - `edu20260807/day05` — 값타입 vs 참조타입 · final · 싱글턴 · String 비교
+  - `edu20260810/day06` — 캡슐화 실전(계산기) · String 메서드 · 문자열 파싱
+  - `edu20260811/day07` — 개미수열 · 배열 · 얕은/깊은 복사
+  - `edu20260812/day08` — 로또 · 상속 · super() · 오버라이딩 · 다형성 입문
+  - `edu20260813/day09` — 상속 실전 · protected · 달력
+  - `edu20260814/day10` — 다형성 · 추상 클래스 · 마방진
+  - `edu20260818/day11` — 인터페이스 · 익명 클래스
+  - `edu20260819/day12` — 중첩 클래스 · 짝수 마방진 · 제네릭
+  - `edu20260820/day13` — 컬렉션 — List · Set · Map · 카드 52장 (`day13`, `day13_1`)
+  - `edu20260821/day14` — 6마방진 · 싱글턴 + 팩토리 패턴
+  - `edu20260824/day15` — 예외 처리 · 사용자 정의 예외
+  - `edu20260825/day16` — 람다 · Stream · 파일 IO · 스레드 기초
+  - `edu20260827/day18` — 스레드 생성 · synchronized · 생산자-소비자 · TCP 기초
+  - `edu20260828/day19` — 멀티스레드 TCP 서버 · UDP · 채팅
+  - 8/26(17일차) 수업 소스는 아직 없다. 8/31(20일차)부터는 SQL(`sql_edu_project/`), 9/10(28일차)부터는 웹(`web_edu_project/`) 과정이다.
 - `sql_edu_project/` — SQL 과정 실습 스크립트 (`scott` · `hr` · `employees` 실습 DB, 수업 중 작성한 쿼리)
 - `web_edu_project/` — 웹 개발 수업 실습 프로젝트 01~08 ([안내](web_edu_project/README.md))
 - `coding-tests/` — 회차별 코딩테스트 기록. 제출 코드·정정 풀이·로컬 검증을 함께 둔다
