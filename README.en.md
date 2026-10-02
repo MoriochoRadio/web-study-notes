@@ -16,7 +16,7 @@ This repository keeps both the original practice code from a job academy course 
 
 ## Scope and Current Review
 
-As of the repository review on 2026-08-13, the frontend curriculum is reflected in both the exercise source and the study dashboard. Backend materials continue to accumulate by class date as the course progresses.
+As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both the exercise source and the study dashboard. Backend materials continue to accumulate by class date as the course progresses.
 
 | Track | Covered material | Status |
 | --- | --- | --- |

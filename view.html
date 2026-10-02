@@ -65,7 +65,7 @@
 <script>
 (() => {
   const REPO = "https://github.com/MoriochoRadio/web-study-notes/blob/main/";
-  const LANG = { java:"java", sql:"sql", mjs:"javascript", js:"javascript", jsx:"javascript", xml:"xml", jsp:"xml", html:"xml", css:"css", properties:"properties", json:"json", ps1:"powershell", sh:"bash" };
+  const LANG = { java:"java", sql:"sql", mjs:"javascript", cjs:"javascript", js:"javascript", jsx:"javascript", ts:"typescript", tsx:"typescript", xml:"xml", jsp:"xml", html:"xml", css:"css", properties:"properties", json:"json", ps1:"powershell", sh:"bash" };
   const out = document.getElementById("out"), nameEl = document.getElementById("name");
   document.getElementById("back").addEventListener("click", () => {
     if (history.length > 1) history.back(); else location.href = "./";
@@ -93,7 +93,7 @@
         if (/^([a-z]+:|#)/i.test(h)) { if (/^https?:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; } return; }
         const url = new URL(h, new URL(dir, location.href.split("view.html")[0]));
         const rel = decodeURIComponent(url.pathname.slice(new URL("./", location.href).pathname.length));
-        if (/\.(java|sql|mjs|md|jsp|xml|properties|txt)$/i.test(rel)) a.href = "view.html?f=" + encodeURI(rel) + url.hash;
+        if (/\.(java|sql|mjs|cjs|js|jsx|ts|tsx|css|json|md|jsp|xml|properties|txt)$/i.test(rel)) a.href = "view.html?f=" + encodeURI(rel) + url.hash;
         else a.href = url.pathname + url.search + url.hash;
       });
       out.querySelectorAll("img[src]").forEach(img => {
