@@ -17,8 +17,10 @@ UI/UX 전면 개편은 AI에게 맡겨 진행했습니다. 시작 전에 "`useEf
 기능 1~8의 핵심 로직(커스텀 훅, API Route, Zustand watchlist 상태)은 전부 AI의
 힌트와 빈칸 채우기 방식으로 직접 작성했습니다. `StockQuoteCard`/`StockSearch`를
 Tailwind로 옮길 때도 상태 초기화 로직과 드롭다운 오버레이 포지셔닝은 직접 짰습니다.
-버그도 여섯 건 직접 잡았습니다 — 전광판 애니메이션 인터리빙, 차트 레이스 컨디션,
-Hooks 규칙 위반 두 건, 해외 종목 응답 검증 누락, `recommendation` 라우트 오사용까지,
+버그도 여섯 건 직접 잡았습니다 — 검색 `route.js`를 AI 리뷰로 3단계에 걸쳐 고친 것(사례 1),
+`StockQuoteCard`의 props 변경과 state 갱신 사이 렌더링 타이밍 레이스(사례 2), 해외 종목 응답
+검증 누락(사례 3), 차트 `CustomTooltip`의 불필요한 재생성(사례 4), 조건부 `return` 뒤의 훅 호출로
+생긴 Hooks 규칙 위반(사례 5), `recommendation/route.js`가 `earnings` 코드로 덮어써진 문제(사례 6)까지,
 전부 [`CODE_REVIEW.md`](./CODE_REVIEW.md)에 Before/After로 남겨뒀습니다.
 
 ### 2) 내가 직접 작성한 핵심 코드 라인 설명

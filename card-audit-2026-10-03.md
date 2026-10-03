@@ -83,7 +83,9 @@
 
 카드 밖 구조도 정리했다. 백엔드 개념 사전에 **그룹 E(SQL 개념)** 를 새로 두고 제목을 "자바·SQL 용어와 에러 메시지"로 바꿨다. 프런트 개념 사전은 그룹 순서를 **A~F**로 바로잡고 Zustand·Tailwind·WebSocket을 새 그룹 C로 모았다. 실습과제·코딩테스트·SQL 섹션 소개의 낡은 문구도 고쳤다.
 
-**남겨 둔 것**: 졸업 과제 `stock-dashboard/README.md`의 버그 요약이 `CODE_REVIEW.md`와 맞지 않는다(카드는 CODE_REVIEW를 따름). 제출한 과제 문서라 그대로 두었다. sql-42·43의 EXPLAIN 행 수는 employees 덤프가 저장소에 없어 다시 재지 못해 측정 환경만 밝혔다.
+졸업 과제 `stock-dashboard/README.md`의 버그 요약이 `CODE_REVIEW.md`의 사례 구성과 달랐던 것도 README를 사례 1~6에 맞춰 고쳤다.
+
+**남겨 둔 것**: sql-42·43의 EXPLAIN 행 수는 employees 덤프가 저장소에 없어 다시 재지 못해 측정 환경만 밝혔다.
 
 ## (참고) 2026-10-03 기준으로 남겨 두었던 것 — 위에서 처리함
 
