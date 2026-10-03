@@ -7475,6 +7475,23 @@ long타입 표현범위: 1000000000000000000
         <li><code>byte + byte</code>는 int로 자동 승격되므로 byte에 담으려면 다시 캐스팅해야 한다. 단 <b>리터럴끼리(10 + 20)</b>는 컴파일 시점에 확정되어 그냥 담긴다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>byte b3 = b1 + b2; 는 컴파일 에러인데 byte b4 = 10 + 20; 은 왜 통과할까?</summary>
+        <div class="sc-a">둘 다 더한 결과는 int지만, <code>b1 + b2</code>는 <b>변수끼리의 연산이라 컴파일 시점에 값을 알 수 없어</b> byte 범위 안이라고 보장할 수 없으니 컴파일러가 대입을 거부합니다. <code>10 + 20</code>은 <b>컴파일 시점에 30으로 확정되는 상수식</b>이고 byte 범위 안이라 허용됩니다. 그래서 <code>byte b5 = 100 + 100;</code>(200)은 상수식이어도 범위를 넘어 에러입니다 — 주석의 "리터럴은 int라서"는 이유가 아닙니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>byte bb = (byte) i; 다음 줄에 System.out.println(bb); 를 넣으면(i = 100000) 무엇이 찍힐까?</summary>
+        <div class="sc-a"><b>-96</b>입니다. int를 byte로 캐스팅하면 <b>아래 8비트만 남기고</b> 나머지를 버립니다. 100000을 256으로 나눈 나머지는 160이고, byte에서는 128 이상이 음수로 해석되어 160 - 256 = -96이 됩니다. 에러 없이 <b>조용히 틀린 값</b>이 나온다는 점이 범위를 넘는 다운캐스팅의 진짜 위험입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>testMethod()에서 static을 지우면 왜 main에서 바로 부를 수 없을까? 고치는 방법 두 가지는?</summary>
+        <div class="sc-a">static이 없는 메서드는 <b>어떤 객체의 메서드인지(<code>this</code>)가 있어야</b> 호출되는데, static인 main 안에는 그 객체가 없기 때문입니다("메모리에 아직 없어서"가 아닙니다). 고치려면 ① <code>testMethod()</code>를 다시 static으로 두거나, ② <code>new HelloJava().testMethod();</code>처럼 <b>객체를 만들어 그 객체로</b> 부르면 됩니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 회원 번호·주문 금액처럼 <b>int 범위(약 21억)를 넘을 수 있는 값은 처음부터 <code>long</code></b>으로 받습니다(DB의 BIGINT와 짝). 그리고 <b>돈 계산에는 <code>double</code>·<code>float</code> 대신 <code>BigDecimal</code></b>을 씁니다 — 실수 타입은 0.1조차 정확히 담지 못해 오차가 쌓이기 때문입니다. 코딩테스트에서는 <b>결과가 int를 넘는 문제</b>가 단골 함정입니다 — <a href="#ct-43">x만큼 간격이 있는 n개의 숫자</a>는 반환 타입이 <code>long[]</code>이고 곱셈으로 구하면 곱하기 전에 long으로 바꿔야 하며, <a href="#ct-19">자연수 뒤집어 배열로 만들기</a>는 long 값을 int 배열에 넣으면서 <code>(int)</code>를 빠뜨려 컴파일 에러가 났던 문제입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>실습 코드 주석 중 <b>사실만 살짝 다르게 적힌 곳</b>이 있어 시험 전에 바로잡아 두면 좋습니다 — ① <code>byte bb = (byte) i;</code>의 주석은 "byte → int"로 되어 있지만 실제 방향은 <b>int → byte</b>입니다(큰 타입에서 작은 타입으로 가야 다운캐스팅이므로 값 손실도 이때 생깁니다). ② <code>float f = 15.77f;</code>의 주석 "8byte크기라 f 붙여줌"에서, <b>float은 4byte이고 8byte는 double</b>입니다 — <code>f</code>를 붙이는 이유는 "실수 리터럴의 기본 타입이 double(8byte)이라서 그대로 두면 float에 담을 수 없기 때문"입니다. 같은 줄의 "경고 띄움"도 정확히는 <b>컴파일 에러</b>입니다(<code>f</code>가 없으면 빨간 줄이 생기고 실행되지 않음). ③ main 옆 주석 "static으로 메모리에 이미 올라가 있음. 그래서 static이 없는 메서드를… 안됨"의 진짜 이유는 <b>non-static 메서드는 호출 대상 객체(<code>this</code>)가 있어야 하는데 static 메서드에는 그 객체가 없기 때문</b>입니다. ④ <code>byte b3 = b1 + b2;</code> 아래 주석 "연산을 하기전 b1,b2를 int 타입으로 변경해준 후 더해야한다"는 거꾸로입니다 — 더하는 순간 자바가 <b>알아서 int로 승격</b>하므로 미리 바꿀 필요가 없고, 문제는 <b>그 int 결과를 byte 변수에 담는 대입</b>에서 생깁니다. 그래서 해법은 <b>더한 결과를 다시 <code>(byte)</code>로 캐스팅</b>하는 것입니다(바로 다음 줄 코드가 정답). ⑤ <code>byte b4 = 10 + 20;</code>의 주석 "리터럴 정수는 기본 int 타입으로 인식하기 때문에 오류가 나지 않는다"도 이유가 틀립니다 — int라서라면 오히려 <code>b1 + b2</code>처럼 에러가 나야 합니다. 진짜 이유는 <b><code>10 + 20</code>이 컴파일 시점에 30으로 확정되는 상수식이고, 그 값이 byte 범위 안이라 컴파일러가 대입을 허용</b>하기 때문입니다(<code>byte b5 = 100 + 100;</code>처럼 범위를 넘으면 에러). 코드 동작에는 영향이 없지만 객관식에서 정확히 갈리는 부분입니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260803/day01/HelloJava.java">HelloJava.java</a> ·
@@ -7932,6 +7949,23 @@ public class prac01 {
         <li>별 찍기: 바깥 for = 줄, 안쪽 for = 개수. 피라미드는 <b>공백 <code>n-1-i</code>개 + 별 <code>2i+1</code>개</b>.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>윤년 조건에서 <code>|| i % 400 == 0</code>을 지우면 2000~2030 목록에서 무엇이 달라질까?</summary>
+        <div class="sc-a"><b>2000이 빠집니다</b>. 2000은 4의 배수지만 100의 배수이기도 해서 앞쪽 괄호 <code>(i % 4 == 0 &amp;&amp; i % 100 != 0)</code>가 false이고, 윤년으로 잡힌 이유는 오직 400의 배수 조건 덕분이었습니다. 2004~2028은 100의 배수가 아니라서 그대로 남습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D1처럼 sc.nextInt()로 연도를 받은 직후 sc.nextLine()으로 이름을 받으면 어떻게 될까?</summary>
+        <div class="sc-a">이름을 칠 기회도 없이 <b>빈 문자열 <code>""</code>이 바로 들어옵니다</b>. <code>nextInt()</code>는 숫자만 가져가고 엔터(개행)를 버퍼에 남기는데, 뒤의 <code>nextLine()</code>이 그 개행을 "한 줄"로 읽어 버리기 때문입니다. 처음부터 <code>Integer.parseInt(sc.nextLine())</code>으로 받으면(D2 방식) 이 문제가 생기지 않습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>ATM 메뉴에서 case 1 끝의 break; 를 지우고 1을 고르면 어떻게 될까?</summary>
+        <div class="sc-a">예금을 처리한 뒤 멈추지 않고 <b>아래 <code>case 2</code>로 흘러내려가(fall through)</b> "출금액 :"까지 출력하고 출금액을 또 입력받습니다. <code>case 2</code> 끝의 <code>break</code>를 만나서야 switch를 빠져나옵니다. case는 "여기서부터 실행" 표시일 뿐이라, <b>끝을 <code>break</code>로 막아야</b> 그 갈래만 실행됩니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>오늘의 <code>while</code> + <code>switch</code> 메뉴 구조는 웹으로 가면 <b>요청 주소나 <code>command</code> 값에 따라 처리를 나누는 컨트롤러</b>가 됩니다. 입력을 문자열로 받아 <code>parseInt</code>로 바꾸는 습관도 그대로 이어지는데, 웹의 요청 값은 전부 문자열로 들어오기 때문입니다. Java 14부터 쓰는 <b>화살표 switch(<code>case 1 -&gt; ...</code>)는 fall through가 없어</b> break 실수를 원천 차단하므로 요즘 코드에서 자주 보입니다. 코딩테스트에서는 <b>조건 + 반복 + <code>%</code></b> 조합이 가장 먼저 나옵니다 — <a href="#ct-01">저주의 숫자3</a>(걸리는 수를 while로 건너뛰기), <a href="#ct-39">나머지가 1이 되는 수 찾기</a>(작은 수부터 나눠 보다 break)가 그 예입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>D1의 <code>isLeapYear(int year)</code> 메서드는 <b>만들어만 두고 main에서 쓰지 않았습니다</b>. main의 <code>if</code>를 <code>if (isLeapYear(year))</code>로, for문 안의 조건도 <code>if (isLeapYear(i))</code>로 바꾸면 같은 조건식을 세 번 쓰지 않아도 되고, 이게 바로 <b>메서드로 분리하는 이유</b>입니다. 덧붙여 <code>if (조건) return true; else return false;</code>는 그냥 <code>return 조건;</code> 한 줄로 줄일 수 있습니다 — 조건식 자체가 이미 true/false이기 때문입니다. 시험에서도 자주 나오는 축약이니 눈에 익혀 두세요.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260804/day02/D1_isLeapYear.java">D1_isLeapYear.java</a> ·
@@ -8228,6 +8262,23 @@ non-static 메서드</pre>
         <li>메서드 유형 = (매개변수 있음/없음) × (반환값 있음/없음) 네 가지 조합.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D2_MethodTest를 실행하면 "non-static 메서드"가 왜 두 번 찍힐까?</summary>
+        <div class="sc-a">main에서 객체를 만들어 <code>methodTest.test02()</code>로 한 번, static인 <code>test01()</code> 안에서도 <b>객체를 새로 만들어</b> <code>test02()</code>를 한 번 더 부르기 때문입니다. static 메서드 안에는 <code>this</code>가 없어 <code>test02()</code>를 그냥 부를 수 없으니, 두 곳 모두 객체를 거쳐야 했던 것입니다. <code>test03</code>~<code>test05</code>는 호출하지 않아 아무것도 찍지 않습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>test03() 위 주석은 "매개변수 없음, 반환값 없음"이다. 맞을까? return 0; 을 지우면?</summary>
+        <div class="sc-a">주석이 틀렸습니다 — <code>public int test03()</code>은 <b>매개변수는 없지만 int를 반환</b>하는 형입니다. 반환타입을 int로 선언했으니 <code>return 0;</code>을 지우면 <b>컴파일 에러</b>(missing return statement)가 납니다. 정말 반환값이 없게 하려면 반환타입을 <code>void</code>로 바꿔야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>역피라미드 for (int i = a; i &gt; 0; i--) (별 9·7·5·3·1개)를 i++로 도는 for문으로 바꾸려면 공백·별 개수를 어떻게 정할까?</summary>
+        <div class="sc-a"><code>for (int i = 0; i &lt; 5; i++)</code>로 두고 <b>공백 <code>i</code>개, 별 <code>9 - 2*i</code>개</b>로 하면 됩니다. 별은 첫항 9, 공차 -2인 등차수열 <code>9 + (n-1)*(-2)</code>이고 i가 0부터 시작하니 n-1 자리에 i가 들어갑니다. 공백은 원래 코드의 <code>5 - i</code>(i = 5→1)가 0·1·2·3·4였으니 그냥 <code>i</code>입니다 — 모양을 정하는 건 반복 방향이 아니라 <b>식</b>입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 메서드 하나가 <b>한 가지 일만 하고, 이름만 보고도 무엇을 하는지 알 수 있게</b> 만듭니다. 결과를 화면에 찍기만 하는 <code>void</code> 메서드보다 <b>값을 반환하는 메서드</b>가 다른 곳에서 재사용하기 쉽고 테스트 코드로 검증하기도 쉽습니다. 필드(상태)가 필요 없는 계산은 <code>Math.max()</code>·<code>Integer.parseInt()</code>처럼 static 유틸리티 메서드로 둡니다. 코딩테스트(프로그래머스)는 <b><code>solution</code> 메서드가 답을 <code>return</code></b>하는 형식이라 "반환타입을 선언했으면 반드시 그 타입을 return"이 매 문제의 뼈대이고, 면접에서 "static 메서드에서 인스턴스 메서드를 바로 못 부르는 이유"를 물으면 "<b>호출할 객체(<code>this</code>)가 없어서</b>"라고 답하면 됩니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>test03()</code> 위에 달린 주석 <code>// 매개변수 없음, 반환값 없음</code>은 실제 코드(<code>public int test03()</code>)와 어긋납니다 — 매개변수는 없지만 <b>반환값은 있는</b> 형이죠. 주석을 코드와 함께 고치는 습관이 시험에서도, 나중 협업에서도 그대로 점수가 됩니다. 그리고 <code>test05</code>의 <code>if~else</code>는 삼항연산자로 <code>return a &gt; b ? a : b;</code> 한 줄로 줄일 수 있습니다. 다음 날 4일차 <code>D1_divisor</code>(약수 출력)에서 <code>(i == a) ? i : i + ","</code>처럼 출력할 값을 고르는 데 쓰게 될 그 도구를 <b>반환에도 쓸 수 있다</b>는 걸 기억해 두세요. → <a href="#class-day04">📅 4일차 수업 진도</a></div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260805/day03/D1_StarView.java">D1_StarView.java</a> ·
@@ -8639,6 +8690,23 @@ public class D1_divisor {
         <li>진약수 합 <code>sumDivisor(n)</code> 기준: <b>완전수는 <code>n == sumDivisor(n)</code></b>, <b>친화수는 서로의 진약수 합이 상대가 되는 쌍</b>(자기 자신은 제외).</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>new D4_Constructor(70)으로 만든 tv2의 color는 무엇일까?</summary>
+        <div class="sc-a"><b>"검정석"</b>(오타 그대로)입니다. size만 받는 생성자는 <code>this.size = size;</code>만 하고 color는 건드리지 않으므로, 필드 선언 때의 초기값 <code>"검정석"</code>이 남습니다. 기본 생성자가 <code>this(24, "검정색")</code>으로 위임하듯 이 생성자도 <code>this(size, "검정색");</code>으로 위임하면 <b>기본값을 한 곳에서만</b> 관리할 수 있습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_ClassTest에서 기본 생성자 D2_ClassTest() { this(10); } 를 통째로 지우면 어디서 문제가 생길까?</summary>
+        <div class="sc-a">D2_ClassTestMain의 <code>new D2_ClassTest()</code> 줄이 <b>컴파일 에러</b>가 납니다. 파라미터 있는 생성자 <code>D2_ClassTest(int number)</code>를 직접 만들었으니 컴파일러가 <b>기본 생성자를 더 이상 자동으로 만들어 주지 않기</b> 때문입니다. <code>new D2_ClassTest(30)</code> 줄은 그대로 동작합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>코드 주석처럼 equals()는 hashCode로 객체를 비교할까? ot.equals(str2)가 false인 이유는?</summary>
+        <div class="sc-a">아닙니다. <code>D3_ObjectTest</code>는 equals를 재정의하지 않았으니 <b>Object의 기본 equals, 즉 <code>==</code>와 같은 주소 비교</b>가 돌고, <code>ot</code>와 <code>str2</code>는 다른 객체라 false입니다. String의 equals는 <b>글자를 하나씩 비교</b>하도록 재정의되어 있습니다. hashCode는 HashMap·HashSet이 칸을 빨리 고르려고 쓰는 <b>보조값</b>이고, 지켜야 할 규칙은 "equals가 true인 두 객체는 hashCode도 같아야 한다"입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>오늘의 <code>private</code> 필드 + getter/setter는 실무에서 <b>DTO(데이터를 담아 옮기는 클래스)</b>의 기본 모양으로 매일 씁니다 — 나중에 게시판의 <code>HkDto</code>가 바로 이 형태입니다. setter에서 값을 검증하거나, 바뀌면 안 되는 값은 setter 없이 생성자로만 받는 식으로 캡슐화를 활용하고, 객체를 HashMap 키나 HashSet에 넣을 땐 <b>equals와 hashCode를 함께 재정의</b>합니다. 면접 단골은 "<code>==</code>와 <code>equals</code>의 차이", "equals를 재정의하면 hashCode도 재정의해야 하는 이유"입니다. 코딩테스트에서는 약수·최대공약수(유클리드 호제법)가 자주 나오는데, <a href="#ct-29">약수의 합</a>은 오늘의 <code>divisor</code>처럼 약수를 찾되 n/2나 √n까지만 봐서 반복을 줄이는 문제입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘 코드에서 눈여겨볼 곳 네 군데. ① <code>D4_Constructor</code>의 필드 초기값이 <code>"검정석"</code>으로 <b>오타</b>가 나 있는데, <code>new D4_Constructor(70)</code>처럼 <b>size만 받는 생성자</b>로 만들면 color가 그 오타 값 그대로 남습니다. 이 생성자도 <code>this(size, "검정색");</code>으로 위임하면 기본값을 한 곳에서만 관리할 수 있어요. ② <code>getSize(int pw)</code>는 "조건을 걸 수 있다"는 걸 보여주기엔 좋지만, <b>getter의 일반 규약은 "파라미터 없이 값만 반환"</b>입니다 — 시험에서는 <code>public int getSize() { return size; }</code> 형태를 기억하세요. ③ 뺄셈 방식 <code>getGcd1(a, b)</code>은 <code>a</code>나 <code>b</code>에 <b>0이 들어오면 <code>a != b</code>가 끝나지 않아 무한 루프</b>에 빠집니다. 나눗셈 버전 <code>getGcd</code>·재귀 버전 <code>getGcd2</code>는 <code>b == 0</code>에서 정상 종료하니, 실전에서는 이쪽이 안전합니다. ④ <code>D3_ObjectTest</code>의 주석 "<code>equals()</code>가 <code>hashcode()</code>를 이용해서 객체를 비교한다", "<code>s.equals(s2)</code> // hashcode로 비교"는 <b>사실과 다릅니다</b>. <code>Object</code>의 기본 <code>equals()</code>는 <b><code>==</code>와 똑같이 주소를 비교</b>하고, <code>String</code>의 <code>equals()</code>는 <b>문자를 한 글자씩 비교</b>합니다 — 어느 쪽도 hashCode를 쓰지 않습니다. hashCode는 HashMap·HashSet 같은 해시 자료구조가 "어느 칸에 넣을지" 빨리 고르려고 쓰는 <b>보조 값</b>입니다. → <a href="#oop-14">🧱 14. == 와 equals의 차이</a></div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260806/day04/D1_divisor.java">D1_divisor.java</a> ·
@@ -8948,6 +9016,23 @@ java</pre>
         <li>반복 연결에는 <code>+=</code> 대신 <b><code>StringBuilder.append()</code></b>가 효율적이다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>change02의 첫 줄에 imTest = new D1_ImmutableTest(); 를 넣으면 main의 imTest.bb는 몇이 찍힐까?</summary>
+        <div class="sc-a"><b>5</b>입니다. 자바는 항상 값을 복사해서 넘기므로 파라미터 <code>imTest</code>에는 원본 객체의 <b>주소값이 복사</b>되어 있을 뿐입니다. 거기에 새 객체를 대입하면 복사된 주소만 새 객체를 가리키게 되고, 이어지는 <code>imTest.bb = 10;</code>은 <b>새 객체의 필드</b>를 바꿉니다. main의 변수는 여전히 원래 객체(bb = 5)를 가리킵니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>arrayNum은 static final인데 왜 arrayNum[0] = 10; 은 되고 arrayNum = test; 는 에러일까?</summary>
+        <div class="sc-a">final이 잠그는 것은 <b>변수에 들어 있는 값 — 참조타입이면 주소</b>입니다. <code>arrayNum = test;</code>는 다른 배열의 주소로 바꿔치기하려는 것이라 컴파일 에러지만, <code>arrayNum[0] = 10;</code>은 주소는 그대로 두고 <b>그 주소에 있는 배열의 내용</b>을 고치는 것이라 막지 못합니다. 그래서 출력이 <code>[10, 2, 3, 4]</code>입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>sss = "자바"; 뒤에 s가 "java" 그대로인 것은 String이 immutable이라는 증거일까?</summary>
+        <div class="sc-a">아닙니다. 그건 <code>sss</code> 변수가 <b>다른 문자열을 가리키게 됐을 뿐</b>이고, String이 아닌 어떤 참조타입이라도 원본 변수는 똑같이 그대로입니다. 진짜 증거는 <code>s.replace("j", "o")</code>입니다 — <b><code>s</code>에 직접</b> 바꾸는 메서드를 불렀는데도 <code>s</code>는 "java" 그대로이고, 바뀐 결과는 <b>새 문자열</b>(<code>s4</code>)로 돌아옵니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 싱글턴은 직접 만들기보다 <b>스프링이 대신 관리</b>합니다 — 스프링 빈은 기본이 싱글턴이라 서비스·DAO 객체 하나를 모든 요청이 함께 씁니다. 그래서 빈의 필드에 요청마다 다른 값을 저장하면 <b>다른 사용자의 요청과 값이 섞이는</b> 버그가 납니다. 상수는 <code>static final</code>로, 반복 연결은 <code>StringBuilder</code>로, 문자열 비교는 항상 <code>equals</code>로 하는 것이 기본 습관입니다. 면접에서는 "자바는 Call by Value인가", "String·StringBuilder·StringBuffer의 차이(StringBuffer는 동기화됨)", "싱글턴 구현"이 단골이고, 코딩테스트에서는 <a href="#ct-44">숫자 문자열과 영단어</a>처럼 <b><code>s = s.replace(...)</code>로 다시 담지 않아</b> 답이 안 바뀌는 실수가 자주 나옵니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_ImmutableTest.change02</code>를 시험 직전에 다시 보세요. <code>aa = imTest.bb;</code>로 꺼낸 <code>aa</code>는 <b>int 지역변수라 이후 아무리 바꿔도(<code>aa = 15</code>) 원본과 무관</b>합니다. 원본이 바뀌는 건 오직 <code>imTest.bb = 10;</code>처럼 <b>객체의 참조를 타고 들어가 필드에 직접 대입</b>할 때뿐입니다. "참조타입을 넘기면 항상 원본이 바뀐다"고 외우면 이 문제에서 틀립니다 — <b>"필드에 직접 대입했는가"</b>가 진짜 기준입니다. 하나 더 — <code>D3_Singleton</code>의 주석 처리된 줄 <code>// list.add("가"); //자동 형변환 -&gt; 참조타입끼리는 가능</code>은 <b>틀린 설명</b>입니다. <code>List&lt;Integer&gt;</code>에는 Integer만 넣을 수 있어서 주석을 풀면 <b>컴파일 에러</b>가 납니다. String과 Integer는 상속 관계가 없으므로 "참조타입끼리"라도 자동 형변환되지 않습니다(제네릭이 바로 이런 실수를 컴파일 시점에 막아 주는 장치입니다). 마지막으로 <code>D4_StringCompare</code>의 효율 비교를 제대로 하려면 <b>같은 횟수로 시간을 재야</b> 합니다 — 예를 들어 두 방식 모두 10,000번 반복하고 앞뒤로 <code>long start = System.currentTimeMillis();</code> … <code>System.out.println(System.currentTimeMillis() - start + "ms");</code>를 찍어 보면 <code>+=</code> 쪽이 눈에 띄게 오래 걸리는 걸 확인할 수 있습니다(정확한 ms는 컴퓨터마다 다름). 수업 코드처럼 <code>hashCode()</code>를 찍는 건 결과 문자열의 해시값일 뿐 속도와는 관계가 없습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D1_ImmutableTest.java">D1_ImmutableTest.java</a> ·
@@ -9349,6 +9434,23 @@ public class D3_CalculatorMain {
         <li><code>Scanner.nextLine()</code>과 <code>while(true)</code>로 <b>종료 조건("0")을 만날 때까지 반복 입력</b>받는 구조를 만든다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>paramInt에서 num2를 자를 때 cal.length() 대신 s.length()를 더하면 "5+10"에서 무슨 일이 생길까?</summary>
+        <div class="sc-a"><code>s.indexOf("+")</code>는 1, <code>s.length()</code>는 4라서 <code>substring(5)</code>가 되는데, 길이 4인 문자열에서 5번 칸부터 자를 수는 없어 <b><code>StringIndexOutOfBoundsException</code></b>이 납니다. 연산자 바로 뒤(1 + 1 = 2)부터 잘라야 <code>"10"</code>이 나옵니다 — 더해야 하는 것은 <b>연산자의 길이</b>입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D3_CalculatorMain에 "5 + 10"처럼 공백을 넣어 입력하면 어떻게 될까?</summary>
+        <div class="sc-a"><b><code>NumberFormatException</code></b>으로 프로그램이 멈춥니다. "+"를 기준으로 자르면 앞은 <code>"5 "</code>, 뒤는 <code>" 10"</code>인데 <code>Integer.parseInt</code>는 공백이 섞인 문자열을 숫자로 바꾸지 못하기 때문입니다. 자르기 전에 <code>s = s.replace(" ", "");</code>로 공백을 지우거나 자른 조각에 <code>trim()</code>을 해야 합니다 — 사용자 입력은 <b>변환 전에 정리·검증</b>하는 것이 기본입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D1_CalculatorMain의 나눗셈 결과가 2.5가 아니라 2인 이유는? 2.5를 얻으려면?</summary>
+        <div class="sc-a"><code>num1</code>·<code>num2</code>가 둘 다 int라 <b>int끼리의 나눗셈은 소수점을 버린 몫</b>(50 / 20 = 2)을 줍니다. 2.5를 얻으려면 한쪽을 먼저 실수로 바꿔 <code>(double) num1 / num2</code>로 계산하고, 결과를 담는 <code>result</code> 필드와 <code>getResult()</code>의 반환타입도 <code>double</code>로 바꿔야 합니다. <code>(double) (num1 / num2)</code>처럼 묶으면 이미 2가 된 뒤에 바꾸는 것이라 2.0이 됩니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>계산 결과를 <code>private</code> + getter로 감춘 것처럼, 실무에서도 <b>DTO·엔티티의 필드를 감추고 정해진 메서드로만 바꾸게</b> 설계합니다. 웹에서 사용자가 보낸 값(<code>request.getParameter</code>)은 전부 문자열이라 오늘의 <code>indexOf</code>·<code>substring</code>·<code>parseInt</code>와 <b>입력 검증(공백 제거·형식 확인·<code>NumberFormatException</code> 처리)</b>을 매일 쓰게 되고, 연산자마다 if~else로 클래스를 고르는 구조는 뒤에서 배우는 인터페이스·다형성으로 더 깔끔하게 정리됩니다. 코딩테스트에서는 문자열 자르기·변환이 단골입니다 — <a href="#ct-47">문자열을 정수로 바꾸기</a>(parseInt가 부호까지 읽는 문제), <a href="#ct-27">핸드폰 번호 가리기</a>(바꿀 범위를 <code>길이 - 4</code>로 정확히 잡는 문제)가 그 예입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D3_Calculator.paramInt</code>의 <code>num2 = Integer.parseInt(s.substring(s.indexOf(cal) + cal.length()));</code> 한 줄이 오늘의 시험 단골 함정입니다. 숫자로 확인해 보면 — <code>s = "5+10"</code>일 때 <code>s.indexOf("+")</code>는 <b>1</b>, <code>cal.length()</code>는 <b>1</b>, <code>s.length()</code>는 <b>4</b>입니다. 올바르게 <code>1 + 1 = 2</code>부터 자르면 <code>"10"</code>이 나오지만, 실수로 <code>1 + 4 = 5</code>를 넣으면 길이 4인 문자열에서 5번 칸부터 자르라는 뜻이 되어 <b><code>StringIndexOutOfBoundsException</code></b>이 납니다(시작 위치가 길이와 딱 같으면 예외 대신 빈 문자열 <code>""</code>이 나와 <code>parseInt</code>에서 <code>NumberFormatException</code>). 연산자가 여러 글자(예: <code>"**"</code>)여도 <code>cal.length()</code>를 더하면 그대로 맞습니다. 그리고 <code>D1_CalculatorCompare</code>처럼 <b>클래스를 매번 새로 <code>new</code>하는 구조</b>는 클래스 하나(<code>D3_Calculator</code>)에 메서드 4개를 몰아넣은 구조보다 객체가 더 많이 생기지만, 대신 <b>연산자별로 클래스를 나눠 관리하기 쉽다</b>는 트레이드오프가 있다는 것도 함께 기억해 두세요. <b>수업 파일 주의</b> — ① <code>D2_StringMethodTest</code>의 주석 "인덱스는 그대로 12345.."는 <b>0부터</b>(<code>01234…</code>)가 맞습니다. 요점은 "<code>lastIndexOf</code>로 뒤에서 찾아도 인덱스 번호는 앞에서부터 센다"입니다. ② <code>sTest02</code>는 대문자 <code>"A"</code>를 검사하는데 출력 문구는 <code>"a가 존재합니다."</code>라서 헷갈립니다 — <code>indexOf</code>는 <b>대소문자를 구분</b>하므로 <code>"a"</code>로 검사했다면 "ABCDEF"에서 -1이 나옵니다. ③ 이름 규칙이 두 파일에서 반대입니다 — <code>D1_Calculator<b>C</b></code>는 나눗셈·<code>D1_Calculator<b>D</b></code>는 곱셈인데, <code>D3_Calculator</code>의 메서드는 <code>c()</code>가 곱셈·<code>d()</code>가 나눗셈입니다. 글자만 보고 짐작하지 말고 안의 연산자를 확인하세요.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260810/day06/D1_CalculatorA.java">D1_CalculatorA.java</a> ·
@@ -9587,6 +9689,23 @@ aa의 배열의 내부 배열의 길이:3
         <li>개미수열은 <b>바로 옆 문자와 비교하며 개수를 세다가, 문자가 바뀌는 순간 "문자+개수"를 이어 붙이는</b> 구조다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D2_ArrayTest에서 b[0] = 10;만 했는데 Arrays.toString(a)가 [10, 2, 3, 4, 5, 6]으로 나오는 이유는?</summary>
+        <div class="sc-a"><code>b = a;</code>는 <b>새 배열을 만들지 않고 <code>a</code>에 든 주소값만 <code>b</code>에 복사</b>하기 때문입니다(엄밀히는 참조 복사). 두 변수가 <b>같은 배열 하나</b>를 가리키니 <code>b</code>로 고친 칸을 <code>a</code>로 읽어도 바뀐 값이 보입니다. 따로 놀게 하려면 <code>new</code>로 새 배열을 만든 뒤 값을 옮겨야(루프·<code>arraycopy()</code>·<code>clone()</code>) 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D1_Ant에서 ant = ant + " "; 줄을 지우면 출력이 어떻게 될까?</summary>
+        <div class="sc-a"><b>마지막 묶음이 결과에서 빠집니다.</b> "문자+개수"는 옆 문자와 <b>달라지는 순간</b>(<code>else</code>)에만 붙는데, 맨 끝 문자는 비교할 다음 문자가 없어 그 순간이 오지 않기 때문입니다. 입력이 <code>"1"</code>이면 안쪽 루프가 한 번도 돌지 않아 첫 줄부터 <b>빈 문자열</b>이 찍힙니다 — 끝에 붙인 공백은 "마지막에도 문자가 바뀌게 만드는" 보초 역할입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>int[][] copy = bb.clone(); 다음 copy[0][0] = 99;를 하면 bb[0][0]은 몇일까?</summary>
+        <div class="sc-a"><b>99로 같이 바뀝니다.</b> <code>clone()</code>은 바깥 배열만 새로 만들고 칸의 값을 그대로 옮기는데, 2차원 배열의 칸에 든 것은 <b>안쪽 행 배열의 주소</b>라 두 배열이 같은 행을 공유합니다(얕은 복사). 수업 주석이 <code>clone()</code>·<code>arraycopy()</code>를 "깊은 복사"라 부른 것은 <b>1차원 기본타입 배열</b>에서만 맞는 말이고, 2차원을 완전히 떼어 내려면 <code>copy[i] = bb[i].clone();</code>처럼 <b>행마다 다시 복사</b>해야 합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 객체가 들고 있는 배열을 getter로 그대로 내주면 밖에서 원본을 고칠 수 있어서, <b><code>Arrays.copyOf()</code>나 <code>clone()</code>으로 사본을 돌려주는 방어적 복사</b>를 씁니다 — 오늘의 "주소 공유"를 모르면 생기지 않을 버그가 생깁니다. 코딩테스트에서는 2차원 배열을 행·열로 도는 문제(<a href="#ct-07">행렬의 덧셈</a>)가 기본이고, 격자 문제에서 <b><code>[i / 열개수][i % 열개수]</code> 변환</b>이 자주 쓰입니다. 면접에서는 "얕은 복사와 깊은 복사의 차이"를 <b>2차원·객체 배열 예</b>로 설명할 수 있으면 됩니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>Arrays.sort(b3)</code>처럼 배열을 정렬하는 메서드는 <b>원본을 바로 바꿉니다</b>(mutable) — 5·6일차에서 본 <code>String.replace()</code>(원본 불변, 재할당 필요)와 정반대라 자주 헷갈립니다. "이 메서드가 원본을 바꾸는가, 새 걸 반환하는가"를 항상 구분해서 외우세요: <b>배열·StringBuilder는 원본을 바꾸고, String은 항상 새 걸 반환</b>합니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260811/day07/D1_Ant.java">D1_Ant.java</a> ·
@@ -9945,6 +10064,23 @@ D2_Parent [a=0]
         <li>다운캐스팅 전에는 <code>instanceof</code>로 <b>실제 타입을 확인</b>하는 것이 안전하다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>new D2_Child()의 출력이 "부모생성자(오버로딩) → 자식생성자(오버로딩) → 자식생성자(default)" 순서인 이유는?</summary>
+        <div class="sc-a"><code>D2_Child()</code>의 첫 줄 <code>this(5)</code>가 먼저 <code>D2_Child(int a)</code>로 넘어가고, 그 첫 줄 <code>super(a)</code>가 <code>D2_Parent(int a)</code>를 실행합니다. 부모 생성자가 끝나야 <code>D2_Child(int a)</code>의 나머지 출력이, 그것이 끝나야 <code>D2_Child()</code>의 출력이 찍힙니다. <code>this(...)</code>로 위임한 생성자에는 <code>super()</code>가 따로 들어가지 않아 <b>부모 생성자는 딱 한 번</b>만 실행됩니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>super(5)로 5를 넘겼는데 D2_Parent의 필드 a가 여전히 0인 이유는?</summary>
+        <div class="sc-a"><code>D2_Parent(int a)</code>가 메시지만 찍고 <b><code>this.a = a;</code>를 하지 않기</b> 때문입니다. 매개변수 <code>a</code>는 생성자 안에서만 사는 지역변수라 생성자가 끝나면 사라지고, 필드 <code>a</code>는 int 기본값 <b>0</b> 그대로 남습니다. <code>super(...)</code>는 "어느 부모 생성자를 부를지"를 정할 뿐, 값을 저장하는 것은 그 생성자 몸체가 할 일입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>test(new D2_Parent())를 호출하면 무엇이 찍힐까? if (p instanceof D2_Child) 검사를 빼면?</summary>
+        <div class="sc-a">객체를 만들 때 "부모생성자(default)"가 먼저 찍히고, 진짜 부모 객체라서 <code>p.parentMethod()</code>는 <b>부모 버전</b>("부모의 메서드:class …D2_Parent")이 실행되고, <code>instanceof</code>가 false라 <code>childMethod()</code>는 건너뜁니다. 검사를 빼고 <code>(D2_Child) p</code>로 바로 바꾸면 <b>컴파일은 되지만 실행 중 <code>ClassCastException</code></b>이 납니다 — 다운캐스팅은 실제 객체가 그 자식일 때만 성공하기 때문입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 <code>test(D2_Parent p)</code>처럼 <b>부모 타입으로 받아 두는 코드</b>가 결제 수단·알림 방식이 늘어나도 호출부를 안 고치게 해 주는 기본 기법이고, 로또의 <code>public int[] lots</code>처럼 필드를 열어 두는 것은 코드 리뷰에서 바로 지적받습니다(<code>private</code>+getter). 코딩테스트에서는 <code>isSame()</code> 같은 중복 검사를 매번 배열을 훑는 대신 <b><code>HashSet</code></b>으로 처리하는 경우가 많습니다(<a href="#ct-36">폰켓몬</a>). 면접에서는 <b>"오버로딩과 오버라이딩의 차이"</b>와 <b>"생성자 호출 순서"</b>가 단골 질문입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_ChildMain</code>의 <code>test(D2_Parent p)</code>를 다시 보세요. 이 메서드는 <b>딱 한 번만 정의됐는데도</b> <code>child</code>·<code>child2</code>·<code>child3</code> 세 가지 서로 다른 변수(타입은 제각각이지만 실제로는 전부 <code>D2_Child</code> 객체)를 다 받아 처리했습니다. <b>파라미터를 부모 타입으로 선언해 두면, 그 부모를 상속한 어떤 자식이 오더라도 같은 코드로 처리할 수 있다</b>는 것 — 이게 다형성을 실전에서 쓰는 이유입니다. 나중에 자식 클래스가 늘어나도 <code>test()</code> 메서드는 고칠 필요가 없습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260812/day08/D1_Lotto.java">D1_Lotto.java</a> ·
@@ -10230,6 +10366,23 @@ public class D2_Calendar {
         <li>윤년 판정: <code>(4로 나누어떨어짐 &amp;&amp; 100으로 안 나누어떨어짐) || 400으로 나누어떨어짐</code>.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D1_VIPCustomer(10002, "김연아", 100) 생성자에는 super(...)가 한 줄도 없는데, 부모 생성자가 실행될까? 등급은 왜 VIP로 남을까?</summary>
+        <div class="sc-a"><b>실행됩니다.</b> 첫 줄에 생략된 <code>super()</code>가 자동으로 들어가 <code>D1_Customer()</code>가 먼저 돌며 SILVER·0.01을 넣고, 그 <b>뒤에</b> 자식 생성자 본문이 VIP·0.05로 덮어쓰기 때문에 VIP가 남습니다. 만약 <code>D1_Customer</code>에 기본 생성자가 없었다면 이 자동 <code>super()</code>가 갈 곳이 없어 <b>컴파일 에러</b>가 났을 것입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>bonusPoint += price * bonusRatio;를 bonusPoint = bonusPoint + price * bonusRatio;로 풀어 쓰면?</summary>
+        <div class="sc-a"><b>컴파일 에러</b>가 납니다. 오른쪽이 int + double = <b>double</b>이라 int 변수에 그대로 넣을 수 없기 때문입니다(손실 가능한 변환). <code>+=</code> 같은 복합 대입은 <code>bonusPoint = (int)(bonusPoint + …)</code>처럼 <b>형변환이 숨어 있어</b> 통과하지만, 그 대가로 소수점이 <b>경고 없이 버려집니다</b>.</div>
+      </details>
+      <details class="sc-q">
+        <summary>calendarApiPrint에서 cal.set(year, month - 1, 1)을 cal.set(year, month, 1)로 바꾸고 8월을 찍으면?</summary>
+        <div class="sc-a">제목은 "2026년 8월"인데 <b>9월 달력</b>이 나옵니다. <code>Calendar</code>의 월은 <b>0부터</b>(0 = 1월)라 8을 넣으면 9월이 되기 때문입니다. 2026년 9월 1일은 화요일이라 앞 공백이 2칸, 마지막 날이 30일로 찍힙니다 — 에러 없이 틀린 결과가 나오는 함정이라, 새 코드에서는 월을 1~12로 쓰는 <code>LocalDate</code>를 쓰는 게 안전합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 날짜는 <b><code>java.time</code>(<code>LocalDate</code>·<code>LocalDateTime</code>)</b>만 쓰고 <code>Calendar</code>·<code>Date</code>는 옛 코드에서만 만납니다. 등급별 할인·적립 같은 정책은 오늘처럼 상속으로 나누기도 하지만, 금액 계산을 <code>double</code>로 하면 오차가 생기므로 실제 결제 코드는 <b><code>BigDecimal</code></b>을 씁니다(오늘의 "+=가 소수점을 조용히 버림"도 같은 종류의 위험). 면접에서는 <b>"<code>protected</code>의 접근 범위"</b>와 <b>"<code>this()</code>와 <code>super()</code>의 차이"</b>를, 코딩테스트에서는 윤년·요일 계산이 날짜 문제의 기본기로 나옵니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_VIPCustomer</code>의 두 생성자를 비교해 보세요. 파라미터 없는 기본 생성자는 <code>customerID</code>·<code>customerName</code>을 <b>안 채웁니다</b>(등급·적립률만 세팅) — 4일차 <code>D4_Constructor</code>가 기본 생성자에서 <code>this(24, "검정색")</code>으로 <b>위임</b>했던 것과 달리, 여기서는 <b>두 생성자가 위임 없이 같은 세팅 코드를 각자 들고 있는</b> 경우라, 나중에 등급 정책이 바뀌면 두 생성자를 <b>둘 다 고쳐야 하는 함정</b>이 있습니다. <code>this(...)</code>로 위임하는 6~8일차 패턴과 비교하며 "어느 쪽이 유지보수하기 편한가"를 생각해 보면 좋은 복습이 됩니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260813/day09/D1_Customer.java">D1_Customer.java</a> ·
@@ -10580,6 +10733,23 @@ public class D3_OddMagicSquare {
         <li>홀수 마방진: 시작은 맨 윗줄 가운데, 이후 <b>왼쪽 위 대각선으로 이동하되 이미 채워져 있으면 바로 아래로</b>, 격자를 벗어나면 반대편 끝으로 순환한다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D1_Animal human = new D1_Human();에서 human.move()는 "사람이 걷습니다"가 되는데, human.eat()은 왜 컴파일조차 안 될까?</summary>
+        <div class="sc-a"><b>"어떤 메서드를 부를 수 있나"는 컴파일러가 변수 타입으로</b>, <b>"어느 버전을 실행하나"는 실행할 때 실제 객체로</b> 정하기 때문입니다. <code>D1_Animal</code> 설계도에는 <code>move()</code>만 있어 <code>eat()</code>은 호출 자체가 막히고, <code>move()</code>는 실제 객체인 <code>D1_Human</code>의 재정의 버전이 실행됩니다. <code>eat()</code>을 쓰려면 <code>(D1_Human) human</code>으로 다운캐스팅해야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>moveAnimal(animalH)와 moveAnimal(humanEat)는 둘 다 같은 사람 객체인데, 같은 moveAnimal 메서드가 불릴까?</summary>
+        <div class="sc-a"><b>아닙니다.</b> 오버로딩은 <b>컴파일할 때 인자의 변수 타입</b>으로 고릅니다. <code>animalH</code>는 <code>D1_Animal</code> 타입이라 <code>moveAnimal(D1_Animal)</code>이, <code>humanEat</code>는 <code>D1_Human</code> 타입이라 더 구체적인 <code>moveAnimal(D1_Human)</code>이 선택됩니다. 출력은 둘 다 "사람이 걷습니다."로 같지만 거쳐 가는 메서드가 다릅니다 — <b>오버로딩은 변수 타입, 오버라이딩은 실제 객체</b>가 정한다는 차이입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_Computer noteBook = new D2_NoteBook();은 왜 안 되고, D2_Computer 타입 변수 자체는 왜 만들 수 있을까?</summary>
+        <div class="sc-a"><code>D2_NoteBook</code>은 <code>typing()</code>을 아직 <code>abstract</code>로 남겨 둔 <b>추상 클래스</b>라 <code>new</code>로 객체를 만들 수 없습니다(컴파일 에러). 하지만 <b>변수의 타입으로는 추상 클래스도 쓸 수 있어서</b>, <code>D2_Computer MynoteBook = new D2_MyNoteBook();</code>처럼 빈칸을 다 채운 자식 객체를 담는 데 씁니다 — 추상 클래스는 "객체를 못 만들 뿐, 타입으로는 쓰는" 존재입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>"공통 흐름은 부모가 완성하고, 달라지는 단계만 자식이 채운다"는 추상 클래스 설계는 실무에서 <b>템플릿 메서드 패턴</b>이라고 부르며, 웹 수업에서 만날 <code>HttpServlet</code>도 <code>doGet()</code>·<code>doPost()</code>를 자식이 재정의해 쓰는 추상 클래스입니다. 면접에서는 <b>"오버로딩과 오버라이딩의 차이"</b>, <b>"추상 클래스는 왜 <code>new</code>가 안 되나"</b>를 자주 묻습니다. 마방진의 "벗어나면 반대편으로" 이동은 코딩테스트 격자 문제에서 <code>(x - 1 + n) % n</code> 한 줄로 쓰는 경우가 많습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_AnimalMain</code>에 <code>moveAnimal(D1_Human)</code>·<code>moveAnimal(D1_Tiger)</code>·<code>moveAnimal(D1_Eagle)</code>처럼 <b>같은 이름, 다른 파라미터 타입의 오버로딩 버전들도 같이 정의</b>되어 있습니다. 하지만 실제 <code>main</code>에서 호출한 건 전부 <code>moveAnimal(D1_Animal animal)</code> 하나뿐이었죠 — <b>다형성을 쓰면 오버로딩으로 자식 타입별 메서드를 따로 만들 필요가 없어진다</b>는 걸 대비시켜 보여주는 코드입니다. 오버로딩(6일차)과 다형성(오늘)을 같은 예제 안에서 비교해 두면 두 개념이 헷갈리지 않습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260814/day10/D1_Animal.java">D1_Animal.java</a> ·
@@ -10799,6 +10969,10 @@ public interface Interface_Magic {
 public abstract class MagicSquare implements Interface_Magic {
     protected int[][] magic;
 
+    public MagicSquare() {
+
+    }
+
     public MagicSquare(int n) {
         this.magic = new int[n][n];
     }
@@ -10819,7 +10993,7 @@ public class OddMagicSquare extends MagicSquare {
     }
 
     public OddMagicSquare(int n) {
-        this.magic = new int[n][n];
+        super(n); // 부모 MagicSquare(int n)이 배열을 만든다
     }
 
     public void make() {
@@ -10873,6 +11047,23 @@ public class D3_MagicSquareMain {
         <li>참조 타입(인터페이스 / 추상 클래스 / 구현 클래스)에 따라 <b>그 타입에 공개된 메서드까지만</b> 보인다 — 더 아래층 메서드는 다운캐스팅해야 호출 가능.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>인터페이스는 new로 객체를 못 만든다면서, D1_InterfaceMain의 new D1_InterfaceTest() { ... }는 왜 컴파일될까?</summary>
+        <div class="sc-a">그 줄이 만드는 것은 인터페이스 자체가 아니라 <b>그 자리에서 정의한 "이름 없는 구현 클래스"의 객체</b>이기 때문입니다. 중괄호 안에서 추상 메서드 <code>test1~3</code>을 모두 구현했으니 완성된 클래스가 되고, 컴파일러는 이를 <code>D1_InterfaceMain$1</code> 같은 이름의 클래스로 따로 만듭니다. 추상 메서드를 하나라도 빼먹으면 컴파일 에러입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>day11_2의 OddMagicSquare에서 make()를 깜빡 구현하지 않으면 어떻게 될까?</summary>
+        <div class="sc-a"><b>컴파일도 되고 실행도 되지만 결과가 틀립니다.</b> 부모 <code>MagicSquare</code>의 <code>make() { }</code>는 abstract가 아니라 <b>텅 빈 구현</b>이라, 자식이 안 고쳐도 그 빈 메서드가 불려 배열이 전부 0으로 남습니다. 그러면 모든 합이 0으로 같아 <code>isCheck()</code>가 <b>true</b>를 돌려주는, 오류 없이 숨는 버그가 됩니다 — 12일차에 <code>public abstract void make();</code>로 바꾼 이유입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_Calc calc = new D2_CalculatorChild();에서 calc.divide(10, 0)의 결과는? D2_CalculatorChild는 ERROR를 어디서 가져왔을까?</summary>
+        <div class="sc-a"><b>-999999</b>입니다. <code>num2</code>가 0이라 <code>ERROR</code>를 돌려주는데, 이 값은 인터페이스 <code>D2_Calc</code>의 필드라 자동으로 <code>public static final</code> 상수이고, 인터페이스를 구현한 클래스(손자인 <code>D2_CalculatorChild</code> 포함)는 <b>이름만으로 바로</b> 쓸 수 있습니다. 다만 -999999가 진짜 계산 결과일 수도 있어서, 실무라면 이런 "특별한 값" 대신 <b>예외</b>를 던지는 편이 안전합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무 자바는 <b>인터페이스 타입으로 받고 구현체는 갈아 끼우는</b> 코드가 기본입니다 — <code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code>, JDBC의 <code>Connection</code>, 스프링의 <code>MemberService</code> 인터페이스 + 구현 클래스가 모두 오늘의 <code>D2_Calc calc = new D2_CalculatorChild();</code>와 같은 모양입니다. 익명 클래스는 요즘 대부분 <b>람다</b>로 줄여 쓰는데, 코딩테스트에서 정렬 기준을 넘기는 <code>Comparator</code>가 대표적입니다(<a href="#ct-35">정수 내림차순으로 배치하기</a>의 <code>Collections.reverseOrder()</code>). 면접에서는 <b>"추상 클래스와 인터페이스의 차이"</b>와 <b>"default 메서드가 생긴 이유"</b>(이미 구현한 클래스들을 깨지 않고 인터페이스에 기능 추가)를 자주 묻습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span> 오늘 나온 세 가지 "빈 몸체" 문법을 비교해서 기억하세요. ① 인터페이스의 <code>void make();</code>(몸체 자체가 없음 — 자동 abstract), ② 추상 클래스의 <code>public abstract void make();</code>(명시적으로 abstract, 몸체 없음), ③ <code>MagicSquare</code>의 <code>public void make() { }</code>(몸체는 있지만 <b>텅 비어 있음</b> — 이건 abstract가 <b>아니라서</b> 자식이 안 고쳐도 컴파일은 되지만, 실제로 호출하면 아무 일도 안 일어나는 함정). 시험에서 "이 메서드는 자식이 반드시 재정의해야 하는가?"를 물으면, <b>①·②는 그렇다(YES), ③은 아니다(NO, 구현을 잊으면 조용히 아무것도 안 하는 버그가 된다)</b>는 걸 구분해야 합니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260818/day11/D1_InterfaceTest.java">D1_InterfaceTest.java</a> ·
@@ -11266,6 +11457,23 @@ Hello~~~
         <li><code>List&lt;? extends Number&gt;</code> 같은 <b>와일드카드는 읽기는 되지만 추가(쓰기)는 컴파일 에러</b> — 정확한 하위 타입을 컴파일러가 모르기 때문이다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>main에서 new StaticInnerClass(...)는 바로 되는데, new InnerClass("내부클래스")라고만 쓰면 왜 컴파일 에러일까?</summary>
+        <div class="sc-a">인스턴스 내부 클래스 객체는 <b>자기를 감싼 바깥 객체</b>에 붙어 있어야 그 필드 <code>a</code>·<code>b</code>를 읽을 수 있습니다. 그런데 <code>main</code>은 <code>static</code> 메서드라 <b>바깥 객체를 가리킬 <code>this</code>가 없습니다</b>. 그래서 <code>new D1_NestedClassTest().new InnerClass(...)</code>처럼 바깥 객체를 먼저 만들어 붙여 줘야 하고, 바깥 객체가 필요 없는 정적 내부 클래스는 그냥 <code>new</code>로 됩니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>11일차 MagicSquare는 sumRow·sumCol 이름이 뒤바뀌어 있었는데, 왜 isCheck()는 그때도 true가 나왔을까?</summary>
+        <div class="sc-a"><code>isCheck()</code>는 가로 합 n개와 세로 합 n개, 대각선 2개를 <b>배열 <code>ma</code>에 모두 넣고 전부 같은지</b>만 봅니다. 이름이 바뀌어도 가로 합과 세로 합이 <b>배열 안에서 자리만 바뀔 뿐</b> 모두 들어가므로 검증 결과는 같습니다. 컴파일러는 이름의 뜻을 모르고 결과도 우연히 맞으니, 이런 버그는 <b>이름과 동작을 직접 대조</b>해야만 잡힙니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>List&lt;? extends Number&gt; numbers에서 numbers.get(0)은 되는데 numbers.add(100)은 왜 막힐까?</summary>
+        <div class="sc-a"><code>numbers</code>가 실제로 <code>List&lt;Integer&gt;</code>인지 <code>List&lt;Double&gt;</code>인지 <b>컴파일러가 알 수 없기 때문</b>입니다. 꺼낼 때는 무엇이 들어 있든 <code>Number</code>로 받을 수 있어 안전하지만, 넣을 때는 <code>Integer</code> 100이 <code>Double</code> 리스트에 들어갈 위험이 있어 막습니다. 그래서 <code>? extends</code>는 <b>읽기 전용</b>처럼 쓰입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>제네릭은 실무에서 매일 씁니다 — DB 조회 결과를 담는 <code>List&lt;BoardDto&gt;</code>, 설정·응답용 <code>Map&lt;String, Object&gt;</code>, 그리고 어떤 데이터든 감싸는 공통 응답 상자 <code>ApiResponse&lt;T&gt;</code>가 오늘의 <code>D3_GBox&lt;T&gt;</code>와 같은 구조입니다. 정적 내부 클래스는 <b>빌더(<code>User.Builder</code>)</b>나 DTO 안의 작은 DTO에 자주 쓰고, 바깥 필드가 필요 없는 내부 클래스는 <code>static</code>으로 두는 것이 관례입니다(바깥 객체를 붙들고 있지 않도록). 코딩테스트에서는 <code>HashMap&lt;String, Integer&gt;</code>처럼 타입을 정해 쓰는 컬렉션이 바로 제네릭이고(<a href="#ct-13">완주하지 못한 선수</a>), 면접에서는 <b>와일드카드 <code>extends</code>/<code>super</code>의 차이</b>를 묻기도 합니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘 마방진 리팩터링은 <b>"컴파일이 되는 것"과 "이름이 맞는 것"은 다르다</b>는 걸 보여주는 좋은 예입니다. <code>sumRow</code>가 사실은 세로 합을 계산해도 자바는 에러를 내지 않습니다 — 메서드 이름은 그냥 식별자일 뿐, 실제 의미는 사람이 붙인 주석과 문서로만 전달되니까요. <code>isCheck()</code> 안에서 <code>ma[i] = sumRow(i)</code>처럼 <b>이름이 잘못된 메서드를 그대로 호출해도 결과가 우연히 맞을 수 있다</b>는 점(가로세로 합을 전부 비교하는 로직이라 순서가 바뀌어도 검증 자체는 통과)도 이런 종류의 버그가 오래 숨어 있기 쉬운 이유입니다. 코드 리뷰에서 <b>이름과 동작을 한 번씩 대조</b>해 보는 습관을 들이세요.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260819/day12/D1_NestedClassTest.java">D1_NestedClassTest.java</a> ·
@@ -11562,6 +11770,23 @@ public class D2_CardMain {
         <li><code>List.contains()</code>·<code>Set</code>의 중복 검사는 <b>내부적으로 <code>equals()</code>를 사용</b>한다 — 재정의하지 않으면 주소 비교라 중복 판정이 항상 실패한다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D2_Card에서 equals() 재정의를 지우면 shuffle()은 어떻게 될까?</summary>
+        <div class="sc-a">무한 루프에 빠지지는 않지만 <b>중복 카드가 섞인 52장</b>이 만들어집니다. <code>Object</code>의 기본 <code>equals</code>는 <b>주소 비교</b>라서, 매번 <code>new D2_Card()</code>로 새로 만든 <code>cc</code>는 모양이 같아도 항상 "없는 카드"로 판정됩니다. 그래서 <code>contains()</code>가 늘 <code>false</code>가 되어 <b>뽑는 족족 추가</b>되고, <code>i</code>가 52가 되는 순간 끝납니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D1_SetTest에서 "제"를 두 번 넣었는데 왜 4개만 찍히고, 순서는 왜 입력한 순서(한·국·경·제)가 아닐까?</summary>
+        <div class="sc-a"><code>HashSet</code>은 <code>hashCode()</code>로 자리를 찾고 <code>equals()</code>로 같은지 확인하는데, <code>String</code>은 둘 다 내용 기준으로 재정의되어 있어 두 번째 "제"는 <b>같은 값으로 판정되어 무시</b>됩니다(<code>add()</code>가 <code>false</code>를 돌려줌). 순서는 <b>해시값으로 정해진 내부 자리 순서</b>라 입력 순서와 무관합니다. 입력 순서가 필요하면 <code>LinkedHashSet</code>, 정렬 순서가 필요하면 <code>TreeSet</code>을 씁니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_Card에서 equals()만 남기고 hashCode()를 지우면, List.contains()와 HashSet은 각각 어떻게 될까?</summary>
+        <div class="sc-a"><code>ArrayList.contains()</code>는 <b><code>equals()</code>만</b> 쓰므로 여전히 중복을 잘 걸러 냅니다. 하지만 <code>HashSet</code>·<code>HashMap</code>은 <b><code>hashCode()</code>로 먼저 칸을 찾은 뒤</b> 그 칸 안에서만 <code>equals()</code>로 비교하는데, <code>Object</code>의 기본 <code>hashCode()</code>는 객체마다 달라서 <b>같은 카드가 서로 다른 칸에 들어가 중복으로 저장</b>될 수 있습니다. 그래서 "equals를 재정의하면 hashCode도 재정의한다"가 규약입니다 — <code>equals</code>가 판정 기준이고 <code>hashCode</code>는 빠르게 찾기 위한 보조값입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무 자바 코드에서 가장 자주 보는 타입이 <b><code>List&lt;Dto&gt;</code></b>입니다 — DB에서 조회한 여러 행을 DTO 하나씩에 담아 리스트로 화면에 넘기고, 코드표·설정값처럼 이름으로 찾는 데이터는 <code>Map</code>에 둡니다. 선언은 <code>List&lt;String&gt; list = new ArrayList&lt;&gt;()</code>처럼 <b>인터페이스 타입</b>으로 하는 것이 관례이고, 값 비교용 클래스는 Java 16부터 <b><code>record</code></b>로 만들면 <code>equals</code>·<code>hashCode</code>를 자동으로 만들어 줍니다. 코딩테스트에서는 "중복 제거 → <code>HashSet</code>"(<a href="#ct-36">폰켓몬</a>), "개수 세기 → <code>HashMap</code> + <code>getOrDefault</code>"(<a href="#ct-13">완주하지 못한 선수</a>)가 단골이고, 면접에서는 <b>"equals와 hashCode를 왜 같이 재정의하나"</b>, <b>"List·Set·Map의 차이"</b>를 자주 묻습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_Card.hashCode()</code>가 <code>card.hashCode() + 137</code>처럼 <b>임의의 숫자(137)를 더한 것</b>이 눈에 띕니다. <code>hashCode()</code>의 규약은 <b>"같은 <code>equals</code> 결과라면 같은 값"</b>만 지키면 되고, 정확히 어떤 계산식을 쓰는지는 자유입니다 — <code>card.hashCode()</code>만 써도 되지만, 상수를 더해 "이 클래스만의" 해시 분포를 살짝 바꿔 보는 것도 흔한 습관입니다. 다만 반대로 <b>서로 다른 카드인데 우연히 <code>hashCode()</code>가 같아도 괜찮습니다</b> — <code>HashSet</code>·<code>HashMap</code>은 해시가 같으면 그다음에 <code>equals()</code>로 한 번 더 확인하기 때문입니다. "해시가 같다 = 반드시 같은 객체"가 아니라 <b>"해시가 다르면 반드시 다른 객체"</b>라는 방향으로만 성립한다는 걸 기억하세요.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260820/day13/D1_ListTest.java">D1_ListTest.java</a> ·
@@ -11819,6 +12044,23 @@ ma결과:[505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 505, 
         <li>파라미터를 인터페이스 타입으로 선언하면(<code>magicRun(Interface_Magic magic)</code>) <b>다형성 덕분에 <code>if~else</code> 분기 없이</b> 모든 구현체를 같은 코드로 처리할 수 있다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D3_MagicSquareMain에는 if~else가 없는데, 어떻게 3·8·10을 넣을 때마다 다른 마방진이 만들어질까?</summary>
+        <div class="sc-a">어떤 클래스를 만들지는 <b><code>factory()</code> 안의 분기 한 곳</b>에서 정하고, 바깥으로는 <code>Interface_Magic</code> 타입으로만 돌려주기 때문입니다. <code>magicRun()</code>이 <code>magic.make()</code>를 부르면 자바는 <b>변수 타입이 아니라 실제 객체의 오버라이딩된 메서드</b>를 실행합니다(다형성). 그래서 새 마방진 종류가 생겨도 고칠 곳은 <code>factory()</code> 하나뿐입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>10×10은 505로 검증을 통과하는데, 6을 넣으면 왜 대각선 검증이 실패할까?</summary>
+        <div class="sc-a"><code>makeA()</code>의 <b><code>if (i == 2)</code>가 n=10일 때의 가운데 줄 번호를 박아 둔 값</b>이기 때문입니다. 가운데 줄은 <code>n / 4</code>라서 n=6이면 1, n=14면 3인데 항상 2번 줄을 밀어 버리니 대각선 합이 어긋납니다. <code>if (i == n / 4)</code>로 고치면 6·10·14·18 모두 통과합니다 — 입력 하나로만 테스트하면 이런 매직 넘버 버그가 숨는다는 교훈입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_MagicFactory.getInstance()를 두 번 부르면 객체가 몇 개 생길까? 스레드 두 개가 동시에 처음 부르면?</summary>
+        <div class="sc-a">한 스레드에서 부르면 <b>첫 호출 때만 <code>new</code></b>가 실행되고 두 번째부터는 <code>null</code>이 아니라 같은 객체를 돌려주므로 <b>1개</b>입니다(<code>fac1 == fac2</code>가 <code>true</code>). 하지만 두 스레드가 거의 동시에 <code>if (magicFactory == null)</code>을 통과하면 <b>둘 다 <code>new</code>를 해서 2개가 생길 수 있습니다</b>. 그래서 여러 스레드 환경에서는 <code>getInstance()</code>에 <code>synchronized</code>를 붙이거나, 필드 선언과 동시에 객체를 만들어 두는 방식을 씁니다(18일차 동기화와 이어지는 이야기).</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 <b>"하나만 만들어 공유하는 객체"와 "알맞은 구현체를 골라 주는 공장"을 스프링 컨테이너가 대신</b> 맡습니다 — 스프링 빈은 기본이 싱글턴이라 <code>getInstance()</code>를 직접 짤 일은 드물고, 결제 수단·파일 저장소처럼 구현체가 여러 개인 기능을 <b>인터페이스로 받아 바꿔 끼우는</b> 설계가 오늘 팩토리의 실전판입니다. 면접에서는 <b>"싱글턴 패턴을 구현하고 단점(멀티스레드 안전성, 테스트하기 어려움)을 말해 보라"</b>, <b>"다형성이 무엇이고 어디에 쓰나"</b>가 단골입니다. 코딩테스트에서는 마방진처럼 <b>2차원 배열의 인덱스를 n에 맞춰 계산</b>하는 문제가 자주 나옵니다(<a href="#ct-07">행렬의 덧셈</a>) — 숫자를 박지 말고 <code>n</code>으로 표현하는 습관이 그대로 필요합니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>6×6이 대각선 검증에 실패한 건 <b>알고리즘의 한계가 아니라 하드코딩 버그</b>입니다 — <code>makeA()</code>의 <code>if (i == 2)</code>는 "A영역의 가운데 줄"을 가리켜야 하는데 그 값이 n마다 다릅니다(n=6이면 1, n=10이면 2, n=14이면 3). <b>힌트: <code>i == n / 4</code></b>로 바꾸면 6·10·14·18 모두 통과합니다. 수업에서 10×10으로만 돌려 봤기 때문에 숨어 있던 버그로, <b>"테스트한 한 가지 입력에서 잘 동작한다"</b>고 해서 <b>모든 크기에서 맞는 건 아니라는 것</b>, 그리고 <b>예제 값에 맞춘 숫자(매직 넘버)를 코드에 박아 두면 다른 입력에서 깨진다</b>는 것을 이 사례로 기억해 두면 좋습니다 — <code>isCheck()</code>처럼 <b>결과를 스스로 검증하는 코드를 같이 짜 두면</b> 이런 예외를 바로 발견할 수 있습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260821/day14/D1_SixMagicSquare.java">D1_SixMagicSquare.java</a>(독립형) ·
@@ -11977,6 +12219,23 @@ java.lang.NumberFormatException: For input string: "오"
         <li>로직 변경 없이 <b>패키지만 옮겨 정리</b>하는 것도 정상적인 리팩터링이다 — 관련 클래스를 한 패키지로 묶으면 구조가 더 잘 드러난다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>exTest2에서 catch (Exception e)를 맨 위로 올리면 어떻게 될까?</summary>
+        <div class="sc-a"><b>컴파일 에러</b>가 납니다("exception NumberFormatException has already been caught"). <code>catch</code>는 위에서부터 처음 맞는 하나만 실행되는데, <code>Exception</code>은 모든 예외의 부모라서 아래의 구체적인 <code>catch</code>들은 <b>절대 도달할 수 없는 코드</b>가 되기 때문입니다. 그래서 항상 <b>구체적인 예외 → 넓은 예외</b> 순서로 씁니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>exTest2("3")을 호출하면 어떤 catch가 잡고, 무엇이 출력될까?</summary>
+        <div class="sc-a"><code>parseInt("3")</code>은 성공하고, <code>"스트링".substring(0, 2)</code>도 성공해 <code>ss</code>가 "스트"가 됩니다. 그다음 <code>array[5]</code>에서 터지는데 배열 길이가 5라 인덱스는 0~4뿐이므로 <b><code>ArrayIndexOutOfBoundsException</code></b>이 "배열의 범위를 벗어났습니다."를 찍습니다. 이어서 <code>finally</code>가 "스트"를 찍고, 프로그램은 멈추지 않고 "오류발생해도 프로그램은 종료되지 않는다."까지 출력합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>main에서 try~catch를 지우고 UserExceptionTest(12)만 남기면 어떻게 될까?</summary>
+        <div class="sc-a"><b>컴파일 에러</b>(unreported exception)가 납니다. <code>D1_UserException</code>은 <code>Exception</code>을 직접 상속한 <b>checked 예외</b>라서, 그 예외를 던지는 메서드를 부르는 쪽은 <b><code>try~catch</code>로 잡거나 자기도 <code>throws</code>로 넘겨야</b> 합니다. 만약 <code>RuntimeException</code>을 상속했다면 unchecked 예외라 컴파일러가 강제하지 않아 컴파일은 되고, 실행 중에 예외로 프로그램이 멈춥니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 <code>printStackTrace()</code> 대신 <b>로그(logger)로 남기고</b>, 사용자에게는 오류 페이지나 알아듣기 쉬운 메시지를 보여 줍니다 — 스프링에서는 예외 처리를 컨트롤러마다 흩어 두지 않고 <code>@ControllerAdvice</code> 한 곳에 모으며, 사용자 정의 예외는 보통 <b><code>RuntimeException</code>을 상속</b>해 "재고 부족", "권한 없음" 같은 업무 규칙 위반을 표현합니다. 빈 <code>catch</code>로 예외를 삼키는 것은 장애 원인을 숨기는 대표적인 나쁜 습관입니다. 코딩테스트에서는 <code>Integer.parseInt</code>의 <b><code>NumberFormatException</code></b>을 자주 만나고(<a href="#ct-47">문자열을 정수로 바꾸기</a>, <a href="#ct-44">숫자 문자열과 영단어</a>), 면접에서는 <b>"checked와 unchecked 예외의 차이"</b>, <b>"throw와 throws의 차이"</b>를 자주 묻습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>exTest2</code>에서 <b><code>substring(0, 2)</code>가 <code>try</code> 안과 <code>finally</code> 안에 똑같이 등장</b>합니다. 예외가 나면 <code>try</code> 안의 <code>substring</code>은 실행되지 못하고 건너뛰지만, <code>finally</code> 안의 같은 코드는 <b>무조건 실행</b>되어 "스트"라는 결과를 만들어 냅니다 — <b>같은 코드라도 어느 블록에 있느냐에 따라 "실행이 보장되는지"가 완전히 달라진다</b>는 걸 보여주는 좋은 예입니다. 그리고 <code>D1_Exception.exTest4()</code>의 <code>new FileInputStream("url")</code>은 <b>"url"이라는 실제 파일이 없으므로 열자마자 <code>IOException</code>(정확히는 <code>FileNotFoundException</code>)이 납니다</b> — try-with-resources는 "자원을 안전하게 닫아 주는 것"이지 "파일이 존재하게 만들어 주는 것"은 아니라는 점도 기억해 두세요.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260824/day15/D1_Exception.java">D1_Exception.java</a> ·
@@ -12373,6 +12632,23 @@ public class D4_ThreadTest {
         <li>스레드를 <code>start()</code>하면 <b>여러 작업이 동시에 진행</b>된다(멀티코어면 실제 동시 실행, 아니면 빠르게 번갈아 실행 = 시분할). 출력이 섞이는 순서(인터리빙)는 실행할 때마다 달라질 수 있다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D4_ThreadTest에서 t1.start(); t2.start(); 를 t1.run(); t2.run(); 으로 바꾸면 출력은?</summary>
+        <div class="sc-a">구분선 아래도 <b>"안안안안안녕녕녕녕녕"</b>으로 순서대로 찍힙니다. <code>run()</code>을 직접 부르면 <b>새 스레드가 생기지 않고 main 스레드가 평범한 메서드를 호출</b>하는 것이라, <code>t1.run()</code>이 2.5초 동안 다 끝난 뒤에야 <code>t2.run()</code>이 시작되기 때문입니다. 새 실행 흐름을 만들어 그 안에서 <code>run()</code>을 돌려 주는 것은 <code>start()</code>뿐입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_StreamTest에서 이미 forEach까지 끝난 streamList로 streamList.filter(...)를 한 번 더 부르면?</summary>
+        <div class="sc-a">컴파일은 되지만 실행하면 <b><code>IllegalStateException</code></b>("stream has already been operated upon or closed")이 납니다. Stream은 <b>최종 연산을 한 번 하면 소비되어 끝나는 파이프</b>라 재사용할 수 없습니다. 그래서 수업 코드처럼 필요할 때마다 <code>list.stream()</code>으로 새 스트림을 만들어 씁니다 — 원본 <code>list</code>는 그대로라 몇 번이든 다시 만들 수 있습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>test03에서 out.write(b, 0, i) 대신 out.write(b)를 쓰면 복사된 이미지는 어떻게 될 수 있을까?</summary>
+        <div class="sc-a">원본보다 <b>최대 9바이트 커지고 끝부분이 깨질</b> 수 있습니다. 파일 끝에서 마지막 <code>read(b)</code>는 10바이트를 다 못 채우고(예: 3바이트) <code>i</code>에 3을 돌려주는데, <code>write(b)</code>는 배열 10칸을 전부 쓰므로 <b>나머지 7칸에 남아 있던 직전 데이터</b>까지 파일에 붙습니다. <code>read</code>가 돌려준 개수만큼만 쓰는 것이 원칙이고, 19일차 UDP 버그도 같은 이유입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무 서비스 코드에서는 DB에서 가져온 <code>List&lt;Dto&gt;</code>를 <b><code>stream().filter().map().collect()</code>로 걸러 내고 변환</b>하는 코드를 매일 보게 되고, 파일 업로드·다운로드는 오늘처럼 <b>버퍼 스트림 + try-with-resources</b> 조합이 기본입니다. <code>parallelStream()</code>은 웹 서버 안에서는 공용 스레드 풀을 나눠 쓰기 때문에 함부로 쓰지 않습니다. 코딩테스트에서는 정렬·변환을 스트림이나 <code>Arrays.sort</code>로 짧게 쓰는 일이 많은데(<a href="#ct-35">정수 내림차순으로 배치하기</a> — 스트림이면 <code>sorted(Comparator.reverseOrder())</code>), 시간이 빠듯하면 for문이 더 빠를 수 있다는 것도 기억해 두세요. 면접에서는 <b>"start()와 run()의 차이"</b>, <b>"Stream의 중간 연산과 최종 연산"</b>, <b>"함수형 인터페이스란"</b>을 자주 묻습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_StreamTest</code>의 <code>Arrays.asList(...)</code>로 만든 <code>list</code>는 <b>크기가 고정</b>이라 <code>add()</code>·<code>remove()</code>는 못 쓰지만 <code>set()</code>은 됩니다(배열을 감싼 것이라 그렇습니다) — <code>List.of(...)</code>로 만든 <code>list3</code>은 그보다 더 엄격한 <b>완전 불변</b>이라 <code>set()</code>조차 안 됩니다. <code>D3_IOTest.test04</code>·<code>test05</code>가 <code>InputStreamReader(System.in, "MS949")</code>로 인코딩을 명시하는 이유도 기억해 두세요 — <b>운영체제 콘솔의 기본 인코딩과 맞춰야</b> 한글이 안 깨집니다(리눅스 서버 콘솔은 보통 UTF-8이라 상황에 따라 인코딩을 바꿔야 할 수도 있습니다). 그리고 <code>D4_ThreadTest</code>의 <code>Thread.sleep(500)</code>은 <b>일부러 넣은 지연</b>입니다 — 없으면 한 스레드가 너무 빨리 끝나 버려서 인터리빙이 잘 안 보일 수 있습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260825/day16/D1_ILambda.java">D1_ILambda.java</a> ·
@@ -12761,6 +13037,23 @@ Client:Connetion to server...
         <li>기본 TCP 서버는 <code>accept()</code>가 <b>한 번에 하나씩만</b> 처리 — 동시에 여러 클라이언트를 받으려면 스레드가 필요하다(19일차로 이어짐).</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D3_CakePlate의 eatBread()에서 synchronized를 지우면 어떻게 될까?</summary>
+        <div class="sc-a">컴파일은 되지만 실행 중 <code>wait()</code>나 <code>notifyAll()</code>을 부르는 순간 <b><code>IllegalMonitorStateException</code></b>이 납니다. 두 메서드는 <b>그 객체의 잠금(모니터)을 쥐고 있는 스레드만</b> 부를 수 있기 때문입니다. 게다가 잠금이 없으면 <code>breadCount--</code>와 <code>breadCount++</code>가 동시에 실행되어 개수가 틀어질 수도 있습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>먹는 스레드를 두 개로 늘리면, if (breadCount &lt; 1) wait(); 코드에서 빵이 -1개가 될 수 있을까?</summary>
+        <div class="sc-a"><b>될 수 있습니다.</b> 빵이 0개라 두 먹는 스레드가 모두 <code>wait()</code> 중일 때 만드는 스레드가 1개를 만들고 <code>notifyAll()</code>하면 둘 다 깨어납니다. 먼저 잠금을 얻은 쪽이 먹어서 0개가 되고, 다음 쪽은 <code>if</code>라 <b>조건을 다시 보지 않고</b> <code>wait()</code> 다음 줄로 내려가 <code>breadCount--</code>를 해서 -1이 됩니다. <code>while (breadCount &lt; 1) wait();</code>로 쓰면 깨어날 때마다 다시 확인하므로 0~10 범위가 지켜집니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>sbTest는 1000번만 append하는데 왜 두 스레드 모두 2000을 찍을까? sf를 StringBuilder로 바꾸면?</summary>
+        <div class="sc-a">두 스레드가 <b>같은 정적 필드 <code>sf</code></b>에 각자 1000번씩 붙이고, 길이를 찍기 전에 <code>Thread.sleep(2000)</code>으로 2초를 쉬기 때문에 그사이 양쪽 append가 모두 끝나 둘 다 2000을 봅니다. <code>StringBuffer</code>는 메서드가 동기화되어 있어 동시에 붙여도 글자를 잃지 않습니다. 동기화가 없는 <code>StringBuilder</code>로 바꾸면 쓰기가 겹치면서 <b>2000보다 작은 값</b>이 나오거나 드물게 예외가 날 수 있습니다(실행마다 다름).</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 <code>wait()</code>/<code>notifyAll()</code>을 직접 쓰는 일은 드물고, 같은 생산자-소비자 구조를 <b><code>BlockingQueue</code></b>로, 스레드 관리는 <b><code>ExecutorService</code>(스레드 풀)</b>로, 공유 카운터·맵은 <code>AtomicInteger</code>·<code>ConcurrentHashMap</code>으로 처리합니다. 웹 서버(톰캣)는 요청마다 다른 스레드가 같은 서블릿·스프링 빈 객체를 쓰기 때문에, <b>그 객체의 필드에 요청별 값을 저장하면 오늘 본 동시성 문제가 그대로</b> 생깁니다. 코딩테스트는 단일 스레드라 동기화가 오히려 손해입니다 — 예를 들어 <a href="#ct-40">크레인 인형뽑기 게임</a>에서 쓰는 <code>Stack</code>은 <code>Vector</code>를 상속해 메서드가 <code>synchronized</code>라서, 요즘은 <code>ArrayDeque</code>를 권장합니다(<code>StringBuffer</code> 대신 <code>StringBuilder</code>를 쓰는 것과 같은 이유). 면접에서는 <b>"StringBuilder와 StringBuffer의 차이"</b>, <b>"synchronized와 데드락"</b>, <b>"Runnable과 Thread 중 무엇을 쓰나"</b>가 단골입니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D2_ThreadSync</code>의 <code>ShareObject.print()</code>를 실행하는 <code>trA</code>·<code>trB</code> 코드는 <code>// trA.start(); // trB.start();</code>로 <b>주석 처리되어 있어 실제로는 실행되지 않습니다</b> — <code>synchronized(so) { so.print(...) }</code> 문법 자체를 보여주기 위한 예시로 남겨 둔 코드입니다. 실제로 돌아간 건 <code>sbTest()</code> 쪽입니다. 그리고 <code>D3_CakeMain</code>에서 <code>t2.setPriority(10)</code>(만드는 사람)·<code>t1.setPriority(1)</code>(먹는 사람)로 <b>일부러 만드는 쪽 우선순위를 높였는데도</b>, 우선순위와 무관하게 <b>빵 개수가 10을 넘거나 0 아래로 내려가는 일은 없습니다</b> — <code>wait()</code>/<code>notifyAll()</code>이 강제하는 건 이 <b>범위(0~10)</b>이지 "10개 만들고 10개 먹고" 같은 정확한 순서가 아닙니다. 우선순위는 힌트일 뿐이고 동기화 로직이 훨씬 강한 규칙이라는 걸 보여주는 예입니다. 또 이 코드의 <code>if (조건) wait();</code>는 실무에선 <b><code>while (조건) wait();</code></b>로 바꿔 쓰세요 — 깨어난 뒤 조건을 다시 확인해야 안전합니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260827/day18/D1_RunableTest.java">D1_RunableTest.java</a> ·
@@ -13086,6 +13379,23 @@ public class D3_ChatClient {
         <li>서버가 접속자 전체에게 같은 메시지를 보내는 것을 <b>브로드캐스트</b>라고 한다.</li>
       </ul>
     </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>D1_MultiTcpServer에서 new ServerThread(clientSocket).start(); 를 .run(); 으로 바꾸면 어떻게 될까?</summary>
+        <div class="sc-a"><b>18일차 서버로 되돌아갑니다.</b> <code>run()</code>을 직접 부르면 새 스레드 없이 main 스레드가 그 클라이언트와의 대화 루프(<code>readLine()</code>)를 직접 돌기 때문에, 그 클라이언트가 연결을 끊을 때까지 <b>다음 <code>accept()</code>로 돌아가지 못합니다</b>. 그동안 B는 연결 대기열에서 기다리기만 합니다 — 16일차의 "start()와 run()" 함정이 서버에서 나타난 모습입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>D2_UDPServer가 돌려보낸 메시지 뒤에 왜 여분의 데이터가 붙고, 어떻게 고칠까?</summary>
+        <div class="sc-a">답장 패킷을 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>로 만들어 <b>받은 길이가 아니라 버퍼 512바이트 전체</b>를 보내기 때문입니다. 보낼 길이를 <code>packet.getLength()</code>(실제로 받은 바이트 수)로 바꾸면 정확히 받은 만큼만 돌아갑니다. 다만 이 코드는 다음 <code>receive()</code>에서 그 답장 패킷을 다시 쓰므로, 받기 전에 수신용 패킷의 길이를 <code>buffer.length</code>로 되돌려야(새로 만들거나 <code>setLength</code>) 더 긴 다음 메시지가 잘리지 않습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>clientWriters는 이미 synchronizedSet인데, broadcast()에서 왜 synchronized (clientWriters) 블록을 또 걸까?</summary>
+        <div class="sc-a"><code>synchronizedSet</code>은 <code>add()</code>·<code>remove()</code> 같은 <b>메서드 한 번 한 번</b>만 동기화해 줄 뿐, for-each로 <b>처음부터 끝까지 순회하는 동안</b>은 보호해 주지 않습니다. 순회 도중 다른 스레드가 접속·퇴장으로 명단을 바꾸면 <code>ConcurrentModificationException</code>이 날 수 있습니다. 그래서 자바 문서도 순회할 때는 <b>그 Set 자체로 <code>synchronized</code> 블록을 직접 걸라</b>고 안내합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>톰캣 같은 웹 서버가 바로 오늘 구조입니다 — <b>요청이 올 때마다 스레드 하나가 그 요청을 전담</b>하는데, 접속마다 <code>new Thread</code>를 하면 사용자가 몰릴 때 자원이 바닥나므로 실무에서는 <b>스레드 풀</b>에서 꺼내 쓰고, Java 21의 <b>가상 스레드(Virtual Thread)</b>는 이 "요청마다 스레드" 방식을 훨씬 가볍게 만들어 줍니다. 채팅·알림 같은 실시간 기능은 요즘 브라우저와 서버 사이의 <b>WebSocket</b> 위에서 오늘과 같은 브로드캐스트 아이디어로 만듭니다. 면접에서는 <b>"TCP와 UDP의 차이"</b>(연결·신뢰성·순서 보장 vs 연결 없이 빠름 — 영상 통화·게임·DNS)와 <b>"여러 클라이언트를 동시에 처리하려면?"</b>을 자주 묻습니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span>오늘로 <b>자바 파트가 마무리</b>됩니다(🧭 학습 여정의 13단계 네트워크까지 도달, 다음 날부터는 SQL·웹으로 이어집니다) — 1일차 명명법부터 시작해 클래스·상속·컬렉션·예외·람다·스레드를 거쳐 <b>결국 "다른 컴퓨터와 대화하는 프로그램"</b>까지 왔습니다. 채팅 서버는 사실 이 여정 전체가 합쳐진 결과물입니다: 소켓(13단계) 위에 스레드(12단계)를 얹어 여러 명을 동시에 받고, 컬렉션(11단계)으로 접속자를 관리하고, 예외 처리(11단계)로 접속 종료를 감지합니다. 복습할 때 막히는 부분이 있다면 그 부분이 가리키는 이전 단계로 돌아가 보세요 — 이 표는 그러라고 만든 지도입니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260828/day19/D1_MultiTcpServer.java">D1_MultiTcpServer.java</a> ·
