@@ -1719,7 +1719,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>Maven</b> <code>pom.xml</code>: 스프링·MyBatis·DBCP·MariaDB 드라이버를 적으면 자동으로 받아 옴 (jar 직접 복사 끝)</li>
               <li><code>web.xml</code>: 모든 <code>*.do</code> 요청을 <b>DispatcherServlet</b>으로</li>
               <li><code>servlet-context.xml</code>: <code>@Controller</code> 찾기(component-scan), <b>ViewResolver</b>(<code>/WEB-INF/views/</code> + 이름 + <code>.jsp</code>)</li>
-              <li><code>root-context.xml</code>: DB 연결(DBCP) → SqlSessionFactory → SqlSessionTemplate 빈 등록</li>
+              <li><code>root-context.xml</code>: DB 연결(DBCP) → SqlSessionFactory(MyBatis가 DB와 대화할 창구를 만드는 공장) → SqlSessionTemplate(그 창구를 안전하게 빌려 쓰게 해 주는 객체)을 빈(스프링이 대신 만들어 관리하는 객체)으로 등록</li>
               <li><code>HomeController</code>: <code>@RequestMapping("/home.do")</code> → <code>return "home";</code></li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">배운 것 — 05에서 무엇이 사라졌나</span><ul>
@@ -1752,7 +1752,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>DI</b>: 인터페이스 타입으로 받으면 구현체를 바꿔 끼우기 쉽다</li>
               <li>MyBatis는 <code>namespace + id</code>로 SQL을 찾는다, <code>#{}</code>로 안전하게 값 바인딩</li>
               <li>DBCP(커넥션 풀): 연결을 미리 만들어 두고 빌려 쓴다</li>
-              <li>Spring 6.1의 <code>-parameters</code> 함정 → <code>@RequestParam("이름")</code> 명시</li>
+              <li>Spring 6.1의 <code>-parameters</code> 함정(컴파일 옵션이 없으면 매개변수 이름을 몰라 <code>@RequestParam</code>에 이름을 꼭 적어야 함) → <code>@RequestParam("이름")</code> 명시</li>
               <li>GET(보기)·POST(바꾸기) 나누기, 저장 뒤 redirect(PRG)</li>
             </ul></div>
             <div class="bp-box wide"><span class="bp-box-t">남은 불편 → 08로</span><p>글이 많아지면 한 화면에 다 나오고(페이징 없음), 답글을 달 수 없고, 무슨 일이 일어났는지 기록(로그)도 없어요. <b>"돌아가는 게시판"을 "실제로 쓸 만한 게시판"으로</b> 만드는 게 08입니다.</p></div>
@@ -1777,7 +1777,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
             <div class="bp-box"><span class="bp-box-t">배운 것</span><ul>
               <li><b>페이징</b>: 전체 글 수 → 페이지 수, 현재 페이지 → 가져올 범위</li>
               <li><b>트랜잭션</b>: 여러 쿼리를 "전부 되거나 전부 취소"로. Service 메서드가 그 단위</li>
-              <li><b>AOP</b>: 공통 기능(로그)을 핵심 코드 수정 없이 바깥에서 붙이기. <code>@Transactional</code>도 같은 원리(프록시)</li>
+              <li><b>AOP</b>: 공통 기능(로그)을 핵심 코드 수정 없이 바깥에서 붙이기. <code>@Transactional</code>도 같은 원리(프록시: 진짜 객체를 감싸 앞뒤로 일을 끼워 넣는 대리 객체)</li>
               <li><b>로그</b>: <code>System.out</code> 대신 레벨(debug·info·warn·error)이 있는 로거</li>
               <li><b>생성자 주입</b>과 "Controller는 얇게, 조립은 Service로"</li>
             </ul></div>
@@ -1845,7 +1845,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>스프링 코드를 열면 <code>BoardService</code>, <code>BoardDao</code>, <code>BoardDto</code> 같은 클래스가 <b>역할별로</b> 나뉘어 있죠? 전부 객체지향입니다. 특히 <b>"인터페이스로 약속하고 구현은 갈아 끼운다"</b>는 생각이 스프링의 의존성 주입(DI)으로 그대로 이어집니다. 싱글턴·팩토리 같은 <b>디자인 패턴</b>도 여기서 처음 만났어요.</p></div>
             <div class="bp-box"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
-              <details><summary>객체지향의 특징(4대 특성)을 설명해 보세요.</summary><div class="bp-a">캡슐화(데이터를 숨기고 메서드로만 접근), 상속(기존 클래스를 물려받아 재사용), 다형성(같은 타입·같은 호출이 실제 객체에 따라 다르게 동작), 추상화(공통 특징만 뽑아 틀로 정의)입니다.</div></details>
+              <details><summary>객체지향의 특징(4대 특성)을 설명해 보세요.</summary><div class="bp-a">캡슐화(데이터를 숨기고 메서드로만 접근), 상속(기존 클래스를 물려받아 재사용), 다형성(같은 타입·같은 호출이 실제 객체에 따라 다르게 동작), 추상화(공통 특징만 뽑아 틀로 정의)입니다. 교안은 추상화를 뺀 3대 개념(은닉화·상속성·다형성)으로 정리하지만, 면접에서는 추상화를 넣어 4대로 묻는 경우가 많습니다.</div></details>
               <details><summary>오버로딩과 오버라이딩의 차이는?</summary><div class="bp-a">오버로딩은 한 클래스 안에서 이름은 같고 매개변수가 다른 메서드를 여러 개 만드는 것, 오버라이딩은 상속받은 메서드를 자식 클래스에서 같은 모양으로 다시 정의하는 것입니다.</div></details>
               <details><summary>추상 클래스와 인터페이스는 언제 쓰나요?</summary><div class="bp-a">공통 코드(필드·구현된 메서드)를 물려주면서 일부만 자식에게 맡길 때는 추상 클래스, 서로 관련 없는 클래스들에게 "이 기능을 가져라"는 약속만 정할 때는 인터페이스를 씁니다. 클래스는 하나만 상속하지만 인터페이스는 여러 개 구현할 수 있습니다.</div></details>
               <details><summary><code>==</code>와 <code>equals()</code>의 차이는?</summary><div class="bp-a"><code>==</code>는 참조타입에서 같은 객체(주소)인지, <code>equals()</code>는 내용이 같은지를 비교합니다. String 비교는 <code>equals()</code>를 써야 합니다.</div></details>
@@ -1895,7 +1895,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li>여러 손님을 동시에 받으려면 손님마다 <b>스레드</b>를 하나씩</li>
               <li>웹(HTTP)은 TCP 위에서 돌아가는 약속이다 (기본 포트 80, HTTPS는 443)</li>
             </ul></div>
-            <div class="bp-box"><span class="bp-box-t">왜 배웠나 (다음과의 연결)</span><p>소켓 채팅 서버를 직접 만들어 보면 "서버는 요청을 기다리다가, 손님마다 스레드로 응답한다"는 감각이 생깁니다. <b>톰캣이 바로 이 일을 대신해 주는 프로그램</b>이에요. 그래서 웹 과정에서는 소켓을 직접 짜지 않고 요청 처리 코드만 씁니다. 톰캣의 기본 포트가 <code>8080</code>인 것도 이제 이해되죠.</p></div>
+            <div class="bp-box"><span class="bp-box-t">초보가 자주 헷갈리는 것</span><ul>
+              <li><b>IP는 컴퓨터, 포트는 그 안의 프로그램</b>을 찾는다 — 같은 PC에서 서버를 두 개 띄우려면 포트가 달라야 한다</li>
+              <li><code>localhost</code> = <code>127.0.0.1</code> = 내 컴퓨터 자신(루프백). 다른 PC에서 접속하려면 실제 IP가 필요하다</li>
+              <li><code>accept()</code>·<code>readLine()</code>은 올 때까지 <b>멈춰서 기다린다</b>(블로킹) — 그래서 손님마다 스레드를 따로 둔다</li>
+              <li>UDP는 받은 길이만큼만 써야 한다 — <code>buffer.length</code>가 아니라 <code>packet.getLength()</code></li>
+            </ul></div>
+            <div class="bp-box wide"><span class="bp-box-t">왜 배웠나 (다음과의 연결)</span><p>소켓 채팅 서버를 직접 만들어 보면 "서버는 요청을 기다리다가, 손님마다 스레드로 응답한다"는 감각이 생깁니다. <b>톰캣이 바로 이 일을 대신해 주는 프로그램</b>이에요. 그래서 웹 과정에서는 소켓을 직접 짜지 않고 요청 처리 코드만 씁니다. 톰캣의 기본 포트가 <code>8080</code>인 것도 이제 이해되죠.</p></div>
             <div class="bp-box wide"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
               <details><summary>TCP와 UDP의 차이는?</summary><div class="bp-a">TCP는 연결을 맺고(3-way handshake) 순서와 도착을 보장하는 신뢰성 있는 전송으로 웹·이메일에 쓰입니다. UDP는 연결 없이 보내 빠르지만 손실·순서 뒤바뀜을 보장하지 않아 실시간 영상·게임·DNS에 쓰입니다.</div></details>
               <details><summary>브라우저 주소창에 URL을 치면 무슨 일이 일어나나요?</summary><div class="bp-a">DNS로 도메인을 IP로 바꾸고, 그 IP의 서버 포트로 TCP 연결을 맺은 뒤 HTTP 요청을 보냅니다. 서버(웹 서버·WAS)가 요청을 처리해 HTML 같은 응답을 돌려주면 브라우저가 그것을 해석해 화면에 그립니다. (단골 질문이니 지도 1번 그림과 같이 기억하세요.)</div></details>
@@ -1922,7 +1928,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><code>WHERE</code>(묶기 전 행을 거름) vs <code>HAVING</code>(묶은 뒤 그룹을 거름)</li>
               <li><code>NULL</code>은 0도 빈칸도 아닌 "모름" → <code>= NULL</code>이 아니라 <code>IS NULL</code></li>
               <li><code>UPDATE</code> · <code>DELETE</code>에서 <code>WHERE</code>를 빼면 <b>표 전체</b>가 바뀐다</li>
-              <li><code>DELETE</code>(행 삭제, 되돌릴 수 있음) · <code>TRUNCATE</code>(전부 비움) · <code>DROP</code>(표 자체 삭제)</li>
+              <li><code>DELETE</code>(행 삭제 — 트랜잭션 안에서 COMMIT 전이면 ROLLBACK 가능, MariaDB 기본은 autocommit이라 바로 확정) · <code>TRUNCATE</code>(전부 비움) · <code>DROP</code>(표 자체 삭제)</li>
               <li><code>GROUP BY</code>는 행을 접고, 윈도우 함수(<code>OVER</code>)는 행을 그대로 둔 채 옆에 붙인다</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>백엔드 개발자 하루의 상당 부분이 <b>"이 화면에 필요한 데이터를 어떤 SQL로 가져올까"</b>입니다. 게시판 목록 = <code>SELECT ... ORDER BY ... LIMIT</code>, 글쓰기 = <code>INSERT</code>, 답글 = <code>UPDATE + INSERT</code>(트랜잭션). 느린 화면을 고칠 땐 <code>EXPLAIN</code>으로 인덱스를 타는지부터 봅니다. 프로그래머스 SQL 문제도 코딩테스트 단골이에요.</p></div>
@@ -2401,7 +2407,7 @@ public static boolean isLeapYear(int year) {
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">단축 대입과 삼항 연산자가 실제로 쓰인 곳</p>
-          <p class="cb-ex-why">ATM 메뉴는 <b>잔고를 <code>+=</code>/<code>-=</code>로 누적하고, <code>&gt;</code>로 출금 가능 여부를 비교</b>하려고 만든 코드이고, 약수 출력은 <b>삼항 연산자로 "마지막 숫자 뒤엔 쉼표를 안 찍는다"</b>를 한 줄로 처리한 예입니다(약수 코드는 4일차 파일).</p>
+          <p class="cb-ex-why">ATM 메뉴는 <b>잔고를 <code>+=</code>/<code>-=</code>로 누적하고, <code>&gt;</code>로 출금 가능 여부를 비교</b>하려고 만든 코드이고, 약수 출력은 <b>삼항 연산자로 "마지막 숫자 뒤엔 쉼표를 안 찍는다"</b>를 한 줄로 처리한 예입니다(약수 코드는 4일차 파일). 코드에 나오는 <code>switch</code>(<code>case</code>)는 4장, <code>Scanner</code>·<code>Integer.parseInt</code> 입력은 5장, 메서드 모양(<code>public void divisor(…)</code>)은 6장에서 배우니, 지금은 <b><code>+=</code>·<code>-=</code>·<code>&gt;</code>·<code>?:</code>가 있는 줄만</b> 보세요.</p>
           <div class="note-code">
             <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">D2_ControlEx.java — ATM의 잔고 계산 (발췌)</span><button class="copy-btn" type="button">복사</button></div>
             <pre><code class="language-java">case 1:
@@ -2867,7 +2873,7 @@ public void perfectnum(int s, int e) {
           <p>클래스 바로 아래 선언한 변수가 <b>멤버필드</b>예요. 그중 static이 없는 것은 <b>인스턴스 변수</b>(객체마다 하나씩, 객체가 사라질 때까지 유지), static이 붙은 것은 <b>클래스 변수</b>(클래스에 딱 하나, 모든 객체가 공유). 메서드 안에서 만든 변수는 <b>지역변수</b>, 메서드 괄호 안의 것은 <b>매개변수</b>로, 메서드가 끝나면 사라집니다.</p>
           <p class="cb-src">📎 교안 p.46 「클래스에서의 용어」</p></div>
         <div class="cb-concept"><b class="cb-cn">③ 생성자 — 객체가 태어날 때 한 번 실행</b>
-          <p>생성자는 <code>new</code>로 객체를 만들 때 <b>딱 한 번</b> 실행되는 초기화 코드예요. 생김새는 메서드와 비슷하지만 <b>이름이 클래스 이름과 같고 반환타입이 없습니다</b>(<code>void</code>도 안 씀). 생성자를 <b>하나도 안 쓰면</b> 컴파일러가 빈 기본 생성자 <code>클래스명() { }</code>를 넣어 주지만, <b>하나라도 직접 쓰면 넣어 주지 않아요</b>. 그리고 모든 생성자의 첫 줄에는 부모 생성자 호출 <code>super();</code>가 숨어 있습니다(4일차 <code>D1_divisor</code> 생성자에 직접 써 둔 그 줄 — 부모는 Object).</p>
+          <p>생성자는 <code>new</code>로 객체를 만들 때 <b>딱 한 번</b> 실행되는 초기화 코드예요. 생김새는 메서드와 비슷하지만 <b>이름이 클래스 이름과 같고 반환타입이 없습니다</b>(<code>void</code>도 안 씀). 생성자를 <b>하나도 안 쓰면</b> 컴파일러가 빈 기본 생성자 <code>클래스명() { }</code>를 넣어 주지만, <b>하나라도 직접 쓰면 넣어 주지 않아요</b>. 그리고 첫 줄에 <code>this(…)</code>나 <code>super(…)</code>를 직접 쓰지 않은 생성자에는 부모 생성자 호출 <code>super();</code>가 숨어 있습니다(4일차 <code>D1_divisor</code> 생성자에 직접 써 둔 그 줄 — 부모는 Object). 이 장 예제의 <code>D2_ClassTest()</code>(<code>this(10)</code>)와 <code>D4_Constructor()</code>(<code>this(24, "검정색")</code>)는 첫 줄이 <code>this(…)</code>라서 여기에는 <code>super();</code>가 붙지 않고, 불려 간 다른 생성자 쪽에 붙습니다.</p>
           <p class="cb-src">📎 교안 p.60 「Constructor(생성자)」</p></div>
         <div class="cb-concept"><b class="cb-cn">④ 생성자 오버로딩과 this</b>
           <p>"기본 TV", "70인치 TV", "60인치 노랑 TV"처럼 만드는 방법이 여러 가지면 생성자를 <b>매개변수만 다르게</b> 여러 개 만들어요(6장의 오버로딩). 이때 <code>this</code>가 두 가지로 쓰입니다. <code>this.size = size;</code>의 <b><code>this.</code></b>는 "이 객체의 필드 size"라는 뜻으로 같은 이름의 매개변수와 구분해 주고, <code>this(24, "검정색");</code>의 <b><code>this(…)</code></b>는 <b>같은 클래스의 다른 생성자를 부르는</b> 것으로 생성자의 <b>첫 줄</b>에만 쓸 수 있어요. 교안 p.62처럼 이름 없는 <code>{ }</code>(인스턴스 블록)는 생성자보다 먼저 실행됩니다.</p>
@@ -3002,7 +3008,7 @@ tv4.setSize(24); // private이라 메서드 통해 값 추가</code></pre>
           <p><code>extends</code>를 안 써도 모든 클래스는 자동으로 <code>java.lang.Object</code>를 물려받아요. 그래서 우리가 만든 아무 클래스의 객체에도 이 메서드들이 있습니다. <code>getClass()</code> → 실제 클래스(<code>class 패키지.클래스명</code>), <code>toString()</code> → 객체를 글자로(기본은 <code>패키지.클래스명@해시코드16진수</code>), <code>hashCode()</code> → 해시 자료구조(HashMap 등)가 쓰는 int 값, <code>equals(o)</code> → 두 객체가 "같은지". 부모 타입 변수에 자식 객체를 담는 것도 자동이에요(<code>Object obj = sm;</code>). 다만 그러면 Object의 메서드만 보이고, 원래 메서드를 쓰려면 <code>(D3_Singleton) obj</code>처럼 다시 형 변환합니다.</p>
           <p class="cb-src">📎 교안 p.49~53 「Object 클래스」</p></div>
         <div class="cb-concept"><b class="cb-cn">② == 와 equals()</b>
-          <p><code>==</code>는 참조타입에서 <b>두 변수가 같은 객체를 가리키는가</b>(주소가 같은가)를 봐요. <code>equals()</code>는 <b>클래스가 정한 "같다"의 기준</b>으로 비교하는데, Object의 기본 <code>equals</code>는 그냥 <code>==</code>와 똑같습니다. <code>String</code>은 equals를 <b>재정의해서 글자 내용</b>을 비교하므로, 문자열 비교는 항상 <code>equals</code>를 써야 해요. 내가 만든 클래스도 내용으로 비교하고 싶으면 equals(와 짝인 hashCode)를 재정의해야 합니다(상속·오버라이딩 장에서).</p>
+          <p><code>==</code>는 참조타입에서 <b>두 변수가 같은 객체를 가리키는가</b>(주소가 같은가)를 봐요. <code>equals()</code>는 <b>클래스가 정한 "같다"의 기준</b>으로 비교하는데, Object의 기본 <code>equals</code>는 그냥 <code>==</code>와 똑같습니다. <code>String</code>은 equals를 <b>재정의해서 글자 내용</b>을 비교하므로, 문자열 비교는 항상 <code>equals</code>를 써야 해요. 내가 만든 클래스도 내용으로 비교하고 싶으면 equals(와 짝인 hashCode)를 재정의해야 합니다(15장 컬렉션에서 직접 해 봅니다).</p>
           <p class="cb-src">📎 교안 p.52~53 「hashcode · equals」</p></div>
         <div class="cb-concept"><b class="cb-cn">③ 접근 제한자 — 누구에게 보여 줄까</b>
           <p>넓은 순서로 <b><code>public</code></b>(어디서나) &gt; <b><code>protected</code></b>(같은 패키지 + 다른 패키지라도 자식 클래스) &gt; <b>(default, 아무것도 안 씀)</b>(같은 패키지만) &gt; <b><code>private</code></b>(그 클래스 안에서만). 중요한 데이터는 <code>private</code>로 숨기고, 꼭 필요한 통로만 <code>public</code> 메서드(getter/setter)로 열어 두는 것을 <b>캡슐화</b>라고 해요. 통로가 메서드이니 "비밀번호가 맞을 때만 알려 준다" 같은 <b>검사</b>를 끼워 넣을 수 있습니다.</p>
@@ -3416,7 +3422,7 @@ System.out.println(s.replace(str, "###"));</code></pre>
           <li>2차원 ↔ 1차원 변환 공식 <code>[i * col + j]</code>, <code>[i / col][i % col]</code>을 쓸 수 있다.</li>
         </ul></div>
 
-        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>10장의 String은 불변이라 "바꾸면 새 객체"였죠. 배열은 <b>같은 참조타입인데 내용을 직접 바꿀 수 있습니다</b>. 그래서 "주소를 나눠 가진 두 변수"라는 참조타입의 성질이 배열에서 가장 또렷하게 드러나요. 그리고 다음 장의 로또(번호 6개)와 마방진(2차원 판)이 전부 배열 위에서 돌아가기 때문에, 여기서 선언과 복사를 확실히 해 둬야 합니다.</p></div>
+        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>10장의 String은 불변이라 "바꾸면 새 객체"였죠. 배열은 <b>같은 참조타입인데 내용을 직접 바꿀 수 있습니다</b>. 그래서 "주소를 나눠 가진 두 변수"라는 참조타입의 성질이 배열에서 가장 또렷하게 드러나요. 그리고 12장의 로또(번호 6개)와 14장의 마방진(2차원 판)이 전부 배열 위에서 돌아가기 때문에, 여기서 선언과 복사를 확실히 해 둬야 합니다.</p></div>
 
         <h4 class="cb-h4">개념</h4>
         <div class="cb-concept"><b class="cb-cn">① 배열 — 같은 타입 칸들의 묶음, 선언 3가지</b>
@@ -3631,6 +3637,30 @@ public void calculator(int num1, int num2, String cal) {
 }</code></pre>
           </div>
           <p class="cb-look">👀 <b>관찰 포인트</b> — <code>D1_CalculatorMain</code>은 50과 20으로 네 연산을 돌려 <code>70</code>, <code>30</code>, <code>1000</code>, <code>2</code>를 출력합니다. Compare 클래스는 <code>calA.result</code>를 직접 읽지 못하고 반드시 <code>getResult()</code>를 거쳐요. 연산자 비교에 10장에서 배운 <code>equals()</code>를 쓴 것도 확인하세요. (더 엄격하게 하려면 <code>num1</code>, <code>num2</code>도 private으로 바꿀 수 있습니다.)</p>
+        </div>
+        <div class="cb-ex">
+          <p class="cb-ex-t">로또 여러 장 — 객체 배열을 맡는 클래스</p>
+          <p class="cb-ex-why">이 코드는 <b>"로또 한 장"(<code>D1_Lotto</code>)과 "여러 장 보관"(<code>D1_LottoStore</code>)으로 일을 나누고, 객체를 담는 배열 <code>D1_Lotto[]</code>를 만들어 한 칸씩 채우는 법</b>을 보여 주려고 만든 실습입니다(실습과제 p.9 「로또 번호 만들기」).</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">D1_LottoStore.java (day08) — 로또 여러 장 보관 (발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">public class D1_LottoStore {
+    public D1_Lotto[] lottos;
+
+    public D1_LottoStore() {
+        this(5);
+    }
+
+    public D1_LottoStore(int count) {
+        this.lottos = new D1_Lotto[count];
+
+        for (int i = 0; i &lt; lottos.length; i++) {
+            lottos[i] = new D1_Lotto();
+        }
+    }
+    // …(생략: printLotto(), getLottoStore())
+}</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — <code>new D1_Lotto[count]</code>는 로또 <b>칸</b>만 만들 뿐 칸은 전부 <code>null</code>이에요. for문의 <code>lottos[i] = new D1_Lotto();</code>가 칸마다 진짜 로또 객체를 넣고, <code>D1_Lotto</code>의 생성자가 그 자리에서 번호 6개를 만듭니다. Store는 "몇 장을 어떻게 담을지"만, Lotto는 "번호를 어떻게 뽑을지"만 맡는다는 점을 확인하세요.</p>
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">Parent / Child — 생성자 순서와 오버라이딩</p>
@@ -3874,13 +3904,14 @@ public class D2_MyNoteBook extends D2_NoteBook {
 
 // D2_ComputerMain
 // D2_Computer com = new D2_Computer(); //불가능
+// …(생략: D2_DeskTop 실행 4줄 — desktop.turnOn()·display()·typing()·turnOff())
 D2_Computer MynoteBook = new D2_MyNoteBook();
 MynoteBook.turnOn();
 MynoteBook.display();
 MynoteBook.typing();
 MynoteBook.turnOff();</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — 출력은 <code>전원을 켭니다</code> → <code>노트북 화면 출력</code> → <code>MyNoteBook typing기능입니다.</code> → <code>전원을 끕니다</code>. 네 메서드가 <b>세 클래스에서 하나씩</b> 왔어요(turnOn은 Computer, display는 NoteBook, typing은 MyNoteBook). 추상 메서드가 남은 Computer·NoteBook은 new가 막혀 있고, 모든 약속을 채운 MyNoteBook만 객체가 됩니다.</p>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — MyNoteBook 부분의 출력은 <code>전원을 켭니다</code> → <code>노트북 화면 출력</code> → <code>MyNoteBook typing기능입니다.</code> → <code>전원을 끕니다</code>. 네 메서드가 <b>세 클래스에서 하나씩</b> 왔어요(turnOn은 Computer, display는 NoteBook, typing은 MyNoteBook). 추상 메서드가 남은 Computer·NoteBook은 new가 막혀 있고, 모든 약속을 채운 MyNoteBook만 객체가 됩니다.</p>
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">인터페이스의 새 기능과 익명 클래스</p>
@@ -4204,7 +4235,7 @@ private void makeA() {
         <div class="cb-head">
           <div class="cb-part">3부 · 자바 활용</div>
           <h3><span class="cb-no">15</span>컬렉션 — List · Set · Map</h3>
-          <div class="cb-meta"><span>📎 교안 <b>p.126~141</b></span><span>📅 <b>13일차</b> · 8/20</span><span>💻 <b>java_edu_project/…/edu20260820/day13</b></span></div>
+          <div class="cb-meta"><span>📎 교안 <b>p.126~141</b> · 실습과제 <b>p.21~22</b></span><span>📅 <b>13일차</b> · 8/20</span><span>💻 <b>java_edu_project/…/edu20260820/day13</b></span></div>
         </div>
 
         <div class="cb-box cb-goal"><span class="cb-box-t">이 장의 목표</span><ul>
@@ -4213,7 +4244,7 @@ private void makeA() {
           <li>내가 만든 클래스를 컬렉션에 담을 때 <b><code>equals()</code>·<code>hashCode()</code>를 왜 재정의해야 하는지</b> 설명할 수 있다.</li>
         </ul></div>
 
-        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>배열은 만들 때 <b>칸 수를 정해야</b> 하고, 나중에 늘릴 수 없었어요. 실제 프로그램에서는 회원이 몇 명일지, 글이 몇 개일지 미리 알 수 없죠. 컬렉션은 <b>필요한 만큼 알아서 늘어나는 그릇</b>입니다. 바로 앞에서 배운 제네릭(<code>&lt;T&gt;</code>)이 여기서 처음 제대로 쓰여요 — <code>List&lt;String&gt;</code>은 "String만 담는 리스트"라는 뜻입니다. 그리고 객체 단원에서 배운 <code>equals()</code>·<code>hashCode()</code> 재정의가 <b>실제로 왜 필요한지</b> 이 장의 카드 실습에서 처음 체감하게 됩니다.</p></div>
+        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>배열은 만들 때 <b>칸 수를 정해야</b> 하고, 나중에 늘릴 수 없었어요. 실제 프로그램에서는 회원이 몇 명일지, 글이 몇 개일지 미리 알 수 없죠. 컬렉션은 <b>필요한 만큼 알아서 늘어나는 그릇</b>입니다. 바로 앞에서 배운 제네릭(<code>&lt;T&gt;</code>)이 여기서 처음 제대로 쓰여요 — <code>List&lt;String&gt;</code>은 "String만 담는 리스트"라는 뜻입니다. 그리고 8장에서 "내용으로 비교하려면 <code>equals()</code>·<code>hashCode()</code>를 재정의해야 한다"고만 했던 것을, 이 장의 카드 실습에서 <b>처음 직접 해 보고</b> 왜 필요한지 체감하게 됩니다.</p></div>
 
         <h4 class="cb-h4">개념</h4>
         <div class="cb-concept"><b class="cb-cn">① 세 가족 — List · Set · Map</b>
@@ -4273,7 +4304,7 @@ for (String s : setKeyMap) {
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">예제 2. 카드 52장을 중복 없이 만들기</p>
-          <p class="cb-ex-why">이 코드는 <b>"내가 만든 객체를 List에 넣고 중복 검사를 하려면 equals()를 재정의해야 한다"</b>는 것을 보여 주려고 만든 실습입니다. 무작위로 카드를 한 장씩 뽑아, 이미 있으면 버리고 없으면 넣기를 52장이 찰 때까지 반복해요.</p>
+          <p class="cb-ex-why">이 코드는 <b>"내가 만든 객체를 List에 넣고 중복 검사를 하려면 equals()를 재정의해야 한다"</b>는 것을 보여 주려고 만든 실습으로, <b>실습과제 12번(카드 만들기, p.21~22)</b>을 푼 코드입니다. 무작위로 카드를 한 장씩 뽑아, 이미 있으면 버리고 없으면 넣기를 52장이 찰 때까지 반복해요.</p>
           <div class="note-code">
             <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">D2_Card.java — 카드 한 장 (equals·hashCode 재정의)</span><button class="copy-btn" type="button">복사</button></div>
             <pre><code class="language-java">public class D2_Card {
@@ -4475,7 +4506,7 @@ public static void UserExceptionTest(int a) throws D1_UserException {
           <li><code>filter</code>·<code>map</code>·<code>sorted</code>·<code>forEach</code>·<code>collect</code>로 리스트를 가공할 수 있다.</li>
         </ul></div>
 
-        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>15장에서 "김씨만 골라 정렬해서 출력"하려면 새 리스트를 만들고, for문으로 고르고, 정렬하고, 다시 for문으로 출력해야 했어요. Stream을 쓰면 이걸 <b>한 줄의 파이프</b>로 씁니다. 그런데 Stream의 <code>filter(…)</code> 괄호 안에는 "어떻게 고를지"라는 <b>동작</b>을 넘겨야 하고, 그 동작을 짧게 적는 문법이 <b>람다</b>예요. 객체 단원에서 배운 <b>인터페이스와 익명 클래스</b>가 람다의 출발점입니다.</p></div>
+        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>15장의 컬렉션만으로 "김씨만 골라 정렬해서 출력"하려면 새 리스트를 만들고, for문으로 고르고, 정렬하고, 다시 for문으로 출력해야 합니다. Stream을 쓰면 이걸 <b>한 줄의 파이프</b>로 씁니다. 그런데 Stream의 <code>filter(…)</code> 괄호 안에는 "어떻게 고를지"라는 <b>동작</b>을 넘겨야 하고, 그 동작을 짧게 적는 문법이 <b>람다</b>예요. 객체 단원에서 배운 <b>인터페이스와 익명 클래스</b>가 람다의 출발점입니다.</p></div>
 
         <h4 class="cb-h4">개념</h4>
         <div class="cb-concept"><b class="cb-cn">① 람다식 — 메서드 하나짜리 인터페이스를 짧게 구현</b>
@@ -4920,7 +4951,7 @@ t2.start();</code></pre>
           <p class="cb-src">📎 교안 p.189~190 「DatagramSocket · DatagramPacket」, p.193~194 「UDP 소켓 프로그래밍」</p></div>
 
         <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 교안·수업 코드에서 조심할 곳</span>
-          <p><b>UDP 에코 서버의 응답 길이</b> — 교안 p.193과 수업 코드 <code>D2_UDPServer</code> 모두 되돌려 보낼 때 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>를 씁니다. 이러면 받은 글자 수와 상관없이 <b>512바이트 전체</b>가 돌아가서, 클라이언트 화면에 메시지 뒤로 빈 바이트와 <b>이전 메시지의 찌꺼기</b>가 붙어 나와요("hello world" 다음에 "hi"를 보내면 "hillo world…"처럼). <b><code>new DatagramPacket(buffer, packet.getLength(), address, port)</code></b>로 받은 길이만큼만 보내야 합니다(오른쪽의 <code>packet</code>은 대입 전이라 아직 받은 패킷이에요).</p>
+          <p><b>UDP 에코 서버의 응답 길이</b> — 교안 p.193과 수업 코드 <code>D2_UDPServer</code> 모두 되돌려 보낼 때 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>를 씁니다. 이러면 받은 글자 수와 상관없이 <b>512바이트 전체</b>가 돌아가서, 클라이언트 화면에 메시지 뒤로 빈 바이트와 <b>이전 메시지의 찌꺼기</b>가 붙어 나와요("hello world" 다음에 "hi"를 보내면 "hillo world…"처럼). 받은 길이만큼만 보내되, 답장은 <b>별도 패킷</b>으로 만들어야 합니다: <b><code>DatagramPacket reply = new DatagramPacket(buffer, packet.getLength(), address, port); socket.send(reply);</code></b>. 원본처럼 <code>packet</code> 변수에 다시 대입하면 안 돼요. 그러면 루프 맨 위의 다음 <code>socket.receive(packet)</code>이 길이가 줄어든 그 패킷으로 받게 되어, 다음 메시지가 더 길면 잘립니다("hi" 다음에 "hello"를 보내면 "he"만 받음). <code>packet</code>을 계속 쓰고 싶다면 다음 <code>receive</code> 전에 <code>packet.setLength(buffer.length)</code>로 길이를 되돌려야 합니다.</p>
           <p><code>D2_UDPClient</code>의 <code>hostname = "192.168.22.2"</code>는 수업 때 강사 PC 주소입니다. 혼자 실습할 때는 <code>"localhost"</code>로 바꾸세요. <code>D4_ChatServer2</code>는 <code>InetAddress.getLoopbackAddress()</code>에 묶여 있어 <b>같은 PC에서만</b> 접속할 수 있습니다.</p></div>
 
         <h4 class="cb-h4">예제 — 수업 코드로 확인하기</h4>
@@ -4986,7 +5017,7 @@ static class ServerThread extends Thread {
           <p class="cb-ex-t">예제 2. UDP 에코 서버 — 연결 없이 패킷 주고받기</p>
           <p class="cb-ex-why">이 코드는 <b>연결(accept) 없이 패킷을 받고, 보낸 사람 주소를 패킷에서 꺼내 되돌려 보내는</b> UDP 방식을 보여 주려고 만든 실습입니다(교안 p.193 예제와 거의 같아요).</p>
           <div class="note-code">
-            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">D2_UDPServer.java — 원본 (응답 길이 버그 포함)</span><button class="copy-btn" type="button">복사</button></div>
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">D2_UDPServer.java — 원본을 줄인 버전(주석은 설명용으로 바꿈, 응답 길이 버그 포함)</span><button class="copy-btn" type="button">복사</button></div>
             <pre><code class="language-java">try (DatagramSocket socket = new DatagramSocket(5000);) {
     byte[] buffer = new byte[512];
     // 수신용 패킷 생성
@@ -5000,13 +5031,13 @@ static class ServerThread extends Thread {
         InetAddress address = packet.getAddress();   // 보낸 사람 주소
         int port = packet.getPort();                 // 보낸 사람 포트
         System.out.println("address:" + address + ",port:" + port);
-        packet = new DatagramPacket(buffer, buffer.length, address, port);   // ⚠️ buffer.length(512) → packet.getLength()로 고쳐야 함
+        packet = new DatagramPacket(buffer, buffer.length, address, port);   // ⚠️ buffer.length(512) — 받은 길이(packet.getLength())로 별도 답장 패킷을 만들어야 함
         socket.send(packet);// 클라이언트로 보냄
     }
 }
 // …(생략: catch)</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — 서버의 "받은 메시지"는 <code>getLength()</code>를 썼으니 정확합니다. 하지만 클라이언트(<code>D2_UDPClient</code>)는 매번 512바이트를 받으므로, 짧은 메시지 뒤에 빈 문자나 앞 메시지의 남은 글자가 붙어 보여요. 표시한 줄을 <code>packet.getLength()</code>로 고치면 보낸 그대로 돌아옵니다.</p>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 서버의 "받은 메시지"는 <code>getLength()</code>를 썼으니 정확합니다. 하지만 클라이언트(<code>D2_UDPClient</code>)는 매번 512바이트를 받으므로, 짧은 메시지 뒤에 빈 문자나 앞 메시지의 남은 글자가 붙어 보여요. 표시한 두 줄을 <code>DatagramPacket reply = new DatagramPacket(buffer, packet.getLength(), address, port); socket.send(reply);</code>로 바꾸면 보낸 그대로 돌아옵니다(받는 <code>packet</code>은 512바이트 그대로 두기).</p>
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">예제 3. 채팅 — 명단에 등록하고 모두에게 방송하기</p>
@@ -5065,13 +5096,13 @@ while ((userInput = keyboard.readLine()) != null) {
           <li>IP = 어느 컴퓨터, 포트 = 그 안의 어느 프로그램. TCP = 연결·신뢰·순서 보장, UDP = 비연결·빠름·보장 없음.</li>
           <li>TCP: <code>ServerSocket.accept()</code>(블록) → <code>Socket</code> → <code>getInputStream</code>/<code>getOutputStream</code>에 <code>BufferedReader</code>·<code>PrintWriter(…, true)</code>를 끼운다. 보낼 땐 <code>println</code>.</li>
           <li>멀티스레드 서버: <b>main은 accept만, 대화는 손님별 스레드</b>. 채팅은 여기에 출력 스트림 명단 + synchronized 브로드캐스트.</li>
-          <li>UDP: <code>DatagramSocket</code> + <code>DatagramPacket</code>. 받은 데이터를 읽을 때도, 되돌려 보낼 때도 <b><code>packet.getLength()</code></b>.</li>
+          <li>UDP: <code>DatagramSocket</code> + <code>DatagramPacket</code>. 받은 데이터를 읽을 때도, 되돌려 보낼 때도 <b><code>packet.getLength()</code></b>. 답장은 받는 패킷에 다시 대입하지 말고 <b>별도 패킷</b>으로.</li>
         </ul></div>
 
         <div class="cb-box cb-check"><span class="cb-box-t">확인 문제</span>
           <details><summary><code>new PrintWriter(socket.getOutputStream(), true)</code>에서 <code>true</code>를 빼면 어떤 증상이 생길까요?</summary><div class="cb-a">자동 flush가 꺼져서 <code>println</code>한 내용이 버퍼에 머물고 상대에게 바로 가지 않습니다. 상대는 <code>readLine()</code>에서 계속 기다리고, 이쪽은 답을 기다리니 둘 다 멈춘 것처럼 보여요. <code>true</code>를 주거나 보낼 때마다 <code>flush()</code>를 불러야 합니다.</div></details>
           <details><summary>채팅 클라이언트에서 수신 스레드 없이 main 스레드 하나로만 처리하면 무엇이 불편할까요?</summary><div class="cb-a">main이 <code>keyboard.readLine()</code>에서 내 입력을 기다리는 동안에는 서버에서 온 메시지를 읽을 수 없습니다. 내가 아무것도 치지 않으면 남의 대화가 화면에 나타나지 않아요. 그래서 받기는 별도 스레드에게 맡겼습니다.</div></details>
-          <details><summary><code>D2_UDPServer</code>의 응답 줄을 어떻게 고쳐야 하고, 왜 그런가요?</summary><div class="cb-a"><code>packet = new DatagramPacket(buffer, packet.getLength(), address, port);</code>로 고칩니다. <code>buffer.length</code>는 배열 크기(항상 512)이고 실제로 받은 바이트 수는 <code>getLength()</code>이기 때문이에요. 512를 쓰면 빈 바이트와 이전 메시지 찌꺼기까지 같이 보내집니다.</div></details>
+          <details><summary><code>D2_UDPServer</code>의 응답 줄을 어떻게 고쳐야 하고, 왜 그런가요?</summary><div class="cb-a"><code>DatagramPacket reply = new DatagramPacket(buffer, packet.getLength(), address, port); socket.send(reply);</code>처럼 <b>별도 답장 패킷</b>을 만들어 보냅니다. <code>buffer.length</code>는 배열 크기(항상 512)이고 실제로 받은 바이트 수는 <code>getLength()</code>이기 때문이에요. 512를 쓰면 빈 바이트와 이전 메시지 찌꺼기까지 같이 보내집니다. 이때 <code>packet = new DatagramPacket(buffer, packet.getLength(), …)</code>처럼 받는 패킷 변수에 다시 대입하면, 다음 <code>receive(packet)</code>이 줄어든 길이로 받아서 더 긴 메시지가 잘립니다("hi" 다음 "hello" → "he").</div></details>
           <details><summary><code>D3_ChatServer</code>의 <code>broadcast()</code>에서 <code>synchronized (clientWriters)</code>를 빼면 어떤 위험이 있나요?</summary><div class="cb-a">한 스레드가 for문으로 명단을 도는 도중에 다른 스레드가 손님을 추가·삭제하면 <code>ConcurrentModificationException</code>이 날 수 있습니다. <code>synchronizedSet</code>은 add·remove 하나하나만 보호하고, <b>for문으로 도는 동안</b>은 직접 synchronized로 감싸야 해요.</div></details>
         </div>
 
@@ -5673,7 +5704,7 @@ WHERE job = 'SALESMAN';</code></pre>
           <p>쿼리 앞에 <code>EXPLAIN</code>을 붙이면 실행하지 않고 <b>실행 계획</b>만 보여 줍니다. 볼 칸은 셋: <code>type</code>(<code>ALL</code>이면 처음부터 끝까지 다 훑기, <code>range</code>는 범위만, <code>const</code>는 딱 한 건), <code>key</code>(실제로 고른 인덱스, NULL이면 안 씀), <code>rows</code>(읽을 것으로 예상한 행 수). 인덱스를 만들어도 옵티마이저가 안 쓰는 대표 경우 셋 — ① <b>조회 범위가 너무 넓을 때</b>(보조 인덱스는 행마다 한 번 더 찾아가야 하니 차라리 전체를 훑는 게 쌈), ② <b>열을 연산·함수로 감쌀 때</b>(<code>emp_no*1 = 100000</code> ✗, <code>emp_no = 100000/1</code> ✓ — 인덱스는 열의 원래 값으로 정렬돼 있으니까), ③ <b>값의 종류가 적을 때</b>(성별 M/F처럼). 데이터를 대량으로 넣은 뒤에는 <code>ANALYZE TABLE</code>로 통계를 갱신해야 옵티마이저가 제대로 판단합니다.</p>
           <p class="cb-src">📎 쿼리 #1.sql 「실습 4」 indexdb · 27일차</p></div>
         <div class="cb-concept"><b class="cb-cn">④ 스토어드 프로시저 · 함수 — SQL 여러 줄에 이름 붙이기</b>
-          <p>프로시저는 자바의 메서드처럼 <b>이름 · 매개변수 · 본문</b>이 있고, DB 서버 안에 저장됩니다. <code>CREATE PROCEDURE 이름(IN p_값 INT) BEGIN … END</code>로 만들고 <code>CALL 이름(10)</code>으로 실행해요. 본문 안에서는 <code>DECLARE</code>(변수 선언, BEGIN 바로 뒤에서만) · <code>IF … END IF</code> · <code>WHILE</code> 같은 절차적 문법을 씁니다. 본문에 세미콜론이 여러 개 들어가므로, 클라이언트(HeidiSQL)가 첫 <code>;</code>에서 문장을 잘라 버리지 않게 <code>DELIMITER $</code>로 문장 끝 기호를 잠시 바꿨다가 <code>DELIMITER ;</code>로 되돌립니다. <b>함수</b>(<code>CREATE FUNCTION … RETURNS INT</code>)는 값을 하나 돌려줘서 <code>SELECT userFunc(100, 200)</code>처럼 SELECT 안에서 쓰고, 프로시저는 <code>CALL</code>로만 부릅니다.</p>
+          <p>프로시저는 자바의 메서드처럼 <b>이름 · 매개변수 · 본문</b>이 있고, DB 서버 안에 저장됩니다. <code>CREATE PROCEDURE 이름(IN p_값 INT) BEGIN … END</code>로 만들고 <code>CALL 이름(10)</code>으로 실행해요. 본문 안에서는 <code>DECLARE</code>(변수 선언, BEGIN 바로 뒤에서만) · <code>IF … END IF</code> · <code>WHILE</code> 같은 절차적 문법을 씁니다. 본문에 세미콜론이 여러 개 들어가므로, 클라이언트(HeidiSQL)가 첫 <code>;</code>에서 문장을 잘라 버리지 않게 <code>DELIMITER $$</code>로 문장 끝 기호를 잠시 바꿨다가 <code>DELIMITER ;</code>로 되돌립니다. <b>함수</b>(<code>CREATE FUNCTION … RETURNS INT</code>)는 값을 하나 돌려줘서 <code>SELECT userFunc(100, 200)</code>처럼 SELECT 안에서 쓰고, 프로시저는 <code>CALL</code>로만 부릅니다.</p>
           <p class="cb-src">📎 쿼리 #1.sql 「프로시저 사용하기」, 「스토어드 함수 사용하기」, 「연습문제13(프로시저)」 · 27일차</p></div>
 
         <h4 class="cb-h4">예제 — 수업 쿼리로 확인하기</h4>
@@ -5744,12 +5775,13 @@ EXPLAIN SELECT * FROM emp_c WHERE emp_no = 100000/1; -- (o)</code></pre>
 
         <div class="cb-ex">
           <p class="cb-ex-t">부서번호를 받아 사원 목록을 보여 주는 프로시저 (연습문제13-1)</p>
-          <p class="cb-ex-why">이 프로시저는 <b>매개변수 · 변수 선언 · SELECT INTO · IF 분기를 한 번에 보여 주려고</b> 낸 문제의 답입니다. "있으면 목록, 없으면 안내 문구"를 DB 안에서 판단해요. 마지막 두 줄의 CALL은 실행 예로 덧붙인 것입니다.</p>
+          <p class="cb-ex-why">이 프로시저는 <b>매개변수 · 변수 선언 · SELECT INTO · IF 분기를 한 번에 보여 주려고</b> 낸 문제의 답입니다. "있으면 목록, 없으면 안내 문구"를 DB 안에서 판단해요. 맨 위 <code>USE scott;</code>과 마지막 두 줄의 CALL은 실행 예로 덧붙인 것입니다 — dept·emp 표는 scott DB에 있어서, 다른 DB가 선택된 상태로 따라 하면 <code>CALL</code>에서 "Table '….dept' doesn't exist" 에러가 나요.</p>
           <div class="note-code">
             <div class="code-head"><span class="code-lang lang-sql">SQL</span><span class="code-file">쿼리 #1.sql — 연습문제13(프로시저) 문제 1(27일차)</span><button class="copy-btn" type="button">복사</button></div>
-            <pre><code class="language-sql">DROP PROCEDURE IF EXISTS getDept_emp;
+            <pre><code class="language-sql">USE scott;   -- ★추가(원본엔 없음): 원본은 이 위에서 USE sqldb; 상태라 dept 표를 못 찾는다
+DROP PROCEDURE IF EXISTS getDept_emp;
 
-delimiter $
+delimiter $$
 CREATE PROCEDURE getDept_emp(IN p_deptno INT)
 BEGIN
     -- 부서 존재 여부를 체크할 변수 선언
@@ -5770,13 +5802,13 @@ BEGIN
         -- 부서가 존재하지 않을 경우: 메시지 출력
         SELECT '해당 부서가 없습니다.' AS '메시지';
     END IF;
-END $
+END $$
 delimiter ;
 
 CALL getDept_emp(10);   -- (실행 예) CLARK · KING · MILLER
 CALL getDept_emp(99);   -- (실행 예) 해당 부서가 없습니다.</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — <code>SELECT COUNT(*) INTO v_cnt</code>는 조회 결과를 화면에 내지 않고 <b>변수에 담습니다</b>. <code>delimiter $</code> 두 줄을 빼고 만들면 클라이언트가 본문의 첫 <code>;</code>(<code>DEFAULT 0;</code>)에서 문장을 잘라 보내 문법 에러(ERROR 1064)가 나요. <code>p_</code>(매개변수)·<code>v_</code>(변수) 접두어는 문법이 아니라 <code>deptno</code> 같은 열 이름과 헷갈리지 않게 하는 관례입니다.</p>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — <code>SELECT COUNT(*) INTO v_cnt</code>는 조회 결과를 화면에 내지 않고 <b>변수에 담습니다</b>. <code>delimiter $$</code> 두 줄을 빼고 만들면 클라이언트가 본문의 첫 <code>;</code>(<code>DEFAULT 0;</code>)에서 문장을 잘라 보내 문법 에러(ERROR 1064)가 나요. <code>p_</code>(매개변수)·<code>v_</code>(변수) 접두어는 문법이 아니라 <code>deptno</code> 같은 열 이름과 헷갈리지 않게 하는 관례입니다.</p>
         </div>
 
         <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 수업 주석 바로잡기</span><p>① 수업 주석 「unique와 not null을 설정하면 클러스터형 인덱스가 됨」은 <b>PK가 없을 때만</b> 맞습니다. 바로 다음 tbl5처럼 PK가 따로 있으면 PK가 클러스터형이고 UNIQUE NOT NULL 열은 보조 인덱스예요. ② 「집계함수, join, union 등을 통한 뷰는 수정할 수 없다」는 대략 맞지만 정확히는 <b>집계 · DISTINCT · GROUP BY · UNION</b>이 있으면 수정 불가이고, <b>JOIN 뷰</b>는 한쪽 표의 열만 고치는 경우 등 제한적으로 허용됩니다. 처음에는 "뷰는 조회용"으로 쓰는 게 안전합니다. ③ 「index를 강제로 실행」 주석의 <code>USE INDEX</code>는 "이 인덱스 중에서 골라라"라는 <b>권유</b>라 옵티마이저가 전체 훑기가 낫다고 보면 여전히 안 씁니다. 정말 강제하려면 <code>FORCE INDEX</code>, 금지는 <code>IGNORE INDEX</code>예요. ④ 파일의 <code>userProc</code>·<code>ifProc</code>·<code>whileProc</code> 등은 <code>CALL</code> 줄만 있고 만드는 문장은 파일에 없습니다(대시보드 카드 참고).</p></div>
@@ -5910,7 +5942,7 @@ String password = System.getenv("STUDY_DB_PASSWORD");</code></pre>
         <h4 class="cb-h4">개념</h4>
         <div class="cb-concept"><b class="cb-cn">① JDBC 6단계 — 전화 걸기와 같다</b>
           <p>JDBC는 자바가 DB와 대화하는 표준 방법이에요. 전화로 치면 ① <b>드라이버 로딩</b>(MariaDB 말을 통역할 드라이버 준비: <code>Class.forName("org.mariadb.jdbc.Driver")</code>) → ② <b>연결</b>(전화 걸기: <code>DriverManager.getConnection(url, user, password)</code> → <code>Connection</code>) → ③ <b>쿼리 준비</b>(할 말 적기: <code>conn.prepareStatement(sql)</code>) → ④ <b>실행</b> → ⑤ <b>결과 받기</b>(<code>ResultSet</code>을 한 줄씩 읽어 객체에 담기) → ⑥ <b>닫기</b>(끊기: 연 순서의 반대로 <code>rs → psmt → conn</code>). 닫지 않으면 DB 연결이 계속 쌓여 결국 새 연결을 못 얻게 돼요.</p>
-          <p>참고로 JDBC 4.0부터는 드라이버 jar만 클래스패스에 있으면 자동으로 등록되어 ①을 생략해도 동작합니다. 수업 코드는 단계를 눈으로 확인하려고 일부러 적어 둔 거예요.</p></div>
+          <p>참고로 JDBC 4.0부터는 드라이버 jar가 클래스패스에 있으면 자동으로 등록되므로, <code>UserMain</code> 같은 <b>콘솔 프로그램</b>에서는 ①을 생략해도 보통 동작합니다. 하지만 <b>Tomcat 웹앱</b>에서 드라이버를 <code>WEB-INF/lib</code>에 둔 경우에는 이 자동 등록이 안 될 수 있어서, <code>Class.forName</code>을 남겨 두는 것이 안전해요. 수업 코드도 단계를 눈으로 확인하려고 적어 두었습니다.</p></div>
         <div class="cb-concept"><b class="cb-cn">② PreparedStatement와 ? — 빈칸 양식에 값 채우기</b>
           <p>SQL에 값을 <code>+</code>로 이어 붙이지 않고 <code>?</code>로 <b>빈칸</b>만 남긴 뒤, <code>psmt.setString(1, 값)</code>처럼 <b>1번부터</b> 채웁니다. 값이 SQL 문법으로 해석되지 않으니 따옴표 실수가 없고, 입력값으로 SQL을 조작하는 <b>SQL 인젝션</b>도 막아요.</p>
           <p>실행 메서드는 두 가지예요. 조회(SELECT)는 <code>executeQuery()</code> → 결과 표(<code>ResultSet</code>). 등록·수정·삭제는 <code>executeUpdate()</code> → <b>영향받은 행 수(int)</b>. 그래서 DAO의 등록·수정·삭제 메서드는 그 수가 <code>0</code>보다 크면 성공으로 봅니다.</p></div>
@@ -6178,7 +6210,7 @@ public List&lt;userDto&gt; getAllUser() {
         <div class="cb-concept"><b class="cb-cn">④ 여러 글 삭제 — batch와 트랜잭션</b>
           <p>목록의 체크박스가 모두 <code>name="seq"</code>라서 <code>request.getParameterValues("seq")</code>로 <b>String 배열</b>을 받아요. 같은 DELETE를 <code>?</code>만 바꿔 여러 번 실행하므로 <code>addBatch()</code>로 쌓았다가 <code>executeBatch()</code>로 한 번에 보냅니다. JDBC 연결은 기본이 <b>auto commit</b>(쿼리마다 바로 확정)이라, 묶음으로 다루려면 <code>conn.setAutoCommit(false)</code>로 끄고 끝에 <code>commit()</code>, 오류가 나면 <code>rollback()</code>합니다. 이것이 <b>트랜잭션</b> — "전부 되거나 전부 취소"예요.</p></div>
 
-        <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 바로잡기</span><p>① MariaDB(HeidiSQL 포함)도 기본이 autocommit이에요. HeidiSQL에서 <code>START TRANSACTION</code> 없이 DELETE를 실행하면 바로 확정되어 <code>ROLLBACK</code>으로 되돌릴 수 없습니다. 자바에서 <code>setAutoCommit(false)</code>를 하는 이유와 같아요. ② <code>mulDel()</code>은 <code>commit()</code>을 <b>먼저</b> 한 뒤에 결과 배열을 검사합니다. 그래서 검사에서 실패로 판정돼 error.jsp로 가더라도 DB는 이미 확정된 상태예요. "하나라도 실패면 전부 취소"를 지키려면 검사를 <code>commit()</code> 앞에 두고, 실패면 <code>rollback()</code>하는 순서가 맞습니다.</p></div>
+        <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 바로잡기</span><p>① MariaDB(HeidiSQL 포함)도 기본이 autocommit이에요. HeidiSQL에서 <code>START TRANSACTION</code> 없이 DELETE를 실행하면 바로 확정되어 <code>ROLLBACK</code>으로 되돌릴 수 없습니다. 자바에서 <code>setAutoCommit(false)</code>를 하는 이유와 같아요. ② <code>mulDel()</code>은 <code>commit()</code>을 <b>먼저</b> 한 뒤에 결과 배열을 검사합니다. 그래서 검사에서 실패로 판정돼 error.jsp로 가더라도 DB는 이미 확정된 상태예요. "하나라도 실패면 전부 취소"를 지키려면 검사를 <code>commit()</code> 앞에 두고, 실패면 <code>rollback()</code>하는 순서가 맞습니다. ③ <code>boardController.jsp</code>의 <code>boardUpdate</code> 분기는 성공 시 같은 <code>&lt;script&gt;alert('수정성공') … location.href=…&lt;/script&gt;</code>를 <b>두 번</b> 내보냅니다 — 한 번은 JSP 템플릿(<code>%&gt; … &lt;%</code> 사이의 HTML)으로, 한 번은 바로 아래 <code>out.println(…)</code>으로요. 그래서 "수정성공" 알림이 두 번 뜰 수 있어요. 둘 중 하나만 남기면 됩니다. 04 프로젝트(31장)에서는 이 일을 <code>jsForward(url, "수정성공", response)</code> 메서드 하나로 정리합니다.</p></div>
 
         <h4 class="cb-h4">예제 — 수업 코드로 확인하기</h4>
         <div class="cb-ex">
@@ -6878,7 +6910,7 @@ public class HomeController {
 	&lt;constructor-arg index="0" ref="sqlSessionFactory" /&gt;
 &lt;/bean&gt;</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — <code>ref="dataSource"</code>처럼 빈끼리 <b>이름으로 연결</b>돼요: 연결을 빌려주는 풀(DBCP) → MyBatis 공장 → 쿼리 실행기. <code>${url}</code> 같은 값은 <code>db.properties</code> 파일에서 채워져서, 비밀번호가 자바 소스에서 완전히 사라졌습니다(26장에서 말한 "설정 파일로 빼기"). <b>DBCP</b>는 연결을 미리 만들어 두고 <b>빌려 쓰고 돌려받는</b> 커넥션 풀이라, 01처럼 요청마다 연결을 새로 열고 닫는 비용이 줄어요.</p>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — <code>ref="dataSource"</code>처럼 빈끼리 <b>이름으로 연결</b>돼요: 연결을 빌려주는 풀(DBCP) → MyBatis 공장 → 쿼리 실행기. <code>${url}</code> 같은 값은 <code>db.properties</code> 파일에서 채워져서, 비밀번호가 자바 소스에서 완전히 사라졌습니다(26장에서 말한 "설정 파일로 빼기"). <b>DBCP</b>는 연결을 미리 만들어 두고 <b>빌려 쓰고 돌려받는</b> 커넥션 풀이라, 01처럼 요청마다 연결을 새로 열고 닫는 비용이 줄어요. 주석의 "커밋시점을 프레임워크가 정한다"는 조금 주의해서 읽어야 해요. 06·07에는 <b>트랜잭션 매니저가 없어서</b>, 스프링 트랜잭션 밖에서는 <code>SqlSessionTemplate</code>이 SQL을 실행할 때마다 바로 commit합니다. 그래서 <code>defaultAutoCommit=false</code>여도 07의 INSERT는 실행 즉시 확정돼요. 여러 쿼리를 한 묶음으로 확정·취소하는 방법은 36장(트랜잭션)에서 배웁니다.</p>
         </div>
 
         <div class="cb-box cb-key"><span class="cb-box-t">핵심 정리</span><ul>
@@ -6908,6 +6940,8 @@ public class HomeController {
           <li>요청 하나가 <b>Controller → Service → DAO → Mapper(SQL)</b>를 거쳐 화면까지 가는 길을 순서대로 말할 수 있다.</li>
           <li>객체를 <code>new</code>로 만들지 않고 스프링이 넣어 주는 것(<b>DI</b>)이 무엇인지 설명할 수 있다.</li>
           <li>MyBatis가 <b>namespace + id</b>로 SQL을 찾는다는 것을 안다.</li>
+          <li>폼 값이 <b>커맨드 객체</b>(<code>HkDto</code>)로 들어오는 방법과, 저장 뒤 <code>redirect:</code>로 목록에 보내는 이유(<b>PRG</b>)를 설명할 수 있다.</li>
+          <li>체크한 여러 글 번호가 <b>Map → <code>&lt;foreach&gt;</code> → <code>IN (…)</code></b>으로 바뀌는 과정을 따라갈 수 있다.</li>
         </ul></div>
 
         <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>33장(06 프로젝트)에서 스프링의 뼈대만 세웠어요. 주소 하나가 화면 하나로 가는 것까지만 확인했죠. 이번 장에서는 그 뼈대 위에 <b>02·04·05에서 만든 것과 똑같은 게시판</b>을 다시 올립니다. 기능은 같고 <b>짜는 방식만 바뀌어서</b>, "예전엔 내가 직접 하던 일을 이제 누가 대신하나"를 비교하기 좋습니다.</p></div>
@@ -6918,7 +6952,19 @@ public class HomeController {
         <div class="cb-concept"><b class="cb-cn">② DI(의존성 주입) — 필요한 객체를 밖에서 넣어 준다</b>
           <p>04·05에서는 Controller 안에서 <code>HkDao dao = new HkDao();</code>로 직접 만들었어요. 07에서는 필드에 <code>@Autowired</code>만 붙이면 <b>스프링이 미리 만들어 둔 객체(빈)를 찾아서 넣어</b> 줍니다. 그리고 변수 타입을 <code>HkService</code>가 아니라 인터페이스 <code>IHKService</code>로 선언했어요. 그래야 나중에 구현을 바꿔도 Controller 코드는 그대로 둘 수 있습니다.</p></div>
         <div class="cb-concept"><b class="cb-cn">③ MyBatis — SQL은 XML에, 자바는 이름만 부른다</b>
-          <p>JDBC로 짜던 연결 → <code>PreparedStatement</code> → <code>ResultSet</code> → DTO에 옮겨 담기 → 닫기를 MyBatis가 대신해요. 우리는 XML에 SQL과 이름(<code>id</code>)만 적고, DAO에서 <code>"namespace.id"</code> 문자열로 부릅니다. 결과를 담을 타입(<code>resultType="HkDto"</code>)만 알려 주면 <b>컬럼 이름과 필드 이름이 같은 것끼리 자동으로 채워</b> 줍니다.</p></div>
+          <p>JDBC로 짜던 연결 → <code>PreparedStatement</code> → <code>ResultSet</code> → DTO에 옮겨 담기 → 닫기를 MyBatis가 대신해요. 우리는 XML에 SQL과 이름(<code>id</code>)만 적고, DAO에서 <code>"namespace.id"</code> 문자열로 부릅니다. 결과를 담을 타입(<code>resultType="HkDto"</code>)만 알려 주면 <b>컬럼 이름과 필드 이름이 같은 것끼리 자동으로 채워</b> 줍니다. 이때 <b>대소문자는 따지지 않아서</b> 컬럼 <code>REGDATE</code>가 필드 <code>regDate</code>에 그대로 들어가요. 그리고 원래는 <code>resultType="com.hk.board.dtos.HkDto"</code>처럼 패키지까지 다 적어야 하는데, <code>Configuration.xml</code>에 <code>typeAlias</code>로 <b>별칭</b>을 등록해 두었기 때문에 <code>HkDto</code>라는 짧은 이름만 써도 됩니다.</p></div>
+        <div class="cb-concept"><b class="cb-cn">④ 커맨드 객체 — 폼 값을 DTO 하나로 받기</b>
+          <p>05까지는 <code>request.getParameter("title")</code>을 값마다 한 줄씩 불러 꺼냈어요. 07의 글쓰기 메서드는 매개변수에 <code>HkDto dto</code> 하나만 적습니다. 그러면 스프링이 ① <code>HkDto</code>를 기본 생성자로 만들고 ② 요청 파라미터 이름(<code>id</code>·<code>title</code>·<code>content</code>)과 <b>같은 이름의 필드</b>를 찾아 setter로 채워서 넘겨 줘요. 이렇게 폼 값을 받아 주는 객체를 <b>커맨드 객체</b>라고 합니다. 그래서 폼의 <code>name</code>과 DTO의 필드 이름이 맞아야 해요. 이름이 다르면 에러 없이 그 필드만 비어(<code>null</code>·0) 들어옵니다.</p></div>
+        <div class="cb-concept"><b class="cb-cn">⑤ redirect와 PRG — 저장한 뒤엔 목록 주소로 다시 보내기</b>
+          <p>메서드가 <code>"boardlist"</code>처럼 이름만 돌려주면 JSP로 <b>forward</b>하고, <code>"redirect:boardlist.do"</code>를 돌려주면 브라우저에게 "이 주소로 <b>새로 요청</b>해"라고 응답합니다. 글쓰기(POST) 뒤에 forward로 목록을 보여 주면 주소창에는 여전히 <code>boardInsert.do</code>가 남아 있어서, 새로고침할 때 <b>같은 글이 또 저장</b>될 수 있어요. redirect하면 브라우저의 마지막 요청이 <code>GET boardlist.do</code>가 되므로 새로고침해도 목록만 다시 읽습니다. 이 순서 — <b>P</b>OST로 저장 → <b>R</b>edirect → <b>G</b>ET으로 보기 — 를 <b>PRG 패턴</b>이라고 해요. 07은 글쓰기·수정·여러 글 삭제가 모두 이렇게 끝납니다.</p></div>
+        <div class="cb-concept"><b class="cb-cn">⑥ 06 → 07에서 바뀐 것</b>
+          <ul>
+            <li>컨트롤러: 06의 <code>HomeController</code>(화면 하나) → 07의 <code>BoardController</code>(목록·글쓰기 폼·글쓰기·상세·수정·여러 글 삭제).</li>
+            <li>새 층: <code>IHKService</code>/<code>HkService</code>(Service), <code>IHkDao</code>/<code>HkDao</code>(DAO), <code>HkDto</code>(06의 <code>TestDto</code> 자리).</li>
+            <li><code>BoardMapper.xml</code>: 06에서는 namespace만 있는 빈 껍데기 → 07에서 <code>select</code>·<code>insert</code>·<code>update</code>·<code>delete</code>와 <code>&lt;foreach&gt;</code>가 채워짐.</li>
+            <li><code>Configuration.xml</code>: 별칭이 <code>TestDto</code> → <code>HkDto</code>로.</li>
+            <li>그대로인 것: <code>web.xml</code>(표시 이름만 다름),<code>root-context.xml</code>(DataSource → SqlSessionFactory → SqlSessionTemplate), <code>servlet-context.xml</code>(ViewResolver, <code>com.hk.board</code> 스캔). 33장에서 깔아 둔 뼈대를 손대지 않고 그 위에 게시판만 올린 거예요.</li>
+          </ul></div>
 
         <h4 class="cb-h4">예제 — 수업 코드로 확인하기</h4>
         <div class="cb-ex">
@@ -6973,15 +7019,126 @@ public class HkDao implements IHkDao {
 		FROM HKBOARD ORDER BY REGDATE DESC
 	&lt;/select&gt;</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — ③의 <code>namespace + "boardList"</code>와 ④의 <code>namespace</code>·<code>id</code>가 글자 하나까지 같아야 연결됩니다. 한 글자라도 다르면 <code>Mapped Statements collection does not contain value</code> 에러가 나요. 그리고 어디에도 <code>new</code>가 없다는 점을 확인하세요. 객체는 전부 스프링이 만들어 넣었습니다.</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-html">XML</span><span class="code-file">⑤ sqls/Configuration.xml — HkDto 별칭 등록(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-xml">  &lt;!-- 변수 설정: Mapper.xml에서 DTO객체를 쉽게 정의하기 위해 설정
+  				com.hk.board.dtos.TestDto : 길어서 매번 작성 불편함
+   --&gt;
+  &lt;typeAliases&gt;
+  	&lt;typeAlias type="com.hk.board.dtos.HkDto" alias="HkDto"/&gt;
+  &lt;/typeAliases&gt;</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — ③의 <code>namespace + "boardList"</code>와 ④의 <code>namespace</code>·<code>id</code>가 글자 하나까지 같아야 연결됩니다. 한 글자라도 다르면 <code>Mapped Statements collection does not contain value</code> 에러가 나요. 그리고 어디에도 <code>new</code>가 없다는 점을 확인하세요. 객체는 전부 스프링이 만들어 넣었습니다. ④의 <code>resultType="HkDto"</code>가 짧은 이름으로 통하는 건 ⑤의 별칭 덕분이에요(주석의 <code>TestDto</code>는 06에서 쓰던 이름이 남은 것). 또 SQL은 <code>REGDATE</code>를 대문자로 읽지만, MyBatis가 대소문자를 무시하고 맞춰 주어 <code>HkDto</code>의 <code>regDate</code> 필드에 담깁니다.</p>
         </div>
 
-        <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 수업 코드에서 조심할 곳</span><p>Spring 6.1부터는 <code>@RequestParam</code>에 이름을 생략하면(<code>String seq</code>만 쓰면) 컴파일 옵션 <code>-parameters</code>가 없을 때 예외가 납니다. 07의 여러 글 삭제처럼 <code>@RequestParam("seq")</code>로 <b>이름을 꼭 적어</b> 주세요.</p></div>
+        <div class="cb-ex">
+          <p class="cb-ex-t">글쓰기 — 폼 값이 HkDto로 들어오고, 저장 뒤엔 redirect</p>
+          <p class="cb-ex-why">이 두 조각은 <b>폼의 <code>name</code>이 DTO 필드로 바로 들어가는 커맨드 객체 바인딩과, 저장 뒤 목록으로 redirect하는 PRG</b>를 보여 줍니다. 05에서 <code>getParameter</code> 여러 줄과 <code>sendRedirect</code>로 하던 일이에요.</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-html">JSP</span><span class="code-file">views/boardInsertForm.jsp — 글쓰기 폼(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-html">&lt;form action="boardInsert.do" method="post"&gt;
+&lt;!-- 	&lt;input type="hidden" name="command" value="boardInsert"/&gt; --&gt;
+	&lt;table border="1"&gt;
+		&lt;tr&gt;
+			&lt;th&gt;작성자(ID)&lt;/th&gt;
+			&lt;td&gt;&lt;input type="text" name="id" required="required" /&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th&gt;글제목&lt;/th&gt;
+			&lt;td&gt;&lt;input type="text" name="title" required="required" /&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th&gt;글내용&lt;/th&gt;
+			&lt;td&gt;&lt;textarea rows="10" cols="60"
+									name="content"
+			                        required="required"&gt;&lt;/textarea&gt; &lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;!-- …(글등록 · 글목록 버튼 줄 생략) --&gt;
+	&lt;/table&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.java — boardInsert()(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">	@RequestMapping(value = "/boardInsert.do", method = RequestMethod.POST)
+	public String boardInsert(HkDto dto) {
+		//파라미터: HkDto가 받아준다(id, title, content)
+		boolean isS=hkService.insertBoard(dto);
+		if(isS) {
+			return "redirect:boardlist.do";
+		}
+		else {
+			return "redirect:error.jsp";
+		}
+	}</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 폼의 <code>name="id"</code>·<code>"title"</code>·<code>"content"</code>가 <code>HkDto</code>의 필드 이름과 같아서, 메서드 안에 <code>getParameter</code>가 한 줄도 없어요. <code>seq</code>와 <code>regDate</code>는 폼에 없으니 비어 있고, INSERT 문의 <code>NULL</code>(자동 번호)과 <code>SYSDATE()</code>가 채웁니다. 성공하면 <code>"redirect:boardlist.do"</code> — 브라우저가 목록 주소로 <b>새로 GET 요청</b>을 보내므로, 목록 화면에서 새로고침해도 글이 두 번 저장되지 않습니다(PRG). 이 INSERT는 트랜잭션 설정이 없어 실행 즉시 확정돼요(<a href="#book-be-33">33장</a>). 실패 쪽 <code>redirect:error.jsp</code>는 아래 "조심할 곳" ③을 보세요.</p>
+        </div>
+
+        <div class="cb-ex">
+          <p class="cb-ex-t">여러 글 삭제 — 체크박스 → String[] → Map → &lt;foreach&gt;</p>
+          <p class="cb-ex-why">이 네 조각은 <b>몇 개가 올지 모르는 번호를 SQL의 <code>IN (…)</code>으로 만드는 동적 쿼리</b>를 보여 줍니다. 35장의 08 게시판도 같은 방법을 써요.</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-html">JSP</span><span class="code-file">views/boardlist.jsp — 삭제 폼과 체크박스(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-html">&lt;form action="mulDel.do" method="post" onsubmit="return isAllCheck()"&gt;
+&lt;!-- …(표 머리줄 생략) --&gt;
+				&lt;c:forEach items="${list}" var="dto"&gt;
+					&lt;tr&gt;
+						&lt;td&gt;&lt;input type="checkbox" name="seq"
+						                           value="${dto.seq}" /&gt;&lt;/td&gt;</code></pre>
+          </div>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">BoardController.java — mulDel()(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">	//삭제하는 기능은 post방식을 권장함
+	// mulDel.do?seq=10 주소창에 노출되면 위험하다.
+	//Spring6 에서는 파라미터 받을때 @RequestParam 명시하기
+	@RequestMapping(value = "/mulDel.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public String mulDel(@RequestParam("seq")String[] seq) {
+		boolean isS=hkService.mulDel(seq);
+		if(isS) {
+			return "redirect:boardlist.do";
+		}else {
+			return "redirect:error.jsp";
+		}
+
+	}</code></pre>
+          </div>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">HkDao.java — mulDel()(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">	@Override
+	public boolean mulDel(String[] seqs) {
+		//동적쿼리에 파라미터를 전달할 경우
+		//Map에 담아서 전달해줘야 한다.
+		Map&lt;String, String[]&gt; map = new HashMap&lt;&gt;();
+		map.put("seqs", seqs);
+		int count=sqlSession.delete(namespace+"mulDel",map);
+		return count&gt;0;
+	}</code></pre>
+          </div>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-html">XML</span><span class="code-file">sqls/BoardMapper.xml — mulDel(원본 발췌)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-xml">&lt;!-- 여러글 삭제
+	다이나믹쿼리(동적쿼리)
+	파라미터: String[]seqs={1,2,3,4,5}
+	이렇게 되어있는걸 갖다가 Map{"seqs",seqs} 로 전달하겠다는 얘기임
+ --&gt;
+ 	&lt;delete id="mulDel" parameterType="Map"&gt;
+ 		DELETE FROM HKBOARD WHERE SEQ IN
+ 		&lt;foreach collection="seqs" item="seq" open="(" close=")" separator=","&gt;
+ 		#{seq}
+ 		&lt;/foreach&gt;
+ 	&lt;/delete&gt;</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 체크박스가 모두 <code>name="seq"</code>라서, 3개를 체크하면 <code>seq=3&amp;seq=7&amp;seq=9</code>처럼 같은 이름이 여러 번 갑니다. <code>@RequestParam("seq") String[] seq</code>가 이것을 배열 <code>{"3","7","9"}</code>로 받고, DAO가 <code>"seqs"</code>라는 <b>이름표</b>를 붙여 Map에 넣어요. Mapper의 <code>collection="seqs"</code>가 바로 그 이름표이고, <code>&lt;foreach&gt;</code>가 <code>open="("</code> · <code>separator=","</code> · <code>close=")"</code>로 이어 붙여 <code>DELETE FROM HKBOARD WHERE SEQ IN (?, ?, ?)</code>를 만듭니다. 하나도 체크하지 않고 보내면 <code>seq</code> 값 자체가 없어서 필수인 <code>@RequestParam</code>에서 요청이 거절(400)되는데, 목록 화면의 <code>isAllCheck()</code>가 0개일 때 전송을 막아 줘요.</p>
+        </div>
+
+        <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 수업 코드에서 조심할 곳</span><p>① Spring 6.1부터는 <code>@RequestParam</code>에 이름을 생략하면(<code>String seq</code>만 쓰면) 컴파일 옵션 <code>-parameters</code>가 없을 때 예외가 납니다. 07의 여러 글 삭제처럼 <code>@RequestParam("seq")</code>로 <b>이름을 꼭 적어</b> 주세요. ② 07의 <code>home.do</code>가 실제로 이 문제를 겪어요. <code>home(Model model, String param, HkDto dto, HttpServletRequest request)</code>의 <code>String param</code>에 이름이 없어서, <code>-parameters</code> 없이 컴파일된 이 프로젝트 설정에서는 요청 때 <code>IllegalArgumentException</code>(Name for argument of type [java.lang.String] not specified …)이 납니다(07 README 참고). <code>@RequestParam(value = "param", required = false)</code>처럼 이름을 적거나, <code>pom.xml</code>의 컴파일러 설정에 <code>&lt;parameters&gt;true&lt;/parameters&gt;</code>를 넣으면 해결돼요. 커맨드 객체(<code>HkDto dto</code>)는 이름이 아니라 필드로 채우므로 이 문제가 없습니다. ③ 실패할 때의 <code>return "redirect:error.jsp"</code>는 브라우저를 <code>/07_hkboard_springMVC/error.jsp</code>로 보내는데, 07의 <code>error.jsp</code>는 <code>WEB-INF/views</code> 안에 있어서 브라우저가 직접 열 수 없어요 — 결국 <b>404</b>가 납니다. <code>return "error";</code>로 바꿔 ViewResolver가 <code>/WEB-INF/views/error.jsp</code>로 forward하게 하는 것이 맞아요. 35장의 08에도 같은 짝의 error.jsp 문제가 나옵니다.</p></div>
 
         <div class="cb-box cb-key"><span class="cb-box-t">핵심 정리</span><ul>
           <li>요청의 길: <b>DispatcherServlet → Controller → Service → DAO → Mapper → DB</b>, 결과는 거꾸로 올라와 <code>Model</code>에 담겨 JSP로 간다.</li>
           <li><code>@Controller</code>·<code>@Service</code>·<code>@Repository</code>를 붙인 클래스는 스프링이 객체로 만들어 두고, <code>@Autowired</code> 자리에 넣어 준다(DI).</li>
-          <li>MyBatis는 <code>namespace.id</code>로 SQL을 찾고, <code>resultType</code>에 맞춰 결과를 자동으로 담는다.</li>
+          <li>MyBatis는 <code>namespace.id</code>로 SQL을 찾고, <code>resultType</code>에 맞춰 결과를 자동으로 담는다(컬럼↔필드 대소문자 무시, 짧은 이름은 <code>typeAlias</code> 덕분).</li>
+          <li>매개변수에 DTO를 적으면 폼의 <code>name</code>과 같은 필드에 값이 채워진다(커맨드 객체). 낱개 값은 <code>@RequestParam("이름")</code>으로 이름을 적어 받는다.</li>
+          <li>개수를 모르는 번호 목록은 Map에 이름표를 붙여 넘기고, <code>&lt;foreach collection="그 이름표"&gt;</code>로 <code>IN (…)</code>을 만든다.</li>
           <li>저장·수정·삭제 뒤에는 <code>return "redirect:boardlist.do"</code> — 새로고침해도 다시 저장되지 않게(PRG).</li>
         </ul></div>
 
@@ -6989,10 +7146,12 @@ public class HkDao implements IHkDao {
           <details><summary>05에서 Controller가 직접 하던 일 중 07에서 사라진 것 두 가지는?</summary><div class="cb-a">① <code>new HkDao()</code>로 객체를 직접 만드는 일 → 스프링이 주입. ② URI를 잘라 어떤 요청인지 분기하는 일 → <code>@RequestMapping</code>이 메서드마다 주소를 연결.</div></details>
           <details><summary>DAO의 <code>namespace</code> 문자열을 "com.hk.board.daos."로 바꾸면 무슨 일이 생기나요?</summary><div class="cb-a">Mapper의 namespace는 그대로 "com.hk.board.dao"라서 이름이 맞지 않아 SQL을 찾지 못하고 에러가 납니다. 자바 패키지 이름과는 상관없이 <b>두 문자열만 같으면</b> 됩니다.</div></details>
           <details><summary>Service가 DAO를 그대로 부르기만 하는데 왜 굳이 만들었을까요?</summary><div class="cb-a">업무 규칙이 들어갈 자리를 미리 만든 것입니다. 08에서 답글을 달 때 "아래 글 밀기(UPDATE) + 답글 넣기(INSERT)"를 하나의 트랜잭션으로 묶는데, 그 묶음의 단위가 Service 메서드입니다.</div></details>
+          <details><summary>글쓰기 성공 뒤 <code>return "boardlist";</code>(forward)로 바꾸면 어떤 문제가 생길까요?</summary><div class="cb-a">① <code>boardlist.jsp</code>가 쓸 <code>list</code>를 Model에 담지 않았으니 목록이 비어 보이고, ② 주소창에 <code>boardInsert.do</code>가 남아 새로고침하면 같은 POST가 다시 가서 글이 또 저장될 수 있어요. 그래서 <code>redirect:boardlist.do</code>로 목록 요청을 새로 하게 합니다(PRG).</div></details>
+          <details><summary>HkDao의 <code>map.put("seqs", seqs)</code>를 <code>map.put("nums", seqs)</code>로 바꾸면?</summary><div class="cb-a">Mapper의 <code>&lt;foreach collection="seqs"&gt;</code>가 Map에서 <code>"seqs"</code>를 찾지 못해 에러가 납니다. Map의 키와 <code>collection</code> 값이 같아야 해요. 바꾸려면 둘을 함께 바꿉니다.</div></details>
         </div>
 
         <div class="cb-box"><span class="cb-box-t">다음 장으로</span><p>07로 "돌아가는 게시판"이 완성됐어요. 하지만 글이 1,000개면 한 화면에 다 나오고, 답글도 못 달아요. 35장에서는 08 프로젝트로 <b>페이지 나누기와 답글</b>을 만듭니다.</p></div>
-        <p class="cb-more">더 자세히 → <a href="#class-day37">37일차 수업</a><a href="#class-day38">38일차 수업</a><a href="#web-41">목록이 화면에 나오기까지</a><a href="#web-42">인터페이스와 DI</a><a href="#web-44">MyBatis가 SQL을 찾는 이름</a><a href="#web-47">CRUD 매핑표</a></p>
+        <p class="cb-more">더 자세히 → <a href="#class-day37">37일차 수업</a><a href="#class-day38">38일차 수업</a><a href="#web-41">목록이 화면에 나오기까지</a><a href="#web-42">인터페이스와 DI</a><a href="#web-44">MyBatis가 SQL을 찾는 이름</a><a href="#web-45">여러 글 삭제와 foreach</a><a href="#web-47">CRUD 매핑표</a><a href="#web-48">커맨드 객체와 @RequestParam</a><a href="#web-49">Spring 6.1과 -parameters</a><a href="#web-50">저장한 뒤엔 왜 redirect인가</a></p>
       </article>
       <article class="cb-ch" id="book-be-35" data-part="6부 · 웹 개발 — 예제 프로젝트로 배우기">
         <div class="cb-head">
@@ -7015,10 +7174,10 @@ public class HkDao implements IHkDao {
           <p>답글을 달 때는 ① 같은 refer에서 <b>부모보다 step이 큰 글들을 한 칸씩 밀고</b>(UPDATE step+1) ② 비워진 자리(부모 step+1)에 <b>부모 depth+1</b>로 INSERT 합니다. 줄 선 사람들 사이에 누가 끼어들 때 뒷사람들이 한 걸음씩 물러나는 것과 같아요.</p></div>
         <div class="cb-concept"><b class="cb-cn">② 페이지 나누기 — ROW_NUMBER와 Paging 유틸</b>
           <p>SQL에서 <code>ROW_NUMBER() OVER(ORDER BY refer DESC, step ASC)</code>로 정렬된 순서대로 1, 2, 3… 번호(<code>rn</code>)를 붙이고, <code>ceil(rn/10) = #{pnum}</code>으로 <b>pnum번째 10개</b>만 가져와요(1~10은 1쪽, 11~20은 2쪽). 전체 쪽수는 <code>ceil(count(*)/10)</code>입니다.</p>
-          <p>아래 번호판은 <code>Paging.pagingValue(전체쪽수, 현재쪽, 5)</code>가 <b>5개씩 묶어</b> 계산해요: 8쪽이면 6~10이 보이고, "이전"은 5쪽, "다음"은 11쪽. 화면을 옮겨 다녀도 보던 쪽으로 돌아오도록 글쓰기·상세·수정·삭제의 모든 링크와 폼이 <code>pnum</code>을 <b>계속 들고 다녀요</b>.</p></div>
+          <p>아래 번호판은 <code>Paging.pagingValue(전체쪽수, 현재쪽, 5)</code>가 <b>5개씩 묶어</b> 계산해요: 전체가 11쪽 이상일 때 8쪽이면 6~10이 보이고, "이전"은 5쪽, "다음"은 11쪽. 화면을 옮겨 다녀도 보던 쪽으로 돌아오도록 글쓰기·상세·수정·삭제의 모든 링크와 폼이 <code>pnum</code>을 <b>계속 들고 다녀요</b>.</p></div>
         <div class="cb-concept"><b class="cb-cn">③ 조회수와 논리 삭제</b>
           <p>목록의 제목 링크에는 <code>review=y</code>가 붙어 있어요. 이 표시가 있을 때만 조회수를 +1 하고, 곧바로 <b><code>review</code>가 없는 상세 주소로 redirect</b> 합니다. 그래서 상세 화면에서 새로고침(F5)을 눌러도 조회수가 또 오르지 않아요(대신 요청이 두 번 오가는 비용이 있습니다).</p>
-          <p>삭제는 <code>DELETE</code> 대신 <code>UPDATE … SET delflag='Y'</code> — <b>논리 삭제</b>예요. 원글을 진짜로 지우면 그 아래 답글들의 줄이 어색해지니, 줄은 남겨 두고 목록에서 "---삭제된 글입니다.---"로 보여 줍니다. 체크한 여러 번호는 07과 같이 MyBatis <code>&lt;foreach&gt;</code>로 <code>IN (…)</code>을 만들어요.</p></div>
+          <p>삭제는 <code>DELETE</code> 대신 <code>UPDATE … SET delflag='Y'</code> — <b>논리 삭제</b>예요. 원글을 진짜로 지우면 그 아래 답글들의 줄이 어색해지니, 줄은 남겨 두고 목록에서 "---삭제된 글입니다.---"로 보여 줍니다. 체크한 여러 번호는 07과 같이 MyBatis <code>&lt;foreach&gt;</code>로 <code>IN (…)</code>을 만들어요(<a href="#book-be-34">34장</a> 예제 참고).</p></div>
         <div class="cb-concept"><b class="cb-cn">④ 화면 조각 나누기 — jsp:include</b>
           <p>모든 화면에 반복되는 메뉴(머리)와 저작권(꼬리)을 <code>header.jsp</code> · <code>footer.jsp</code>로 빼고 <code>&lt;jsp:include page="header.jsp"/&gt;</code>로 불러와요. <code>&lt;jsp:include&gt;</code>는 요청 때마다 그 JSP를 <b>실행한 결과</b>를 끼워 넣는 동적 include이고, <code>&lt;%@ include file="…" %&gt;</code>는 번역 단계에서 <b>소스를 붙여</b> 한 파일로 만드는 정적 include예요. 모양은 Bootstrap 클래스(<code>table table-striped</code>, <code>btn btn-primary</code>, <code>pagination</code>)로 입혔습니다.</p></div>
 
@@ -7153,7 +7312,7 @@ public String boardDetail(@RequestParam("seq")int seq,
           <li>생성자 주입과 "Controller는 얇게"가 무엇인지 안다.</li>
         </ul></div>
 
-        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>35장의 답글 저장은 <b>UPDATE(아래 글 밀기) + INSERT(답글 넣기)</b> 두 쿼리예요. 트랜잭션이 없으면 쿼리마다 바로 확정되므로, INSERT만 실패하면 step만 밀리고 답글은 없는 <b>빈자리</b>가 남습니다. 29장(02)에서는 <code>setAutoCommit(false)</code> → <code>commit()</code>/<code>rollback()</code>을 손으로 썼지만, 스프링 + MyBatis에서는 우리가 <code>Connection</code>을 직접 잡지 않아요. 또 01부터 써 온 <code>System.out.println</code> 확인 출력은 끄고 켤 수 없고, DAO 메서드마다 손으로 넣어야 했죠. 이 장은 "돌아가는 코드"를 "믿고 운영할 수 있는 코드"로 다듬는 도구들을 봅니다.</p></div>
+        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>35장의 답글 저장은 <b>UPDATE(아래 글 밀기) + INSERT(답글 넣기)</b> 두 쿼리예요. 08의 DataSource는 <code>defaultAutoCommit=false</code>지만, 스프링 트랜잭션 밖에서는 <code>SqlSessionTemplate</code>이 문장마다 commit해서 앞 쿼리가 그대로 확정돼요. 그래서 INSERT만 실패하면 step만 밀리고 답글은 없는 <b>빈자리</b>가 남습니다. 29장(02)에서는 <code>setAutoCommit(false)</code> → <code>commit()</code>/<code>rollback()</code>을 손으로 썼지만, 스프링 + MyBatis에서는 우리가 <code>Connection</code>을 직접 잡지 않아요. 또 01부터 써 온 <code>System.out.println</code> 확인 출력은 끄고 켤 수 없고, DAO 메서드마다 손으로 넣어야 했죠. 이 장은 "돌아가는 코드"를 "믿고 운영할 수 있는 코드"로 다듬는 도구들을 봅니다.</p></div>
 
         <h4 class="cb-h4">개념</h4>
         <div class="cb-concept"><b class="cb-cn">① 트랜잭션 — @Transactional 한 줄</b>
@@ -7211,7 +7370,7 @@ public boolean boardReply(AnsDto dto) {
 	return count&gt;0;
 }</code></pre>
           </div>
-          <p class="cb-look">👀 <b>관찰 포인트</b> — 로그의 "트랜젝션 활성 상태:true"가 트랜잭션이 걸렸다는 증거예요. 주석 처리된 <code>throw</code>를 풀면 UPDATE 뒤에 예외가 나서 <b>rollback</b> → step이 밀리지 않은 원래 상태로 남습니다. 02의 <code>setAutoCommit(false)</code> · <code>commit()</code> · <code>rollback()</code> 세 줄이 애너테이션 한 줄이 된 셈이에요. 짝이 되는 servlet-context.xml의 스캔은 <code>&lt;context:component-scan base-package="com.hk.ansboard.controller" /&gt;</code>로 좁혀져 있습니다. 40일차까지처럼 <code>com.hk.ansboard</code> 전체를 스캔하게 되돌리면 같은 코드에서 <code>false</code>가 찍혀요. <code>proxy-target-class="true"</code>는 08의 Service가 인터페이스 없는 클래스라 <b>클래스를 상속한</b> 대리 객체를 만들라는 뜻입니다.</p>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 로그의 "트랜젝션 활성 상태:true"가 트랜잭션이 걸렸다는 증거예요. 주석 처리된 <code>throw</code>를 풀면 UPDATE 뒤에 예외가 나서 <b>rollback</b> → step이 밀리지 않은 원래 상태로 남습니다. 02의 <code>setAutoCommit(false)</code> · <code>commit()</code> · <code>rollback()</code> 세 줄이 애너테이션 한 줄이 된 셈이에요. 짝이 되는 servlet-context.xml의 스캔은 <code>&lt;context:component-scan base-package="com.hk.ansboard.controller" /&gt;</code>로 좁혀져 있습니다. 40일차까지처럼 <code>com.hk.ansboard</code> 전체를 스캔하게 되돌리면 같은 코드에서 <code>false</code>가 찍혀요. <code>proxy-target-class="true"</code>는 인터페이스가 있어도 <b>클래스를 상속한</b> 대리 객체(CGLIB 프록시)를 <b>강제로</b> 만들라는 옵션이에요. 08의 <code>AnsService</code>는 인터페이스가 없는 클래스라, 이 설정이 없어도 스프링은 어차피 클래스 상속 프록시를 씁니다(Spring 6.1에서는 이름이 <code>AnsService$$SpringCGLIB$$0</code>처럼 찍혀요).</p>
         </div>
         <div class="cb-ex">
           <p class="cb-ex-t">DAO는 그대로, 로그는 바깥에서 — aop-context.xml과 LogExecute</p>
@@ -9032,7 +9191,7 @@ java</pre>
         <div class="sc-a">아닙니다. 그건 <code>sss</code> 변수가 <b>다른 문자열을 가리키게 됐을 뿐</b>이고, String이 아닌 어떤 참조타입이라도 원본 변수는 똑같이 그대로입니다. 진짜 증거는 <code>s.replace("j", "o")</code>입니다 — <b><code>s</code>에 직접</b> 바꾸는 메서드를 불렀는데도 <code>s</code>는 "java" 그대로이고, 바뀐 결과는 <b>새 문자열</b>(<code>s4</code>)로 돌아옵니다.</div>
       </details>
     </div>
-    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 싱글턴은 직접 만들기보다 <b>스프링이 대신 관리</b>합니다 — 스프링 빈은 기본이 싱글턴이라 서비스·DAO 객체 하나를 모든 요청이 함께 씁니다. 그래서 빈의 필드에 요청마다 다른 값을 저장하면 <b>다른 사용자의 요청과 값이 섞이는</b> 버그가 납니다. 상수는 <code>static final</code>로, 반복 연결은 <code>StringBuilder</code>로, 문자열 비교는 항상 <code>equals</code>로 하는 것이 기본 습관입니다. 면접에서는 "자바는 Call by Value인가", "String·StringBuilder·StringBuffer의 차이(StringBuffer는 동기화됨)", "싱글턴 구현"이 단골이고, 코딩테스트에서는 <a href="#ct-44">숫자 문자열과 영단어</a>처럼 <b><code>s = s.replace(...)</code>로 다시 담지 않아</b> 답이 안 바뀌는 실수가 자주 나옵니다.</p>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 싱글턴은 직접 만들기보다 <b>스프링이 대신 관리</b>합니다 — 스프링 빈은 기본이 싱글턴이라 서비스·DAO 객체 하나를 모든 요청이 함께 씁니다. 그래서 빈의 필드에 요청마다 다른 값을 저장하면 <b>다른 사용자의 요청과 값이 섞이는</b> 버그가 납니다. 상수는 <code>static final</code>로, 반복 연결은 <code>StringBuilder</code>로, 문자열 비교는 항상 <code>equals</code>로 하는 것이 기본 습관입니다. 면접에서는 "자바는 Call by Value인가", "String·StringBuilder·StringBuffer의 차이(StringBuffer는 동기화됨)", "싱글턴 구현"이 단골이고, 코딩테스트에서는 <a href="#ct-44">숫자 문자열과 영단어</a>처럼 <b><code>s = s.replace(...)</code>로 다시 담지 않으면</b> 영문자가 그대로 남아 <code>parseInt</code>에서 <code>NumberFormatException</code>이 나는 실수가 자주 나옵니다.</p>
     <div class="note-tip"><span class="tip-label">TIP</span><code>D1_ImmutableTest.change02</code>를 시험 직전에 다시 보세요. <code>aa = imTest.bb;</code>로 꺼낸 <code>aa</code>는 <b>int 지역변수라 이후 아무리 바꿔도(<code>aa = 15</code>) 원본과 무관</b>합니다. 원본이 바뀌는 건 오직 <code>imTest.bb = 10;</code>처럼 <b>객체의 참조를 타고 들어가 필드에 직접 대입</b>할 때뿐입니다. "참조타입을 넘기면 항상 원본이 바뀐다"고 외우면 이 문제에서 틀립니다 — <b>"필드에 직접 대입했는가"</b>가 진짜 기준입니다. 하나 더 — <code>D3_Singleton</code>의 주석 처리된 줄 <code>// list.add("가"); //자동 형변환 -&gt; 참조타입끼리는 가능</code>은 <b>틀린 설명</b>입니다. <code>List&lt;Integer&gt;</code>에는 Integer만 넣을 수 있어서 주석을 풀면 <b>컴파일 에러</b>가 납니다. String과 Integer는 상속 관계가 없으므로 "참조타입끼리"라도 자동 형변환되지 않습니다(제네릭이 바로 이런 실수를 컴파일 시점에 막아 주는 장치입니다). 마지막으로 <code>D4_StringCompare</code>의 효율 비교를 제대로 하려면 <b>같은 횟수로 시간을 재야</b> 합니다 — 예를 들어 두 방식 모두 10,000번 반복하고 앞뒤로 <code>long start = System.currentTimeMillis();</code> … <code>System.out.println(System.currentTimeMillis() - start + "ms");</code>를 찍어 보면 <code>+=</code> 쪽이 눈에 띄게 오래 걸리는 걸 확인할 수 있습니다(정확한 ms는 컴퓨터마다 다름). 수업 코드처럼 <code>hashCode()</code>를 찍는 건 결과 문자열의 해시값일 뿐 속도와는 관계가 없습니다.</div>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/java_edu_project/src/hk/edu20260807/day05/D1_ImmutableTest.java">D1_ImmutableTest.java</a> ·
@@ -9474,8 +9633,8 @@ public class D3_CalculatorMain {
     <div class="note-tags"><span class="tag">개미수열</span><span class="tag">배열</span><span class="tag">얕은 복사</span><span class="tag">깊은 복사</span><span class="tag">arraycopy</span><span class="tag">2차원 배열</span></div>
   </div>
   <div class="note-body">
-    <p class="note-summary"><span class="summary-label">한 줄 요약</span>6일차의 문자열 메서드를 <b>개미수열(Look-and-say)</b>이라는 실전 문제로 다시 써먹고, 배열을 <b>리터럴·new·크기만 선언</b> 세 가지 방식으로 만드는 법과 <b>얕은 복사(주소만 복사)와 깊은 복사(내용을 통째로 복사)의 차이</b>를 <code>b = a</code> 대입 하나로 직접 확인한 날. 2차원 배열의 <code>length</code>는 "바깥 배열 길이"와 "안쪽 배열 길이"가 따로라는 것과, <b>2차원 ↔ 1차원 배열 변환 공식</b>도 코드로 정리했다.</p>
-    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>b = a;</code>는 <b>원본 사진을 새로 뽑아 주는 게 아니라 같은 사진이 걸린 액자를 하나 더 다는 것</b>입니다 — 액자(b) 속 사진을 고치면 원본(a) 사진도 같이 바뀝니다(얕은 복사). 진짜 사진을 한 장 더 인화하려면 <code>arraycopy()</code>나 직접 루프를 돌려 <b>내용물을 새 자리에 옮겨 담아야</b> 합니다(깊은 복사).</p>
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>6일차의 문자열 메서드를 <b>개미수열(Look-and-say)</b>이라는 실전 문제로 다시 써먹고, 배열을 <b>리터럴·new·크기만 선언</b> 세 가지 방식으로 만드는 법과 <b>참조 복사(<code>b = a</code> — 새 배열이 생기지 않음)와 새 배열에 값을 옮기는 복사(<code>arraycopy</code>·<code>clone</code>)의 차이</b>를 <code>b = a</code> 대입 하나로 직접 확인한 날. 2차원 배열의 <code>length</code>는 "바깥 배열 길이"와 "안쪽 배열 길이"가 따로라는 것과, <b>2차원 ↔ 1차원 배열 변환 공식</b>도 코드로 정리했다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>b = a;</code>는 <b>원본 사진을 새로 뽑아 주는 게 아니라 같은 사진이 걸린 액자를 하나 더 다는 것</b>입니다 — 액자(b) 속 사진을 고치면 원본(a) 사진도 같이 바뀝니다(참조 복사 — 새 배열이 생기지 않음). 진짜 사진을 한 장 더 인화하려면 <code>arraycopy()</code>나 직접 루프를 돌려 <b>내용물을 새 자리에 옮겨 담아야</b> 합니다(칸의 값만 옮기는 얕은 복사지만, 1차원 기본타입 배열이면 이것으로 완전히 따로 놉니다).</p>
     <div class="note-concept">
       <div class="concept-block">
         <h4>① D1_Ant — 개미수열, indexOf 없이 <code>charAt</code>만으로</h4>
@@ -9486,8 +9645,8 @@ public class D3_CalculatorMain {
         <p>(a) <b>리터럴</b>: <code>int[] a = {1,2,3,4,5,6};</code>처럼 선언과 동시에 초기화(<code>int[] a;</code> 다음 줄에 <code>a = {…};</code>처럼 <b>선언과 초기화를 다른 줄로 나눌 수 없음</b>). (b) <b><code>new</code></b>: <code>b2 = new int[]{1,2,3,4,5};</code>로 나중에 초기화. (c) <b>크기만 선언</b>: <code>new int[5]</code>처럼 길이(칸 수)만 정하면 <code>int</code>는 자동으로 0으로 채워집니다. 생성자에서도 <code>this(3)</code>으로 위임해 배열 크기를 정하는 오버로딩(6일차 패턴 그대로)을 다시 썼습니다. → <a href="#oop-16">🧱 16. 배열 — 선언 3가지 방법</a></p>
       </div>
       <div class="concept-block">
-        <h4>③ 얕은 복사와 깊은 복사 — <code>b = a</code> vs <code>arraycopy()</code></h4>
-        <p><code>b = a;</code> 다음 <code>b[0] = 10;</code>을 하면 <b><code>a</code>도 함께 바뀝니다</b> — <code>b</code>가 새 배열이 아니라 <code>a</code>와 <b>같은 주소를 가리키는 이름표</b>이기 때문입니다(얕은 복사). 진짜로 별개의 배열을 만들려면 <code>for</code>문으로 값을 하나씩 옮기거나, <code>System.arraycopy(원본, 시작, 대상, 시작, 길이)</code>를 씁니다. 수업 주석은 <code>arraycopy()</code>와 <code>clone()</code>을 "깊은 복사"라고 불렀지만 정확히는 둘 다 <b>새 배열을 만들고 칸의 값을 그대로 옮기는 얕은 복사</b>입니다 — <code>arraycopy()</code>는 기본타입 배열뿐 아니라 <b>어떤 배열에도</b> 쓸 수 있고, <b>1차원 기본타입 배열</b>이면 칸에 값 자체가 들어 있어 결과가 깊은 복사처럼 동작합니다. 반면 객체 배열·2차원 배열은 칸에 든 것이 <b>주소</b>라 안쪽 객체·배열을 원본과 공유합니다. → <a href="#oop-17">🧱 17. 얕은 복사 · 깊은 복사</a></p>
+        <h4>③ 참조 복사 vs 새 배열로 복사 — <code>b = a</code> vs <code>arraycopy()</code></h4>
+        <p><code>b = a;</code> 다음 <code>b[0] = 10;</code>을 하면 <b><code>a</code>도 함께 바뀝니다</b> — <code>b</code>가 새 배열이 아니라 <code>a</code>와 <b>같은 주소를 가리키는 이름표</b>이기 때문입니다(참조 복사 — 새 배열이 생기지 않음. 수업 주석은 이것을 "얕은 복사"라고 적었습니다). 진짜로 별개의 배열을 만들려면 <code>for</code>문으로 값을 하나씩 옮기거나, <code>System.arraycopy(원본, 시작, 대상, 시작, 길이)</code>를 씁니다. 수업 주석은 <code>arraycopy()</code>와 <code>clone()</code>을 "깊은 복사"라고 불렀지만 정확히는 둘 다 <b>새 배열을 만들고 칸의 값을 그대로 옮기는 얕은 복사</b>입니다 — <code>arraycopy()</code>는 기본타입 배열뿐 아니라 <b>어떤 배열에도</b> 쓸 수 있고, <b>1차원 기본타입 배열</b>이면 칸에 값 자체가 들어 있어 결과가 깊은 복사처럼 동작합니다. 반면 객체 배열·2차원 배열은 칸에 든 것이 <b>주소</b>라 안쪽 객체·배열을 원본과 공유합니다. → <a href="#oop-17">🧱 17. 얕은 복사 · 깊은 복사</a></p>
       </div>
       <div class="concept-block">
         <h4>④ 2차원 배열의 <code>length</code>와 1차원 ↔ 2차원 변환 공식</h4>
@@ -9677,7 +9836,7 @@ aa의 배열의 내부 배열의 길이:3
 [1, 2, 3, 4, 5, 6]
 [1, 2, 3]
 [4, 5, 6]</pre>
-      <div class="run-note">첫 줄 <code>[10, 2, 3, 4, 5, 6]</code>이 오늘의 핵심 — <code>b[0]=10</code>만 했는데 <b><code>a</code>까지 10으로 바뀝니다</b>(얕은 복사). <code>aa</code>는 2행 3열이라 <code>aa.length=2</code>, <code>aa[0].length=3</code>입니다. 마지막 세 줄은 2행 3열 <code>bb</code>를 1차원 <code>[1,2,3,4,5,6]</code>으로 폈다가 다시 2차원 <code>[1,2,3]</code>·<code>[4,5,6]</code>으로 되돌린 결과로, 왕복해도 원래 모양 그대로 돌아온다는 걸 보여줍니다.</div>
+      <div class="run-note">첫 줄 <code>[10, 2, 3, 4, 5, 6]</code>이 오늘의 핵심 — <code>b[0]=10</code>만 했는데 <b><code>a</code>까지 10으로 바뀝니다</b>(참조 복사 — 새 배열이 생기지 않음). <code>aa</code>는 2행 3열이라 <code>aa.length=2</code>, <code>aa[0].length=3</code>입니다. 마지막 세 줄은 2행 3열 <code>bb</code>를 1차원 <code>[1,2,3,4,5,6]</code>으로 폈다가 다시 2차원 <code>[1,2,3]</code>·<code>[4,5,6]</code>으로 되돌린 결과로, 왕복해도 원래 모양 그대로 돌아온다는 걸 보여줍니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">7일차에 배운 것 — 핵심 정리</div>
@@ -10259,60 +10418,130 @@ public int calcPrice(int price) {
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D2_Calendar.java (수업 실습 원본 — 핵심 메서드만 발췌)</span>
+        <span class="code-file">D2_Calendar.java (수업 실습 원본 그대로)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">package hk.edu20260813.day09;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+
 public class D2_Calendar {
+
+    // 윤년일때 달의 마지막 날
     private static final int[] leap = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    // 평년일때 달의 마지막 날
     private static final int[] plain = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+    // 윤년을 판단하는 메서드
     public boolean isLeapYear(int year) {
-        return (year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0;
+        boolean isS = false;
+        if ((year % 4 == 0 &amp;&amp; year % 100 != 0) || year % 400 == 0) {
+            isS = true;
+        }
+        return isS;
     }
+    // 1년1월1일~2026년8월1일까지의 경과일 구하기-&gt; 공백수를 구하기 위함
+    // 1년은 365일, 366일 1년~2025년 -&gt; 윤년만 판단해서 계속 합을 구해감
+    // 해당 년도의 8월 전월까지 31+28+31 ....
 
-    // 1년1월1일부터 해당 연도 전까지의 경과일
+    // 전년도까지의 경과일
     public int dates(int year) {
         int tot = 0;
         for (int i = 1; i &lt; year; i++) {
-            tot += isLeapYear(i) ? 366 : 365;
+            if (isLeapYear(i)) {
+                tot += 366;
+            } else {
+                tot += 365;
+            }
         }
         return tot;
     }
 
-    // 전년도 경과일 + 전월까지의 경과일
+    // 전년도경과일+전월까지의 경과일
     public int dates(int year, int month) {
         int tot = dates(year);
         for (int i = 1; i &lt; month; i++) {
-            tot += isLeapYear(year) ? leap[i - 1] : plain[i - 1];
+            if (isLeapYear(year)) {
+                tot += leap[i - 1];
+            } else {
+                tot += plain[i - 1];
+            }
         }
         return tot;
     }
 
+    // 전년도 경과일+전달까지 경과일+현재일 1일
     public int dates(int year, int month, int date) {
         return dates(year, month) + date;
     }
 
+    // 해당 달의 마지막 날
+    public int lastDay(int year, int month) {
+        return isLeapYear(year) ? leap[month - 1] : plain[month - 1];
+    }
+
+    // 한달을 출력하는 메서드
     public void calendarPrint(int year, int month) {
         System.out.println(year + "년\t" + month + "월");
         System.out.println("일\t월\t화\t수\t목\t금\t토");
-        int dayOfWeek = dates(year, month, 1) % 7; // 1일의 요일 -&gt; 앞쪽 공백수
-        for (int i = 0; i &lt; dayOfWeek; i++) System.out.print("\t");
-        int lastDay = isLeapYear(year) ? leap[month - 1] : plain[month - 1];
-        for (int i = 1; i &lt;= lastDay; i++) {
+
+        // 1일의 요일 -&gt; 0~6 -&gt; 해당 달력의 앞쪽 공백수와 일치
+        int dayOfWeek = dates(year, month, 1) % 7;
+
+        // 공백을 출력
+        for (int i = 0; i &lt; dayOfWeek; i++) {
+            System.out.print("\t");
+        }
+        // 날짜 출력
+        for (int i = 1; i &lt;= lastDay(year, month); i++) {
             System.out.print(i + "\t");
-            if ((i + dayOfWeek) % 7 == 0) System.out.println();
+            if ((i + dayOfWeek) % 7 == 0) {
+                System.out.println();
+            }
         }
     }
 
-    // java.util.Calendar를 이용한 버전
+    public static void main(String[] args) {
+        D2_Calendar cal = new D2_Calendar();
+        // cal.calendarPrint(2026, 8);
+
+        // 실습: 1. 2026년도 1월~12까지 출력하기
+        int year = 2026;
+        for (int i = 1; i &lt;= 12; i++) {
+            cal.calendarPrint(year, i);
+            System.out.println("\n");
+        }
+        // 실습: 2.나의 살아온 일수 구하기 --&gt; 경과일 구하는 기능 구현
+        int a = cal.dates(2026, 8, 13);
+        int birth = cal.dates(1981, 5, 22);
+        System.out.println("나의 살아온 일수:" + (a - birth));
+
+        System.out.println("calendarAPI 사용한 경우");
+        // 실습: 3. JAVA API를 활용해서 구현해보기
+        // -- 관련 클래스: java.util.Calendar, java.time.LocalDate
+
+        for (int i = 1; i &lt;= 12; i++) {
+            cal.calendarApiPrint(year, i);
+        }
+
+    }
+
     public void calendarApiPrint(int year, int month) {
-        // Calendar -&gt; new 객체생성 X --&gt; 추상클래스, getInstance()로 얻어옴
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        cal.set(year, month - 1, 1); // 0월~11월로 계산함
-        int lastDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-        int dayOfWeek = cal.get(java.util.Calendar.DAY_OF_WEEK); // 요일: 1~7 관리
+        // Calendar -&gt; new 객체생성 X --&gt; 추상클래스(미완성된 메서드를 포함)
+        // --&gt; 사용하려면 반드시 하위에 자식클래스가 구현해야 된다.
+        // --&gt; 완성된 메서드, 미완성된 메서드 -&gt; 완성된 메서드는 공통으로 사용하고 싶음
+
+        // new X 못하고 getInstance() 메서드를 통해 객체를 얻어옴
+        Calendar cal = Calendar.getInstance();
+        // System.out.println(cal.get(Calendar.DATE));
+
+        // 0월~11월로 계산함
+        cal.set(year, month - 1, 1);// 특정날짜로 셋팅
+
+        // 해당 달의 마지막날 구하기
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);// 요일: 1~7 관리
         // 공백수 구한다면 dayOfWeek-1
 
         System.out.println(year + "년\t" + month + "월");
@@ -10330,12 +10559,40 @@ public class D2_Calendar {
         System.out.println("\n");
     }
 
-    // JDK 8부터 등장: LocalDate 버전
+    // JDK 8 부터 등장: LocalDate
     public void localDateCalendarPrint(int year, int month) {
-        java.time.LocalDate firstDay = java.time.LocalDate.of(year, month, 1); // 월에 -1 불필요
-        int lastDay = firstDay.lengthOfMonth(); // 윤년도 자동 계산됨
-        int dayOfWeek = firstDay.getDayOfWeek().getValue() % 7; // [일:0, 월:1, ..., 토:6]
-        // ... 위와 같은 방식으로 출력
+        // 선언 방법
+        LocalDate today = LocalDate.now();// 현재날짜
+        LocalDate dateStr = LocalDate.parse("2026-08-03");// 특정날짜를 문자열로 정의하는 경우
+
+        // 1. 해당 연/월의 1일 날짜 객체 생성 (월에 -1 할 필요 없음!)
+        LocalDate firstDay = LocalDate.of(year, month, 1);
+
+        // 2. 그 달의 마지막 날짜 구하기 (윤년도 자동 계산됨)
+        int lastDay = firstDay.lengthOfMonth();
+
+        // 3. 1일의 요일 구하기
+        // LocalDate의 getValue()는 [월:1, 화:2, ..., 토:6, 일:7]을 반환합니다.
+        // % 7을 해주면 [일:0, 월:1, 화:2, ..., 토:6]으로 변환되어 바로 '공백수'가 됩니다!
+        int dayOfWeek = firstDay.getDayOfWeek().getValue() % 7;
+
+        // 출력부
+        System.out.println(year + "년\t" + month + "월");
+        System.out.println("일\t월\t화\t수\t목\t금\t토");
+
+        // 1일 앞의 공백 출력
+        for (int i = 0; i &lt; dayOfWeek; i++) {
+            System.out.print("\t");
+        }
+
+        // 날짜 출력 및 토요일 줄바꿈
+        for (int i = 1; i &lt;= lastDay; i++) {
+            System.out.print(i + "\t");
+            if ((i + dayOfWeek) % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n");
     }
 }</code></pre>
     </div>
@@ -10775,7 +11032,7 @@ public class D3_OddMagicSquare {
     <div class="note-tags"><span class="tag">interface</span><span class="tag">implements</span><span class="tag">default 메서드</span><span class="tag">static 메서드</span><span class="tag">익명 클래스</span><span class="tag">추상 클래스+인터페이스</span></div>
   </div>
   <div class="note-body">
-    <p class="note-summary"><span class="summary-label">한 줄 요약</span>10일차 추상 클래스의 다음 단계인 <b>인터페이스</b>를 배운 날 — 필드는 자동으로 <code>public static final</code> 상수, 메서드는 자동으로 <code>public abstract</code>가 된다는 기본 규칙에 이어 JDK 8부터 생긴 <b><code>default</code>·<code>static</code>·<code>private</code> 메서드</b>까지 전부 한 인터페이스에 넣어 확인했고, 이름 없이 즉석에서 구현하는 <b>익명 클래스</b>, 그리고 <b>추상 클래스가 인터페이스를 구현하면서 일부만 완성해 물려주는</b> 조합 설계(마방진 3단 구조)까지 이어졌다.</p>
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>10일차 추상 클래스의 다음 단계인 <b>인터페이스</b>를 배운 날 — 필드는 자동으로 <code>public static final</code> 상수, 메서드는 자동으로 <code>public abstract</code>가 된다는 기본 규칙에 이어 JDK 8부터 생긴 <b><code>default</code>·<code>static</code> 메서드와 JDK 9부터 생긴 <code>private</code> 메서드</b>까지 전부 한 인터페이스에 넣어 확인했고, 이름 없이 즉석에서 구현하는 <b>익명 클래스</b>, 그리고 <b>추상 클래스가 인터페이스를 구현하면서 일부만 완성해 물려주는</b> 조합 설계(마방진 3단 구조)까지 이어졌다.</p>
     <p class="note-easy"><span class="easy-label">쉽게 말하면</span>인터페이스는 <b>"이 기능들은 반드시 구현해야 한다"는 계약서</b>입니다. 추상 클래스가 "일부는 완성해서 주고 일부는 비워 두는" 것이라면, 인터페이스는 <b>원래는 통째로 빈칸(계약)뿐</b>이었는데, JDK 8부터 <code>default</code> 메서드로 <b>"기본값은 이렇게 해 두겠다"</b>는 구현까지 넣을 수 있게 됐습니다. 익명 클래스는 <b>일회용 컵처럼 이름도 없이 그 자리에서 한 번 쓰고 마는 구현체</b>입니다.</p>
     <div class="note-concept">
       <div class="concept-block">
@@ -11040,7 +11297,7 @@ public class D3_MagicSquareMain {
       <div class="note-points-title">11일차에 배운 것 — 핵심 정리</div>
       <ul>
         <li>인터페이스 필드는 자동 <b><code>public static final</code></b>, 메서드는 키워드 없이 써도 자동 <b><code>public abstract</code></b>.</li>
-        <li>JDK 8부터 인터페이스에 <b><code>default</code></b>(구현 있음, 재정의 가능) · <b><code>static</code></b>(인터페이스명으로 직접 호출) · <b><code>private</code></b>(내부 전용) 메서드가 추가됐다.</li>
+        <li>인터페이스에 JDK 8부터 <b><code>default</code></b>(구현 있음, 재정의 가능) · <b><code>static</code></b>(인터페이스명으로 직접 호출), JDK 9부터 <b><code>private</code></b>(내부 전용) 메서드를 넣을 수 있다.</li>
         <li>인터페이스는 <code>implements</code>로 구현하며 <b>여러 개를 동시에 구현할 수 있다</b>(클래스 상속은 하나만).</li>
         <li>익명 클래스는 <b>이름 없이 그 자리에서 즉시 구현</b>하는 일회성 클래스 — 인터페이스·추상 클래스를 재사용 없이 한 번만 쓸 때 편하다.</li>
         <li>추상 클래스가 인터페이스를 구현하면서 <b>일부 메서드만 완성하고 나머지는 abstract로 남겨 자식에게 미룰</b> 수 있다.</li>
@@ -11803,14 +12060,14 @@ public class D2_CardMain {
   <div class="note-head">
     <span class="note-num">14일차</span>
     <h3>2026-08-21 · 6마방진(싱글 이븐) · 싱글턴 + 팩토리 패턴으로 마방진 3종 통합</h3>
-    <div class="note-tags"><span class="tag">6마방진</span><span class="tag">LUX 방식</span><span class="tag">싱글턴</span><span class="tag">팩토리 패턴</span><span class="tag">공통 실행 헬퍼</span><span class="tag">다형성</span></div>
+    <div class="note-tags"><span class="tag">6마방진</span><span class="tag">스트레이치 방식</span><span class="tag">싱글턴</span><span class="tag">팩토리 패턴</span><span class="tag">공통 실행 헬퍼</span><span class="tag">다형성</span></div>
   </div>
   <div class="note-body">
     <p class="note-summary"><span class="summary-label">한 줄 요약</span>12일차의 홀수·짝수(4의 배수) 마방진에 이어 <b>4로 나누면 2가 남는 크기(6, 10, 14...)의 마방진</b>을 4개 영역으로 쪼개 채우는 방식으로 완성했고, 완성된 <b>세 가지 마방진(홀수·짝수·6마방진)을 <code>D2_MagicFactory</code> 하나로 묶어</b> 사용자가 입력한 숫자에 맞는 객체를 골라 돌려주는 <b>싱글턴 + 팩토리 패턴</b>을 만들었으며, <code>D1_MagicUtil.magicRun()</code>이라는 <b>공통 실행 헬퍼</b>(템플릿 메서드와 비슷한 발상)로 "어떤 마방진이든 <code>make()</code> 다음 <code>magicPrint()</code>"라는 공통 실행 순서를 한 곳에 모았다.</p>
     <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오늘은 <b>마방진 자판기를 만든 날</b>입니다. 지금까지는 "홀수용 기계", "짝수용 기계"를 각각 따로 작동시켰다면, 오늘은 <b>숫자를 넣으면 알맞은 기계를 대신 골라 작동시켜 주는 자판기(<code>MagicFactory</code>)</b>를 만들었습니다. 자판기는 세상에 하나만 있으면 되니까 <b>싱글턴</b>이고, "어떤 상품이든 꺼내서(<code>make</code>) 보여주는(<code>magicPrint</code>) 순서는 똑같다"는 걸 <code>MagicUtil</code>이라는 <b>공통 사용 설명서</b> 한 장으로 정리했습니다.</p>
     <div class="note-concept">
       <div class="concept-block">
-        <h4>① D1_SixMagicSquare — 4영역으로 쪼개 채우는 LUX 방식</h4>
+        <h4>① D1_SixMagicSquare — 4영역으로 쪼개 채우는 스트레이치(Strachey) 방식</h4>
         <p>6·10·14처럼 <b>4로 나누면 나머지가 2인 크기</b>(싱글 이븐)는 홀수·짝수 마방진보다 까다로워서 <b>4단계</b>로 나눠 채웁니다. <code>makeA()</code>·<code>makeB()</code>가 왼쪽 위/오른쪽 위 두 영역을 각각 3과 1·2 패턴으로 채우고, <code>makeCD()</code>가 그 값을 이용해 <b>아래쪽 두 영역(C·D)을 대칭적으로 채우며</b>(3↔0, 1↔2 맞바꾸기), <code>multi()</code>가 전체에 <code>(n/2)²</code>를 곱해 자리를 벌려 놓고, 마지막 <code>makeAdd()</code>가 <b>이미 만들어 둔 <code>OddMagicSquare</code>(n/2 크기)의 값을 네 영역에 똑같이 더해</b> 완성합니다 — <b>"새로 만들지 않고 이미 있는 걸 재사용한다"</b>는 게 핵심입니다. → <a href="#prac-09">🧪 9번 마방진</a></p>
       </div>
       <div class="concept-block">
@@ -11825,7 +12082,7 @@ public class D2_CardMain {
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D1_SixMagicSquare.java (수업 실습 원본 — day14 독립형, day11_2엔 MagicSquare 상속판도 있음)</span>
+        <span class="code-file">D1_SixMagicSquare.java (수업 실습 원본 그대로 — day14 독립형, day11_2엔 MagicSquare 상속판도 있음)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">package hk.edu20260821.day14;
@@ -11833,6 +12090,7 @@ public class D2_CardMain {
 import hk.edu20260818.day11.day11_2.OddMagicSquare;
 
 public class D1_SixMagicSquare {
+
     private int[][] magic;
 
     public D1_SixMagicSquare() {
@@ -11851,60 +12109,88 @@ public class D1_SixMagicSquare {
         makeAdd();
     }
 
-    // A영역: i가 2일 땐 j+1 위치에, 그 외엔 j 위치에 3을 채운다
+    // A영역구현하기
+    // n : 배열의 길이
+    // j인덱스의 n/4이 되는 영역을 3으로 채우는 기능
+    // i인덱스의 n/4이 되는 위치에서 j+1을 해서 3을 채우자
     private void makeA() {
         int n = magic.length;
+
         for (int i = 0; i &lt; n / 2; i++) {
             for (int j = 0; j &lt; n / 4; j++) {
-                if (i == 2) magic[i][j + 1] = 3;
-                else magic[i][j] = 3;
+                if (i == 2) {
+                    magic[i][j + 1] = 3;
+                } else {
+                    magic[i][j] = 3;
+                }
             }
         }
     }
 
-    // B영역: 먼저 1로 채우고, 그 범위만큼 2로 덮어쓴다
+    // B영역
+    // 개념 : 2로 채우다가 마지막 열에만 1로 채운다.
+    // 먼저 1로 모두 채우고 그리고 해당 범위만큼 2로 채우자.
     private void makeB() {
         int n = magic.length;
+        // 1을 먼저 채우자
         for (int i = 0; i &lt; n / 2; i++) {
             for (int j = 0; j &lt; n / 2; j++) {
                 magic[i][j + n / 2] = 1;
             }
         }
+        // 2를 채우자
         for (int i = 0; i &lt; n / 2; i++) {
             for (int j = 0; j &lt; n / 2 - (n / 4 - 1); j++) {
                 magic[i][j + n / 2] = 2;
             }
         }
+
     }
 
-    // C영역: A의 3&lt;-&gt;0을 맞바꿔 아래로. D영역: B의 1&lt;-&gt;2를 맞바꿔 아래로
+    // C영역: A지역에서 0 -&gt; 3, 3 -&gt; 0으로 변경
+    // D영역: B지역에서 1 -&gt; 2, 2 -&gt; 1로 변경
     private void makeCD() {
+        // C영역
         int n = magic.length;
+
         for (int i = 0; i &lt; n / 2; i++) {
             for (int j = 0; j &lt; n / 2; j++) {
-                if (magic[i][j] == 3) magic[i + n / 2][j] = 0;
-                else if (magic[i][j] == 0) magic[i + n / 2][j] = 3;
+                if (magic[i][j] == 3) {
+                    magic[i + n / 2][j] = 0;
+                } else if (magic[i][j] == 0) {
+                    magic[i + n / 2][j] = 3;
+                }
 
-                if (magic[i][j + n / 2] == 1) magic[i + n / 2][j + n / 2] = 2;
-                else if (magic[i][j + n / 2] == 2) magic[i + n / 2][j + n / 2] = 1;
+                // D영역에 값 추가
+                if (magic[i][j + n / 2] == 1) {
+                    magic[i + n / 2][j + n / 2] = 2;
+                } else if (magic[i][j + n / 2] == 2) {
+                    magic[i + n / 2][j + n / 2] = 1;
+                }
             }
         }
+
     }
 
-    // 전체 값에 (n/2)*(n/2)를 곱해 자리를 벌린다
+    // 각 자리에 값에, (n/2)*(n/2)계산 결과를 각각 곱한다.
     private void multi() {
         int n = magic.length;
         int m = (n / 2) * (n / 2);
+
         for (int i = 0; i &lt; n; i++) {
             for (int j = 0; j &lt; n; j++) {
                 magic[i][j] *= m;
             }
         }
+
     }
 
-    // 이미 만들어 둔 홀수 마방진(n/2 크기)을 네 영역에 똑같이 더한다
+    // 각각의 영역에 대해 홀수 마방진의 값을 더하자
+    // 4개의 영역 --&gt; 10마방진의 경우 5홀수마방진을 더해야 된다.
+    // 홀수마방진 다시 구현할 필요 없음 --&gt; OddMagicSquare 구현했음
     private void makeAdd() {
         int n = magic.length;
+
         OddMagicSquare odd = new OddMagicSquare(n / 2);
         odd.make();
         int[][] oddMagic = odd.getMagic();
@@ -11944,25 +12230,27 @@ public class D1_SixMagicSquare {
 97	20	13	81	79	47	45	38	31	54
 3	21	94	87	85	28	46	44	37	60
 9	2	100	93	86	34	27	50	43	61</pre>
-      <div class="run-note">day11_2의 <code>MagicSquare</code>를 상속한 버전으로 <b>가로·세로·대각선 합을 전부 검증</b>해 보면 10×10 기준 <b>505</b>로 정확히 일치합니다(1~100의 합 5050 ÷ 10). <b>다만 6×6은 실패</b>했습니다 — 직접 돌려 보니 가로·세로 합은 전부 111로 맞았지만 <b>대각선 합은 84와 165로 서로 달라 <code>isCheck()</code>가 false</b>가 나왔습니다. 원인은 알고리즘이 아니라 <b>코드의 버그</b>입니다. <code>makeA()</code>의 <code>if (i == 2)</code>는 "A영역 <b>가운데 줄</b>만 한 칸 옆으로 민다"는 뜻인데, 가운데 줄 번호를 <b>2로 고정</b>해 버려서 가운데 줄이 정확히 2인 <b>n=10에서만</b> 맞습니다. 원본 주석("i인덱스의 n/4이 되는 위치")대로 <code>if (i == n / 4)</code>로 고치면 6×6(대각선 111·111), 14×14, 18×18까지 전부 마방진이 됩니다 — 고치기 전에는 14×14·18×18도 대각선이 틀립니다.</div>
+      <div class="run-note">day11_2의 <code>MagicSquare</code>를 상속한 버전으로 <b>가로·세로·대각선 합을 전부 검증</b>해 보면 10×10 기준 <b>505</b>로 정확히 일치합니다(1~100의 합 5050 ÷ 10). <b>다만 6×6은 실패</b>합니다 — 돌려 보면 가로·세로 합은 전부 111로 맞았지만 <b>대각선 합은 84와 165로 서로 달라 <code>isCheck()</code>가 false</b>가 나옵니다. 원인은 알고리즘이 아니라 <b>코드의 버그</b>입니다. <code>makeA()</code>의 <code>if (i == 2)</code>는 "A영역 <b>가운데 줄</b>만 한 칸 옆으로 민다"는 뜻인데, 가운데 줄 번호를 <b>2로 고정</b>해 버려서 가운데 줄이 정확히 2인 <b>n=10에서만</b> 맞습니다. 원본 주석("i인덱스의 n/4이 되는 위치")대로 <code>if (i == n / 4)</code>로 고치면 6×6(대각선 111·111), 14×14, 18×18까지 전부 마방진이 됩니다 — 고치기 전에는 14×14·18×18도 대각선이 틀립니다.</div>
     </details>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D2_MagicFactory.java + D1_MagicUtil.java + D3_MagicSquareMain.java (day11_2, 수업 실습 원본)</span>
+        <span class="code-file">D2_MagicFactory.java + D1_MagicUtil.java + D3_MagicSquareMain.java (day11_2, 수업 실습 원본 — D3의 주석 처리된 실험 줄만 생략)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
-      <pre><code class="language-java">// ※ 파일 세 개를 이어 붙인 블록입니다. public class 하나당 파일 하나이므로
+      <pre><code class="language-java">// ★추가(원본엔 없음): 파일 세 개를 이어 붙인 블록입니다. public class 하나당 파일 하나이므로
 //    복사할 때는 클래스별로 나눠 저장하세요(같은 package 선언을 각 파일 맨 위에).
 package hk.edu20260818.day11.day11_2;
 
 import java.util.Scanner;
 
 public class D2_MagicFactory {
+
     // singleton pattern 적용
     private static D2_MagicFactory magicFactory;
 
-    private D2_MagicFactory() { }
+    private D2_MagicFactory() {
+    }
 
     public static D2_MagicFactory getInstance() {
         if (magicFactory == null) {
@@ -11971,13 +12259,14 @@ public class D2_MagicFactory {
         return magicFactory;
     }
 
-    // Factory pattern: 원하는 마방진 요청을 확인해서 해당 객체를 반환
+    // Factory pattern
+    // 원하는 마방진 요청을 확인해서 해당 객체를 반환해 주는 기능
     public Interface_Magic factory() {
         Interface_Magic magic = null;
 
         System.out.println("원하는 마방진을 입력하세요(숫자형식)");
         Scanner scan = new Scanner(System.in);
-        int num = scan.nextInt();
+        int num = scan.nextInt(); // 입력 대기 -&gt; 입력완료하면 다음 코드로 넘어감
 
         if (num &lt; 3) {
             System.out.println("3이상 숫자를 입력하세요");
@@ -11991,10 +12280,11 @@ public class D2_MagicFactory {
         scan.close();
         return magic;
     }
+
 }
 
 public class D1_MagicUtil {
-    // 템플릿 메서드: 어떤 마방진이든 "만들고 -&gt; 찍는다" 순서는 동일
+    // 템플릿 메서드 정의
     public static void magicRun(Interface_Magic magic) {
         magic.make();
         magic.magicPrint();
@@ -12002,8 +12292,16 @@ public class D1_MagicUtil {
 }
 
 public class D3_MagicSquareMain {
+
+    // IMagic : make(), magicPrint()
+    // MagicSquare : make()만 추상메서드
+    // OddMagicSquare : make() 구현
+
     public static void main(String[] args) {
-        // 메서드를 통해 객체 얻어옴: new 사용 못함(생성자가 private)
+
+        // ... (주석 처리된 실험 줄 생략: odd·ev·six를 직접 만들어 찍던 코드)
+
+        // 메서드를 통해 객체 얻어옴: new 사용 못함
         D2_MagicFactory fac = D2_MagicFactory.getInstance();
         Interface_Magic magic = fac.factory();
         if (magic == null) {
@@ -12011,7 +12309,9 @@ public class D3_MagicSquareMain {
         } else {
             D1_MagicUtil.magicRun(magic);
         }
+
     }
+
 }</code></pre>
     </div>
     <details class="run-output">
@@ -12766,7 +13066,7 @@ public class D1_ThreadMain {
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D2_ThreadSync.java (수업 실습 원본 — synchronized 블록 예시(실행은 주석 처리) + sbTest)</span>
+        <span class="code-file">D2_ThreadSync.java (수업 실습 원본 — 주석 일부 정리, synchronized 블록 예시(실행은 주석 처리) + sbTest)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">package hk.edu20260827.day18;
@@ -12784,7 +13084,8 @@ public class D2_ThreadSync {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(sf.length()); // 1000인지 확인
+        // 문자열의 길이 출력해서 1000인지 확인   ← 원본 주석. 두 스레드가 같은 sf를 쓰므로 실제로는 합계 2000이 찍힌다
+        System.out.println(sf.length());
     }
 
     public static void main(String[] args) {
@@ -12862,75 +13163,105 @@ public class D2_ThreadSync {
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D3_CakePlate.java + D3_CakeMaker.java + D3_CakeEater.java + D3_CakeMain.java (수업 실습 원본 — 생산자-소비자)</span>
+        <span class="code-file">D3_CakePlate.java + D3_CakeMaker.java + D3_CakeEater.java + D3_CakeMain.java (수업 실습 원본 그대로 — 생산자-소비자, 파일 순서만 Plate·Eater·Maker·Main)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
-      <pre><code class="language-java">package hk.edu20260827.day18;
+      <pre><code class="language-java">// ★추가(원본엔 없음): 파일 여러 개를 이어 붙인 블록입니다. 복사할 때는 클래스별로 나눠 저장하세요(package·import는 각 파일 맨 위에).
+package hk.edu20260827.day18;
 
 public class D3_CakePlate {
+
     private int breadCount = 0;
 
-    // eatBread()가 10개 모두 소진(notifyAll) -&gt; wait()
-    // -&gt; makeBread()가 실행 10개 모두 만듦(notifyAll) -&gt; wait()
+    // eatBread()가 10개 모두 소진(notifyAll)-&gt; wait()
+    // -&gt; makeBread()가실행 10모두 만듦(notifyAll)-&gt;wait()
     public synchronized void eatBread() {
         if (breadCount &lt; 1) {
             System.out.println("빵이 모자라서 기다려야 함");
             try {
-                wait(); // 스레드를 일시정지
+                wait();// 스레드를 일시정지
             } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
         breadCount--;
         System.out.println("빵을 1개 먹음. 총 " + breadCount + "개 남음");
-        notifyAll(); // 모든 스레드를 실행대기로 설정
+        notifyAll();// 모든 스레드를 실행대기로 설정
     }
 
     public synchronized void makeBread() {
         if (breadCount &gt;= 10) {
             System.out.println("빵이 남아요!");
             try {
-                wait();
+                wait();// 스레드를 일시정지
             } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
         breadCount++;
         System.out.println("빵을 1개 더 만듦. 총 " + breadCount + "개");
-        notifyAll();
+        notifyAll();// 모든 스레드를 실행대기로 설정
     }
 }
 
 public class D3_CakeEater implements Runnable {
+
     private D3_CakePlate cake;
-    public D3_CakeEater(D3_CakePlate cake) { this.cake = cake; }
+
+    public D3_CakeEater() {
+    }
+
+    public D3_CakeEater(D3_CakePlate cake) {
+        this.cake = cake;
+    }
 
     @Override
     public void run() {
-        for (int i = 0; i &lt; 30; i++) cake.eatBread();
+        for (int i = 0; i &lt; 30; i++) {
+            cake.eatBread();
+        }
+
     }
 }
 
 public class D3_CakeMaker implements Runnable {
+
     private D3_CakePlate cake;
-    public D3_CakeMaker(D3_CakePlate cake) { this.cake = cake; }
+
+    public D3_CakeMaker() {
+    }
+
+    public D3_CakeMaker(D3_CakePlate cake) {
+        this.cake = cake;
+    }
 
     @Override
     public void run() {
-        for (int i = 0; i &lt; 30; i++) cake.makeBread();
+        for (int i = 0; i &lt; 30; i++) {
+            cake.makeBread();
+        }
+
     }
 }
 
 public class D3_CakeMain {
-    public static void main(String[] args) {
-        D3_CakePlate cake = new D3_CakePlate(); // 스레드들이 공유할 객체
 
+    public static void main(String[] args) {
+
+        // 스레드들이 공유할 객체 생성
+        D3_CakePlate cake = new D3_CakePlate();
+
+        // runable구현한 클래스 생성
         D3_CakeEater eater = new D3_CakeEater(cake);
         D3_CakeMaker maker = new D3_CakeMaker(cake);
 
+        // 스레드 객체 생성
         Thread t1 = new Thread(eater);
         Thread t2 = new Thread(maker);
 
+        // 스레드 우선순위 1~10
         t2.setPriority(10);
         t1.setPriority(1);
 
@@ -12959,43 +13290,96 @@ public class D3_CakeMain {
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D4_TCPServer.java + D4_TCPClient.java (수업 실습 원본)</span>
+        <span class="code-file">D4_TCPServer.java + D4_TCPClient.java (수업 실습 원본 그대로)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
-      <pre><code class="language-java">package hk.edu20260827.day18;
+      <pre><code class="language-java">// ★추가(원본엔 없음): 파일 여러 개를 이어 붙인 블록입니다. 복사할 때는 클래스별로 나눠 저장하세요(package·import는 각 파일 맨 위에).
+package hk.edu20260827.day18;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class D4_TCPServer {
     public static void main(String[] args) {
-        try (
-                var serverSocket = new java.net.ServerSocket(9595);) {
+        Socket clientSocket = null; // 클라이언트 소켓
+        PrintWriter out = null; // 클라이언트로 출력할때 사용할 객체
+        ServerSocket serverSocket = null; // 클라이언트와 연결하는 Socket을 생성
+        BufferedReader in = null; // 클라이언트에서 전달된 메시지 읽어들일 객체
+
+        try {
+            serverSocket = new ServerSocket(9595);
             System.out.println("서버가 클라이언트의 접속을 기다립니다...");
             while (true) {
-                var clientSocket = serverSocket.accept(); // 접속할 때까지 대기(블로킹)
+                clientSocket = serverSocket.accept();
                 System.out.println("클라이언트 연결됨:" + clientSocket.getInetAddress().getHostName());
 
-                var out = new java.io.PrintWriter(clientSocket.getOutputStream(), true);
-                var in = new java.io.BufferedReader(
-                        new java.io.InputStreamReader(clientSocket.getInputStream()));
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     System.out.println("클라이언트 메시지:" + inputLine);
                     out.println("메시지를 잘 전달받았습니다.");
                 }
+
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (clientSocket != null) {
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (serverSocket != null) {
+                try {
+                    serverSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class D4_TCPClient {
+
     public static void main(String[] args) {
         try (
-                Socket socket = new Socket("localhost", 9595); // 요청 ip, port
+                // 클라이언트 소켓 생성(요청ip, port)
+                Socket socket = new Socket("localhost", 9595);
+                // 서버로 메시지 전송할때 사용할 객체
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                // 서버에서 전송된 메시지 읽어들일 객체
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(socket.getInputStream()));
+                // 클라이언트에서 키보드로 입력한 메시지 읽어들일 객체
                 BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in, "MS949"))) {
             System.out.println("Client:Connetion to server...");
             String inputLine;
@@ -13003,7 +13387,11 @@ public class D4_TCPClient {
                 out.println(inputLine);
                 System.out.println("서버에서 전달된 메시지:" + in.readLine());
             }
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -13169,7 +13557,7 @@ Client:Connetion to server...
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">D2_UDPServer.java + D2_UDPClient.java (수업 실습 원본)</span>
+        <span class="code-file">D2_UDPServer.java + D2_UDPClient.java (수업 실습 원본 — import 생략, catch 합침, 주석 일부 정리)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">package hk.edu20260828.day19;
@@ -13238,7 +13626,7 @@ address:/127.0.0.1,port:62320
 [클라이언트 콘솔]
 받은 메시지:핑퐁 테스트1(뒤에 공백처럼 보이는 여분 데이터가 붙어서 돌아옴)
 받은 메시지:핑퐁 테스트2(마찬가지)</pre>
-      <div class="run-note">서버가 받은 메시지는 정확했지만, <b>돌려보낼 때 문제가 있었습니다</b> — <code>packet = new DatagramPacket(buffer, buffer.length, address, port);</code>에서 <b><code>buffer.length</code>(항상 512)를 그대로 길이로 써서, 실제로 받은 글자 수(<code>packet.getLength()</code>)가 아니라 <code>buffer</code> 배열 512바이트 전체를 돌려보냅니다</b> — 짧은 메시지 뒤에 이전에 담겨 있던 찌꺼기 바이트까지 같이 전송되는 버그입니다. <code>new DatagramPacket(buffer, packet.getLength(), address, port)</code>로 고쳐야 정확히 받은 만큼만 돌려보낼 수 있습니다. <a href="#class-day16">16일차</a> <code>D3_IOTest.test03</code>에서 배운 "<code>read(b)</code>는 실제로 읽은 개수만큼만 써야 한다"는 교훈이 여기서도 그대로 적용되는 사례입니다.</div>
+      <div class="run-note">서버가 받은 메시지는 정확했지만, <b>돌려보낼 때 문제가 있었습니다</b> — <code>packet = new DatagramPacket(buffer, buffer.length, address, port);</code>에서 <b><code>buffer.length</code>(항상 512)를 그대로 길이로 써서, 실제로 받은 글자 수(<code>packet.getLength()</code>)가 아니라 <code>buffer</code> 배열 512바이트 전체를 돌려보냅니다</b> — 짧은 메시지 뒤에 이전에 담겨 있던 찌꺼기 바이트까지 같이 전송되는 버그입니다. 답장은 <b>별도 패킷</b> <code>DatagramPacket reply = new DatagramPacket(buffer, packet.getLength(), address, port); socket.send(reply);</code>로 만들어야 정확히 받은 만큼만 돌려보낼 수 있습니다. 이때 같은 변수 <code>packet</code>에 길이만 바꿔 다시 대입하면 안 됩니다 — 다음 <code>socket.receive(packet)</code>이 줄어든 길이로 받아서 더 긴 다음 메시지가 잘립니다(원본은 길이가 512라 이 문제는 없습니다). <a href="#class-day16">16일차</a> <code>D3_IOTest.test03</code>에서 배운 "<code>read(b)</code>는 실제로 읽은 개수만큼만 써야 한다"는 교훈이 여기서도 그대로 적용되는 사례입니다.</div>
     </details>
     <div class="note-code">
       <div class="code-head">
@@ -13373,7 +13761,7 @@ public class D3_ChatClient {
         <li>여러 클라이언트를 동시에 받으려면 <b><code>accept()</code>마다 새 스레드를 만들어</b> 그 스레드에서 대화를 처리한다.</li>
         <li>TCP는 <b>연결을 맺어 두고</b> 주고받지만, UDP는 <b>패킷마다 주소를 직접 지정</b>해서 보낸다(연결 없음).</li>
         <li>UDP는 <code>DatagramSocket</code>·<code>DatagramPacket</code>을 쓰고, <b>받을 데이터 크기(버퍼)를 미리 정해야</b> 한다.</li>
-        <li>패킷을 돌려보낼 때는 <b>버퍼 전체 길이가 아니라 실제 받은 길이(<code>packet.getLength()</code>)</b>를 써야 여분의 데이터가 안 딸려 간다.</li>
+        <li>패킷을 돌려보낼 때는 <b>별도 답장 패킷(<code>reply</code>)</b>을 만들고 길이는 <b>버퍼 전체가 아니라 실제 받은 길이(<code>packet.getLength()</code>)</b>를 써야 여분의 데이터가 안 딸려 간다(수신용 패킷은 덮어쓰지 않는다).</li>
         <li>여러 스레드가 동시에 접근하는 컬렉션은 <code>Collections.synchronizedSet(...)</code> 같은 <b>동기화 래퍼</b>로 감싼다.</li>
         <li>채팅처럼 <b>양방향 실시간 통신</b>은 "보내는 스레드"와 "받는 스레드"를 분리해야 한쪽이 막혀도 다른 쪽이 계속 동작한다.</li>
         <li>서버가 접속자 전체에게 같은 메시지를 보내는 것을 <b>브로드캐스트</b>라고 한다.</li>
@@ -13388,7 +13776,7 @@ public class D3_ChatClient {
       </details>
       <details class="sc-q">
         <summary>D2_UDPServer가 돌려보낸 메시지 뒤에 왜 여분의 데이터가 붙고, 어떻게 고칠까?</summary>
-        <div class="sc-a">답장 패킷을 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>로 만들어 <b>받은 길이가 아니라 버퍼 512바이트 전체</b>를 보내기 때문입니다. 보낼 길이를 <code>packet.getLength()</code>(실제로 받은 바이트 수)로 바꾸면 정확히 받은 만큼만 돌아갑니다. 다만 이 코드는 다음 <code>receive()</code>에서 그 답장 패킷을 다시 쓰므로, 받기 전에 수신용 패킷의 길이를 <code>buffer.length</code>로 되돌려야(새로 만들거나 <code>setLength</code>) 더 긴 다음 메시지가 잘리지 않습니다.</div>
+        <div class="sc-a">답장 패킷을 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>로 만들어 <b>받은 길이가 아니라 버퍼 512바이트 전체</b>를 보내기 때문입니다. 답장은 <b>별도 패킷</b>으로 만들고 길이를 <code>packet.getLength()</code>(실제로 받은 바이트 수)로 주면 정확히 받은 만큼만 돌아갑니다: <code>DatagramPacket reply = new DatagramPacket(buffer, packet.getLength(), address, port); socket.send(reply);</code>. 원본처럼 같은 변수 <code>packet</code>에 다시 대입하면서 길이만 바꾸면, 다음 <code>receive(packet)</code>이 줄어든 길이로 받아 더 긴 다음 메시지가 잘리는 새 버그가 생깁니다(같은 패킷을 꼭 쓰려면 receive 전에 <code>packet.setLength(buffer.length)</code>로 되돌려야 합니다).</div>
       </details>
       <details class="sc-q">
         <summary>clientWriters는 이미 synchronizedSet인데, broadcast()에서 왜 synchronized (clientWriters) 블록을 또 걸까?</summary>
@@ -15195,8 +15583,8 @@ deleteUser("KBS")   → 외래키 위반 SQLException → catch → count 0 → 
         <p>컨트롤러가 DB에서 꺼낸 <code>list</code>를 화면(<code>boardlist.jsp</code>)에 넘겨야 합니다. 01에서 쓰던 <code>response.sendRedirect</code>는 <b>브라우저에게 "저 주소로 다시 요청하세요"</b>라고 시키는 것이라 <b>새 요청</b>이 되고, 앞 요청에 담아 둔 값이 사라집니다. 그래서 오늘은 <code>request.setAttribute("list", list)</code>로 <b>요청 객체에 담고</b> <code>pageContext.forward("boardlist.jsp")</code>로 <b>서버 안에서 같은 요청을 넘깁니다</b>. 받는 쪽은 <code>request.getAttribute("list")</code>로 꺼내는데, 돌려받는 타입이 <code>Object</code>라서 <b><code>(List&lt;HkDto&gt;)</code>로 형변환</b>해야 합니다. forward는 서버 안에서만 넘어가므로 <b>주소창은 <code>boardController.jsp?command=boardlist</code> 그대로</b>입니다. → <a href="#web-21">🖥️ 21. 네 가지 scope</a> · <a href="#web-22">🖥️ 22. 파라미터와 객체 전달</a></p>
       </div>
       <div class="concept-block">
-        <h4>④ 아직 진행 중인 프로젝트</h4>
-        <p>9월 15일 기준으로 <code>command</code>가 <code>boardinsertform</code>·<code>boardinsert</code>일 때의 분기는 <b>주석만 있고 코드는 없었습니다</b> — 다음 시간(32일차)에 채웠습니다. 정리하면서 고친 것은 하나뿐입니다: <code>command</code> 없이 이 파일을 열면(주소 오타 등) <code>command</code>가 <code>null</code>이라 <code>equalsIgnoreCase</code>에서 <b><code>NullPointerException</code>(500)</b>이 났기 때문에, <code>null</code>이면 빈 문자열로 바꿔 <b>아무 분기에도 걸리지 않고 조용히 지나가게</b> 막아 두었습니다.</p>
+        <h4>④ 분기는 하나씩 늘어난다 — 그리고 null 방어</h4>
+        <p>이날 수업에서 <code>command</code>가 <code>boardinsertform</code>·<code>boardinsert</code>일 때의 분기는 <b>주석으로 자리만 잡혀 있고</b>, 코드는 다음 시간(<a href="#class-day32">32일차</a>)에 채워집니다. 컨트롤러는 이렇게 <b>기능마다 분기를 하나씩 추가</b>하며 자랍니다. 또 <code>command</code> 없이 이 파일을 열면(주소 오타 등) <code>command</code>가 <code>null</code>이라 <code>equalsIgnoreCase</code>에서 <b><code>NullPointerException</code>(500)</b>이 납니다. 아래 코드의 <code>if (command == null) command = "";</code> 한 줄은 이것을 막아 <b>아무 분기에도 걸리지 않고 조용히 지나가게</b> 하는 방어 코드입니다.</p>
       </div>
     </div>
     <div class="note-code">
@@ -15266,7 +15654,7 @@ public class HkDao extends DataBase {   // ← 부모의 getConnection()을 물�
 
 	//command 없이 이 파일을 직접 열면 null 이라 아래 equalsIgnoreCase 에서
 	//NullPointerException 이 난다. 빈 문자열로 바꿔 조용히 넘어가게 한다.
-	if (command == null) command = "";          // ← 정리하며 추가한 방어 코드
+	if (command == null) command = "";          // ★추가(수업 원본엔 없음): null 방어 코드
 
 	//2단계: DAO 객체 생성
 	HkDao dao = new HkDao();                    // ← 이 순간 부모 생성자(드라이버 로딩)가 먼저 실행
@@ -15281,7 +15669,7 @@ public class HkDao extends DataBase {   // ← 부모의 getConnection()을 물�
 		//7단계: 페이지 이동
 		pageContext.forward("boardlist.jsp");   // ← 서버 안에서 넘김: 주소창은 그대로
 	}
-	// (9/15에는 boardinsertform · boardinsert 분기가 주석만 있었다 — 32일차에 채움)
+	// (boardinsertform · boardinsert 분기는 다음 시간에 채워짐 — 여기서는 생략)
 %&gt;
 
 &lt;%-- ===== boardlist.jsp — 넘겨받은 list 꺼내기 ===== --%&gt;
@@ -15320,7 +15708,7 @@ public class HkDao extends DataBase {   // ← 부모의 getConnection()을 물�
         <li>컨트롤러의 흐름은 <b>command 받기 → DAO → 분기 → 파라미터 → DAO 실행 → Scope에 담기 → 이동</b>의 7단계다.</li>
         <li><b><code>forward</code>는 주소창이 안 바뀌고 같은 요청이 이어진다</b> — <code>sendRedirect</code>는 새 요청이라 주소가 바뀌고 request 값이 사라진다.</li>
         <li><b><code>request.setAttribute</code>/<code>getAttribute</code></b>로 forward되는 동안 값을 주고받는다(request scope). <code>getAttribute</code>는 <b><code>Object</code></b>를 돌려주므로 원래 타입으로 <b>형변환</b>해야 한다.</li>
-        <li>수업 코드가 <b>미완성인 채로 진행 중</b>인 것은 자연스럽다 — 다음 시간에 이어서 채운다.</li>
+        <li>요청 파라미터는 <b>없을 수 있으므로</b>(<code>null</code>) 문자열 메서드를 부르기 전에 <code>null</code>을 먼저 막는다.</li>
       </ul>
     </div>
     <div class="self-check">
@@ -15347,6 +15735,7 @@ public class HkDao extends DataBase {   // ← 부모의 getConnection()을 물�
       <a href="../view.html?f=Back_end/web_edu_project/02_hkboard_MVC1/src/main/webapp/boardlist.jsp">boardlist.jsp</a> ·
       <a href="../view.html?f=Back_end/web_edu_project/README.md">web_edu_project README</a>
     </div>
+    <details><summary>정리 작업 메모</summary><ul><li><code>boardController.jsp</code>의 <code>if (command == null) command = "";</code>는 수업 원본이 아니라 저장소를 정리하면서 넣은 방어 코드다. 9/15 수업 시점의 파일에는 글쓰기 분기가 주석만 있었다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="class-day32">
@@ -15978,7 +16367,7 @@ null                                                ← getPathInfo(): 확장자
       <a href="../view.html?f=Back_end/web_edu_project/04_hkboard_MVC2/src/main/java/com/hk/board/controller/BoardController.java">04 BoardController.java</a> ·
       <a href="../view.html?f=Back_end/web_edu_project/04_hkboard_MVC2/src/main/java/com/hk/board/util/EncodeFilter.java">04 EncodeFilter.java</a> ·
       <a href="../view.html?f=Back_end/teacher-sync-2026-09-18.md">강사 코드 대조 기록</a><br>
-      코딩테스트 16회차: 시험 당일 노트북 고장으로 응시하지 못해 <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a>를 먼저 보충 풀이로 정리했고, 이후 <b>직접 풀어 제출해 둘 다 PASS</b> 했다. 제출 코드는 2026-09-22 정리에서 반영했다.
+      코딩테스트 16회차: <a href="#ct-29">약수의 합</a>과 <a href="#ct-30">최댓값 구하기</a> — 이후 <b>직접 풀어 제출해 둘 다 PASS</b>한 기록(경위는 ct-29 카드의 정리 작업 메모).
     </div>
   </div>
 </article>
@@ -15989,7 +16378,7 @@ null                                                ← getPathInfo(): 확장자
     <div class="note-tags"><span class="tag">EL ${ }</span><span class="tag">JSTL</span><span class="tag">c:forEach</span><span class="tag">c:choose · empty</span><span class="tag">taglib</span></div>
   </div>
   <div class="note-body">
-    <p class="note-summary"><span class="summary-label">한 줄 요약</span>04를 복사해 <code>05_hkboard_MVC2_JSTL</code>을 만들고, 목록·상세 화면의 <b>스크립틀릿(<code>&lt;% %&gt;</code>)을 EL(<code>${ }</code>)과 JSTL 태그로</b> 바꿨다. EL·JSTL 전환은 <b>JSP만</b> 손댄 작업이고, 같은 날 실행이 막힌 원인을 찾으며 DB 설정·오류 출력 코드도 바로잡았다.</p>
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>04를 복사해 <code>05_hkboard_MVC2_JSTL</code>을 만들고, 목록·상세 화면의 <b>스크립틀릿(<code>&lt;% %&gt;</code>)을 EL(<code>${ }</code>)과 JSTL 태그로</b> 바꿨다. EL·JSTL 전환은 <b>JSP만</b> 손댄 작업이다. 화면이 조용히 실패할 때는 <b>바뀌지 않은 04와 비교</b>하고 <b>SQL 오류를 로그로 드러내</b> 원인을 좁힌다.</p>
     <p class="note-easy"><span class="easy-label">쉽게 말하면</span><b>가구(자바 코드)는 그대로 두고 벽지(화면)만 새로 바른 날</b>입니다. 화면 속 자바 문법을 <code>${ }</code>와 <code>&lt;c:forEach&gt;</code> 같은 태그로 바꿨더니 JSP가 <b>HTML처럼 읽히게</b> 됐어요. 형변환·<code>import</code>·<code>&lt;% } %&gt;</code> 짝 맞추기가 사라지고, 값이 없을 때 화면에 <code>null</code>이 찍히던 문제도 같이 없어집니다.</p>
     <div class="note-concept">
       <div class="concept-block">
@@ -15998,15 +16387,15 @@ null                                                ← getPathInfo(): 확장자
       </div>
       <div class="concept-block">
         <h4>② JSTL 설치 — jar 2개와 jakarta taglib</h4>
-        <p>JSTL은 표준이지만 <b>Tomcat에 들어 있지 않아서</b> <code>WEB-INF/lib</code>에 <b>API jar(<code>jakarta.servlet.jsp.jstl-api-3.0.1</code>)와 구현 jar(<code>jakarta.servlet.jsp.jstl-3.0.1</code>) 두 개</b>를 함께 넣습니다. API만 넣으면 실행할 구현이 없어 실패합니다. JSP 맨 위에는 <code>&lt;%@ taglib prefix="c" uri="jakarta.tags.core" %&gt;</code>를 씁니다 — Tomcat 10부터 <code>javax</code>가 <code>jakarta</code>로 바뀐 여파라, 인터넷 예제의 <code>http://java.sun.com/jsp/jstl/core</code>를 그대로 쓰면 태그를 찾지 못합니다. → <a href="#web-33">🖥️ 33. JSTL 설치</a></p>
+        <p>JSTL은 표준이지만 <b>Tomcat에 들어 있지 않아서</b> <code>WEB-INF/lib</code>에 <b>API jar(<code>jakarta.servlet.jsp.jstl-api-3.0.1</code>)와 구현 jar(<code>jakarta.servlet.jsp.jstl-3.0.1</code>) 두 개</b>를 함께 넣습니다. API만 넣으면 실행할 구현이 없어 실패합니다. JSP 맨 위에는 <code>&lt;%@ taglib prefix="c" uri="jakarta.tags.core" %&gt;</code>를 씁니다 — Jakarta(Tomcat 10 이상)용 JSTL 3.0의 새 표준 URI가 <code>jakarta.tags.core</code>입니다. 인터넷 예제에는 옛 URI <code>http://java.sun.com/jsp/jstl/core</code>가 많이 보이는데, Tomcat 10에서 태그를 못 찾는 흔한 원인은 URI보다 <b><code>javax</code> 기반 JSTL 1.2 jar를 넣은 경우</b>입니다. → <a href="#web-33">🖥️ 33. JSTL 설치</a></p>
       </div>
       <div class="concept-block">
         <h4>③ c:forEach · c:choose — 반복과 분기를 태그로</h4>
-        <p>스크립틀릿 <code>for</code>문은 <code>&lt;c:forEach items="${list}" var="dto"&gt;</code>가 대신합니다. <code>list</code>가 <code>null</code>이어도 <b>예외 없이 0번 반복</b>하고 지나갑니다. 글이 없을 때 안내 문구를 보여 주려고 <code>&lt;c:choose&gt;</code> 안에 <code>&lt;c:when test="${empty list}"&gt;</code>와 <code>&lt;c:otherwise&gt;</code>를 두었는데, <code>empty</code>는 <b>null·빈 문자열·빈 컬렉션을 모두 true</b>로 봅니다. <code>&lt;c:when&gt;</code>·<code>&lt;c:otherwise&gt;</code>는 <b><code>&lt;c:choose&gt;</code>의 직속 자식</b>이어야 해서, <code>&lt;/c:choose&gt;</code>를 먼저 닫아 버리면 500이 납니다(이날 실제로 겪은 오류). → <a href="#web-34">🖥️ 34. c:forEach</a> · <a href="#web-35">🖥️ 35. c:choose</a></p>
+        <p>스크립틀릿 <code>for</code>문은 <code>&lt;c:forEach items="${list}" var="dto"&gt;</code>가 대신합니다. <code>list</code>가 <code>null</code>이어도 <b>예외 없이 0번 반복</b>하고 지나갑니다. 글이 없을 때 안내 문구를 보여 주려고 <code>&lt;c:choose&gt;</code> 안에 <code>&lt;c:when test="${empty list}"&gt;</code>와 <code>&lt;c:otherwise&gt;</code>를 두었는데, <code>empty</code>는 <b>null·빈 문자열·빈 컬렉션을 모두 true</b>로 봅니다. <code>&lt;c:when&gt;</code>·<code>&lt;c:otherwise&gt;</code>는 <b><code>&lt;c:choose&gt;</code>의 직속 자식</b>이어야 해서, <code>&lt;/c:choose&gt;</code>를 먼저 닫아 버리면 500이 납니다(자주 하는 실수). → <a href="#web-34">🖥️ 34. c:forEach</a> · <a href="#web-35">🖥️ 35. c:choose</a></p>
       </div>
       <div class="concept-block">
-        <h4>④ 바뀐 것은 View뿐 — 그리고 같은 날 고친 "조용한 실패"</h4>
-        <p>EL·JSTL 전환에서 Controller·DAO·DTO의 <b>로직은 바뀌지 않았습니다</b> — 04와 나란히 놓으면 JSP만 다릅니다. 다만 <code>boardDetail.jsp</code> 위쪽에는 <b>이제 쓰이지 않는 스크립틀릿 선언</b>(<code>HkDto dto = (HkDto)request.getAttribute("dto");</code>)이 아직 남아 있습니다. 실행 중에는 글쓰기가 계속 <code>error.jsp</code>로 튕겼는데, 04도 똑같이 실패해서 "05 코드 문제가 아니다"가 바로 갈렸고, 원인은 <b>DB 비밀번호 환경변수 부재</b>였습니다. 이를 계기로 <code>DataBase</code>에 <b><code>printSqlError</code></b>(작업 이름·SQLState·오류코드를 한 줄로)를 만들고, <code>INSERT</code>에 <b>컬럼 목록을 명시</b>했습니다(05에 반영, 04에는 없음). → <a href="#web-36">🖥️ 36. 04→05 핵심 정리</a> · <a href="#web-37">🖥️ 37. 디버깅 기록</a></p>
+        <h4>④ 바뀐 것은 View뿐 — 그리고 "조용한 실패"는 로그로 찾는다</h4>
+        <p>EL·JSTL 전환에서 Controller·DAO·DTO의 <b>로직은 바뀌지 않았습니다</b> — 04와 나란히 놓으면 JSP만 다릅니다. 다만 <code>boardDetail.jsp</code> 위쪽에는 <b>이제 쓰이지 않는 스크립틀릿 선언</b>(<code>HkDto dto = (HkDto)request.getAttribute("dto");</code>)이 아직 남아 있습니다. 실패하면 <code>error.jsp</code>로 넘어가기만 하는 코드는 <b>원인을 알려 주지 않습니다</b>. 이럴 때는 같은 요청을 바뀌지 않은 04에도 보내 "05의 화면 문제인지, 둘이 공유하는 DB 쪽 문제인지"를 먼저 가르고, <code>SQLException</code>의 <b>SQLState·오류코드를 로그로 찍어</b> 원인을 드러냅니다. 저장소의 05 <code>DataBase</code>에는 이런 용도의 <b><code>printSqlError</code></b>가 들어 있고, <code>INSERT</code>에는 <b>컬럼 목록이 명시</b>되어 있습니다(04에는 없음, 아래 세 번째 코드). → <a href="#web-36">🖥️ 36. 04→05 핵심 정리</a> · <a href="#web-37">🖥️ 37. 디버깅 기록</a></p>
       </div>
     </div>
     <div class="note-code">
@@ -16086,7 +16475,7 @@ null                                                ← getPathInfo(): 확장자
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
-        <span class="code-file">DataBase.printSqlError + HkDao.insertBoard (05) — 같은 날 디버깅하며 고친 곳</span>
+        <span class="code-file">DataBase.printSqlError + HkDao.insertBoard (05) — 조용한 실패를 로그로 드러내는 코드(수업 뒤 저장소 정리 때 추가)</span>
         <button class="copy-btn" type="button">복사</button>
       </div>
       <pre><code class="language-java">//getenv("이름")은 "값"이 아니라 "환경변수 이름"으로 찾는다
@@ -16140,11 +16529,11 @@ String sql = " INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) "     // ← 04:
         <div class="sc-a">편집기에서는 태그가 인식될 수 있어도 <b>실행 시점에 실제로 일할 구현 클래스가 없어</b> 화면이 실패합니다. 규격(API)과 구현은 별개라 <b>두 jar를 함께</b> 넣어야 합니다. (반대로 이클립스에 <code>Unknown tag</code> 표시만 남는 것은 검증기가 jar를 아직 못 읽은 것으로, Refresh·Clean으로 사라지며 실행과는 별개입니다.)</div>
       </details>
       <details class="sc-q">
-        <summary>System.getenv("내가쓰는비밀번호")처럼 이름 자리에 값을 적으면 왜 항상 실패할까?</summary>
-        <div class="sc-a"><code>getenv</code>는 괄호 안의 문자열을 <b>환경변수 이름</b>으로 보고 찾습니다. 그런 이름의 환경변수는 없으니 <b>언제나 <code>null</code></b>이 돌아오고, 비밀번호 없이 접속하다 인증 오류가 납니다. 이름(<code>STUDY_DB_PASSWORD</code>)을 적고, 값은 실행 환경에 넣어 둡니다.</div>
+        <summary>05에서 글쓰기를 누르면 아무 메시지 없이 error.jsp로만 넘어간다. 원인을 어떻게 좁힐까?</summary>
+        <div class="sc-a">① <b>같은 요청을 04에도</b> 보내 봅니다. 04도 실패하면 JSP(EL·JSTL)가 아니라 <b>둘이 공유하는 부분</b>(DB 접속·SQL)이 원인입니다. ② <code>catch</code>에서 <code>SQLException</code>의 <b>SQLState·오류코드·메시지를 로그로</b> 찍습니다(05의 <code>printSqlError</code>). 예를 들어 SQLState <code>28000</code>이면 계정·비밀번호 문제, <code>42S02</code>면 테이블이 없는 것입니다. 비밀번호를 <code>System.getenv("STUDY_DB_PASSWORD")</code>로 읽는데 그 환경변수가 없으면 <code>null</code>로 접속하다 인증 오류가 나는 것도 이렇게 드러납니다.</div>
       </details>
     </div>
-    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>"화면에서 자바 코드를 걷어낸다"는 생각은 이후 <b>Thymeleaf 같은 템플릿 엔진</b>까지 그대로 이어집니다. 실무에서 꼭 알아 둘 함정 하나: JSP 본문에 쓴 <b><code>${dto.title}</code>은 HTML 특수문자를 바꾸지 않고 그대로 출력</b>합니다. 사용자가 제목에 <code>&lt;script&gt;</code>를 넣으면 그대로 실행될 수 있어(XSS), 사용자 입력은 <b><code>&lt;c:out value="${dto.title}"/&gt;</code></b>처럼 이스케이프해서 찍는 것이 안전합니다. 또 오늘의 디버깅처럼 <b>"바뀐 쪽과 안 바뀐 쪽을 같이 돌려 보는"</b> 비교 습관은 원인을 빠르게 좁히는 실무 기술입니다.</p>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>"화면에서 자바 코드를 걷어낸다"는 생각은 이후 <b>Thymeleaf 같은 템플릿 엔진</b>까지 그대로 이어집니다. 실무에서 꼭 알아 둘 함정 하나: JSP 본문에 쓴 <b><code>${dto.title}</code>은 HTML 특수문자를 바꾸지 않고 그대로 출력</b>합니다. 사용자가 제목에 <code>&lt;script&gt;</code>를 넣으면 그대로 실행될 수 있어(XSS), 사용자 입력은 <b><code>&lt;c:out value="${dto.title}"/&gt;</code></b>처럼 이스케이프해서 찍는 것이 안전합니다. 또 <b>"바뀐 쪽과 안 바뀐 쪽을 같이 돌려 보는"</b> 비교 습관은 원인을 빠르게 좁히는 실무 기술입니다.</p>
     <div class="note-files">실습 파일:
       <a href="../view.html?f=Back_end/web_edu_project/05_hkboard_MVC2_JSTL/src/main/webapp/boardlist.jsp">05 boardlist.jsp</a> ·
       <a href="../view.html?f=Back_end/web_edu_project/05_hkboard_MVC2_JSTL/src/main/webapp/boardDetail.jsp">05 boardDetail.jsp</a> ·
@@ -16152,6 +16541,7 @@ String sql = " INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) "     // ← 04:
       <a href="../view.html?f=Back_end/web_edu_project/05_hkboard_MVC2_JSTL/src/main/java/com/hk/board/dao/HkDao.java">05 HkDao.java</a> ·
       <a href="../view.html?f=Back_end/web_edu_project/04_hkboard_MVC2/src/main/webapp/boardlist.jsp">04 boardlist.jsp(비교용)</a>
     </div>
+    <details><summary>정리 작업 메모</summary><ul><li>35일차 정리 작업 중 05의 글쓰기가 계속 <code>error.jsp</code>로 넘어갔다. 04도 똑같이 실패해서 05 코드 문제가 아님을 갈랐고, 원인은 DB 비밀번호 환경변수가 없던 것이었다. 이를 계기로 05의 <code>DataBase</code>에 <code>printSqlError</code>를 만들고 <code>INSERT</code>에 컬럼 목록을 명시했다(04에는 반영하지 않음).</li><li>③의 <code>&lt;/c:choose&gt;</code>를 먼저 닫아 500이 난 것은 이날 실제로 겪은 오류다.</li></ul></details>
   </div>
 </article>
 
@@ -16349,8 +16739,8 @@ GET /06_spring_template/home.do
         <p><code>BoardController</code>(요청·화면 이름 담당) → <code>HkService</code>(작업 흐름 담당) → <code>HkDao</code>(DB 접근 담당)로 역할을 나눴고, Service·DAO는 <b>인터페이스(<code>IHKService</code>·<code>IHkDao</code>)와 구현 클래스</b>로 만들었습니다. 객체는 직접 <code>new</code>하지 않고, <code>@Controller</code>·<code>@Service</code>·<code>@Repository</code>로 빈 등록을 표시한 뒤 필드에 <b><code>@Autowired</code></b>를 붙이면 스프링이 <b>같은 타입의 빈을 찾아 넣어 줍니다</b>(의존성 주입, DI). Service가 <code>IHkDao</code> <b>타입</b>으로 받기 때문에 나중에 구현을 바꿔도 Service 코드는 그대로입니다. Controller는 결과를 <code>Model</code>에 <code>addAttribute("list", list)</code>로 담고 <code>"boardlist"</code>를 돌려주며, JSP는 05와 같은 <code>&lt;c:forEach items="${list}"&gt;</code>로 그립니다. → <a href="#web-41">🖥️ 41. 요청 흐름</a> · <a href="#web-42">🖥️ 42. 의존성 주입</a></p>
       </div>
       <div class="concept-block">
-        <h4>④ 구현 범위와 오늘의 오류</h4>
-        <p><b>Controller의 웹 요청은 목록 하나까지</b>입니다. DAO·Service·Mapper에는 등록·상세·수정·삭제·다중 삭제(<code>&lt;foreach&gt;</code>)까지 있지만, <b>메서드가 있다는 것과 화면 버튼까지 동작한다는 것은 다릅니다</b> — 요청 연결은 38일차입니다. 실행하며 만난 오류는 <b>Maven 클래스패스 누락</b>(스프링·MyBatis·JSTL을 못 찾음), 메인 링크의 <b><code>.board</code>와 실제 매핑 <code>.do</code> 불일치</b>, 로컬 DB 인증 실패, <b>이전 리소스가 남은 배포</b>였고, 하나씩 좁혀 메인·목록이 HTTP 200으로 열리는 것까지 확인했습니다. <code>defaultAutoCommit=false</code>만으로 스프링 트랜잭션이 생기지는 않습니다(트랜잭션 관리자 설정은 42일차). → <a href="#web-46">🖥️ 46. 오류를 단계별로 좁히기</a></p>
+        <h4>④ 구현 범위와 오류를 좁히는 순서</h4>
+        <p><b>Controller의 웹 요청은 목록 하나까지</b>입니다. DAO·Service·Mapper에는 등록·상세·수정·삭제·다중 삭제(<code>&lt;foreach&gt;</code>)까지 있지만, <b>메서드가 있다는 것과 화면 버튼까지 동작한다는 것은 다릅니다</b> — 요청 연결은 38일차입니다. 스프링 프로젝트가 처음 안 열릴 때는 <b>라이브러리(클래스패스) → 요청 주소와 매핑 → DB 접속 → 배포 상태</b>처럼 <b>한 고리씩 좁혀 가는 것</b>이 가장 빠릅니다. <code>defaultAutoCommit=false</code>만으로 스프링 트랜잭션이 생기지는 않습니다(트랜잭션 관리자 설정은 42일차). → <a href="#web-46">🖥️ 46. 오류를 단계별로 좁히기</a></p>
       </div>
     </div>
     <div class="note-code">
@@ -16484,7 +16874,7 @@ GET /07_hkboard_springMVC/boardlist.do
   → model.addAttribute("list", list)
   → return "boardlist"
   → /WEB-INF/views/boardlist.jsp → c:forEach</pre>
-      <div class="run-note">07 README에 정리한 경로 그대로이고, 이날 로컬 Tomcat에서 메인과 <code>/boardlist.do</code>가 <b>HTTP 200</b>을 반환하는 것까지 확인했습니다. 이 사슬의 <b>어느 한 고리</b>(매핑 주소, 스캔, 주입, namespace.id, DB 접속, Model 이름)만 어긋나도 목록이 안 나옵니다.</div>
+      <div class="run-note">07 README에 정리한 경로 그대로입니다. 이 사슬의 <b>어느 한 고리</b>(매핑 주소, 스캔, 주입, namespace.id, DB 접속, Model 이름)만 어긋나도 목록이 안 나옵니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">37일차에 배운 것 — 핵심 정리</div>
@@ -16502,7 +16892,7 @@ GET /07_hkboard_springMVC/boardlist.do
       <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
       <details class="sc-q">
         <summary>목록에 글이 나오려면 무엇이 모두 맞아야 할까?</summary>
-        <div class="sc-a">JSP의 링크, DispatcherServlet 매핑, Controller 주소, Service·DAO 주입, Mapper 전체 이름, DB 접속, Model 이름과 JSP의 EL이 연결되어야 한다.</div>
+        <div class="sc-a">JSP의 링크, DispatcherServlet 매핑, Controller 주소, Service·DAO 주입, Mapper 전체 이름, DB 접속, Model 이름과 JSP의 EL이 연결되어야 한다. 고리마다 증상이 다르다 — 링크가 <code>.board</code>인데 매핑이 <code>*.do</code>면 <b>404</b>, Mapper 전체 이름이 틀리면 "Mapped Statements collection does not contain value…" <b>500</b>, Model 이름과 EL 이름이 다르면 <b>오류 없이 빈 목록</b>이 나온다.</div>
       </details>
       <details class="sc-q">
         <summary>DAO의 namespace를 "com.hk.board.dao"(끝의 점 없이)로 쓰면 무슨 일이 생길까?</summary>
@@ -16523,6 +16913,7 @@ GET /07_hkboard_springMVC/boardlist.do
       <a href="../view.html?f=Back_end/web_edu_project/07_hkboard_springMVC/README.md">원본 소스·실행 안내</a><br>
       18회차 코딩테스트: <a href="#ct-35">정수 내림차순</a>(FAIL) · <a href="#ct-36">폰켓몬</a>(FAIL) · <a href="#ct-37">이름이 있는 동물</a>(PASS) · <a href="#ct-38">헤비 유저</a>(PASS)
     </div>
+    <details><summary>정리 작업 메모</summary><ul><li>37일차 실행 중 만난 오류: Maven 클래스패스 누락(스프링·MyBatis·JSTL을 못 찾음), 메인 링크의 <code>.board</code>와 실제 매핑 <code>.do</code> 불일치, 로컬 DB 인증 실패, 이전 리소스가 남은 배포. 하나씩 좁혀 이날 로컬 Tomcat에서 메인과 <code>/boardlist.do</code>가 HTTP 200을 반환하는 것까지 확인했다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="class-day38">
@@ -17185,7 +17576,7 @@ pnum   pageEndNum   startPage  endPage   prePageNum  nextPageNum
     <div class="note-concept">
       <div class="concept-block">
         <h4>① @Transactional — 답글 두 쿼리를 한 묶음으로</h4>
-        <p><code>root-context.xml</code>에 <b><code>DataSourceTransactionManager</code></b>(커넥션 풀로 commit·rollback을 실제로 하는 관리자)를 등록하고, <b><code>&lt;tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/&gt;</code></b>로 "<code>@Transactional</code>이 붙은 메서드를 찾아 트랜잭션을 걸어라"를 켰습니다. 그리고 <code>AnsService.boardReply</code>에 <code>@Transactional(propagation = Propagation.REQUIRED)</code>를 붙였습니다. 이제 메서드가 <b>정상 종료되면 commit</b>, <b>실행 중 <code>RuntimeException</code>(또는 Error)이 밖으로 나가면 rollback</b>됩니다 — <code>replyUpdate</code>만 되고 <code>replyInsert</code>가 실패하는 일이 사라집니다. 수업 코드에는 <code>TransactionSynchronizationManager.isActualTransactionActive()</code>로 "트랜젝션 활성 상태"를 로그로 찍고, 일부러 <code>RuntimeException</code>을 던지는 <b>롤백 테스트 줄(주석 처리)</b>이 남아 있습니다. 33일차에 JDBC로 직접 쓰던 <code>setAutoCommit(false)</code>·<code>commit()</code>·<code>rollback()</code>을 애너테이션 하나가 대신하는 셈입니다. → <a href="#web-59">🖥️ 59. 트랜잭션과 컨텍스트 나누기</a></p>
+        <p><code>root-context.xml</code>에 <b><code>DataSourceTransactionManager</code></b>(커넥션 풀로 commit·rollback을 실제로 하는 관리자)를 등록하고, <b><code>&lt;tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/&gt;</code></b>로 "<code>@Transactional</code>이 붙은 메서드를 찾아 트랜잭션을 걸어라"를 켰습니다(<code>proxy-target-class="true"</code>는 인터페이스가 있어도 클래스를 상속한 CGLIB 프록시를 쓰라고 강제하는 속성입니다 — <code>AnsService</code>는 인터페이스가 없어 이 속성이 없어도 CGLIB 프록시가 됩니다). 그리고 <code>AnsService.boardReply</code>에 <code>@Transactional(propagation = Propagation.REQUIRED)</code>를 붙였습니다. 이제 메서드가 <b>정상 종료되면 commit</b>, <b>실행 중 <code>RuntimeException</code>(또는 Error)이 밖으로 나가면 rollback</b>됩니다 — <code>replyUpdate</code>만 되고 <code>replyInsert</code>가 실패하는 일이 사라집니다. 수업 코드에는 <code>TransactionSynchronizationManager.isActualTransactionActive()</code>로 "트랜젝션 활성 상태"를 로그로 찍고, 일부러 <code>RuntimeException</code>을 던지는 <b>롤백 테스트 줄(주석 처리)</b>이 남아 있습니다. 33일차에 JDBC로 직접 쓰던 <code>setAutoCommit(false)</code>·<code>commit()</code>·<code>rollback()</code>을 애너테이션 하나가 대신하는 셈입니다. → <a href="#web-59">🖥️ 59. 트랜잭션과 컨텍스트 나누기</a></p>
       </div>
       <div class="concept-block">
         <h4>② 프록시와 컨텍스트 나누기 — 왜 스캔 범위를 쪼갰나</h4>
@@ -17197,7 +17588,7 @@ pnum   pageEndNum   startPage  endPage   prePageNum  nextPageNum
       </div>
       <div class="concept-block">
         <h4>④ 생성자 주입과 얇은 Controller — 그리고 화면 마무리</h4>
-        <p>Controller는 <code>@Autowired</code> 필드 대신 <b>생성자 <code>AnsController(AnsService ansService)</code></b>로 서비스를 받습니다(생성자가 하나면 스프링이 알아서 그 생성자로 주입). 의존 객체가 빠지면 <b>객체를 만드는 순간 바로 드러나고</b>, 테스트에서 <code>new AnsController(가짜 서비스)</code>처럼 직접 넣기도 쉽습니다. 목록용 조립(글 목록 + 총 페이지 수 + 페이지 번호 계산)은 <code>AnsService.getBoardListWithPaging(pnum)</code>이 <code>Map</code>으로 돌려주고, Controller는 <code>model.addAllAttributes(result)</code> 한 줄로 담습니다 — Controller는 <b>요청과 화면 연결만</b>. 목록 화면은 <code>depth</code>만큼 들여쓰고 답글 화살표 그림(<code>resources/img/arrow.png</code>)을 붙였으며, 페이지 번호는 Bootstrap pagination으로 지금 쪽에 <code>active</code>를 줍니다. <code>log4j.xml</code>의 root 수준을 info → debug로 바꿨지만, 39일차에 확인했듯 이 파일은 읽히지 않습니다. → <a href="#web-61">🖥️ 61. 생성자 주입과 Service로 옮긴 조립</a> · <a href="#journey-web-07">학습 여정 24단계</a></p>
+        <p>Controller는 <code>@Autowired</code> 필드 대신 <b>생성자 <code>AnsController(AnsService ansService)</code></b>로 서비스를 받습니다(생성자가 하나면 스프링이 알아서 그 생성자로 주입). 의존 객체가 빠지면 <b>객체를 만드는 순간 바로 드러나고</b>, 테스트에서 <code>new AnsController(가짜 서비스)</code>처럼 직접 넣기도 쉽습니다. 목록용 조립(글 목록 + 총 페이지 수 + 페이지 번호 계산)은 <code>AnsService.getBoardListWithPaging(pnum)</code>이 <code>Map</code>으로 돌려주고, Controller는 <code>model.addAllAttributes(result)</code> 한 줄로 담습니다 — Controller는 <b>요청과 화면 연결만</b>. 목록 화면은 <code>depth</code>만큼 들여쓰고 답글 화살표 그림(<code>resources/img/arrow.png</code>)을 붙였으며, 페이지 번호는 Bootstrap pagination으로 지금 쪽에 <code>active</code>를 줍니다. <code>log4j.xml</code>의 root 수준을 info → debug로 바꿨지만, 08은 로그 구현체가 Logback이라 이 파일은 읽히지 않습니다(<a href="#web-53">web-53</a>). → <a href="#web-61">🖥️ 61. 생성자 주입과 Service로 옮긴 조립</a> · <a href="#journey-web-07">학습 여정 24단계</a></p>
       </div>
     </div>
     <div class="note-code">
@@ -17342,7 +17733,7 @@ AnsController.boardReply → ansService.boardReply(dto)  ← 실제로는 "프�
       ansDao.replyInsert  → [AOP before] → INSERT → [AOP afterReturning]
   [트랜잭션 프록시] 정상 종료 → commit
      (INSERT에서 예외가 나면 → [AOP daoError] → 예외가 밖으로 → rollback: UPDATE도 취소)</pre>
-      <div class="run-note">08 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링을 띄워 본 정리 작업에서, <b>답글 요청이 commit되고, INSERT가 실패하면 rollback되며, servlet-context가 전체를 스캔하면 트랜잭션이 아예 걸리지 않는 것</b>을 확인했습니다(아래 정리 작업 메모). 위 순서는 그 동작을 프록시·advice 위치로 풀어 쓴 것입니다.</div>
+      <div class="run-note">위 순서는 <b>트랜잭션 프록시와 AOP advice가 끼어드는 위치</b>를 풀어 쓴 것입니다. 정상이면 commit, INSERT가 실패하면 UPDATE까지 rollback됩니다. 단 servlet-context가 전체를 스캔하면 Controller가 프록시가 아닌 Service를 받아 <b>트랜잭션이 아예 걸리지 않습니다</b>(<a href="#web-59">web-59</a>).</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">42일차에 배운 것 — 핵심 정리</div>
@@ -17358,11 +17749,11 @@ AnsController.boardReply → ansService.boardReply(dto)  ← 실제로는 "프�
       <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
       <details class="sc-q">
         <summary>servlet-context가 다시 com.hk.ansboard 전체를 스캔하면 @Transactional은 어떻게 되나?</summary>
-        <div class="sc-a">자식(servlet) 컨텍스트에 트랜잭션 설정이 없는 AnsService가 하나 더 만들어지고, Controller는 가까운 자식 쪽 것을 주입받습니다. 그래서 트랜잭션이 걸리지 않습니다. 같은 설정으로 재현해 보니 "트랜젝션 활성 상태:false"가 찍히고 rollback도 일어나지 않았습니다(<a href="#web-59">자세히</a>).</div>
+        <div class="sc-a">자식(servlet) 컨텍스트에 트랜잭션 설정이 없는 AnsService가 하나 더 만들어지고, Controller는 가까운 자식 쪽 것을 주입받습니다. 그래서 트랜잭션이 걸리지 않습니다. 이때 로그에는 "트랜젝션 활성 상태:false"가 찍히고, 트랜잭션 밖에서는 <code>SqlSessionTemplate</code>이 문장마다 커밋하므로 INSERT가 실패해도 앞의 UPDATE는 되돌려지지 않습니다(<a href="#web-59">자세히</a>).</div>
       </details>
       <details class="sc-q">
-        <summary>log4j.xml을 debug로 바꾸면 로그가 달라지나?</summary>
-        <div class="sc-a">아닙니다. 08의 구현체는 여전히 Logback이라 <code>log4j.xml</code>은 읽히지 않습니다(<a href="#web-53">39일차 재현</a>). 원래부터 Logback 기본 설정으로 전체 DEBUG가 출력되고 있었습니다. 워크스페이스의 <code>log/</code> 폴더도 10/2 현재 비어 있습니다.</div>
+        <summary>boardReply 안에서 checked 예외(throw new Exception("실패"))를 던지면 rollback될까?</summary>
+        <div class="sc-a"><b>기본 설정에서는 안 됩니다 — commit됩니다.</b> <code>@Transactional</code>의 기본 롤백 대상은 <code>RuntimeException</code>과 <code>Error</code>뿐이기 때문입니다. checked 예외에도 되돌리려면 <code>@Transactional(rollbackFor = Exception.class)</code>처럼 지정합니다. 반면 DAO의 SQL 실패는 MyBatis-Spring이 <code>DataAccessException</code>(RuntimeException의 하위)으로 바꿔 던지므로 기본 설정으로도 rollback됩니다.</div>
       </details>
       <details class="sc-q">
         <summary>AnsService 안에 다른 메서드를 만들고 그 안에서 boardReply(dto)를 부르면 트랜잭션이 걸릴까?</summary>
@@ -17379,7 +17770,7 @@ AnsController.boardReply → ansService.boardReply(dto)  ← 실제로는 "프�
       <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a><br>
       21회차 코딩테스트 — <a href="#ct-47">문자열을 정수로 바꾸기</a>(PASS) · <a href="#ct-48">모의고사</a>(FAIL) · <a href="#ct-49">여러 기준으로 정렬하기</a>(PASS) · <a href="#ct-50">조건에 맞는 사용자 정보 조회하기</a>(FAIL)
     </div>
-    <details><summary>정리 작업 메모</summary><ul><li>확인함 — 08의 Java 7개 파일이 JDK 21로, <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08의 <code>aop-context.xml</code> 원본과 <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링 컨테이너를 띄웠다. 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, 스캔을 잘못 나누면 트랜잭션이 아예 없다(<a href="#web-59">결과</a>).</li><li>확인하지 않음 — 톰캣과 실제 DB로 답글·페이지 이동을 눌러 본 기록은 이번 정리에 없다.</li></ul></details>
+    <details><summary>정리 작업 메모</summary><ul><li>확인함 — 08의 Java 7개 파일이 JDK 21로, <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08의 <code>aop-context.xml</code> 원본과 <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링 컨테이너를 띄웠다. 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, 스캔을 잘못 나누면 트랜잭션이 아예 없다(<a href="#web-59">결과</a>).</li><li>확인하지 않음 — 톰캣과 실제 DB로 답글·페이지 이동을 눌러 본 기록은 이번 정리에 없다.</li><li><code>log4j.xml</code>이 읽히지 않는 것은 39일차 정리에서 재현했다(<a href="#web-53">web-53</a>). 워크스페이스의 <code>log/</code> 폴더도 10/2 현재 비어 있었다.</li></ul></details>
   </div>
 </article>
 </div>
@@ -22130,7 +22521,7 @@ public class TCPClient {
       </div>
       <div class="concept-block">
         <h4>되돌려 보낼 때도 getLength()</h4>
-        <p>수업 원본 서버는 응답 패킷을 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>로 만들어 <b>받은 글자 수와 상관없이 512바이트 전체</b>를 돌려보냅니다. 원본 클라이언트는 받기 전용 버퍼로 받은 뒤 <code>getLength()</code>(=512)만큼 문자열로 만들기 때문에, 짧은 메시지 뒤에 빈 바이트·이전 찌꺼기가 같이 찍힙니다. 아래 코드는 응답 길이를 <code>packet.getLength()</code>로 고친 버전이고, 클라이언트도 보내기·받기 버퍼를 나눴습니다(보낸 배열을 받기에 재사용하면 받을 수 있는 크기가 보낸 길이로 줄어, 우연히 맞아 보일 뿐입니다). 원본 코드와 수정 과정은 <a href="#class-day19">19일차</a>에 있습니다.</p>
+        <p>수업 원본 서버는 응답 패킷을 <code>new DatagramPacket(buffer, buffer.length, address, port)</code>로 만들어 <b>받은 글자 수와 상관없이 512바이트 전체</b>를 돌려보냅니다. 원본 클라이언트는 받기 전용 버퍼로 받은 뒤 <code>getLength()</code>(=512)만큼 문자열로 만들기 때문에, 짧은 메시지 뒤에 빈 바이트·이전 찌꺼기가 같이 찍힙니다. 아래 코드는 답장을 <b>별도 패킷 <code>reply</code></b>로 만들고 길이를 <code>packet.getLength()</code>로 고친 버전입니다(같은 변수 <code>packet</code>에 다시 대입하면 다음 <code>receive(packet)</code>이 줄어든 길이로 받아 더 긴 메시지가 잘리므로, 수신용 패킷은 그대로 둡니다). 클라이언트도 보내기·받기 버퍼를 나눴습니다(보낸 배열을 받기에 재사용하면 받을 수 있는 크기가 보낸 길이로 줄어, 우연히 맞아 보일 뿐입니다). 원본 코드와 수정 과정은 <a href="#class-day19">19일차</a>에 있습니다.</p>
       </div>
     </div>
     <div class="note-code">
@@ -22219,7 +22610,7 @@ public class UDPClient {
         <li>전송용 패킷은 <b>데이터+길이+주소+포트</b>, 수신용 패킷은 <b>데이터+길이</b>만 있으면 된다.</li>
         <li><code>receive()</code>는 데이터가 도착할 때까지 블록된다.</li>
         <li>받은 데이터는 <code>new String(getData(), 0, getLength())</code>로 실제 길이만큼만 변환한다.</li>
-        <li>받은 것을 되돌려 보낼 때도 길이는 <code>buffer.length</code>가 아니라 <code>packet.getLength()</code>를 쓴다.</li>
+        <li>받은 것을 되돌려 보낼 때는 <b>별도 답장 패킷</b>을 만들고, 길이는 <code>buffer.length</code>가 아니라 <code>packet.getLength()</code>를 쓴다(수신용 패킷을 덮어쓰지 않는다).</li>
       </ul>
     </div>
     <div class="self-check">
@@ -26331,7 +26722,7 @@ CASE로 바뀌는 것은 <b>결과 화면에 표시되는 값</b>뿐이다. 저�
       <a href="coding-tests/2026-09-18/">📝 16회차 회차 노트</a>
       <p>정수 n(0 이상 3000 이하)을 받아 <b>n의 약수를 모두 더한 값</b>을 돌려주는 문제. 예: 12의 약수 1·2·3·4·6·12의 합은 28.</p>
     </div>
-    <p><b>시험 당일에는 노트북 고장으로 응시하지 못했다.</b> 동료 자료로 문제와 회차만 확인해 보충 풀이를 먼저 써 두었고, 이후 <b>직접 풀어 제출해 PASS</b> 했다. 아래에 제출 코드와 보충 풀이를 함께 둔다.</p>
+    <p>이 회차는 이후 <b>직접 풀어 제출해 PASS</b>한 기록이다. 아래에 제출 코드와 보충 풀이를 함께 둔다.</p>
     <div class="note-code">
       <div class="code-head">
         <span class="code-lang lang-java">JAVA</span>
@@ -26429,7 +26820,7 @@ n이 3000이면 O(n)도 충분하다. 하지만 n이 10억 단위로 커지면 O
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span><b>약수 · 소수 판별 · 약수의 개수</b> 문제는 코딩테스트에 계속 나옵니다. 공통 공식은 <b>"√n까지만 보고 짝으로 센다"</b>입니다. 먼저 제한 조건을 보고 O(n)으로 충분한지 판단하고, 크면 바로 √n 방식으로 가세요. 면접에서도 <b>"왜 √n까지만 봐도 되나요?"</b>는 단골 질문이라, 짝 (d, n/d) 중 작은 쪽이 √n 이하라는 설명을 한 문장으로 할 수 있으면 좋습니다.</p>
-    <details><summary>정리 작업 메모</summary><ul><li>제출 코드는 <code>Back_end/coding-tests/2026-09-18/SubmittedDivisorSum.java</code>, 보충 풀이는 같은 폴더 <code>Solution.java</code>와 같다(보충 풀이의 <code>// ←</code> 주석만 카드에서 덧붙임).</li><li>로컬 검증: 허용 범위 0~3000 전체 3,001개 입력을, 각 수의 배수에 약수를 누적하는 별도 방식으로 만든 기대값과 비교했다. 제출 코드·보충 풀이 둘 다 전 구간 일치 (JDK 21, <code>DivisorSumTest.java</code>). 프로그래머스 채점 화면을 재현한 것은 아니다.</li><li>PASS는 본인이 직접 풀어 제출한 결과다. 동료 문서는 문제와 회차를 확인하는 데만 썼다.</li></ul></details>
+    <details><summary>정리 작업 메모</summary><ul><li>시험 당일에는 노트북 고장으로 응시하지 못했다. 동료 자료로 문제와 회차만 확인해 보충 풀이를 먼저 써 두었고, 이후 직접 풀어 제출했다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-09-18/SubmittedDivisorSum.java</code>, 보충 풀이는 같은 폴더 <code>Solution.java</code>와 같다(보충 풀이의 <code>// ←</code> 주석만 카드에서 덧붙임).</li><li>로컬 검증: 허용 범위 0~3000 전체 3,001개 입력을, 각 수의 배수에 약수를 누적하는 별도 방식으로 만든 기대값과 비교했다. 제출 코드·보충 풀이 둘 다 전 구간 일치 (JDK 21, <code>DivisorSumTest.java</code>). 프로그래머스 채점 화면을 재현한 것은 아니다.</li><li>PASS는 본인이 직접 풀어 제출한 결과다. 동료 문서는 문제와 회차를 확인하는 데만 썼다.</li></ul></details>
   </div>
 </article>
 
@@ -34215,7 +34606,7 @@ seq=3          (form 안에서 체크박스가 놓인 순서대로 — 목록이
   </div>
   <div class="note-body">
     <p class="note-summary"><span class="summary-label">한 줄 요약</span>체크한 글 번호들을 <b><code>getParameterValues("seq")</code>로 배열</b>로 받고, 같은 DELETE 문에 번호만 바꿔 <b>batch로 한 번에 실행</b>한다. 이때 <b>자동 커밋을 끄고(트랜잭션)</b> 모두 괜찮을 때만 <code>commit</code>, 문제가 나면 <code>rollback</code>한다.</p>
-    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>버릴 서류를 <b>한 묶음(batch)</b>으로 모아 한 번에 처리하고, 전부 괜찮을 때만 <b>확정 도장(commit)</b>을 찍는 것이 트랜잭션입니다. 중간에 문제가 생기면 <b>없던 일(rollback)</b>로 돌려요. 다만 <b>도장을 찍은 뒤에 서류를 검사하면 이미 늦습니다</b> — 이번 수업 코드에서 꼭 짚어야 할 부분이 바로 이것입니다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>버릴 서류를 <b>한 묶음(batch)</b>으로 모아 한 번에 처리하고, 전부 괜찮을 때만 <b>확정 도장(commit)</b>을 찍는 것이 트랜잭션입니다. 중간에 문제가 생기면 <b>없던 일(rollback)</b>로 돌려요. 다만 <b>도장을 찍은 뒤에 서류를 검사하면 이미 늦습니다</b> — 원본 코드(02 <code>HkDao.mulDel</code>)는 검사를 commit 뒤에 하고 있어서, 이 순서가 왜 문제인지 아래에서 짚습니다.</p>
     <div class="note-concept">
       <div class="concept-block">
         <h4>① 흐름 — form → muldel → mulDel → 목록</h4>
@@ -34321,7 +34712,7 @@ else       conn.rollback();      // ← 하나라도 아니면 전부 취소</co
         <div class="sc-a"><b>연결을 다시 쓰는 쪽이 예상치 못한 상태를 만나지 않게</b> 하려는 것입니다. 지금은 매번 새 연결을 만들고 닫지만, 나중에 <b>커넥션 풀</b>을 쓰면 연결이 반납 후 재사용되므로, autoCommit이 꺼진 채 돌아가면 다음 사용자의 SQL이 확정되지 않는 문제가 생길 수 있습니다.</div>
       </details>
     </div>
-    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>스프링에서는 이 commit·rollback을 <b><code>@Transactional</code></b>이 대신해 줍니다. 단, <b>프록시 방식이라 같은 클래스 안에서 자기 메서드를 부르면 적용되지 않고</b>, 기본으로는 <b>RuntimeException에서만 롤백</b>한다는 점이 면접 단골입니다. 다중 삭제는 batch 대신 <code>DELETE ... WHERE SEQ IN (...)</code> 한 문장으로 쓰기도 하는데, MyBatis에서는 <code>&lt;foreach&gt;</code>로 만듭니다. 또 JDBC 규약상 <code>executeBatch()</code> 결과에는 행 수 대신 <code>Statement.SUCCESS_NO_INFO</code>(-2)가 올 수도 있어, 실무에서는 사용하는 드라이버가 무엇을 돌려주는지 확인하고 판정 기준을 정합니다.</p>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>스프링에서는 이 commit·rollback을 <b><code>@Transactional</code></b>이 대신해 줍니다. 단, <b>프록시 방식이라 같은 클래스 안에서 자기 메서드를 부르면 적용되지 않고</b>, 기본으로는 <b>RuntimeException(과 Error)에서만 롤백하고 checked 예외는 commit</b>한다는 점이 면접 단골입니다. 다중 삭제는 batch 대신 <code>DELETE ... WHERE SEQ IN (...)</code> 한 문장으로 쓰기도 하는데, MyBatis에서는 <code>&lt;foreach&gt;</code>로 만듭니다. 또 JDBC 규약상 <code>executeBatch()</code> 결과에는 행 수 대신 <code>Statement.SUCCESS_NO_INFO</code>(-2)가 올 수도 있어, 실무에서는 사용하는 드라이버가 무엇을 돌려주는지 확인하고 판정 기준을 정합니다.</p>
   </div>
 </article>
 
@@ -35116,11 +35507,11 @@ Illegal use of &lt;when&gt;-style tag without &lt;choose&gt; as its direct paren
       </details>
       <details class="sc-q">
         <summary>JSTL로 바꾼 뒤 05 글쓰기가 error.jsp로 튕긴다. JSTL 탓인지 어떻게 빨리 가려낼까?</summary>
-        <div class="sc-a"><b>같은 요청을 04에도 보내 봅니다.</b> 04와 05는 화면만 다르므로, <b>04도 똑같이 실패하면</b> 원인은 JSTL이 아니라 <b>둘이 공유하는 부분</b>(DB 접속 등)입니다. 실제로 35일차에 이 방법으로 원인이 DB 비밀번호 환경변수였다는 것을 찾았어요. → <a href="#web-37">🖥️ 37</a></div>
+        <div class="sc-a"><b>같은 요청을 04에도 보내 봅니다.</b> 04와 05는 화면만 다르므로, <b>04도 똑같이 실패하면</b> 원인은 JSTL이 아니라 <b>둘이 공유하는 부분</b>(DB 접속 등)입니다. 예를 들어 DB 접속 설정이 틀렸다면 04도 같이 실패합니다. → <a href="#web-37">🖥️ 37</a></div>
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서는 <b>"동작은 그대로, 구조만 바꾸는" 리팩터링을 기능 변경과 섞지 않는</b> 것이 기본 원칙입니다. 한 커밋에 둘이 섞이면 버그가 생겼을 때 <b>어느 쪽 탓인지 가를 수 없고</b>, 코드 리뷰도 어려워지죠. 04 → 05처럼 <b>"이번에는 View만"</b>이라고 범위를 정해 두면 비교도, 되돌리기도 쉬워집니다.</p>
-    <details><summary>정리 작업 메모</summary><ul><li>JSTL 전환 직후 04와 05의 Controller · DAO · DTO · Filter를 컴파일해 클래스 파일이 바이트 단위로 같은 것을 확인했다. 그 뒤 05의 <code>HkDao</code>·<code>DataBase</code>에 <code>printSqlError</code>와 INSERT 컬럼 명시가 추가되어 지금은 두 프로젝트의 DAO가 다르다.</li></ul></details>
+    <details><summary>정리 작업 메모</summary><ul><li>JSTL 전환 직후 04와 05의 Controller · DAO · DTO · Filter를 컴파일해 클래스 파일이 바이트 단위로 같은 것을 확인했다. 그 뒤 05의 <code>HkDao</code>·<code>DataBase</code>에 <code>printSqlError</code>와 INSERT 컬럼 명시가 추가되어 지금은 두 프로젝트의 DAO가 다르다.</li><li>35일차 정리 작업에서 04·05를 나란히 실행해 보는 이 방법으로 글쓰기 실패의 원인이 DB 비밀번호 환경변수였다는 것을 찾았다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="web-37">
@@ -35320,7 +35711,7 @@ String sql = " INSERT INTO HKBOARD(ID, TITLE, CONTENT, REGDATE) "   // ← 05 : 
     <div class="note-concept">
       <div class="concept-block">
         <h4>web.xml에 설정이 두 벌인 이유</h4>
-        <p><b>root-context.xml</b>은 <code>ContextLoaderListener</code>가 읽고, <b>servlet-context.xml</b>은 <code>DispatcherServlet</code>이 읽습니다. 나누는 기준은 <b>"화면과 상관있는가"</b>예요. Controller·ViewResolver처럼 <b>웹 화면에 딸린 것</b>은 servlet-context에, DB·서비스처럼 <b>화면과 무관하게 애플리케이션 전체가 쓰는 것</b>은 root-context에 둡니다. 36일차에는 root-context.xml이 <code>&lt;beans&gt;</code>만 있는 빈 파일이었고, 다음 날(9월 23일) <b>DataSource·SqlSessionFactory·SqlSessionTemplate</b>이 바로 이 파일에 들어왔습니다. → <a href="#web-43">🖥️ 43</a></p>
+        <p><b>root-context.xml</b>은 <code>ContextLoaderListener</code>가 읽고, <b>servlet-context.xml</b>은 <code>DispatcherServlet</code>이 읽습니다. 나누는 기준은 <b>"화면과 상관있는가"</b>예요. Controller·ViewResolver처럼 <b>웹 화면에 딸린 것</b>은 servlet-context에, DB·서비스처럼 <b>화면과 무관하게 애플리케이션 전체가 쓰는 것</b>은 root-context에 둡니다. root-context.xml에는 <b>DataSource·SqlSessionFactory·SqlSessionTemplate</b>처럼 DB 쪽 빈이 들어갑니다. → <a href="#web-43">🖥️ 43</a></p>
       </div>
       <div class="concept-block">
         <h4><code>*.do</code> 매핑 — 04의 <code>*.board</code>와 같은 발상</h4>
@@ -36321,7 +36712,7 @@ WEB-INF 안 JSP  열 수 있음 (서버 내부 이동)         열 수 없음 (�
       </div>
       <div class="concept-block">
         <h4>③ 수업 코드의 함정 — redirect:error.jsp</h4>
-        <p><code>error.jsp</code>는 <code>/WEB-INF/views/error.jsp</code>에 있습니다. redirect는 브라우저가 그 주소를 <b>직접</b> 여는 것이라 <code>WEB-INF</code> 안으로 들어갈 수 없고, 웹앱 바로 아래에는 <code>error.jsp</code>가 없습니다. 이 파일 배치 그대로라면 실패 시 화면을 찾지 못합니다. <b>실행해서 확인한 것은 아니고</b> 파일 위치로 따진 결과입니다. 뷰 폴더의 화면을 보여 주려면 <code>return "error";</code>처럼 <b>뷰 이름(forward)</b>을 돌려주면 됩니다.</p>
+        <p><code>error.jsp</code>는 <code>/WEB-INF/views/error.jsp</code>에 있습니다. redirect는 브라우저가 그 주소를 <b>직접</b> 여는 것이라 <code>WEB-INF</code> 안으로 들어갈 수 없고, 웹앱 바로 아래에는 <code>error.jsp</code>가 없습니다. 또 DispatcherServlet은 <code>*.do</code>만 받으므로 <code>/error.jsp</code> 요청은 스프링을 거치지 않고 톰캣이 직접 찾는데, 파일은 <code>WEB-INF</code> 안에 있어서 <b>404</b>가 됩니다. 이 파일 배치 그대로라면 실패 시 화면을 찾지 못합니다. 뷰 폴더의 화면을 보여 주려면 <code>return "error";</code>처럼 <b>뷰 이름(forward)</b>을 돌려주면 됩니다.</p>
       </div>
     </div>
     <div class="note-code">
@@ -36369,6 +36760,7 @@ public String boardUpdate(HkDto dto) {
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span><b>"forward와 redirect의 차이"</b>는 웹 백엔드 면접의 단골 질문입니다. "<b>forward는 서버 내부 이동이라 요청 1번·주소 유지·request 공유, redirect는 브라우저 재요청이라 요청 2번·주소 변경·request 새로</b>"에 <b>PRG로 중복 제출을 막는다</b>까지 말하면 충분합니다. 실무에서 redirect 뒤에 "저장되었습니다" 같은 <b>일회성 메시지</b>를 보여 주고 싶을 때는 스프링의 <code>RedirectAttributes.addFlashAttribute()</code>를 씁니다 — 다음 요청 한 번까지만 값을 살려 주는 장치예요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>③의 <code>redirect:error.jsp</code> 판단은 07의 <code>web.xml</code>(<code>*.do</code> 매핑)과 <code>error.jsp</code> 파일 위치로 따진 결과다. 톰캣에서 실행해 확인한 것은 아니다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="web-51">
@@ -36980,7 +37372,7 @@ if(isS) {
       </div>
       <div class="concept-block">
         <h4>③ pnum 들고 다니기 — 그리고 필수 파라미터의 함정</h4>
-        <p>목록의 글쓰기 버튼은 <code>boardInsertForm.do?pnum=${pnum}</code>, 상세 링크는 <code>…&amp;review=y&amp;pnum=${pnum}</code>, 상세·삭제·답글 폼에는 <code>&lt;input type="hidden" name="pnum"&gt;</code>가 있습니다. Controller는 끝나면 <code>redirect:boardList.do?pnum=</code>처럼 <b>같은 쪽으로 돌려보냅니다</b>. 단 이 메서드들의 <code>@RequestParam("pnum")</code>은 <b>필수</b>라서, pnum 없이 <code>boardDetail.do?seq=3</code>을 직접 열면 <b>400 오류</b>가 납니다(소스로 따진 결과). 새 글 저장만은 <code>redirect:boardList.do</code>로 <b>1쪽</b>에 갑니다 — 새 글은 refer가 가장 커서 1쪽 맨 위에 있기 때문입니다.</p>
+        <p>목록의 글쓰기 버튼은 <code>boardInsertForm.do?pnum=${pnum}</code>, 상세 링크는 <code>…&amp;review=y&amp;pnum=${pnum}</code>, 상세·삭제·답글 폼에는 <code>&lt;input type="hidden" name="pnum"&gt;</code>가 있습니다. Controller는 끝나면 <code>redirect:boardList.do?pnum=</code>처럼 <b>같은 쪽으로 돌려보냅니다</b>. 단 이 메서드들의 <code>@RequestParam("pnum")</code>은 <b>필수</b>라서, pnum 없이 <code>boardDetail.do?seq=3</code>을 직접 열면 <b>400 오류</b>가 납니다. 새 글 저장만은 <code>redirect:boardList.do</code>로 <b>1쪽</b>에 갑니다 — 새 글은 refer가 가장 커서 1쪽 맨 위에 있기 때문입니다.</p>
       </div>
     </div>
     <div class="note-code">
@@ -37018,7 +37410,7 @@ if(isS) {
     6    6 |   5     6~6      6
     1    1 |   1     1~1      1
     0    1 |   1     1~0      0</pre>
-      <div class="run-note">08의 <code>Paging.java</code>를 그대로 컴파일해 호출했습니다. <b>마지막 묶음에서 "다음"은 마지막 쪽(14)</b>을, <b>첫 묶음에서 "이전"은 1</b>을 가리킵니다.<br><br>글이 하나도 없으면(pcount 0) 번호 반복이 <code>1~0</code>이라 <b>번호는 안 나오고</b>, "Next"가 <b><code>pnum=0</code></b>을 가리킵니다.</div>
+      <div class="run-note"><b>마지막 묶음에서 "다음"은 마지막 쪽(14)</b>을, <b>첫 묶음에서 "이전"은 1</b>을 가리킵니다.<br><br>글이 하나도 없으면(pcount 0) 번호 반복이 <code>1~0</code>이라 <b>번호는 안 나오고</b>, "Next"가 <b><code>pnum=0</code></b>을 가리킵니다.</div>
     </details>
     <div class="note-code">
       <div class="code-head">
@@ -37061,10 +37453,11 @@ if(isS) {
       </details>
       <details class="sc-q">
         <summary>3쪽에서 글을 보고 "글목록" 버튼을 눌렀는데 1쪽으로 돌아간다면 무엇을 빠뜨린 것인가?</summary>
-        <div class="sc-a"><b>pnum을 어딘가에서 안 넘긴 것</b>입니다. 목록 링크 → 상세 Controller → <code>model.addAttribute("pnum")</code> → 상세 JSP의 버튼 <code>boardList.do?pnum=${pnum}</code>까지 <b>한 고리라도 빠지면</b> pnum이 사라지고, 목록 Controller의 <code>defaultValue="1"</code>이 1쪽을 보여 줍니다. HTTP는 <b>이전 요청을 기억하지 않으므로</b> 상태는 이렇게 직접 들고 다녀야 합니다.</div>
+        <div class="sc-a"><b>상세 쪽에서 pnum을 안 넘긴 것</b>입니다. 고리는 목록 링크 → 상세 Controller → <code>model.addAttribute("pnum", pnum)</code> → 상세 JSP의 버튼 <code>boardList.do?pnum=${pnum}</code>인데, 어디서 빠졌느냐에 따라 증상이 다릅니다. ① <b>목록 링크</b>에서 빠지면 08의 <code>boardDetail</code>은 <code>@RequestParam("pnum")</code>이 필수라 <b>상세 요청 자체가 400</b>이 됩니다(글을 볼 수도 없음). ② <b>상세 Controller의 <code>addAttribute</code></b>나 <b>상세 JSP 버튼</b>에서 빠지면 버튼 주소가 <code>boardList.do?pnum=</code>(빈 값)이 되고, 목록 Controller의 <code>defaultValue="1"</code>이 1쪽을 보여 줍니다. 그러니 "글은 보이는데 1쪽으로 돌아간다"면 ②입니다. HTTP는 <b>이전 요청을 기억하지 않으므로</b> 상태는 이렇게 직접 들고 다녀야 합니다.</div>
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>페이징 계산은 <b>정수 나눗셈·올림</b>을 정확히 다루는 연습이라 코딩테스트의 <b>"총 몇 묶음인가", "몇 번째 그룹인가"</b> 문제와 같은 식입니다(<code>(n + k - 1) / k</code>로 올림하는 공식도 같이 익혀 두세요). 실무에서는 이런 계산을 <b>Spring Data의 <code>Pageable</code></b> 같은 도구가 대신해 주지만, <b>"목록으로 돌아올 때 보던 쪽·검색어를 유지하라"</b>는 요구는 거의 모든 관리 화면에 따라붙습니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>위 실행 결과는 08의 <code>Paging.java</code>를 그대로 컴파일해 호출한 것이다.</li><li>pnum 없이 상세를 열면 400이 된다는 판단과 스스로 확인 2의 답은 08 <code>AnsController</code>·<code>boardDetail.jsp</code> 소스로 따진 결과다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="web-58">
@@ -37178,11 +37571,11 @@ if(isS) {
     <div class="note-concept">
       <div class="concept-block">
         <h4>① 왜 필요한가 — 답글은 UPDATE 다음 INSERT</h4>
-        <p>트랜잭션이 없으면 <b>쿼리마다 바로 확정</b>되므로, INSERT만 실패해도 <b>이미 밀린 step은 그대로 남습니다</b>. Service 주석의 <b>"결론은 step만 올라가고 답글은 추가되지 않는 상황"</b>이 바로 이것이고, 아래 첫 번째 실행 결과가 그 상황을 만든 것입니다.</p>
+        <p>트랜잭션이 없으면 <b>쿼리마다 바로 확정</b>되므로, INSERT만 실패해도 <b>이미 밀린 step은 그대로 남습니다</b>. Service 주석의 <b>"결론은 step만 올라가고 답글은 추가되지 않는 상황"</b>이 바로 이것이고, 아래 첫 번째 실행 결과가 그 상황을 만든 것입니다. 참고로 08은 DataSource가 <code>defaultAutoCommit=false</code>이고, 스프링 트랜잭션이 없으면 <code>SqlSessionTemplate</code>이 <b>문장마다 commit</b>합니다 — 그래서 "쿼리마다 바로 확정"은 08에서도 그대로입니다.</p>
       </div>
       <div class="concept-block">
         <h4>② 무엇이 일을 하나 — 트랜잭션 매니저와 프록시</h4>
-        <p><b>트랜잭션 매니저</b>(<code>DataSourceTransactionManager</code>)가 실제로 연결의 auto commit을 끄고, 끝에 commit/rollback 합니다. MyBatis(<code>SqlSessionTemplate</code>)는 <b>같은 DataSource의 그 연결을 함께</b> 씁니다. 그리고 스프링이 AnsService를 감싼 <b>대리 객체(<code>AnsService$SpringCGLIB$0</code>)</b>를 만들어 Controller에 넣고, 대리 객체가 메서드 앞뒤에서 트랜잭션을 열고 닫습니다. 그래서 같은 클래스 안에서 <code>this.boardReply()</code>처럼 직접 부르면 <b>대리 객체를 거치지 않아 걸리지 않습니다</b>. <code>proxy-target-class="true"</code>는 인터페이스가 아니라 <b>클래스를 상속해</b> 대리 객체를 만들라는 뜻입니다(08의 Service는 인터페이스가 없다).</p>
+        <p><b>트랜잭션 매니저</b>(<code>DataSourceTransactionManager</code>)가 트랜잭션을 시작할 때 연결의 auto commit을 끄고(08은 DataSource가 이미 <code>defaultAutoCommit=false</code>라 끌 필요가 없습니다), 끝에 commit/rollback 합니다. 트랜잭션 밖에서는 <code>SqlSessionTemplate</code>이 문장마다 commit합니다. MyBatis(<code>SqlSessionTemplate</code>)는 <b>같은 DataSource의 그 연결을 함께</b> 씁니다. 그리고 스프링이 AnsService를 감싼 <b>대리 객체(<code>AnsService$$SpringCGLIB$$0</code>)</b>를 만들어 Controller에 넣고, 대리 객체가 메서드 앞뒤에서 트랜잭션을 열고 닫습니다. 그래서 같은 클래스 안에서 <code>this.boardReply()</code>처럼 직접 부르면 <b>대리 객체를 거치지 않아 걸리지 않습니다</b>. <code>proxy-target-class="true"</code>는 인터페이스가 있어도 <b>클래스를 상속해</b>(CGLIB) 대리 객체를 만들라고 <b>강제</b>하는 속성입니다. 08의 Service처럼 인터페이스가 없으면 이 설정이 없어도 스프링이 알아서 CGLIB 클래스 프록시를 씁니다.</p>
       </div>
       <div class="concept-block">
         <h4>③ 무엇에 rollback 하나 — RuntimeException, 그리고 DataAccessException</h4>
@@ -37194,10 +37587,10 @@ if(isS) {
       </div>
     </div>
     <details class="run-output">
-      <summary><span class="run-tag">실행 결과</span>B 묶음에서 UPDATE만 실행되고 INSERT가 실패했다면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <summary><span class="run-tag">실행 결과</span>원글 seq 2(step 0)와 답글 seq 6(step 1)이 있는 묶음(refer=2)에 seq 2의 답글을 달 때, UPDATE만 실행되고 INSERT가 실패했다면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
       <pre>refer=2 (seq:step)  전 → 2:0, 6:1   /   후 → 2:0, 6:2
 step 1 자리가 비었다 → true</pre>
-      <div class="run-note">답글은 안 들어갔는데 <b>기존 답글만 한 칸 내려가 빈자리</b>가 생겼습니다. Service 주석의 "결론은 step만 올라가고 답글은 추가되지 않는 상황"이 바로 이것입니다.</div>
+      <div class="run-note">첫 줄은 refer=2 묶음의 글을 <code>seq:step</code>으로 적은 것입니다(2:0 = 원글, 6:1 = 기존 답글). 답글은 안 들어갔는데 <b>기존 답글만 한 칸 내려가 빈자리</b>가 생겼습니다. Service 주석의 "결론은 step만 올라가고 답글은 추가되지 않는 상황"이 바로 이것입니다.</div>
     </details>
     <div class="note-code">
       <div class="code-head">
@@ -37237,27 +37630,27 @@ public boolean boardReply(AnsDto dto) {
 }</code></pre>
     </div>
     <details class="run-output">
-      <summary><span class="run-tag">실행 결과</span>08 설정 그대로(DB만 가짜 연결) 스프링을 띄워 boardReply 호출 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
-      <pre>① 42일차 설정 (자식 = controller만)
+      <summary><span class="run-tag">실행 결과</span>08 설정에서 boardReply를 부르면 — 연결에 commit·rollback이 불리는 흐름 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>① 현재 08 설정 (servlet = controller만)
   자식에도 ansService 빈이 있나? false
-  [DB연결] setAutoCommit(false)
   트랜젝션 활성 상태:true
   [SQL] UPDATE replyUpdate / INSERT replyInsert
   [DB연결] commit()
   → redirect:boardList.do?pnum=1
 
 ② 같은 설정, replyInsert가 실패하면
-  [DB연결] setAutoCommit(false)
   트랜젝션 활성 상태:true
   [SQL] UPDATE replyUpdate / INSERT replyInsert ← 예외
   [DB연결] rollback()
 
-③ 자식이 com.hk.ansboard 전체를 스캔하면 (40일차까지의 servlet-context)
+③ servlet-context가 com.hk.ansboard 전체를 스캔하면
   자식에도 ansService 빈이 있나? true
   트랜젝션 활성 상태:false
-  [SQL] UPDATE replyUpdate / INSERT replyInsert ← 예외
-  (commit도 rollback도 없음 — UPDATE는 이미 확정)</pre>
-      <div class="run-note">08의 <code>AnsController</code>·<code>AnsService</code>·<code>AnsDao</code>와 <code>aop-context.xml</code> 원본, <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 썼습니다. DB 대신 호출을 기록하는 가짜 연결과 가짜 <code>SqlSessionTemplate</code>을 넣었으므로, <b>스프링이 언제 commit·rollback을 부르는지</b>를 확인한 것이고 MariaDB의 실제 되돌리기를 본 것은 아닙니다.<br><br><b>③이 가장 무서운 경우</b>입니다. 자식(servlet)이 service까지 스캔하면 <b>자식 안에 트랜잭션 설정이 없는 AnsService가 하나 더</b> 생기고, Controller는 가까운 자식 쪽 빈을 받습니다. 에러 없이 돌아가지만 <b>트랜잭션이 꺼져 있어</b>, 실패하면 위의 SQLite 결과처럼 UPDATE만 남습니다.</div>
+  [SQL] UPDATE replyUpdate
+  [DB연결] commit()      ← SqlSessionTemplate이 문장마다 커밋
+  [SQL] INSERT replyInsert ← 예외
+  (UPDATE만 확정된 채 남음)</pre>
+      <div class="run-note">①·②에 <code>setAutoCommit(false)</code> 줄이 없는 것은 08의 DataSource가 이미 <code>defaultAutoCommit=false</code>라서 트랜잭션 매니저가 따로 끌 필요가 없기 때문입니다. 실제 출력 모양은 로그 설정에 따라 다르고, 여기서는 <b>언제 commit·rollback이 불리는지</b>만 정리했습니다.<br><br><b>③이 가장 무서운 경우</b>입니다. 자식(servlet)이 service까지 스캔하면 <b>자식 안에 트랜잭션 설정이 없는 AnsService가 하나 더</b> 생기고, Controller는 가까운 자식 쪽 빈을 받습니다. 에러 없이 돌아가지만 <b>트랜잭션이 꺼져 있어</b>, 트랜잭션 밖이라 <code>SqlSessionTemplate</code>이 UPDATE를 바로 커밋하므로, 실패하면 위 첫 번째 실행 결과처럼 UPDATE만 남습니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">59번 정리 — 핵심 정리</div>
@@ -37282,6 +37675,7 @@ public boolean boardReply(AnsDto dto) {
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>트랜잭션은 <b>백엔드 면접 최다 출제 주제</b> 중 하나입니다. <b>"@Transactional이 안 먹는 경우"</b>(내부 호출, private 메서드, checked 예외, 다른 컨텍스트)와 <b>전파 속성(REQUIRED·REQUIRES_NEW)</b>, <b>ACID</b>가 단골이에요. 실무에서는 트랜잭션을 <b>Service 계층에</b> 거는 것이 표준이고, 스프링 부트에서는 컨텍스트가 하나라 ④의 문제는 드물지만 <b>프록시 원리</b>는 그대로입니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>첫 번째 실행 결과는 Mapper의 답글 SQL을 SQLite 메모리 DB에 실행해 만든 것이다.</li><li>두 번째 실행 결과는 08의 <code>AnsController</code>·<code>AnsService</code>·<code>AnsDao</code>와 <code>aop-context.xml</code> 원본, <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고, DB 대신 호출을 기록하는 가짜 연결과 가짜 <code>SqlSessionTemplate</code>을 넣어 스프링을 띄운 결과다. 스프링이 언제 commit·rollback을 부르는지만 본 것이고 MariaDB의 실제 되돌리기를 본 것은 아니다. 출력 모양은 검증용 로그 설정으로 맞춘 것이다. 가짜 <code>SqlSessionTemplate</code>은 문장마다 커밋하지 않았으므로, ③의 <code>commit()</code> 줄은 실제 <code>SqlSessionTemplate</code>의 동작(트랜잭션 밖이면 문장마다 커밋)에 맞춰 고쳐 적은 것이다. ①·②에서 <code>setAutoCommit(false)</code> 줄은 08 DataSource의 <code>defaultAutoCommit=false</code>에 맞춰 뺐다.</li><li>①의 "현재 08 설정"은 42일차에 바뀐 설정, ③은 40일차까지의 servlet-context(com.hk.ansboard 전체 스캔)다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="web-60">
@@ -37304,7 +37698,7 @@ public boolean boardReply(AnsDto dto) {
       </div>
       <div class="concept-block">
         <h4>③ XML 방식과 애너테이션 방식</h4>
-        <p>같은 일을 <code>LogExecuteNoXML</code>은 <code>@Aspect</code>·<code>@Pointcut</code>·<code>@Before</code>·<code>@AfterReturning(returning="result")</code>·<code>@AfterThrowing(throwing="ex")</code>로 씁니다. 이쪽은 <b>반환값과 예외 객체도 받아</b> 로그에 남겨요. 다만 지금은 <code>@Aspect</code>·<code>@Component</code>가 주석이고, 켜려면 <code>&lt;aop:aspectj-autoproxy/&gt;</code>(또는 <code>@EnableAspectJAutoProxy</code>)와 <code>aop</code> 패키지를 포함하는 스캔이 필요합니다. 지금 08의 스캔 범위(controller / service·dao)에는 aop 패키지가 없습니다(소스로 따진 결과). 포인트컷도 <b>XML 쪽은 DAO, 애너테이션 쪽은 service 패키지</b>로 다릅니다.</p>
+        <p>같은 일을 <code>LogExecuteNoXML</code>은 <code>@Aspect</code>·<code>@Pointcut</code>·<code>@Before</code>·<code>@AfterReturning(returning="result")</code>·<code>@AfterThrowing(throwing="ex")</code>로 씁니다. 이쪽은 <b>반환값과 예외 객체도 받아</b> 로그에 남겨요. 다만 지금은 <code>@Aspect</code>·<code>@Component</code>가 주석이고, 켜려면 <code>&lt;aop:aspectj-autoproxy/&gt;</code>(또는 <code>@EnableAspectJAutoProxy</code>)와 <code>aop</code> 패키지를 포함하는 스캔이 필요합니다. 지금 08의 스캔 범위(controller / service·dao)에는 aop 패키지가 없습니다. 포인트컷도 <b>XML 쪽은 DAO, 애너테이션 쪽은 service 패키지</b>로 다릅니다.</p>
       </div>
       <div class="concept-block">
         <h4>④ 트랜잭션도 같은 원리</h4>
@@ -37354,7 +37748,7 @@ public void afterReturning(JoinPoint join) {
 }</code></pre>
     </div>
     <details class="run-output">
-      <summary><span class="run-tag">실행 결과</span>답글 저장 한 번에 찍힌 AOP 로그 (web-59와 같은 실행) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <summary><span class="run-tag">실행 결과</span>답글 저장 한 번에 찍히는 AOP 로그 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
       <pre>INFO  class com.hk.ansboard.dao.AnsDao - before실행(info):시작:replyUpdate
 DEBUG class com.hk.ansboard.dao.AnsDao - before실행(debug):시작:execution(public int com.hk.ansboard.dao.AnsDao.replyUpdate(com.hk.ansboard.dtos.AnsDto))
 INFO  class com.hk.ansboard.dao.AnsDao - afterReturning실행(info):시작:replyUpdate
@@ -37363,7 +37757,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - before실행(info):시작:replyInsert
 …
 (replyInsert가 실패한 경우)
 INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert</pre>
-      <div class="run-note">로그 이름이 <code>class com.hk.ansboard.dao.AnsDao</code>로 <b>"class " 글자가 앞에 붙었습니다.</b> <code>getClass()+""</code>는 Class 객체를 문자열로 바꾼 것이라 <code>"class 패키지.이름"</code>이 되기 때문이에요. 로그 설정은 보통 <code>com.hk.ansboard</code>처럼 <b>패키지 이름으로 수준을 정하므로</b>, 이 이름은 그런 설정에 걸리지 않습니다. 주석 처리된 <code>LogExecuteNoXML</code>처럼 <b><code>LoggerFactory.getLogger(join.getTarget().getClass())</code>로 Class를 그대로 넘기면</b> 됩니다.<br><br>출력 모양은 검증용 Logback 설정으로 스프링 내부 로그만 줄인 것입니다.</div>
+      <div class="run-note">로그 이름이 <code>class com.hk.ansboard.dao.AnsDao</code>로 <b>"class " 글자가 앞에 붙었습니다.</b> <code>getClass()+""</code>는 Class 객체를 문자열로 바꾼 것이라 <code>"class 패키지.이름"</code>이 되기 때문이에요. 로그 설정은 보통 <code>com.hk.ansboard</code>처럼 <b>패키지 이름으로 수준을 정하므로</b>, 이 이름은 그런 설정에 걸리지 않습니다. 주석 처리된 <code>LogExecuteNoXML</code>처럼 <b><code>LoggerFactory.getLogger(join.getTarget().getClass())</code>로 Class를 그대로 넘기면</b> 됩니다.<br><br>실제 출력의 앞부분(시간·스레드 등)은 로그 설정에 따라 다릅니다.</div>
     </details>
     <div class="note-points">
       <div class="note-points-title">60번 정리 — 핵심 정리</div>
@@ -37389,6 +37783,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무에서 AOP는 <b>로그·실행 시간 측정·트랜잭션·권한 검사·예외 변환</b>처럼 "모든 곳에 필요하지만 본업은 아닌" 일에 씁니다. 대부분 XML보다 <b><code>@Aspect</code> 애너테이션 방식</b>이고, <b><code>@Around</code></b>로 실행 전후를 한 번에 감싸는 경우가 많아요. 면접 단골은 <b>"AOP 용어(Advice·Pointcut·JoinPoint·Aspect)"</b>와 <b>"스프링 AOP는 프록시 기반이라 내부 호출에는 적용되지 않는다"</b>입니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>실행 결과는 <a href="#web-59">web-59</a>와 같은 재현(08 설정에 DB만 가짜 연결)에서 나온 로그이고, 출력 모양은 검증용 Logback 설정으로 스프링 내부 로그만 줄인 것이다.</li><li>"08의 스캔 범위에 aop 패키지가 없다"는 <code>servlet-context.xml</code>·<code>root-context.xml</code> 소스로 따진 결과다.</li></ul></details>
   </div>
 </article>
 <article class="note-card" id="web-61">
@@ -37403,7 +37798,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
     <div class="note-concept">
       <div class="concept-block">
         <h4>① 생성자 주입 — 생성자가 하나면 @Autowired 생략</h4>
-        <p>42일차에 <code>AnsController</code>의 필드 <code>@Autowired</code>를 주석 처리하고 <b>생성자 <code>AnsController(AnsService ansService)</code></b>를 만들었습니다. 스프링은 <b>생성자가 하나뿐이면 그 생성자를 써서</b> 필요한 빈을 넣어 줍니다(Spring 4.3부터). 실제로 <a href="#web-59">web-59</a>의 재현에서 Controller는 이 생성자로 <b>프록시 Service</b>를 받았습니다. 참고로 <code>AnsService</code> 안의 <code>AnsDao</code>는 아직 <b>필드 <code>@Autowired</code></b> 그대로입니다.</p>
+        <p>08의 <code>AnsController</code>는 필드 <code>@Autowired</code>를 주석 처리하고 <b>생성자 <code>AnsController(AnsService ansService)</code></b>로 받습니다. 스프링은 <b>생성자가 하나뿐이면 그 생성자를 써서</b> 필요한 빈을 넣어 줍니다(Spring 4.3부터). 그래서 Controller는 이 생성자로 <b>트랜잭션 프록시가 씌워진 Service</b>(<a href="#web-59">web-59</a>)를 받습니다. 참고로 <code>AnsService</code> 안의 <code>AnsDao</code>는 아직 <b>필드 <code>@Autowired</code></b> 그대로입니다.</p>
       </div>
       <div class="concept-block">
         <h4>② 생성자 주입이 권장되는 이유</h4>
@@ -37485,6 +37880,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
       </details>
     </div>
     <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>스프링 공식 문서와 대부분의 팀이 <b>생성자 주입을 기본</b>으로 씁니다. 실무에서는 <b><code>private final</code> 필드 + Lombok의 <code>@RequiredArgsConstructor</code></b>로 생성자를 자동으로 만드는 모습을 가장 많이 보게 될 거예요. 면접에서는 <b>"필드 주입 대신 생성자 주입을 쓰는 이유"</b>와 <b>"Controller·Service·DAO 각 계층의 책임"</b>이 자주 나옵니다 — "Controller에 업무 로직이 쌓이면 왜 나쁜가"를 이번 리팩터링으로 설명할 수 있습니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>생성자 주입으로 바꾼 것은 42일차 수업이다. Controller가 생성자로 프록시 Service를 받는 것은 <a href="#web-59">web-59</a>의 재현(08 설정에 DB만 가짜 연결)에서 확인했다.</li></ul></details>
   </div>
 </article>
 </div>
