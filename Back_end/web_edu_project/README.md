@@ -1,6 +1,6 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-10-02(42일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 최신 상태: 2026-10-06(43일차) 기준. 01 회원·구매, 02 MVC1 게시판,
 > 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판 프로젝트를 포함한다.
 > [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day42)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
@@ -27,7 +27,7 @@
 | [`05_hkboard_MVC2_JSTL`](05_hkboard_MVC2_JSTL) | **04를 복사해 화면만 EL·JSTL로 교체.** 자바 코드는 그대로 두고 스크립틀릿을 걷어낸다 | web-32~37 |
 | [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
 | [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시(37일차), 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 연결(38일차).** | web-41~51 |
-| [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기, 답글 트랜잭션(`@Transactional`), DAO 로그 AOP, 생성자 주입(41~42일차) | web-52~61 |
+| [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기, 답글 트랜잭션(`@Transactional`), DAO 로그 AOP, 생성자 주입(41~42일차). 로그인 확인 인터셉터(등록은 주석)와 JUnit 5 · spring-test 테스트 클래스(43일차) | web-52~64 |
 
 ## 개발 환경
 
@@ -194,7 +194,7 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 앞으로
 
 > 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 교육과정 전체 자료를 기준으로
-> 다시 맞췄다. **지금(2026-10-02, 42일차·08번 프로젝트)까지 4번 항목과 5번의 대부분이 끝났다.**
+> 다시 맞췄다. **지금(2026-10-06, 43일차·08번 프로젝트)까지 4번 항목과 5번의 대부분이 끝났다.**
 > 6번부터는 아직 수업 전이라 프로젝트도 없다.
 
 1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
@@ -204,7 +204,7 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 4. ~~**답변형 게시판 심화** — 페이징 처리, Connection Pool(DBCP), 조회수~~
    (DBCP는 36일차 06부터, 페이징·조회수·답글은 39~41일차 08 프로젝트)
 5. **Spring 답변형 게시판** — ~~로깅(SLF4J)~~, ~~AOP~~, ~~`@Transactional` 트랜잭션~~(39~42일차, 08 프로젝트),
-   JUnit 단위테스트 ← **여기까지 진행 중** (단위테스트는 아직)
+   JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석) ← **여기까지 진행 중**
 6. **파일 업로드 · 다운로드**
 7. **일정관리(캘린더) 게시판** — Spring MVC로 월별 달력·일정 CRUD
 8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환
@@ -567,7 +567,7 @@ Controller에 `boardInsertForm.do`(GET) · `boardInsert.do`(POST) · `boardDetai
 
 ## 08_answerboard_springMVC — 답변형 게시판
 
-[프로젝트 실행 안내와 구현 범위](08_answerboard_springMVC/README.md) · [39일차](../index.html#class-day39) · [40일차](../index.html#class-day40) · [41일차](../index.html#class-day41) · [42일차](../index.html#class-day42) · [개념 카드 52~61](../index.html#web-52)
+[프로젝트 실행 안내와 구현 범위](08_answerboard_springMVC/README.md) · [39일차](../index.html#class-day39) · [40일차](../index.html#class-day40) · [41일차](../index.html#class-day41) · [42일차](../index.html#class-day42) · [43일차](../index.html#class-day43) · [개념 카드 52~64](../index.html#web-52)
 
 07을 복사해 패키지를 `com.hk.ansboard`로 바꾸고, 답글을 같은 테이블에 줄 세우는 게시판을 시작했다. 글마다 `refer`(묶음) · `step`(묶음 안 순서) · `depth`(들여쓰기)를 두고, 목록은 `ORDER BY refer DESC, step ASC`에 `ROW_NUMBER()`로 번호를 붙여 10개씩 자른다. 삭제는 `delflag='Y'`로 바꾸는 논리 삭제이고, 조회수는 목록에서 `review=y`로 들어올 때만 올린 뒤 redirect 한다. 화면은 `header.jsp`·`footer.jsp`를 `<jsp:include>`로 불러오고 Bootstrap을 입혔다.
 
@@ -585,3 +585,13 @@ Controller에 `boardInsertForm.do`(GET) · `boardInsert.do`(POST) · `boardDetai
 - **확인함** — 08 설정 그대로(DB만 가짜 연결) 스프링을 띄워 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, servlet-context가 전체를 스캔하면 트랜잭션이 걸리지 않는 것을 재현했다. AOP 로그의 로거 이름에 `class `가 붙는 것도 확인했다.
 - **확인하지 않음** — 톰캣에서 실제 DB로 페이지 이동·답글을 실행한 기록은 없다.
 - **남은 것** — `error.jsp` 문제는 그대로다. `log4j.xml`은 root 수준을 debug로 바꿨지만 여전히 읽히지 않는다.
+
+### 2026-10-06 (43일차) — 로그인 확인 인터셉터와 JUnit 테스트
+
+`interceptor/LoginChkInterceptor`가 `preHandle`에서 `request.getSession(false)`로 세션을 꺼내, 세션이나 `id`가 없으면 `index.jsp`로 redirect하고 `false`를 돌려준다. `servlet-context.xml`의 `<mvc:interceptors>`에 "모든 `.do`, 단 `boardList.do`·`/resources/**` 제외"로 등록하는 블록을 적었지만 **주석 상태**다 — 08에는 세션에 `id`를 넣는 로그인 기능이 아직 없다. `pom.xml`에 테스트 전용 의존성 4개(JUnit 4.13.2, JUnit Jupiter api·engine 5.10.2, spring-test)를 더하고 `src/test/java`에 `AnsDaoTest`(목록 10건 기대) · `AnsServiceTest`(틀만) · `AnsControllerTest`(MockMvc로 `boardList.do` 200 확인, 나머지는 틀만)를 만들었다. `log4j.xml`의 root 수준은 INFO로 되돌렸다.
+
+- **확인함** — main·test 소스를 JDK 21로 컴파일했다(Eclipse 배포본 lib + 로컬 Maven 저장소의 JUnit 5.10.2 · spring-test 6.1.13).
+- **확인함** — 수업 테스트 18개를 JUnit 런처로 원본 그대로 실행: 16개는 `fail("Not yet implemented")` 틀, 2개는 DB 연결 실패. 세 설정 XML이 한 컨테이너로 합쳐지고, 세 테스트 클래스가 컨테이너를 한 번만 만들어 함께 썼다.
+- **확인함** — DB 연결부만 가짜로 바꾼 설정에서 `AnsControllerTest.testBoardList` 통과. 인터셉터 주석을 벗긴 설정에서 `boardList.do` 200, 로그인 없는 `boardDetail.do`·`home.do`·`boardInsertForm.do` 302 → `index.jsp`, 세션에 `id`가 있으면 200.
+- **확인함** — `/**/*.do`는 Spring 6.1의 `PathPatternParser`로는 해석되지 않지만 인터셉터 매핑은 예전 방식으로 되돌아가 의도대로 동작한다.
+- **확인하지 않음** — 실제 MariaDB로 `AnsDaoTest`를 돌린 결과, 톰캣에서 인터셉터를 켠 화면.

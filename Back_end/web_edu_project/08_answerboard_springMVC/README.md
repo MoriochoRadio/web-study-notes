@@ -1,9 +1,9 @@
 # 08_answerboard_springMVC — 답변형 게시판 (Spring MVC · MyBatis)
 
-2026-09-29(39일차)에 07을 바탕으로 시작해 2026-10-02(42일차)까지 이어진 수업의 로컬 소스다. 답글을 같은 테이블에 줄 세우기 위한 refer·step·depth 구조, 페이지 단위 목록과 페이지 번호, 조회수, 논리 삭제, 답글 달기, 트랜잭션(`@Transactional`), AOP 로그, 공통 화면(header·footer)과 Bootstrap, 로거(SLF4J)를 다뤘다.
-[39일차](../../index.html#class-day39) · [40일차](../../index.html#class-day40) · [41일차](../../index.html#class-day41) · [42일차](../../index.html#class-day42) · [개념 카드 52~61](../../index.html#web-52)
+2026-09-29(39일차)에 07을 바탕으로 시작해 2026-10-06(43일차)까지 이어진 수업의 로컬 소스다. 답글을 같은 테이블에 줄 세우기 위한 refer·step·depth 구조, 페이지 단위 목록과 페이지 번호, 조회수, 논리 삭제, 답글 달기, 트랜잭션(`@Transactional`), AOP 로그, 공통 화면(header·footer)과 Bootstrap, 로거(SLF4J), 로그인 확인 인터셉터, JUnit 5 · spring-test 테스트를 다뤘다.
+[39일차](../../index.html#class-day39) · [40일차](../../index.html#class-day40) · [41일차](../../index.html#class-day41) · [42일차](../../index.html#class-day42) · [43일차](../../index.html#class-day43) · [개념 카드 52~64](../../index.html#web-52)
 
-## 현재 구현 범위 (2026-10-02)
+## 현재 구현 범위 (2026-10-06)
 
 | 구간 | 상태 |
 |---|---|
@@ -15,8 +15,10 @@
 | 답글 `POST /boardReply.do` | 연결(41~42일차). `replyUpdate`로 아래 글들의 step을 민 뒤 `replyInsert`. 두 쿼리를 `@Transactional`로 묶음 |
 | 트랜잭션 | `root-context.xml`에 `DataSourceTransactionManager` + `tx:annotation-driven`, service·dao는 root에서, controller는 servlet에서 스캔 |
 | AOP | `aop-context.xml` — 모든 `*Dao` 메서드 전·정상 종료 후·예외 시 `LogExecute`가 로그. 애너테이션판 `LogExecuteNoXML`은 주석 처리된 참고용 |
+| 인터셉터 | `interceptor/LoginChkInterceptor` — 세션에 `id`가 없으면 `index.jsp`로 redirect. `servlet-context.xml`의 등록 블록은 **주석 상태**(로그인 기능이 아직 없어 켜면 목록 말고 모두 막힌다) |
+| 테스트 | `src/test/java` — `AnsDaoTest`(목록 10건 기대, 실제 DB 필요) · `AnsServiceTest`(틀만) · `AnsControllerTest`(MockMvc로 `boardList.do` 200, 나머지는 틀만). JUnit 5 + spring-test |
 | 실패 시 화면 | `return "error.jsp"`는 뷰 이름으로 해석되어 `/WEB-INF/views/error.jsp.jsp`를 찾고, 08에는 `error.jsp`가 없다 (파일로 따진 결과) |
-| 로그 설정 | 코드는 SLF4J, 구현체는 Logback. **`log4j.xml`은 읽히지 않는다** — 42일차에 root 수준을 debug로 바꿨지만 결과는 같다 |
+| 로그 설정 | 코드는 SLF4J, 구현체는 Logback. **`log4j.xml`은 읽히지 않는다** — 42일차에 root 수준을 debug로, 43일차에 INFO로 바꿨지만 결과는 같다 |
 | 실제 실행 | 이번 정리에서 톰캣·DB로 화면을 눌러 보지 않았다 |
 
 수업 당시 상태를 그대로 보존했다. 코드에 요청이 연결된 것과 실제로 실행해 확인한 것을 구분해 적는다.
@@ -74,13 +76,15 @@ AOP의 `LogExecute`는 `LoggerFactory.getLogger(join.getTarget().getClass()+"")`
 2. `src/main/resources/properties/db.properties.example`을 같은 폴더의 `db.properties`로 복사해 본인 DB 계정을 채운다. 실제 파일은 Git에서 제외된다.
 3. Eclipse에서 **Import → Existing Maven Projects**, **Maven → Update Project** 후 Tomcat 10.1에 올린다.
 4. `http://localhost:8080/08_answerboard_springMVC/`에서 "게시판" 링크(`boardList.do?pnum=1`)를 누른다. 상세·수정·삭제·답글 요청은 `pnum`이 필수라, 주소를 직접 칠 때는 `&pnum=1`을 붙인다.
+5. 테스트는 Eclipse에서 `src/test/java`의 클래스를 **Run As → JUnit Test**로 돌린다(JUnit 5). `AnsDaoTest`와 `AnsControllerTest.testBoardList`는 DB가 켜져 있고 1쪽에 글이 10개 있어야 통과한다. `fail("Not yet implemented")`만 있는 테스트는 실패가 정상이다.
 
 ## 확인한 것과 남은 것
 
-- 수업 원본 소스(Java 7 · JSP 7 · XML 7 · 그림 1 · pom)를 복사한 뒤 원본과 바이트 단위로 같은지 대조했다. 실제 `db.properties`, 빌드 산출물, JAR, Eclipse 설정은 제외했다.
+- 수업 원본 소스(Java 8 · 테스트 3 · JSP 7 · XML 7 · 그림 1 · pom)를 복사한 뒤 원본과 바이트 단위로 같은지 대조했다. 실제 `db.properties`, 빌드 산출물, JAR, Eclipse 설정은 제외했다.
 - Java 7개 파일이 JDK 21로, 이 PC처럼 `-parameters` 없이 컴파일된다. 단순 타입 매개변수는 모두 `@RequestParam("이름")`으로 이름을 적었다.
 - Mapper의 `boardInsert`·`replyUpdate`·`replyInsert`·`boardList`를 Node 내장 SQLite에서 실행해 답글 순서(같은 글의 답글은 나중 것이 위, 답글의 답글은 바로 아래 한 칸 안쪽)와 step 중복 없음을 확인했다. SQLite의 `/`가 정수 나눗셈이라 `ceil(rn/10)`만 `rn/10.0`으로 바꿔 돌렸다.
 - 08 설정 그대로(DB만 가짜 연결) 스프링 컨테이너를 띄워, 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, servlet-context가 전체를 스캔하면 트랜잭션이 걸리지 않는 것을 재현했다. 실제 MariaDB에서 되돌려지는 것을 본 것은 아니다.
 - `replyUpdate`는 UPDATE가 같은 테이블을 서브쿼리로 읽는다. 이 PC의 MariaDB 12.3은 허용하지만 MySQL에서는 1093 오류가 나는 문장이다(문서 기준, 실행 안 함).
 - 톰캣과 실제 DB로 화면을 눌러 보지 않았다. 새 글의 `MAX(refer)+1` 방식은 동시에 두 명이 쓰면 같은 번호가 나올 수 있는 수업용 단순화다.
+- 43일차 — main·test 소스를 JDK 21로 컴파일하고, 수업 테스트 18개를 JUnit 런처로 원본 그대로 돌렸다(DB 접속 정보는 연결되지 않는 가짜 값): 16개는 `Not yet implemented` 틀, 2개는 DB 연결 실패. DB 연결부만 가짜로 바꾼 설정에서는 `testBoardList`가 통과했다. 인터셉터는 등록 주석만 벗긴 설정에서 MockMvc로 요청 5개를 보내 확인했다(로그인 없음 → 302 `index.jsp`, 목록 → 200, 세션에 `id` → 200). `/**/*.do`는 Spring 6.1의 `PathPatternParser`로는 해석되지 않지만 인터셉터 매핑은 예전 방식으로 되돌아가 동작했다. 실제 DB로 테스트를 돌리거나 톰캣에서 인터셉터를 켠 확인은 하지 않았다.
 - 소스로 따진 결과: 헤더·푸터 조각이 각각 완전한 HTML 문서라 결과 화면에 `<html>`·`<body>`가 겹친다. 글이 하나도 없으면 페이지 번호는 안 나오고 Next가 `pnum=0`을 가리킨다(Paging 계산은 실행해 확인). `resources/img/arrow.png`는 이름과 달리 내용이 JPEG다.

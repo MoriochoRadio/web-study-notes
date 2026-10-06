@@ -1563,6 +1563,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .bp-mod-body{padding:0 20px 18px;}
   .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   @media (max-width:700px){ .bp-grid{grid-template-columns:1fr;} }
+  .bp-grid>*{min-width:0;}               /* 긴 코드 한 줄이 칸을 화면 밖으로 밀어내지 않게 */
+  .bp-box code{overflow-wrap:anywhere;}
   .bp-box{background:var(--panel-2);border:1px solid var(--border);border-radius:11px;padding:12px 15px;font-size:13.8px;line-height:1.8;}
   .bp-box.wide{grid-column:1 / -1;}
   .bp-box-t{display:block;font-size:12.5px;font-weight:800;color:var(--c);margin-bottom:4px;letter-spacing:.02em;}

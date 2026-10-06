@@ -1,0 +1,7 @@
+-- 22회차 SQL 2번 — 카테고리 별 도서 판매량 집계하기 (프로그래머스 144855) · 제출 코드 그대로 (PASS)
+-- 원문 제목은 '도서 판매량 집계'로 줄여 적혀 있어 공식 문제명을 썼다
+SELECT B.CATEGORY, SUM(S.SALES) AS TOTAL_SALES
+FROM BOOK B JOIN BOOK_SALES S ON B.BOOK_ID = S.BOOK_ID
+where YEAR(S.SALES_DATE) = '2022' AND MONTH(S.SALES_DATE) = '01'
+GROUP BY B.CATEGORY
+ORDER BY B.CATEGORY ASC;

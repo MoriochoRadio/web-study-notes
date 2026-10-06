@@ -1219,6 +1219,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .bp-mod-body{padding:0 20px 18px;}
   .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   @media (max-width:700px){ .bp-grid{grid-template-columns:1fr;} }
+  .bp-grid>*{min-width:0;}               /* 긴 코드 한 줄이 칸을 화면 밖으로 밀어내지 않게 */
+  .bp-box code{overflow-wrap:anywhere;}
   .bp-box{background:var(--panel-2);border:1px solid var(--border);border-radius:11px;padding:12px 15px;font-size:13.8px;line-height:1.8;}
   .bp-box.wide{grid-column:1 / -1;}
   .bp-box-t{display:block;font-size:12.5px;font-weight:800;color:var(--c);margin-bottom:4px;letter-spacing:.02em;}
@@ -1343,10 +1345,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 · SQL · 웹(JSP·Servlet·Spring) 수업을 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리한 노트입니다. <b>복습하러 왔다면 왼쪽 맨 위 🔁 복습 탭</b>에서 바로 시작하세요. 처음이거나 흐름이 헷갈린다면 <b>🗺️ 큰 그림 탭</b>으로 지도를 보고, <b>📘 개념서 탭</b>에서 1장부터 차례대로 공부하세요.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-10-02</span>
-      <span>📅 수업 42일차</span>
-      <span>🗂️ 노트 카드 296장</span>
-      <span>✏️ 시험 대비 187문제</span>
+      <span id="updated-badge">마지막 업데이트: 2026-10-06</span>
+      <span>📅 수업 43일차</span>
+      <span>🗂️ 노트 카드 304장</span>
+      <span>✏️ 시험 대비 193문제</span>
     </div>
     <a class="cross-link" href="../Front_end/">🎨 프론트엔드 학습 노트로 이동 →</a>
     <a class="cross-link" href="../setup/">🛠️ 새 노트북 · 개발환경 준비 →</a>
@@ -1371,16 +1373,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <div class="nav-group">
       <div class="nav-group-label">학습 콘텐츠</div>
       <button data-target="bigpicture" class="nav-item"><span class="nav-label">🗺️ 큰 그림</span></button>
-      <button data-target="book" class="nav-item"><span class="nav-label">📘 개념서</span><span class="nav-count">36</span></button>
+      <button data-target="book" class="nav-item"><span class="nav-label">📘 개념서</span><span class="nav-count">37</span></button>
       <button data-target="class" class="nav-item"><span class="nav-label">📅 수업 진도</span><span class="nav-count" id="nav-count-class"></span></button>
       <button data-target="basic" class="nav-item"><span class="nav-label">☕ 자바 기초</span><span class="nav-count">11</span></button>
       <button data-target="oop" class="nav-item"><span class="nav-label">🧱 객체지향</span><span class="nav-count">24</span></button>
       <button data-target="util" class="nav-item"><span class="nav-label">🛠️ 자바 활용</span><span class="nav-count">11</span></button>
       <button data-target="net" class="nav-item"><span class="nav-label">🌐 네트워크</span><span class="nav-count">8</span></button>
       <button data-target="prac" class="nav-item"><span class="nav-label">🧪 실습과제</span><span class="nav-count">12</span></button>
-      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">50</span></button>
+      <button data-target="codingtest" class="nav-item"><span class="nav-label">🧩 코딩테스트</span><span class="nav-count">54</span></button>
       <button data-target="sql" class="nav-item"><span class="nav-label">🗄️ SQL 기초</span><span class="nav-count">46</span></button>
-      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">61</span></button>
+      <button data-target="web" class="nav-item"><span class="nav-label">🖥️ 웹 개발</span><span class="nav-count">64</span></button>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">학습 도구</div>
@@ -1461,16 +1463,16 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <details class="overview-fold">
       <summary>📊 전체 분량 한눈에 보기</summary>
     <div class="stat-grid">
-      <div class="stat-card class"><div class="n">41</div><div class="l">📅 수업 진도 (일차)</div></div>
+      <div class="stat-card class"><div class="n">42</div><div class="l">📅 수업 진도 (일차)</div></div>
       <div class="stat-card basic"><div class="n">11</div><div class="l">☕ 자바 기초 항목</div></div>
       <div class="stat-card oop"><div class="n">24</div><div class="l">🧱 객체지향 항목</div></div>
       <div class="stat-card util"><div class="n">11</div><div class="l">🛠️ 자바 활용 항목</div></div>
       <div class="stat-card net"><div class="n">8</div><div class="l">🌐 네트워크 항목</div></div>
       <div class="stat-card prac"><div class="n">12</div><div class="l">🧪 실습과제 문제</div></div>
-      <div class="stat-card codingtest"><div class="n">50</div><div class="l">🧩 코딩테스트 오답노트</div></div>
+      <div class="stat-card codingtest"><div class="n">54</div><div class="l">🧩 코딩테스트 오답노트</div></div>
       <div class="stat-card sql"><div class="n">46</div><div class="l">🗄️ SQL 기초 항목</div></div>
-      <div class="stat-card web"><div class="n">61</div><div class="l">🖥️ 웹 개발 항목</div></div>
-      <div class="stat-card journey"><div class="n">24</div><div class="l">🧭 학습 여정 단계</div></div>
+      <div class="stat-card web"><div class="n">64</div><div class="l">🖥️ 웹 개발 항목</div></div>
+      <div class="stat-card journey"><div class="n">25</div><div class="l">🧭 학습 여정 단계</div></div>
       <div class="stat-card concepts"><div class="n">32</div><div class="l">📖 개념 사전 항목</div></div>
       <div class="stat-card progress"><div class="n" id="progress-stat-n">0/0</div><div class="l">학습 완료 진도 (<span id="progress-stat-pct">0%</span>)</div><div class="progress-breakdown" id="progress-by-subject"></div></div>
     </div>
@@ -1505,7 +1507,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <ol>
         <li>이 노트는 <strong>자바 교안 197장 + 실습과제 12문제</strong>를 미리 정리해 둔 예습용으로 시작해, 2026-08-31부터는 <strong>데이터베이스(SQL) 과정</strong>까지 함께 담고 있습니다. 수업에서 진도가 나간 부분을 골라 읽으면 복습 노트로도 그대로 쓸 수 있습니다.</li>
         <li><strong>📅 수업 진도</strong> 탭에는 수업에서 <strong>직접 작성한 실습 코드</strong>가 날짜별로 정리돼 있습니다. "오늘 어디까지 나갔는지"와 "그게 어느 개념 카드로 이어지는지"를 한눈에 볼 수 있어 시험 범위를 가늠하기 좋습니다.</li>
-        <li><strong>🧭 학습 여정</strong> 탭은 교안 전 범위를 <strong>"왜 이 순서로 배우는가"</strong> 하나의 흐름으로 엮은 24단계 지도입니다(자바 1~13 · SQL 14~17 · 웹 18~24). 지금 배우는 내용이 앞의 무엇 위에 서 있고 뒤의 무엇으로 이어지는지 헷갈릴 때 여기부터 보세요. <strong>📖 개념 사전</strong> 탭은 진도와 상관없이 <strong>용어 하나만 찾아보는</strong> 곳이고, 특히 <strong>그룹 D는 빨간 에러 메시지를 그대로 찾는 사전</strong>입니다 — 코드가 안 돌아가면 <code>NullPointer</code>처럼 메시지 일부를 검색창에 쳐 보세요.</li>
+        <li><strong>🧭 학습 여정</strong> 탭은 교안 전 범위를 <strong>"왜 이 순서로 배우는가"</strong> 하나의 흐름으로 엮은 25단계 지도입니다(자바 1~13 · SQL 14~17 · 웹 18~25). 지금 배우는 내용이 앞의 무엇 위에 서 있고 뒤의 무엇으로 이어지는지 헷갈릴 때 여기부터 보세요. <strong>📖 개념 사전</strong> 탭은 진도와 상관없이 <strong>용어 하나만 찾아보는</strong> 곳이고, 특히 <strong>그룹 D는 빨간 에러 메시지를 그대로 찾는 사전</strong>입니다 — 코드가 안 돌아가면 <code>NullPointer</code>처럼 메시지 일부를 검색창에 쳐 보세요.</li>
         <li>순서대로 본다면 <strong>☕ 자바 기초 → 🧱 객체지향 → 🛠️ 자바 활용 → 🌐 네트워크</strong> 흐름을 따르세요. 기초는 "변수·연산·제어문", 객체지향은 "클래스가 메모리에 올라가는 방식", 활용은 "컬렉션·예외·입출력·스레드", 네트워크는 "소켓으로 서버 만들기"가 중심입니다.</li>
         <li>카드는 처음에 접혀 있고 <strong>한 줄 요약</strong>과 <strong>쉽게 말하면</strong>(일상 비유)만 보입니다. 이 두 줄만 훑어도 전체 흐름이 잡혀요.</li>
         <li><strong>🧪 실습과제</strong> 탭에는 자바실습과제 12문제(약수·최대공약수·친화수·완전수·윤년·개미수열·로또·마방진·야구게임·달력·카드)의 <strong>풀이 단계와 핵심 코드</strong>가 정리돼 있습니다. 먼저 직접 풀어보고 막힐 때 펼쳐 보세요.</li>
@@ -1533,7 +1535,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li><b>비슷해서 헷갈리는 말</b> — 한 표로 정리</li>
         <li><b>면접에서 이 과정을 설명한다면</b> — 30초 답변과 단골 질문</li>
       </ol>
-      <p style="margin-top:10px">더 자세히 보고 싶으면 각 카드 아래 링크로 해당 노트에 바로 갑니다. 같은 흐름을 24단계로 자세히 쪼갠 건 <b>🧭 학습 여정</b> 탭이에요.</p>
+      <p style="margin-top:10px">더 자세히 보고 싶으면 각 카드 아래 링크로 해당 노트에 바로 갑니다. 같은 흐름을 25단계로 자세히 쪼갠 건 <b>🧭 학습 여정</b> 탭이에요.</p>
     </div>
 
     <h3 class="bp-h"><span class="bp-step">1</span>먼저 지도 한 장 — 웹 서비스에서 "요청 한 번"이 지나가는 길</h3>
@@ -1569,8 +1571,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">8/31 ~ 9/9</span><span class="bp-what">SQL · 데이터베이스</span><span class="bp-badge done">완료</span><span class="bp-why">데이터를 꺼내고 저장하는 언어. 게시판의 모든 기능이 결국 SQL 한 줄로 끝난다.</span></li>
       <li class="done"><span class="bp-when">9/10 ~ 9/21</span><span class="bp-what">웹 기초: JDBC → JSP → Servlet → MVC2</span><span class="bp-badge done">완료</span><span class="bp-why">자바와 DB, 자바와 브라우저를 <b>손으로 직접</b> 잇는다. 불편함을 몸으로 겪는 단계.</span></li>
       <li class="done"><span class="bp-when">9/22 ~ 9/28</span><span class="bp-what">Spring MVC + MyBatis</span><span class="bp-badge done">완료</span><span class="bp-why">손으로 하던 반복 작업을 프레임워크가 대신한다. 같은 게시판을 더 짧고 정돈되게.</span></li>
-      <li class="now"><span class="bp-when">9/29 ~ 지금</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리를 한 묶음으로, 공통 기능은 바깥으로.</span></li>
-      <li><span class="bp-when">예정</span><span class="bp-what">단위 테스트(JUnit) · 파일 업로드/다운로드 · 일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">지금 만든 Spring MVC 구조 위에 기능을 더 얹는다.</span></li>
+      <li class="done"><span class="bp-when">9/29 ~ 10/2</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP</span><span class="bp-badge done">완료</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리를 한 묶음으로, 공통 기능은 바깥으로.</span></li>
+      <li class="now"><span class="bp-when">10/6 ~ 지금</span><span class="bp-what">인터셉터 · 단위 테스트(JUnit · MockMvc)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">막을 곳은 Controller 앞에서 한 번에 막고, 브라우저로 눌러 보던 확인은 코드로 적어 자동으로 되풀이한다.</span></li>
+      <li><span class="bp-when">예정</span><span class="bp-what">파일 업로드/다운로드 · 일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">지금 만든 Spring MVC 구조 위에 기능을 더 얹는다.</span></li>
       <li><span class="bp-when">예정</span><span class="bp-what">Spring Boot · Thymeleaf · Spring Security 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">XML 설정을 걷어 내고, 로그인·권한까지 갖춘 "요즘 방식" 스프링으로 마무리.</span></li>
     </ol>
 
@@ -1587,7 +1590,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
           <tr><td>05 MVC2 + JSTL</td><td>Servlet</td><td><b>JSP + EL/JSTL</b></td><td>02와 같음</td><td>EL · JSTL</td></tr>
           <tr><td>06 스프링 뼈대</td><td><b>DispatcherServlet</b></td><td>JSP (ViewResolver)</td><td>DBCP·MyBatis 설정만</td><td>Spring · Maven</td></tr>
           <tr><td>07 스프링 게시판</td><td>@Controller</td><td>JSP + EL/JSTL</td><td><b>Service → DAO → MyBatis</b></td><td>DI · 계층 · Mapper</td></tr>
-          <tr><td>08 답변형 게시판</td><td>@Controller</td><td>JSP + include + Bootstrap</td><td>Service(@Transactional) → DAO</td><td>페이징 · 답글 · 트랜잭션 · AOP · 로그</td></tr>
+          <tr><td>08 답변형 게시판</td><td>@Controller</td><td>JSP + include + Bootstrap</td><td>Service(@Transactional) → DAO</td><td>페이징 · 답글 · 트랜잭션 · AOP · 로그 · 인터셉터 · 테스트</td></tr>
         </tbody>
       </table>
     </div>
@@ -1762,7 +1765,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       </details>
 
       <details class="bp-mod" open>
-        <summary><span class="bp-mod-num">08</span><span class="bp-mod-title">08_answerboard_springMVC — 답변형 게시판</span><span class="bp-badge now">📍 진행 중 · 39~42일차 · 9/29~10/2</span><span class="bp-mod-one">07 구조 위에 답글 · 페이지 번호 · 조회수 · 논리 삭제를 올리고, 트랜잭션 · AOP · 로그로 실무형 게시판을 만든다.</span></summary>
+        <summary><span class="bp-mod-num">08</span><span class="bp-mod-title">08_answerboard_springMVC — 답변형 게시판</span><span class="bp-badge now">📍 진행 중 · 39~43일차 · 9/29~10/6</span><span class="bp-mod-one">07 구조 위에 답글 · 페이지 번호 · 조회수 · 논리 삭제를 올리고, 트랜잭션 · AOP · 로그로 실무형 게시판을 만든다.</span></summary>
         <div class="bp-mod-body">
           <div class="bp-grid">
             <div class="bp-box easy wide"><span class="bp-box-t">이 프로젝트의 의도</span><p>07까지는 <b>구조</b>를 배웠다면, 08은 <b>실무에서 꼭 부딪히는 문제</b>를 풉니다. "글이 1,000개면?"(페이징), "답글은 어디에 끼우지?"(refer·step·depth), "두 쿼리 중 하나만 성공하면?"(트랜잭션), "모든 메서드에 로그를 남기려면?"(AOP). 구조는 07과 같고, <b>기능과 품질</b>이 올라갑니다.</p></div>
@@ -1773,6 +1776,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li>답글: 아래 글들 <code>step+1</code>(UPDATE) → 그 자리에 INSERT, 두 작업을 <code>@Transactional</code>로 묶음</li>
               <li><code>LogExecute</code>(AOP)로 메서드 실행 전후 로그, SLF4J + Logback 로거</li>
               <li>header·footer를 <code>&lt;jsp:include&gt;</code>로 나누고 Bootstrap, Controller는 생성자 주입</li>
+              <li>로그인 확인 인터셉터(<code>LoginChkInterceptor</code>) — 등록은 아직 주석(로그인 기능이 없어서)</li>
+              <li>JUnit 5 + spring-test로 DAO · Service · Controller 테스트 클래스, MockMvc로 목록 요청 테스트</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">배운 것</span><ul>
               <li><b>페이징</b>: 전체 글 수 → 페이지 수, 현재 페이지 → 가져올 범위</li>
@@ -1780,10 +1785,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>AOP</b>: 공통 기능(로그)을 핵심 코드 수정 없이 바깥에서 붙이기. <code>@Transactional</code>도 같은 원리(프록시: 진짜 객체를 감싸 앞뒤로 일을 끼워 넣는 대리 객체)</li>
               <li><b>로그</b>: <code>System.out</code> 대신 레벨(debug·info·warn·error)이 있는 로거</li>
               <li><b>생성자 주입</b>과 "Controller는 얇게, 조립은 Service로"</li>
+              <li><b>인터셉터</b>: Controller 앞뒤에 끼어드는 검문소(preHandle이 false면 중단), 필터와 서는 자리가 다르다</li>
+              <li><b>테스트</b>: 서버 없이 스프링 컨테이너를 띄워 <code>assertEquals</code>로 확인, DB에 기대면 통합 테스트</li>
             </ul></div>
-            <div class="bp-box wide"><span class="bp-box-t">앞으로</span><p>단위 테스트(JUnit)가 아직 남아 있고, 이후 파일 업로드 · 캘린더 게시판을 거쳐 <b>Spring Boot</b>로 넘어갑니다. Boot로 가면 06에서 세운 XML 설정 대부분이 사라지지만, <b>07·08에서 익힌 Controller → Service → DAO 구조는 그대로</b> 갑니다.</p></div>
+            <div class="bp-box wide"><span class="bp-box-t">앞으로</span><p>43일차에 단위 테스트(JUnit)를 시작했지만 아직 틀만 있는 테스트가 많고, 인터셉터는 로그인 기능이 생겨야 켤 수 있습니다. 이후 파일 업로드 · 캘린더 게시판을 거쳐 <b>Spring Boot</b>로 넘어갑니다. Boot로 가면 06에서 세운 XML 설정 대부분이 사라지지만, <b>07·08에서 익힌 Controller → Service → DAO 구조는 그대로</b> 갑니다.</p></div>
           </div>
-          <p class="bp-links">더 보기 → <a href="#class-day42">42일차</a><a href="#web-52">07 → 08 변화</a><a href="#web-54">refer·step·depth</a><a href="#web-57">페이지 번호</a><a href="#web-58">답글 달기</a><a href="#web-59">트랜잭션</a><a href="#web-60">AOP</a><a href="#web-61">생성자 주입</a></p>
+          <p class="bp-links">더 보기 → <a href="#class-day42">42일차</a><a href="#web-52">07 → 08 변화</a><a href="#web-54">refer·step·depth</a><a href="#web-57">페이지 번호</a><a href="#web-58">답글 달기</a><a href="#web-59">트랜잭션</a><a href="#web-60">AOP</a><a href="#web-61">생성자 주입</a><a href="#class-day43">43일차</a><a href="#web-62">인터셉터</a><a href="#web-63">JUnit 테스트</a><a href="#web-64">MockMvc</a></p>
         </div>
       </details>
 
@@ -2035,7 +2042,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       </details>
 
       <details class="bp-mod" open>
-        <summary><span class="bp-mod-num">09</span><span class="bp-mod-title">웹 4 — 답변형 게시판: 페이징 · 답글 · 트랜잭션 · AOP</span><span class="bp-badge now">📍 진행 중 · 39~42일차</span><span class="bp-mod-one">게시판을 "실무에서 쓸 만하게" 다듬는다. 많은 글은 나눠 보여 주고, 여러 쿼리는 한 묶음으로, 공통 기능은 바깥으로.</span></summary>
+        <summary><span class="bp-mod-num">09</span><span class="bp-mod-title">웹 4 — 답변형 게시판: 페이징 · 답글 · 트랜잭션 · AOP · 인터셉터 · 테스트</span><span class="bp-badge now">📍 진행 중 · 39~43일차</span><span class="bp-mod-one">게시판을 "실무에서 쓸 만하게" 다듬는다. 많은 글은 나눠 보여 주고, 여러 쿼리는 한 묶음으로, 공통 기능은 바깥으로.</span></summary>
         <div class="bp-mod-body">
           <div class="bp-grid">
             <div class="bp-box easy wide"><span class="bp-box-t">쉽게 말하면</span><p>답글을 하나 달려면 DB에 두 가지 일을 해야 해요. ① 아래 글들을 한 칸씩 밀고(<code>UPDATE</code>) ② 그 자리에 답글을 넣기(<code>INSERT</code>). 그런데 ①만 되고 ②가 실패하면? 글 순서만 엉망이 됩니다. <b>트랜잭션</b>은 "둘 다 되거나, 둘 다 없던 일로" 묶는 장치예요. <b>AOP</b>는 모든 메서드에 똑같이 붙는 일(로그 남기기 등)을 <b>각 메서드를 고치지 않고 바깥에서 한 번에</b> 붙이는 기술입니다.</p></div>
@@ -2046,22 +2053,28 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b><code>@Transactional</code></b>: Service 메서드에 붙이면 안의 쿼리들이 한 트랜잭션. 런타임 예외가 나면 자동 롤백</li>
               <li><b>AOP</b>: 공통 기능(Advice)을 어디에(Pointcut) 붙일지 정한다 — <code>@Before</code>, <code>@AfterReturning</code>, <code>@AfterThrowing</code></li>
               <li><b>로그</b>: <code>System.out</code> 대신 SLF4J(창구) + Logback(실제 출력), 레벨은 debug &lt; info &lt; warn &lt; error</li>
+              <li><b>인터셉터</b>: <code>preHandle</code>(Controller 전) → <code>postHandle</code>(뷰 전) → <code>afterCompletion</code>(뷰 후). <code>preHandle</code>이 false면 거기서 멈춘다</li>
+              <li><b>테스트</b>: <code>@Test</code> + <code>assertEquals(기대, 실제)</code>, 스프링 빈은 <code>@ExtendWith(SpringExtension.class)</code> · <code>@ContextConfiguration</code>, Controller는 MockMvc로 가짜 요청</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">초보가 자주 헷갈리는 것</span><ul>
               <li><code>@Transactional</code>은 <b>Service</b>에 붙인다 — "업무 하나"의 단위가 Service 메서드이기 때문</li>
               <li>같은 클래스 안에서 자기 메서드를 부르면 트랜잭션·AOP가 안 걸린다 (스프링이 바깥에 씌운 대리인(프록시)을 거치지 않으니까)</li>
               <li>설정 파일이 둘(root / servlet)로 나뉘면 어느 쪽이 무엇을 스캔하는지 꼬이기 쉽다 → 트랜잭션이 조용히 안 걸릴 수 있음</li>
               <li>체크 예외(<code>Exception</code>)는 기본적으로 롤백되지 않는다</li>
+              <li>인터셉터에서 <code>false</code>만 돌려주고 redirect를 안 하면 빈 화면이 된다</li>
+              <li>DB가 꺼져 있거나 데이터가 바뀌면 실패하는 테스트는 코드 문제가 아닐 수 있다 — DB에 기대는 통합 테스트이기 때문</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>"주문하면 재고를 줄이고 결제 기록을 남긴다", "송금하면 내 잔액을 빼고 상대 잔액을 더한다" — <b>돈과 관련된 모든 기능이 트랜잭션</b>입니다. 로그는 운영 중 장애를 추적하는 유일한 단서라, 실무에선 <code>System.out.println</code>을 거의 쓰지 않아요. AOP는 로그 외에도 <b>권한 검사, 실행 시간 측정, 트랜잭션 자체</b>(<code>@Transactional</code>도 AOP로 동작)에 쓰입니다.</p></div>
             <div class="bp-box"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
               <details><summary><code>@Transactional</code>은 어떻게 동작하나요?</summary><div class="bp-a">스프링이 해당 Bean을 감싸는 프록시를 만들어, 메서드 실행 전에 트랜잭션을 시작하고 정상 종료 시 커밋, 런타임 예외가 나면 롤백합니다. AOP 방식이라 프록시를 거치지 않는 같은 클래스 내부 호출에는 적용되지 않습니다.</div></details>
               <details><summary>AOP란 무엇이고 어디에 쓰나요?</summary><div class="bp-a">여러 곳에 반복되는 공통 관심사(로그, 트랜잭션, 보안 검사, 실행 시간 측정)를 핵심 로직에서 떼어 내 한 곳에 정의하고, 정해진 지점에 자동으로 끼워 넣는 프로그래밍 방식입니다.</div></details>
               <details><summary>페이징은 어떻게 구현하나요?</summary><div class="bp-a">전체 글 수로 총 페이지 수를 계산하고, 현재 페이지 번호에 해당하는 범위만 DB에서 조회합니다. MariaDB·MySQL에서는 보통 <code>LIMIT 개수 OFFSET 시작</code>을 쓰고, 수업에서는 <code>ROW_NUMBER()</code>로 번호를 매겨 잘랐습니다. 화면 아래의 페이지 번호 묶음(예: 1~5, 6~10)도 현재 페이지로 계산합니다.</div></details>
+              <details><summary>필터와 인터셉터는 무엇이 다른가요?</summary><div class="bp-a">필터는 서블릿 컨테이너(톰캣)가 관리해 DispatcherServlet보다 앞에서, 매핑한 모든 요청(JSP·정적 파일 포함)에 동작합니다. 인터셉터는 스프링 MVC 안에서 Controller로 가는 요청에만 동작하고, Controller 실행 전·후·뷰 완료 후 세 시점에 끼어들 수 있습니다. 인코딩 같은 전역 처리는 필터, 로그인 확인 같은 Controller 접근 제어는 인터셉터가 맞습니다.</div></details>
+              <details><summary>단위 테스트와 통합 테스트의 차이는?</summary><div class="bp-a">단위 테스트는 클래스 하나를 떼어 의존 객체를 가짜(목)로 바꿔 그 클래스의 로직만 빠르게 확인합니다. 통합 테스트는 DB·스프링 컨테이너 같은 실제 구성 요소를 함께 띄워 연결까지 확인합니다. 수업의 AnsDaoTest처럼 실제 DB에 기대는 테스트는 통합 테스트에 가깝습니다.</div></details>
               <details><summary>물리 삭제 대신 논리 삭제를 쓰는 이유는?</summary><div class="bp-a">실수로 지운 데이터를 복구할 수 있고, 다른 데이터(답글, 주문 기록 등)와의 연결이 깨지지 않으며, 언제 무엇이 지워졌는지 기록이 남기 때문입니다.</div></details>
             </div></div>
           </div>
-          <p class="bp-links">더 보기 → <a href="#class-day42">42일차 수업</a><a href="#web-54">refer·step·depth</a><a href="#web-57">페이지 번호</a><a href="#web-58">답글 달기</a><a href="#web-59">트랜잭션</a><a href="#web-60">AOP</a><a href="#web-53">로그</a></p>
+          <p class="bp-links">더 보기 → <a href="#class-day42">42일차 수업</a><a href="#web-54">refer·step·depth</a><a href="#web-57">페이지 번호</a><a href="#web-58">답글 달기</a><a href="#web-59">트랜잭션</a><a href="#web-60">AOP</a><a href="#web-53">로그</a><a href="#web-62">인터셉터</a><a href="#web-63">JUnit 테스트</a><a href="#web-64">MockMvc</a></p>
         </div>
       </details>
 
@@ -2069,7 +2082,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <summary><span class="bp-mod-num">10</span><span class="bp-mod-title">앞으로 배울 것 — 미리 감 잡기</span><span class="bp-badge next">예정</span><span class="bp-mod-one">단위 테스트, 파일 업로드, 캘린더 게시판, 그리고 Spring Boot · Thymeleaf · Spring Security로 마무리.</span></summary>
         <div class="bp-mod-body">
           <div class="bp-grid">
-            <div class="bp-box"><span class="bp-box-t">JUnit 단위 테스트</span><p>브라우저로 일일이 눌러 보지 않고, <b>코드로 "이 메서드가 이 값을 돌려주는지"</b> 자동으로 확인합니다. 생성자 주입을 배운 이유 중 하나가 여기서 드러나요 — 가짜 DAO를 넣어 Service만 따로 시험할 수 있거든요.</p></div>
+            <div class="bp-box"><span class="bp-box-t">JUnit 단위 테스트 — 43일차에 시작</span><p>브라우저로 일일이 눌러 보지 않고, <b>코드로 "이 메서드가 이 값을 돌려주는지"</b> 자동으로 확인합니다. 43일차에 08에 테스트 클래스를 처음 붙였고(<a href="#web-63">web-63</a>), 지금은 틀만 있는 테스트가 많아요. 생성자 주입을 배운 이유 중 하나가 여기서 드러납니다 — 가짜 DAO를 넣어 Service만 따로 시험할 수 있거든요.</p></div>
             <div class="bp-box"><span class="bp-box-t">파일 업로드 · 다운로드</span><p>폼에 <code>enctype="multipart/form-data"</code>를 붙여 파일을 보내고, 서버는 파일을 디스크에 저장한 뒤 <b>DB에는 파일 경로·이름만</b> 저장합니다. 같은 이름 덮어쓰기를 막으려고 저장할 땐 이름을 바꿔요(UUID 등).</p></div>
             <div class="bp-box"><span class="bp-box-t">일정관리(캘린더) 게시판</span><p>자바 실습과제의 <b>달력 출력</b>이 웹 화면으로 돌아옵니다. 월별 달력 + 날짜별 일정 CRUD — 지금까지 배운 Spring MVC 구조를 한 번 더 처음부터 끝까지 반복하는 연습이에요.</p></div>
             <div class="bp-box"><span class="bp-box-t">Spring Boot</span><p>지금 쓰는 <code>web.xml</code>, <code>servlet-context.xml</code>, <code>root-context.xml</code> 같은 설정을 <b>자동 설정</b>으로 대체하고, 톰캣까지 안에 품고 있어 <code>main()</code> 실행 한 번으로 서버가 뜹니다. 설정은 <code>application.properties</code> 한 파일로. <b>개념은 지금 배운 Spring MVC 그대로</b>입니다.</p></div>
@@ -2129,6 +2142,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
           <tr><td>forward / redirect</td><td>서버 안에서 넘김 / 브라우저가 다시 요청</td><td>저장 뒤엔 redirect (새로고침 중복 방지)</td></tr>
           <tr><td>GET / POST</td><td>주소에 값을 붙여 조회 / 본문에 담아 변경</td><td>바꾸는 요청(저장·삭제)은 POST</td></tr>
           <tr><td>세션 / 쿠키</td><td>서버에 저장 / 브라우저에 저장</td><td>로그인 정보는 세션</td></tr>
+          <tr><td>Filter / Interceptor</td><td>톰캣 단계에서 모든 요청 / 스프링 안에서 Controller로 가는 요청</td><td>인코딩은 필터, 로그인 확인은 인터셉터</td></tr>
+          <tr><td>단위 테스트 / 통합 테스트</td><td>클래스 하나만, 나머지는 가짜 / 실제 DB·컨테이너까지 함께</td><td>DB가 꺼지면 실패한다면 통합 테스트</td></tr>
           <tr><td>JSP / Servlet</td><td>HTML 안에 자바 / 자바 안에 HTML</td><td>JSP도 실행 전에 Servlet으로 바뀐다</td></tr>
           <tr><td>Spring / Spring Boot</td><td>프레임워크 본체 / 자동 설정 + 내장 톰캣</td><td>Boot는 "스프링을 쉽게 시작하게 해 주는 것"</td></tr>
           <tr><td>MyBatis / JPA</td><td>SQL을 직접 쓴다 / 객체를 다루면 SQL을 만들어 준다</td><td>지금 수업은 MyBatis</td></tr>
@@ -2152,7 +2167,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <p><b>한 장은 이렇게 생겼어요</b> — 🎯 이 장의 목표 → 🔗 왜 지금 배우나(앞 장과의 연결) → 개념(📎 교안 몇 쪽인지 표시) → 💻 수업 코드 예제("이 코드는 무엇을 보여 주려고 짠 것인지") → ⚠️ 교안 표현 바로잡기(있을 때만) → 핵심 정리 → 확인 문제 → 다음 장으로.</p>
       <p><b>이렇게 공부하세요</b> — 확인 문제는 답을 펼치기 전에 <b>먼저 소리 내어 답해 보세요.</b> 막히면 그 장의 개념을 다시 읽고, 장 끝의 <b>"이 장 다 읽었어요"</b>를 누르면 목차에 ✓가 붙습니다(이 브라우저에만 저장). 전체 흐름이 궁금하면 <b>🗺️ 큰 그림</b> 탭을 먼저 보세요.</p>
     </div>
-    <div class="cb-progress"><span>읽은 장</span><div class="cb-progress-track"><div class="cb-progress-fill"></div></div><b class="cb-progress-n">0 / 36장</b></div>
+    <div class="cb-progress"><span>읽은 장</span><div class="cb-progress-track"><div class="cb-progress-fill"></div></div><b class="cb-progress-n">0 / 37장</b></div>
     <details class="cb-toc" open><summary>목차 — 장 제목을 누르면 그 장으로 갑니다</summary><div class="cb-toc-body"></div></details>
     <div class="cb-chapters">
       <article class="cb-ch" id="book-be-01" data-part="1부 · 자바 기초">
@@ -7601,8 +7616,136 @@ public class AnsController {
           <details><summary>운영 서버에서 <code>logger.debug</code> 메시지를 안 보이게 하려면 코드를 고쳐야 할까요?</summary><div class="cb-a">아니요. 설정 파일(Logback이면 <code>logback.xml</code>)에서 해당 로거의 레벨을 INFO로 올리면 됩니다. 이게 println 대신 로거를 쓰는 가장 큰 이유예요.</div></details>
         </div>
 
-        <div class="cb-box"><span class="cb-box-t">다음 장으로</span><p>6부는 10/2(42일차)까지의 수업을 다뤘어요. 앞으로 JUnit 단위 테스트, 파일 업로드, 일정관리(캘린더) 게시판을 거쳐 <b>Spring Boot</b>로 넘어갑니다. Boot에서는 web.xml · root/servlet-context 같은 XML 설정 대부분이 사라지지만, 26장부터 쌓아 온 <b>요청 → Controller → Service → DAO → DB</b> 흐름과 트랜잭션·AOP의 원리는 그대로 가져갑니다.</p></div>
+        <div class="cb-box"><span class="cb-box-t">다음 장으로</span><p>다음 37장에서는 이렇게 다듬은 08 앞에 <b>로그인 확인(인터셉터)</b>을 세우고, 브라우저로 눌러 보던 확인을 <b>코드로 적는 테스트(JUnit · MockMvc)</b>를 붙입니다. 이 장에서 바꾼 생성자 주입이 "테스트하기 쉬운 코드"로 이어져요.</p></div>
         <p class="cb-more">더 자세히 → <a href="#class-day39">39일차 수업</a><a href="#class-day42">42일차 수업</a><a href="#web-53">SLF4J와 Logback</a><a href="#web-59">트랜잭션과 컨텍스트 나누기</a><a href="#web-60">AOP</a><a href="#web-61">생성자 주입</a></p>
+      </article>
+      <article class="cb-ch" id="book-be-37" data-part="6부 · 웹 개발 — 예제 프로젝트로 배우기">
+        <div class="cb-head">
+          <div class="cb-part">6부 · 웹 개발</div>
+          <h3><span class="cb-no">37</span>인터셉터와 단위 테스트 — 08을 지키고, 코드로 확인하기</h3>
+          <div class="cb-meta"><span>📅 <b>43일차</b> · 10/6</span><span>💻 <b>web_edu_project/08_answerboard_springMVC</b></span><span>📎 교안 없음 — 수업 코드가 교재</span></div>
+        </div>
+
+        <div class="cb-box cb-goal"><span class="cb-box-t">이 장의 목표</span><ul>
+          <li>인터셉터의 세 메서드(<code>preHandle</code> · <code>postHandle</code> · <code>afterCompletion</code>)가 요청 흐름의 어디에서 불리는지, <code>preHandle</code>이 <code>false</code>면 무슨 일이 생기는지 설명할 수 있다.</li>
+          <li>필터와 인터셉터가 서는 자리의 차이를 말할 수 있다.</li>
+          <li>JUnit 5 테스트 클래스의 애너테이션 세 개(<code>@ExtendWith</code> · <code>@ContextConfiguration</code> · <code>@WebAppConfiguration</code>)가 각각 무엇을 하는지 안다.</li>
+          <li>MockMvc로 Controller에 가짜 요청을 보내고 상태 코드를 확인하는 테스트를 읽고 쓸 수 있다.</li>
+        </ul></div>
+
+        <div class="cb-box cb-why"><span class="cb-box-t">왜 지금 이걸 배우나 — 앞 장과의 연결</span><p>36장에서 08을 트랜잭션·AOP·로그로 "믿고 운영할 수 있는 코드"로 다듬었어요. 남은 질문은 두 가지입니다. ① <b>아무나 글을 쓰고 지우면 안 될 때</b> — Controller 메서드마다 "로그인했나?"를 넣는 대신, 36장의 AOP처럼 <b>한 곳에서 앞을 막는</b> 방법(인터셉터). ② <b>코드를 고칠 때마다 톰캣을 켜고 브라우저로 눌러 보는 수고</b> — 그 확인을 코드로 적어 두고 버튼 한 번에 되풀이하는 방법(테스트). 36장에서 바꾼 <b>생성자 주입</b>이 "테스트하기 쉬운 코드"를 위한 준비였다는 것도 여기서 드러납니다.</p></div>
+
+        <h4 class="cb-h4">개념</h4>
+        <div class="cb-concept"><b class="cb-cn">① 인터셉터 — Controller 앞뒤의 검문소</b>
+          <p><code>HandlerInterceptor</code>를 구현한 클래스는 DispatcherServlet이 Controller를 부르는 길목에 끼어듭니다. 순서는 <b>preHandle → Controller → postHandle → 뷰(JSP) → afterCompletion</b>. <code>preHandle</code>이 <code>true</code>를 돌려주면 계속 가고, <code>false</code>면 Controller · postHandle · afterCompletion을 모두 건너뛰고 끝나요. 그래서 막을 때는 <code>response.sendRedirect(…)</code>처럼 응답을 직접 만들어 둡니다. 등록은 <code>servlet-context.xml</code>의 <code>&lt;mvc:interceptors&gt;</code> 안에 <code>&lt;mvc:mapping path&gt;</code>(적용) · <code>&lt;mvc:exclude-mapping path&gt;</code>(제외) · <code>&lt;bean class&gt;</code>(인터셉터 객체)로 적습니다.</p>
+          <p>로그인 확인은 <b>세션</b>으로 해요. <code>request.getSession(false)</code>는 세션이 없으면 새로 만들지 않고 <code>null</code>을 돌려주므로, "세션이 없거나 <code>id</code>가 없으면 로그인 안 한 사람"으로 판단할 수 있습니다(30장의 세션과 같은 원리).</p></div>
+        <div class="cb-concept"><b class="cb-cn">② 필터와 인터셉터 — 서는 자리가 다르다</b>
+          <p>30장의 <b>필터</b>는 톰캣이 서블릿을 부르기 <b>전</b>에 동작해서, <code>web.xml</code>에 매핑한 주소면 JSP·이미지 요청까지 거칩니다. <b>인터셉터</b>는 그 뒤 스프링의 DispatcherServlet 안에서 <b>Controller로 가는 요청에만</b> 동작하고 스프링 빈을 쓸 수 있어요. "모든 요청을 UTF-8로"는 필터, "이 기능들은 로그인한 사람만"은 인터셉터가 제자리입니다.</p></div>
+        <div class="cb-concept"><b class="cb-cn">③ JUnit 5 — 확인을 코드로 적는다</b>
+          <p>테스트 클래스는 <code>src/test/java</code>에 두고(배포되는 war에는 안 들어감), 메서드에 <b><code>@Test</code></b>를 붙입니다. 안에서 <b><code>assertEquals(기대값, 실제값)</code></b>이 다르면 그 테스트는 실패예요. pom에는 테스트 때만 쓰는 의존성을 <b><code>&lt;scope&gt;test&lt;/scope&gt;</code></b>로 넣습니다(JUnit Jupiter api·engine, spring-test). 스프링 빈을 시험하려면 클래스에 세 애너테이션을 붙여요 — <b><code>@ExtendWith(SpringExtension.class)</code></b>(JUnit에 스프링 기능을), <b><code>@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*.xml")</code></b>(이 설정들로 컨테이너를), <b><code>@WebAppConfiguration</code></b>(웹용으로). 그러면 <code>@Autowired</code>로 DAO·Service를 받아 바로 부를 수 있습니다.</p>
+          <p>DB까지 실제로 거치는 테스트는 <b>통합 테스트</b>, 한 클래스만 떼어 나머지를 가짜로 바꾸는 테스트는 <b>단위 테스트</b>라고 부릅니다. 생성자로 의존 객체를 받는 클래스는 <code>new AnsController(가짜서비스)</code>처럼 가짜를 넣기 쉬워 단위 테스트가 편해요.</p></div>
+        <div class="cb-concept"><b class="cb-cn">④ MockMvc — 톰캣 없이 요청 보내기</b>
+          <p><code>MockMvcBuilders.webAppContextSetup(wac).build()</code>는 테스트 컨테이너의 Controller·인터셉터를 그대로 쓰는 가짜 요청기를 만듭니다. <code>perform(get("/boardList.do").param("pnum","1"))</code>로 요청하고 <code>andExpect(status().isOk())</code>로 기대를 걸어요. 주소 매핑·파라미터 바인딩·인터셉터·Controller~DAO는 실제로 돌고, JSP는 그리지 않고 forward할 주소까지만 확인됩니다. 세션이 필요하면 <code>MockHttpSession</code>에 <code>id</code>를 넣어 <code>.session(…)</code>으로 붙여요.</p></div>
+
+        <div class="cb-box cb-fix"><span class="cb-box-t">⚠️ 수업 코드 바로잡기</span><p>① 인터셉터 매핑의 <code>/**/*.do</code>처럼 <b><code>**</code> 뒤에 조각이 더 붙는 패턴</b>은 Spring 6의 새 경로 해석기(<code>PathPatternParser</code>) 문법으로는 해석되지 않습니다. 인터셉터 매핑은 그럴 때 예전 방식으로 되돌아가 비교하므로 지금은 의도대로 동작하지만, <code>/*.do</code>나 <code>/**</code> + exclude로 쓰는 편이 안전해요. ② 테스트의 <code>file:…/spring/**/*.xml</code>은 root · aop · servlet 설정을 <b>하나의 컨테이너</b>로 합칩니다. 톰캣의 부모·자식 두 컨테이너 구조와 달라서, 36장의 "servlet이 서비스를 다시 스캔하면 트랜잭션이 사라지는" 문제는 이 테스트로는 드러나지 않아요. ③ <code>AnsServiceTest</code>는 이름과 달리 <code>AnsDao</code>를 주입받습니다 — Service를 시험하려면 <code>AnsService</code>를 받아야 해요. ④ pom의 JUnit 4는 쓰이지 않습니다(테스트가 모두 JUnit 5). ⑤ <code>log4j.xml</code>의 수준을 INFO로 바꿔도 08의 로그 구현체는 Logback이라 적용되지 않습니다(36장 바로잡기 ①).</p></div>
+
+        <h4 class="cb-h4">예제 — 수업 코드로 확인하기</h4>
+        <div class="cb-ex">
+          <p class="cb-ex-t">로그인하지 않은 요청을 첫 화면으로 — LoginChkInterceptor</p>
+          <p class="cb-ex-why">이 코드는 <b>Controller를 고치지 않고</b> 여러 요청 앞에서 로그인 여부를 한 번에 확인하는 방법을 보여 주려고 만든 실습입니다.</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">interceptor/LoginChkInterceptor.java — preHandle</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">public class LoginChkInterceptor implements HandlerInterceptor {
+
+	Logger logger = LoggerFactory.getLogger(getClass());
+
+	//Controller 진입 전에 실행된다
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// false를 설정하면 기존에 생성된게 있으면 사용하고
+		// 없으면 null을 반환
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("id")==null) {
+			logger.info("로그인이 필요함");
+			response.sendRedirect("index.jsp");
+			return false; //컨트롤러로 진입 못함
+		}
+		return true; //true가 반환되면 컨트롤러로 진입
+	}
+	…
+}</code></pre>
+          </div>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-html">XML</span><span class="code-file">appServlet/servlet-context.xml — 등록 (수업 코드는 주석)</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-xml">&lt;mvc:interceptors&gt;
+	&lt;mvc:interceptor&gt;
+		&lt;mvc:mapping path="/**/*.do"/&gt;
+		&lt;mvc:exclude-mapping path="/**/boardList.do"/&gt;
+		&lt;mvc:exclude-mapping path="/resources/**"/&gt;
+		&lt;bean class="com.hk.ansboard.interceptor.LoginChkInterceptor"/&gt;
+	&lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 등록 블록의 주석을 벗기고 요청을 보내면, 로그인 없이 연 <code>boardDetail.do</code> · <code>home.do</code> · <code>boardInsertForm.do</code>는 모두 <b>302 → <code>index.jsp</code></b>, 제외한 <code>boardList.do</code>는 200, 세션에 <code>id</code>를 넣은 상세보기는 200이었어요. 그런데 08에는 아직 <b>세션에 <code>id</code>를 넣는 로그인 기능이 없어서</b>, 지금 켜면 목록 말고는 들어갈 길이 없습니다. 수업 코드가 등록을 주석으로 둔 이유예요. "로그인이 필요함" 로그는 막힌 요청마다, postHandle·afterCompletion 로그는 통과한 요청에서만 찍혔습니다.</p>
+        </div>
+        <div class="cb-ex">
+          <p class="cb-ex-t">브라우저 대신 코드로 — AnsControllerTest의 testBoardList</p>
+          <p class="cb-ex-why">이 코드는 <b>톰캣 없이 스프링 컨테이너를 띄워</b> 목록 요청이 200으로 끝나는지 자동으로 확인하는 방법을 보여 주려고 만든 실습입니다.</p>
+          <div class="note-code">
+            <div class="code-head"><span class="code-lang lang-java">JAVA</span><span class="code-file">src/test/…/controller/AnsControllerTest.java</span><button class="copy-btn" type="button">복사</button></div>
+            <pre><code class="language-java">@ExtendWith(SpringExtension.class)
+@ContextConfiguration(
+		locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"}
+		)
+@WebAppConfiguration
+class AnsControllerTest {
+
+	@Autowired
+	private WebApplicationContext wac;
+
+	private MockMvc mock;
+
+	@Test
+	void testBoardList() throws Exception {
+		this.mock=MockMvcBuilders.webAppContextSetup(wac).build();
+		MvcResult result= mock.perform(
+				MockMvcRequestBuilders.get("/boardList.do")
+				.param("pnum", "1")
+				).andExpect(MockMvcResultMatchers.status().isOk())
+		.andReturn();
+		int statusCode=result.getResponse().getStatus();
+		assertEquals(HttpStatus.OK.value(), statusCode);
+	}
+
+	@Test
+	void testBoardInsertForm() {
+		fail("Not yet implemented");
+	}
+	…
+}</code></pre>
+          </div>
+          <p class="cb-look">👀 <b>관찰 포인트</b> — 수업 테스트 18개를 그대로 돌리면 <b>모두 실패</b>합니다. 16개는 Eclipse가 만든 틀(<code>fail("Not yet implemented")</code>)이고, 2개(<code>AnsDaoTest.testGetAllList</code> · 이 <code>testBoardList</code>)는 <b>실제 DB가 있어야</b> 통과해요. DB 자리에 가짜 <code>SqlSessionTemplate</code>을 넣은 설정에서는 <code>testBoardList</code>가 통과했습니다 — 테스트 코드가 틀린 게 아니라 <b>DB에 기대는 테스트</b>라는 뜻이죠. 컨테이너 생성 로그를 보면 세 설정 XML이 한 컨테이너로 합쳐지고, 같은 설정을 쓰는 세 테스트 클래스가 컨테이너를 <b>한 번만</b> 만들어 함께 씁니다.</p>
+        </div>
+
+        <div class="cb-box cb-key"><span class="cb-box-t">핵심 정리</span><ul>
+          <li>인터셉터: preHandle(전, <code>false</code>면 중단) → Controller → postHandle(뷰 전) → afterCompletion(뷰 후). 등록은 <code>&lt;mvc:interceptors&gt;</code>의 mapping / exclude-mapping.</li>
+          <li>필터는 톰캣 단계(정적 파일까지), 인터셉터는 스프링 안에서 Controller로 가는 요청만.</li>
+          <li>로그인 확인은 <code>getSession(false)</code> + 세션의 <code>id</code>. 로그인 기능이 먼저 있어야 켤 수 있다.</li>
+          <li>JUnit 5: <code>@Test</code> + <code>assertEquals(기대, 실제)</code>. 스프링 빈은 <code>@ExtendWith(SpringExtension.class)</code> · <code>@ContextConfiguration</code> · <code>@WebAppConfiguration</code>으로.</li>
+          <li>MockMvc: 톰캣 없이 <code>perform → andExpect → andReturn</code>. JSP는 그리지 않는다.</li>
+          <li>실제 DB에 기대면 통합 테스트. 단위 테스트는 의존 객체를 가짜로 — 생성자 주입이 그걸 쉽게 만든다.</li>
+        </ul></div>
+
+        <div class="cb-box cb-check"><span class="cb-box-t">확인 문제</span>
+          <details><summary>preHandle에서 return false 앞의 sendRedirect 줄을 지우면 사용자는 무엇을 볼까요?</summary><div class="cb-a">아무 내용 없는 빈 응답을 받습니다. <code>false</code>는 "더 진행하지 마"일 뿐 응답을 대신 만들어 주지 않아요. 막을 때는 redirect나 에러 응답을 직접 만들어야 합니다.</div></details>
+          <details><summary>한글 인코딩 처리를 필터 대신 인터셉터에 두면 왜 안 될까요?</summary><div class="cb-a">인터셉터는 DispatcherServlet을 거쳐 Controller로 가는 요청에만 동작해서, JSP를 직접 부르는 요청 등은 지나가지 않습니다. 또 파라미터를 읽기 전에 인코딩을 정해야 하는데 인터셉터 시점은 그보다 늦을 수 있어요. 모든 요청의 맨 앞 일은 필터 몫입니다.</div></details>
+          <details><summary>DB를 끈 채 AnsDaoTest를 돌리면 어떻게 되고, 그게 이 테스트에 대해 말해 주는 것은?</summary><div class="cb-a">연결 오류(Connection refused)로 실패합니다. 코드가 아니라 바깥 환경(DB) 때문에 실패할 수 있다는 것 — 즉 단위 테스트라기보다 DB까지 함께 확인하는 통합 테스트라는 뜻이에요. 데이터가 바뀌어도(글이 9개) 실패합니다.</div></details>
+          <details><summary>테스트에서는 트랜잭션이 잘 걸렸는데 톰캣에서는 안 걸릴 수 있다면 왜일까요?</summary><div class="cb-a">테스트는 설정 XML을 하나의 컨테이너로 합쳐 띄우지만, 톰캣은 부모(root)·자식(servlet) 두 컨테이너로 띄웁니다. servlet-context가 서비스를 다시 스캔하는 실수는 자식 컨테이너가 따로 있을 때만 문제가 되므로 테스트로는 드러나지 않아요.</div></details>
+        </div>
+
+        <div class="cb-box"><span class="cb-box-t">다음 장으로</span><p>6부는 10/6(43일차)까지의 수업을 다뤘어요. 08은 이제 "돌아가고(26~35장), 믿을 수 있고(36장), 지키고 확인할 수 있는(37장)" 게시판이 됐습니다. 앞으로 파일 업로드·다운로드, 일정관리(캘린더) 게시판을 거쳐 <b>Spring Boot</b>로 넘어가요. Boot에서는 인터셉터를 <code>WebMvcConfigurer</code>로 등록하고 테스트는 <code>@SpringBootTest</code> · <code>@WebMvcTest</code>로 더 짧게 쓰지만, preHandle의 흐름과 MockMvc 사용법은 이 장 그대로입니다.</p></div>
+        <p class="cb-more">더 자세히 → <a href="#class-day43">43일차 수업</a><a href="#web-62">인터셉터</a><a href="#web-63">JUnit 5와 스프링 테스트</a><a href="#web-64">MockMvc</a><a href="#web-30">인코딩 Filter</a></p>
       </article>
     </div>
   </section>
@@ -18039,6 +18182,163 @@ AnsController.boardReply → ansService.boardReply(dto)  ← 실제로는 "프�
       21회차 코딩테스트 — <a href="#ct-47">문자열을 정수로 바꾸기</a>(PASS) · <a href="#ct-48">모의고사</a>(FAIL) · <a href="#ct-49">여러 기준으로 정렬하기</a>(PASS) · <a href="#ct-50">조건에 맞는 사용자 정보 조회하기</a>(FAIL)
     </div>
     <details><summary>정리 작업 메모</summary><ul><li>확인함 — 08의 Java 7개 파일이 JDK 21로, <code>-parameters</code> 없이 컴파일된다.</li><li>확인함 — 08의 <code>aop-context.xml</code> 원본과 <code>root-context.xml</code>의 트랜잭션·스캔 설정을 그대로 쓰고 DB 연결만 가짜로 바꿔 스프링 컨테이너를 띄웠다. 답글 요청이 commit 되고, INSERT가 실패하면 rollback 되며, 스캔을 잘못 나누면 트랜잭션이 아예 없다(<a href="#web-59">결과</a>).</li><li>확인하지 않음 — 톰캣과 실제 DB로 답글·페이지 이동을 눌러 본 기록은 이번 정리에 없다.</li><li><code>log4j.xml</code>이 읽히지 않는 것은 39일차 정리에서 재현했다(<a href="#web-53">web-53</a>). 워크스페이스의 <code>log/</code> 폴더도 10/2 현재 비어 있었다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="class-day43">
+  <div class="note-head">
+    <span class="note-num">43일차</span>
+    <h3>2026-10-06 · 로그인 확인 인터셉터와 JUnit 단위 테스트</h3>
+    <div class="note-tags"><span class="tag">HandlerInterceptor</span><span class="tag">preHandle</span><span class="tag">세션 로그인 확인</span><span class="tag">JUnit 5</span><span class="tag">SpringExtension</span><span class="tag">MockMvc</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Controller에 들어가기 <b>전에</b> 로그인 여부를 확인하는 <b>인터셉터</b>(<code>LoginChkInterceptor</code>)를 만들고, 08 프로젝트에 <b>JUnit 5 + spring-test</b>로 DAO · Service · Controller <b>테스트 클래스</b>를 처음 붙였다. 인터셉터 등록은 아직 주석이고, 테스트는 DAO 목록 조회와 Controller 목록 요청(<b>MockMvc</b>) 두 개만 내용이 채워져 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>인터셉터는 <b>사무실 입구의 출입증 검사원</b>이에요. 출입증(세션에 저장된 <code>id</code>)이 없으면 정문(<code>index.jsp</code>)으로 돌려보내고, 로비(목록)는 누구나 들어오게 둡니다. 단위 테스트는 <b>출고 전에 버튼을 하나씩 눌러 보는 검사표</b>예요 — 사람이 브라우저로 눌러 보는 대신 코드가 "이 요청이 200으로 끝나는가, 1쪽 글이 10개인가"를 자동으로 확인합니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 인터셉터 — DispatcherServlet과 Controller 사이의 검문소</h4>
+        <p><code>HandlerInterceptor</code>를 구현하면 스프링 MVC가 Controller를 부르는 길목에 끼어들 수 있습니다. 메서드는 세 개예요. <b><code>preHandle</code></b>은 Controller <b>실행 전</b>에 불리고, <code>true</code>를 돌려주면 Controller로 들어가고 <code>false</code>면 <b>거기서 멈춥니다</b>. <b><code>postHandle</code></b>은 Controller가 끝나고 <b>뷰(JSP)를 그리기 전</b>, <b><code>afterCompletion</code></b>은 <b>뷰까지 다 끝난 뒤</b>에 불립니다. 등록은 <code>servlet-context.xml</code>의 <code>&lt;mvc:interceptors&gt;</code>에서 하고, <code>&lt;mvc:mapping path&gt;</code>로 적용할 주소를, <code>&lt;mvc:exclude-mapping&gt;</code>으로 뺄 주소를 정합니다. 수업에서는 "모든 <code>.do</code> 요청에 로그인 확인, 단 <code>boardList.do</code>와 <code>/resources/**</code>는 제외"로 적었습니다. → <a href="#web-62">🖥️ 62. 인터셉터</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② 세션으로 로그인 확인 — 그런데 로그인 기능이 아직 없다</h4>
+        <p><code>preHandle</code>은 <b><code>request.getSession(false)</code></b>로 세션을 꺼냅니다. <code>false</code>는 "있으면 쓰고, <b>없으면 새로 만들지 말고 null</b>"이라는 뜻이라, 로그인한 적 없는 사용자에게 빈 세션을 만들어 주지 않아요. 세션이 없거나 <code>session.getAttribute("id")</code>가 <code>null</code>이면 <code>response.sendRedirect("index.jsp")</code>로 돌려보내고 <code>false</code>를 반환합니다. 다만 08에는 아직 <b>로그인 화면과 <code>session.setAttribute("id", …)</code>를 하는 코드가 없어서</b>, 등록 블록의 주석을 풀면 <b>목록을 뺀 모든 화면이 <code>index.jsp</code>로 튕깁니다</b>(아래 실행 결과). 수업 코드가 등록 부분을 주석으로 둔 상태인 것도 그래서입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ JUnit 5 + spring-test — 서버 없이 스프링 컨테이너 띄우기</h4>
+        <p><code>pom.xml</code>에 <b>테스트 전용(<code>&lt;scope&gt;test&lt;/scope&gt;</code>) 의존성 4개</b>(JUnit 4.13.2, JUnit 5 Jupiter api·engine 5.10.2, spring-test)를 더하고, <code>src/test/java</code>에 테스트 클래스를 만들었습니다. 클래스 위의 세 애너테이션이 핵심이에요 — <b><code>@ExtendWith(SpringExtension.class)</code></b>(JUnit 5에 스프링 기능을 붙인다), <b><code>@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*.xml")</code></b>(이 설정 파일들로 컨테이너를 만든다), <b><code>@WebAppConfiguration</code></b>(웹용 컨테이너로). 그러면 테스트 안에서 <code>@Autowired</code>로 <code>SqlSessionTemplate</code>·<code>AnsDao</code>를 바로 받아 씁니다. 검사는 <b><code>assertEquals(기대값, 실제값)</code></b>. Eclipse가 만들어 준 테스트 틀의 <b><code>fail("Not yet implemented")</code></b>는 "아직 안 짰다"를 잊지 않게 <b>일부러 실패시키는 자리표시</b>입니다. → <a href="#web-63">🖥️ 63. JUnit 5와 스프링 테스트</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ MockMvc — 톰캣 없이 Controller에 요청 보내기</h4>
+        <p><code>AnsControllerTest</code>는 <code>WebApplicationContext</code>를 받아 <b><code>MockMvcBuilders.webAppContextSetup(wac).build()</code></b>로 가짜 요청기를 만들고, <code>mock.perform(get("/boardList.do").param("pnum", "1"))</code>로 요청을 보낸 뒤 <code>.andExpect(status().isOk())</code>로 <b>응답이 200인지</b> 확인합니다. 톰캣도 브라우저도 없이 <b>DispatcherServlet → (인터셉터) → Controller → Service → DAO</b>까지 실제 코드가 돕니다. JSP 화면은 그리지 않고 "어느 JSP로 보낼지"(forward 주소)까지만 확인돼요. → <a href="#web-64">🖥️ 64. MockMvc</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">interceptor/LoginChkInterceptor.java — preHandle (08)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">//해당 클래스를 인터셉터로 사용하려면, HandlerInterceptor를 구현한다
+//Controller로 진입하기 전후로 동작한다.
+public class LoginChkInterceptor implements HandlerInterceptor {
+
+	Logger logger = LoggerFactory.getLogger(getClass());
+
+	//Controller 진입 전에 실행된다
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// false를 설정하면 기존에 생성된게 있으면 사용하고
+		// 없으면 null을 반환
+		HttpSession session = request.getSession(false);          // ← 없으면 새로 만들지 않는다
+		if(session == null || session.getAttribute("id")==null) {
+			logger.info("로그인이 필요함");
+			response.sendRedirect("index.jsp");                      // ← 첫 화면으로 돌려보내고
+			return false; //컨트롤러로 진입 못함                       // ← Controller는 실행되지 않는다
+		}
+		return true; //true가 반환되면 컨트롤러로 진입
+	}
+	…  // postHandle · afterCompletion 은 로그만 남긴다
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">controller/AnsControllerTest.java — MockMvc로 목록 요청 (src/test)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">@ExtendWith(SpringExtension.class)
+@ContextConfiguration(
+		locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"}   // ← root·aop·servlet 설정 전부
+		)
+@WebAppConfiguration
+class AnsControllerTest {
+
+	// web 테스트 환경에서 서버 없이 컨트롤러 테스트를
+	// 수행하기 위한 Spring Context 객체
+	@Autowired
+	private WebApplicationContext wac;
+
+	//가상의 클라이언트 요청을 처리할 객체
+	private MockMvc mock;
+
+	@Test
+	void testBoardList() throws Exception {
+		this.mock=MockMvcBuilders.webAppContextSetup(wac).build();
+		//boardList.do 요청하기
+		MvcResult result= mock.perform(
+				MockMvcRequestBuilders.get("/boardList.do")
+				.param("pnum", "1")
+				).andExpect(MockMvcResultMatchers.status().isOk())    // ← 200 이 아니면 여기서 실패
+		.andReturn();//MvcResult객체 반환
+		int statusCode=result.getResponse().getStatus();
+		assertEquals(HttpStatus.OK.value(), statusCode);
+	}
+
+	@Test
+	void testBoardInsertForm() {
+		fail("Not yet implemented");                               // ← Eclipse가 만든 틀 — 일부러 실패
+	}
+	…
+}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>수업 테스트 18개를 그대로 돌리면, 그리고 인터셉터를 켜면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>① 수업 테스트 3개 클래스를 원본 그대로 (DB는 연결되지 않는 상태)
+  AnsDaoTest.testGetAllList         실패 — 근본 원인 ConnectException: Connection refused
+  AnsServiceTest 9개                실패 — AssertionFailedError: Not yet implemented
+  AnsControllerTest.testBoardList   실패 — 근본 원인 ConnectException (Service → DAO에서)
+  AnsControllerTest 나머지 7개      실패 — AssertionFailedError: Not yet implemented
+  합계: 통과 0 · 실패 18
+
+② DB 자리에 가짜 SqlSessionTemplate(목록 10건)을 넣고 AnsControllerTest 그대로
+  통과  testBoardList()   status코드:200 / HttpStatus:200
+
+③ servlet-context.xml의 인터셉터 블록 주석만 벗기고 요청
+  boardList.do        (로그인 없음)   200 · forward → /WEB-INF/views/boardList.jsp
+  boardDetail.do      (로그인 없음)   302 · redirect → index.jsp
+  boardDetail.do      (세션 id=hk)    200 · forward → /WEB-INF/views/boardDetail.jsp
+  home.do             (로그인 없음)   302 · redirect → index.jsp
+  boardInsertForm.do  (로그인 없음)   302 · redirect → index.jsp</pre>
+      <div class="run-note">① 실패 18개 중 16개는 <b>아직 내용이 없는 틀</b>이고, 2개는 <b>실제 DB가 있어야 통과</b>하는 테스트입니다. DB 대신 가짜를 넣은 ②에서는 Controller 테스트가 통과해요 — 테스트가 틀린 게 아니라 <b>DB에 기대는 테스트</b>라는 뜻입니다. ③은 로그인 기능이 없는 지금 등록을 켜면 <b>목록 말고는 다 막힌다</b>는 것을 보여 줍니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">43일차에 배운 것 — 핵심 정리</div>
+      <ul>
+        <li><b>인터셉터</b> — <code>preHandle</code>(Controller 전, <code>false</code>면 중단) → <code>postHandle</code>(Controller 후, 뷰 전) → <code>afterCompletion</code>(뷰 후). 등록은 <code>&lt;mvc:interceptors&gt;</code>의 mapping / exclude-mapping.</li>
+        <li><b>로그인 확인</b> — <code>getSession(false)</code>로 세션을 새로 만들지 않고 꺼내, <code>id</code>가 없으면 redirect + <code>return false</code>. 로그인 기능(세션에 id 저장)이 먼저 있어야 켤 수 있다.</li>
+        <li><b>JUnit 5 + spring-test</b> — <code>@ExtendWith(SpringExtension.class)</code> · <code>@ContextConfiguration</code> · <code>@WebAppConfiguration</code>로 서버 없이 스프링 컨테이너를 띄우고, <code>@Autowired</code>로 받은 빈을 <code>assertEquals</code>로 검사한다.</li>
+        <li><b>MockMvc</b> — 톰캣 없이 가짜 요청을 보내 상태 코드·forward 주소를 확인한다. 인터셉터도 실제처럼 거친다.</li>
+        <li>테스트 의존성은 <b><code>scope=test</code></b> — 배포되는 war에는 들어가지 않는다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>preHandle이 false를 반환한 요청에서 postHandle과 afterCompletion은 불릴까?</summary>
+        <div class="sc-a"><b>둘 다 불리지 않습니다.</b> Controller가 실행되지 않았으니 postHandle은 당연히 없고, afterCompletion도 <b>preHandle이 true를 돌려준 인터셉터에만</b> 불립니다. 실제로 인터셉터를 켜고 요청 5개를 보냈을 때 "로그인이 필요함"은 3번 찍혔지만 postHandle·afterCompletion 로그는 통과한 요청(세션에 id가 있던 상세보기)에서만 한 번씩 찍혔어요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>servlet-context.xml의 인터셉터 주석을 지금 풀면, 첫 화면에서 "게시판"을 눌러 글 하나를 열 때 어떻게 될까?</summary>
+        <div class="sc-a">목록(<code>boardList.do</code>)은 제외 대상이라 열리지만, 글 제목을 눌러 <code>boardDetail.do</code>로 가면 세션에 <code>id</code>가 없으니 <b><code>index.jsp</code>로 돌려보내집니다</b>. 08에는 아직 로그인 화면도, 세션에 <code>id</code>를 넣는 코드도 없어서 글쓰기·상세·수정이 전부 막혀요. 인터셉터를 켜기 전에 <b>로그인 기능부터</b> 있어야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>AnsDaoTest는 "1쪽 글이 10개"를 기대한다. 이 테스트를 단위 테스트라고 부르기 어려운 이유는?</summary>
+        <div class="sc-a"><b>실제 DB와 그 안의 데이터에 기대기 때문</b>입니다. DB가 꺼져 있으면 연결 오류로 실패하고(실행 결과 ①), 글이 9개뿐이거나 누가 글을 지우면 코드가 멀쩡해도 실패해요. 이렇게 DB·서버 같은 바깥 것까지 함께 확인하는 테스트는 보통 <b>통합 테스트</b>라고 부르고, 테스트용 DB를 따로 두거나 데이터를 테스트가 직접 넣고 지우게 만듭니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>인터셉터는 <b>로그인·권한 확인, 요청 로그, 실행 시간 측정</b>처럼 "여러 Controller 앞에 공통으로 필요한 일"에 씁니다. 면접 단골 질문은 <b>"필터와 인터셉터의 차이"</b> — 필터는 톰캣(서블릿 컨테이너) 단계에서 JSP·정적 파일까지 모든 요청에, 인터셉터는 스프링 안에서 DispatcherServlet이 Controller로 보내는 요청에 동작한다고 답하면 됩니다. 테스트는 실무에서 <b>코드를 바꿀 때마다 자동으로 돌려</b> 고장을 바로 잡는 안전망이에요. 스프링 부트로 가면 <code>@SpringBootTest</code>·<code>@WebMvcTest</code>로 같은 일을 더 짧게 쓰고, 테스트용 DB는 운영 DB와 따로 둡니다.</p>
+    <div class="note-files">실습 파일:
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/src/main/java/com/hk/ansboard/interceptor/LoginChkInterceptor.java">LoginChkInterceptor.java</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml">servlet-context.xml</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/src/test/java/com/hk/ansboard/dao/AnsDaoTest.java">AnsDaoTest.java</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/src/test/java/com/hk/ansboard/service/AnsServiceTest.java">AnsServiceTest.java</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/src/test/java/com/hk/ansboard/controller/AnsControllerTest.java">AnsControllerTest.java</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/pom.xml">pom.xml</a> ·
+      <a href="../view.html?f=Back_end/web_edu_project/08_answerboard_springMVC/README.md">08 소스와 실행 안내</a><br>
+      22회차 코딩테스트 — <a href="#ct-51">서울에서 김서방 찾기</a>(PASS) · <a href="#ct-52">체육복</a>(FAIL) · <a href="#ct-53">상위 n개 레코드</a>(FAIL) · <a href="#ct-54">카테고리 별 도서 판매량 집계하기</a>(PASS)
+    </div>
+    <details><summary>정리 작업 메모</summary><ul><li>10/5는 개천절 대체공휴일이라 워크스페이스 변경이 없다. 43일차 내용은 10/6 수정 파일(인터셉터 10:55, log4j.xml 11:28, servlet-context.xml 13:24, pom.xml 13:26, 테스트 3개 13:51~14:54)로 정리했다.</li><li>확인함 — 08의 main·test 소스가 JDK 21로 컴파일된다(Eclipse 배포본 lib + 로컬 Maven 저장소의 JUnit 5.10.2·spring-test 6.1.13).</li><li>확인함 — 수업 테스트 3개 클래스를 JUnit 런처로 원본 그대로 실행(DB 접속 정보는 연결되지 않는 가짜 값). 세 설정 XML이 한 컨텍스트로 읽히고(빈 11 + 6 + 31개), 세 테스트 클래스가 컨텍스트를 한 번만 만들어 함께 썼다.</li><li>확인함 — DB 연결부만 가짜로 바꾼 설정에서 <code>AnsControllerTest.testBoardList</code> 통과. 인터셉터 블록의 주석만 벗긴 설정에서 요청 5개의 상태 코드·이동 주소와 인터셉터 로그 횟수.</li><li>확인하지 않음 — 실제 MariaDB로 <code>AnsDaoTest</code>를 돌린 결과, 톰캣에서 인터셉터를 켠 화면 동작. 로컬 DB 접속 정보는 쓰지 않았다.</li></ul></details>
   </div>
 </article>
 </div>
@@ -28916,6 +29216,340 @@ MySQL의 <code>CONCAT</code>은 인자 하나라도 NULL이면 <b>결과 전체�
     <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL. 제출 코드·정답 풀이는 <code>Back_end/coding-tests/2026-10-02/user-info-submitted.sql</code>, <code>user-info-answer.sql</code>에 보존. 카드의 제출 코드는 SELECT 줄만 보기 좋게 나눴다(내용 동일).</li><li>로컬 검증(프로그래머스 재채점 아님) — <code>verify-sql21.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행, 8개 항목 통과. SQLite의 <code>CONCAT</code>은 NULL을 빈 문자열로 치므로 MySQL처럼 NULL을 돌려주는 같은 이름의 함수를 등록했다. 로컬 DB 접속 정보는 쓰지 않았다.</li></ul></details>
   </div>
 </article>
+<article class="note-card" id="ct-51">
+  <div class="note-head">
+    <span class="note-num">22회차</span>
+    <h3>서울에서 김서방 찾기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">문자열 비교 equals</span><span class="tag">배열 순회</span><span class="tag">문자열 연결</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>배열을 처음부터 돌며 <code>"Kim"</code>과 <b><code>equals</code>로</b> 같은 칸을 찾고, 그 인덱스를 <code>"김서방은 x에 있다"</code> 문장에 끼워 돌려준다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>출석부를 위에서부터 읽다가 "Kim"이라는 이름이 나오면 몇 번째 줄인지 적어 내는 일이에요. 이름이 같은지는 <b>글자가 같은지(<code>equals</code>)</b>로 봐야 합니다.</div>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">22회차 · 2026.10.06</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12919" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>문자열 배열 <code>seoul</code>(길이 1~1,000)에 <code>"Kim"</code>이 <b>딱 한 번</b> 들어 있다. 그 위치(인덱스) x를 찾아 <b><code>"김서방은 x에 있다"</code></b>를 반환하는 문제.</p>
+      <p><a href="../view.html?f=Back_end/coding-tests/2026-10-06/KimSeoul.java">📄 제출 코드 파일</a> · <a href="coding-tests/2026-10-06/">📁 22회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public String solution(String[] seoul) {
+        String answer = "김서방은 ";
+        for(int i =0;i&lt;seoul.length;i++){
+            if(seoul[i].equals("Kim")){                              // ← == 가 아니라 equals
+                answer = answer+(Integer.toString(i))+"에 있다";      // ← 찾은 뒤에도 끝까지 돈다
+            }
+        }
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 오답노트에는 정답 풀이·개념 정리 칸이 비어 있어, 아래는 이 문제에서 짚어 둘 점이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>seoul[i] == "Kim"</code>으로 비교</b> — <code>==</code>는 두 변수가 <b>같은 객체</b>인지 본다. 채점 입력이 리터럴이면 우연히 맞을 수 있지만, 실행 중에 만들어진 문자열이면 글자가 같아도 <code>false</code>다. 문자열 내용 비교는 언제나 <code>equals</code>.
+2. <b>문장 형식</b> — "김서방은 1에 있다"에서 띄어쓰기 하나만 달라도 오답이다. 문제의 출력 예시를 그대로 복사해 쓰는 습관이 안전하다.
+
+<b>더 짧게 쓰는 방법</b>
+<code>"Kim"</code>은 한 번만 나오므로 찾는 즉시 <code>return "김서방은 " + i + "에 있다";</code>로 끝내도 된다(뒤를 더 볼 필요가 없다). 문자열과 숫자를 <code>+</code>로 이으면 <code>Integer.toString(i)</code> 없이도 숫자가 글자로 바뀐다. <code>Arrays.asList(seoul).indexOf("Kim")</code>도 같은 위치를 돌려준다(<code>indexOf</code>는 안에서 <code>equals</code>로 비교).</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>== 와 equals 를 직접 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 ["Jane", "Kim"]          → 김서방은 1에 있다
+무작위 20,000개 (길이 1~1000)       → 모두 통과
+new String("Kim") == "Kim"          → false
+new String("Kim").equals("Kim")     → true
+실행 중에 이어 붙인 "Ki"+'m' == "Kim" → false</pre>
+      <div class="run-note">리터럴 <code>"Kim"</code>은 String pool의 객체 하나를 함께 쓰지만, <code>new</code>나 실행 중 연결로 만든 문자열은 <b>새 객체</b>입니다. 글자가 같아도 <code>==</code>는 <code>false</code>예요.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 문자열 비교는 <code>equals</code></b>
+<code>==</code>는 주소(같은 객체인가), <code>equals</code>는 내용(같은 글자인가). → <a href="#oop-14">🧱 14. String 비교 — == 와 equals의 차이</a> · <a href="#concept-java-equals">📖 == vs equals()</a>
+
+<b>(2) 찾으면 바로 반환</b>
+답이 하나뿐인 탐색은 찾은 순간 <code>return</code>하면 불필요한 반복이 줄고 "끝까지 돌며 덮어쓰는" 실수도 없다.
+
+<b>(3) 문자열 + 숫자</b>
+<code>"김서방은 " + i</code>처럼 한쪽이 문자열이면 다른 쪽은 자동으로 문자열로 바뀐다. 다만 반복문 안에서 문자열을 계속 이어 붙이면 매번 새 객체가 생기니 그럴 땐 <code>StringBuilder</code>. → <a href="#concept-java-string-builder">📖 String vs StringBuilder</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>제출 코드에서 equals를 ==로 바꿔도 프로그래머스에서 통과할 수 있는 이유와, 그래도 쓰면 안 되는 이유는?</summary>
+        <div class="sc-a">채점 입력의 <code>"Kim"</code>이 코드 속 리터럴과 <b>같은 pool 객체</b>라면 <code>==</code>도 우연히 <code>true</code>가 됩니다. 하지만 입력이 파일·네트워크·<code>new String</code>에서 왔다면 글자가 같아도 다른 객체라 <code>false</code>예요. "우연히 맞는 코드"는 환경이 바뀌면 깨지므로 내용 비교는 항상 <code>equals</code>입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>"Kim"이 두 번 들어 있다면 제출 코드는 무엇을 돌려줄까?</summary>
+        <div class="sc-a">찾을 때마다 문장 뒤에 덧붙이므로 <b>"김서방은 1에 있다3에 있다"</b>처럼 이상한 문장이 됩니다. 문제 조건(딱 한 번)이 있어서 괜찮았던 것이고, 찾는 즉시 <code>return</code>하면 첫 위치만 돌려줘 더 안전해요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>seoul[i].equals("Kim")과 "Kim".equals(seoul[i]) 중 더 안전한 쪽은?</summary>
+        <div class="sc-a"><b><code>"Kim".equals(seoul[i])</code></b>입니다. 배열 칸이 <code>null</code>이면 앞쪽은 <code>null.equals(…)</code>라 NullPointerException이 나지만, 리터럴을 앞에 두면 <code>false</code>로 끝나요. 이 문제는 null이 없지만 실무 코드에서 자주 쓰는 습관입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"배열에서 값 하나 찾기"는 코딩테스트 입문 문제의 단골이고, 실무에서도 <b>문자열 비교를 <code>==</code>로 한 버그</b>는 코드 리뷰에서 가장 먼저 지적됩니다. 면접에서 "String을 ==로 비교하면 왜 안 되나요?"가 나오면 String pool과 <code>new String</code>의 차이를 예로 들어 설명하면 됩니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 오답노트의 정답 풀이·개념 정리 칸이 비어 있어 "흔히 틀리는 곳"·개념은 새로 썼다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-06/KimSeoul.java</code>(클래스 이름만 바꿈). 카드 코드는 클래스 이름을 <code>Solution</code>으로 두고 주석만 붙였다.</li><li>로컬 검증(프로그래머스 재채점 아님) — 공식 예제 1개 + 무작위 20,000개. == / equals 비교는 같은 검증 파일에서 출력.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-52">
+  <div class="note-head">
+    <span class="note-num">22회차</span>
+    <h3>체육복</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">탐욕법 Greedy</span><span class="tag">상태 배열</span><span class="tag">경계 패딩</span><span class="tag">향상된 for문</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>학생마다 <b>가진 체육복 수(0·1·2)</b>를 한 배열에 담고, 1번부터 차례로 0벌인 학생이 <b>앞 번호 → 뒤 번호 순</b>으로 여벌을 빌린다. 배열을 <code>n+2</code>로 잡아 양 끝 경계 검사를 없앤다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>줄 선 학생들 중 체육복이 없는 아이는 <b>앞사람에게 먼저</b> 빌립니다. 앞사람의 여벌은 지금 아니면 쓸 데가 없지만, 뒷사람의 여벌은 그 뒤 아이가 필요할 수도 있으니까요. 도난당한 아이가 여벌도 가져왔다면 그 여벌은 자기가 입습니다.</div>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">22회차 · 2026.10.06</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42862" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>학생 <code>n</code>명(2~30) 중 체육복을 도난당한 학생 번호 <code>lost</code>, 여벌을 가져온 학생 번호 <code>reserve</code>가 주어진다. 여벌은 <b>바로 앞·뒤 번호에게만</b> 빌려줄 수 있고, 여벌을 가져온 학생이 도난당했다면 그 학생은 남에게 빌려줄 수 없다. 체육 수업을 들을 수 있는 <b>최대 인원</b>을 구하는 문제. <code>lost</code>·<code>reserve</code>가 정렬돼 있다는 보장은 없다.</p>
+      <p><a href="../view.html?f=Back_end/coding-tests/2026-10-06/GymSuit.java">📄 정답 풀이 파일</a> · <a href="coding-tests/2026-10-06/">📁 22회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+        int[] student = new int[n+2];                     // ← 0번·n+1번은 경계용 빈 칸
+        for (int i = 1; i &lt;= n; i++) student[i] = 1;     // ← 모두 1벌로 시작
+        for (int l : lost) student[l]--;                  // ← 도난: -1
+        for (int r : reserve) student[r]++;               // ← 여벌: +1 (도난+여벌이면 1로 돌아온다)
+
+        for(int i=1;i&lt;=n;i++){
+            if( (student[i]==0) &amp;&amp; (student[i-1]==2) ){        // ← 앞 번호 먼저
+                student[i]++;
+                student[i-1]--;
+            }else if( (student[i]==0) &amp;&amp; (student[i+1]==2) ){  // ← 그다음 뒤 번호
+                student[i]++;
+                student[i+1]--;
+            }
+        }
+
+        int count=0;
+        for(int i=1;i&lt;=n;i++){
+           if(student[i] &gt;= 1){                           // ← 빌려주지 못해 2벌인 학생도 포함
+                count++;
+            }
+        }
+        return count;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>과 정답 풀이의 흐름이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>도난당한 여벌 학생을 빼지 않기</b> — <code>lost</code>와 <code>reserve</code> 배열을 그대로 비교하면, 도난당한 여벌 학생이 남에게 빌려준 것처럼 계산된다. <code>n=2, lost=[1], reserve=[1]</code>의 답은 2인데 1이 나온다.
+2. <b>뒤 번호부터 빌리기</b> — 뒤 학생의 여벌을 먼저 가져오면, 그 뒤에 0벌인 학생이 빌릴 곳이 없어진다. <code>n=4, lost=[2,4], reserve=[1,3]</code>은 앞 먼저면 4명, 뒤 먼저면 3명.
+3. <b>정렬되지 않은 입력</b> — <code>lost</code>를 그대로 순서대로 처리하면 순서에 따라 답이 달라진다. 학생 번호 칸 배열을 쓰면 1번부터 차례로 보므로 입력 순서와 상관없다.
+4. <b>경계</b> — 1번의 앞(0번), n번의 뒤(n+1번)를 볼 때 <code>ArrayIndexOutOfBoundsException</code>. 배열을 <code>n+2</code>로 잡거나 <code>if (i &gt; 1)</code> 같은 조건을 넣는다.
+
+<b>풀이 흐름</b>
+1. 학생마다 체육복 수를 담는 배열을 <code>n+2</code> 크기로 만들고 1~n번을 1로 채운다.
+2. 도난은 −1, 여벌은 +1. 도난+여벌 학생은 1 − 1 + 1 = 1로 저절로 "빌려줄 수 없는 평범한 상태"가 된다.
+3. 1번부터 차례로, 0벌이면 앞 번호가 2벌일 때 먼저 빌리고, 아니면 뒤 번호에게 빌린다.
+4. 1벌 이상인 학생을 센다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>흔한 실수 두 가지를 실제로 돌려 보면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 3개                                         → 통과 (5 · 4 · 2)
+n 2~8 에서 가능한 입력 전부 86,367개 (lost 순서는 섞음) → 모두 통과
+흔한 실수 ① 뒤 번호부터  n=4, lost=[2,4], reserve=[1,3] → 정답 4 / 뒤 먼저 3
+흔한 실수 ② 도난당한 여벌 무시  n=2, lost=[1], reserve=[1] → 정답 2 / 무시하면 1
+n=5, lost=[2,4], reserve=[3]                          → 4 (3번의 여벌은 앞 번호 2번이 먼저 받는다)</pre>
+      <div class="run-note">기댓값은 여벌 학생마다 "앞에게 / 뒤에게 / 안 빌려줌"을 <b>전부 시도해 최댓값</b>을 구하는 별도 코드로 계산했습니다. 그 최댓값과 정답 풀이가 86,367개 입력에서 모두 같았어요 — 앞 번호 먼저라는 탐욕 규칙이 언제나 최선이라는 뜻입니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 탐욕법(Greedy)</b>
+매 순간 가장 좋아 보이는 선택을 이어 가는 방법이다. 이 문제에서는 "0벌이면 앞 번호에게 먼저"가 그 선택이고, 앞 학생의 여벌은 지나가면 다시 쓰일 일이 없기 때문에 이 선택이 손해를 보지 않는다. 탐욕법은 <b>그 선택이 왜 손해가 없는지</b> 설명할 수 있을 때만 쓴다.
+
+<b>(2) 상태를 한 배열로 — 경계 패딩</b>
+두 배열(<code>lost</code>·<code>reserve</code>)을 서로 비교하는 대신, 학생별 체육복 수라는 <b>하나의 상태 배열</b>로 합치면 조건문이 크게 줄어든다. 앞뒤 칸(<code>i-1</code>, <code>i+1</code>)을 보는 문제는 양 끝에 빈 칸을 덧대 <code>n+2</code>로 잡으면 경계 조건을 따로 쓸 필요가 없다.
+
+<b>(3) 향상된 for문 vs 일반 for문</b>
+<code>for (int l : lost) student[l]--;</code>는 배열의 <b>값</b>을 하나씩 꺼낸다 — 처음부터 끝까지 읽기만 할 때 짧고 인덱스 실수가 없다. 인덱스 자체가 필요하거나 앞뒤 칸을 비교할 때(<code>student[i-1]</code>)는 일반 for문을 쓴다. → <a href="#oop-17">🧱 17. 향상된 for문</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>배열을 new int[n]으로 잡고 학생 번호를 그대로 인덱스로 쓰면 어떤 문제가 생길까?</summary>
+        <div class="sc-a">학생 번호는 1~n인데 배열 인덱스는 0~n−1이라 <b>n번 학생에서 <code>ArrayIndexOutOfBoundsException</code></b>이 나고, 앞뒤를 볼 때 0번·n+1번도 범위 밖입니다. 번호를 그대로 인덱스로 쓰고 경계 검사도 없애려고 <code>n+2</code>로 잡은 거예요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>도난당했지만 여벌을 가져온 학생이 정답 풀이에서 자동으로 처리되는 이유는?</summary>
+        <div class="sc-a">기본 1벌에서 도난으로 −1, 여벌로 +1을 하면 <b>1</b>이 됩니다. 빌려주는 조건은 "2벌"이므로 이 학생은 남에게 빌려주지 않고 자기 것만 입어요. 두 배열을 따로 비교했다면 "lost에도 reserve에도 있는 학생을 먼저 빼는" 코드가 필요했을 겁니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>마지막에 student[i] == 1이 아니라 &gt;= 1로 세는 이유는?</summary>
+        <div class="sc-a">여벌이 있었지만 <b>빌려줄 사람이 없어 2벌로 남은 학생</b>도 수업을 들을 수 있기 때문입니다. <code>== 1</code>로 세면 그 학생들이 빠져 인원이 적게 나와요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"이웃에게만 줄 수 있다 + 최대 몇 명" 꼴은 <b>탐욕법 입문</b>의 대표 유형입니다. 탐욕법이 맞는지 확신이 없을 때는 이번처럼 <b>작은 입력에서 모든 경우를 시도하는 코드와 답을 비교</b>해 보면 확인할 수 있어요. 실무의 자원 배정(회의실·좌석 배정 등)에서도 "지금 쓰지 않으면 버려지는 것부터 먼저 쓴다"는 같은 생각을 씁니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL. 오답노트의 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. "흔히 틀리는 곳"의 두 반례는 로컬에서 찾아 실행했다.</li><li>정답 풀이는 <code>Back_end/coding-tests/2026-10-06/GymSuit.java</code>(클래스 이름만 바꿈).</li><li>로컬 검증(프로그래머스 재채점 아님) — 공식 예제 3개 + n 2~8의 가능한 입력 전부 86,367개(도난당한 여벌 학생이 있는 경우 77,539개). 기댓값은 모든 대여 방법을 시도하는 별도 코드.</li><li>오답노트의 "향상된 for문" 정리표를 개념 (3)으로 옮겼다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-53">
+  <div class="note-head">
+    <span class="note-num">22회차</span>
+    <h3>상위 n개 레코드</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">ORDER BY</span><span class="tag">LIMIT</span><span class="tag">SQL 실행 순서</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>"가장 먼저 들어온 동물"은 보호 시작일(<code>DATETIME</code>)이 가장 이른 행이다. <b>오름차순으로 정렬한 뒤 <code>LIMIT 1</code></b>로 맨 위 한 행만 자른다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>입소 날짜 순으로 줄을 세우고 <b>맨 앞 한 명</b>만 부르는 일이에요. 줄을 세우지 않고 "한 명만"을 부르면 아무나 나옵니다.</div>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">22회차 · 2026.10.06</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59405" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>동물 보호소 테이블 <code>ANIMAL_INS</code>에서 <b>가장 먼저 들어온 동물의 이름</b>을 조회하는 문제. <code>DATETIME</code>이 보호 시작일이다.</p>
+      <p><a href="../view.html?f=Back_end/coding-tests/2026-10-06/top-n-answer.sql">📄 정답 풀이 파일</a> · <a href="coding-tests/2026-10-06/">📁 22회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT NAME
+FROM ANIMAL_INS
+ORDER BY DATETIME ASC     -- ← 과거 → 최근 (가장 이른 날짜가 맨 위)
+LIMIT 1;                  -- ← 맨 위 한 행만</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>ORDER BY</code> 없이 <code>LIMIT 1</code></b> — 정렬하지 않은 결과의 "첫 행"은 저장 순서 등에 따라 정해질 뿐 가장 먼저 들어온 동물이라는 보장이 없다.
+2. <b><code>DESC</code>로 정렬</b> — 내림차순은 가장 <b>최근</b>에 들어온 동물이 맨 위에 온다.
+3. <b><code>SELECT NAME, MIN(DATETIME)</code></b> — 집계 함수와 일반 컬럼을 섞으면 <code>MIN</code>은 가장 이른 날짜를 주지만 <code>NAME</code>은 그 행의 이름이라는 보장이 없다(설정에 따라 오류가 나거나 아무 행의 이름이 나온다). 그 날짜를 가진 행을 원하면 정렬 + <code>LIMIT</code>이나 서브쿼리 <code>WHERE DATETIME = (SELECT MIN(DATETIME) …)</code>.
+4. <b>절 순서</b> — <code>LIMIT</code>은 맨 끝, <code>ORDER BY</code>보다 뒤에 쓴다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>보호 시작일이 다른 동물 4마리로 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>정답 풀이 (ORDER BY DATETIME ASC LIMIT 1)   → Jack   (2013-10-14, 가장 이른 날짜)
+정렬 없이 LIMIT 1                           → Lucy   (먼저 넣은 행 — '가장 먼저 들어온' 동물이 아님)
+ORDER BY DATETIME DESC LIMIT 1               → Max    (2016-01-01, 가장 최근)</pre>
+      <div class="run-note">SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행했습니다. <code>ORDER BY</code> · <code>LIMIT</code>은 MySQL과 같은 규칙이에요.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 정렬 → 자르기</b>
+"가장 ○○한 n개"는 언제나 <b>기준으로 정렬한 뒤 <code>LIMIT n</code></b>이다. ASC는 작은 값(과거) → 큰 값(최근), DESC는 반대. → <a href="#sql-15">🗄️ 15. ORDER BY</a>
+
+<b>(2) 쓰는 순서와 처리되는 순서는 다르다</b>
+쓰는 순서는 <code>SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT</code>이지만, DB가 논리적으로 처리하는 순서는 <b><code>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</code></b>이다. 그래서 <code>WHERE</code>에서는 <code>SELECT</code>에서 붙인 별칭을 못 쓰고, <code>ORDER BY</code>에서는 쓸 수 있다.
+
+<b>(3) DBMS마다 다른 "상위 n개"</b>
+MySQL·MariaDB·PostgreSQL은 <code>LIMIT n</code>, SQL Server는 <code>SELECT TOP n</code>, Oracle은 <code>FETCH FIRST n ROWS ONLY</code>(12c부터) 또는 <code>ROWNUM</code>. 프로그래머스 SQL 문제는 MySQL 문법이 기본이다.</p>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">⚠️ 오답노트 표현 바로잡기</div>
+      <p>오답노트의 개념 정리는 <code>SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT</code>을 "실행 및 작성 순서"로 함께 적었는데, 이것은 <b>작성 순서</b>입니다. 실행(논리 처리) 순서는 <code>FROM</code>이 맨 처음이고 <code>SELECT</code>는 <code>HAVING</code> 다음이에요(위 개념 (2)). "ORDER BY가 LIMIT보다 먼저"라는 결론은 두 순서 모두에서 맞습니다.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>"가장 늦게 들어온 동물 3마리의 이름"으로 바꾸면 어디를 고칠까?</summary>
+        <div class="sc-a"><code>ORDER BY DATETIME DESC LIMIT 3</code>으로 정렬 방향과 개수를 바꿉니다. 정렬 기준이 같으면 "가장 이른"은 ASC, "가장 늦은"은 DESC예요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>SELECT NAME AS 이름 … 다음에 WHERE 이름 = 'Jack'을 쓰면 왜 오류가 날까?</summary>
+        <div class="sc-a"><code>WHERE</code>는 <code>SELECT</code>보다 <b>먼저</b> 처리되어, 그 시점에는 별칭 <code>이름</code>이 아직 없기 때문입니다. <code>ORDER BY 이름</code>은 <code>SELECT</code> 다음에 처리되므로 별칭을 쓸 수 있어요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>보호 시작일이 똑같은 동물이 둘이면 정답 풀이는 누구를 돌려줄까?</summary>
+        <div class="sc-a"><b>둘 중 어느 쪽인지 정해져 있지 않습니다.</b> 정렬 기준이 같은 행끼리의 순서는 보장되지 않아요. 항상 같은 결과가 필요하면 <code>ORDER BY DATETIME, ANIMAL_ID</code>처럼 두 번째 기준을 더합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"최신 글 10개", "가장 비싼 상품 3개"처럼 <b>정렬 + LIMIT</b>은 실무 쿼리에서 가장 많이 쓰는 모양이고, 게시판 페이지 나누기(<code>LIMIT 10 OFFSET 20</code>)도 같은 원리입니다. 같은 값이 있을 때 결과가 흔들리지 않도록 <b>마지막 정렬 기준에 고유한 컬럼(ID)</b>을 넣는 습관을 들이세요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL. 오답노트의 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. "흔히 틀리는 곳"은 이 문제의 일반적인 함정이다.</li><li>정답 풀이는 <code>Back_end/coding-tests/2026-10-06/top-n-answer.sql</code>. 실행 결과는 <code>verify-sql22.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB)로 확인. "정렬 없이 LIMIT 1"의 결과는 SQLite에서 먼저 넣은 행이 나온 것으로, 어떤 행이 나오는지는 DB마다 보장되지 않는다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-54">
+  <div class="note-head">
+    <span class="note-num">22회차</span>
+    <h3>카테고리 별 도서 판매량 집계하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">JOIN</span><span class="tag">GROUP BY · SUM</span><span class="tag">날짜 조건</span><span class="tag">WHERE 먼저</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>도서 정보(<code>BOOK</code>)와 판매 기록(<code>BOOK_SALES</code>)을 <code>BOOK_ID</code>로 잇고, <b>2022년 1월 판매만 먼저 거른 뒤</b> 카테고리별로 묶어 판매량을 <b><code>SUM</code></b>한다.</p><div class="note-easy"><span class="easy-label">쉽게 말하면</span>1월 영수증만 골라낸 다음, 책 종류(인문·경제…)별 바구니에 나눠 담고 <b>바구니마다 팔린 권수를 더하는</b> 일이에요. "몇 번 팔렸나"(건수)가 아니라 "몇 권 팔렸나"(합계)라서 COUNT가 아니라 SUM입니다.</div>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">22회차 · 2026.10.06</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144855" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p><code>BOOK</code>(책 ID·카테고리)과 <code>BOOK_SALES</code>(책 ID·판매일·판매량)에서 <b>2022년 1월</b>의 카테고리별 도서 판매량 합계를 <code>CATEGORY</code>, <code>TOTAL_SALES</code>로 조회하고 카테고리명 오름차순으로 정렬하는 문제. 원문 제목은 '도서 판매량 집계'로 줄여 적혀 있었다.</p>
+      <p><a href="../view.html?f=Back_end/coding-tests/2026-10-06/book-sales-submitted.sql">📄 제출 코드 파일</a> · <a href="coding-tests/2026-10-06/">📁 22회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT B.CATEGORY, SUM(S.SALES) AS TOTAL_SALES          -- ← 권수 합계 (건수 아님)
+FROM BOOK B JOIN BOOK_SALES S ON B.BOOK_ID = S.BOOK_ID   -- ← 카테고리는 BOOK 쪽에
+where YEAR(S.SALES_DATE) = '2022' AND MONTH(S.SALES_DATE) = '01'   -- ← 묶기 전에 1월만
+GROUP BY B.CATEGORY
+ORDER BY B.CATEGORY ASC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 오답노트의 해설을 정리하면 이렇다.
+
+1. <b>JOIN</b> — 카테고리는 <code>BOOK</code>에, 판매량은 <code>BOOK_SALES</code>에 있으니 <code>BOOK_ID</code>로 잇는다.
+2. <b>WHERE로 2022년 1월만</b> — <code>YEAR(…) = '2022' AND MONTH(…) = '01'</code>. <code>MONTH()</code>는 숫자 1을 돌려주지만, MySQL은 문자열 <code>'01'</code>과 숫자를 비교할 때 문자열을 숫자로 바꿔 같다고 본다. 그래서 <code>= 1</code>로 써도, <code>= '01'</code>로 써도 결과가 같다.
+3. <b>GROUP BY + SUM</b> — 카테고리별로 묶고 <code>SUM(S.SALES)</code>로 권수를 더해 <code>TOTAL_SALES</code>라는 별칭을 붙인다.
+4. <b>ORDER BY</b> — 카테고리명 오름차순.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>1월·2월·2021년 판매가 섞인 데이터로 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>제출 코드                                  → 경제|5, 생활|1, 인문|5
+COUNT(*) 로 바꾸면 (판매 '건수')           → 경제|2, 생활|1, 인문|2
+LIKE '2022-01%' 로                          → 경제|5, 생활|1, 인문|5
+범위 비교 >= '2022-01-01' AND < '2022-02-01' → 경제|5, 생활|1, 인문|5
+WHERE 없이 묶으면 (2월·2021년까지)         → 경제|12, 생활|10, 인문|5</pre>
+      <div class="run-note">SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)에서 실행했습니다. SQLite는 문자열 <code>'01'</code>과 숫자 1을 다르게 보기 때문에, 등록한 <code>YEAR()</code>·<code>MONTH()</code>는 MySQL의 비교 결과와 같아지도록 <code>'2022'</code>·<code>'01'</code> 같은 문자열을 돌려주게 했어요(제출 SQL은 그대로).</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) COUNT vs SUM</b>
+<code>COUNT(*)</code>는 <b>행의 개수</b>(판매 기록이 몇 건인가), <code>SUM(컬럼)</code>은 <b>값의 합계</b>(몇 권 팔렸나). 문제가 "판매량"을 물으면 SUM이다. → <a href="#sql-17">🗄️ 17. 집계 함수</a>
+
+<b>(2) 날짜로 거르는 세 가지 방법</b>
+① 날짜 함수 <code>YEAR(d) = 2022 AND MONTH(d) = 1</code> — 읽기 쉽다. ② 문자열 <code>DATE_FORMAT(d, '%Y-%m') = '2022-01'</code> 또는 <code>d LIKE '2022-01%'</code>. ③ 범위 <code>d &gt;= '2022-01-01' AND d &lt; '2022-02-01'</code> — 컬럼을 함수로 감싸지 않아 <b>인덱스를 쓸 수 있는</b> 형태라 데이터가 많을 때 가장 빠르다. 끝을 <code>&lt; '2022-02-01'</code>로 잡으면 1월 31일 밤 시각까지 빠짐없이 들어간다. → <a href="#sql-27">🗄️ 27. 날짜 함수</a>
+
+<b>(3) WHERE가 GROUP BY보다 먼저</b>
+처리 순서상 <code>WHERE</code>로 1월 판매만 먼저 남긴 뒤 묶는다. 묶은 <b>결과</b>를 거를 때(예: 합계가 5 이상인 카테고리)만 <code>HAVING</code>을 쓴다. → <a href="#sql-18">🗄️ 18. GROUP BY</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>SUM(S.SALES)를 COUNT(*)로 바꾸면 결과는 무엇을 뜻하게 될까?</summary>
+        <div class="sc-a">카테고리별 <b>판매 기록의 건수</b>가 됩니다. 한 기록에 3권이 팔렸어도 1로 세요. 위 실행 결과에서 경제가 5(권)에서 2(건)로 바뀐 이유입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>"1월 판매량 합계가 5권 이상인 카테고리만" 보여 주려면 조건을 어디에 써야 할까?</summary>
+        <div class="sc-a"><code>GROUP BY</code> 뒤에 <b><code>HAVING SUM(S.SALES) &gt;= 5</code></b>를 씁니다. 합계는 묶은 다음에야 나오므로 <code>WHERE</code>에는 쓸 수 없어요. 1월만 남기는 조건은 그대로 <code>WHERE</code>에 둡니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>판매 기록이 수백만 건일 때 YEAR()·MONTH() 조건보다 범위 비교가 빠를 수 있는 이유는?</summary>
+        <div class="sc-a"><code>YEAR(SALES_DATE)</code>처럼 컬럼을 함수로 감싸면 DB가 <code>SALES_DATE</code> 인덱스를 그대로 쓸 수 없어 모든 행에 함수를 계산해야 합니다. <code>SALES_DATE &gt;= '2022-01-01' AND SALES_DATE &lt; '2022-02-01'</code>은 컬럼을 그대로 두므로 인덱스로 해당 범위만 바로 찾을 수 있어요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"기간 + 그룹별 합계"는 매출 리포트·월별 통계처럼 실무에서 가장 많이 짜는 쿼리입니다. <b>기간 조건은 범위 비교</b>로, <b>건수인지 합계인지</b>는 문제(요구사항)의 단어로 판단하세요. 코딩테스트에서는 <code>JOIN</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>ORDER BY</code> 순서로 한 줄씩 붙여 가며 중간 결과를 확인하면 실수가 줄어듭니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 원문 제목 '도서 판매량 집계'는 줄여 적은 것이라 공식 문제명을 썼다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-06/book-sales-submitted.sql</code>. 실행 결과는 <code>verify-sql22.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB) 8개 항목으로 확인했다.</li><li><code>'01'</code>과 숫자 1의 비교가 같다는 것은 MySQL의 형 변환 규칙(문서 기준)이며, MySQL로 직접 실행하지는 않았다.</li></ul></details>
+  </div>
+</article>
 </div>
   </section>
 
@@ -38183,6 +38817,365 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
     <details><summary>정리 작업 메모</summary><ul><li>생성자 주입으로 바꾼 것은 42일차 수업이다. Controller가 생성자로 프록시 Service를 받는 것은 <a href="#web-59">web-59</a>의 재현(08 설정에 DB만 가짜 연결)에서 확인했다.</li></ul></details>
   </div>
 </article>
+<article class="note-card" id="web-62">
+  <div class="note-head">
+    <span class="note-num">62</span>
+    <h3>인터셉터 — Controller 앞에서 로그인 확인하기 (HandlerInterceptor)</h3>
+    <div class="note-tags"><span class="tag">HandlerInterceptor</span><span class="tag">preHandle · postHandle · afterCompletion</span><span class="tag">mvc:interceptors</span><span class="tag">필터 vs 인터셉터</span><span class="tag">getSession(false)</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>인터셉터는 <b>DispatcherServlet이 Controller를 부르기 전·후</b>에 끼어드는 스프링 MVC의 검문소다. <code>preHandle</code>이 <code>false</code>를 돌려주면 Controller는 실행되지 않는다. 어떤 주소에 걸지는 <code>servlet-context.xml</code>의 <code>&lt;mvc:interceptors&gt;</code>에서 정한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>건물 각 층 사무실(Controller)마다 경비원을 세우는 대신, <b>엘리베이터 앞에 출입증 검사원 한 명</b>을 둡니다. 검사원은 사람이 올라가기 전에 출입증을 보고(<code>preHandle</code>), 일을 마치고 내려올 때(<code>postHandle</code>), 건물을 완전히 나갈 때(<code>afterCompletion</code>) 기록을 남겨요. 로비(목록)처럼 누구나 들어와도 되는 곳은 검사 목록에서 뺍니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 세 메서드와 불리는 순서</h4>
+        <p>요청 하나는 <b>DispatcherServlet → <code>preHandle</code> → Controller → <code>postHandle</code> → 뷰(JSP) 그리기 → <code>afterCompletion</code></b> 순서로 지나갑니다. <code>preHandle</code>의 반환값이 문지기 역할을 해요 — <code>true</code>면 계속, <code>false</code>면 <b>Controller·postHandle·afterCompletion 모두 건너뛰고</b> 응답이 끝납니다. 그래서 <code>false</code>를 돌려줄 때는 <code>response.sendRedirect(…)</code>처럼 <b>직접 응답을 만들어 둬야</b> 사용자가 빈 화면을 보지 않아요. <code>postHandle</code>은 Controller가 예외 없이 끝났을 때만, <code>afterCompletion</code>은 예외가 났어도 불려서 정리 작업 자리로 씁니다. 세 메서드 모두 <code>HandlerInterceptor</code>에 기본 구현이 있어서 필요한 것만 재정의하면 됩니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 등록 — mapping과 exclude-mapping</h4>
+        <p>인터셉터 객체는 <code>@Component</code>가 아니라 XML의 <code>&lt;bean class="…LoginChkInterceptor"/&gt;</code>로 만들어 <code>&lt;mvc:interceptor&gt;</code> 안에 넣습니다. <code>&lt;mvc:mapping path="…"/&gt;</code>은 <b>적용할 주소</b>, <code>&lt;mvc:exclude-mapping path="…"/&gt;</code>은 <b>뺄 주소</b>예요. 수업 코드는 <code>/**/*.do</code>(모든 .do)에 걸고 <code>/**/boardList.do</code>와 <code>/resources/**</code>를 뺐습니다. 등록은 Controller와 같은 쪽인 <b><code>servlet-context.xml</code>(자식 컨텍스트)</b>에 합니다 — 인터셉터는 DispatcherServlet의 일부라서요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 필터와 인터셉터 — 서는 자리가 다르다</h4>
+        <p>34일차의 인코딩 필터(<a href="#web-30">web-30</a>)도 "요청 앞에 끼어든다"는 점은 같습니다. 차이는 <b>서는 자리</b>예요. <b>필터</b>는 톰캣(서블릿 컨테이너)이 서블릿을 부르기 <b>전</b>에 동작해서, <code>web.xml</code>에 매핑한 주소라면 JSP·이미지 같은 정적 파일 요청까지 거칩니다. <b>인터셉터</b>는 그 뒤 스프링의 DispatcherServlet 안에서, <b>Controller로 가는 요청에만</b> 동작하고 스프링 빈을 쓸 수 있어요. 그래서 "모든 요청의 한글 인코딩"은 필터가, "이 Controller들은 로그인한 사람만"은 인터셉터가 맞습니다.</p>
+        <table><thead><tr><th></th><th>필터 (Filter)</th><th>인터셉터 (HandlerInterceptor)</th></tr></thead><tbody>
+          <tr><td>누가 관리</td><td>톰캣(서블릿 컨테이너)</td><td>스프링 MVC(DispatcherServlet)</td></tr>
+          <tr><td>등록</td><td><code>web.xml</code>의 <code>&lt;filter&gt;</code></td><td><code>servlet-context.xml</code>의 <code>&lt;mvc:interceptors&gt;</code></td></tr>
+          <tr><td>거치는 요청</td><td>매핑한 모든 요청(JSP·정적 파일 포함)</td><td>DispatcherServlet이 Controller로 보내는 요청</td></tr>
+          <tr><td>끼어드는 지점</td><td><code>chain.doFilter</code> 앞뒤</td><td>Controller 전 · 후 · 뷰 완료 후</td></tr>
+          <tr><td>수업 예</td><td>인코딩 필터(UTF-8)</td><td>로그인 확인(<code>LoginChkInterceptor</code>)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="concept-block">
+        <h4>④ getSession(false)와 redirect 주소</h4>
+        <p><code>request.getSession()</code>(인자 없음 = <code>true</code>)은 세션이 없으면 <b>새로 만들어</b> 줍니다. 로그인 확인에서 그렇게 하면 처음 온 사람에게도 빈 세션이 생겨요. <b><code>getSession(false)</code></b>는 없으면 <code>null</code>을 돌려주므로 "세션도 없다 = 로그인 안 함"을 바로 판단할 수 있습니다. 또 <code>sendRedirect("index.jsp")</code>처럼 <b>슬래시 없는 주소</b>는 지금 요청 주소 기준의 상대 경로라, 08처럼 모든 <code>.do</code>가 맨 위 경로에 있을 때는 맞지만 <code>/board/detail.do</code> 같은 주소가 생기면 <code>/board/index.jsp</code>로 갑니다. 그럴 땐 <code>request.getContextPath() + "/index.jsp"</code>처럼 앞을 고정해요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">interceptor/LoginChkInterceptor.java (08)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">public class LoginChkInterceptor implements HandlerInterceptor {
+
+	//slf4j는 로그 출력 위치, 형식을 정의
+	// --&gt; log4j는 실제 그 형식을 출력하는 작업을 수행
+	Logger logger = LoggerFactory.getLogger(getClass());
+
+	//Controller 진입 전에 실행된다
+	// -&gt; 예시) 로그인 정보를 확인해서 true면 Controller 진입시킴
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// false를 설정하면 기존에 생성된게 있으면 사용하고
+		// 없으면 null을 반환
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("id")==null) {   // ← 세션도 없거나, 있어도 id가 없으면
+			logger.info("로그인이 필요함");
+			response.sendRedirect("index.jsp");                         // ← 응답을 직접 만들고
+			return false; //컨트롤러로 진입 못함                          // ← 여기서 멈춘다
+		}
+		return true; //true가 반환되면 컨트롤러로 진입
+	}
+
+	//Controller 진입 후 DisatcherServlet이 뷰로 보내기 전에 호출
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		logger.info("인터셉터: postHandle 실행");
+	}
+
+	//Controller 에서 뷰까지 실행이 완료된 후 호출
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		logger.info("인터셉터:afterCompletion실행");
+	}
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-html">XML</span>
+        <span class="code-file">appServlet/servlet-context.xml — 등록 블록 (수업 코드는 주석 상태)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-xml">&lt;!-- 인터셉터 설정하기:모든 요청에 대해 로그인 확인하는 기능 단 boardList.do요청은 제외 --&gt;
+&lt;!-- 	&lt;mvc:interceptors&gt; --&gt;
+&lt;!-- 		&lt;mvc:interceptor&gt; --&gt;
+&lt;!-- 			&lt;mvc:mapping path="/**/*.do"/&gt; --&gt;                    &lt;!-- ← 적용: 모든 .do --&gt;
+&lt;!-- 			&lt;mvc:exclude-mapping path="/**/boardList.do"/&gt; --&gt;    &lt;!-- ← 제외: 목록 --&gt;
+&lt;!-- 			&lt;mvc:exclude-mapping path="/resources/**"/&gt; --&gt;      &lt;!-- ← 제외: 이미지·CSS --&gt;
+&lt;!-- 			&lt;bean class="com.hk.ansboard.interceptor.LoginChkInterceptor"/&gt; --&gt;
+&lt;!-- 		&lt;/mvc:interceptor&gt; --&gt;
+&lt;!-- 	&lt;/mvc:interceptors&gt; --&gt;</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>주석만 벗기고 MockMvc로 요청 5개 + 경로 패턴 해석 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>요청                               상태 · 이동
+  boardList.do        (로그인 없음)   200 · forward → /WEB-INF/views/boardList.jsp
+  boardDetail.do      (로그인 없음)   302 · redirect → index.jsp
+  boardDetail.do      (세션 id=hk)    200 · forward → /WEB-INF/views/boardDetail.jsp
+  home.do             (로그인 없음)   302 · redirect → index.jsp
+  boardInsertForm.do  (로그인 없음)   302 · redirect → index.jsp
+인터셉터 로그: "로그인이 필요함" 3번 · postHandle 1번 · afterCompletion 1번
+
+경로 패턴 (Spring 6.1.13)
+  PathPatternParser.parse("/**/*.do")  → 실패: No more pattern data allowed after {*...} or ** pattern element
+  PathPatternParser.parse("/*.do")     → OK
+  MappedInterceptor(mapping "/**/*.do", exclude "/**/boardList.do", "/resources/**")
+    boardList.do → 제외 · boardDetail.do → 적용 · home.do → 적용 · /resources/img/arrow.png → 제외</pre>
+      <div class="run-note">postHandle·afterCompletion은 <b>통과한 요청(세션 id가 있던 상세보기)에서만</b> 찍혔습니다. 경로 패턴은 아래 "수업 코드 주의"를 보세요.</div>
+    </details>
+    <div class="note-tip"><span class="tip-label">수업 코드 주의</span><code>/**/*.do</code>처럼 <b><code>**</code> 뒤에 다른 조각이 오는 패턴</b>은 Spring 6부터 기본이 된 새 경로 해석기(<code>PathPatternParser</code>)의 문법으로는 <b>해석되지 않습니다</b>(위 실행 결과). 인터셉터 매핑은 해석에 실패하면 예전 방식(AntPathMatcher)으로 되돌아가 비교하기 때문에 지금은 의도대로 동작하지만, 새 문법에서도 맞는 <b><code>/*.do</code></b>(08처럼 모든 .do가 맨 위 경로일 때)나 <b><code>/**</code></b> + exclude로 쓰는 편이 안전합니다. 주석의 "DisatcherServlet"은 DispatcherServlet의 오타예요.</div>
+    <div class="note-points">
+      <div class="note-points-title">62번 정리 — 핵심 정리</div>
+      <ul>
+        <li><b>preHandle → Controller → postHandle → 뷰 → afterCompletion</b>. preHandle이 <code>false</code>면 나머지는 모두 건너뛴다.</li>
+        <li><code>false</code>를 돌려줄 땐 redirect 같은 응답을 <b>직접</b> 만든다.</li>
+        <li>등록은 <code>servlet-context.xml</code>의 <code>&lt;mvc:interceptors&gt;</code> — mapping(적용) / exclude-mapping(제외).</li>
+        <li><b>필터</b>는 톰캣 단계(정적 파일까지), <b>인터셉터</b>는 스프링 안에서 Controller로 가는 요청만.</li>
+        <li>로그인 확인은 <code>getSession(false)</code> — 세션을 새로 만들지 않는다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>preHandle에서 sendRedirect 줄을 빼고 return false만 남기면 사용자는 무엇을 보게 될까?</summary>
+        <div class="sc-a"><b>내용 없는 빈 화면</b>(상태 200, 본문 없음)을 봅니다. <code>false</code>는 "더 진행하지 마"일 뿐 응답을 대신 만들어 주지 않아요. 그래서 막을 때는 redirect(다른 화면으로)나 <code>response.sendError(401)</code> 같은 응답을 함께 만들어야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>한글 깨짐을 막는 인코딩 처리를 인터셉터로 옮기면 안 되는 이유는?</summary>
+        <div class="sc-a">인터셉터는 <b>DispatcherServlet을 거쳐 Controller로 가는 요청에만</b> 동작합니다. JSP를 직접 부르는 요청 등은 인터셉터를 지나지 않고, 또 파라미터를 읽기 <b>전에</b> 인코딩을 정해야 하는데 인터셉터 시점은 그보다 늦을 수 있어요. 모든 요청의 맨 앞에서 해야 하는 일은 <b>필터</b>가 맞습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>exclude-mapping에서 /resources/**를 빼면 08 화면에 무슨 일이 생길까?</summary>
+        <div class="sc-a">수업 매핑은 <code>/**/*.do</code>라 <code>.do</code>로 끝나지 않는 이미지·CSS 요청은 원래 적용 대상이 아닙니다. 그래서 지금 설정에서는 <b>아무 일도 없어요</b>. 하지만 매핑을 <code>/**</code>로 넓히면 <code>arrow.png</code> 같은 리소스 요청도 로그인 확인에 걸려, 로그인 전 목록 화면의 화살표 그림이 깨집니다. exclude는 "매핑과 겹치는 것"을 빼는 장치예요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>인터셉터는 <b>로그인·권한 확인, 요청 로그, 실행 시간 측정, 공통 헤더 처리</b>에 씁니다. 스프링 부트에서는 XML 대신 <code>WebMvcConfigurer.addInterceptors()</code>에서 <code>registry.addInterceptor(…).addPathPatterns("/**").excludePathPatterns(…)</code>로 등록해요. 실무의 로그인·권한은 대개 <b>Spring Security</b>(필터 기반)가 맡고, 인터셉터는 그보다 가벼운 공통 처리에 남는 경우가 많습니다. 면접에서는 "필터와 인터셉터의 차이"와 "preHandle이 false면 어떻게 되나"가 자주 나옵니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>요청 5개 결과는 인터셉터 블록의 주석만 벗긴 <code>servlet-context.xml</code>과, DB 연결부만 가짜로 바꾼 <code>root-context.xml</code>로 MockMvc를 돌려 확인했다(수업 테스트와 같은 SpringExtension 방식).</li><li>경로 패턴은 spring-webmvc 6.1.13의 <code>PathPatternParser</code>와 <code>MappedInterceptor</code>를 직접 호출해 확인했다.</li><li>"필터는 정적 파일까지"는 <code>web.xml</code>의 매핑이 <code>/*</code>일 때의 이야기다(08의 인코딩 필터는 <code>/*</code>).</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="web-63">
+  <div class="note-head">
+    <span class="note-num">63</span>
+    <h3>단위 테스트 — JUnit 5와 스프링 테스트 컨텍스트로 DAO·Service 확인하기</h3>
+    <div class="note-tags"><span class="tag">JUnit 5</span><span class="tag">@Test · assertEquals</span><span class="tag">SpringExtension</span><span class="tag">@ContextConfiguration</span><span class="tag">scope test</span><span class="tag">단위 vs 통합</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>테스트는 <b>"이 코드가 이 값을 돌려주는가"를 코드로 확인</b>하는 것이다. JUnit 5의 <code>@Test</code> 메서드 안에서 <code>assertEquals(기대값, 실제값)</code>으로 검사하고, spring-test의 애너테이션 세 개로 <b>서버 없이 스프링 컨테이너를 띄워</b> DAO·Service 빈을 그대로 시험한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>지금까지는 코드를 고칠 때마다 <b>톰캣을 켜고 브라우저로 직접 눌러 보며</b> 확인했죠. 테스트는 그 확인을 <b>버튼 한 번에 되풀이하는 체크리스트</b>예요. 한 번 써 두면 내일 다른 곳을 고쳐도 체크리스트를 다시 돌려 "예전 기능이 아직 멀쩡한지"를 바로 압니다.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① JUnit 5의 기본 — @Test, assert, fail</h4>
+        <p>테스트 클래스는 <code>src/test/java</code>에 둡니다(배포되는 war에는 안 들어감). 메서드에 <b><code>@Test</code></b>를 붙이면 JUnit이 하나씩 실행하고, 안에서 <b><code>assertEquals(기대값, 실제값)</code></b>이 다르면 그 테스트는 <b>실패</b>로 표시돼요. 순서는 <b>기대값이 먼저</b>입니다 — 거꾸로 쓰면 실패 메시지의 "expected/but was"가 뒤바뀌어 읽기 헷갈려요. <b><code>fail("Not yet implemented")</code></b>는 무조건 실패시키는 줄로, Eclipse가 테스트 틀을 만들 때 <b>"아직 안 짰다"를 잊지 않게</b> 넣어 둡니다. 예외가 나서 멈춘 테스트도 실패로 집계돼요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② spring-test — 애너테이션 세 개로 컨테이너 띄우기</h4>
+        <p><b><code>@ExtendWith(SpringExtension.class)</code></b>는 JUnit 5가 테스트를 실행할 때 스프링 기능(컨테이너 만들기·<code>@Autowired</code> 채우기)을 붙여 줍니다. <b><code>@ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*.xml")</code></b>은 어떤 설정으로 컨테이너를 만들지 정하는데, <code>file:</code>은 <b>프로젝트 폴더 기준 파일 경로</b>, <code>**/*.xml</code>은 그 아래 모든 XML이라 <b>root-context · aop-context · servlet-context 셋이 하나의 컨테이너로 합쳐집니다</b>. <b><code>@WebAppConfiguration</code></b>은 웹용 컨테이너로 만들라는 표시예요(servlet-context의 MVC 설정과 MockMvc에 필요). 같은 설정을 쓰는 테스트 클래스들은 컨테이너를 <b>한 번만 만들어 함께 씁니다</b> — 실제로 세 클래스를 돌렸을 때 컨테이너 생성 로그는 한 번이었어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 운영과 다른 점 — 컨텍스트가 하나로 합쳐진다</h4>
+        <p>톰캣에서는 web.xml이 <b>부모(root + aop)</b>와 <b>자식(servlet)</b> 두 컨테이너를 따로 만들죠(<a href="#web-59">web-59</a>). 테스트의 와일드카드 설정은 셋을 <b>한 컨테이너</b>에 넣으므로, "servlet이 서비스를 다시 스캔하면 트랜잭션이 사라지는" 같은 <b>부모·자식 구조에서만 생기는 문제는 테스트에서 드러나지 않습니다</b>. 테스트가 통과해도 운영 구조와 같은지 한 번 더 생각해야 하는 이유예요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>④ 단위 테스트와 통합 테스트</h4>
+        <p><code>AnsDaoTest</code>는 진짜 <code>SqlSessionTemplate</code>으로 진짜 DB에 <code>boardList</code>를 실행하고 "1쪽 글이 10개"를 기대합니다. 이렇게 DB까지 함께 확인하는 테스트는 <b>통합 테스트</b>에 가까워요 — DB가 꺼져 있거나 글이 9개뿐이면 코드가 멀쩡해도 실패합니다. <b>단위 테스트</b>는 한 클래스만 떼어 내고 나머지(예: DAO)는 <b>가짜(목, mock)</b>로 바꿔 시험해요. 42일차에 배운 <b>생성자 주입</b>이 여기서 힘을 씁니다 — <code>new AnsService(가짜DAO)</code>처럼 넣을 수 있으니까요(08의 <code>AnsService</code>는 아직 필드 주입이라 이 방식이 어렵습니다).</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">dao/AnsDaoTest.java (src/test, 08)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">@ExtendWith(SpringExtension.class)                                    // ← JUnit 5 + 스프링
+@ContextConfiguration(
+		locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"}  // ← 설정 XML 전부 → 컨테이너 하나
+		)
+@WebAppConfiguration                                                  // ← 웹용 컨테이너
+public class AnsDaoTest {
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;                            // ← 컨테이너의 진짜 빈
+	private String namespace="com.hk.ansboard.dao.";
+
+	@Test
+	void testGetAllList() {
+		Map&lt;String, String&gt;map=new HashMap&lt;&gt;();
+		map.put("pnum","1");
+		List&lt;AnsDto&gt;list=sqlSession.selectList(namespace+"boardList",map);   // ← 실제 DB 조회
+		System.out.println("글목록개수:"+list.size());
+		assertEquals(10, list.size());                                // ← 기대값 10 이 먼저
+	}
+}</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-html">XML</span>
+        <span class="code-file">pom.xml — 테스트 전용 의존성 (43일차에 추가)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-xml">&lt;junit-jupiter-version&gt;5.10.2&lt;/junit-jupiter-version&gt;     &lt;!-- properties --&gt;
+…
+&lt;dependency&gt;
+  &lt;groupId&gt;junit&lt;/groupId&gt;
+  &lt;artifactId&gt;junit&lt;/artifactId&gt;
+  &lt;version&gt;4.13.2&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;                                        &lt;!-- ← 테스트할 때만, war 에는 안 들어감 --&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+  &lt;artifactId&gt;junit-jupiter-api&lt;/artifactId&gt;               &lt;!-- ← @Test · assertEquals --&gt;
+  &lt;version&gt;${junit-jupiter-version}&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+  &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;            &lt;!-- ← 테스트를 실제로 돌리는 엔진 --&gt;
+  &lt;version&gt;${junit-jupiter-version}&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;                      &lt;!-- ← SpringExtension · MockMvc --&gt;
+  &lt;version&gt;${org.springframework-version}&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>수업 테스트 3개 클래스를 원본 그대로 (DB는 연결되지 않는 상태) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>컨테이너: root-context.xml(빈 11) + aop-context.xml(6) + servlet-context.xml(31) → 하나로, 한 번만 생성
+  실패  AnsDaoTest.testGetAllList()          근본 원인 ConnectException: Connection refused
+  실패  AnsServiceTest 9개                    AssertionFailedError: Not yet implemented
+  실패  AnsControllerTest.testBoardList()     근본 원인 ConnectException (Service → DAO에서)
+  실패  AnsControllerTest 나머지 7개          AssertionFailedError: Not yet implemented
+  합계: 통과 0 · 실패 18</pre>
+      <div class="run-note">컨테이너는 정상으로 떴습니다 — 설정 XML·애너테이션은 맞게 쓰였다는 뜻이에요. 실패 이유는 두 가지뿐입니다. <b>아직 비어 있는 틀(16개)</b>과 <b>DB가 필요한 테스트(2개)</b>. Controller 테스트의 실패 기록에 AOP 로그 "daoError실행 … getAllList"도 찍혀, 테스트 안에서도 AOP가 그대로 동작한다는 것을 볼 수 있었습니다.</div>
+    </details>
+    <div class="note-tip"><span class="tip-label">수업 코드 주의</span>① <code>AnsServiceTest</code>는 이름과 달리 <code>AnsService</code>가 아니라 <b><code>AnsDao</code></b>를 주입받고 있어요 — Service를 시험하려면 <code>@Autowired private AnsService ansService;</code>가 맞습니다. ② pom에 JUnit 4도 들어 있지만 08의 테스트는 모두 JUnit 5(<code>org.junit.jupiter</code>)라 JUnit 4 의존성은 쓰이지 않습니다. JUnit 5 엔진으로 JUnit 4 테스트까지 돌리려면 <code>junit-vintage-engine</code>이 따로 필요해요. ③ <code>log4j.xml</code>의 root 수준을 INFO로 바꿨지만, 08의 로그 구현체는 여전히 Logback이라 이 파일은 읽히지 않습니다(<a href="#web-53">web-53</a>) — 테스트 실행 로그에도 DEBUG가 그대로 나왔어요.</div>
+    <div class="note-points">
+      <div class="note-points-title">63번 정리 — 핵심 정리</div>
+      <ul>
+        <li><b><code>@Test</code></b> 메서드 하나 = 확인 하나. <b><code>assertEquals(기대값, 실제값)</code></b> — 기대값이 먼저.</li>
+        <li><code>fail("Not yet implemented")</code>는 <b>일부러 실패</b>시키는 자리표시다.</li>
+        <li><code>@ExtendWith(SpringExtension.class)</code> + <code>@ContextConfiguration</code> + <code>@WebAppConfiguration</code> = 서버 없이 스프링 컨테이너.</li>
+        <li>와일드카드 설정은 root·servlet을 <b>하나로 합친다</b> — 운영의 부모·자식 구조와 다르다.</li>
+        <li>실제 DB에 기대면 <b>통합 테스트</b>. 단위 테스트는 의존 객체를 가짜로 바꾼다 — 생성자 주입이 그걸 쉽게 만든다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>@ExtendWith(SpringExtension.class)를 빼고 AnsDaoTest를 돌리면 어떻게 될까?</summary>
+        <div class="sc-a">JUnit 5가 스프링을 모르는 채 테스트를 실행하므로 <b>컨테이너가 만들어지지 않고 <code>@Autowired</code>도 채워지지 않습니다</b>. <code>sqlSession</code>이 <code>null</code>이라 <code>selectList</code>에서 <b>NullPointerException</b>으로 실패해요. 스프링 테스트 애너테이션은 "이 테스트는 스프링 위에서 돈다"는 선언입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>테스트에서는 트랜잭션이 잘 걸렸는데 톰캣에서는 안 걸릴 수 있는 이유는?</summary>
+        <div class="sc-a">테스트는 세 설정 XML을 <b>한 컨테이너</b>에 넣어서, 트랜잭션 설정과 Service가 언제나 같은 곳에 있습니다. 톰캣은 <b>부모(root)와 자식(servlet) 두 컨테이너</b>라, 자식이 Service를 또 스캔하면 Controller가 트랜잭션 없는 복제본을 받죠(<a href="#web-59">web-59</a>). 테스트 구조가 운영 구조와 다르면 이런 문제는 테스트로 잡히지 않습니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>실무 프로젝트는 <b>빌드할 때마다 테스트를 자동으로 돌리고</b>(Maven <code>mvn test</code>, CI), 하나라도 실패하면 배포를 멈춥니다. 그래서 테스트는 <b>언제 돌려도 같은 결과</b>가 나와야 해요 — 운영 DB 대신 테스트용 DB(H2, Testcontainers)를 쓰고, 테스트가 쓴 데이터는 <code>@Transactional</code>로 끝나면 되돌립니다(스프링 테스트에서 <code>@Transactional</code>은 기본이 rollback). 면접에서는 <b>"단위 테스트와 통합 테스트의 차이"</b>, <b>"테스트하기 쉬운 코드란"</b>(→ 생성자 주입, 작은 책임)이 자주 나옵니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>실행은 JUnit Platform 런처(1.10.2)로 수업 테스트 클래스를 그대로 돌렸다. <code>db.properties</code>는 저장소 밖 검증 폴더에 연결되지 않는 가짜 값을 따로 두었고, 실제 접속 정보는 읽지 않았다.</li><li>빈 개수(11 · 6 · 31)와 "컨테이너 한 번 생성"은 실행 로그의 <code>Loaded N bean definitions</code>·<code>Refreshing</code> 줄로 확인했다.</li><li>스프링 테스트의 <code>@Transactional</code> 기본 rollback은 spring-test 문서 기준이며 이번에 실행해 보지는 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="web-64">
+  <div class="note-head">
+    <span class="note-num">64</span>
+    <h3>MockMvc — 톰캣 없이 Controller에 가짜 요청 보내기</h3>
+    <div class="note-tags"><span class="tag">MockMvc</span><span class="tag">WebApplicationContext</span><span class="tag">perform · andExpect</span><span class="tag">status().isOk()</span><span class="tag">forwardedUrl</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>MockMvc</code>는 <b>톰캣 없이 DispatcherServlet에 가짜 HTTP 요청</b>을 보내는 도구다. <code>perform(get("/boardList.do").param("pnum","1"))</code>로 요청하고 <code>andExpect(status().isOk())</code>로 결과를 검사한다. 매핑·파라미터 바인딩·인터셉터·Controller·Service·DAO가 실제로 돌지만, <b>JSP 화면은 그리지 않는다</b>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>식당(서버)을 열지 않고 <b>주방 앞에서 주문서만 넣어 보는 시식 테스트</b>예요. 주문서(요청)를 넣으면 주방(Controller 이하)이 진짜로 요리하고, "주문이 접수됐나(200), 어느 접시(JSP)에 담으라고 했나"까지 확인합니다. 접시에 예쁘게 담긴 모습(화면)은 보지 않아요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 준비 — 컨테이너에서 MockMvc 만들기</h4>
+        <p>테스트 클래스에 <code>@WebAppConfiguration</code>이 있으면 스프링이 <b><code>WebApplicationContext</code></b>(웹용 컨테이너)를 만들어 주고, 이걸 <code>@Autowired</code>로 받습니다. <b><code>MockMvcBuilders.webAppContextSetup(wac).build()</code></b>는 그 컨테이너에 등록된 Controller·인터셉터·ViewResolver를 그대로 쓰는 MockMvc를 만들어요. 수업 코드는 테스트 메서드 안에서 만들었는데, 여러 테스트가 함께 쓰려면 <code>@BeforeEach</code> 메서드에서 한 번 만들어 두는 게 보통입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 요청 → 기대 → 결과</h4>
+        <p><b><code>perform(…)</code></b>에 <code>MockMvcRequestBuilders.get("/boardList.do").param("pnum", "1")</code>처럼 요청을 넣고, <b><code>andExpect(…)</code></b>로 기대를 겁니다 — <code>status().isOk()</code>(200), 그 밖에 <code>view().name("boardList")</code>, <code>model().attributeExists("list")</code>, <code>redirectedUrl("index.jsp")</code> 같은 검사가 있어요. 기대가 어긋나면 그 자리에서 테스트가 실패합니다. <b><code>andReturn()</code></b>은 결과(<code>MvcResult</code>)를 꺼내 <code>getResponse().getStatus()</code>처럼 직접 들여다볼 때 씁니다. 수업 코드는 <code>andExpect(status().isOk())</code>와 <code>assertEquals(200, statusCode)</code>로 <b>같은 것을 두 번</b> 확인하고 있어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 무엇을 확인하고, 무엇은 확인하지 않나</h4>
+        <p>확인하는 것: <b>주소 매핑</b>(<code>/boardList.do</code>가 어느 메서드로 가나), <b>파라미터 바인딩</b>(<code>pnum</code> → <code>@RequestParam</code>), <b>인터셉터</b>(켜져 있으면 실제로 거친다), Controller → Service → DAO 호출, 그리고 <b>어느 JSP로 forward할지</b>(<code>/WEB-INF/views/boardList.jsp</code>). 확인하지 않는 것: <b>JSP를 실제로 그린 HTML</b>. MockMvc 응답에는 forward 주소만 남고 본문은 비어 있어서, JSP 안의 EL 오타 같은 문제는 여기서 잡히지 않아요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">controller/AnsControllerTest.java — testBoardList (src/test, 08)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">	// web 테스트 환경에서 서버 없이 컨트롤러 테스트를
+	// 수행하기 위한 Spring Context 객체
+	@Autowired
+	private WebApplicationContext wac;                               // ← @WebAppConfiguration 덕분에 받을 수 있다
+
+	//가상의 클라이언트 요청을 처리할 객체
+	private MockMvc mock;
+
+	@Test
+	void testBoardList() throws Exception {
+		//mock객체 생성
+		this.mock=MockMvcBuilders.webAppContextSetup(wac).build();   // ← 컨테이너의 Controller·인터셉터를 그대로
+
+		//boardList.do 요청하기
+		MvcResult result= mock.perform(
+				MockMvcRequestBuilders.get("/boardList.do")          // ← GET /boardList.do?pnum=1
+				.param("pnum", "1")
+				).andExpect(MockMvcResultMatchers.status().isOk())   // ← 200 이 아니면 여기서 실패
+		.andReturn();//MvcResult객체 반환
+		//처리된 결과 내용을 받아옴
+		int statusCode=result.getResponse().getStatus();
+		System.out.println("status코드:"+statusCode);
+		System.out.println("HttpStatus:"+HttpStatus.OK.value());
+		//ok는 200코드의미 == 현재 실행된 상태코드와 비교
+		assertEquals(HttpStatus.OK.value(), statusCode);             // ← 위 andExpect 와 같은 확인
+	}</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>DB 자리에 가짜를 넣고 수업 테스트 그대로 + 인터셉터 켠 상태 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>DB 연결부만 가짜 SqlSessionTemplate(목록 10건)로 바꾼 설정
+  통과  AnsControllerTest.testBoardList()
+        status코드:200
+        HttpStatus:200
+
+인터셉터 블록 주석을 벗긴 설정에서 같은 테스트
+  통과  AnsControllerTest.testBoardList()     ← boardList.do 는 제외 대상
+  boardDetail.do (세션 없음)  302 · redirectedUrl = index.jsp
+  boardDetail.do (MockHttpSession 에 id=hk)  200 · forwardedUrl = /WEB-INF/views/boardDetail.jsp</pre>
+      <div class="run-note">세션이 필요한 요청은 <code>MockHttpSession</code>에 <code>setAttribute("id", "hk")</code>를 해서 <code>.session(login)</code>으로 붙여 보냈습니다 — 로그인 기능이 없어도 "로그인한 상태"를 테스트에서 만들어 볼 수 있어요. 응답의 forward 주소는 있지만 본문(HTML)은 비어 있었습니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">64번 정리 — 핵심 정리</div>
+      <ul>
+        <li><code>MockMvcBuilders.webAppContextSetup(wac).build()</code> — 테스트 컨테이너의 MVC 구성을 그대로 쓰는 가짜 요청기.</li>
+        <li><b><code>perform(요청)</code> → <code>andExpect(기대)</code> → <code>andReturn()</code></b>. 기대가 어긋나면 그 자리에서 실패.</li>
+        <li>매핑·바인딩·인터셉터·Controller~DAO는 <b>실제로 돈다</b>. JSP 화면은 <b>그리지 않는다</b>(forward 주소만).</li>
+        <li>세션이 필요하면 <code>MockHttpSession</code>을 만들어 <code>.session(…)</code>으로 붙인다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 떠올리려고 애쓰는 그 순간에 기억이 만들어집니다.</p>
+      <details class="sc-q">
+        <summary>boardList.jsp에 EL 오타(예: ${pMap.startPag})가 있어도 testBoardList는 통과할까?</summary>
+        <div class="sc-a"><b>통과합니다.</b> MockMvc는 "어느 JSP로 forward할지"까지만 정하고 JSP를 실제로 실행하지 않아요. 게다가 EL은 없는 속성을 오류 없이 빈 값으로 처리하죠. 화면 내용까지 확인하려면 톰캣에 띄워 보거나, Controller가 Model에 넣은 값을 <code>model().attribute(…)</code>로 검사하는 식으로 범위를 나눕니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>인터셉터를 켠 뒤 testBoardDetail을 세션 없이 짜면 어떤 기대를 걸어야 할까?</summary>
+        <div class="sc-a">로그인 확인에 걸리므로 <b><code>status().is3xxRedirection()</code>과 <code>redirectedUrl("index.jsp")</code></b>를 기대해야 합니다. 상세 화면이 열리는지 보려면 <code>MockHttpSession</code>에 <code>id</code>를 넣어 <code>.session(…)</code>으로 보내고 <code>status().isOk()</code>를 기대해요. 같은 요청이라도 <b>로그인 여부에 따라 기대가 다르다</b>는 것을 테스트 두 개로 나눠 적는 게 좋습니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무·코딩테스트에서는</span>MockMvc는 스프링 Controller 테스트의 표준 도구라, 스프링 부트의 <code>@WebMvcTest</code>도 내부에서 MockMvc를 씁니다. 실무에서는 Controller 테스트에서 <b>Service를 가짜(<code>@MockBean</code>·Mockito)로 바꿔</b> DB 없이 빠르게 돌리고, DB까지 확인하는 테스트는 따로 둬요. REST API라면 <code>jsonPath("$.title").value("…")</code>로 응답 JSON을 검사합니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>통과 결과는 08의 <code>root-context.xml</code>에서 DB 연결부(dataSource · sqlSessionFactory)만 가짜 <code>SqlSessionTemplate</code>으로 바꾼 검증용 설정으로 얻었다. 실제 DB로 돌린 결과가 아니다.</li><li>세션을 붙인 요청과 redirectedUrl은 검증용 테스트(수업 테스트와 같은 애너테이션 구성)로 확인했다.</li><li><code>view().name</code>·<code>model().attributeExists</code>·<code>jsonPath</code>는 spring-test의 검사 API 소개이며 이번 실행에는 쓰지 않았다.</li></ul></details>
+  </div>
+</article>
 </div>
   </section>
 
@@ -38192,7 +39185,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
 
     <div class="journey-intro">
       <h3>💡 이 탭을 보는 법</h3>
-      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 스프링 게시판에 트랜잭션과 AOP를 붙이는 단계</b>입니다. <a href="#class-day42">10월 2일 진도</a>와 <a href="#journey-web-07">24단계</a>에서 이어서 복습하세요.</p>
+      <p>단계마다 <b>이전 단계에서 배운 것을 명시적으로 언급</b>하며 이어집니다 — "값을 담는 법"에서 시작해 "흐름을 제어하는 법", "코드에 이름을 붙이는 법", "설계도와 실체", "물려받고 바꿔 쓰는 법" 순으로 넓어져요. 상자는 개념 하나, 화살표는 <b>"그걸 가지고 다음에 무엇을 하는지"</b>입니다. 각 단계의 <b>전체 카드 보기</b>를 누르면 해당 과목 탭의 자세한 설명으로 바로 이동합니다. <b>현재는 스프링 게시판에 인터셉터와 단위 테스트를 붙이는 단계</b>입니다. <a href="#class-day43">10월 6일 진도</a>와 <a href="#journey-web-08">25단계</a>에서 이어서 복습하세요.</p>
     </div>
 
     <div class="journey-list">
@@ -38543,7 +39536,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
             <div class="flow-box"><b>멀티스레드 서버</b><span>접속마다 스레드 하나</span></div>
           </div>
         </div>
-        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 24단계 중 웹 개발 7단계(18~24)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다. <b>2026-09-28(38일차)에는 <a href="#journey-web-05">22단계 — CRUD 요청 연결</a></b>로 글쓰기·상세·수정·삭제를 Controller 메서드에 붙였습니다. <b>2026-09-29~30(39~40일차)에는 <a href="#journey-web-06">23단계 — 답변형 게시판</a></b>을 시작해 refer·step·depth 구조와 논리 삭제, 로그를 다뤘습니다. <b>2026-10-01~02(41~42일차)에는 <a href="#journey-web-07">24단계 — 트랜잭션과 AOP</a></b>로 페이지 번호·답글을 완성하고 여러 쿼리를 한 작업으로 묶었습니다.</div>
+        <div class="journey-tip"><b>🏁 지금 수업이 여기입니다 — 25단계 중 웹 개발 8단계(18~25)까지</b> — 2026-08-28(19일차)로 자바 교안의 마지막 단계까지 도달했고, 2026-08-31(20일차)부터는 <b>HeidiSQL로 MySQL을 다루는 SQL 과정</b>이 시작됐습니다(→ <a href="#sql-01">🗄️ SQL 기초 탭</a>). 18일차에 <code>Socket</code>·<code>ServerSocket</code>으로 기본 TCP 대화를, 19일차에 <b>접속마다 스레드를 만드는 멀티스레드 서버, UDP 에코, 그리고 소켓+스레드+컬렉션+예외 처리가 전부 합쳐진 채팅 서버</b>까지 완성했습니다. 시험 대비 탭의 <b>📅 배운 데까지</b> 범위도 자바 전 범위를 출제합니다 — 자바 복습은 <a href="#prac-01">🧪 실습과제 탭</a>의 12문제로 마무리하고, 2026-09-08(26일차) 기준으로 <b>SQL도 제약조건·뷰·인덱스까지</b> 나갔습니다 — <a href="#sql-01">🗄️ SQL 기초 탭</a>의 46개 카드가 그 전 범위이고, 시험 대비 탭에도 <b>SQL 30문항</b>이 들어 있습니다. 이어서 2026-09-10(28일차)부터 <b>JSP·Servlet 웹 개발 과정</b>이 시작됐고, 2026-09-21(35일차)에 <a href="#journey-web-02">19단계 — EL·JSTL</a>을 마쳤습니다. <b>2026-09-22(36일차)부터는 <a href="#journey-web-03">20단계 — 스프링 MVC</a></b>로, 지금까지 직접 만들던 구조를 프레임워크에 넘기기 시작했습니다. <b>2026-09-23(37일차)에는 <a href="#journey-web-04">21단계 — Spring과 MyBatis DB 연동</a></b>으로 목록 요청을 실제 데이터까지 연결했습니다. <b>2026-09-28(38일차)에는 <a href="#journey-web-05">22단계 — CRUD 요청 연결</a></b>로 글쓰기·상세·수정·삭제를 Controller 메서드에 붙였습니다. <b>2026-09-29~30(39~40일차)에는 <a href="#journey-web-06">23단계 — 답변형 게시판</a></b>을 시작해 refer·step·depth 구조와 논리 삭제, 로그를 다뤘습니다. <b>2026-10-01~02(41~42일차)에는 <a href="#journey-web-07">24단계 — 트랜잭션과 AOP</a></b>로 페이지 번호·답글을 완성하고 여러 쿼리를 한 작업으로 묶었습니다. <b>2026-10-06(43일차)에는 <a href="#journey-web-08">25단계 — 인터셉터와 단위 테스트</a></b>로 Controller 앞의 로그인 확인과 코드로 하는 확인(JUnit · MockMvc)을 시작했습니다.</div>
         <div class="journey-label">여기서 잡는 감각</div>
         <ul class="journey-points">
           <li><b>TCP</b>는 연결을 맺고 보내 신뢰성이 높고, <b>UDP</b>는 맺지 않고 던져 빠릅니다.</li>
@@ -38683,6 +39676,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
 <article class="journey-step" id="journey-web-05"><div class="journey-step-head"><span class="journey-num">22</span><h3>요청마다 메서드 하나 — 스프링 MVC로 CRUD 연결하기</h3><a class="journey-jump" href="#web-47">전체 카드 보기 →</a></div><p>21단계에서 목록 하나를 DB까지 연결했다. 이번에는 글쓰기·상세·수정·삭제를 같은 방식으로 붙인다. 요청 분기는 <code>@RequestMapping</code>이, 폼 값을 객체로 옮기는 일은 스프링의 바인딩이 맡는다. 남은 선택은 "저장한 뒤 어디로 보낼까"이고, 그 답이 redirect다.</p><ul><li>URL 하나에 메서드 하나 — MVC2의 if문 분기가 사라진다.</li><li>폼 값은 DTO로 한 번에, 같은 이름 여러 개는 배열로 받는다.</li><li>데이터를 바꾼 뒤에는 redirect(PRG) — 새로고침 중복 저장을 막는다.</li><li>Spring 6.1에서는 이름으로 받는 매개변수에 <code>@RequestParam("이름")</code>을 적는다.</li></ul><p><a href="#class-day38">38일차 진도</a> · <a href="#web-49">-parameters 함정</a> · <a href="#web-50">forward와 redirect</a></p></article>
 <article class="journey-step" id="journey-web-06"><div class="journey-step-head"><span class="journey-num">23</span><h3>답글이 달리는 게시판 — 한 테이블에 글과 답글을 줄 세우기</h3><a class="journey-jump" href="#web-54">전체 카드 보기 →</a></div><p>22단계까지 만든 CRUD 흐름은 그대로 두고, 데이터 쪽을 바꾼다. 답글은 따로 테이블을 두지 않고 같은 테이블에 넣되, refer·step·depth 세 숫자로 "어느 묶음의 몇 번째 줄, 몇 칸 들여쓰기"를 표시한다. 글을 지울 때도 행을 없애지 않고 표시만 바꾼다. 그래야 답글 구조가 무너지지 않는다.</p><ul><li>목록은 refer 내림차순 · step 오름차순 — 새 묶음이 위, 묶음 안에서는 원글 다음에 답글.</li><li>페이지 나누기는 ROW_NUMBER로 번호를 붙인 뒤 번호로 거른다.</li><li>논리 삭제(delflag)와 조회수 redirect — 상태를 바꾼 뒤엔 새로고침을 안전하게.</li><li>로그는 SLF4J로 남기고, 설정 파일은 실제 구현체(Logback) 양식이어야 한다.</li></ul><p><a href="#class-day39">39일차</a> · <a href="#class-day40">40일차 진도</a> · <a href="#web-53">log4j.xml이 안 읽히는 이유</a></p></article>
 <article class="journey-step" id="journey-web-07"><div class="journey-step-head"><span class="journey-num">24</span><h3>여러 쿼리를 한 작업으로, 공통 기능은 바깥으로 — 트랜잭션과 AOP</h3><a class="journey-jump" href="#web-59">전체 카드 보기 →</a></div><p>23단계에서 세운 refer·step·depth 구조로 실제로 답글을 달자, 쿼리 두 개(step 밀기·답글 넣기)가 함께 성공해야 하는 문제가 생겼다. 스프링은 이 문제와 "모든 DAO에 로그 남기기"를 같은 방법으로 푼다 — 객체를 대리 객체(프록시)로 감싸고, 메서드 앞뒤에 필요한 일을 끼워 넣는다.</p><ul><li>페이지 번호는 유틸로 계산하고, 모든 화면이 pnum을 들고 다닌다.</li><li>답글 = 같은 묶음에서 아래 글 step 밀기 → 부모 바로 아래에 넣기.</li><li><code>@Transactional</code> — 성공하면 commit, RuntimeException이면 rollback.</li><li>트랜잭션 설정은 root 컨텍스트에, service·dao도 root에서 스캔.</li><li>AOP — Advice(할 일) + Pointcut(끼울 곳). 코드를 고치지 않고 공통 기능을 붙인다.</li></ul><p><a href="#class-day41">41일차</a> · <a href="#class-day42">42일차 진도</a> · <a href="#web-58">답글 달기</a> · <a href="#web-60">AOP</a></p></article>
+<article class="journey-step" id="journey-web-08"><div class="journey-step-head"><span class="journey-num">25</span><h3>막을 곳은 앞에서 막고, 확인은 코드로 — 인터셉터와 단위 테스트</h3><a class="journey-jump" href="#web-62">전체 카드 보기 →</a></div><p>24단계에서 08을 트랜잭션·AOP로 "믿을 수 있는" 게시판으로 만들었다. 이제 두 가지가 남는다. 아무나 글을 쓰고 지우지 못하게 <b>Controller 앞에서 한 번에 막는 것</b>(인터셉터 — AOP처럼 공통 일을 바깥에 두는 생각의 연장), 그리고 고칠 때마다 브라우저로 눌러 보던 확인을 <b>코드로 적어 자동으로 되풀이하는 것</b>(JUnit 테스트). 24단계의 생성자 주입이 "가짜를 넣어 시험하기 쉬운 코드"였다는 것도 여기서 드러난다.</p><ul><li>인터셉터: preHandle(전, false면 중단) → Controller → postHandle → 뷰 → afterCompletion.</li><li>필터는 톰캣 단계, 인터셉터는 스프링 안에서 Controller로 가는 요청만.</li><li>로그인 확인은 세션의 id — 로그인 기능이 먼저 있어야 켤 수 있다.</li><li>JUnit 5 + spring-test로 서버 없이 컨테이너를 띄우고, MockMvc로 가짜 요청을 보낸다.</li><li>실제 DB에 기대는 테스트는 통합 테스트 — 단위 테스트는 의존 객체를 가짜로.</li></ul><p><a href="#class-day43">43일차 진도</a> · <a href="#web-62">인터셉터</a> · <a href="#web-63">JUnit 5와 스프링 테스트</a> · <a href="#web-64">MockMvc</a></p></article>
 </div>
   </section>
 
@@ -40223,7 +41217,7 @@ INFO  class com.hk.ansboard.dao.AnsDao - daoError실행(info):시작:replyInsert
 
   <section id="exam-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>✏️ 시험 대비 — Java · SQL 객관식 연습문제</h2></div>
-    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 55문항</b>까지, 총 <b>187문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
+    <p class="cat-desc">자바 교안 전 범위(기초·객체지향·활용·네트워크)와 <b>SQL 30문항 · 웹 개발 61문항</b>까지, 총 <b>193문항</b>의 객관식 문제를 <b>한 문제씩 풀면서 고르는 즉시 정답과 해설을 확인</b>합니다. 짧은 해설 아래의 <b>🔎 자세한 해설</b>을 펼치면 <b>보기 ①~④를 하나씩 왜 맞고 왜 틀렸는지</b> 짚어 주고, 마지막에 더 쉬운 말로 정리한 설명까지 붙습니다(틀린 문제는 자동으로 펼쳐집니다). 마음에 걸리는 문제는 <b>⭐ 즐겨찾기 · 🔥 어려움</b>으로 표시해 두면 나중에 <b>표시한 것만 · 틀린 것만</b> 골라 다시 풀 수 있어요. 범위 칩에서 <b>🗄️ SQL</b>이나 <b>🖥️ 웹 개발</b>만 골라 그 과목만 풀 수도 있습니다. 문제은행은 <b>교안 전 범위</b>라 아직 배우지 않은 단원도 섞여 나오는데, 범위에서 <b>📅 배운 데까지</b>를 고르면 <b>수업에서 진도가 나간 개념만</b> 출제됩니다(진도 카드가 늘어나면 범위도 함께 넓어집니다).</p>
 
     <div class="exam-box" id="exam-setup">
       <div class="exam-setup-row">
@@ -41544,6 +42538,12 @@ document.querySelectorAll(".note-code").forEach(box => {
     {"id": "w53", "cat": "WEB", "q": "root-context에 tx:annotation-driven이 있는데 servlet-context가 com.hk.ansboard 전체를 스캔하면 어떻게 되나?", "ch": ["트랜잭션이 두 번 걸린다", "서버가 뜨지 않는다", "자식(servlet) 컨텍스트에 트랜잭션 없는 Service가 또 만들어지고 Controller가 그것을 받아 트랜잭션이 걸리지 않는다", "아무 차이 없다"], "a": 2, "ex": "tx:annotation-driven은 선언된 컨텍스트의 빈에만 적용된다. Controller는 가까운 자식 컨텍스트의 Service를 주입받는다. 그래서 servlet은 controller만, root는 service·dao를 스캔한다.", "link": ["#web-59", "트랜잭션 — 둘 다 되거나 둘 다 안 되거나, 그리고 컨텍스트 나누기"]},
     {"id": "w54", "cat": "WEB", "q": "AOP 포인트컷 execution(* com.hk.ansboard.dao.*Dao.*(..)) 가 가리키는 것은?", "ch": ["dao 패키지의 Dao 인터페이스 하나", "dao 패키지에서 이름이 Dao로 끝나는 클래스의 모든 메서드(반환형·매개변수 무관)", "매개변수가 없는 메서드만", "반환형이 void인 메서드만"], "a": 1, "ex": "execution(반환형 패키지.클래스.메서드(매개변수)). *는 아무거나 하나, 매개변수 자리의 ..은 개수·타입 상관없음.", "link": ["#web-60", "AOP — DAO를 고치지 않고 모든 DAO 메서드에 로그 남기기"]},
     {"id": "w55", "cat": "WEB", "q": "Controller에 생성자가 public AnsController(AnsService s) 하나뿐이다. @Autowired를 적지 않으면?", "ch": ["주입되지 않아 NullPointerException이 난다", "스프링이 그 생성자로 AnsService를 넣어 준다", "기본 생성자가 없어서 컴파일 오류가 난다", "필드에 @Autowired를 꼭 함께 써야 한다"], "a": 1, "ex": "Spring 4.3부터 생성자가 하나면 @Autowired를 생략해도 그 생성자로 주입한다. 생성자 주입은 빠진 의존성을 일찍 알 수 있고 final 필드도 쓸 수 있다.", "link": ["#web-61", "생성자 주입, 그리고 Controller는 얇게 — 페이징 조립을 Service로"]},
+    {"id": "w56", "cat": "WEB", "q": "인터셉터의 preHandle이 false를 반환하면 어떻게 되나?", "ch": ["Controller는 실행되고 뷰만 그리지 않는다", "Controller가 실행되지 않고 요청 처리가 거기서 멈춘다(postHandle·afterCompletion도 불리지 않음)", "스프링이 자동으로 500 에러 화면을 보여 준다", "다음 인터셉터를 건너뛰고 Controller로 바로 간다"], "a": 1, "ex": "false는 '더 진행하지 마'라는 뜻이라 Controller·postHandle·afterCompletion이 모두 실행되지 않는다. 응답을 대신 만들어 주지 않으므로 sendRedirect 같은 응답을 직접 만들어 둔다.", "link": ["#web-62", "인터셉터 — Controller 앞에서 로그인 확인하기 (HandlerInterceptor)"]},
+    {"id": "w57", "cat": "WEB", "q": "필터(Filter)와 인터셉터(HandlerInterceptor)의 차이로 옳은 것은?", "ch": ["인터셉터가 필터보다 먼저 실행된다", "필터는 톰캣 단계에서, 인터셉터는 DispatcherServlet이 Controller로 보내는 요청에서 동작한다", "필터는 스프링 빈만 쓸 수 있고 인터셉터는 쓸 수 없다", "둘은 이름만 다르고 등록 위치와 동작 시점이 같다"], "a": 1, "ex": "필터는 서블릿 컨테이너(톰캣)가 서블릿을 부르기 전에 동작해 매핑한 모든 요청(JSP·정적 파일 포함)을 거친다. 인터셉터는 스프링 MVC 안에서 Controller로 가는 요청에만 동작한다.", "link": ["#web-62", "인터셉터 — Controller 앞에서 로그인 확인하기 (HandlerInterceptor)"]},
+    {"id": "w58", "cat": "WEB", "q": "로그인 확인에서 request.getSession(false)를 쓰는 이유는?", "ch": ["세션을 강제로 새로 만들기 위해", "세션이 없으면 새로 만들지 않고 null을 돌려받아, 로그인하지 않은 사람을 바로 가려내기 위해", "세션을 삭제하기 위해", "쿠키를 읽지 않기 위해"], "a": 1, "ex": "getSession()(=true)은 세션이 없으면 새로 만든다. getSession(false)는 없으면 null이라 '세션도 없다 = 로그인 안 함'을 판단할 수 있고 빈 세션도 생기지 않는다.", "link": ["#web-62", "인터셉터 — Controller 앞에서 로그인 확인하기 (HandlerInterceptor)"]},
+    {"id": "w59", "cat": "WEB", "q": "테스트 클래스에 @ContextConfiguration(locations = \"file:src/main/webapp/WEB-INF/spring/**/*.xml\")을 붙이면?", "ch": ["root-context.xml만 읽는다", "spring 폴더 아래 설정 XML(root·aop·servlet)이 하나의 컨테이너로 합쳐져 뜬다", "톰캣이 실행된다", "web.xml을 읽어 부모·자식 두 컨테이너를 만든다"], "a": 1, "ex": "와일드카드로 spring 폴더 아래 XML을 모두 읽어 컨테이너 하나를 만든다. 톰캣의 부모(root)·자식(servlet) 두 컨테이너 구조와는 다르다.", "link": ["#web-63", "단위 테스트 — JUnit 5와 스프링 테스트 컨텍스트로 DAO·Service 확인하기"]},
+    {"id": "w60", "cat": "WEB", "q": "Eclipse가 만든 테스트 틀의 fail(\"Not yet implemented\")를 그대로 두고 실행하면?", "ch": ["통과로 표시된다", "건너뜀(skip)으로 표시된다", "실패로 표시된다 — 아직 안 짠 테스트를 잊지 않게 하는 자리표시다", "컴파일 오류가 난다"], "a": 2, "ex": "fail()은 그 자리에서 테스트를 무조건 실패시킨다. 아직 내용을 채우지 않은 테스트가 통과로 보이지 않게 하려는 자리표시다.", "link": ["#web-63", "단위 테스트 — JUnit 5와 스프링 테스트 컨텍스트로 DAO·Service 확인하기"]},
+    {"id": "w61", "cat": "WEB", "q": "mock.perform(get(\"/boardList.do\").param(\"pnum\",\"1\")).andExpect(status().isOk())가 확인하는 것은?", "ch": ["실제 브라우저를 띄워 화면이 보이는지", "톰캣 없이 DispatcherServlet에 가짜 요청을 보내 응답 상태가 200인지", "JSP를 그린 HTML이 기대한 글자와 같은지", "DB 없이도 항상 통과하는지"], "a": 1, "ex": "MockMvc는 서버 없이 요청을 처리해 상태 코드·forward 주소 등을 확인한다. Controller~DAO는 실제로 돌지만 JSP는 그리지 않는다.", "link": ["#web-64", "MockMvc — 톰캣 없이 Controller에 가짜 요청 보내기"]},
   ];
 
   // ═══════════ 자세한 해설 표 ═══════════
@@ -42716,6 +43716,45 @@ document.querySelectorAll(".note-code").forEach(box => {
       deep:"문(생성자)이 하나뿐인 집이면 '이 문으로 들어가세요'라고 표시하지 않아도 스프링은 그 문으로 들어갑니다.\n생성자 주입은 빠진 의존성을 객체를 만들 때 바로 알 수 있고, 필드를 final로 둘 수 있어 권장되는 방식입니다."}
 });
 
+  // ---- 웹 개발 (w56~w61, 43일차) ----
+  Object.assign(EXAM_DETAIL, {
+    w56:{why:[
+      "Controller까지 가지 않는다. preHandle의 false는 Controller 실행 자체를 막는다.",
+      "정답. false면 Controller·postHandle·afterCompletion이 모두 실행되지 않고 요청 처리가 거기서 끝난다.",
+      "에러 화면을 자동으로 만들지 않는다. 응답을 만들지 않았다면 내용 없는 응답이 간다.",
+      "다른 인터셉터를 건너뛰고 진행하는 것이 아니라 처리 전체가 멈춘다."],
+      deep:"preHandle은 문지기입니다. true면 '들어가세요', false면 '여기까지'예요.\n다만 문지기가 손님을 돌려보낼 때 안내문(redirect)을 주지 않으면 손님은 빈손으로 돌아갑니다. 그래서 false를 돌려줄 때는 sendRedirect 같은 응답을 직접 만들어 둡니다."},
+    w57:{why:[
+      "순서가 반대다. 요청은 필터를 먼저 지나 DispatcherServlet에 도착하고, 그 안에서 인터셉터를 만난다.",
+      "정답. 필터는 톰캣(서블릿 컨테이너) 단계, 인터셉터는 스프링 MVC 안에서 Controller로 가는 요청에 동작한다.",
+      "스프링 빈을 다루기 쉬운 쪽은 스프링 안에 있는 인터셉터다. 필터는 스프링 바깥(톰캣)이 관리한다.",
+      "등록 위치(web.xml vs servlet-context.xml)도, 동작 시점도, 거치는 요청의 범위도 다르다."],
+      deep:"건물로 비유하면 필터는 건물 정문 경비, 인터셉터는 특정 층 엘리베이터 앞 검사원입니다.\n정문은 모든 방문객(JSP·이미지 요청까지)이 지나가고, 엘리베이터 앞은 사무실(Controller)로 가는 사람만 지나가요. 인코딩처럼 모두에게 필요한 일은 정문에서, 로그인 확인처럼 사무실 출입 조건은 엘리베이터 앞에서 합니다."},
+    w58:{why:[
+      "반대다. 새로 만드는 것은 인자 없는 getSession()(또는 getSession(true))이다.",
+      "정답. false면 세션이 없을 때 null을 돌려주므로, 로그인하지 않은 사람을 바로 가려내고 빈 세션도 만들지 않는다.",
+      "세션을 없애는 메서드는 session.invalidate()다.",
+      "getSession은 쿠키와 상관없이 세션을 꺼내는 메서드다. 쿠키를 읽지 않게 하는 옵션이 아니다."],
+      deep:"getSession()은 '사물함이 없으면 새로 하나 내주세요', getSession(false)는 '내 사물함이 있으면 보여 주고 없으면 없다고만 해 주세요'입니다.\n로그인 확인은 '사물함(세션)과 그 안의 출입증(id)이 있는가'를 보는 일이라, 확인하다가 새 사물함을 만들어 버리면 안 됩니다."},
+    w59:{why:[
+      "**/*.xml은 spring 폴더 아래 모든 XML을 뜻한다. root-context.xml만이 아니다.",
+      "정답. 와일드카드로 root·aop·servlet 설정 XML을 모두 읽어 하나의 컨테이너로 만든다.",
+      "톰캣은 실행되지 않는다. spring-test가 서버 없이 스프링 컨테이너만 만든다.",
+      "web.xml은 읽지 않는다. 그래서 운영의 부모·자식 두 컨테이너 구조가 아니라 컨테이너 하나가 된다."],
+      deep:"운영(톰캣)에서는 web.xml이 부모 컨테이너(root·aop)와 자식 컨테이너(servlet)를 따로 만들어요. 이 테스트 설정은 세 설정을 한 바구니에 모두 담습니다.\n그래서 테스트가 통과해도 '부모·자식 사이에서만 생기는 문제'(서비스 중복 스캔으로 트랜잭션이 빠지는 것 등)는 여기서 드러나지 않는다는 점을 기억하세요."},
+    w60:{why:[
+      "fail()은 무조건 실패시키는 메서드라 통과로 표시될 수 없다.",
+      "건너뜀은 @Disabled를 붙였을 때다. fail()은 실행된 뒤 실패로 기록된다.",
+      "정답. fail()은 그 자리에서 테스트를 실패시킨다. 아직 내용이 없는 테스트가 통과로 보이지 않게 하려는 자리표시다.",
+      "fail(String)은 JUnit이 제공하는 정상적인 메서드라 컴파일 오류가 나지 않는다."],
+      deep:"할 일 목록에 '아직 안 함'이라고 빨간 표시를 해 두는 것과 같아요. 비어 있는 테스트가 초록색(통과)으로 보이면 다 짠 줄 착각하니까요.\n수업 테스트 18개 중 16개가 이 틀이라, 그대로 돌리면 실패가 많은 게 정상입니다."},
+    w61:{why:[
+      "MockMvc는 브라우저를 띄우지 않는다. 서버도 브라우저도 없이 요청을 흉내 낸다.",
+      "정답. 톰캣 없이 DispatcherServlet에 가짜 요청을 보내 응답 상태가 200(OK)인지 확인한다.",
+      "JSP는 그리지 않는다. 어느 JSP로 forward할지(주소)까지만 남고 본문은 비어 있다.",
+      "Controller → Service → DAO가 실제로 돌기 때문에 DB가 필요한 코드면 DB 없이 실패한다."],
+      deep:"MockMvc는 식당 문을 열지 않고 주방 앞에서 주문서만 넣어 보는 시식 테스트예요. 주문 접수(매핑·파라미터)부터 요리(Controller~DAO)까지는 진짜로 하지만, 접시에 담긴 모습(JSP 화면)은 보지 않습니다.\n그래서 '요청이 제대로 처리되는가'는 확인할 수 있지만 '화면에 글자가 맞게 나오는가'는 따로 확인해야 해요."},
+  });
   const BANK_BY_ID = Object.fromEntries(EXAM_BANK.map(q => [q.id, q]));
 
   const $ = (id) => document.getElementById(id);
