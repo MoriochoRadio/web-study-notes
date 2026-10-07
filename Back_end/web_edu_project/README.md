@@ -1,7 +1,7 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-10-06(43일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판 프로젝트를 포함한다.
+> 최신 상태: 2026-10-07(44일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판 프로젝트를 포함한다.
 > [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day42)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
@@ -28,6 +28,7 @@
 | [`06_spring_template`](06_spring_template) | **스프링 MVC 첫 프로젝트.** Maven·DispatcherServlet·ViewResolver — 직접 짜던 분기 코드가 사라진다 | web-38~40 |
 | [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시(37일차), 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 연결(38일차).** | web-41~51 |
 | [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기, 답글 트랜잭션(`@Transactional`), DAO 로그 AOP, 생성자 주입(41~42일차). 로그인 확인 인터셉터(등록은 주석)와 JUnit 5 · spring-test 테스트 클래스(43일차) | web-52~64 |
+| [`09_hkboard_springboot`](09_hkboard_springboot/README.md) | **스프링 부트 게시판.** 07의 게시판을 Boot 4.1 · `@Mapper` 인터페이스 · Thymeleaf · Lombok으로 다시 만든다. XML 설정 없이 `application.properties`만, 내장 톰캣(9090). 수업 도구는 Antigravity(44일차) | web-65~68 |
 
 ## 개발 환경
 
@@ -38,6 +39,7 @@
 | IDE | Eclipse IDE for Enterprise Java and Web Developers (2026-03) |
 | DB | MariaDB 12.3 |
 | JDBC 드라이버 | mariadb-java-client 3.3.3 |
+| 09부터 | Spring Boot 4.1.1 (내장 톰캣) · Antigravity IDE · Maven Wrapper(`mvnw`) |
 
 > **Tomcat 10부터 패키지가 `javax.servlet` → `jakarta.servlet`으로 바뀌었습니다.**
 > 인터넷 예제에 `import javax.servlet.*`이 있으면 Tomcat 9 이하 기준이라 그대로는 컴파일되지 않습니다.
@@ -194,8 +196,8 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 앞으로
 
 > 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 교육과정 전체 자료를 기준으로
-> 다시 맞췄다. **지금(2026-10-06, 43일차·08번 프로젝트)까지 4번 항목과 5번의 대부분이 끝났다.**
-> 6번부터는 아직 수업 전이라 프로젝트도 없다.
+> 다시 맞췄다. **지금(2026-10-07, 44일차·09번 프로젝트)까지 5번의 대부분이 끝났고, 6·7번을 건너 8·9번(스프링 부트 · Thymeleaf)이 시작됐다.**
+> 6·7·10번은 아직 수업 전이라 프로젝트도 없다.
 
 1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
 2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차, 01~02 프로젝트)
@@ -204,11 +206,11 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 4. ~~**답변형 게시판 심화** — 페이징 처리, Connection Pool(DBCP), 조회수~~
    (DBCP는 36일차 06부터, 페이징·조회수·답글은 39~41일차 08 프로젝트)
 5. **Spring 답변형 게시판** — ~~로깅(SLF4J)~~, ~~AOP~~, ~~`@Transactional` 트랜잭션~~(39~42일차, 08 프로젝트),
-   JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석) ← **여기까지 진행 중**
+   JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석)
 6. **파일 업로드 · 다운로드**
 7. **일정관리(캘린더) 게시판** — Spring MVC로 월별 달력·일정 CRUD
-8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환
-9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수
+8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환 (44일차 시작, 09 프로젝트) ← **여기까지 진행 중**
+9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수 (44일차 시작 — `th:each` · `th:text` · `@{…}` · `#dates`. 프래그먼트는 아직)
 10. **Spring Security + Spring Boot 회원관리·게시판 종합**
 
 ## 고친 것 · 남긴 것
@@ -595,3 +597,17 @@ Controller에 `boardInsertForm.do`(GET) · `boardInsert.do`(POST) · `boardDetai
 - **확인함** — DB 연결부만 가짜로 바꾼 설정에서 `AnsControllerTest.testBoardList` 통과. 인터셉터 주석을 벗긴 설정에서 `boardList.do` 200, 로그인 없는 `boardDetail.do`·`home.do`·`boardInsertForm.do` 302 → `index.jsp`, 세션에 `id`가 있으면 200.
 - **확인함** — `/**/*.do`는 Spring 6.1의 `PathPatternParser`로는 해석되지 않지만 인터셉터 매핑은 예전 방식으로 되돌아가 의도대로 동작한다.
 - **확인하지 않음** — 실제 MariaDB로 `AnsDaoTest`를 돌린 결과, 톰캣에서 인터셉터를 켠 화면.
+
+## 09_hkboard_springboot — 스프링 부트 게시판
+
+[프로젝트 실행 안내와 구현 범위](09_hkboard_springboot/README.md) · [44일차](../index.html#class-day44) · [개념 카드 65~68](../index.html#web-65) · [개념서 38장](../index.html#book-be-38)
+
+### 2026-10-07 (44일차) — 같은 게시판을 스프링 부트로
+
+Spring Initializr로 Boot 4.1.1 · Java 21 프로젝트를 만들고 스타터(webmvc · thymeleaf · validation · devtools · MariaDB · Lombok · MyBatis)를 골랐다. `web.xml`과 두 context XML이 사라지고 `application.properties`에 포트(9090) · Thymeleaf 캐시 끄기 · DB 주소 · MyBatis 별칭 패키지와 Mapper 위치만 적는다. DAO 클래스 대신 `@Mapper` 인터페이스 `BoardMapper`를 두고 `mybatis/BoardMapper.xml`의 namespace를 인터페이스 이름으로, SQL id를 메서드 이름으로 맞춘다. 화면은 `templates/`의 Thymeleaf 5개(`th:each` · `th:text` · `th:value` · `@{…}` · `#dates.format`), 주입은 Lombok `@RequiredArgsConstructor` + `final`이다. 주소는 클래스의 `@RequestMapping("/thboard")` 아래에 모았다.
+
+- **확인함** — DB만 H2 메모리 DB(MariaDB 모드)로 바꾼 사본(사본의 Mapper만 `SYSDATE()` → `CURRENT_TIMESTAMP`)을 `target/classes` 폴더 실행과 jar 실행으로 띄워 모든 요청을 보냈다.
+- **확인함** — `return "/insertboardform"`처럼 뷰 이름 앞에 `/`를 붙인 글쓰기 폼 · 상세 · 수정 폼은 폴더에서는 200, **jar에서는 500**(`templates//….html`을 찾지 못함).
+- **확인함** — `/thboard/muldel`은 `@RequestMapping`이라 `GET /thboard/muldel?chk=4`로도 글이 지워진다. `seq` 없이 상세를 열면 기본형 `int` 때문에 500, 없는 글 번호는 SpEL 오류 500, 실패 시 `return "error"`는 Whitelabel 화면(상태 200).
+- **확인함** — 부트 부모 pom이 `-parameters`로 컴파일한다(`javap`의 MethodParameters). 08까지의 "매개변수 이름을 모른다" 문제가 없다.
+- **확인하지 않음** — 실제 MariaDB와 Antigravity에서의 실행. `contextLoads` 테스트는 `@Test`가 주석이라 실행 대상이 아니다.

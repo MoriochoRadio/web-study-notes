@@ -55,6 +55,15 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def is_server_template_dir(path: Path) -> bool:
+    """스프링 부트 수업 소스의 `src/main/resources/templates`인가.
+
+    Thymeleaf 템플릿은 확장자만 .html이고, 안의 `/thboard/...` 같은 주소는
+    앱이 실행될 때 서버가 받는 요청 주소다. 저장소 파일 경로가 아니므로 검사하지 않는다.
+    """
+    return path.parts[-4:] == ("src", "main", "resources", "templates")
+
+
 def html_files(root: Path) -> list[Path]:
     """검사 대상 HTML을 모은다.
 
@@ -82,6 +91,7 @@ def html_files(root: Path) -> list[Path]:
         directories[:] = [
             name for name in directories
             if name not in SKIP_DIRECTORIES and not os.path.islink(os.path.join(current, name))
+            and not is_server_template_dir(Path(current) / name)
         ]
         for name in filenames:
             if not name.lower().endswith(".html"):

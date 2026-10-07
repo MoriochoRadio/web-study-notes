@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-10-07 update:** Added day 44 — the start of **Spring Boot**. The class rebuilt the 07 board with Boot 4.1, a MyBatis `@Mapper` interface, Thymeleaf and Lombok; the source is kept as [09_hkboard_springboot](Back_end/web_edu_project/09_hkboard_springboot/) with the DB password replaced by `YOUR_DB_PASSWORD`. Also added four web concept cards, concept-book chapter 38 (part 7, Spring Boot), journey step 26 and six exam questions. Running a copy with an in-memory H2 database both from the build folder and as a jar showed that the view names written with a leading `/` (insert form, detail, update form) return 500 only from the jar, and that multi-delete also accepts GET. Nothing was run against the real MariaDB or in the class IDE.
+
 **2026-10-06 update:** Added day 43 — a login-check `HandlerInterceptor` for the 08 answer board (its registration is still commented out in class code) and the first JUnit 5 + spring-test classes (DAO, Service, and a MockMvc controller test) — plus [coding-test round 22](Back_end/coding-tests/2026-10-06/) (2 PASS, 2 FAIL), concept-book chapter 37, journey step 25 and six exam questions. Running the 18 class tests unchanged: 16 are still empty "Not yet implemented" stubs and 2 need the real database; enabling the interceptor sends every page except the list back to `index.jsp` because there is no login feature yet. Nothing was executed against Tomcat and the real database.
 
 **2026-10-02 update:** Added days 41–42 — the 08 answer board now has page-number navigation (a `Paging` utility with Bootstrap pagination) and replies (shift `step`, then insert under the parent), the reply is wrapped in `@Transactional`, and DAO calls are logged through Spring AOP. The reply SQL was run from the mapper file in SQLite to check ordering, and the transaction setup was reproduced by starting the project's own Spring configuration with a fake connection: commit on success, rollback on failure, and no transaction at all when the servlet context scans every package. [Coding-test round 21](Back_end/coding-tests/2026-10-02/) (2 PASS, 2 FAIL) was added as well. Nothing was executed against Tomcat and the real database.
@@ -23,7 +25,7 @@ As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both th
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Java daily exercises · concept cards · 12 practice problems · 193 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Java daily exercises · concept cards · 12 practice problems · 199 exam-prep questions | 🔄 In progress (started 2026-08-03) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
