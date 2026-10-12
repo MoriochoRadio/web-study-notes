@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link type="text/css" th:href="@{/css/layout.css}" rel="stylesheet">
+<script type="text/javascript">
+	// 뒤로가기로 캐시된 화면(bfcache)이 보여질 경우 새로고침하여 서버에서 다시 받아오기
+	// -> 로그아웃 후 뒤로가기 하면 서버의 LoginInterceptor가 로그인 페이지로 이동시킴
+	window.addEventListener("pageshow", function(event) {//캐시에서 꺼낸 페이지, reload한 페이지가 실행됐다면
+		if (event.persisted) {//캐시에서 꺼내온 페이지라면
+			location.reload();
+		}
+	});
+</script>
+
+</head>
+<body>
+<div th:replace="~{fragments/header::header}"></div>
+	
+<div layout:fragment="content" class="content"></div>
+	
+<div th:replace="~{fragments/footer::footer}"></div>
+</body>
+</html>
+
+
+
+
+

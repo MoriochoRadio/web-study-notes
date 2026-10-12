@@ -1,0 +1,357 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>23회차 코딩테스트 · 2026-10-08</title><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}}</style><style>.ct-box,.ct-src,.self-check{background:rgba(127,127,127,.06);border:1px solid #dce3ed;border-radius:10px;padding:12px 16px;margin:14px 0}.ct-box p{white-space:pre-line;margin:0}.ct-box-title,.self-check-title{font-weight:700;margin-bottom:6px}.note-tags .tag{display:inline-block;font-size:.8rem;margin-right:6px;padding:1px 8px;border:1px solid #dce3ed;border-radius:999px}.practice-note{border-left:3px solid #255ec7;padding-left:12px}.code-head{font-size:.85rem;color:#5a6d84;margin-top:14px}.copy-btn{display:none}</style></head><body><main><nav><a href="../../index.html#class-day45">45일차 수업</a> / <a href="../../index.html#ct-55">백엔드 코딩테스트</a> / <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/README.md">Markdown 기록</a></nav><h1>23회차 코딩테스트</h1><p>2026-10-08 · Java 2문제 · SQL 2문제 · <b>1 PASS / 3 FAIL</b></p><p>FAIL 세 문제(콜라츠 추측 · 같은 숫자는 싫어 · 자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기)는 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. 아래 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-55">
+  <div class="note-head">
+    <span class="note-num">23회차</span>
+    <h3>콜라츠 추측</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">정수 오버플로</span><span class="tag">long 형변환</span><span class="tag">while 반복</span><span class="tag">종료 조건 순서</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>짝수면 2로 나누고 홀수면 3을 곱해 1을 더하기를 <b>1이 될 때까지</b> 반복해 횟수를 센다. 500번 안에 1이 안 되면 −1. 중간값이 <b><code>int</code>의 한도(약 21억)를 넘을 수 있어</b> <code>long</code>으로 계산해야 한다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>숫자가 오르락내리락하며 결국 1로 떨어지는 놀이예요. 그런데 중간에 <b>엄청나게 높이 튀어 오르는</b> 순간이 있어서, 작은 그릇(<code>int</code>)에 담으면 넘쳐서 <b>음수로 뒤집혀 버립니다</b>. 큰 그릇(<code>long</code>)에 담으면 끝까지 제대로 따라갈 수 있어요.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">23회차 · 2026.10.08</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12943" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>1 이상 8,000,000 미만인 자연수 <code>num</code>에 대해 ① 짝수면 2로 나누고 ② 홀수면 3을 곱해 1을 더하는 작업을 <b>1이 될 때까지</b> 반복한다. 반복 횟수를 반환하되, <b>500번을 반복해도 1이 되지 않으면 −1</b>, 처음부터 1이면 0을 반환하는 문제.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/Collatz.java">📄 정답 풀이 파일</a> · <a href="./">📁 23회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int num) {
+        if (num == 1) return 0;                 // ← 처음부터 1이면 0
+
+        long n = num;                           // ← int 오버플로 방지: long 으로 계산
+        int count = 0;
+
+        while (n != 1) {
+            if (count == 500) return -1;        // ← 501번째 작업을 하기 전에 끊는다
+
+            if (n % 2 == 0) {
+                n /= 2;                         // ← 짝수
+            } else {
+                n = n * 3 + 1;                  // ← 홀수: 여기서 값이 크게 뛴다
+            }
+            count++;
+        }
+        return count;                           // ← 정확히 500번째에 1이 되면 500
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>과 정답 풀이의 흐름이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>int</code>로 계산</b> — 시작 수는 800만 미만이지만 중간값은 <b>60조</b>(60,342,610,919,632)까지 올라간다. <code>int</code>(최대 2,147,483,647)를 넘으면 음수로 뒤집혀 짝·홀 판정과 종료가 엉킨다. 1~7,999,999 중 <b>25,051개</b>의 답이 달라지고, 공식 예제 626331은 −1이어야 하는데 <code>int</code>로는 <b>488</b>이 나온다.
+2. <b>500번 검사 순서</b> — "카운트를 올린 뒤 <code>count &gt;= 500</code>이면 −1"로 쓰면, <b>정확히 500번째 작업에서 1이 되는 수</b>(3027113 등 5개)를 −1로 잘못 처리한다. 정답 풀이처럼 <b>작업하기 전에</b> <code>count == 500</code>을 보면 500번째에 1이 된 경우는 <code>while</code>이 먼저 끝나 500을 돌려준다.
+3. <b>매개변수를 그대로 <code>long</code>으로 바꿔 쓰기</b> — 프로그래머스는 <code>solution(int num)</code>이 정해져 있다. 메서드 안에서 <code>long n = num;</code>으로 옮겨 담는다.
+
+<b>풀이 흐름</b>
+1. <code>num</code>을 <code>long n</code>에 담는다.
+2. <code>n</code>이 1이 아닌 동안: 이미 500번 했으면 −1, 아니면 짝수·홀수 규칙을 적용하고 <code>count++</code>.
+3. 1이 되면 <code>count</code>. (처음부터 1이면 반복이 한 번도 돌지 않아 0 — 첫 줄의 <code>if</code>가 없어도 같은 답이다.)</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>1부터 7,999,999까지 전부 돌려 보면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 6 → 8, 16 → 4, 626331 → -1             → 통과
+1 이상 8,000,000 미만 전부 7,999,999개            → 모두 통과 (답이 -1 인 수 413개)
+500번 안에서 가장 큰 중간값                       → 60,342,610,919,632 (시작 6631675)
+중간값이 int 를 처음 넘는 시작 수                 → 113383
+int 로 계산하면 답이 달라지는 수                  → 25,051개 (113383 → int -1 / 정답 247)
+공식 예제 626331 을 int 로                        → 488 (정답 -1)
+정확히 500번째에 1이 되는 수                      → 5개 (3027113 → 정답 풀이 500 / count++ 뒤 &gt;= 500 이면 -1)</pre>
+      <div class="run-note">113383부터 이미 <code>int</code>가 넘칩니다. 넘친 값은 음수가 되고, 음수에서는 같은 규칙을 되풀이해도 1에 닿지 않아 500번을 채우거나(−1) 다시 넘쳐 엉뚱한 횟수에 1을 만나요. 홀수를 <code>n % 2 == 1</code>로 검사했다면 음수 홀수(<code>-3 % 2</code>는 <code>-1</code>)를 짝수로 처리하는 실수까지 겹칩니다. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 정수 오버플로와 <code>long</code></b>
+<code>int</code>는 약 −21억 ~ 21억(−2<sup>31</sup> ~ 2<sup>31</sup>−1), <code>long</code>은 약 ±922경(2<sup>63</sup>)까지 담는다. 한도를 넘으면 오류 없이 <b>반대쪽 끝으로 돌아간다</b>. 곱셈이 반복되는 계산은 입력 범위가 작아도 중간값을 의심할 것. → <a href="../../index.html#basic-04">☕ 4. 기본타입 8가지와 메모리</a> · <a href="../../index.html#basic-06">☕ 6. 형 변환</a>
+
+<b>(2) 경계값 — <code>num == 1</code></b>
+"처음부터 1이면 0"은 반복문 조건(<code>while (n != 1)</code>)이 처음부터 거짓이라 자연스럽게 처리된다. <code>do~while</code>로 쓰면 한 번은 실행되어 틀린다. → <a href="../../index.html#basic-09">☕ 9. 반복문</a>
+
+<b>(3) 종료 조건의 순서</b>
+"N번 했는데도 안 되면"은 <b>작업 전에</b> 횟수를 보는지, <b>작업 후에</b> 보는지에 따라 경계 한 칸이 달라진다. 경계값(정확히 N번째에 성공)을 하나 만들어 손으로 따라가 보면 확실하다.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>시작 수가 800만도 안 되는데 int로 부족한 이유를 한 문장으로?</summary>
+        <div class="sc-a">홀수일 때 <b>3을 곱하는 작업이 거듭되면서 중간값이 시작 수보다 훨씬 커지기</b> 때문입니다. 이번 범위에서 최대 약 60조까지 올라가 <code>int</code>의 21억을 넘었어요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>long n = num * 3 + 1; 과 long n = (long) num * 3 + 1; 은 어떻게 다를까?</summary>
+        <div class="sc-a">앞쪽은 <b><code>int</code>끼리 먼저 계산</b>한 뒤(이미 넘쳤을 수 있음) 그 결과를 <code>long</code>에 담습니다. 뒤쪽은 <code>num</code>을 먼저 <code>long</code>으로 바꿔 <b><code>long</code>으로 계산</b>해요. 담는 변수가 <code>long</code>이어도 계산이 <code>int</code>로 끝나면 소용없습니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>count++ 다음에 if (count &gt; 500) return -1; 로 쓰면 정답일까?</summary>
+        <div class="sc-a">이 경우는 <b>맞습니다</b>. 500번째 작업 후 <code>count</code>가 500이면 넘어가고, 1이 됐으면 <code>while</code>이 끝나 500을 돌려줘요. 1이 안 됐으면 501번째 작업 후 501 &gt; 500으로 −1. <code>&gt;= 500</code>으로 쓰면 500번째에 1이 된 경우까지 −1이 되어 틀립니다. 한 글자 차이로 경계가 바뀌어요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"입력은 작은데 계산 중간값이 커지는" 문제(곱셈 누적, 피보나치, 거듭제곱, 합계)는 <b>처음부터 <code>long</code></b>으로 잡는 습관을 들이세요. 실무에서도 금액 합계·밀리초 시간·ID 계산에서 <code>int</code> 오버플로가 조용히 버그를 만들고, <code>Math.addExact</code> · <code>Math.multiplyExact</code>로 넘치면 예외가 나게 할 수도 있습니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이는 원문 그대로 <code>Back_end/coding-tests/2026-10-08/Collatz.java</code>(클래스 이름만 바꿈).</li><li>원문 개념 정리의 수식(int 범위)은 문서 변환 과정에서 숫자가 빠져 있어 −2<sup>31</sup> ~ 2<sup>31</sup>−1로 다시 적었다.</li><li>실행 결과는 <code>CodingTest23Test.java</code>(1~7,999,999 전수, 기댓값은 long으로 501번까지 따라가는 별도 코드).</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-56">
+  <div class="note-head">
+    <span class="note-num">23회차</span>
+    <h3>같은 숫자는 싫어</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">스택 Stack</span><span class="tag">단락 평가</span><span class="tag">연속 중복 제거</span><span class="tag">Integer 비교</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>배열을 앞에서부터 보며 <b>바로 앞에 넣은 값과 다를 때만</b> 넣는다. 정답 풀이는 스택을 쓰고 <code>stack.isEmpty() || stack.peek() != arr[i]</code>로 빈 스택에서 <code>peek()</code>을 부르지 않게 막는다. 결과는 <code>stack.get(i)</code>로 바닥부터 꺼내 원래 순서를 지킨다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>줄 서서 들어오는 사람을 명단에 적는데, <b>방금 적은 사람과 같은 사람이면 안 적는</b> 거예요. 명단 맨 끝만 보면 되니까 스택(맨 위만 보는 상자)이 잘 맞고, 사실 "바로 앞 칸과 비교"만 해도 됩니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">23회차 · 2026.10.08</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12906" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>0~9로 이루어진 배열 <code>arr</code>(길이 최대 1,000,000)에서 <b>연속으로 나타나는 숫자는 하나만 남기고</b> 지운 결과를, 원래 순서대로 반환하는 문제. 예: <code>[1,1,3,3,0,1,1]</code> → <code>[1,3,0,1]</code> (떨어져 있는 1은 남는다).</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/NoSameNumber.java">📄 정답 풀이 파일</a> · <a href="./">📁 23회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">import java.util.*;
+
+public class Solution {
+    public int[] solution(int []arr) {
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (stack.isEmpty() || stack.peek() != arr[i]) {   // ← 비었으면 peek 을 안 부른다
+                stack.push(arr[i]);
+            }
+            else if (!stack.isEmpty() &amp;&amp; arr[i - 1] == arr[i]) {  // ← 지워도 결과가 같은 블록
+                stack.pop();
+                stack.push(arr[i]);
+            }
+        }
+
+        int[] ans = new int[stack.size()];
+        for (int i = 0; i &lt; ans.length; i++) {
+            ans[i] = stack.get(i);                              // ← get(0) 이 바닥 = 처음 넣은 값
+        }
+        return ans;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>과 정답 풀이의 흐름이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>전체 중복 제거로 착각</b> — <code>HashSet</code>이나 <code>distinct()</code>를 쓰면 떨어져 있는 같은 숫자까지 지워 <code>[1,3,0]</code>이 된다. 문제는 <b>연속</b>된 것만 하나로.
+2. <b>빈 스택에서 <code>peek()</code></b> — 조건 순서를 <code>stack.peek() != arr[i] || stack.isEmpty()</code>로 바꾸면 첫 원소에서 <code>EmptyStackException</code>. <code>||</code>는 <b>앞이 참이면 뒤를 보지 않는다</b>(단락 평가).
+3. <b>스택을 <code>pop()</code>으로 꺼내 배열에 담기</b> — 맨 위부터 나와서 순서가 거꾸로 된다. <code>Stack</code>은 <code>Vector</code>를 물려받아 <code>get(0)</code>이 맨 아래라 순서대로 옮길 수 있다.
+4. <b><code>Integer</code>끼리 <code>!=</code></b> — 정답 풀이는 <code>peek()</code>(Integer)과 <code>arr[i]</code>(int)를 비교해서 Integer가 숫자로 풀려 값 비교가 된다. 둘 다 <code>Integer</code>면 <b>주소 비교</b>라 −128~127 밖의 같은 값이 "다르다"로 나온다(이 문제는 0~9라 드러나지 않음).
+
+<b>더 짧게 쓰는 방법</b>
+<code>i == 0 || arr[i] != arr[i-1]</code>이면 <code>ArrayList</code>에 넣기 — 스택 없이 "바로 앞 칸과 비교"만으로 같은 결과다. 정답 풀이의 <code>else if</code> 블록은 같은 값을 꺼냈다 다시 넣을 뿐이라 지워도 된다(원문 주석도 같은 말).</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>무작위 배열과 Integer 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 [1,1,3,3,0,1,1] → [1,3,0,1], [4,4,4,3,3] → [4,3]   → 통과
+무작위 20,000개 (길이 1~200, 0~9)                            → 모두 통과 ("바로 앞 칸과 비교" 코드와 같은 결과)
+길이 1,000,000 (세 개씩 같은 수)                             → 결과 333,334개, 약 10ms
+Integer 끼리: peek() != Integer 1000                         → true   (같은 값인데 "다르다")
+Integer 와 int: peek() != 1000                               → false
+peek().equals(Integer 1000)                                  → true</pre>
+      <div class="run-note"><code>Integer</code>는 −128~127만 미리 만들어 둔 객체를 함께 쓰고, 그 밖의 값은 상자를 새로 만듭니다. 그래서 1000짜리 상자 두 개를 <code>!=</code>로 비교하면 <b>서로 다른 상자</b>라 <code>true</code>예요. 한쪽이 <code>int</code>면 상자를 풀어 값으로 비교합니다. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 단락 평가(Short-circuit)</b>
+<code>A || B</code>는 A가 참이면 B를 실행하지 않고, <code>A &amp;&amp; B</code>는 A가 거짓이면 B를 실행하지 않는다. "비어 있지 않은지 먼저 보고 꺼내기"처럼 <b>안전 검사를 앞에</b> 둔다. → <a href="../../index.html#basic-07">☕ 7. 연산자 총정리 (단축 논리)</a>
+
+<b>(2) 연속 중복 제거 = "직전과 다를 때만 넣기"</b>
+지우는 것이 아니라 <b>넣지 않는</b> 것. 직전 값 하나만 기억하면 된다.
+
+<b>(3) <code>Stack</code>과 순서</b>
+<code>push</code> · <code>pop</code> · <code>peek</code>은 맨 위, <code>get(i)</code>는 바닥부터. 새 코드에서는 <code>Stack</code>보다 <code>ArrayDeque</code>를 권장한다(자바 문서). → <a href="../../index.html#util-01">🛠️ 1. 컬렉션 프레임워크</a> · <a href="../../index.html#ct-40">🧩 크레인 인형뽑기(스택)</a> · <a href="../../index.html#concept-java-primitive-reference">📖 기본타입 vs 참조타입 — Wrapper</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>[1,1,3,3,0,1,1]에 HashSet을 쓰면 결과는? 왜 틀릴까?</summary>
+        <div class="sc-a">순서를 지키는 <code>LinkedHashSet</code>이라도 <b><code>[1,3,0]</code></b>이 됩니다. 마지막 <code>1</code>은 앞의 <code>1</code>들과 <b>떨어져 있어서 남아야</b> 하는데, Set은 "이미 본 값"을 전부 지우기 때문이에요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>조건을 stack.peek() != arr[i] || stack.isEmpty() 로 순서만 바꾸면?</summary>
+        <div class="sc-a">첫 원소에서 스택이 비어 있는데 <code>peek()</code>을 먼저 불러 <b><code>EmptyStackException</code></b>이 납니다. <code>||</code>는 왼쪽부터 보므로 "비었는지"를 먼저 물어야 해요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>스택을 쓰지 않고 이 문제를 푸는 가장 간단한 조건은?</summary>
+        <div class="sc-a"><b><code>i == 0 || arr[i] != arr[i - 1]</code></b>이면 결과 목록에 넣습니다. 첫 칸은 비교할 앞 칸이 없으니 무조건 넣고, 나머지는 바로 앞 칸과 다를 때만. 두 값 모두 <code>int</code>라 Integer 비교 함정도 없어요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"직전 값과 비교"는 로그에서 같은 메시지 반복 줄이기, 센서 값 변화만 기록하기, 문자열 압축(<code>aaabb</code> → <code>a3b2</code>) 같은 문제의 기본 틀입니다. 자바에서 <b><code>Integer</code>·<code>Long</code>을 <code>==</code>로 비교한 버그</b>는 작은 값으로 테스트하면 통과하고 운영에서만 터져서 코드 리뷰 단골이에요 — 객체끼리는 <code>equals</code>.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이는 원문 그대로 <code>Back_end/coding-tests/2026-10-08/NoSameNumber.java</code>(클래스 이름만 바꿈). 원문의 <code>import java.util.Stack;</code>은 <code>java.util.*</code>과 겹치지만 그대로 두었다.</li><li><code>ArrayDeque</code> 권장은 자바 <code>Stack</code> 문서 기준.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-57">
+  <div class="note-head">
+    <span class="note-num">23회차</span>
+    <h3>나이 정보가 없는 회원 수</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">IS NULL</span><span class="tag">COUNT(*) vs COUNT(컬럼)</span><span class="tag">NULL 비교</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span><code>WHERE AGE IS NULL</code>로 나이가 비어 있는 행만 남기고 <b><code>COUNT(*)</code></b>로 센다. <code>= NULL</code>로 비교하거나 <code>COUNT(AGE)</code>로 세면 0이 된다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>NULL은 "0살"이 아니라 <b>"모름"</b>이에요. "모름과 같은가?"라고 물으면 답도 "모름"이라 아무도 뽑히지 않죠. 그래서 "모름인가?"를 묻는 전용 말 <code>IS NULL</code>을 씁니다. 그리고 셀 때는 나이 칸이 아니라 <b>사람 수(행)</b>를 세야 해요.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">23회차 · 2026.10.08</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131528" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>회원 정보 테이블 <code>USER_INFO</code>에서 <b>나이(<code>AGE</code>) 정보가 없는 회원 수</b>를 <code>USERS</code>라는 이름으로 출력하는 문제.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/age-null-submitted.sql">📄 제출 코드 파일</a> · <a href="./">📁 23회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT count(*) as USERS        -- ← 행(회원)을 센다
+from USER_INFO
+where AGE is NULL;              -- ← = NULL 이 아니라 IS NULL</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 오답노트에는 정답 풀이·개념 정리 칸이 비어 있어, 아래는 이 문제에서 짚어 둘 점이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>WHERE AGE = NULL</code></b> — NULL과의 비교는 참도 거짓도 아닌 <b>UNKNOWN</b>이라 어떤 행도 남지 않아 <b>0</b>이 나온다.
+2. <b><code>COUNT(AGE)</code></b> — 컬럼을 세는 <code>COUNT</code>는 NULL을 건너뛴다. 나이가 NULL인 행만 남겨 놓고 나이를 세니 <b>0</b>.
+3. <b><code>AGE = 0</code>과 혼동</b> — 0살은 값이 있는 것이다. NULL과 다르다.
+
+<b>같은 답을 다르게</b>
+<code>SELECT COUNT(*) - COUNT(AGE) AS USERS FROM USER_INFO;</code> — 전체 행 수에서 나이가 있는 행 수를 빼면 NULL의 개수다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>= NULL 과 COUNT(AGE) 를 직접 돌려 보면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>회원 5명 (나이 26 · NULL · NULL · 0 · 31)
+제출 코드  WHERE AGE IS NULL, COUNT(*)      → 2
+WHERE AGE = NULL                            → 0
+WHERE AGE IS NULL, COUNT(AGE)               → 0
+COUNT(*), COUNT(AGE), COUNT(*) - COUNT(AGE) → 5 | 3 | 2</pre>
+      <div class="run-note">0살 회원은 NULL로 세지지 않았어요. <code>verify-sql23.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)로 실행한 결과이며, NULL 규칙은 MySQL과 같습니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) NULL은 <code>IS NULL</code> / <code>IS NOT NULL</code>로</b>
+<code>=</code> · <code>&lt;&gt;</code> · <code>&gt;</code> 어떤 비교도 NULL과는 UNKNOWN. → <a href="../../index.html#concept-sql-null">📖 SQL의 NULL — "모름"</a> · <a href="../../index.html#sql-14">🗄️ 14. NULL 함정</a>
+
+<b>(2) <code>COUNT(*)</code> vs <code>COUNT(컬럼)</code></b>
+<code>COUNT(*)</code>는 행 수, <code>COUNT(컬럼)</code>은 그 컬럼이 NULL이 아닌 행 수. <code>SUM</code> · <code>AVG</code>도 NULL을 건너뛴다(평균의 분모가 줄어든다). → <a href="../../index.html#sql-17">🗄️ 17. 집계 함수와 NULL</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>나이 26 · NULL · NULL · 0 · 31 인 5명에서 AVG(AGE)는 얼마일까?</summary>
+        <div class="sc-a">NULL 두 명은 빼고 <b>(26 + 0 + 31) / 3 = 19</b>입니다. 5로 나누지 않아요. NULL을 0으로 보고 싶으면 <code>AVG(IFNULL(AGE, 0))</code>(MySQL)처럼 바꿔 줘야 합니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>"나이 정보가 있는 회원 수"를 WHERE 없이 한 줄로 구하려면?</summary>
+        <div class="sc-a"><b><code>SELECT COUNT(AGE) FROM USER_INFO;</code></b> — 컬럼을 세는 <code>COUNT</code>는 NULL을 건너뛰니 그 자체가 "값이 있는 행 수"예요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>실무 데이터에는 "입력 안 함(NULL)"이 늘 섞여 있어서, 통계·리포트 쿼리에서 <b><code>= NULL</code>, <code>COUNT(컬럼)</code>, <code>AVG</code> 분모</b> 실수가 숫자를 조용히 틀리게 만듭니다. "비어 있는 데이터가 몇 건인가"를 먼저 세어 보는 습관(<code>COUNT(*) - COUNT(컬럼)</code>)이 데이터 품질 점검의 첫걸음이에요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 정답 풀이·개념 정리 칸이 비어 있어 "흔히 틀리는 곳"·개념은 새로 썼다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-08/age-null-submitted.sql</code>. AVG 예시(19)는 손으로 계산한 값이다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-58">
+  <div class="note-head">
+    <span class="note-num">23회차</span>
+    <h3>자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">GROUP BY</span><span class="tag">조건부 집계 MAX(CASE)</span><span class="tag">BETWEEN 날짜</span><span class="tag">1:N 이력 테이블</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>대여 이력은 <b>차 한 대에 여러 줄</b>이다. <code>GROUP BY CAR_ID</code>로 차마다 한 줄로 접고, 각 이력이 2022-10-16에 걸치면 1 아니면 0을 매긴 뒤 <b><code>MAX(...) = 1</code></b>이면(하나라도 걸치면) '대여중', 아니면 '대여 가능'. <code>CAR_ID</code> 내림차순.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>차마다 대여 장부가 여러 장 있어요. "10월 16일에 빌려 가 있었나?"를 알려면 <b>장부를 한 장씩 보고 해당하면 깃발(1)</b>을 꽂은 다음, 그 차 장부 묶음에 <b>깃발이 하나라도 있으면</b> 대여중이에요. 장부 한 장 한 장마다 답을 내면 같은 차에 답이 두 개 나옵니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">23회차 · 2026.10.08</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157340" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>자동차 대여 기록 테이블 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code>(<code>HISTORY_ID</code> · <code>CAR_ID</code> · <code>START_DATE</code> · <code>END_DATE</code>)에서 <b>2022년 10월 16일에 대여 중인 차는 '대여중', 아니면 '대여 가능'</b>을 <code>AVAILABILITY</code> 컬럼으로 표시한다. 반납일이 10월 16일이어도 대여중. 결과는 <code>CAR_ID</code> 기준 내림차순.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/car-rental-answer.sql">📄 정답 풀이 파일</a> · <a href="./">📁 23회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT
+    CAR_ID,
+    CASE
+        WHEN MAX(CASE WHEN '2022-10-16' BETWEEN START_DATE AND END_DATE THEN 1 ELSE 0 END) = 1
+                                                -- ← 이력마다 1/0 깃발, 차마다 가장 큰 값
+        THEN '대여중'
+        ELSE '대여 가능'
+    END AS AVAILABILITY
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+GROUP BY CAR_ID                                 -- ← 차 한 대 = 한 줄
+ORDER BY CAR_ID DESC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>과 정답 풀이의 흐름이다(오답노트의 해설을 바탕으로 정리).
+
+<b>흔히 틀리는 곳</b>
+1. <b>줄마다 판정하고 <code>DISTINCT</code></b> — 이력마다 '대여중'/'대여 가능'을 매긴 뒤 <code>DISTINCT</code>를 걸면, 한 차에 지난 이력('대여 가능')과 10/16 이력('대여중')이 <b>둘 다 남아 같은 차가 두 줄</b>이 된다.
+2. <b><code>WHERE</code>로 10/16 이력만 남기기</b> — 대여중인 차만 남고 <b>대여 가능한 차는 결과에서 사라진다</b>. 문제는 모든 차를 보여 달라고 한다.
+3. <b>경계 빠뜨리기</b> — "반납일이 10/16이어도 대여중"이라 <code>&lt;</code> · <code>&gt;</code>가 아니라 <b>양 끝을 포함하는 <code>BETWEEN</code></b>(또는 <code>&lt;=</code> · <code>&gt;=</code>). 시작일이 10/16인 경우도 포함된다.
+4. <b>정렬 방향</b> — <code>CAR_ID</code> <b>내림차순</b>.
+
+<b>풀이 흐름</b>
+1. <code>GROUP BY CAR_ID</code>로 차마다 한 묶음.
+2. 안쪽 <code>CASE</code>: 그 이력이 10/16을 포함하면 1, 아니면 0.
+3. 바깥 <code>MAX(…) = 1</code>: 묶음 안에 1이 하나라도 있으면 '대여중'. (<code>SUM(…) &gt; 0</code>도 같은 뜻)</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>틀리는 방법 두 가지와 같은 결과를 내는 다른 방법 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>이력 8줄: 1번(10/11~10/16) · 2번(10/05, 10/15~10/17) · 3번(10/03~04, 10/13~15)
+          4번(09/27, 10/16~10/20) · 5번(10/17~10/20)
+정답 풀이                  → 5|대여 가능, 4|대여중, 3|대여 가능, 2|대여중, 1|대여중
+줄마다 판정 + DISTINCT     → 5|대여 가능, 4|대여 가능, 4|대여중, 3|대여 가능, 2|대여 가능, 2|대여중, 1|대여중
+WHERE 로 10/16 이력만      → 4|대여중, 2|대여중, 1|대여중          (3·5번이 사라짐)
+경계 빼고 &lt; · &gt; 로 비교      → 2                                    (반납일·시작일이 10/16 인 1·4번이 빠짐)
+SUM(...) &gt; 0               → 정답과 같음
+IN (서브쿼리)              → 정답과 같음</pre>
+      <div class="run-note">2번·4번이 두 줄씩 나온 것이 1:N 이력 테이블을 <b>묶지 않고</b> 판정한 결과예요. 날짜는 <code>'YYYY-MM-DD'</code> 글자로 넣었는데, 이 형식은 글자 순서가 날짜 순서와 같아 <code>BETWEEN</code>이 MySQL의 DATE 비교와 같은 결과를 냅니다(<code>verify-sql23.mjs</code>, SQLite 메모리 DB).</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 조건부 집계 — <code>MAX(CASE WHEN 조건 THEN 1 ELSE 0 END)</code></b>
+"묶음 안에 조건을 만족하는 행이 <b>하나라도</b> 있는가"를 조인·서브쿼리 없이 판정하는 대표 패턴. 개수가 필요하면 <code>SUM</code>. → <a href="../../index.html#sql-27">🗄️ 27. CASE</a> · <a href="../../index.html#sql-17">🗄️ 17. 집계 함수</a>
+
+<b>(2) 1:N 이력 테이블과 <code>GROUP BY</code></b>
+결과를 "차 한 대 = 한 줄"로 내야 하면 차 기준으로 묶는다. 묶지 않고 판정하면 이력 수만큼 답이 나온다. → <a href="../../index.html#sql-18">🗄️ 18. GROUP BY</a> · <a href="../../index.html#ct-46">🧩 대여 기록이 존재하는 자동차 리스트 구하기</a>
+
+<b>(3) <code>BETWEEN A AND B</code>는 양 끝 포함</b>
+<code>A &lt;= x AND x &lt;= B</code>와 같다. 시·분·초가 있는 <code>DATETIME</code>이면 끝 날짜의 하루가 거의 빠지므로 <code>&lt; 다음날</code>로 쓴다. → <a href="../../index.html#sql-07">🗄️ 7. BETWEEN</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>MAX 대신 MIN(CASE … THEN 1 ELSE 0 END) = 1 로 쓰면 무슨 뜻이 될까?</summary>
+        <div class="sc-a">"그 차의 <b>모든</b> 이력이 10/16을 포함한다"가 됩니다. 이력이 하나라도 10/16과 겹치지 않으면 0이 섞여 MIN이 0이 되니까요. <code>MAX = 1</code>은 "하나라도", <code>MIN = 1</code>은 "전부"예요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>END_DATE가 '2022-10-16 18:00:00' 같은 DATETIME이면 BETWEEN '2022-10-16' AND … 의 반대 방향 조건에서 무엇을 조심해야 할까?</summary>
+        <div class="sc-a"><code>'2022-10-16'</code>은 <b>그날 0시</b>로 해석됩니다. 예를 들어 <code>START_DATE BETWEEN '2022-10-01' AND '2022-10-16'</code>이면 16일 0시 이후에 시작한 기록이 빠져요. 하루 전체를 넣으려면 <code>START_DATE &lt; '2022-10-17'</code>처럼 <b>다음 날 미만</b>으로 씁니다. 이 문제의 컬럼은 DATE라 상관없어요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>대여 기록이 한 번도 없는 차도 '대여 가능'으로 보여 주려면 무엇이 더 필요할까?</summary>
+        <div class="sc-a">이력 테이블에는 그 차가 아예 없으니, <b>자동차 목록 테이블(<code>CAR_RENTAL_COMPANY_CAR</code>)을 기준으로 이력을 <code>LEFT JOIN</code></b>해야 합니다. 이 문제는 이력 테이블만 보라고 했으니 필요 없어요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"회원별 이번 달 구매 여부", "상품별 품절 이력 존재 여부", "직원별 결근 기록 유무"처럼 <b>이력 테이블에서 엔티티별 상태 하나를 뽑는</b> 쿼리는 실무 리포트의 단골입니다. 먼저 "결과 한 줄 = 무엇 하나인가"를 정하고 그것으로 <code>GROUP BY</code>, 상태는 <code>MAX/SUM(CASE …)</code>로 판정하는 순서를 기억하세요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이는 원문 그대로 <code>Back_end/coding-tests/2026-10-08/car-rental-answer.sql</code>. 원문 제목 끝의 공백만 뺐다.</li><li>"흔히 틀리는 곳" 1번(DISTINCT로 두 줄)은 오답노트 개념 정리에 있던 내용을 실행으로 재현했다. DATETIME 경계 설명은 MySQL 문서 기준이며 실행해 보지 않았다.</li></ul></details>
+  </div>
+</article>
+
+
+<article><h2>로컬 검증과 범위</h2><p>Java는 <code>CodingTest23Test.java</code>(콜라츠 추측은 1~7,999,999 전수, 같은 숫자는 싫어는 무작위 20,000개), SQL은 <code>verify-sql23.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB)로 확인했다. SQL 파일을 그대로 읽어 실행하며, 날짜는 <code>YYYY-MM-DD</code> 글자로 넣어 <code>BETWEEN</code>이 MySQL의 DATE 비교와 같은 결과를 낸다. 로컬 MariaDB 접속 정보는 쓰지 않았다.</p></article>
+
+<footer><p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/Collatz.java">콜라츠 추측</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/NoSameNumber.java">같은 숫자는 싫어</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/CodingTest23Test.java">Java 검증</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/age-null-submitted.sql">SQL 1 제출</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/car-rental-answer.sql">SQL 2 정답</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-08/verify-sql23.mjs">SQL 검증</a></p></footer></main></body></html>
