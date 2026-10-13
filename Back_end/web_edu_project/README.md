@@ -1,6 +1,6 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-10-08(45일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 최신 상태: 2026-10-12(46일차) 기준. 01 회원·구매, 02 MVC1 게시판,
 > 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트) 프로젝트를 포함한다.
 > [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day42)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
@@ -29,7 +29,7 @@
 | [`07_hkboard_springMVC`](07_hkboard_springMVC/README.md) | **Service·DAO·MyBatis를 연결해 실제 DB 목록을 JSP에 표시(37일차), 글쓰기·상세·수정·다중 삭제 요청을 Controller 메서드로 연결(38일차).** | web-41~51 |
 | [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기, 답글 트랜잭션(`@Transactional`), DAO 로그 AOP, 생성자 주입(41~42일차). 로그인 확인 인터셉터(등록은 주석)와 JUnit 5 · spring-test 테스트 클래스(43일차) | web-52~64 |
 | [`09_hkboard_springboot`](09_hkboard_springboot/README.md) | **스프링 부트 게시판.** 07의 게시판을 Boot 4.1 · `@Mapper` 인터페이스 · Thymeleaf · Lombok으로 다시 만든다. XML 설정 없이 `application.properties`만, 내장 톰캣(9090). 수업 도구는 Antigravity(44일차) | web-65~68 |
-| [`10_login_board_springboot`](10_login_board_springboot/README.md) | **로그인 게시판(부트).** 선생님 완성본을 실행하며 따라감 — 회원가입·로그인(BCrypt), Command 객체 `@Validated`, 여러 파일 업로드·다운로드, resultMap `collection`, Thymeleaf 레이아웃, `WebMvcConfigurer` 인터셉터, `@ControllerAdvice`(45일차) | web-69~73 |
+| [`10_login_board_springboot`](10_login_board_springboot/README.md) | **로그인 게시판(부트).** 선생님 완성본을 실행하며 따라감 — 회원가입·로그인(BCrypt), Command 객체 `@Validated`, 여러 파일 업로드·다운로드, resultMap `collection`, Thymeleaf 레이아웃, `WebMvcConfigurer` 인터셉터, `@ControllerAdvice`(45일차). 개선 과제 — 생성자 주입 통일 · `@Slf4j` · 업로드 경로 `@Value` · 작성자 본인 확인 · 수정할 때 첨부파일 삭제·추가(46일차) | web-69~77 |
 
 ## 개발 환경
 
@@ -197,7 +197,7 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 앞으로
 
 > 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 교육과정 전체 자료를 기준으로
-> 다시 맞췄다. **지금(2026-10-08, 45일차·10번 프로젝트)까지 5번의 대부분, 6번(부트에서), 8·9번이 진행됐고 10번(Security)은 의존성만 들어왔다.**
+> 다시 맞췄다. **지금(2026-10-12, 46일차·10번 프로젝트 개선 과제)까지 5번의 대부분, 6번(부트에서), 8·9번이 진행됐고 10번(Security)은 의존성만 들어왔다(46일차의 작성자 확인은 Security 없이 Controller · Service에서 직접).**
 > 7번은 아직 수업 전이라 프로젝트도 없다.
 
 1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
@@ -208,11 +208,11 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
    (DBCP는 36일차 06부터, 페이징·조회수·답글은 39~41일차 08 프로젝트)
 5. **Spring 답변형 게시판** — ~~로깅(SLF4J)~~, ~~AOP~~, ~~`@Transactional` 트랜잭션~~(39~42일차, 08 프로젝트),
    JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석)
-6. **파일 업로드 · 다운로드** (45일차, 10 프로젝트 — 스프링 부트에서)
+6. **파일 업로드 · 다운로드** (45일차, 10 프로젝트 — 스프링 부트에서. 46일차에 수정할 때 첨부파일 삭제·추가)
 7. **일정관리(캘린더) 게시판** — Spring MVC로 월별 달력·일정 CRUD
 8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환 (44일차 시작, 09 · 10 프로젝트)
 9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수 (44일차 시작 — `th:each` · `th:text` · `@{…}` · `#dates`. 45일차 레이아웃 · `th:replace` 프래그먼트 · `th:field` · `th:errors`)
-10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`) ← **여기까지 진행 중**
+10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`. 46일차 개선 과제로 작성자 본인 확인 · 로그 · 설정 분리) ← **여기까지 진행 중**
 
 ## 고친 것 · 남긴 것
 
@@ -615,7 +615,7 @@ Spring Initializr로 Boot 4.1.1 · Java 21 프로젝트를 만들고 스타터(w
 
 ## 10_login_board_springboot — 로그인 게시판 (부트)
 
-[프로젝트 실행 안내와 구현 범위](10_login_board_springboot/README.md) · [45일차](../index.html#class-day45) · [개념 카드 69~73](../index.html#web-69) · [개념서 39장](../index.html#book-be-39)
+[프로젝트 실행 안내와 구현 범위](10_login_board_springboot/README.md) · [45일차](../index.html#class-day45) · [46일차](../index.html#class-day46) · [개념 카드 69~77](../index.html#web-69) · [개념서 39~40장](../index.html#book-be-39)
 
 ### 2026-10-08 (45일차) — 회원가입·로그인, 입력값 검사, 파일 첨부
 
@@ -625,3 +625,11 @@ Spring Initializr로 Boot 4.1.1 · Java 21 프로젝트를 만들고 스타터(w
 - **확인함** — 로그인한 채 폼의 hidden `id`만 다른 회원으로 바꾸면 그 회원 이름으로 글이 저장된다. 첨부 없는 글도 "파일 1". 확장자 없는 파일은 예외 → 글 롤백.
 - **확인함** — 없는 주소·GET 로그아웃도 `@ControllerAdvice`가 잡아 상태 200 오류 화면. `/upload/저장이름`은 로그인 없이 열린다. 다운로드 파일 이름의 공백이 `+`로 바뀐다.
 - **확인하지 않음** — 실제 MariaDB와 Antigravity에서의 실행, 실제 브라우저.
+
+### 2026-10-12 (46일차) — 개선 과제: 생성자 주입 · 로그 · 설정 분리 · 작성자 확인 · 첨부파일 수정
+
+선생님이 "직접 해 보라"며 개선사항 표 5개를 줬다. 쉬운 것부터 ④ → ⑤ → ③ → ② → ① 순서로 했고, ④(생성자 주입)는 직접, 나머지는 Claude와 함께 바꾸며 단계마다 설명을 들었다. `@Autowired` 필드는 `private final` + `@RequiredArgsConstructor`로(`BoardService` · `FileService` · `MemberService` · `BoardController`), `println` 21곳은 `@Slf4j` 로그로 바꾸고 `logging.level.com.hk.board=debug` · `logging.file.name=logs/app.log`를 더했다. 세 곳에 따로 있던 업로드 경로는 `file.upload-dir=${user.dir}/upload` 한 줄 + `@Value`로 모았다(`@Value` 필드는 `final` 없이). `BoardService.isWriter`로 DB의 작성자와 세션 아이디를 비교해 수정·삭제를 본인 글로 막고, 글쓰기 작성자도 세션에서 정했다. 수정 폼에는 파일별 삭제 체크박스와 새 파일 칸을 두고, `updateBoard`가 한 트랜잭션 안에서 DB 먼저 · 디스크 삭제는 마지막에 처리한다(다른 글의 파일 번호면 예외 → 전부 롤백).
+
+- **확인함** — 저장소 사본을 `127.0.0.1:9098`로 실행하고 로컬 MariaDB에 임시 회원 두 명(A · B)을 만들어 21개 항목 통과: 작성자 위조 차단, B의 삭제·수정 차단 + WARN 로그, A의 첨부 삭제·추가와 디스크 삭제, 다른 글 파일 번호를 섞으면 제목까지 롤백, "파일 0", DEBUG SQL 로그와 `logs/app.log`. 끝난 뒤 테스트 행 삭제(남은 행 0).
+- **확인함(10/13)** — `@Value` 필드에 `final`을 붙인 사본은 기동 실패(`Parameter 3 of constructor … required a bean of type 'java.lang.String'`).
+- **확인하지 않음** — Antigravity 실행, 실제 브라우저 화면, 확장자 없는 파일 업로드.

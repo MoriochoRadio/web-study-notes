@@ -14,6 +14,12 @@
 		FROM FILEINFO
 		WHERE FILE_SEQ=#{file_seq}
 	</select>
+
+	<!-- 첨부파일 1개 삭제 (글 수정 화면에서 '삭제' 체크한 파일) -->
+	<delete id="deleteFile" parameterType="Integer">
+		DELETE FROM FILEINFO
+		WHERE FILE_SEQ=#{file_seq}
+	</delete>
 </mapper>
 
 

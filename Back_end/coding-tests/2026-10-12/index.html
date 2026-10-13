@@ -1,0 +1,368 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>24회차 코딩테스트 · 2026-10-12</title><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}}</style><style>.ct-box,.ct-src,.self-check{background:rgba(127,127,127,.06);border:1px solid #dce3ed;border-radius:10px;padding:12px 16px;margin:14px 0}.ct-box p{white-space:pre-line;margin:0}.ct-box-title,.self-check-title{font-weight:700;margin-bottom:6px}.note-tags .tag{display:inline-block;font-size:.8rem;margin-right:6px;padding:1px 8px;border:1px solid #dce3ed;border-radius:999px}.practice-note{border-left:3px solid #255ec7;padding-left:12px}.code-head{font-size:.85rem;color:#5a6d84;margin-top:14px}.copy-btn{display:none}</style></head><body><main><nav><a href="../../index.html#class-day46">46일차 수업</a> / <a href="../../index.html#ct-59">백엔드 코딩테스트</a> / <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/README.md">Markdown 기록</a></nav><h1>24회차 코딩테스트</h1><p>2026-10-12 · Java 2문제 · SQL 2문제 · <b>3 PASS / 1 FAIL</b></p><p>FAIL 한 문제(대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기)는 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. 아래 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-59">
+  <div class="note-head">
+    <span class="note-num">24회차</span>
+    <h3>음양 더하기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">두 배열을 같은 인덱스로</span><span class="tag">boolean 조건</span><span class="tag">삼항 연산자</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>절댓값 배열 <code>absolutes</code>와 부호 배열 <code>signs</code>를 <b>같은 인덱스로 함께</b> 돌면서, <code>signs[i]</code>가 <code>true</code>면 더하고 <code>false</code>면 뺀다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>금액이 적힌 종이와 "입금 / 출금" 도장이 찍힌 종이가 따로 있어요. <b>같은 줄끼리</b> 맞춰 보면서 입금이면 더하고 출금이면 빼면 통장 잔액이 나옵니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">24회차 · 2026.10.12</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/76501" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>정수들의 절댓값을 차례대로 담은 배열 <code>absolutes</code>와 각 정수의 부호를 담은 배열 <code>signs</code>가 주어진다. <code>signs[i]</code>가 <code>true</code>면 양수, <code>false</code>면 음수일 때 <b>실제 정수들의 합</b>을 반환하는 문제. 두 배열의 길이는 1 이상 1,000 이하로 같고, 절댓값은 1 이상 1,000 이하.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/SignedSum.java">📄 제출 코드 파일</a> · <a href="./">📁 24회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int[] absolutes, boolean[] signs) {
+        int answer = 0;
+
+        for(int i=0;i&lt;absolutes.length;i++){         // ← 두 배열을 같은 i 로 본다
+            if(signs[i]==true){
+                answer = answer + absolutes[i];
+            } else if (signs[i] == false){              // ← 여기 오면 이미 false — 조건이 늘 참
+                answer = answer - absolutes[i];
+            }
+        }
+
+        return answer;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 오답노트에는 정답 풀이·개념 정리 칸이 비어 있어, 아래는 이 문제에서 짚어 둘 점이다.
+
+<b>더 짧게 쓰는 법</b>
+1. <b><code>signs[i] == true</code> → <code>signs[i]</code></b> — <code>boolean</code> 값은 그 자체가 조건이다. <code>== true</code>를 붙여도 결과는 같지만 군더더기다.
+2. <b><code>else if (signs[i] == false)</code> → <code>else</code></b> — 앞의 <code>if</code>가 거짓이면 <code>signs[i]</code>는 이미 <code>false</code>라 두 번째 조건은 항상 참이다.
+3. <b>삼항 연산자로 한 줄</b> — <code>answer += signs[i] ? absolutes[i] : -absolutes[i];</code>
+
+<b>흔히 틀리는 곳</b>
+1. <b>향상된 for문(<code>for (int a : absolutes)</code>)</b> — 값만 꺼내고 인덱스가 없어 짝이 되는 <code>signs[i]</code>를 찾을 수 없다. 두 배열을 함께 볼 때는 인덱스 for문을 쓴다.
+2. <b><code>if (signs[i] = true)</code></b> — <code>=</code> 하나는 <b>대입</b>이다. 값이 늘 <code>true</code>가 되어 전부 더해지는데, <code>boolean</code> 대입은 조건 자리에 들어가도 컴파일이 된다. <code>==</code>를 아예 안 쓰는 1번 방식이 이 실수까지 막는다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>공식 예제와 무작위 입력 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 [4,7,12] / [true,false,true]  → 9
+공식 예제 [1,2,3]  / [false,false,true] → 0              → 통과
+무작위 20,000개 (길이 1~1000, 절댓값 1~1000)            → 모두 통과
+합이 될 수 있는 범위                                    → -1,000,000 ~ 1,000,000 (int 로 충분)</pre>
+      <div class="run-note">기댓값은 부호를 붙여 더하는 별도 코드로 만들었어요(무작위 시드 24 고정). 1,000개 × 1,000이라 합은 백만을 넘지 않아 <code>int</code>로 충분합니다. <a href="../../index.html#ct-55">콜라츠 추측</a>처럼 중간값이 커지는 문제와 다른 점이에요. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) <code>boolean</code>은 그 자체가 조건</b>
+<code>if (flag == true)</code>는 <code>if (flag)</code>, <code>if (flag == false)</code>는 <code>if (!flag)</code>. 둘 중 하나는 반드시 참이니 두 번째는 <code>else</code>면 된다. → <a href="../../index.html#basic-08">☕ 8. 조건문: if · switch ~ case</a>
+
+<b>(2) 삼항 연산자</b>
+<code>조건 ? 참일 때 값 : 거짓일 때 값</code> — "값을 고르는" 두 갈래 <code>if</code>를 식 하나로. → <a href="../../index.html#basic-07">☕ 7. 연산자 총정리</a>
+
+<b>(3) 두 배열을 같은 인덱스로</b>
+같은 위치끼리 짝인 배열(병렬 배열)은 인덱스 for문 하나로 함께 돈다. 길이가 같다는 문제 조건을 믿고 쓰는 방식이다. → <a href="../../index.html#basic-09">☕ 9. 반복문</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>제출 코드의 else if (signs[i] == false) 를 그냥 else 로 바꾸면 결과가 달라질 수 있을까?</summary>
+        <div class="sc-a"><b>달라지지 않습니다.</b> <code>boolean</code>은 <code>true</code> 아니면 <code>false</code>뿐이라, 앞의 <code>if</code>가 거짓이면 뒤 조건은 항상 참이에요. 검사를 한 번 덜 할 뿐입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>예제 1([4,7,12] / [true,false,true])에서 false 일 때 빼지 않고 아무것도 안 하면 답은?</summary>
+        <div class="sc-a"><b>16</b>(4 + 12)입니다. 정답 9는 4 − 7 + 12예요. "음수를 무시"가 아니라 "빼기"라는 점이 문제의 핵심입니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>같은 인덱스끼리 짝인 배열 두세 개가 주어지는 문제는 코딩테스트에 자주 나옵니다. 인덱스 for문 하나로 함께 돌면 돼요. 실무에서는 짝이 어긋날 위험을 없애려고 두 값을 <b>하나의 객체(클래스·record)</b>로 묶어 리스트 하나로 다루는 편이 더 안전합니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 정답 풀이·개념 정리 칸이 비어 있어 "더 짧게 쓰는 법"·"흔히 틀리는 곳"·개념은 새로 썼다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-12/SignedSum.java</code>(클래스 이름만 바꿈).</li><li>실행 결과는 <code>CodingTest24Test.java</code>(공식 예제 2개 + 무작위 20,000개).</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-60">
+  <div class="note-head">
+    <span class="note-num">24회차</span>
+    <h3>올바른 괄호</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">Stack · LIFO</span><span class="tag">조기 반환</span><span class="tag">boolean 반환</span><span class="tag">정수 카운터</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span><code>(</code>는 스택에 쌓고 <code>)</code>는 짝이 될 <code>(</code>를 꺼낸다. <b>꺼낼 게 없으면 그 자리에서 false</b>, 끝까지 돌았을 때 <b>스택이 비어 있으면 true</b>. 제출 코드도 통과했고, 오답노트에는 더 깔끔한 정석 풀이가 함께 적혀 있다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>접시 쌓기예요. 여는 괄호는 접시를 올려 두는 것, 닫는 괄호는 <b>맨 위 접시를 내리는 것</b>. 내릴 접시가 없는데 내리라고 하면 그 자리에서 실패, 다 끝났는데 접시가 남아 있어도 실패입니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">24회차 · 2026.10.12</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12909" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p><code>(</code>와 <code>)</code>로만 이루어진 문자열 <code>s</code>(길이 100,000 이하)가 <b>올바르게 짝지어진 괄호</b>이면 <code>true</code>, 아니면 <code>false</code>를 반환하는 문제. <code>"()()"</code> · <code>"(())()"</code>는 올바르고 <code>")()("</code> · <code>"(()("</code>는 올바르지 않다.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/ValidParenthesesSubmitted.java">📄 제출 코드 파일</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/ValidParentheses.java">📄 정답 풀이 파일</a> · <a href="./">📁 24회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+int t = s.length();
+int i = 0;
+while(true){
+    if(i==t) break;
+    if(stack.isEmpty() || ( stack.peek() == s.charAt(i) ) ){   // ← 비었거나 같은 괄호면 쌓기
+        stack.push(s.charAt(i));
+        i++;
+    }else if(s.charAt(i) == ')' &amp;&amp; stack.peek() == '('){    // ← 짝이 맞으면 꺼내기
+        stack.pop();
+        i++;
+    }else{
+        stack.push(s.charAt(i));                                 // ← 맨 위 ')' 에 '(' 가 오면 쌓기
+        i++;
+    }
+}
+System.out.println(stack);                                       // ← 디버깅 출력이 남아 있다
+if(stack.isEmpty())return true;
+else return false;</code></pre>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">정답 풀이 (오답노트 원문)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+
+for (char c : s.toCharArray()) {
+    if (c == '(') {
+        stack.push(c);                  // ← 여는 괄호는 무조건 쌓는다
+    } else {
+        if (stack.isEmpty()) {
+            return false;               // ← 꺼낼 '(' 가 없으면 그 즉시 실패 (조기 반환)
+        }
+        stack.pop();                    // ← 짝이 맞으니 꺼낸다
+    }
+}
+return stack.isEmpty();                 // ← if ~ else 대신 결과를 바로 반환</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드도 정답이다.</b> 길이 1~16의 모든 문자열 131,070개에서 정석 풀이와 답이 같다. 차이는 세 가지다.
+
+<b>제출 코드와 정석 풀이의 차이</b>
+1. <b>틀린 게 확정돼도 끝까지 돈다</b> — 첫 글자가 <code>)</code>면 그 순간 답은 <code>false</code>인데, 제출 코드는 <code>)</code>를 스택에 넣고 100,000자를 끝까지 본다. 정석 풀이는 꺼낼 <code>(</code>가 없으면 바로 <code>return false</code>.
+2. <b><code>)</code>까지 스택에 넣는다</b> — 한 번 들어간 <code>)</code>는 다시 꺼낼 일이 없어 들어가는 순간 답이 정해진다. 정석 풀이는 <code>(</code>만 쌓는다.
+3. <b>디버깅용 <code>System.out.println(stack)</code>이 남아 있다</b> — 채점 결과에는 영향이 없지만, <code>(</code>만 100,000개인 입력이면 <b>300,002글자</b>를 찍는다. 제출 전에 지울 것.
+
+<b>정석 풀이의 흐름</b>
+1. <code>s.toCharArray()</code>로 한 글자씩 돈다 — 인덱스(<code>i++</code>)를 직접 관리하지 않아 경계를 넘거나 헛도는 실수가 없다.
+2. <code>(</code>면 쌓고, <code>)</code>면 스택이 비었는지 보고(비었으면 <code>false</code>) 아니면 꺼낸다.
+3. 다 돌고 나서 <code>return stack.isEmpty();</code> — <code>"(()"</code>처럼 닫히지 못한 <code>(</code>가 남으면 <code>false</code>.
+
+참고로 제출 코드의 <code>stack.peek() == s.charAt(i)</code>는 <code>Character</code>와 <code>char</code>의 비교라 <b>값으로</b> 비교된다(<code>Character</code>가 풀려서 비교). <a href="../../index.html#ct-56">같은 숫자는 싫어</a>에서 본 "<code>Integer</code>끼리 <code>!=</code>는 주소 비교"와 다른 경우다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>모든 짧은 문자열과 길이 100,000 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 "()()" · "(())()" · ")()(" · "(()("             → 통과 (true · true · false · false)
+길이 1~16 의 모든 문자열 131,070개                         → 정석 풀이 · 제출 코드 · 정수 카운터 모두 같은 답
+                                                             (올바른 것 2,055개)
+길이 100,000 — 균형 맞음 (((…)))   평균  정석 0.15ms · 제출 3.46ms · 정수 카운터 0.05ms
+길이 100,000 — 첫 글자가 ')'       평균  정석 0.009ms · 제출 5.45ms
+제출 코드가 찍는 글자 수            균형 맞음 4 · '(' 100,000개 300,002</pre>
+      <div class="run-note">올바른 괄호의 개수 2,055는 길이 2 · 4 · … · 16에서 1 + 2 + 5 + 14 + 42 + 132 + 429 + 1430(카탈랑 수)을 더한 값이라, 전수 비교가 제대로 돌았다는 확인도 됩니다. 시간은 이 PC에서 20번 돌린 평균이고, 제출 코드는 비교하는 동안 출력을 버렸어요(실제로 출력하면 더 느립니다). 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 스택 — 나중에 들어간 것이 먼저 나온다(LIFO)</b>
+괄호는 가장 안쪽, 즉 <b>가장 나중에 열린 것부터</b> 닫혀야 한다. 짝 맞추기는 종류가 섞여도 "열릴 때 넣고, 닫힐 때 맨 위를 꺼내 비교한다" 하나로 풀린다. <code>Stack</code>은 <code>Vector</code>를 물려받은 클래스다. → <a href="../../index.html#util-02">🛠️ 02. List 계열</a> · <a href="../../index.html#ct-56">같은 숫자는 싫어</a>
+
+<b>(2) 조기 반환(Early Return)</b>
+실패 조건이 분명하면(비어 있는데 <code>)</code>) 그 자리에서 <code>return false;</code>. 뒤를 볼 필요가 없어 최악의 경우에도 빨라진다.
+
+<b>(3) <code>boolean</code> 반환 간소화</b>
+<code>if (조건) return true; else return false;</code>는 <code>return 조건;</code>과 같다. 조건식의 결과가 이미 <code>true</code> 아니면 <code>false</code>다.
+
+<b>(4) 정수 카운터 — O(1) 공간</b>
+괄호가 한 종류뿐이면 스택 없이 <code>int count</code> 하나로 된다. <code>(</code>에서 <code>count++</code>, <code>)</code>에서 <code>count--</code>, 도중에 <code>count &lt; 0</code>이면 바로 <code>false</code>, 끝나면 <code>count == 0</code>. 실행 결과의 세 번째 방법이 이것이다.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>"(()" 를 정석 풀이로 한 글자씩 따라가면 어디서 false 가 될까?</summary>
+        <div class="sc-a">세 글자 동안은 실패하지 않아요(넣기 → 넣기 → 꺼내기). <b>끝까지 돈 뒤</b> 스택에 <code>(</code> 하나가 남아 <code>return stack.isEmpty();</code>가 <code>false</code>가 됩니다. 반대로 <code>"())"</code>는 세 번째 <code>)</code>에서 스택이 비어 있어 <b>도중에</b> <code>false</code>예요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>괄호가 ( ) { } [ ] 세 종류로 섞이면 정수 카운터로 충분할까?</summary>
+        <div class="sc-a"><b>충분하지 않습니다.</b> <code>"([)]"</code>은 종류별 개수는 다 맞지만 짝이 엇갈려 있어요. 스택에 여는 괄호를 넣고, 닫는 괄호가 올 때 <b>맨 위가 같은 종류인지</b> 비교해야 합니다. 카운터는 종류가 하나일 때만 쓰는 지름길이에요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>괄호 짝 맞추기는 스택의 대표 문제라 형태를 바꿔 자주 나옵니다(여러 종류 괄호, 괄호 회전하기, 짝지어 제거하기). 실무에서도 수식 계산기, 코드 편집기의 괄호 강조, HTML 태그 짝 검사가 같은 원리예요. 그리고 <b>제출·배포 전에 디버깅용 <code>System.out</code>을 지우는 습관</b>은 46일차에 로그(<code>@Slf4j</code>)로 바꾼 이유와도 이어집니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 제출 코드와 함께 정석 풀이 · 해설 · 개념 정리가 적혀 있어 정석 풀이를 <code>ValidParentheses.java</code>로, 제출 코드를 <code>ValidParenthesesSubmitted.java</code>로 옮겼다(클래스 이름만 바꿈).</li><li>원문 개념 정리의 "O(1)"은 수식 개체라 문서 변환에서 빠져 있어 다시 적었다.</li><li>실행 결과는 <code>CodingTest24Test.java</code>(길이 1~16 전수, 길이 100,000 시간은 이 PC에서 20번 평균).</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-61">
+  <div class="note-head">
+    <span class="note-num">24회차</span>
+    <h3>강원도에 위치한 생산공장 목록 출력하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">LIKE와 %</span><span class="tag">ORDER BY</span><span class="tag">앞부분 일치</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>주소에 <b>'강원도'가 들어간 공장</b>만 <code>LIKE '%강원도%'</code>로 골라 <code>FACTORY_ID</code> 오름차순으로 보여 준다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>주소록에서 "강원도"라는 글자가 들어간 줄에만 형광펜을 긋고, 공장 번호 순서대로 다시 옮겨 적는 일이에요. <code>%</code>는 "여기에 무슨 글자가 몇 개 오든 상관없음"이라는 표시입니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">24회차 · 2026.10.12</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131112" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>식품공장 테이블 <code>FOOD_FACTORY</code>에서 <b>강원도에 위치한</b> 식품공장의 공장 ID · 공장 이름 · 주소를 조회하고, 결과를 공장 ID 기준 오름차순으로 정렬하는 문제.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/food-factory-submitted.sql">📄 제출 코드 파일</a> · <a href="./">📁 24회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT FACTORY_ID, FACTORY_NAME, ADDRESS
+from FOOD_FACTORY
+where ADDRESS like '%강원도%'          -- ← 주소 어디에든 '강원도'가 있으면
+order by FACTORY_ID asc;               -- ← asc 는 기본값이라 생략해도 같다</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 오답노트에는 정답 풀이·개념 정리 칸이 비어 있어, 아래는 이 문제에서 짚어 둘 점이다.
+
+<b><code>'%강원도%'</code>와 <code>'강원도%'</code></b>
+주소는 시·도부터 적으니 "강원도에 위치한"은 <b>'강원도'로 시작하는 주소</b>다. 그래서 <code>LIKE '강원도%'</code>(앞부분 일치)가 뜻에 더 정확하다. <code>'%강원도%'</code>는 다른 도의 "…강원도로 12" 같은 주소까지 잡을 수 있다. 이 문제의 데이터에서는 둘의 결과가 같다.
+앞부분 일치에는 하나의 장점이 더 있다. <b>앞에 <code>%</code>가 붙으면 인덱스를 쓸 수 없다</b>. 목차를 "가"부터 찾을 수는 있어도 "…원도"로 끝나는 말은 처음부터 다 읽어야 하는 것과 같다.
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>LIKE '강원도'</code>(<code>%</code> 없음)</b> — 와일드카드가 없으면 "주소 전체가 정확히 '강원도'"인지 비교하는 것과 같아 <b>0행</b>이다.
+2. <b>정렬 방향</b> — <code>DESC</code>로 쓰면 순서가 뒤집혀 오답. 오름차순은 <code>ASC</code>이고 생략해도 오름차순이다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>% 위치를 바꿔 보면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공장 10곳 (강원도 3곳 — 정선 · 원주 · 평창, 나머지는 다른 시·도)
+제출 코드  LIKE '%강원도%' ORDER BY FACTORY_ID  → FT19980003 · FT20100003 · FT20100004
+LIKE '강원도%'  (앞부분 일치)                  → 같은 3곳
+LIKE '강원도'   (% 없음)                       → 0행
+ORDER BY FACTORY_ID DESC                       → FT20100004 · FT20100003 · FT19980003 (순서가 뒤집힘)</pre>
+      <div class="run-note"><code>verify-sql24.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)로 실행한 결과예요. <code>LIKE</code>와 <code>%</code>의 규칙은 MySQL과 같습니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) <code>LIKE</code>의 와일드카드</b>
+<code>%</code>는 0글자 이상 아무 글자, <code>_</code>는 정확히 한 글자. <code>'강원도%'</code> 앞부분 · <code>'%강원도'</code> 뒷부분 · <code>'%강원도%'</code> 어디든. → <a href="../../index.html#sql-09">🗄️ 09. LIKE와 와일드카드</a> · <a href="../../index.html#ct-26">자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기</a>
+
+<b>(2) 앞에 <code>%</code>가 붙으면 인덱스를 못 쓴다</b>
+→ <a href="../../index.html#concept-sql-index">인덱스 개념</a>
+
+<b>(3) <code>ORDER BY</code>의 기본은 오름차순</b>
+<code>ASC</code>는 생략해도 된다. 여러 기준이면 쉼표로 이어 기준마다 방향을 정한다. → <a href="../../index.html#sql-15">🗄️ 15. ORDER BY</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>LIKE '강원_' 는 '강원도 정선군 …' 주소를 찾을까?</summary>
+        <div class="sc-a"><b>찾지 못합니다.</b> <code>_</code>는 정확히 <b>한 글자</b>라서 "강원" 뒤에 딱 한 글자로 끝나는 값(예: "강원도")만 맞아요. 뒤에 무엇이든 오게 하려면 <code>'강원%'</code>입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>'%강원도%' 와 '강원도%' 중 ADDRESS 인덱스를 쓸 수 있는 것은?</summary>
+        <div class="sc-a"><b><code>'강원도%'</code></b>입니다. 시작 글자가 정해져 있어 정렬된 인덱스에서 "강원도…"가 모인 곳으로 바로 갈 수 있어요. 앞에 <code>%</code>가 붙으면 시작 글자를 몰라 처음부터 끝까지 다 봐야 합니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>검색 기능의 기본이 <code>LIKE</code>입니다. 실무에서 <code>'%키워드%'</code>는 큰 테이블에서 느려지기 쉬워, 시작 글자 검색으로 바꾸거나 전문 검색(MySQL <code>FULLTEXT</code>, 검색 엔진)을 씁니다. 코딩테스트에서는 <b>문장이 말하는 범위</b>("~로 시작하는", "~를 포함하는")에 맞춰 <code>%</code> 위치를 고르세요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 원문 제목은 '생산공장 목록'으로 줄여 적혀 있어 공식 문제명을 썼다. 정답 풀이·개념 정리 칸이 비어 있어 짚을 점은 새로 썼다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-12/food-factory-submitted.sql</code>(원문 맨 앞의 빈 줄만 뺐다).</li><li>실행 결과는 <code>verify-sql24.mjs</code>(공장 10곳을 넣은 메모리 DB). "다른 도의 …강원도로 12 같은 주소"는 <code>%</code> 위치의 차이를 설명하려는 가정이며 문제 데이터에 그런 행이 있는지는 확인하지 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-62">
+  <div class="note-head">
+    <span class="note-num">24회차</span>
+    <h3>대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">IN 서브쿼리</span><span class="tag">GROUP BY 두 컬럼</span><span class="tag">HAVING</span><span class="tag">MONTH()</span><span class="tag">BETWEEN</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>"8~10월에 <b>5번 이상</b> 빌린 차"를 <b>서브쿼리로 먼저</b> 고르고, 바깥 쿼리에서 <b>같은 기간을 다시</b> 걸어 월 · 차별로 센다. 고르는 기준(석 달 합계)과 세는 단위(월별)가 달라서 <code>GROUP BY</code> 한 번으로는 안 된다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>먼저 "석 달 동안 다섯 번 넘게 온 단골" 명단을 뽑고, 그 단골들만 달력에 표시해 <b>달마다 몇 번 왔는지</b> 세는 거예요. 명단을 뽑을 때와 달력에 셀 때 모두 "8~10월"만 봐야 합니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">24회차 · 2026.10.12</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151139" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>자동차 대여 기록 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code>에서 <b>대여 시작일 기준 2022년 8월~10월</b> 총 대여 횟수가 <b>5회 이상</b>인 자동차들에 대해, 그 기간의 <b>월별 · 자동차 ID별</b> 총 대여 횟수(<code>RECORDS</code>)를 월 오름차순, 자동차 ID 내림차순으로 출력하는 문제. 특정 월의 대여 횟수가 0이면 결과에서 제외한다.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/car-rental-monthly-answer.sql">📄 정답 풀이 파일</a> · <a href="./">📁 24회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">정답 풀이 (오답노트 원문 · 제출 코드는 남아 있지 않음)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT MONTH(START_DATE) AS MONTH, CAR_ID, COUNT(*) AS RECORDS
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE START_DATE BETWEEN '2022-08-01' AND '2022-10-31'       -- ← ② 세는 쪽도 기간 안만
+  AND CAR_ID IN (
+      SELECT CAR_ID
+      FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+      WHERE START_DATE BETWEEN '2022-08-01' AND '2022-10-31'   -- ← ① 고르는 쪽도 기간 안만
+      GROUP BY CAR_ID
+      HAVING COUNT(*) &gt;= 5                                    -- ← 석 달 합계 5번 이상인 차
+  )
+GROUP BY MONTH(START_DATE), CAR_ID                             -- ← 월 + 차 두 기준으로 묶기
+ORDER BY MONTH ASC, CAR_ID DESC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어 실제로 어디서 틀렸는지는 알 수 없다.</b> 아래는 이 문제에서 <b>흔히 틀리는 곳</b>(모두 실제로 돌려 봄)과 정답 풀이의 흐름이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>바깥 쿼리의 기간 조건을 뺀다</b> — 고른 차의 <b>7월 · 11월 이력까지</b> 월별로 세어진다. 서브쿼리에서 걸렀다고 끝이 아니다.
+2. <b>서브쿼리의 기간 조건을 뺀다</b> — 기간 <b>밖</b> 이력으로 5번을 채운 차가 대상에 끼어든다(실행 결과의 2번 차: 기간 안 4번 + 7월 2번).
+3. <b>서브쿼리 없이 월별로 묶고 <code>HAVING COUNT(*) &gt;= 5</code></b> — 조건이 "석 달 합계 5번"이 아니라 "<b>한 달에</b> 5번"으로 바뀐다.
+4. <b>정렬</b> — 월은 오름차순, 같은 달 안에서는 자동차 ID <b>내림차순</b>이다.
+
+<b>풀이 흐름</b>
+1. 서브쿼리: 기간 안 이력만 남겨 <code>GROUP BY CAR_ID</code> → <code>HAVING COUNT(*) &gt;= 5</code>로 대상 차의 ID 목록.
+2. 바깥 쿼리: 기간 안 이력 중 그 목록에 있는 차만 → <code>GROUP BY MONTH(START_DATE), CAR_ID</code>로 월·차별 <code>COUNT(*)</code>.
+3. 대여가 0번인 달은 처리할 필요가 없다. <code>GROUP BY</code>는 <b>있는 행만</b> 묶어서, 이력이 없는 달은 줄이 생기지 않는다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>기간 조건을 하나씩 빼 보면 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>차 4대 · 이력 23줄
+  1번: 8월 2 · 9월 2 · 10월 1 (10/31 시작 포함) + 7월 1 · 11월 1
+  2번: 8월 2 · 9월 1 · 10월 1 (기간 안 4번) + 7월 2
+  3번: 9월에만 5
+  4번: 8월 1 (8/1 시작) · 10월 4
+
+정답 풀이 (MONTH|CAR_ID|RECORDS)        → 8|4|1, 8|1|2, 9|3|5, 9|1|2, 10|4|4, 10|1|1
+바깥 쿼리 기간 조건을 빼면              → 7|1|1 과 11|1|1 이 끼어든다
+서브쿼리 기간 조건을 빼면               → 2번 차가 대상이 되어 8|2|2, 9|2|1, 10|2|1 이 끼어든다
+월별로 묶고 HAVING &gt;= 5 만 쓰면        → 9|3|5 한 줄
+BETWEEN 양 끝                           → 8/1 (4번) · 10/31 (1번) 시작도 포함</pre>
+      <div class="run-note">3번 차의 8 · 10월은 0번이라 줄이 없어요. 지문의 "0이면 제외"는 따로 쓸 필요가 없습니다. <code>verify-sql24.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite로 실행했고, SQLite에는 MySQL의 <code>MONTH()</code>가 없어 같은 일을 하는 함수를 등록했습니다. 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 집계 단위가 다르면 서브쿼리로 나눈다</b>
+고르는 기준(석 달 합계)과 결과 단위(월별 · 차별)가 다르면 한 번의 <code>GROUP BY</code>로 안 된다. "서브쿼리로 대상 ID 목록 줄이기 → 바깥 쿼리에서 세부 단위로 집계"가 정형화된 풀이다. → <a href="../../index.html#sql-13">🗄️ 13. 다중행 서브쿼리 — IN · ANY · ALL</a> · <a href="../../index.html#sql-18">🗄️ 18. GROUP BY</a> · <a href="../../index.html#sql-19">🗄️ 19. HAVING vs WHERE</a>
+
+<b>(2) 0인 경우는 자동으로 빠진다</b>
+<code>GROUP BY</code>는 실제로 있는 행만 묶는다. 0번인 달까지 보여 달라는 문제라면 달 목록을 따로 만들어 <code>LEFT JOIN</code>해야 한다. → <a href="../../index.html#sql-33">🗄️ 33. OUTER JOIN</a>
+
+<b>(3) <code>BETWEEN</code>과 날짜</b>
+<code>BETWEEN</code>은 양 끝을 포함한다. 이 문제의 <code>START_DATE</code>는 <code>DATE</code>라 <code>'2022-10-31'</code>까지 그대로 된다. 같은 테이블을 쓴 <a href="../../index.html#ct-46">대여 기록이 존재하는 자동차 리스트 구하기</a>는 <code>MONTH(START_DATE) = 10</code>으로 달을 골랐다. → <a href="../../index.html#sql-07">🗄️ 07. BETWEEN</a> · <a href="../../index.html#ct-58">자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기</a>
+
+<b>(4) 키워드와 값 사이는 띄운다</b>
+<code>BETWEEN'2022-08-01'</code>처럼 붙여 써도 MySQL은 통과하지만, 다른 DBMS나 협업에서는 오류·혼동의 원인이 된다. <code>BETWEEN '2022-08-01'</code>처럼 띄우는 습관.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>서브쿼리의 HAVING COUNT(*) &gt;= 5 를 WHERE COUNT(*) &gt;= 5 로 쓰면?</summary>
+        <div class="sc-a"><b>오류입니다.</b> <code>WHERE</code>는 묶기 <b>전</b>의 행 하나하나를 거르는 자리라 아직 그룹이 없어 <code>COUNT(*)</code>를 쓸 수 없어요. 묶은 <b>뒤</b>의 그룹을 거르는 자리가 <code>HAVING</code>입니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>START_DATE 가 DATE 가 아니라 DATETIME 이고 10/31 오후에 시작한 대여가 있다면 BETWEEN '2022-08-01' AND '2022-10-31' 은 그 줄을 셀까?</summary>
+        <div class="sc-a"><b>세지 않습니다.</b> <code>'2022-10-31'</code>은 10월 31일 <b>0시 0분 0초</b>로 해석돼서 그날 오후는 범위 밖이에요. 그럴 땐 <code>START_DATE &gt;= '2022-08-01' AND START_DATE &lt; '2022-11-01'</code>처럼 "다음 날 미만"으로 씁니다. 이 문제는 <code>DATE</code>라 해당하지 않아요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"기간 안에 N번 이상인 회원의 월별 추이" 같은 리포트는 실무 대시보드에서 아주 흔한 모양입니다. 서브쿼리가 길어지면 <code>WITH</code>(CTE)로 대상 목록에 이름을 붙여 읽기 쉽게 만들어요(→ <a href="../../index.html#sql-26">🗄️ 26. CTE (WITH)</a>). 그리고 이 유형에서 가장 먼저 확인할 곳은 기간 조건을 <b>두 곳 모두</b> 걸었는지입니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이는 원문 그대로 <code>Back_end/coding-tests/2026-10-12/car-rental-monthly-answer.sql</code>.</li><li>원문 개념 정리의 화살표("목록 축소 → 메인 쿼리")는 수식 개체라 문서 변환에서 빠져 있어 다시 적었다.</li><li>원문 "가독성 팁"은 "코드 6번 줄의 <code>between'2022-08-01'</code>"을 가리키지만 원문 정답 풀이에는 붙여 쓴 줄이 없다(모두 띄어 씀). 가리키는 코드를 확인할 수 없어 팁의 내용만 옮겼다.</li><li>실행 결과는 <code>verify-sql24.mjs</code>(차 4대 · 이력 23줄). SQLite에는 <code>MONTH()</code>가 없어 같은 일을 하는 함수를 등록했다. DATETIME 경계는 설명이며 실행하지 않았다.</li></ul></details>
+  </div>
+</article>
+
+<article><h2>로컬 검증과 범위</h2><p>Java는 <code>CodingTest24Test.java</code>(음양 더하기는 무작위 20,000개, 올바른 괄호는 길이 1~16의 모든 문자열 131,070개 + 길이 100,000 시간), SQL은 <code>verify-sql24.mjs</code>(Node 내장 SQLite 3.53, 메모리 DB)로 확인했다. SQL 파일을 그대로 읽어 실행하며, 날짜는 <code>YYYY-MM-DD</code> 글자로 넣어 <code>BETWEEN</code>이 MySQL의 DATE 비교와 같은 결과를 내고, SQLite에 없는 <code>MONTH()</code>는 같은 일을 하는 함수를 등록했다. 로컬 MariaDB 접속 정보는 쓰지 않았다.</p></article>
+
+<footer><p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/SignedSum.java">음양 더하기</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/ValidParenthesesSubmitted.java">올바른 괄호 제출</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/ValidParentheses.java">올바른 괄호 정석 풀이</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/CodingTest24Test.java">Java 검증</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/food-factory-submitted.sql">SQL 1 제출</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/car-rental-monthly-answer.sql">SQL 2 정답</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-12/verify-sql24.mjs">SQL 검증</a></p></footer></main></body></html>

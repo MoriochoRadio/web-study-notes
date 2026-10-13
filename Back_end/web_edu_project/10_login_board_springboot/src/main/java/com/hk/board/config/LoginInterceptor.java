@@ -1,5 +1,6 @@
 package com.hk.board.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor{
 
@@ -17,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 
 		HttpSession session=request.getSession();
 		if(session.getAttribute("mdto")==null) {// 로그인X
-			System.out.println("로그인 필요");
+			log.warn("로그인 필요");
 			response.sendRedirect("/user/login");//home.html로 이동
 			return false;
 		}else {

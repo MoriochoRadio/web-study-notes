@@ -1,12 +1,20 @@
 package com.hk.board.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Slf4j
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer{
+
+	// 첨부파일 저장 폴더 — application.properties 의 file.upload-dir 값
+	// (@Value 필드에는 final 을 붙이지 않는다: Lombok 이 만든 생성자로 @Value 가 따라가지 않음)
+	@Value("${file.upload-dir}")
+	private String uploadDir;
 	
 	//구현된 interceptor 객체를 등록한다.
 	@Override
@@ -33,9 +41,9 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	//                                  -> 다른경로에 있으면 못불러오기때문에 경로 설정해줌) 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("user.dir:"+System.getProperty("user.dir"));
+		log.info("업로드 폴더: {}", uploadDir);
 		registry.addResourceHandler("/upload/**")
-				.addResourceLocations("file:"+System.getProperty("user.dir")+"/upload/");
+				.addResourceLocations("file:" + uploadDir + "/");
 	}
 }
 

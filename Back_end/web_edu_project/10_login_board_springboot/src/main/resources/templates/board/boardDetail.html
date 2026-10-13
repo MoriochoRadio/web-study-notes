@@ -21,10 +21,16 @@
 <div layout:fragment="content">
 <div id="container">
 <h1>상세보기</h1>
+<!-- 파일을 같이 보내려면 enctype="multipart/form-data" 가 반드시 필요 -->
 <form action="/board/boardUpdate" method="post" onsubmit="return updateEX()"
+								enctype="multipart/form-data"
 								th:object="${updateBoardCommand}">
 	<input type="hidden" name="board_seq"  th:value="${dto.board_seq}"/>
-	<table class="table">
+	<!-- isWriter: 본인 글인지 / hasFiles: 실제 첨부파일이 있는지 — 아래에서 여러 번 쓰므로 한 번만 계산 -->
+	<table class="table"
+		   th:with="isWriter=${session.mdto != null and session.mdto.id == dto.id},
+		            hasFiles=${dto.fileBoardDto != null and !#lists.isEmpty(dto.fileBoardDto)
+		                       and dto.fileBoardDto[0].origin_filename != null}">
 		<tr>
 			<th>작성자[ID]</th>
 			<td th:text="${dto.id}"></td>
@@ -39,20 +45,27 @@
 			</td>
 		</tr>
 		<tr>
-			<th>파일 [[${#lists.size(dto.fileBoardDto)}]]</th>
-			<th:block th:if="${dto.fileBoardDto[0].origin_filename==null}">
-				<td>첨부파일없음</td>
-			</th:block>
-			<th:block th:unless="${dto.fileBoardDto[0].origin_filename==null}">
-				<td>
-					<th:block th:each="fdto:${dto.fileBoardDto}">
+			<th>파일 [[${hasFiles ? #lists.size(dto.fileBoardDto) : 0}]]</th>
+			<td>
+				<!-- 기존 첨부파일: 누구나 다운로드 / 작성자에게만 '삭제' 체크박스 -->
+				<span th:unless="${hasFiles}">첨부파일없음</span>
+				<th:block th:if="${hasFiles}" th:each="fdto:${dto.fileBoardDto}">
+					<div>
 						<span class="glyphicon glyphicon-folder-open"></span>
 						<a th:text="${fdto.origin_filename}"
-						   th:href="@{/board/download(file_seq=${fdto.file_seq})}" ></a>&nbsp;&nbsp;
+						   th:href="@{/board/download(file_seq=${fdto.file_seq})}" ></a>
+						<label th:if="${isWriter}">
+							&nbsp;<input type="checkbox" name="delFileSeq" th:value="${fdto.file_seq}"/> 삭제
+						</label>
 <!-- 					<img th:src="@{'/upload/'+${fdto.stored_filename}}"/> -->
-					</th:block>
-				</td>
-			</th:block>
+					</div>
+				</th:block>
+				<!-- 새 첨부파일 추가 (작성자에게만). 교체 = 기존 파일 '삭제' 체크 + 새 파일 선택 -->
+				<div th:if="${isWriter}" style="margin-top: 8px;">
+					<input type="file" name="filename" multiple="multiple" class="form-control"/>
+					<small>새 파일을 고르면 추가됩니다. 바꾸려면 기존 파일의 '삭제'를 체크하고 새 파일을 고르세요.</small>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
@@ -66,11 +79,12 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-<!-- 				<th:block th:if="${session.mdto!=null&&session.mdto.id==dto.id}"> -->
+				<!-- 본인 글일 때만 수정·삭제 버튼 표시 (편의용. 진짜 막는 건 Controller 의 isWriter 검사) -->
+				<th:block th:if="${isWriter}">
 					<button type="submit" class="btn">수정</button>
 					<button type="button" class="btn"
 					 th:onclick="|location.href='@{/board/mulDel(seq=${dto.board_seq})}'|">삭제</button>
-<!-- 				</th:block> -->
+				</th:block>
 				<button type="button" class="btn"
 				 th:onclick="|location.href='@{/board/boardList}'|">목록</button>
 			</td>

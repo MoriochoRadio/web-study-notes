@@ -34,3 +34,5 @@ build/
 
 *.png
 *.jpg
+### 실행할 때 생기는 로그 (logging.file.name=logs/app.log) ###
+logs/

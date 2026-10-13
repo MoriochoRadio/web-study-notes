@@ -1,5 +1,6 @@
 package com.hk.board.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.hk.board.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
 @Controller
 @RequestMapping(value = "/user")
 @RequiredArgsConstructor // Lombok : 필드를 이용한 생성자 자동주입
@@ -28,7 +30,7 @@ public class MemberController {
 
 	@GetMapping(value = "/addUser")
 	public String addUserForm(Model model) {
-		System.out.println("회원가입폼 이동");
+		log.debug("회원가입폼 이동");
 
 		// 회원가입폼에서 addUserCommand객체를 사용하는 코드가 작성되어 있어서
 		// null일경우 오류가 발생하기때문에 보내줘야 함
@@ -39,19 +41,19 @@ public class MemberController {
 
 	@PostMapping(value = "/addUser")
 	public String addUser(@Validated AddUserCommand addUserCommand, BindingResult result, Model model) {
-		System.out.println("회원가입하기");
+		log.debug("회원가입하기");
 
 		if (result.hasErrors()) {
-			System.out.println("회원가입 유효값 오류");
+			log.warn("회원가입 유효값 오류");
 			return "member/addUserForm";
 		}
 
 		try {
 			memberService.addUser(addUserCommand);
-			System.out.println("회원가입 성공");
+			log.info("회원가입 성공");
 			return "redirect:/";
 		} catch (Exception e) {
-			System.out.println("회원가입실패");
+			log.error("회원가입실패");
 			e.printStackTrace();
 			return "redirect:addUser";
 		}
@@ -61,7 +63,7 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping(value = "/idChk")
 	public Map<String, String> idChk(String id) {
-		System.out.println("ID중복체크");
+		log.debug("ID중복체크");
 
 		String resultId = memberService.idChk(id);
 		// json객체로 보내기 위해 Map에 담아서 응답
@@ -83,7 +85,7 @@ public class MemberController {
 	public String login(@Validated LoginCommand loginCommand, BindingResult result, Model model,
 			HttpServletRequest request) {
 		if (result.hasErrors()) {
-			System.out.println("로그인 유효값 오류");
+			log.warn("로그인 유효값 오류");
 			return "member/login";
 		}
 
@@ -96,7 +98,7 @@ public class MemberController {
 	// @GetMapping(value="/logout")
 	@PostMapping(value = "/logout")
 	public String logout(HttpServletRequest request) {
-		System.out.println("로그아웃");
+		log.info("로그아웃");
 		request.getSession().invalidate();
 		return "redirect:/";
 	}
