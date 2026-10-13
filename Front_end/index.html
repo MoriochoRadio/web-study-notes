@@ -1892,7 +1892,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li><b>타임라인</b> — 왜 이 순서로 배웠고, 백엔드 과정과 어떻게 이어지는지</li>
         <li><b>예제 프로젝트 따라가기</b> — React 레슨 01~13이 각각 무엇을 하려고 만든 것이고 무엇이 바뀌었나</li>
         <li><b>단계별 핵심</b> — 단계마다 꼭 알 것 · 헷갈리는 것 · 실무 · 면접 질문</li>
-        <li><b>계속 다시 나오는 큰 생각 5가지</b> — 과목은 달라도 같은 원리</li>
+        <li><b>계속 다시 나오는 큰 생각 6가지</b> — 과목은 달라도 같은 원리</li>
         <li><b>비슷해서 헷갈리는 말</b> — 한 표로 정리</li>
         <li><b>면접에서 이 과정을 설명한다면</b> — 30초 답변</li>
       </ol>
@@ -1911,7 +1911,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="bp-node bp-node-be">
         <span class="bp-node-t">② 서버 (자바 프로그램)</span>
         <span class="bp-node-d">요청을 받아 "무엇을 할지" 판단하고, 결과 화면이나 데이터를 돌려준다.</span>
-        <span class="bp-node-s">Java · Servlet/JSP · Spring MVC</span>
+        <span class="bp-node-s">Java · Servlet/JSP · Spring MVC → Spring Boot</span>
       </div>
       <div class="bp-arrow">JDBC<br>MyBatis</div>
       <div class="bp-node bp-node-be">
@@ -1932,9 +1932,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">8/31 ~ 9/9</span><span class="bp-what">SQL · 데이터베이스</span><span class="bp-badge done">완료</span><span class="bp-why">데이터를 꺼내고 저장하는 언어. 게시판의 모든 기능이 결국 SQL 한 줄로 끝난다.</span></li>
       <li class="done"><span class="bp-when">9/10 ~ 9/21</span><span class="bp-what">웹 기초: JDBC → JSP → Servlet → MVC2</span><span class="bp-badge done">완료</span><span class="bp-why">자바와 DB, 자바와 브라우저를 <b>손으로 직접</b> 잇는다. 불편함을 몸으로 겪는 단계.</span></li>
       <li class="done"><span class="bp-when">9/22 ~ 9/28</span><span class="bp-what">Spring MVC + MyBatis</span><span class="bp-badge done">완료</span><span class="bp-why">손으로 하던 반복 작업을 프레임워크가 대신한다. 같은 게시판을 더 짧고 정돈되게.</span></li>
-      <li class="now"><span class="bp-when">9/29 ~ 지금</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리를 한 묶음으로, 공통 기능은 바깥으로.</span></li>
-      <li><span class="bp-when">예정</span><span class="bp-what">단위 테스트(JUnit) · 파일 업로드/다운로드 · 일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">지금 만든 Spring MVC 구조 위에 기능을 더 얹는다.</span></li>
-      <li><span class="bp-when">예정</span><span class="bp-what">Spring Boot · Thymeleaf · Spring Security 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">XML 설정을 걷어 내고, 로그인·권한까지 갖춘 "요즘 방식" 스프링으로 마무리.</span></li>
+      <li class="done"><span class="bp-when">9/29 ~ 10/6</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP · 인터셉터 · 테스트</span><span class="bp-badge done">완료</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리는 한 묶음으로, 공통 기능(로그 · 로그인 확인)은 바깥으로, 확인은 코드로.</span></li>
+      <li class="now"><span class="bp-when">10/7 ~ 지금</span><span class="bp-what">스프링 부트 — 같은 게시판을 부트로, 그리고 회원 · 파일 · 권한</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">XML 설정을 부트의 자동 설정에 맡기고, 회원가입 · 로그인(세션) · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판을 만든다. 프런트에서 쓰던 "로그인 · 업로드 화면" 뒤편의 서버 쪽 일이다.</span></li>
+      <li><span class="bp-when">예정</span><span class="bp-what">일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">부트 구조로 새 게시판을 처음부터 끝까지 한 번 더. 자바 실습의 달력 출력이 웹 화면으로 돌아온다.</span></li>
+      <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">직접 짠 로그인 · 권한 확인을 Spring Security 필터 체인에 맡기고, 종합 프로젝트로 "요즘 방식" 스프링을 마무리.</span></li>
     </ol>
 
     <h3 class="bp-h" id="bp-projects"><span class="bp-step">3</span>예제 프로젝트 따라가기 — React 레슨 01~13과 졸업 과제</h3>
@@ -2235,7 +2236,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>Tailwind + 다크 모드</b>, <b>Recharts + WebSocket</b> — 첫 차트는 REST로, 이후 점은 WebSocket으로 이어 붙이는 실시간 차트</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">면접에서 이렇게 설명하세요</span><p>"무엇을 만들었다"보다 <b>"왜 그렇게 만들었다"</b>가 중요합니다. 예: "REST 요청용 API 키가 브라우저에 노출되지 않도록 Next.js API Route를 중계 서버로 뒀다(WebSocket은 브라우저가 직접 연결해야 해서 공개용 키를 따로 썼다)", "Context는 값이 바뀔 때마다 하위 전체가 렌더링돼서 셀렉터 구독이 되는 Zustand를 골랐다".</p></div>
-            <div class="bp-box"><span class="bp-box-t">백엔드와 이어 보기</span><p>지금은 데이터를 외부 API(Finnhub)에서 받지만, 백엔드 과정을 마치면 <b>"관심 종목을 내 스프링 서버 + DB에 저장"</b>하도록 확장할 수 있어요. 그게 곧 풀스택 포트폴리오입니다.</p></div>
+            <div class="bp-box"><span class="bp-box-t">백엔드와 이어 보기</span><p>지금은 데이터를 외부 API(Finnhub)에서 받고 관심 종목은 브라우저(localStorage)에만 남지만, 백엔드에서 만들고 있는 <b>회원가입 · 로그인(세션) · DB 저장</b>을 붙이면 "내 관심 종목을 내 스프링 서버 + DB에 저장해 어느 기기에서나 보기"로 확장할 수 있어요. 이때 화면은 <code>fetch</code>로 JSON을 주고받고, 서버는 <code>@RestController</code>로 응답하는 구조가 됩니다. 그게 곧 풀스택 포트폴리오입니다(→ <a href="../Back_end/#bigpicture-section">백엔드 큰 그림</a>).</p></div>
           </div>
           <p class="bp-links">더 보기 → <a href="#react-capstone">졸업 과제 카드</a></p>
         </div>
@@ -2243,33 +2244,38 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
 
     </div>
 
-    <h3 class="bp-h"><span class="bp-step">5</span>계속 다시 나오는 큰 생각 5가지</h3>
-    <p class="bp-sub">과목 이름은 계속 바뀌었지만, 사실 <b>같은 생각이 모양만 바꿔 반복</b>됐습니다. 이 다섯 개를 잡으면 새 기술도 "아, 그거구나" 하고 이해돼요. 아래의 자바·스프링 용어는 백엔드 과정에서 배우는 것이라 괄호에 한 줄 풀이를 달았고, 자세한 내용은 <a href="../Back_end/#bigpicture-section">백엔드 큰 그림</a>에 있어요.</p>
+    <h3 class="bp-h"><span class="bp-step">5</span>계속 다시 나오는 큰 생각 6가지</h3>
+    <p class="bp-sub">과목 이름은 계속 바뀌었지만, 사실 <b>같은 생각이 모양만 바꿔 반복</b>됐습니다. 이 여섯 개를 잡으면 새 기술도 "아, 그거구나" 하고 이해돼요. 항목마다 이 과정(프런트엔드)의 예를 먼저 들고, 마지막 줄에 백엔드에서 같은 생각이 어떻게 나오는지 적었습니다. 백엔드 쪽 자세한 내용은 <a href="../Back_end/#bigpicture-section">백엔드 큰 그림</a>에 있어요.</p>
     <div class="bp-ideas">
       <div class="bp-idea"><span class="bp-idea-t">① 역할을 나눈다 (관심사 분리)</span>한 곳이 모든 일을 하면 고치기 어렵다. 그래서 계속 쪼갰어요.<ul>
         <li>HTML(구조) / CSS(모양) / JS(동작)</li>
-        <li>클래스 하나 = 책임 하나</li>
-        <li><b>DTO / DAO</b>(데이터를 담아 나르는 상자 / DB 일을 맡는 객체) → <b>MVC1 → MVC2</b>(JSP 한 장이 다 하던 일을 요청 처리·화면·데이터로 나누기)</li>
-        <li><b>Controller / Service / DAO / Mapper</b>(요청 받기 / 업무 처리 / DB 접근 / SQL 적어 두는 곳)</li></ul></div>
-      <div class="bp-idea"><span class="bp-idea-t">② 약속(인터페이스)과 구현을 떼어 놓는다</span>"무엇을 하느냐"와 "어떻게 하느냐"를 분리하면 갈아 끼울 수 있어요.<ul>
-        <li>추상 클래스·인터페이스·다형성</li>
-        <li>JDBC 인터페이스 ↔ MariaDB 드라이버(자바가 정한 DB 연결 약속 ↔ DB 쪽이 만든 실제 구현)</li>
-        <li><b>스프링 DI</b>(의존성 주입) — 필요한 객체를 직접 <code>new</code> 하지 않고 스프링이 넣어 준다</li></ul></div>
+        <li>화면은 <b>컴포넌트</b> 하나 = 조각 하나, 반복 로직은 <b>커스텀 훅</b>으로 화면에서 떼기</li>
+        <li><b>서버 컴포넌트</b>(데이터 가져오기) / <b>클라이언트 컴포넌트</b>(클릭 · 입력)</li>
+        <li>백엔드에서는 Controller / Service / DAO(요청 받기 / 업무 처리 / DB 접근)</li></ul></div>
+      <div class="bp-idea"><span class="bp-idea-t">② 약속과 구현을 떼어 놓는다</span>"무엇을 하느냐"와 "어떻게 하느냐"를 분리하면 갈아 끼울 수 있어요.<ul>
+        <li><b>props</b> — 부모는 "이런 값을 준다"만 약속하고, 자식이 어떻게 그리는지는 모른다</li>
+        <li><b>API 명세</b> — "이 주소에 보내면 이런 JSON이 온다"만 맞으면 서버가 무엇으로 만들었든(Next.js API Route · 스프링) 화면 코드는 그대로</li>
+        <li>백엔드에서는 인터페이스와 <b>DI</b>(필요한 객체를 스프링이 넣어 줌)</li></ul></div>
       <div class="bp-idea"><span class="bp-idea-t">③ 반복되는 일은 도구에 맡긴다</span>직접 해 보고 → 불편함을 느끼고 → 도구가 대신하는 순서로 배웠어요.<ul>
-        <li>배열 → 컬렉션(크기가 알아서 늘어나는 자바의 목록·묶음 도구, <code>ArrayList</code> 등)</li>
-        <li>JDBC 반복 코드 → <b>MyBatis</b>(SQL만 적으면 연결·결과 담기를 대신해 주는 도구)</li>
-        <li>Servlet 직접 작성 → <b>DispatcherServlet</b>(스프링이 모든 요청을 받아 알맞은 Controller로 나눠 주는 대표 창구)</li>
-        <li>로그 코드 복붙 → <b>AOP</b>(로그·트랜잭션 같은 공통 기능을 떼어 내 한곳에서 끼워 넣기) / XML 설정 → <b>Spring Boot</b>(설정을 대부분 자동으로 해 주는 스프링)</li></ul></div>
-      <div class="bp-idea"><span class="bp-idea-t">④ 요청 → 처리 → 응답</span>네트워크도, 웹도, 스프링도 결국 이 세 박자예요.<ul>
-        <li>소켓(자바 네트워크 연결): <code>accept()</code>(서버가 접속을 기다렸다 받기) → 읽기 → 쓰기</li>
-        <li>JS의 AJAX: 요청 보내고 응답 받기</li>
-        <li><b>Servlet</b>(자바로 요청을 받아 응답을 만드는 서버 프로그램): request → 처리 → response</li>
-        <li>forward / redirect = 응답을 어디로 보낼지(서버 안에서 다른 화면으로 넘기기 / 브라우저에게 다른 주소로 다시 요청하라고 하기)</li></ul></div>
+        <li><code>createElement</code>로 DOM 직접 고치기 → <b>React</b>가 바뀐 부분만 다시 그림</li>
+        <li>props 여러 층 전달 → <b>Context</b> → 필요한 값만 구독하는 <b>Zustand</b></li>
+        <li>긴 인라인 style → <b>Tailwind</b>, 주소 관리 직접 → Next.js <b>파일 기반 라우팅</b></li>
+        <li>백엔드에서는 JDBC 반복 → <b>MyBatis</b>, XML 설정 → <b>Spring Boot</b></li></ul></div>
+      <div class="bp-idea"><span class="bp-idea-t">④ 요청 → 처리 → 응답</span>화면도 서버도 결국 이 세 박자예요.<ul>
+        <li>AJAX · <code>fetch</code>: 요청 보내고 응답(JSON) 받기 — 그동안 화면은 멈추지 않는다(비동기)</li>
+        <li>Next.js <b>API Routes</b>: 같은 프로젝트 안의 작은 서버가 요청을 받아 응답</li>
+        <li><b>WebSocket</b>은 예외 — 연결을 열어 두고 서버가 먼저 밀어 준다</li>
+        <li>백엔드에서는 Servlet · Controller가 request → 처리 → response</li></ul></div>
       <div class="bp-idea"><span class="bp-idea-t">⑤ 데이터는 어디에, 언제까지 사나</span>값을 "얼마나 오래, 누구와 공유할지"에 따라 담는 곳이 달라져요.<ul>
-        <li>지역변수(블록) &lt; 필드(객체) &lt; static(프로그램 전체가 함께 씀)</li>
-        <li>request &lt; session &lt; application (scope: 요청 한 번 / 한 사용자의 접속 동안 / 서버가 켜져 있는 동안)</li>
-        <li>쿠키·localStorage(브라우저) vs <b>DB(영구)</b></li>
-        <li>트랜잭션 = DB에 "확정"하는 순간을 정하기</li></ul></div>
+        <li><b>state</b>(그 컴포넌트) &lt; <b>Context · Zustand</b>(앱 전체) — 화면에 안 보이는 값은 <code>useRef</code></li>
+        <li>새로고침에도 남기려면 <b>localStorage</b>(persist) — 단, 그 브라우저에만</li>
+        <li>쿠키(요청마다 서버로 감) vs localStorage(브라우저에만)</li>
+        <li>여러 기기 · 여러 사람이 함께 보려면 서버의 <b>DB</b>, 로그인 상태는 서버의 <b>세션</b></li></ul></div>
+      <div class="bp-idea"><span class="bp-idea-t">⑥ 브라우저에서 온 값은 믿지 않는다</span>브라우저 코드는 누구나 열어 보고 바꿀 수 있어요. 숨길 것은 서버에, 마지막 확인도 서버가.<ul>
+        <li>사용자 입력을 화면에 넣을 땐 <code>innerHTML</code> 대신 <b><code>textContent</code></b>(스크립트가 실행되지 않게)</li>
+        <li><b>API 키</b>는 브라우저 코드가 아니라 서버 쪽(API Route · 서버 컴포넌트)에</li>
+        <li>폼의 빈칸 검사는 <b>편의</b>일 뿐 — 요청은 개발자 도구로 얼마든지 직접 보낼 수 있다</li>
+        <li>백엔드에서는 서버 입력 검사(<code>@Validated</code>) · 비밀번호 해시(BCrypt) · "내 글인가" 권한 확인으로 이어진다</li></ul></div>
     </div>
 
     <h3 class="bp-h"><span class="bp-step">6</span>비슷해서 헷갈리는 말 — 한 표로</h3>
@@ -2303,7 +2309,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h3 class="bp-h"><span class="bp-step">7</span>면접에서 "무엇을 배웠나요?"라고 물으면</h3>
     <p class="bp-sub">아래는 이 과정을 30초로 말하는 예시입니다. 그대로 외우기보다 <b>내 말로 바꿔서</b> 연습하세요.</p>
     <div class="bp-pitch">
-      <p>"HTML·CSS로 화면 구조와 배치를, JavaScript로 DOM 조작과 AJAX 통신을 익힌 뒤, React로 컴포넌트·state 기반 화면을 만들었습니다. 이후 Next.js의 App Router, API Routes, 서버 컴포넌트를 배우고, 졸업 과제로 <b>Zustand로 전역 상태를 관리하고 WebSocket으로 실시간 시세를 받는 주식 대시보드</b>를 만들었습니다. 이때 REST용 API 키를 숨기려고 API Route를 중계 서버로 두는 등 <b>보안과 성능을 고려한 구조</b>를 직접 결정했습니다. 지금은 자바·스프링 백엔드 과정을 이어서 듣고 있습니다."</p>
+      <p>"HTML·CSS로 화면 구조와 배치를, JavaScript로 DOM 조작과 AJAX 통신을 익힌 뒤, React로 컴포넌트·state 기반 화면을 만들었습니다. 이후 Next.js의 App Router, API Routes, 서버 컴포넌트를 배우고, 졸업 과제로 <b>Zustand로 전역 상태를 관리하고 WebSocket으로 실시간 시세를 받는 주식 대시보드</b>를 만들었습니다. 이때 REST용 API 키를 숨기려고 API Route를 중계 서버로 두는 등 <b>보안과 성능을 고려한 구조</b>를 직접 결정했습니다. 지금은 자바·스프링 백엔드 과정에서 스프링 부트로 회원가입 · 로그인 · 파일 첨부 · 권한 검사를 갖춘 게시판을 만들며, 화면과 서버를 함께 다루는 풀스택으로 넓혀 가고 있습니다."</p>
       <p class="bp-pitch-note">💡 백엔드 과정의 큰 그림은 <a href="../Back_end/#bigpicture-section">백엔드 학습 노트</a>의 🗺️ 큰 그림 탭에 있어요. 두 탭의 1번 지도는 같은 그림이고, 칠해진 칸만 다릅니다.</p>
     </div>
   </section>
