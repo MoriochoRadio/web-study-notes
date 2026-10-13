@@ -1529,9 +1529,9 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <ol>
         <li><b>지도</b> — 배운 것들이 웹 서비스의 어느 칸인지</li>
         <li><b>타임라인</b> — 왜 이 순서로 배웠고, 지금 어디인지</li>
-        <li><b>예제 프로젝트 따라가기</b> — 01~08 프로젝트가 각각 무엇을 하려고 만든 것이고 무엇이 바뀌었나</li>
+        <li><b>예제 프로젝트 따라가기</b> — 01~10 프로젝트가 각각 무엇을 하려고 만든 것이고 무엇이 바뀌었나</li>
         <li><b>단계별 핵심</b> — 단계마다 꼭 알 것 · 헷갈리는 것 · 실무 · 면접 질문</li>
-        <li><b>계속 다시 나오는 큰 생각 5가지</b> — 과목은 달라도 같은 원리</li>
+        <li><b>계속 다시 나오는 큰 생각 6가지</b> — 과목은 달라도 같은 원리</li>
         <li><b>비슷해서 헷갈리는 말</b> — 한 표로 정리</li>
         <li><b>면접에서 이 과정을 설명한다면</b> — 30초 답변과 단골 질문</li>
       </ol>
@@ -1550,7 +1550,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <div class="bp-node bp-node-be here">
         <span class="bp-node-t">② 서버 (자바 프로그램)</span>
         <span class="bp-node-d">요청을 받아 "무엇을 할지" 판단하고, 결과 화면이나 데이터를 돌려준다.</span>
-        <span class="bp-node-s">Java · Servlet/JSP · Spring MVC</span>
+        <span class="bp-node-s">Java · Servlet/JSP · Spring MVC → Spring Boot</span>
       </div>
       <div class="bp-arrow">JDBC<br>MyBatis</div>
       <div class="bp-node bp-node-be here">
@@ -1571,13 +1571,10 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">8/31 ~ 9/9</span><span class="bp-what">SQL · 데이터베이스</span><span class="bp-badge done">완료</span><span class="bp-why">데이터를 꺼내고 저장하는 언어. 게시판의 모든 기능이 결국 SQL 한 줄로 끝난다.</span></li>
       <li class="done"><span class="bp-when">9/10 ~ 9/21</span><span class="bp-what">웹 기초: JDBC → JSP → Servlet → MVC2</span><span class="bp-badge done">완료</span><span class="bp-why">자바와 DB, 자바와 브라우저를 <b>손으로 직접</b> 잇는다. 불편함을 몸으로 겪는 단계.</span></li>
       <li class="done"><span class="bp-when">9/22 ~ 9/28</span><span class="bp-what">Spring MVC + MyBatis</span><span class="bp-badge done">완료</span><span class="bp-why">손으로 하던 반복 작업을 프레임워크가 대신한다. 같은 게시판을 더 짧고 정돈되게.</span></li>
-      <li class="done"><span class="bp-when">9/29 ~ 10/2</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP</span><span class="bp-badge done">완료</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리를 한 묶음으로, 공통 기능은 바깥으로.</span></li>
-      <li class="done"><span class="bp-when">10/6</span><span class="bp-what">인터셉터 · 단위 테스트(JUnit · MockMvc)</span><span class="bp-badge done">완료</span><span class="bp-why">막을 곳은 Controller 앞에서 한 번에 막고, 브라우저로 눌러 보던 확인은 코드로 적어 자동으로 되풀이한다.</span></li>
-      <li class="done"><span class="bp-when">10/7</span><span class="bp-what">스프링 부트 · Thymeleaf · Mapper 인터페이스</span><span class="bp-badge done">완료</span><span class="bp-why">06~08에서 XML로 직접 세운 부품을 부트의 자동 설정에 맡긴다. 같은 게시판을 다시 만들며 "무엇이 대신되는지"를 본다.</span></li>
-      <li class="done"><span class="bp-when">10/8</span><span class="bp-what">로그인 게시판(부트) — 회원가입·BCrypt · 입력값 검사 · 파일 업로드</span><span class="bp-badge done">완료</span><span class="bp-why">회원이 생기면 따라오는 숙제(비밀번호 보관 · 입력 검사 · 로그인한 사람만)를 풀고, 글에 파일을 붙여 DB와 디스크에 나눠 저장한다.</span></li>
-      <li class="now"><span class="bp-when">10/12 ~ 지금</span><span class="bp-what">로그인 게시판 개선 과제 — 생성자 주입 · 로그 · 설정 분리 · 권한 검증 · 첨부파일 수정</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">돌아가는 게시판의 구멍(남의 글 수정·삭제, 작성자 위조)을 서버에서 막고, 코드 습관(필드 주입 · println · 하드코딩 경로)을 실무 방식으로 바꾼다.</span></li>
-      <li><span class="bp-when">예정</span><span class="bp-what">일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">지금 만든 구조 위에 기능을 더 얹는다.</span></li>
-      <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">45일차에 주석으로 남은 Security 설정을 켜서 로그인·권한을 필터 체인에 맡기고, "요즘 방식" 스프링으로 마무리.</span></li>
+      <li class="done"><span class="bp-when">9/29 ~ 10/6</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP · 인터셉터 · 테스트</span><span class="bp-badge done">완료</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리는 한 묶음으로(트랜잭션), 공통 기능(로그 · 로그인 확인)은 바깥으로(AOP · 인터셉터), 확인은 코드로(JUnit).</span></li>
+      <li class="now"><span class="bp-when">10/7 ~ 지금</span><span class="bp-what">스프링 부트 — 같은 게시판을 부트로, 그리고 회원 · 파일 · 권한</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">XML로 직접 세우던 부품을 부트의 자동 설정에 맡기고(09), 그 위에 회원가입 · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판을 키운다(10). 기능만큼 중요한 것은 "서버는 브라우저에서 온 값을 그대로 믿지 않는다"는 습관.</span></li>
+      <li><span class="bp-when">예정</span><span class="bp-what">일정관리(캘린더) 게시판</span><span class="bp-badge next">예정</span><span class="bp-why">부트 구조로 새 게시판을 처음부터 끝까지 한 번 더. 자바 실습의 달력 출력이 웹 화면으로 돌아온다.</span></li>
+      <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">지금은 인터셉터와 직접 짠 코드로 하는 로그인 · 권한 확인을 Spring Security 필터 체인에 맡기고, 종합 프로젝트로 "요즘 방식" 스프링을 마무리.</span></li>
     </ol>
 
     <h3 class="bp-h" id="bp-projects"><span class="bp-step">3</span>예제 프로젝트 따라가기 — 01부터 10까지, 같은 게시판이 어떻게 바뀌었나</h3>
@@ -1793,7 +1790,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>인터셉터</b>: Controller 앞뒤에 끼어드는 검문소(preHandle이 false면 중단), 필터와 서는 자리가 다르다</li>
               <li><b>테스트</b>: 서버 없이 스프링 컨테이너를 띄워 <code>assertEquals</code>로 확인, DB에 기대면 통합 테스트</li>
             </ul></div>
-            <div class="bp-box wide"><span class="bp-box-t">앞으로</span><p>43일차에 단위 테스트(JUnit)를 시작했지만 아직 틀만 있는 테스트가 많고, 인터셉터는 로그인 기능이 생겨야 켤 수 있습니다. 이후 파일 업로드 · 캘린더 게시판을 거쳐 <b>Spring Boot</b>로 넘어갑니다. Boot로 가면 06에서 세운 XML 설정 대부분이 사라지지만, <b>07·08에서 익힌 Controller → Service → DAO 구조는 그대로</b> 갑니다.</p></div>
+            <div class="bp-box wide"><span class="bp-box-t">남은 불편 → 09 · 10으로</span><p>설정이 XML 세 벌(<code>web.xml</code> · root · servlet-context)에 흩어져 있고, 새 프로젝트마다 같은 설정을 다시 써야 합니다. 로그인 기능이 없어 인터셉터도 켜지 못했고, 테스트는 아직 틀만 있어요. 그래서 09에서 같은 게시판을 <b>스프링 부트</b>로 옮겨 설정을 걷어 내고, 10에서 회원 기능과 함께 인터셉터를 실제로 켭니다. <b>07·08에서 익힌 Controller → Service → DAO 구조는 그대로</b> 갑니다.</p></div>
           </div>
           <p class="bp-links">더 보기 → <a href="#class-day42">42일차</a><a href="#web-52">07 → 08 변화</a><a href="#web-54">refer·step·depth</a><a href="#web-57">페이지 번호</a><a href="#web-58">답글 달기</a><a href="#web-59">트랜잭션</a><a href="#web-60">AOP</a><a href="#web-61">생성자 주입</a><a href="#class-day43">43일차</a><a href="#web-62">인터셉터</a><a href="#web-63">JUnit 테스트</a><a href="#web-64">MockMvc</a></p>
         </div>
@@ -2135,32 +2132,24 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       </details>
 
             <details class="bp-mod" open>
-        <summary><span class="bp-mod-num">10</span><span class="bp-mod-title">웹 5 — 스프링 부트: 설정은 부트에게, 화면은 Thymeleaf로, 그리고 회원</span><span class="bp-badge now">📍 진행 중 · 44~46일차</span><span class="bp-mod-one">같은 게시판을 스프링 부트로 다시 만들고(44일차), 회원가입·로그인·입력값 검사·파일 첨부를 붙이고(45일차), 권한 검증·로그·설정 분리로 다듬는다(46일차).</span></summary>
+        <summary><span class="bp-mod-num">10</span><span class="bp-mod-title">웹 5 — 스프링 부트: 설정은 부트에게, 회원 · 파일 · 권한은 서버에서</span><span class="bp-badge now">📍 진행 중 · 44일차~</span><span class="bp-mod-one">같은 게시판을 부트로 다시 만들어 무엇이 자동이 되는지 보고(09), 회원가입 · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판으로 키운다(10).</span></summary>
         <div class="bp-mod-body">
           <div class="bp-grid">
-            <div class="bp-box easy wide"><span class="bp-box-t">쉽게 말하면</span><p>스프링 MVC는 <b>부품을 사서 직접 조립하는 컴퓨터</b>, 스프링 부트는 <b>완제품 노트북</b>이에요. 안에 든 부품(DispatcherServlet · ViewResolver · DataSource)은 같지만 조립은 공장(자동 설정)이 해 두었고, 우리는 설정 화면(<code>application.properties</code>)에서 DB 주소나 포트만 고릅니다. 전원 버튼(<code>main()</code>)을 누르면 서버(내장 톰캣)까지 켜져요.</p></div>
+            <div class="bp-box easy wide"><span class="bp-box-t">쉽게 말하면</span><p>스프링 MVC는 <b>부품을 사서 직접 조립하는 컴퓨터</b>, 스프링 부트는 <b>완제품 노트북</b>이에요. 안에 든 부품(DispatcherServlet · ViewResolver · DataSource)은 같지만 조립은 공장(자동 설정)이 해 두었고, 우리는 설정 화면(<code>application.properties</code>)에서 DB 주소나 포트만 고릅니다. 전원 버튼(<code>main()</code>)을 누르면 서버(내장 톰캣)까지 켜져요. 그 노트북 위에 이번엔 <b>회원제 가게</b>를 차렸습니다 — 입구에서 회원증을 보고(로그인), 신청서는 창구에서 다시 검사하고(입력값 검사), 손님 물건은 보관소에 맡기고(파일), <b>내 물건만 꺼낼 수 있게</b>(권한) 했어요.</p></div>
             <div class="bp-box"><span class="bp-box-t">꼭 알아야 할 것</span><ul>
-              <li><b>스타터</b>: 라이브러리 묶음 + 버전 관리(<code>spring-boot-starter-parent</code>)</li>
-              <li><b>자동 설정</b>: 클래스패스와 <code>application.properties</code> 값을 보고 흔한 빈을 등록</li>
-              <li><b>@SpringBootApplication</b>: 그 패키지와 아래를 스캔, <code>main()</code>이 내장 톰캣까지 띄운다</li>
-              <li><b>@Mapper</b>: namespace = 인터페이스 이름, id = 메서드 이름</li>
-              <li><b>Thymeleaf</b>: <code>th:each</code> · <code>th:text</code> · <code>th:value</code> · <code>@{…}</code>, 템플릿은 <code>templates/</code></li>
-              <li><b>Lombok</b>: <code>@RequiredArgsConstructor</code> + <code>final</code> = 생성자 주입</li>
-              <li><b>BCrypt</b>: <code>encode</code>로 저장, <code>matches</code>로 비교 — 해시끼리 <code>equals</code>는 항상 실패</li>
-              <li><b>@Validated + BindingResult</b>(바로 뒤) → <code>th:object</code> · <code>th:field</code> · <code>th:errors</code></li>
-              <li><b>파일</b>: <code>multipart/form-data</code> → <code>List&lt;MultipartFile&gt;</code>, UUID 이름, <code>useGeneratedKeys</code></li>
-              <li><b>@Slf4j</b>: <code>log.debug/info/warn/error("… {}", 값)</code>, 레벨·파일은 <code>logging.*</code></li>
-              <li><b>@Value("${키}")</b>: 여러 곳이 같아야 하는 값은 <code>application.properties</code> 한 줄에서</li>
+              <li><b>부트의 정체</b>: 스타터(라이브러리 묶음) + 자동 설정 + 내장 톰캣 → <code>main()</code> 하나로 실행, 설정은 <code>application.properties</code>의 값</li>
+              <li><b>DB와 화면</b>: <code>@Mapper</code> 인터페이스(namespace = 인터페이스, id = 메서드)와 Thymeleaf(<code>th:each</code> · <code>th:field</code> · 레이아웃 <code>layout:decorate</code>)</li>
+              <li><b>회원</b>: 비밀번호는 BCrypt로 <code>encode</code>해 저장하고 <code>matches</code>로 비교, 로그인 = 세션에 회원 정보</li>
+              <li><b>입력 검사</b>: 화면 입력 전용 Command 객체 + <code>@Validated</code> + 바로 뒤 <code>BindingResult</code></li>
+              <li><b>파일</b>: <code>multipart/form-data</code> → UUID 이름으로 디스크, 이름 정보는 DB. 둘을 함께 맞추는 건 개발자 몫</li>
+              <li><b>코드 습관</b>: 생성자 주입(<code>private final</code> + <code>@RequiredArgsConstructor</code>), <code>println</code> 대신 <code>@Slf4j</code>, 같아야 하는 값은 <code>@Value</code>로 한 곳에서</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">초보가 자주 헷갈리는 것</span><ul>
+              <li><b>인증 ≠ 권한</b> — 로그인 확인(인터셉터)을 통과했다고 남의 글을 고칠 자격까지 있는 건 아니다. 버튼 숨기기는 보안이 아니다</li>
+              <li>작성자 같은 "누가"는 폼의 hidden 칸이 아니라 <b>세션</b>에서 꺼낸다 — 폼 값은 바꿔 보낼 수 있다</li>
+              <li><code>@Transactional</code>은 <b>DB만</b> 되돌린다 — 디스크 파일은 직접 지우고, 되돌릴 수 없는 일(파일 삭제)은 맨 마지막에</li>
+              <li>Lombok 생성자 주입은 <code>final</code> 필드만 — 빠뜨리면 주입이 안 되고, 반대로 <code>@Value</code> 필드에 붙이면 기동 실패</li>
               <li>뷰 이름 앞에 <code>/</code>를 붙이면 IDE에서는 되고 <b>jar에서는 500</b> — <code>return "boardlist"</code>처럼</li>
-              <li><code>@SpringBootApplication</code> 패키지 <b>밖</b>에 둔 클래스는 스캔되지 않는다</li>
-              <li><code>th:onclick</code>에는 숫자·참거짓만 — 문자열은 <code>data-*</code> 속성으로</li>
-              <li><code>@RequiredArgsConstructor</code>인데 <code>final</code>을 빠뜨리면 주입이 안 된다</li>
-              <li><code>@Transactional</code>은 DB만 되돌린다 — 디스크에 저장한 파일은 직접 지운다</li>
-              <li>작성자 같은 "누가"를 폼의 hidden 칸에서 받으면 바꿔 보낼 수 있다 — 세션에서 꺼낸다</li>
-              <li>로그인 확인(인터셉터)을 통과했다고 <b>남의 글을 고칠 자격</b>까지 있는 건 아니다 — 버튼 숨기기는 보안이 아니다</li>
-              <li><code>@Value</code> 필드에 <code>final</code>을 붙이면 <code>@RequiredArgsConstructor</code> 생성자로 들어가 기동 실패</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>새 스프링 프로젝트는 거의 부트로 시작하고, jar 하나를 서버에 올려 <code>java -jar</code>로 띄웁니다. 설정은 <code>application.yml</code>과 프로파일(dev · prod)로 나누고, 비밀번호는 환경 변수로 넣어요. MyBatis를 쓰는 곳은 Mapper 인터페이스 방식이 표준이고, 화면을 서버에서 그리면 Thymeleaf, React 같은 프런트가 있으면 <code>@RestController</code>로 JSON만 돌려줍니다.</p></div>
             <div class="bp-box"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
@@ -2177,29 +2166,26 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       </details>
 
       <details class="bp-mod">
-        <summary><span class="bp-mod-num">11</span><span class="bp-mod-title">앞으로 배울 것 — 미리 감 잡기</span><span class="bp-badge next">예정</span><span class="bp-mod-one">단위 테스트, 파일 업로드, 캘린더 게시판, 그리고 Spring Boot · Thymeleaf · Spring Security로 마무리.</span></summary>
+        <summary><span class="bp-mod-num">11</span><span class="bp-mod-title">앞으로 배울 것 — 미리 감 잡기</span><span class="bp-badge next">예정</span><span class="bp-mod-one">남은 것은 일정관리(캘린더) 게시판과 Spring Security. 이미 시작한 JUnit · 파일 업로드 · Spring Boot · Thymeleaf는 위 09 · 10 단계에 정리했다.</span></summary>
         <div class="bp-mod-body">
           <div class="bp-grid">
-            <div class="bp-box"><span class="bp-box-t">JUnit 단위 테스트 — 43일차에 시작</span><p>브라우저로 일일이 눌러 보지 않고, <b>코드로 "이 메서드가 이 값을 돌려주는지"</b> 자동으로 확인합니다. 43일차에 08에 테스트 클래스를 처음 붙였고(<a href="#web-63">web-63</a>), 지금은 틀만 있는 테스트가 많아요. 생성자 주입을 배운 이유 중 하나가 여기서 드러납니다 — 가짜 DAO를 넣어 Service만 따로 시험할 수 있거든요.</p></div>
-            <div class="bp-box"><span class="bp-box-t">파일 업로드 · 다운로드 — 45일차에 시작</span><p>45일차에 <a href="#web-71">10 프로젝트</a>로 해 봤어요. 폼에 <code>enctype="multipart/form-data"</code>를 붙여 파일을 보내고, 서버는 파일을 디스크에 저장한 뒤 <b>DB에는 파일 경로·이름만</b> 저장합니다. 같은 이름 덮어쓰기를 막으려고 저장할 땐 이름을 바꿔요(UUID 등).</p></div>
-            <div class="bp-box"><span class="bp-box-t">일정관리(캘린더) 게시판</span><p>자바 실습과제의 <b>달력 출력</b>이 웹 화면으로 돌아옵니다. 월별 달력 + 날짜별 일정 CRUD — 지금까지 배운 Spring MVC 구조를 한 번 더 처음부터 끝까지 반복하는 연습이에요.</p></div>
-            <div class="bp-box"><span class="bp-box-t">Spring Boot — 44일차에 시작</span><p>44일차에 <a href="#web-65">09 프로젝트</a>로 시작했어요. 06~08에서 쓰던 <code>web.xml</code>, <code>servlet-context.xml</code>, <code>root-context.xml</code> 같은 설정을 <b>자동 설정</b>으로 대체하고, 톰캣까지 안에 품고 있어 <code>main()</code> 실행 한 번으로 서버가 뜹니다. 설정은 <code>application.properties</code> 한 파일로. <b>개념은 지금 배운 Spring MVC 그대로</b>입니다.</p></div>
-            <div class="bp-box"><span class="bp-box-t">Thymeleaf — 44일차에 시작</span><p>44일차에 <a href="#web-67">09의 화면</a>으로 처음 썼어요. JSP를 대신하는 화면 템플릿. <code>th:text</code>, <code>th:each</code>처럼 HTML 속성으로 값을 끼워 넣어서, 서버 없이 열어도 HTML로 보이는 게 장점입니다. JSTL의 <code>&lt;c:forEach&gt;</code> ↔ <code>th:each</code>로 대응해 보면 금방 익숙해져요.</p></div>
-            <div class="bp-box"><span class="bp-box-t">Spring Security — 45일차에 맛보기</span><p>45일차 10 프로젝트에 의존성이 들어왔지만 필터 체인은 <code>permitAll()</code>로 꺼 두고 <code>PasswordEncoder</code>(BCrypt)만 썼어요(<a href="#web-69">web-69</a>). 로그인·로그아웃, "관리자만 들어갈 수 있는 페이지" 같은 <b>인증(누구냐)과 인가(무엇을 할 수 있냐)</b>를 맡는 스프링 모듈. 내부적으로는 웹 과정에서 배운 <b>Filter</b>와 <b>Session</b> 위에서 동작합니다. 비밀번호는 반드시 암호화(BCrypt)해서 저장해요.</p></div>
+            <div class="bp-box"><span class="bp-box-t">일정관리(캘린더) 게시판</span><p>자바 실습과제의 <b>달력 출력</b>이 웹 화면으로 돌아옵니다. 월별 달력 + 날짜별 일정 CRUD — 지금까지의 구조(부트 · Mapper · Thymeleaf · 로그인)를 <b>새 게시판 하나로 처음부터 끝까지</b> 다시 밟는 연습이에요.</p></div>
+            <div class="bp-box"><span class="bp-box-t">Spring Security</span><p>로그인 · 로그아웃, "관리자만 들어갈 수 있는 페이지" 같은 <b>인증(누구냐)과 인가(무엇을 할 수 있냐)</b>를 맡는 스프링 모듈입니다. 10 프로젝트에 의존성은 이미 들어 있어요(지금은 <code>PasswordEncoder</code>만 쓰고 필터 체인은 <code>permitAll()</code>). 켜면 지금 인터셉터와 직접 짠 코드로 하는 확인을 <b>필터 체인</b>이 대신하고, 회원 등급(<code>ADMIN</code> · <code>USER</code>)으로 주소를 나눌 수 있게 됩니다. 내부적으로는 웹 과정에서 배운 <b>Filter</b>와 <b>Session</b> 위에서 동작해요.</p></div>
           </div>
         </div>
       </details>
 
     </div>
 
-    <h3 class="bp-h"><span class="bp-step">5</span>계속 다시 나오는 큰 생각 5가지</h3>
-    <p class="bp-sub">과목 이름은 계속 바뀌었지만, 사실 <b>같은 생각이 모양만 바꿔 반복</b>됐습니다. 이 다섯 개를 잡으면 새 기술도 "아, 그거구나" 하고 이해돼요.</p>
+    <h3 class="bp-h"><span class="bp-step">5</span>계속 다시 나오는 큰 생각 6가지</h3>
+    <p class="bp-sub">과목 이름은 계속 바뀌었지만, 사실 <b>같은 생각이 모양만 바꿔 반복</b>됐습니다. 이 여섯 개를 잡으면 새 기술도 "아, 그거구나" 하고 이해돼요.</p>
     <div class="bp-ideas">
       <div class="bp-idea"><span class="bp-idea-t">① 역할을 나눈다 (관심사 분리)</span>한 곳이 모든 일을 하면 고치기 어렵다. 그래서 계속 쪼갰어요.<ul>
         <li>HTML(구조) / CSS(모양) / JS(동작)</li>
         <li>클래스 하나 = 책임 하나</li>
         <li><b>DTO / DAO</b> → <b>MVC1 → MVC2</b></li>
-        <li><b>Controller / Service / DAO / Mapper</b></li></ul></div>
+        <li><b>Controller / Service / DAO / Mapper</b></li>
+        <li>화면 입력(Command) / DB 한 행(DTO)</li></ul></div>
       <div class="bp-idea"><span class="bp-idea-t">② 약속(인터페이스)과 구현을 떼어 놓는다</span>"무엇을 하느냐"와 "어떻게 하느냐"를 분리하면 갈아 끼울 수 있어요.<ul>
         <li>추상 클래스·인터페이스·다형성</li>
         <li>JDBC 인터페이스 ↔ MariaDB 드라이버</li>
@@ -2218,7 +2204,13 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <li>지역변수(블록) &lt; 필드(객체) &lt; static(프로그램)</li>
         <li>request &lt; session &lt; application (scope)</li>
         <li>쿠키·localStorage(브라우저) vs <b>DB(영구)</b></li>
-        <li>트랜잭션 = DB에 "확정"하는 순간을 정하기</li></ul></div>
+        <li>트랜잭션 = DB에 "확정"하는 순간을 정하기</li>
+        <li>로그인 정보는 세션, 파일 내용은 디스크 · 이름은 DB</li></ul></div>
+      <div class="bp-idea"><span class="bp-idea-t">⑥ 브라우저에서 온 값은 믿지 않는다</span>화면에서 막아도 요청은 얼마든지 직접 보낼 수 있어요. 그래서 마지막 확인은 늘 서버가 합니다.<ul>
+        <li>SQL 조각 끼워 넣기 → <b>PreparedStatement · <code>#{}</code></b></li>
+        <li>빈칸 · 길이 → 화면 JS에 더해 서버 <b><code>@Validated</code></b></li>
+        <li>비밀번호 → 원문 대신 <b>BCrypt 해시</b></li>
+        <li>작성자 · "내 글인가" → hidden 칸이 아니라 <b>세션과 DB</b>로</li></ul></div>
     </div>
 
     <h3 class="bp-h"><span class="bp-step">6</span>비슷해서 헷갈리는 말 — 한 표로</h3>
@@ -2259,8 +2251,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h3 class="bp-h"><span class="bp-step">7</span>면접에서 "무엇을 배웠나요?"라고 물으면</h3>
     <p class="bp-sub">아래는 이 과정을 30초로 말하는 예시입니다. 그대로 외우기보다 <b>내 말로 바꿔서</b> 연습하세요. 핵심은 "무엇을 만들었고, 왜 그 구조였는지"입니다.</p>
     <div class="bp-pitch">
-      <p>"프런트엔드에서는 HTML·CSS·JavaScript로 화면을 만들고, React와 Next.js로 컴포넌트 기반 주식 대시보드를 완성했습니다. 백엔드에서는 자바 객체지향과 SQL을 익힌 뒤, JDBC와 JSP로 게시판을 직접 만들어 보고, 같은 게시판을 Servlet MVC2와 Spring MVC + MyBatis로 옮기면서 <b>계층을 나누는 이유</b>를 체감했습니다. 최근에는 답변형 게시판에 페이징과 답글을 구현하고, 답글 저장을 <b>@Transactional로 묶어</b> 데이터가 꼬이지 않게 했으며, <b>AOP로 공통 로그</b>를 분리했습니다."</p>
-      <p class="bp-pitch-note">💡 면접관이 이어서 물어볼 만한 것: "트랜잭션이 왜 필요했나요?", "MVC1에서 MVC2로 바꾸면서 뭐가 좋아졌나요?", "MyBatis를 쓰면 JDBC보다 뭐가 편한가요?" — 위 단계 카드의 면접 질문으로 준비할 수 있어요.</p>
+      <p>"프런트엔드에서는 HTML·CSS·JavaScript로 화면을 만들고, React와 Next.js로 컴포넌트 기반 주식 대시보드를 완성했습니다. 백엔드에서는 자바 객체지향과 SQL을 익힌 뒤, JDBC와 JSP로 게시판을 직접 만들어 보고, 같은 게시판을 Servlet MVC2와 Spring MVC + MyBatis로 옮기면서 <b>계층을 나누는 이유</b>를 체감했습니다. 답변형 게시판에서는 답글 저장을 <b>@Transactional로 묶어</b> 데이터가 꼬이지 않게 하고 <b>AOP로 공통 로그</b>를 분리했으며, 최근에는 같은 게시판을 <b>스프링 부트</b>로 옮겨 회원가입(BCrypt) · 입력값 검사 · 파일 첨부를 붙이고, <b>작성자 본인만 수정 · 삭제하도록 서버에서 권한을 확인</b>했습니다."</p>
+      <p class="bp-pitch-note">💡 면접관이 이어서 물어볼 만한 것: "트랜잭션이 왜 필요했나요?", "MVC1에서 MVC2로 바꾸면서 뭐가 좋아졌나요?", "MyBatis를 쓰면 JDBC보다 뭐가 편한가요?", "스프링 부트로 바꾸면서 무엇이 사라졌나요?", "남의 글 수정은 화면이 아니라 어디서 막았나요?" — 위 단계 카드의 면접 질문으로 준비할 수 있어요.</p>
     </div>
   </section>
 
