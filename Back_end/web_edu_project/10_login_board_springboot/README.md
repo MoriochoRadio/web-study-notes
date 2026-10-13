@@ -19,9 +19,9 @@
 
 ## 선생님 원본과 다른 점
 
-10/8에는 `MemberController`(`@RequiredArgsConstructor` + `final`, 내 수정)와 `application.properties`의 DB 계정 줄만 달랐다. 10/12 개선 과제로 12개 파일이 더 바뀌었다 — `command/UpdateBoardCommand` · `config/LoginInterceptor` · `config/WebMvcConfig` · `controller/BoardController` · `controller/MemberController` · `mapper/FileMapper` · `service/BoardService` · `service/FileService` · `service/MemberService` · `application.properties` · `mybatis/FileMapper.xml` · `templates/board/boardDetail.html`. 저장소 사본은 실습 폴더(`workspace-boot/login_board_springboot10`)와 바이트 단위로 같고, `application.properties`의 비밀번호 줄만 `YOUR_DB_PASSWORD`다.
+10/8에는 `MemberController`(`@RequiredArgsConstructor` + `final`, 내 수정)와 `application.properties`의 DB 계정 줄만 달랐다. 10/12 개선 과제로 12개 파일이 더 바뀌었다 — `command/UpdateBoardCommand` · `config/LoginInterceptor` · `config/WebMvcConfig` · `controller/BoardController` · `controller/MemberController` · `mapper/FileMapper` · `service/BoardService` · `service/FileService` · `service/MemberService` · `application.properties` · `mybatis/FileMapper.xml` · `templates/board/boardDetail.html`. 저장소 사본은 실습 폴더(`workspace-boot/login_board_springboot10`)와 바이트 단위로 같다. 예외는 `application.properties`의 비밀번호 줄(`YOUR_DB_PASSWORD`)과, 저장소용으로 `logs/`를 더한 `.gitignore`다.
 
-2026-10-12에 선생님 레포를 원격에서 다시 확인했다. 마지막 push는 10/7 16:01(09 프로젝트)이고, 10/8 수업분과 개선 과제 풀이는 올라와 있지 않다.
+2026-10-12에는 선생님 레포의 마지막 push가 10/7 16:01(09 프로젝트)이었다. **2026-10-13 09:25에 `login_board10 완료`**가 올라와 대조했다 — 선생님 풀이는 `BoardController` · `FileService` · `MemberService`를 생성자 주입으로 바꾸고(`BoardService` · `MemberController`는 `@Autowired` 그대로) `insertBoard`에 파일 칸 null 검사를 넣었다. 다만 그 바로 앞 줄의 `System.out.println("파일첨부여부:"+(!files.get(0).isEmpty()))`이 먼저 실행되어 파일 칸이 없는 요청은 여전히 NullPointerException이다(소스로 따진 결과). 이 실습 폴더는 두 가지를 이미 포함하고 더 고쳤으므로 선생님 파일로 덮어쓰지 않았다.
 
 ## 현재 구현 범위 (2026-10-12)
 
