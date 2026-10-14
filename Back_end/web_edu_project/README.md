@@ -2,7 +2,7 @@
 
 > 최신 상태: 2026-10-14(48일차) 기준. 01 회원·구매, 02 MVC1 게시판,
 > 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트), 11 일정관리(캘린더) 게시판 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day42)
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day48)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
 > 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
@@ -10,8 +10,8 @@
 
 🛠️ 새 컴퓨터라면 **[개발환경 준비 안내](https://moriochoradio.github.io/web-study-notes/setup/#java-web)**부터 진행하세요. Eclipse Import · JDK/Tomcat 연결 · [실습 DB 준비 SQL](../../setup/bootstrap-hk.sql) · JDBC 설정을 한 순서로 정리했습니다.
 
-취업아카데미 백엔드 과정의 **웹 개발(JSP · Servlet) 수업** 실습 프로젝트입니다.
-2026-09-10(28일차)부터 **Eclipse JEE + Tomcat 10.1** 환경에서 진행하고 있습니다.
+취업아카데미 백엔드 과정의 **웹 개발 수업**(JSP · Servlet → Spring MVC → Spring Boot) 실습 프로젝트입니다.
+2026-09-10(28일차)부터 **Eclipse JEE + Tomcat 10.1**(01~08), 2026-10-07(44일차)부터 **Spring Boot 4.1 · Antigravity**(09~11, 내장 톰캣 9090)에서 진행하고 있습니다.
 
 정리된 학습 노트는 대시보드의 **🖥️ 웹 개발** 탭에서 볼 수 있습니다
 → https://moriochoradio.github.io/web-study-notes/Back_end/#web-01

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>원본 파일 보기 | 취업아카데미 학습 노트</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="저장소의 원본 코드·SQL·Markdown 파일을 UTF-8로 읽어 보여 주는 뷰어">
 <!--
   GitHub Pages는 .java를 charset 없이(한글이 깨짐), .sql을 application/sql(다운로드)로,
@@ -93,8 +94,26 @@
         if (/^([a-z]+:|#)/i.test(h)) { if (/^https?:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; } return; }
         const url = new URL(h, new URL(dir, location.href.split("view.html")[0]));
         const rel = decodeURIComponent(url.pathname.slice(new URL("./", location.href).pathname.length));
-        if (/\.(java|sql|mjs|cjs|js|jsx|ts|tsx|css|json|md|jsp|xml|properties|txt)$/i.test(rel)) a.href = "view.html?f=" + encodeURI(rel) + url.hash;
-        else a.href = url.pathname + url.search + url.hash;
+        const last = rel.replace(/\/$/, "").split("/").pop();
+        if (/\.(java|sql|mjs|cjs|js|jsx|ts|tsx|css|json|md|jsp|xml|properties|txt)$/i.test(rel)
+            || (/\.html$/i.test(rel) && rel.includes("src/main/resources/templates/"))) {
+          // 코드·문서 파일과 서버 템플릿(Thymeleaf .html — 그대로 열면 깨진 화면)은 이 뷰어로
+          a.href = "view.html?f=" + encodeURI(rel) + url.hash;
+        } else if (rel === "" || rel.endsWith("/") || !last.includes(".")) {
+          // 폴더 링크: GitHub에서는 폴더 화면이지만 Pages는 index.html이 없으면 404다.
+          // 우선 GitHub 폴더 화면으로 걸어 두고, index.html이 있으면 사이트 페이지, README.md가 있으면 이 뷰어로 바꾼다.
+          const d = rel.replace(/\/?$/, "/");
+          const enc = d.split("/").map(encodeURIComponent).join("/");
+          a.href = REPO.replace("/blob/", "/tree/") + enc.replace(/\/$/, "");
+          a.target = "_blank"; a.rel = "noopener";
+          const ok = (p) => fetch(p, { method: "HEAD" }).then(r => r.ok).catch(() => false);
+          ok(enc + "index.html").then(has => {
+            if (has) { a.href = enc + url.hash; a.removeAttribute("target"); return; }
+            return ok(enc + "README.md").then(hasReadme => {
+              if (hasReadme) { a.href = "view.html?f=" + encodeURI(d + "README.md") + url.hash; a.removeAttribute("target"); }
+            });
+          });
+        } else a.href = url.pathname + url.search + url.hash;
       });
       out.querySelectorAll("img[src]").forEach(img => {
         const s = img.getAttribute("src");

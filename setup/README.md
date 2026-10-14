@@ -13,13 +13,14 @@
 | HTML · CSS · JavaScript | 브라우저, VS Code. AJAX는 로컬 HTTP 서버 사용 |
 | Java 기초 | JDK **21**, VS Code + Extension Pack for Java |
 | SQL | MariaDB Server **12.3.3**, HeidiSQL |
-| JSP · Servlet | JDK **21**, Eclipse **Enterprise Java and Web Developers 2026-03**, Tomcat **10.1.x**, MariaDB, Connector/J |
+| JSP · Servlet (웹 01~08) | JDK **21**, Eclipse **Enterprise Java and Web Developers 2026-03**, Tomcat **10.1.x**, MariaDB, Connector/J |
+| Spring Boot (웹 09~11, 지금 수업) | JDK **21**, Antigravity IDE(VS Code 계열, Java 확장) 또는 VS Code + Java 확장, MariaDB — Maven은 프로젝트의 `mvnw`가 받아 온다 |
 | React · Next.js | VS Code, **Node.js 24 LTS** + 함께 설치되는 npm, 각 프로젝트의 `package.json` |
 
 Java/Eclipse/Tomcat/DB는 [수업 README](../Back_end/web_edu_project/README.md), [웹 개발 노트](../Back_end/index.html#web-01), 프로젝트의 `.classpath` 및 `.settings`에 근거합니다.
 JDK 공급사·세부 패치와 이전 Node 버전은 기록만으로 확정할 수 없습니다. Temurin JDK 21 및 Node 24 LTS는 **새 설치 권장값**입니다.
 Connector/J는 수업 기록 **3.3.3**, 새 설치는 같은 3.3 계열의 최신 안정 패치를 우선합니다. 한 프로젝트에는 JAR 한 개만 둡니다.
-현재 Eclipse 웹 프로젝트에는 `pom.xml`/`build.gradle`이 없으므로 Maven·Gradle·Spring을 먼저 설치할 필요는 없습니다.
+웹 프로젝트 01~05에는 빌드 파일이 없고, 06~08은 Maven(`pom.xml` — Eclipse가 의존성을 받는다), 09~11은 Spring Boot 4.1.1(`pom.xml` + Maven Wrapper `mvnw`)입니다. 어느 쪽도 Maven·Gradle·Spring을 따로 설치할 필요는 없습니다. DB 비밀번호는 01~02는 소스에, 06~08은 `properties/db.properties`(`.example`을 복사), 09~11은 `application.properties`의 `YOUR_DB_PASSWORD` 자리에 로컬에서만 채웁니다.
 
 ## 프로젝트 받기
 
@@ -41,7 +42,8 @@ Set-Location web-study-notes
 3. HeidiSQL에서 **로컬 실습 서버를 선택한 뒤** [bootstrap-hk.sql](bootstrap-hk.sql)을 열어 실행합니다. 기존 테이블·행을 삭제하지 않습니다. 기존 스키마를 수정하거나 수업 전체 DB를 복원하는 파일은 아닙니다.
 4. 두 웹 프로젝트 각각의 `src/main/webapp/WEB-INF/lib/`에 Connector/J JAR를 넣고, 수업 README의 DB 접속 정보를 로컬에서 채웁니다. 실제 비밀번호를 커밋하지 않습니다.
 5. Eclipse → Run on Server → `http://localhost:8080/01_userboard_sepa/`에서 회원 목록을 확인합니다. SQL 접속, Java 실행, 웹 첫 화면을 각각 확인해야 준비 완료입니다.
-6. React는 레슨 폴더에서 `npm ci`(lockfile 있음) 또는 `npm install`(없음), `npm run dev`를 실행합니다. Windows PowerShell에서 npm.ps1 실행이 막히면 `npm.cmd`를 사용합니다.
+6. 스프링 부트(09~11)는 프로젝트 폴더에서 `mvnw.cmd spring-boot:run`(또는 IDE 실행 버튼) → `http://localhost:9090/`. 각 프로젝트 README의 테이블 준비와 실행 절차를 따릅니다.
+7. React는 레슨 폴더에서 `npm ci`(lockfile 있음) 또는 `npm install`(없음), `npm run dev`를 실행합니다. Windows PowerShell에서 npm.ps1 실행이 막히면 `npm.cmd`를 사용합니다.
 
 ## 설치 상태 점검 (선택)
 

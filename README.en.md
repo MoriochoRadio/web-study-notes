@@ -33,7 +33,7 @@ As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both th
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Java daily exercises · concept cards · 12 practice problems · 221 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Daily class notes through day 48 · Java concept cards · SQL 46 · web 81 (JDBC/JSP → Spring MVC → Spring Boot, schedule board) · 12 practice problems · 66 coding-test notes · 221 exam-prep questions | 🔄 In progress (started 2026-08-03) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
@@ -90,7 +90,10 @@ Manual checks remain available, and the same checks now run automatically for `m
 │   └── slides/           # Lecture materials (PPT)
 └── Back_end/     # Backend (Java) track
     ├── index.html            # Java backend study-note dashboard
-    ├── java_edu_project/     # Class exercises organized by date
+    ├── java_edu_project/     # Java class exercises organized by date
+    ├── sql_edu_project/      # SQL class scripts
+    ├── web_edu_project/      # Web class projects 01–11 (JSP → Spring Boot)
+    ├── coding-tests/         # Coding-test notes by round (with local verification)
     └── *.pptx / *.pdf        # Course materials and assignments
 ```
 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="새 노트북에서 취업아카데미 실습 시작하기. JDK 21, Eclipse, Tomcat, MariaDB, React 설치와 첫 실행 안내.">
   <title>개발환경 준비 | 취업아카데미 학습 노트</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="setup.css">
   <script src="setup.js" defer></script>
 </head>
@@ -51,7 +52,7 @@
       <section id="start" class="panel">
         <div class="section-number">01 / START</div>
         <h2>오늘 실습할 과목부터 선택하세요</h2>
-        <p>Java 웹 수업을 이어간다면 <strong>JSP · Servlet</strong> 순서로 진행하세요. 모든 도구를 한 번에 설치할 필요는 없습니다.</p>
+        <p>지금 Java 웹 수업은 <strong>스프링 부트(웹 09~11)</strong>입니다 — JDK 21과 DB는 아래 JSP · Servlet 준비와 같고, 프로젝트마다 들어 있는 <code>mvnw</code>로 실행합니다(<a href="#java-web-boot">스프링 부트 안내</a>). Java 웹을 처음부터 따라간다면 <strong>JSP · Servlet</strong> 순서로 진행하세요. 모든 도구를 한 번에 설치할 필요는 없습니다.</p>
         <div class="tracks">
           <a href="#java-web"><strong>JSP · Servlet</strong><span>JDK + Eclipse + Tomcat + DB</span><span class="track-link">현재 웹 실습 준비 →</span></a>
           <a href="#java-basics"><strong>Java 기초</strong><span>JDK 21 + VS Code</span><span class="track-link">자바 실행 →</span></a>
@@ -151,7 +152,7 @@ Back_end/web_edu_project/02_hkboard_MVC1/src/main/webapp/WEB-INF/lib/</code></pr
           <li>01 프로젝트: <code>com/hk/board/dao/UserDao.java</code>, <code>BuyDao.java</code>의 각 메서드, 총 10곳.</li>
           <li>02 프로젝트: <code>com/hk/board/datasource/DataBase.java</code> 1곳.</li>
         </ul>
-        <p class="callout"><strong>비밀번호를 GitHub에 올리지 마세요.</strong> 현재 수업 원본은 소스에 직접 채우는 방식입니다. 커밋 전 변경 내역을 보고 실제 비밀번호가 들어간 줄은 제외하세요. 파일이 이미 추적 중이면 <code>.gitignore</code>만 추가해도 숨겨지지 않습니다. DB 계정을 바꿨다면 사용자 값도 맞춰야 합니다.</p>
+        <p class="callout"><strong>비밀번호를 GitHub에 올리지 마세요.</strong> 01~02 수업 원본은 소스에 직접 채우는 방식이고, 06~08은 <code>src/main/resources/properties/db.properties</code>(<code>db.properties.example</code>을 복사), 09~11은 <code>application.properties</code>의 <code>YOUR_DB_PASSWORD</code> 자리에 채웁니다. 커밋 전 변경 내역을 보고 실제 비밀번호가 들어간 줄은 제외하세요. 파일이 이미 추적 중이면 <code>.gitignore</code>만 추가해도 숨겨지지 않습니다. DB 계정을 바꿨다면 사용자 값도 맞춰야 합니다.</p>
         <h3>5. 첫 웹 실습 실행</h3>
         <ol>
           <li><strong>Window → Show View → Servers</strong>에서 Tomcat v10.1 서버를 만들고 두 프로젝트를 추가합니다.</li>
@@ -242,11 +243,11 @@ npm.cmd run dev</code></pre>
           <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/01_userboard_sepa/.classpath">Eclipse .classpath</a>와 <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Back_end/web_edu_project/01_userboard_sepa/.settings/org.eclipse.wst.common.project.facet.core.xml">Project Facets</a>: JavaSE-21, Tomcat v10.1, Web 6.0 설정.</li>
           <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/lessons/01_react_jsx_props/package.json">React 첫 레슨 package.json</a> · <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/Front_end/4.react/stock-dashboard/package.json">졸업 과제 package.json</a>: 프런트엔드 의존성 근거. 과거 Node 버전은 확정하지 않습니다.</li>
         </ul>
-        <p>노트에 Maven 3.9.16, Spring Framework 6.1.x / Boot 3.2~3.3, MyBatis 3.5.15+ 조합도 있지만, 현재 두 Eclipse 웹 프로젝트에는 Maven/Gradle 빌드 파일이 없습니다. <strong>해당 수업에서 필요해질 때 추가</strong>하면 됩니다.</p>
+        <p id="java-web-boot"><strong>스프링 부트(웹 09~11, 2026-10-07~)</strong> — 웹 06~08은 Maven(<code>pom.xml</code>)으로 Spring MVC · MyBatis를 받는 Eclipse 프로젝트이고, 09~11은 <strong>Spring Boot 4.1.1</strong> · MyBatis 스타터 4.1.0 · Thymeleaf 프로젝트입니다. 09~11에는 Maven Wrapper(<code>mvnw</code> · <code>mvnw.cmd</code>)가 들어 있어 Maven을 따로 설치하지 않아도 되고, 수업은 Antigravity IDE(VS Code 계열, Java 확장)에서 진행합니다. 실행은 프로젝트 폴더에서 <code>mvnw.cmd spring-boot:run</code> 또는 IDE 실행 버튼, 주소는 <code>http://localhost:9090/</code>(프로젝트의 <code>server.port</code>)입니다. 프로젝트마다 <a href="../view.html?f=Back_end/web_edu_project/11_schedule_springboot/README.md">README</a>에 필요한 테이블과 실행 절차가 있습니다.</p>
         <details><summary>macOS / Linux / ARM 노트북에서도 사용할 수 있나요?</summary><p>공식 다운로드에서 OS와 CPU(x64 또는 ARM64/AArch64)를 맞춰 선택하세요. JDK 21·Tomcat 10.1·Node 24의 기준은 같습니다. Windows용 MSI·.exe·점검 스크립트는 사용하지 않습니다. MariaDB는 해당 OS용 공식 설치 안내를 따르고 HeidiSQL 대신 MariaDB CLI 등 접속 도구를 사용할 수 있습니다.</p><p>Linux는 테이블명의 대소문자를 구분할 수 있습니다. 수업 코드가 사용하는 <code>USERTBL</code>, <code>BUYTBL</code>, <code>HKBOARD</code>와 실제 이름을 맞춰야 합니다. 기존 DB의 전역 설정을 함부로 바꾸지 말고 로컬 실습 스키마·쿼리 이름을 함께 점검하세요. Windows 기준 동작을 그대로 보장하는 안내는 아닙니다.</p></details>
         <p class="sources">공식 기준: <a href="https://tomcat.apache.org/whichversion.html">Tomcat 호환 표</a> · <a href="https://adoptium.net/temurin/releases/?version=21">JDK 21</a> · <a href="https://nodejs.org/en/about/previous-releases">Node LTS 현황</a> · <a href="https://mariadb.org/mariadb/all-releases/">MariaDB 릴리스</a> · <a href="https://mariadb.org/connector-java/all-releases/">Connector/J 릴리스</a> · <a href="https://code.visualstudio.com/docs/java/java-tutorial">VS Code Java 안내</a></p>
       </section>
-      <footer>준비가 끝났다면 <a href="../Back_end/">백엔드 학습 노트</a> 또는 <a href="../Front_end/">프론트엔드 학습 노트</a>로 이어가세요.<br>수업 환경 기준과 공식 배포 정보 확인: 2026-09-19.</footer>
+      <footer>준비가 끝났다면 <a href="../Back_end/">백엔드 학습 노트</a> 또는 <a href="../Front_end/">프론트엔드 학습 노트</a>로 이어가세요.<br>수업 환경 기준과 공식 배포 정보 확인: 2026-09-19 · 스프링 부트 안내 추가: 2026-10-14.</footer>
     </div>
   </div>
 </main>

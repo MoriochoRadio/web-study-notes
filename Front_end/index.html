@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>웹 개발 학습 노트 | 취업아카데미</title>
-<meta name="description" content="취업아카데미 HTML·CSS·JavaScript 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
+<meta name="description" content="취업아카데미 HTML·CSS·JavaScript·React·Next.js 복습 노트 — 개념 설명, 주석 달린 코드, 핵심 정리로 다시 공부하는 페이지">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -1692,7 +1692,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <h1>웹 개발 학습 노트</h1>
         <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
         <div class="meta-row">
-          <span id="updated-badge">마지막 점검: 2026-10-02</span>
+          <span id="updated-badge">마지막 점검: 2026-10-14</span>
           <span>HTML 7개 단원</span>
           <span>CSS 12개 단원</span>
           <span>JavaScript 18개 단원</span>
@@ -18309,16 +18309,17 @@ function showJourneySubject(subject){
 }
 journeySubtabBtns.forEach(b => b.addEventListener("click", () => showJourneySubject(b.dataset.subject)));
 
-// ---- 테마 전환 (라이트 기본, 선택은 localStorage에 저장) ----
+// ---- 테마 전환 (저장한 선택 → 없으면 운영체제 설정, 버튼으로 고를 때만 localStorage에 저장) ----
+// 예전에는 열 때마다 저장해서, 처음 방문한 순간의 밝기가 굳어 운영체제 설정을 다시 따라가지 않았다.
 const themeBtn = document.getElementById("theme-btn");
-function applyTheme(t){
+function applyTheme(t, save){
   document.documentElement.dataset.theme = t;
   themeBtn.textContent = t === "dark" ? "라이트 모드" : "다크 모드";
-  localStorage.setItem("theme", t);
+  if (save) { try { localStorage.setItem("theme", t); } catch (e) {} }
 }
-applyTheme(document.documentElement.dataset.theme || "light");
+applyTheme(document.documentElement.dataset.theme || "light", false);
 themeBtn.addEventListener("click", () =>
-  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true));
 
 // 긴 노트를 읽을 때는 카드 간격을 좁혀 한 화면에 더 많이 보도록 선택할 수 있다.
 const DENSITY_KEY = "studyNoteDensity";
