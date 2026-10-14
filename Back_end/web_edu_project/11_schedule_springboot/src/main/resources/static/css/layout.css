@@ -1,67 +1,59 @@
 @charset "UTF-8";
 
-.content {
-    margin: 80px 150px 10px;
+.content{
+	margin: 80px 150px 10px;
 }
 
 /* footer요소 하단에 위치하는 코드 시작 --------*/
 /* footer요소가 항상 바닥에 위치하면서 페이지 내부가 길어지면 아래로 밀리면서 계속 하단에 위치 */
 
 #container {
-    min-height: calc(90vh - 50px);
-    /* 50px은 푸터 높이 */
+   min-height: calc(90vh - 50px); /* 50px은 푸터 높이 */
 }
 
-.footer {
-    text-align: center;
-    line-height: 50px;
-    height: 50px;
+.footer{
+	text-align: center;
+	line-height: 50px;
+	height: 50px;
 }
-
 /* footer요소 하단에 위치하는 코드 종료--------*/
 
 
 /*달력 폼*/
 #ctitle {
-    text-align: center;
-    font-size: 20px;
+	text-align: center;
+	font-size: 20px;
 }
 
-.cal #thead>div {
-    text-align: center;
+.cal #thead > div {
+	text-align: center;
 }
 
-.cal #tbody>div {
-    height: 120px;
-    vertical-align: top;
-    border-top: 1px solid gray;
-    /* 	position: relative; */
+.cal #tbody > div{
+	height: 120px;
+	vertical-align: top;
+	border-top:1px solid gray;
+/* 	position: relative; */
 }
-
 /* 달력 내부에 div 박스들을 인라인요소처럼 옆으로 나열시키려고 설정*/
-.cal #thead>div,
-.cal #tbody>div {
-    display: inline-block;
-    width: 140px;
+.cal #thead > div, .cal #tbody > div{
+	display: inline-block; width: 140px;
 }
+.cal {width:1100px;}
 
-.cal {
-    width: 1100px;
-}
-
-.pen {
-    width: 20px;
-    height: 20px;
+.pen{
+	width: 20px;
+	height: 20px;
 }
 
 /* 유효값처리 에러 폰트색설정 */
-.errorField {
-    color: red;
+.errorField{
+	color:red;
 }
 
-#tbody div>p {
-    background-color: orange;
-    margin: 2px;
-    padding: 1px;
-    font-weight: bold;
+#tbody div > p{
+	background-color: orange;
+	margin: 2px;
+	padding: 1px;
+	font-weight: bold;
 }

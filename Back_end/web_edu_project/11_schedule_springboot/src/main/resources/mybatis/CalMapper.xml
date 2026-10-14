@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- namespace 속성: 반드시 정의 해야함 -->
-<!-- CalMapper인터페이스의 경로를 설정  -->
+<!-- namespace속성: 반드시 정의 해야함-->
+<!-- CalMapper 인터페이스의 경로를 설정-->
 <mapper namespace="com.hk.board.mapper.CalMapper">
-    <insert id="insertCalBoard" parameterType="CalDto"> INSERT into calboard VALUES(NULL,
-        #{id},#{title},#{content},#{mdate},SYSDATE()) </insert>
-    <select id="calBoardList" parameterType="Map" resultType="CalDto"> SELECT
-        seq,id,title,content,mdate,regdate FROM calboard WHERE id = #{id} AND MDATE LIKE
-        CONCAT(#{yyyyMMdd}, '%') ORDER BY mdate asc </select>
-    <select id="calBoardDetail" parameterType="Integer" resultType="CalDto"> SELECT
-        seq,id,title,content,mdate,regdate FROM calboard WHERE seq = #{seq} </select>
-    <update id="calBoardUpdate" parameterType="CalDto"> UPDATE calboard SET title = #{title},
-        content=#{content}, mdate = #{mdate}, regdate=SYSDATE() WHERE seq = #{seq} </update>
-    <delete id="calMulDel" parameterType="Map"> DELETE FROM calboard WHERE seq IN <foreach
-            collection="seqs" item="seq" open="(" close=")" separator=","> #{seq} </foreach>
+
+    <insert id="insertCalBoard" parameterType="CalDto">
+        INSERT INTO calboard
+        VALUES(NULL,#{id},#{title},#{content},#{mdate},SYSDATE())
+    </insert>
+    <select id="calBoardList" parameterType="Map"
+                              resultType="CalDto">
+        SELECT seq, id,title, content,mdate,regdate 
+        FROM calboard
+        WHERE id = #{id}
+        AND MDATE LIKE CONCAT(#{yyyyMMdd}, '%')
+        order by mdate asc
+    </select>
+    <select id="calBoardDetail" parameterType="Integer"
+                                resultType="CalDto">
+        SELECT seq, id,title, content,mdate,regdate 
+        FROM calboard
+        WHERE seq = #{seq}
+    </select>
+
+    <update id="calBoardUpdate" parameterType="CalDto">
+        UPDATE calboard
+        SET title=#{title}, content=#{content},
+            mdate=#{mdate}, regdate=SYSDATE()
+        WHERE seq=#{seq}
+    </update>
+
+    <delete id="calMulDel" parameterType="Map">
+        DELETE FROM calboard WHERE seq IN 
+        <foreach collection="seqs" item="seq"
+                 open="(" close=")" separator=",">
+            #{seq}
+        </foreach>
     </delete>
 </mapper>

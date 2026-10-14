@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.1.1</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hk.board</groupId>
 	<artifactId>schedule_springboot11</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>schedule_springboot11</name>
-	<description />
-	<url />
+	<description/>
+	<url/>
 	<licenses>
-		<license />
+		<license/>
 	</licenses>
 	<developers>
-		<developer />
+		<developer/>
 	</developers>
 	<scm>
-		<connection />
-		<developerConnection />
-		<tag />
-		<url />
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
 	</scm>
 	<properties>
 		<java.version>21</java.version>
@@ -42,7 +41,7 @@
 		<!-- thymeleaf layout 설정-->
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
+		  	<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -102,9 +101,8 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>3.2.0</version>
+			<version>3.2.6</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
