@@ -1,7 +1,7 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-10-12(46일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트) 프로젝트를 포함한다.
+> 최신 상태: 2026-10-13(47일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트), 11 일정관리(캘린더) 게시판 프로젝트를 포함한다.
 > [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day42)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
@@ -30,6 +30,7 @@
 | [`08_answerboard_springMVC`](08_answerboard_springMVC/README.md) | **답변형 게시판.** refer·step·depth, 10개씩 페이지 목록, 조회수 redirect, 논리 삭제, header·footer include와 Bootstrap, SLF4J 로거(39~40일차). 페이지 번호·답글 달기, 답글 트랜잭션(`@Transactional`), DAO 로그 AOP, 생성자 주입(41~42일차). 로그인 확인 인터셉터(등록은 주석)와 JUnit 5 · spring-test 테스트 클래스(43일차) | web-52~64 |
 | [`09_hkboard_springboot`](09_hkboard_springboot/README.md) | **스프링 부트 게시판.** 07의 게시판을 Boot 4.1 · `@Mapper` 인터페이스 · Thymeleaf · Lombok으로 다시 만든다. XML 설정 없이 `application.properties`만, 내장 톰캣(9090). 수업 도구는 Antigravity(44일차) | web-65~68 |
 | [`10_login_board_springboot`](10_login_board_springboot/README.md) | **로그인 게시판(부트).** 선생님 완성본을 실행하며 따라감 — 회원가입·로그인(BCrypt), Command 객체 `@Validated`, 여러 파일 업로드·다운로드, resultMap `collection`, Thymeleaf 레이아웃, `WebMvcConfigurer` 인터셉터, `@ControllerAdvice`(45일차). 개선 과제 — 생성자 주입 통일 · `@Slf4j` · 업로드 경로 `@Value` · 작성자 본인 확인 · 수정할 때 첨부파일 삭제·추가(46일차) | web-69~77 |
+| [`11_schedule_springboot`](11_schedule_springboot/README.md) | **일정관리(캘린더) 게시판.** 새 부트 프로젝트. `Calendar`로 그 달 1일의 요일 · 마지막 날을 구해 Thymeleaf로 달력을 그리고 이전·다음 달 링크를 붙였다. 일정 SQL은 준비만(47일차) | web-78~79 |
 
 ## 개발 환경
 
@@ -197,8 +198,7 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 앞으로
 
 > 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 교육과정 전체 자료를 기준으로
-> 다시 맞췄다. **지금(2026-10-12, 46일차·10번 프로젝트 개선 과제)까지 5번의 대부분, 6번(부트에서), 8·9번이 진행됐고 10번(Security)은 의존성만 들어왔다(46일차의 작성자 확인은 Security 없이 Controller · Service에서 직접).**
-> 7번은 아직 수업 전이라 프로젝트도 없다.
+> 다시 맞췄다. **지금(2026-10-13, 47일차·11번 프로젝트)까지 5번의 대부분, 6 · 8 · 9번이 진행됐고, 7번(일정관리)을 시작했다. 10번(Security)은 10 프로젝트에 의존성만 들어왔다(46일차의 작성자 확인은 Security 없이 Controller · Service에서 직접).**
 
 1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
 2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차, 01~02 프로젝트)
@@ -209,10 +209,10 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 5. **Spring 답변형 게시판** — ~~로깅(SLF4J)~~, ~~AOP~~, ~~`@Transactional` 트랜잭션~~(39~42일차, 08 프로젝트),
    JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석)
 6. **파일 업로드 · 다운로드** (45일차, 10 프로젝트 — 스프링 부트에서. 46일차에 수정할 때 첨부파일 삭제·추가)
-7. **일정관리(캘린더) 게시판** — Spring MVC로 월별 달력·일정 CRUD
+7. **일정관리(캘린더) 게시판** — 스프링 부트로 월별 달력·일정 CRUD (47일차 시작, 11 프로젝트 — 달력까지) ← **여기까지 진행 중**
 8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환 (44일차 시작, 09 · 10 프로젝트)
 9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수 (44일차 시작 — `th:each` · `th:text` · `@{…}` · `#dates`. 45일차 레이아웃 · `th:replace` 프래그먼트 · `th:field` · `th:errors`)
-10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`. 46일차 개선 과제로 작성자 본인 확인 · 로그 · 설정 분리) ← **여기까지 진행 중**
+10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`. 46일차 개선 과제로 작성자 본인 확인 · 로그 · 설정 분리)
 
 ## 고친 것 · 남긴 것
 
@@ -633,3 +633,15 @@ Spring Initializr로 Boot 4.1.1 · Java 21 프로젝트를 만들고 스타터(w
 - **확인함** — 저장소 사본을 `127.0.0.1:9098`로 실행하고 로컬 MariaDB에 임시 회원 두 명(A · B)을 만들어 21개 항목 통과: 작성자 위조 차단, B의 삭제·수정 차단 + WARN 로그, A의 첨부 삭제·추가와 디스크 삭제, 다른 글 파일 번호를 섞으면 제목까지 롤백, "파일 0", DEBUG SQL 로그와 `logs/app.log`. 끝난 뒤 테스트 행 삭제(남은 행 0).
 - **확인함(10/13)** — `@Value` 필드에 `final`을 붙인 사본은 기동 실패(`Parameter 3 of constructor … required a bean of type 'java.lang.String'`).
 - **확인하지 않음** — Antigravity 실행, 실제 브라우저 화면, 확장자 없는 파일 업로드.
+
+## 11_schedule_springboot — 일정관리(캘린더) 게시판
+
+[프로젝트 실행 안내와 구현 범위](11_schedule_springboot/README.md) · [47일차](../index.html#class-day47) · [개념 카드 78~79](../index.html#web-78) · [개념서 41장](../index.html#book-be-41)
+
+### 2026-10-13 (47일차) — 새 프로젝트, 달력 한 장
+
+Spring Initializr로 새 부트 프로젝트를 만들었다(스타터는 10과 거의 같고 Security는 pom에서 주석, modelmapper 추가 — 아직 안 씀). `CalServiceImp.makeCalendar`가 `Calendar`로 `cal.set(year, month - 1, 1)` 뒤 `DAY_OF_WEEK` · `getActualMaximum(DAY_OF_MONTH)`를 구하고, 0월 · 13월은 자동 보정된 값을 다시 읽는다. `calendar.html`은 `#numbers.sequence`로 빈 칸(`dayOfWeek - 1`, 일요일 시작이면 `th:if`로 건너뜀)과 날짜를 찍고 CSS(칸 140px · 줄 1100px)가 7칸마다 줄을 바꾼다. 이전·다음 달(연) 링크는 ±1만 보낸다. `CalMapper.xml`에 일정 추가 · 그날의 목록(`MDATE LIKE CONCAT(#{yyyyMMdd}, '%')`) · 상세 · 수정 · 여러 개 삭제 SQL을 미리 썼다.
+
+- **확인함** — DB만 H2 메모리 DB로 바꾼 사본으로 2000~2030년 372개월이 JavaScript `Date` 계산과 일치, 0월 · 13월 보정, 잘못된 값(`abc` · 빈 문자열) 500. 브라우저 칸 위치로 5줄 · 4줄 · 6줄 확인. Thymeleaf `sequence(1, 0)` = `[1, 0]`.
+- **확인함** — 선생님 레포 10/13 커밋과 대조: 실습 폴더가 이전·다음 링크, 보정 값 다시 읽기, `ADN` → `AND`, `lombok.ToString`(선생님 `groovy.transform.ToString` — `toString()`이 만들어지지 않음)까지 앞서 있다.
+- **확인하지 않음** — 실제 MariaDB와 Antigravity 실행, 일정 SQL(부르는 코드가 없음), `calboard` 테이블 DDL(수업 자료에서 찾지 못함).

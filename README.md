@@ -1,5 +1,7 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
+**2026-10-14 갱신:** [47일차(10/13)](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day47) — 새 부트 프로젝트 [`11_schedule_springboot`](Back_end/web_edu_project/11_schedule_springboot/)로 **일정관리(캘린더) 게시판**을 시작한 수업을 반영했다(DB 비밀번호는 `YOUR_DB_PASSWORD`로 가림). 서버가 `Calendar`로 그 달 1일의 요일 · 마지막 날을 구하고 Thymeleaf가 `#numbers.sequence`로 칸을 찍는 달력 한 장 — 수업 진도 카드 1장, 웹 개념 2장, 📘 개념서 41장, 학습 여정 29단계, 시험 문제 5개와 🗺️ 큰 그림 탭(백엔드 · 프런트엔드 타임라인, 11 프로젝트 카드, 단계 "웹 6")을 고쳤다. 이날은 코딩테스트 오답노트가 없다. 선생님 GitHub의 10/13 커밋과 대조하니 실습 폴더가 이전·다음 달 링크와 오타 수정까지 앞서 있었다. DB만 H2로 바꾼 사본으로 2000~2030년 372개월을 JavaScript `Date`와 비교해 모두 일치했다. 실제 MariaDB · Antigravity 실행은 하지 않았다. [검증 기록](Back_end/sync-validation-2026-10-13.md)
+
 **2026-10-13 갱신:** [46일차(10/12)](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day46) — 선생님이 준 **개선사항 표 5개**로 [`10_login_board_springboot`](Back_end/web_edu_project/10_login_board_springboot/)를 직접 고친 수업(생성자 주입 통일 · `println` → `@Slf4j` · 업로드 경로를 `application.properties` + `@Value`로 · 수정·삭제할 때 작성자 본인 확인 · 수정할 때 첨부파일 삭제·추가를 한 트랜잭션으로)과 [24회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-12/)(3 PASS · 1 FAIL)를 반영했다. 수업 진도 카드 1장, 웹 개념 4장, 코딩테스트 4장, 📘 개념서 40장, 학습 여정 28단계, 시험 문제 6개와 🗺️ 큰 그림 탭을 고쳤다. 45일차에 기록한 구멍(작성자 위조 · 남의 글 수정·삭제 · 첨부 없는 글의 "파일 1")이 막혔는지, 저장소 사본을 로컬 MariaDB에 임시 회원 두 명으로 실행해 21개 항목을 확인했다(테스트 행은 삭제). 선생님 GitHub에는 10/13 아침 `login_board10 완료`가 올라왔는데, 실습 폴더가 이미 그 내용을 포함하고 있었다(10/13 점검). [검증 기록](Back_end/sync-validation-2026-10-12.md)
 
 **2026-10-12 갱신:** [45일차(10/8)](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day45) — 선생님 완성본 **로그인 게시판** [`10_login_board_springboot`](Back_end/web_edu_project/10_login_board_springboot/)을 실행하며 따라간 수업(회원가입·로그인 BCrypt · Command 객체 `@Validated` · 파일 업로드·다운로드 · resultMap `collection` · Thymeleaf 레이아웃 · 부트식 인터셉터 · `@ControllerAdvice`)과 [23회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-08/)(1 PASS · 3 FAIL)를 반영했다. 수업 진도 카드 1장, 웹 개념 5장, 코딩테스트 4장, 📘 개념서 39장, 학습 여정 27단계, 시험 문제 6개와 🗺️ 큰 그림 탭을 고쳤다. 선생님 GitHub는 10/7 이후 push가 없어(10은 10/6에 완성본으로 올라옴) 실습 폴더에 더 가져올 것은 없었다. DB만 H2로 바꾼 사본으로 가입부터 로그아웃까지 실행해 보니, 작성자를 폼의 hidden 칸에서 받아 **다른 회원 이름으로 글을 쓸 수 있었고**, 첨부 없는 글도 "파일 1"로 나왔다. 실제 MariaDB · Antigravity 실행은 하지 않았다. [검증 기록](Back_end/sync-validation-2026-10-08.md)
@@ -58,14 +60,14 @@ JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러�
 | 과정 | 반영 범위 | 상태 |
 | --- | --- | --- |
 | 프런트엔드 | HTML 7 · CSS 12 · JavaScript 18(AJAX까지) · React/Next.js 14단원 · StockDash 졸업 과제 | ✅ 완료 |
-| 백엔드 | Java 날짜별 수업 실습 46일차 · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 77항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis·답변형 게시판·트랜잭션·AOP·인터셉터·JUnit·Spring Boot·Thymeleaf·로그인·파일 업로드·권한 검증) · 코딩테스트 62문제 · 시험 대비 211문제 | 🔄 진행 중 (2026-08-03 시작) |
+| 백엔드 | Java 날짜별 수업 실습 47일차 · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 79항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis·답변형 게시판·트랜잭션·AOP·인터셉터·JUnit·Spring Boot·Thymeleaf·로그인·파일 업로드·권한 검증·일정관리 달력) · 코딩테스트 62문제 · 시험 대비 216문제 | 🔄 진행 중 (2026-08-03 시작) |
 | 저장소 위생 | 의존성·Next.js 빌드 캐시·환경 변수·IDE 파일 제외 규칙 적용 | ✅ 점검 완료 |
 
 > **노트 작성 원칙:** 모든 학습 카드는 “한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리”의 순서로 구성합니다. 실행 가능한 원본 코드는 단원 폴더에 남기고, 대시보드는 개념과 코드 흐름을 빠르게 복습하는 용도로 사용합니다.
 
 ## 복습과 검증 방식
 
-공부 순서가 필요하면 **📘 개념서 탭**에서 1장부터 차례대로 읽으세요(백엔드 40장 · 프런트 31장, 교안 개념과 수업 코드를 장마다 연결). 처음이거나 흐름이 헷갈린다면 두 대시보드의 **🗺️ 큰 그림 탭**부터 보세요 — 배운 것이 웹 서비스의 어느 칸인지, 단계마다 꼭 알 것과 면접 질문이 무엇인지 한 장에 모았습니다. 두 대시보드 모두 **복습 탭**으로 열립니다 — "뭐부터 볼까"에 한 줄로 답하고 버튼 하나로 5분 플래시카드를 시작합니다(헷갈린다고 표시한 카드가 있으면 그것부터). 그 밖에 검색, 접기/펼치기, 다크 모드, 진도 체크, 오답 노트를 지원해 필요한 내용을 다시 찾는 시간을 줄입니다. 과목별 안내 문서에는 현재 범위와 폴더 구조를 기록하고, 수업 후에는 원본 코드와 복습 카드가 같은 단원을 가리키는지 함께 확인합니다.
+공부 순서가 필요하면 **📘 개념서 탭**에서 1장부터 차례대로 읽으세요(백엔드 41장 · 프런트 31장, 교안 개념과 수업 코드를 장마다 연결). 처음이거나 흐름이 헷갈린다면 두 대시보드의 **🗺️ 큰 그림 탭**부터 보세요 — 배운 것이 웹 서비스의 어느 칸인지, 단계마다 꼭 알 것과 면접 질문이 무엇인지 한 장에 모았습니다. 두 대시보드 모두 **복습 탭**으로 열립니다 — "뭐부터 볼까"에 한 줄로 답하고 버튼 하나로 5분 플래시카드를 시작합니다(헷갈린다고 표시한 카드가 있으면 그것부터). 그 밖에 검색, 접기/펼치기, 다크 모드, 진도 체크, 오답 노트를 지원해 필요한 내용을 다시 찾는 시간을 줄입니다. 과목별 안내 문서에는 현재 범위와 폴더 구조를 기록하고, 수업 후에는 원본 코드와 복습 카드가 같은 단원을 가리키는지 함께 확인합니다.
 
 | 대상 | 확인 방법 | 기록 위치 |
 | --- | --- | --- |
@@ -154,7 +156,7 @@ python3 scripts/verify_backend_inventory.py
     ├── index.html            # Java 백엔드 학습 노트 대시보드
     ├── java_edu_project/     # 날짜별 수업 실습 코드
     ├── sql_edu_project/      # SQL 과정 실습 스크립트
-    ├── web_edu_project/      # 웹 개발 실습 프로젝트 01~10 (JSP → MVC2 → 스프링 → 스프링 부트)
+    ├── web_edu_project/      # 웹 개발 실습 프로젝트 01~11 (JSP → MVC2 → 스프링 → 스프링 부트)
     ├── coding-tests/         # 회차별 코딩테스트 기록 (제출 코드 · 정정 풀이 · 로컬 검증)
     └── *.pptx / *.pdf        # 교안 · 실습과제
 ```
