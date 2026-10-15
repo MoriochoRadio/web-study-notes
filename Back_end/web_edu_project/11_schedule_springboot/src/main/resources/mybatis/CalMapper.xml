@@ -17,6 +17,14 @@
         AND MDATE LIKE CONCAT(#{yyyyMMdd}, '%')
         order by mdate asc
     </select>
+    <select id="calViewList" parameterType="Map"
+                            resultType="CalDto">
+        SELECT seq, id, title, content, mdate, regdate
+        FROM calboard
+        WHERE id = #{id}
+        AND MDATE LIKE CONCAT(#{yyyyMM}, '%')
+        ORDER BY mdate ASC
+    </select>
     <select id="calBoardDetail" parameterType="Integer"
                                 resultType="CalDto">
         SELECT seq, id,title, content,mdate,regdate 

@@ -1,40 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div layout:fragment="content">
         <div id="container">
             <h1>일정관리[달력]</h1>
             <div class="cal">
-                <div id="ctitle">  
-                    <a th:href= "@{/schedule/calendar(year=${calMap.year-1},month=${calMap.month})}">◁</a>   
-                    <a th:href= "@{/schedule/calendar(year=${calMap.year},month=${calMap.month-1})}">◀</a> 
+                <div id="ctitle">
+                    <a th:href="@{/schedule/calendar(year=${calMap.year-1},month=${calMap.month})}">◁</a>
+                    <a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month-1})}">◀</a>
                     <span class="y" th:text="${calMap.year}"></span>
                     <span>년</span>
                     <span class="m" th:text="${calMap.month}"></span>
                     <span>월</span>
-                    <a th:href= "@{/schedule/calendar(year=${calMap.year},month=${calMap.month+1})}">▶</a>   
-                    <a th:href= "@{/schedule/calendar(year=${calMap.year+1},month=${calMap.month})}">▷</a>
+                    <a th:href="@{/schedule/calendar(year=${calMap.year},month=${calMap.month+1})}">▶</a>
+                    <a th:href="@{/schedule/calendar(year=${calMap.year+1},month=${calMap.month})}">▷</a>
                 </div>
                 <div id="thead">
-                    <div>일</div><div>월</div><div>화</div><div>수</div>
-                    <div>목</div><div>금</div><div>토</div>
+                    <div>일</div>
+                    <div>월</div>
+                    <div>화</div>
+                    <div>수</div>
+                    <div>목</div>
+                    <div>금</div>
+                    <div>토</div>
                 </div>
                 <div id="tbody">
-                    <th:block th:if= "${calMap.dayOfWeek>1}">
-                        <div th:each= "num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>
+                    <th:block th:if="${calMap.dayOfWeek>1}">
+                        <div th:each="num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>
                     </th:block>
-                    <th:block th:each= "i:${#numbers.sequence(1,calMap.lastDay)}">
+                    <th:block th:each="i:${#numbers.sequence(1,calMap.lastDay)}">
                         <div>
-                            <!-- 과제: 날짜 숫자를 누르면 그날의 일정 목록으로 (year, month, date 전달) -->
-                            <a th:href="@{/schedule/calboardlist(year=${calMap.year},month=${calMap.month},date=${i})}" th:text="${i}" class="d"></a>
+                            <a th:href="@{/schedule/calboardlist(year=${calMap.year},month=${calMap.month},date=${i})}"
+                                th:text="${i}" class="d"></a>
                             <a th:href="@{/schedule/addcalboardform(year=${calMap.year},month=${calMap.month},date=${i})}">추가</a>
+                            <!-- 일정 목록이 출력되는 부분 -->
+                            <div class="clist" th:with="cview=${@util.getCalView(calMap.get('clist'), i)}">
+                                <th:block th:utext="${cview}"></th:block>
+                            </div>
                         </div>
                     </th:block>
                 </div>
@@ -42,4 +52,5 @@
         </div>
     </div>
 </body>
+
 </html>
