@@ -1,0 +1,336 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>26회차 코딩테스트 · 2026-10-16</title><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}}:not(pre)>code{overflow-wrap:anywhere}</style><style>.ct-box,.ct-src,.self-check{background:rgba(127,127,127,.06);border:1px solid #dce3ed;border-radius:10px;padding:12px 16px;margin:14px 0}.ct-box p{white-space:pre-line;margin:0}.ct-box-title,.self-check-title{font-weight:700;margin-bottom:6px}.note-tags .tag{display:inline-block;font-size:.8rem;margin-right:6px;padding:1px 8px;border:1px solid #dce3ed;border-radius:999px}.practice-note{border-left:3px solid #255ec7;padding-left:12px}.code-head{font-size:.85rem;color:#5a6d84;margin-top:14px}.copy-btn{display:none}</style></head><body><main><nav><a href="../../index.html#class-day50">50일차 수업</a> / <a href="../../index.html#ct-67">백엔드 코딩테스트</a> / <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/README.md">Markdown 기록</a></nav><h1>26회차 코딩테스트</h1><p>2026-10-16 · Java 2문제 · SQL 2문제 · <b>2 PASS / 2 FAIL</b></p><p>FAIL 두 문제 중 타겟 넘버는 제출 코드 칸의 코드가 로컬 검증에서 정답과 같아, 대장균 분류 2는 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. 아래 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-67">
+  <div class="note-head">
+    <span class="note-num">26회차</span>
+    <h3>없는 숫자 더하기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">전체 합 − 있는 것의 합</span><span class="tag">등차수열 합</span><span class="tag">향상된 for · -=</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>0~9의 합은 45로 정해져 있고 배열 원소는 모두 다르니, <b>45에서 배열에 있는 숫자를 모두 빼면</b> 없는 숫자들의 합이 남는다. 무엇이 없는지 하나하나 찾을 필요가 없다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>0번부터 9번까지 공이 든 상자에서 몇 개를 꺼냈어요. 상자에 남은 공의 번호 합을 알려면 남은 공을 다 볼 필요 없이 "원래 합 45 − 꺼낸 공의 번호 합"이면 됩니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">26회차 · 2026.10.16</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/86051" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>0부터 9까지의 숫자 중 일부가 들어 있는 정수 배열 <code>numbers</code>(길이 1~9, 원소는 모두 다름)가 주어질 때, <b>배열에 없는 0~9 숫자를 모두 찾아 더한 수</b>를 반환하는 문제. <code>[1,2,3,4,6,7,8,0]</code> → 5 + 9 = 14.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/MissingNumbersSum.java">📄 제출 코드 파일</a> · <a href="./">📁 26회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int solution(int[] numbers) {
+        int sum = 45;                         // ← 0+1+…+9
+
+        for(int i=0;i&lt;numbers.length;i++){
+            sum= sum-numbers[i];              // ← 있는 숫자를 하나씩 뺀다
+        }
+
+        return sum;                           // ← 남은 것 = 없는 숫자들의 합
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 원문에는 같은 생각을 <code>for (int num : numbers) sum -= num;</code>으로 다듬은 코드와 해설이 함께 적혀 있다.
+
+<b>왜 되나 — 여집합</b>
+0~9 전체 = 배열에 있는 것 + 없는 것. 원소가 <b>모두 다르다</b>는 조건 덕분에 "있는 것의 합"이 겹치지 않아, 전체 합에서 빼면 정확히 "없는 것의 합"이다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>조건을 확인하지 않음</b> — 중복이 있으면 이 풀이는 깨진다. 조건 밖이지만 <code>[9,9]</code>를 넣으면 27(실제 없는 0~8의 합은 36). 문제의 "모두 다르다" 한 줄이 이 풀이의 전제다.
+2. <b>하나하나 찾기</b> — 0~9마다 배열을 다 훑으면 이중 반복문이 된다. 여기서는 크기가 작아 상관없지만, 같은 문제를 1~n으로 키우면 차이가 커진다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>가능한 입력 전부 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 [1,2,3,4,6,7,8,0] → 14 · [5,8,4,0,6,7,9] → 6          → 통과
+0~9 의 부분집합 중 길이 1~9 인 것 전부 1,022개   → '없는 숫자를 직접 더한 값'과 모두 같음
+(조건 밖) 중복 [9,9]                               → 27  (실제 36 — 중복이 없어야 되는 풀이)</pre>
+      <div class="run-note">원소가 모두 다르고 0~9 안이니, 가능한 배열은 0~9의 부분집합(순서만 다름)이에요. 그래서 1,022개(2^10 − 빈 것 − 전체)를 모두 돌려 볼 수 있었습니다. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 여집합 — 전체에서 빼기</b>
+범위가 정해져 있고 중복이 없으며 구하는 것이 "합 · 개수"일 때, 하나하나 찾는 대신 전체 값에서 있는 것을 뺀다. 확인용 배열(<code>boolean[]</code>)이 필요 없어진다.
+
+<b>(2) 1부터 n까지의 합 = n(n+1)/2</b>
+0~9는 9×10/2 = 45. 범위가 커지면 상수 대신 공식으로. <code>int</code>를 넘을 수 있으면 <code>long</code>. → <a href="../../index.html#ct-63">내적</a>(합의 범위 미리 계산)
+
+<b>(3) 향상된 for문과 복합 대입</b>
+인덱스가 필요 없는 전체 순회는 <code>for (int num : numbers)</code>, <code>sum = sum - x</code>는 <code>sum -= x</code>. → <a href="../../index.html#basic-09">☕ 9. 반복문</a> · <a href="../../index.html#basic-07">☕ 7. 연산자</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>1부터 n까지 중 딱 하나가 빠진 길이 n−1 배열에서 빠진 수를 찾으려면?</summary>
+        <div class="sc-a"><code>n * (n + 1) / 2 - (배열의 합)</code>이에요. 같은 여집합 생각입니다. n이 크면 곱이 <code>int</code>를 넘을 수 있으니 <code>long</code>으로 계산해요(또는 XOR로 찾는 방법도 있음).</div>
+      </details>
+      <details class="sc-q">
+        <summary>중복이 있을 수 있는 문제로 바뀌면 어떻게 풀까?</summary>
+        <div class="sc-a"><code>boolean[] seen = new boolean[10]</code>에 있는 숫자를 표시하고, 0~9 중 표시 안 된 것만 더해요. 전체 합에서 빼는 지름길은 "중복 없음"이라는 조건이 있을 때만 씁니다.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"빠진 번호 찾기"(누락된 주문 번호, 비어 있는 좌석)는 실무에서도 자주 나와요. 범위와 중복 여부를 먼저 확인하고, 조건이 맞으면 합 · 개수로 한 번에, 아니면 Set으로 표시하는 두 갈래를 기억하세요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 원문 해설의 수식 개체(0, 9, O(n) 등)는 문서 변환에서 빠져 있어 다시 적었다.</li><li>제출 코드는 <code>Back_end/coding-tests/2026-10-16/MissingNumbersSum.java</code>(클래스 이름만 바꿈). 실행 결과는 <code>CodingTest26Test.java</code>. 스스로 확인 두 문항은 실행하지 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-68">
+  <div class="note-head">
+    <span class="note-num">26회차</span>
+    <h3>타겟 넘버</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">DFS · 재귀</span><span class="tag">완전 탐색 2^n</span><span class="tag">상태(index · sum)</span><span class="tag">필드 초기화 주의</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>숫자마다 <b>더하기 / 빼기</b> 두 갈래가 있으니 모든 경우는 2<sup>n</sup>가지(최대 2<sup>20</sup> ≈ 100만). 재귀 함수 <code>dfs(index, sum)</code>가 "지금 몇 번째 숫자인지"와 "지금까지의 합"을 들고 두 갈래로 내려가다, 끝(<code>index == n</code>)에서 합이 <code>target</code>이면 하나를 센다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>갈림길마다 왼쪽(+) · 오른쪽(−)이 있는 미로를 끝까지 다 걸어 보고, 도착한 곳의 점수가 목표와 같은 길이 몇 개인지 세는 거예요. 갈림길이 20개여도 길은 100만 개라 컴퓨터는 금방 다 걷습니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">26회차 · 2026.10.16</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/43165" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>음이 아닌 정수 배열 <code>numbers</code>(2~20개, 각 1~50)의 순서를 바꾸지 않고 각 수에 <code>+</code> 또는 <code>-</code>를 붙여 <b>타겟 넘버</b>(1~1000)를 만드는 방법의 수를 반환하는 문제. <code>[1,1,1,1,1]</code> · 3 → 5.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/TargetNumber.java">📄 제출 코드 칸의 코드</a> · <a href="./">📁 26회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">오답노트 제출 코드 칸 (원문 결과 FAIL)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    int answer = 0;                                   // ← 정답 개수 (필드)
+
+    public int solution(int[] numbers, int target) {
+        dfs(numbers, target, 0, 0);                   // ← 0번 숫자부터, 합 0으로 시작
+        return answer;
+    }
+
+    public void dfs(int[] numbers, int target, int index, int sum) {
+        if (index == numbers.length) {                // ← 끝까지 왔으면
+            if (sum == target) answer = answer + 1;   //    목표와 같을 때만 센다
+            return;
+        }
+        dfs(numbers, target, index + 1, sum + numbers[index]);   // ← 더하는 길
+        dfs(numbers, target, index + 1, sum - numbers[index]);   // ← 빼는 길
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>원문 결과는 FAIL이지만, 제출 코드 칸에 적힌 이 코드는 로컬 검증에서 정답과 같은 값을 낸다.</b> 시험 시간 안에 낸 코드인지는 기록만으로 알 수 없어 실패 원인은 단정하지 않았다. 원문 정답 풀이는 이 코드의 흐름(시작 · 분기 · 종료 판정)을 설명한다.
+
+<b>풀이의 세 단계</b>
+1. <b>시작</b> — <code>dfs(numbers, target, 0, 0)</code>: 0번째 숫자, 합 0.
+2. <b>분기</b> — <code>index + 1</code>로 다음 숫자로 가며 <code>sum + numbers[index]</code>(더하기 길)와 <code>sum - numbers[index]</code>(빼기 길) 두 번 호출.
+3. <b>종료 · 판정</b> — <code>index == numbers.length</code>면 멈추고 <code>sum == target</code>일 때만 센다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>상태를 직접 바꾸기</b> — <code>sum += numbers[index]; dfs(…, sum)</code> 다음 줄에서 빼기 길을 부르면 이미 더해진 <code>sum</code>에서 빼게 된다. 새 값을 <b>인자로</b> 넘겨야 갈림길마다 원래 상태가 남는다(원문 개념 3).
+2. <b>종료 조건을 <code>index == n - 1</code>로</b> — 마지막 숫자를 반영하기 전에 멈춰 답이 틀린다.
+3. <b>필드 <code>answer</code>를 0으로 되돌리지 않음</b> — 같은 객체로 <code>solution</code>을 두 번 부르면 5 → 10처럼 앞의 개수가 쌓인다(로컬에서 확인). <code>solution</code> 첫 줄에서 <code>answer = 0;</code>을 하거나, <code>dfs</code>가 개수를 <code>return</code>하게 만들면 안전하다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>2^n 가지를 비트로 모두 세어 본 값과 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 [1,1,1,1,1]/3 → 5 · [4,1,2,1]/4 → 2                 → 통과
+무작위 2,000개 (숫자 2~14개, 1~50)                              → 비트로 2^n 가지를 모두 센 값과 같음
+최대 크기: 숫자 20개(모두 1) · 목표 2                            → 167,960가지, 이 PC에서 2.6ms (2^20 = 1,048,576 갈래)
+같은 객체로 두 번 호출 [1,1,1,1,1]/3                            → 5 → 10  (answer 필드가 남아 있음)</pre>
+      <div class="run-note">기댓값은 재귀를 쓰지 않는 별도 코드예요 — <code>mask</code>의 i번째 비트가 1이면 +, 0이면 −로 2<sup>n</sup>개를 모두 만들어 셉니다(시드 26 고정). 167,960은 20개 중 +가 11개 · −가 9개인 경우의 수 C(20, 9)와 같아 결과가 맞는지도 손으로 확인돼요. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) DFS와 완전 탐색</b>
+모든 경우를 빠짐없이 보는 방법. 갈래가 2개씩 n단계면 2<sup>n</sup>. n ≤ 20이면 약 100만이라 충분히 빠르다(문제 크기를 보고 완전 탐색이 되는지 먼저 계산).
+
+<b>(2) 상태 공간 트리 — 무엇을 들고 다니나</b>
+<code>index</code>(지금 몇 번째)와 <code>sum</code>(지금까지 합) 두 가지. 재귀 호출의 인자가 곧 상태다.
+
+<b>(3) 재귀의 매개변수 전달 — 덮어쓰지 말고 넘긴다</b>
+<code>dfs(index + 1, sum + x)</code>처럼 계산한 값을 넘기면 돌아왔을 때 내 <code>sum</code>은 그대로라, 다음 갈래(<code>sum - x</code>)를 바로 시작할 수 있다(백트래킹). → <a href="../../index.html#ct-64">기능개발</a>(큐) · <a href="../../index.html#ct-60">올바른 괄호</a>(스택)</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>[4,1,2,1], 목표 4 가 되는 두 가지 식은?</summary>
+        <div class="sc-a"><code>4 − 1 + 2 − 1 = 4</code>와 <code>4 + 1 − 2 + 1 = 4</code>예요. 16가지(2⁴) 중 이 두 개만 4가 됩니다.</div>
+      </details>
+      <details class="sc-q">
+        <summary>answer 필드 없이 dfs 가 개수를 돌려주게 바꾸면 어떤 모양일까?</summary>
+        <div class="sc-a"><code>int dfs(int[] a, int t, int i, int s) { if (i == a.length) return s == t ? 1 : 0; return dfs(a, t, i + 1, s + a[i]) + dfs(a, t, i + 1, s - a[i]); }</code> — 두 갈래의 개수를 더해 올려 보내요. 바깥 상태가 없어 몇 번을 불러도 안전합니다(실행하지 않은 코드).</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"가능한 모든 조합/부호/선택의 수"는 DFS(재귀) 또는 BFS(큐)로 완전 탐색하고, 크기가 커지면 같은 (index, sum)을 다시 계산하지 않도록 메모(DP)로 바꿔요. 먼저 <b>경우의 수가 몇인지</b>(2<sup>20</sup>은 OK, 2<sup>40</sup>은 불가)를 계산하는 습관이 시간 초과를 막습니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL. 제출 코드 칸의 코드(주석 포함)는 <code>TargetNumber.java</code>로 옮겼다(클래스 이름만 바꿈). 이 코드는 로컬 검증에서 정답과 같다 — 시험 중 제출본인지, 이후에 적어 둔 코드인지는 알 수 없다.</li><li>원문 개념 정리의 "2^20"은 수식 개체라 빠져 있어 다시 적었다. 실행 결과는 <code>CodingTest26Test.java</code>(시간은 이 PC에서 한 번 잰 값). 스스로 확인 2번 코드는 실행하지 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-69">
+  <div class="note-head">
+    <span class="note-num">26회차</span>
+    <h3>흉부외과 또는 일반외과 의사 목록 출력하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">IN</span><span class="tag">ORDER BY 두 기준</span><span class="tag">DATE_FORMAT</span><span class="tag">AND · OR 우선순위</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>진료과 코드가 <code>'CS'</code> 또는 <code>'GS'</code>인 의사를 <code>IN ('CS','GS')</code>로 고르고, <b>고용일 내림차순 → 같으면 이름 오름차순</b>으로 정렬한다. 날짜는 <code>YYYY-MM-DD</code> 모양이어야 해서 <code>DATE_FORMAT</code>으로 고정해 두면 안전하다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>병원 명단에서 흉부외과 · 일반외과 두 과만 형광펜을 긋고, 최근에 들어온 사람부터 줄 세우되 같은 날 들어온 사람끼리는 가나다순으로 세우는 거예요.</p>
+    <div class="ct-meta"><span class="ct-badge ct-pass">✅ PASS</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">26회차 · 2026.10.16</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132203" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>의사 테이블 <code>DOCTOR</code>(이름 · ID · 면허번호 · 고용일자 <code>HIRE_YMD</code>(DATE) · 진료과 코드 <code>MCDP_CD</code> · 전화번호)에서 진료과가 흉부외과(<code>CS</code>)이거나 일반외과(<code>GS</code>)인 의사의 이름 · ID · 진료과 · 고용일자를 조회하는 문제. 고용일자 내림차순, 같으면 이름 오름차순. 날짜는 예시처럼 <code>2020-03-01</code> 모양.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/doctor-cs-gs-submitted.sql">📄 제출 코드 파일</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/doctor-cs-gs-answer.sql">📄 정답 풀이 파일</a> · <a href="./">📁 26회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">제출 코드 · 오답노트 원문 (PASS)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT DR_NAME, DR_ID, MCDP_CD, HIRE_YMD
+from DOCTOR
+where MCDP_CD in ('CS','GS')                -- ← 둘 중 하나
+order by HIRE_YMD desc, DR_NAME asc;        -- ← 1차 고용일 ↓, 2차 이름 ↑</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드가 정답이다.</b> 원문은 "실전 권장 쿼리"로 날짜 출력만 <code>DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') AS HIRE_YMD</code>로 고정하라고 정리했다 — 컬럼이 <code>DATETIME</code>이거나 DB 출력 설정이 달라도 시 · 분 · 초가 붙지 않게.
+
+<b>흔히 틀리는 곳</b>
+1. <b>정렬 방향을 기준마다 쓰지 않음</b> — <code>ORDER BY HIRE_YMD, DR_NAME DESC</code>는 앞 기준이 <b>오름차순</b>(기본값)이 된다. 방향은 기준마다 따로.
+2. <b>OR와 AND를 섞으며 괄호를 빼먹음</b> — <code>MCDP_CD = 'CS' OR MCDP_CD = 'GS' AND HIRE_YMD &gt;= '2015-01-01'</code>은 AND가 먼저 묶여 CS 의사는 날짜 조건을 받지 않는다. <code>IN</code>을 쓰면 이 실수가 원천적으로 없다.
+3. <b>날짜 모양</b> — 문제가 "예시와 같은 형식"을 요구하면 <code>DATE_FORMAT</code>을 습관처럼. <code>%m</code>(01~12) · <code>%c</code>(1~12), <code>%i</code>(분) · <code>%s</code>(초)처럼 글자 하나가 다르다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>같은 고용일 · 정렬 방향 · OR/AND <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>의사 11명 (CS 3 · GS 4 · 다른 과 4, 2020-03-01 에 CS 니모와 GS 가가가 함께 입사)
+제출 코드                          → 가가 · 니모 · 뽀로로 · 벨 · 자스민 · 패티 · 루피  (같은 날은 이름순)
+정답 풀이(DATE_FORMAT)             → 같은 결과, 날짜 2020-03-01 모양
+ORDER BY HIRE_YMD, DR_NAME DESC    → 루피 · 패티 · 자스민 · 벨 · 뽀로로 · 니모 · 가가  (앞 기준이 오름차순)
+CS OR GS AND 2015년 이후           → 가가 · 니모 · 뽀로로 · 패티 · 루피  (CS 는 날짜 조건이 빠짐)
+IN ('CS','GS') AND 2015년 이후     → 가가 · 니모 · 뽀로로</pre>
+      <div class="run-note"><code>verify-sql26.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite(메모리 DB)로 실행한 결과예요. SQLite에는 <code>DATE_FORMAT</code>이 없어 쓰는 서식(<code>%Y · %m · %d</code>)만 같은 이름으로 등록했습니다. 정답 풀이의 <code>ORDER BY HIRE_YMD</code>는 별칭(서식을 입힌 글자)을 가리키지만 <code>YYYY-MM-DD</code> 글자 순서가 날짜 순서와 같아 결과가 같아요.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) <code>IN</code> — 여러 값 중 하나</b>
+<code>= 'CS' OR = 'GS'</code>와 같은 뜻이지만 짧고, AND와 섞일 때 괄호 실수가 없다. → <a href="../../index.html#sql-09">🗄️ 09. LIKE와 와일드카드</a>(조건 쓰기) · <a href="../../index.html#ct-65">경기도 식품창고</a>
+
+<b>(2) <code>ORDER BY</code> 여러 기준</b>
+첫 기준으로 정렬하고, 값이 같은 행끼리만 두 번째 기준을 쓴다. 방향(<code>ASC</code>/<code>DESC</code>)은 기준마다. → <a href="../../index.html#sql-15">🗄️ 15. ORDER BY</a>
+
+<b>(3) <code>DATE_FORMAT(날짜, '서식')</code></b>
+<code>%Y</code> 4자리 연도 · <code>%m</code> 2자리 월 · <code>%d</code> 2자리 일 · <code>%H</code> 24시 · <code>%i</code> 분 · <code>%s</code> 초. → <a href="../../index.html#sql-27">🗄️ 27. 내장 함수</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>MCDP_CD 가 NULL 인 의사는 WHERE MCDP_CD NOT IN ('CS','GS') 결과에 나올까?</summary>
+        <div class="sc-a"><b>나오지 않아요.</b> <code>NULL NOT IN (…)</code>은 참도 거짓도 아닌 UNKNOWN이라 걸러집니다. "CS · GS가 아닌 의사 전부(진료과 미정 포함)"가 필요하면 <code>OR MCDP_CD IS NULL</code>을 더해야 해요(<a href="../../index.html#concept-sql-null">SQL의 NULL</a>).</div>
+      </details>
+      <details class="sc-q">
+        <summary>DATE_FORMAT(HIRE_YMD, '%Y-%M-%D') 로 쓰면?</summary>
+        <div class="sc-a">대문자 <code>%M</code>은 월 <b>이름</b>(March), <code>%D</code>는 영어 서수가 붙은 일(1st)이라 <code>2020-March-1st</code>처럼 나와요. 서식 글자는 대소문자가 뜻을 바꿉니다(MySQL 문서 기준, 실행하지 않음).</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"A 또는 B 조건 + 여러 기준 정렬 + 날짜 모양"은 조회 문제의 기본 세트예요. 실무 화면에서도 날짜 모양은 DB(<code>DATE_FORMAT</code>)나 서버(<code>@JsonFormat</code> — 오늘 12번 예제)나 화면(<code>toLocaleDateString</code>) 중 <b>한 곳에서만</b> 정하는 것이 헷갈리지 않습니다.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 PASS. 원문 제목 끝의 공백만 뺐다. 정답 풀이 파일 <code>doctor-cs-gs-answer.sql</code>은 원문의 "절별 비교" 표 오른쪽 칸(실전 권장 쿼리)을 쿼리 하나로 모은 것이다.</li><li>실행 결과는 <code>verify-sql26.mjs</code>(검증용 의사 11명). 스스로 확인 2번은 실행하지 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-70">
+  <div class="note-head">
+    <span class="note-num">26회차</span>
+    <h3>대장균의 크기에 따라 분류하기 2</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">윈도우 함수</span><span class="tag">NTILE · PERCENT_RANK · CUME_DIST</span><span class="tag">OVER (ORDER BY)</span><span class="tag">경계 &lt;=</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>크기 내림차순으로 줄 세웠을 때 <b>상위 25%씩 네 묶음</b>으로 나눠 CRITICAL · HIGH · MEDIUM · LOW를 붙인다. 개별 행을 지운 채 묶는 <code>GROUP BY</code>로는 "전체 중 몇 번째"를 알 수 없어서, 행을 그대로 두고 순위 · 비율을 옆에 붙여 주는 <b>윈도우 함수</b>(<code>NTILE(4)</code> · <code>PERCENT_RANK()</code> · <code>CUME_DIST()</code>)를 쓴다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>반 학생을 키 큰 순서로 줄 세운 뒤 앞에서부터 4분의 1씩 끊어 1조 · 2조 · 3조 · 4조를 정하는 거예요. NTILE은 조 번호를 바로 붙여 주고, PERCENT_RANK · CUME_DIST는 "앞에서 몇 % 지점"을 알려 줘서 그걸로 끊습니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">26회차 · 2026.10.16</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/301649" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>대장균 개체 테이블 <code>ECOLI_DATA</code>에서 크기(<code>SIZE_OF_COLONY</code>)를 내림차순으로 정렬했을 때 상위 0~25%는 <code>CRITICAL</code>, 26~50%는 <code>HIGH</code>, 51~75%는 <code>MEDIUM</code>, 76~100%는 <code>LOW</code>로 분류해 <code>ID</code>와 <code>COLONY_NAME</code>을 ID 오름차순으로 출력하는 문제. 전체 데이터 수는 4의 배수이고, 같은 크기의 개체가 서로 다른 이름으로 분류되는 경우는 없다.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-ntile.sql">📄 정답 풀이 1 (NTILE)</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-percent-rank.sql">📄 풀이 2 (PERCENT_RANK)</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-cume-dist.sql">📄 풀이 3 (CUME_DIST)</a> · <a href="./">📁 26회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">정답 풀이 1 · 2 (오답노트 원문) · 제출 코드 칸은 비어 있음</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">-- 풀이 1: NTILE(4) — 4묶음 번호를 바로
+SELECT ID,
+       CASE NTILE(4) OVER (ORDER BY SIZE_OF_COLONY DESC)   -- ← 큰 것부터 1 · 2 · 3 · 4
+           WHEN 1 THEN 'CRITICAL'
+           WHEN 2 THEN 'HIGH'
+           WHEN 3 THEN 'MEDIUM'
+           ELSE 'LOW'
+       END AS COLONY_NAME
+FROM ECOLI_DATA
+ORDER BY ID ASC;                                           -- ← 최종 정렬은 따로
+
+-- 풀이 2: PERCENT_RANK — 0(맨 앞) ~ 1(맨 뒤) 비율로 끊기
+SELECT ID,
+       CASE WHEN PR &lt;= 0.25 THEN 'CRITICAL'
+            WHEN PR &lt;= 0.50 THEN 'HIGH'
+            WHEN PR &lt;= 0.75 THEN 'MEDIUM'
+            ELSE 'LOW' END AS COLONY_NAME
+FROM (SELECT ID, PERCENT_RANK() OVER (ORDER BY SIZE_OF_COLONY DESC) AS PR
+      FROM ECOLI_DATA) AS SUB
+ORDER BY ID ASC;</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>제출 코드 칸이 비어 있어</b> 실패 원인은 단정하지 않았다. 원문에는 세 가지 정답 풀이(NTILE · PERCENT_RANK · CUME_DIST)와 해설이 적혀 있다.
+
+<b>풀이의 세 단계</b>
+1. <b>순위 붙이기</b> — <code>윈도우함수() OVER (ORDER BY SIZE_OF_COLONY DESC)</code>: 행을 줄이지 않고 큰 것부터의 위치를 옆에 붙인다. 전체를 한 줄로 보니 <code>PARTITION BY</code>는 없다.
+2. <b>이름 붙이기</b> — <code>CASE</code>로 번호(1~4)나 비율(≤ 0.25 · ≤ 0.50 · ≤ 0.75)을 이름으로.
+3. <b>최종 정렬</b> — <code>OVER</code> 안의 정렬은 순위용일 뿐이라, 결과 순서는 바깥 <code>ORDER BY ID</code>로 따로 정한다.
+
+<b>세 함수가 같은 답을 내는 이유</b>
+개체가 4k개이고 크기가 겹치지 않으면, 앞에서 p번째(0부터)의 <code>PERCENT_RANK</code> = p / (4k−1), <code>CUME_DIST</code> = (p+1) / 4k. 경계(0.25 · 0.50 · 0.75)를 <code>&lt;=</code>로 끊으면 두 값 모두 정확히 k개씩 나뉜다(개체 4 · 8 · 12 · 20개로 세 풀이를 돌려 모두 같은 답을 확인).
+
+<b>흔히 틀리는 곳</b>
+1. <b><code>DESC</code> 빠뜨림</b> — 작은 것이 CRITICAL이 된다.
+2. <b><code>CUME_DIST</code>를 <code>&lt;</code>로</b> — 8개일 때 두 번째 개체가 정확히 0.25라 CRITICAL에서 빠진다(2개가 아니라 1개).
+3. <b>바깥 <code>ORDER BY ID</code> 빠뜨림</b> — 창 함수의 정렬 순서로 나올 수 있다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>세 풀이를 개체 수를 바꿔 가며 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>개체 4 · 8 · 12 · 20개 (크기 모두 다름)   → NTILE · PERCENT_RANK · CUME_DIST 세 풀이 모두 "크기 순위로 직접 4등분한 답"과 같음
+크기 내림차순 8개의 함수 값:
+  크기  NTILE  PERCENT_RANK  CUME_DIST
+  800     1        0           0.125
+  700     1        0.143       0.25     ← CUME_DIST 가 경계값과 같다
+  600     2        0.286       0.375
+  500     2        0.429       0.5
+  400     3        0.571       0.625
+  300     3        0.714       0.75
+  200     4        0.857       0.875
+  100     4        1           1
+NTILE 에서 DESC 를 빼면           → 가장 작은 100 이 CRITICAL
+CUME_DIST &lt; 0.25 로 쓰면           → CRITICAL 1개 (700 이 빠짐)</pre>
+      <div class="run-note"><code>verify-sql26.mjs</code>가 SQL 파일을 그대로 읽어 Node 내장 SQLite(3.53, 윈도우 함수 지원)로 실행한 결과예요. 개체는 검증용으로 만든 행이고, 세 함수의 정의는 MySQL 8 · MariaDB 10.2+와 같습니다. 크기가 같은 개체가 있으면 <code>NTILE</code>은 같은 크기를 다른 묶음에 넣을 수 있지만, 문제 조건("같은 크기가 다른 이름으로 분류되는 경우는 없다")이 그 경우를 막아 줘요.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 윈도우 함수 — 행을 지우지 않고 옆에 값</b>
+<code>함수() OVER (PARTITION BY 그룹 ORDER BY 기준)</code>. <code>GROUP BY</code>는 묶어서 한 줄로 줄이지만, 창 함수는 행을 그대로 두고 순위 · 비율 · 누적을 붙인다. 결과를 거르려면 서브쿼리로 감싼다. → <a href="../../index.html#web-88">일정관리의 ROW_NUMBER(날마다 3개)</a>
+
+<b>(2) NTILE · PERCENT_RANK · CUME_DIST</b>
+<code>NTILE(N)</code>: 1~N 묶음 번호(남는 행은 앞 묶음부터 하나씩). <code>PERCENT_RANK()</code>: (순위−1)/(전체−1), 0~1. <code>CUME_DIST()</code>: 나보다 앞서거나 같은 행의 비율, 0 초과~1.
+
+<b>(3) 순위 함수 가족</b>
+<code>ROW_NUMBER</code>(같아도 1 · 2 · 3) · <code>RANK</code>(같으면 같은 번호, 다음은 건너뜀) · <code>DENSE_RANK</code>(건너뛰지 않음). → <a href="../../index.html#ct-66">대장균 분류 1</a>(CASE 구간)</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>"부모 개체(PARENT_ID)별로 크기 순위 1등만" 고르려면 어디를 바꿀까?</summary>
+        <div class="sc-a"><code>ROW_NUMBER() OVER (PARTITION BY PARENT_ID ORDER BY SIZE_OF_COLONY DESC) AS RN</code>을 서브쿼리에서 붙이고 바깥에서 <code>WHERE RN = 1</code>. 오늘 일정관리의 "날마다 3개"와 같은 틀이에요(실행하지 않은 쿼리).</div>
+      </details>
+      <details class="sc-q">
+        <summary>NTILE 풀이에서 바깥 ORDER BY ID 를 빼도 결과가 맞을까?</summary>
+        <div class="sc-a">값(이름)은 맞지만 <b>순서가 보장되지 않아요.</b> 창 함수를 계산하느라 크기 순으로 나올 수도 있고, 채점은 ID 오름차순을 요구하니 오답이 될 수 있습니다. SQL은 <code>ORDER BY</code>를 쓰지 않으면 순서를 약속하지 않아요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"상위 n%", "등급 매기기", "그룹별 상위 n개", "누적 합"은 윈도우 함수 영역이에요 — 리포트 · 대시보드 쿼리의 핵심입니다. 오늘처럼 같은 문제를 세 가지 함수로 풀어 보면 각 함수의 정의(어디가 0이고 어디가 1인지)가 확실히 남아요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이 세 가지는 원문 그대로 <code>ecoli-size2-ntile.sql</code> · <code>-percent-rank.sql</code> · <code>-cume-dist.sql</code>. 원문 제목 끝의 공백만 뺐다.</li><li>"세 함수가 같은 답을 내는 이유"의 식(p / (4k−1), (p+1) / 4k)은 함수 정의로 따진 것이고, 4 · 8 · 12 · 20개로 실제 실행해 확인했다. 스스로 확인 1번 쿼리는 실행하지 않았다.</li></ul></details>
+  </div>
+</article>
+<footer><p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/MissingNumbersSum.java">없는 숫자 더하기</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/TargetNumber.java">타겟 넘버</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/CodingTest26Test.java">Java 검증</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/doctor-cs-gs-submitted.sql">SQL 1 제출</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/doctor-cs-gs-answer.sql">SQL 1 정답</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-ntile.sql">SQL 2 NTILE</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-percent-rank.sql">SQL 2 PERCENT_RANK</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/ecoli-size2-cume-dist.sql">SQL 2 CUME_DIST</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-16/verify-sql26.mjs">SQL 검증</a></p></footer></main></body></html>

@@ -4,15 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- ===== 모든 화면이 입는 공통 틀 =====
+     각 화면이 layout:decorate="~{layouts/layout}" 로 이 파일을 지정하면
+     이 파일의 head(부트스트랩·CSS)와 머리·꼬리가 붙고, 가운데 content 자리에 그 화면의 조각이 들어간다 -->
+<!-- jQuery (지금 화면들에서는 직접 쓰지 않는다) -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <!-- bootstrap 설정 링크 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- 부트스트랩 아이콘: 버튼의 bi bi-trash3(휴지통), bi bi-calendar-week(달력) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- 우리 CSS: static/css/layout.css (static 아래 파일은 /css/... 주소로 열린다) -->
 <link th:href="@{/css/layout.css}" rel="stylesheet"/>
 </head>
 <body>
+<!-- th:replace = 이 div 를 fragments/header.html 의 th:fragment="header" 부분으로 통째로 바꾼다 -->
 <div th:replace="~{fragments/header::header}"></div>
+<!-- 여기에 각 화면의 layout:fragment="content" 내용이 들어간다 -->
 <div layout:fragment="content" class="content"></div>
 <div th:replace="~{fragments/footer::footer}"></div>
 </body>

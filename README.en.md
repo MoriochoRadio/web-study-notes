@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-10-16 update:** Added day 50 (Oct 16) — REST APIs: the same board split into a Spring Boot JSON API ([12_backend_hkboard_restAPI](Back_end/web_edu_project/12_backend_hkboard_restAPI/): `@RestController`, `@RequestBody`, `@PathVariable`, `ResponseEntity`, CORS) and a Next.js front end ([12_frontend_hkboard_react](Back_end/web_edu_project/12_frontend_hkboard_react/)) that calls it with `fetch`; the teacher's final schedule-board code (top three per day with `ROW_NUMBER() OVER (PARTITION BY …)`, a `@ControllerAdvice` error page); and [coding-test round 26](Back_end/coding-tests/2026-10-16/) (2 PASS, 2 FAIL). Four web concept cards, concept-book chapter 44, journey step 32, five exam questions and both big-picture tabs were updated. With an in-memory H2 copy, the API, the CORS preflight and the whole UI flow (list → write → detail → edit → delete) worked; a missing post returned 200 with `null`, which crashed the detail page. Nothing was run against the real MariaDB or in the class IDE.
+
 **2026-10-15 update:** Added day 49 (Oct 15) — the schedule board gained multi-delete (checkbox array, `@NotEmpty`, `rejectValue`, MyBatis `foreach` → `IN (…)`), a detail page filled through a `ModelMapper` bean, and a date helper bean called from Thymeleaf (`@util.toDates`); the class folder also has an update action and a three-item preview in each calendar cell. Three web concept cards, concept-book chapter 43, journey step 31, five exam questions and the big-picture tabs were updated. No coding test that day. Running a copy with an in-memory H2 database showed that the calendar preview prints titles unescaped (`th:utext`) — a title of `<!--` removed the next day's cell — and that `toDates` silently shows September 31 as September 30. Nothing was run against the real MariaDB or in the class IDE.
 
 **2026-10-14 update (2):** Added day 48 (Oct 14) — adding a schedule (a date cell opens a form pre-filled through a command object; `@Validated` checks the input; the date is stored as a 12-digit string; `RedirectAttributes` sends the user back to that month) and the teacher's assignment, listing one day's schedules (including the class folder's solution note), plus [coding-test round 25](Back_end/coding-tests/2026-10-14/) (2 PASS, 2 FAIL), two web concept cards, concept-book chapter 42, journey step 30, five exam questions and the big-picture tabs. The class folder now equals the teacher's Oct 14 push except four local changes (port, DB account, `lombok.ToString`, `AND`). Running a copy with an in-memory H2 database showed that an empty `date=` mixes in schedules from the 1st to the 9th and that September 31 is accepted. Nothing was run against the real MariaDB or in the class IDE.
@@ -35,7 +37,7 @@ As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both th
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Daily class notes through day 49 · Java concept cards · SQL 46 · web 84 (JDBC/JSP → Spring MVC → Spring Boot, schedule board) · 12 practice problems · 66 coding-test notes · 226 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Daily class notes through day 50 · Java concept cards · SQL 46 · web 88 (JDBC/JSP → Spring MVC → Spring Boot → REST API + React) · 12 practice problems · 70 coding-test notes · 231 exam-prep questions | 🔄 In progress (started 2026-08-03) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
@@ -94,7 +96,7 @@ Manual checks remain available, and the same checks now run automatically for `m
     ├── index.html            # Java backend study-note dashboard
     ├── java_edu_project/     # Java class exercises organized by date
     ├── sql_edu_project/      # SQL class scripts
-    ├── web_edu_project/      # Web class projects 01–11 (JSP → Spring Boot)
+    ├── web_edu_project/      # Web class projects 01–12 (JSP → Spring Boot → REST API + React)
     ├── coding-tests/         # Coding-test notes by round (with local verification)
     └── *.pptx / *.pdf        # Course materials and assignments
 ```

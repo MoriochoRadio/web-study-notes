@@ -9,6 +9,9 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <!-- ===== 일정 추가 폼 (GET /schedule/addcalboardform?year&month&date) =====
+             달력 칸의 연필 아이콘으로 들어온다 → insertCalCommand 에 그 날짜가 미리 들어 있다
+             [일정추가] → POST /schedule/addcalboard → 성공하면 그 달 달력으로, 검사 오류면 이 폼을 다시 -->
         <div id="container">
             <h1>일정 추가하기</h1>
             <form th:action="@{/schedule/addcalboard}" method="post"
@@ -17,11 +20,13 @@
                     <tr>
                         <th>아이디</th>
                         <td>
-                            <input th:field="*{id}" 
+                            <!-- 로그인 기능이 없어 아이디를 직접 입력한다 (달력·목록은 "hk" 일정만 보여 준다) -->
+                            <input th:field="*{id}"
                                    type="text"
                                    name="id"
                                    class="form-control"/>
-                            <span th:if="${#fields.hasErrors('id')}" 
+                            <!-- 비워 두고 추가하면 @NotBlank 메시지 -->
+                            <span th:if="${#fields.hasErrors('id')}"
                                   th:errors="*{id}"
                                   class="errorField"
                             ></span>
@@ -30,38 +35,40 @@
                     <tr>
                         <th>일정</th>
                         <td>
+                            <!-- 년·월·일은 연필을 누른 날짜가, 시·분은 지금 시각(now)이 처음 선택된다 -->
                             <div class="d-flex align-items-center flex-wrap gap-2">
                             <select name="year" class="form-select w-auto">
                                 <th:block th:each="i:${#numbers.sequence(insertCalCommand.year-5,insertCalCommand.year+5)}">
-                                    <option th:value="${i}" th:text="${i}" 
+                                    <option th:value="${i}" th:text="${i}"
                                             th:selected="${insertCalCommand.year==i}"></option>
                                 </th:block>
                             </select>
                             <span>년</span>
                             <select name="month" class="form-select w-auto">
                                 <th:block th:each="i:${#numbers.sequence(1,12)}">
-                                    <option th:value="${i}" th:text="${i}" 
+                                    <option th:value="${i}" th:text="${i}"
                                             th:selected="${insertCalCommand.month==i}"></option>
                                 </th:block>
                             </select>
                             <span>월</span>
                             <select name="date" class="form-select w-auto">
                                 <th:block th:each="i:${#numbers.sequence(1,31)}">
-                                    <option th:value="${i}" th:text="${i}" 
+                                    <option th:value="${i}" th:text="${i}"
                                             th:selected="${insertCalCommand.date==i}"></option>
                                 </th:block>
                             </select>
                             <span>일</span>
+                            <!-- #temporals.hour(now): Controller 가 넣은 LocalTime.now() 에서 시만 꺼낸다 -->
                             <select name="hour" class="form-select w-auto">
                                 <th:block th:each="i:${#numbers.sequence(0,23)}">
-                                    <option th:value="${i}" th:text="${i}" 
+                                    <option th:value="${i}" th:text="${i}"
                                             th:selected="${#temporals.hour(now)==i}"></option>
                                 </th:block>
                             </select>
                             <span>시</span>
                             <select name="min" class="form-select w-auto">
                                 <th:block th:each="i:${#numbers.sequence(0,59)}">
-                                    <option th:value="${i}" th:text="${i}" 
+                                    <option th:value="${i}" th:text="${i}"
                                             th:selected="${#temporals.minute(now)==i}"></option>
                                 </th:block>
                             </select>
@@ -72,11 +79,11 @@
                     <tr>
                         <th>제목</th>
                         <td>
-                            <input th:field="*{title}" 
+                            <input th:field="*{title}"
                                    type="text"
                                    name="title"
                                    class="form-control"/>
-                            <span th:if="${#fields.hasErrors('title')}" 
+                            <span th:if="${#fields.hasErrors('title')}"
                                   th:errors="*{title}"
                                   class="errorField"
                             ></span>
@@ -85,12 +92,12 @@
                     <tr>
                         <th>내용</th>
                         <td>
-                            <textarea rows="10" cols="60" 
-                                   th:field="*{content}" 
+                            <textarea rows="10" cols="60"
+                                   th:field="*{content}"
                                    type="text"
                                    name="content"
                                    class="form-control"></textarea>
-                            <span th:if="${#fields.hasErrors('content')}" 
+                            <span th:if="${#fields.hasErrors('content')}"
                                   th:errors="*{content}"
                                   class="errorField"
                             ></span>
@@ -99,6 +106,7 @@
                     <tr>
                         <td colspan="2">
                             <input type="submit" value="일정추가" class="btn btn-primary"/>
+                            <!-- 추가하지 않고 그 달 달력으로 돌아가기 -->
                             <input type="button" value="달력" class="btn btn-primary"
                                    th:onclick="|location.href='@{/schedule/calendar(year=${insertCalCommand.year},month=${insertCalCommand.month})}'|"
                             />

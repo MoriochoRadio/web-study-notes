@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- ===== 오류 화면 =====
+     handler/Exceptionhandle 이 예외를 잡으면 model 에 msg 를 넣고 이 화면을 돌려준다.
+     레이아웃(layout:decorate)을 쓰지 않는 단독 페이지라 머리·꼬리 메뉴가 없다 -->
+<h1>페이지 오류</h1>
+<p th:text="${msg}"></p>
+<p><a th:href="@{/}">HOME</a></p>
+</body>
+</html>

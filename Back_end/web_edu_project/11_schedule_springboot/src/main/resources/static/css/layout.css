@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* 공통 틀(layout.html)의 가운데 내용 영역 여백: 위 80px, 좌우 150px, 아래 10px */
 .content{
 	margin: 80px 150px 10px;
 }
@@ -19,6 +20,7 @@
 /* footer요소 하단에 위치하는 코드 종료--------*/
 
 
+/* ===== 아래부터 달력 화면(calendar.html) ===== */
 /*달력 폼*/
 #ctitle {
 	text-align: center;
@@ -29,6 +31,7 @@
 	text-align: center;
 }
 
+/* 날짜 칸 하나: 높이 120px, 위쪽 회색 선 */
 .cal #tbody > div{
 	height: 120px;
 	vertical-align: top;
@@ -39,8 +42,10 @@
 .cal #thead > div, .cal #tbody > div{
 	display: inline-block; width: 140px;
 }
+/* 140px × 7칸 = 980px 이 한 줄에 들어가도록 달력 전체 폭을 정한다 → 8번째 칸부터 다음 줄 */
 .cal {width:1100px;}
 
+/* 일정 추가 연필 아이콘 크기 */
 .pen{
 	width: 20px;
 	height: 20px;
@@ -51,6 +56,7 @@
 	color:red;
 }
 
+/* 달력 칸 안의 일정 제목(Util.getCalViewList 가 만든 p 태그)을 주황 띠로 */
 #tbody div > p{
 	background-color: orange;
 	margin: 2px;

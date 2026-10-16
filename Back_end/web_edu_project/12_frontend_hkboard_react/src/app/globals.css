@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  color: #334155;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 30px;
+}
+
+.board-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 30px;
+}
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.board-table th {
+  background-color: #f1f5f9;
+  padding: 15px;
+  text-align: center;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.board-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.board-table .board-title {
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.board-table .board-title a {
+  text-decoration: none;
+  color: #2563eb;
+  transition: color 0.2s;
+}
+
+.board-table .board-title a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #94a3b8;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #64748b;
+  transform: translateY(-1px);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+textarea.form-control {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.readonly-text {
+  background-color: #f8fafc;
+  color: #64748b;
+}

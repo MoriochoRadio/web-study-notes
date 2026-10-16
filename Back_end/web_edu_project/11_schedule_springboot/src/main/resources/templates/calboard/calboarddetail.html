@@ -8,18 +8,24 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<!-- ===== 일정 상세보기 + 수정 (GET /schedule/calboarddetail?seq=글번호) =====
+	     상세와 수정을 한 화면에서: 값이 채워진 입력 칸을 고치고 [일정수정] → POST /schedule/calboardupdate
+	     th:object="${updateCalCommand}" 아래의 *{필드} 는 updateCalCommand.필드 를 줄여 쓴 것
+	     th:field="*{title}" = name="title" + value="그 값" 을 한 번에 만들어 준다 -->
 	<div id="container">
 		<h1>일정 상세보기</h1>
 		<form th:action="@{/schedule/calboardupdate}" method="post"
 		      th:object="${updateCalCommand}">
-		    <input type="hidden" name="seq" th:field="*{seq}"/>  
+		    <!-- 어느 일정을 고치는지 — 화면에는 안 보이지만 같이 전송된다 -->
+		    <input type="hidden" name="seq" th:field="*{seq}"/>
 			<table class="table">
 				<tr>
 					<th>아이디</th>
 					<td>
-						<input th:field="*{id}" 
-						       type="text" 
-						       name="id" 
+						<!-- readonly: 보여 주기만, 고칠 수 없음 (값은 전송된다) -->
+						<input th:field="*{id}"
+						       type="text"
+						       name="id"
 						       class="form-control"
 						       readonly="readonly"/>
 					</td>
@@ -27,6 +33,9 @@
 				<tr>
 					<th>일정</th>
 					<td>
+					  <!-- 년·월·일·시·분 select 다섯 개.
+					       th:selected 가 참인 option 하나가 처음 선택된 값이 된다 (mdate 에서 나눈 값과 같은 것)
+					       년도는 저장된 해의 앞뒤 5년만 보여 준다 -->
 					  <div class="d-flex align-items-center flex-wrap gap-2">
 					    <select name="year" class="form-select w-auto">
 					      <th:block th:each="i:${#numbers.sequence(updateCalCommand.year-5, updateCalCommand.year+5)}">
@@ -34,28 +43,28 @@
 					      </th:block>
 					    </select>
 					    <span>년</span>
-					
+
 					    <select name="month" class="form-select w-auto">
 					      <th:block th:each="i:${#numbers.sequence(1,12)}">
 					        <option th:value="${i}" th:text="${i}" th:selected="${updateCalCommand.month==i}"></option>
 					      </th:block>
 					    </select>
 					    <span>월</span>
-					
+
 					    <select name="date" class="form-select w-auto">
 					      <th:block th:each="i:${#numbers.sequence(1,31)}">
 					        <option th:value="${i}" th:text="${i}" th:selected="${updateCalCommand.date==i}"></option>
 					      </th:block>
 					    </select>
 					    <span>일</span>
-					
+
 					    <select name="hour" class="form-select w-auto">
 					      <th:block th:each="i:${#numbers.sequence(0,23)}">
 					        <option th:value="${i}" th:text="${i}"
 					                th:selected="${updateCalCommand.hour==i}"></option>
 					      </th:block>
 					    </select>
-					    
+
 					    <span>시</span>
 					    <select name="min" class="form-select w-auto">
 					      <th:block th:each="i:${#numbers.sequence(0,59)}">
@@ -70,10 +79,11 @@
 				<tr>
 					<th>제목</th>
 					<td>
-						<input th:field="*{title}" 
-						       type="text" 
-						       name="title" 
+						<input th:field="*{title}"
+						       type="text"
+						       name="title"
 						       class="form-control"/>
+						<!-- 제목을 비우고 수정하면 @NotBlank 메시지가 여기 나온다 -->
 						<span th:if="${#fields.hasErrors('title')}"
 						      th:errors="*{title}"
 						      class="errorField"></span>
@@ -83,8 +93,8 @@
 					<th>내용</th>
 					<td>
 						<textarea rows="10" cols="60"
-								  th:field="*{content}" 
-						          name="content" 
+								  th:field="*{content}"
+						          name="content"
 						          class="form-control"></textarea>
 						<span th:if="${#fields.hasErrors('content')}"
 						      th:errors="*{content}"
@@ -93,6 +103,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
+						<!-- [일정수정] = 폼 전송, [일정목록] = 그날 목록으로, [달력] = 그 달 달력으로 -->
 						<input type="submit" value="일정수정" class="btn btn-primary"/>
 						<input type="button" value="일정목록" class="btn btn-primary"
                                th:onclick="|location.href='@{/schedule/calboardlist(year=${updateCalCommand.year},month=${updateCalCommand.month},date=${updateCalCommand.date})}'|"/>

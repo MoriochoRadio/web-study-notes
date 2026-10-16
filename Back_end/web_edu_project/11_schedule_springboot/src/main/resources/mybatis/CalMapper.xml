@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 이 PC 맞춤: 위 DOCTYPE 한 줄은 선생님 파일의 "DTD Config" 대신 Mapper 용 정식 이름으로 바꿨다 -->
 
 <!-- namespace속성: 반드시 정의 해야함-->
 <!-- CalMapper 인터페이스의 경로를 설정-->
+<!-- 각 SQL 의 id = CalMapper 인터페이스의 메서드 이름. #{이름} = 넘긴 객체의 필드 또는 Map 의 키 -->
 <mapper namespace="com.hk.board.mapper.CalMapper">
 
+    <!-- 일정 추가: 컬럼 순서대로 seq(자동 증가라 NULL), id, title, content, mdate, regdate(지금 시각) -->
     <insert id="insertCalBoard" parameterType="CalDto">
         INSERT INTO calboard
         VALUES(NULL,#{id},#{title},#{content},#{mdate},SYSDATE())
     </insert>
+    <!-- 하루 일정 목록: mdate 가 "20261015" 로 시작하는 것 = 그날의 모든 시각 -->
+    <!-- CONCAT(#{yyyyMMdd}, '%') 은 LIKE '20261015%' 와 같다. 시간순(mdate 오름차순) -->
     <select id="calBoardList" parameterType="Map"
                               resultType="CalDto">
-        SELECT seq, id,title, content,mdate,regdate 
+        SELECT seq, id,title, content,mdate,regdate
         FROM calboard
         WHERE id = #{id}
         AND MDATE LIKE CONCAT(#{yyyyMMdd}, '%')
         order by mdate asc
     </select>
-    <select id="calViewList" parameterType="Map"
-                            resultType="CalDto">
-        SELECT seq, id, title, content, mdate, regdate
-        FROM calboard
-        WHERE id = #{id}
-        AND MDATE LIKE CONCAT(#{yyyyMM}, '%')
-        ORDER BY mdate ASC
-    </select>
+    <!-- 일정 하나 상세: 글번호로 한 행 -->
     <select id="calBoardDetail" parameterType="Integer"
                                 resultType="CalDto">
-        SELECT seq, id,title, content,mdate,regdate 
+        SELECT seq, id,title, content,mdate,regdate
         FROM calboard
         WHERE seq = #{seq}
     </select>
 
+    <!-- 일정 수정: 제목·내용·일정 날짜를 바꾸고 regdate 는 수정한 시각으로 -->
     <update id="calBoardUpdate" parameterType="CalDto">
         UPDATE calboard
         SET title=#{title}, content=#{content},
@@ -39,11 +38,31 @@
         WHERE seq=#{seq}
     </update>
 
+    <!-- 여러 일정 삭제: 배열 seqs 를 돌며 ( 1 , 2 , 3 ) 모양을 만든다 -->
+    <!-- 결과 SQL 예: DELETE FROM calboard WHERE seq IN ( ?, ?, ? ) -->
+    <!-- collection = Map 의 키 이름, item = 반복할 때 한 개를 부르는 이름, open·close·separator = 앞·뒤·사이 글자 -->
     <delete id="calMulDel" parameterType="Map">
-        DELETE FROM calboard WHERE seq IN 
+        DELETE FROM calboard WHERE seq IN
         <foreach collection="seqs" item="seq"
                  open="(" close=")" separator=",">
             #{seq}
         </foreach>
     </delete>
+
+    <!-- 달력 칸용: 한 달 일정을 날짜마다 시간순 최대 3개 -->
+    <!-- 안쪽 SELECT: 이번 달(mdate 앞 6자리 = yyyyMM) 일정에 날짜(mdate 앞 8자리)별로 1, 2, 3 ... 순번(rn)을 매긴다 -->
+    <!--   ROW_NUMBER() OVER(PARTITION BY 묶을 기준 ORDER BY 순서) = 묶음마다 1부터 다시 번호 -->
+    <!-- 바깥 SELECT: 순번 1~3 만 남긴다 → 하루에 일정이 5개여도 달력에는 앞의 3개만 -->
+    <select id="calViewList" parameterType="Map" resultType="CalDto">
+		SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+		FROM
+			(
+			SELECT
+			ROW_NUMBER() OVER(PARTITION BY substr(mdate,1,8) ORDER BY mdate) 'rn',
+			 seq, id, title, content, mdate, regdate
+			FROM CALBOARD
+			WHERE id = #{id} AND SUBSTRING(mdate,1,6) = #{yyyyMM}
+			) a
+		WHERE rn BETWEEN 1 AND 3
+	</select>
 </mapper>

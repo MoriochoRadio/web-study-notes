@@ -1,0 +1,16 @@
+-- 26회차 SQL 2번 — 원문 정답 풀이 3 (CUME_DIST) 그대로
+SELECT 
+    ID,
+    CASE 
+        WHEN CD <= 0.25 THEN 'CRITICAL'
+        WHEN CD <= 0.50 THEN 'HIGH'
+        WHEN CD <= 0.75 THEN 'MEDIUM'
+        ELSE 'LOW'
+    END AS COLONY_NAME
+FROM (
+    SELECT 
+        ID,
+        CUME_DIST() OVER (ORDER BY SIZE_OF_COLONY DESC) AS CD
+    FROM ECOLI_DATA
+) AS SUB
+ORDER BY ID ASC;

@@ -1,0 +1,5 @@
+-- 26회차 SQL 1번 — 원문 정답 풀이 표의 "실전 권장 쿼리"(날짜 형식을 DATE_FORMAT 으로 고정)를 쿼리 하나로 모은 것
+SELECT DR_NAME, DR_ID, MCDP_CD, DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') AS HIRE_YMD
+FROM DOCTOR
+WHERE MCDP_CD IN ('CS', 'GS')
+ORDER BY HIRE_YMD DESC, DR_NAME ASC;

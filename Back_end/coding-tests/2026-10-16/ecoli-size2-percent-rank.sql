@@ -1,0 +1,16 @@
+-- 26회차 SQL 2번 — 원문 정답 풀이 2 (PERCENT_RANK) 그대로
+SELECT 
+    ID,
+    CASE 
+        WHEN PR <= 0.25 THEN 'CRITICAL'
+        WHEN PR <= 0.50 THEN 'HIGH'
+        WHEN PR <= 0.75 THEN 'MEDIUM'
+        ELSE 'LOW'
+    END AS COLONY_NAME
+FROM (
+    SELECT 
+        ID,
+        PERCENT_RANK() OVER (ORDER BY SIZE_OF_COLONY DESC) AS PR
+    FROM ECOLI_DATA
+) AS SUB
+ORDER BY ID ASC;

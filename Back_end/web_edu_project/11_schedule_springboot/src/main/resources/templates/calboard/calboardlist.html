@@ -1,74 +1,103 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layouts/layout}">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일정목록(calboardlist.html)</title>
     <script type="text/javascript">
 
-        function isConfirm() {
-            if (confirm("정말 삭제 하시겠습니까?")) {
-                return true;
-            }
-            return false;
-        }
+	// [일정삭제] 를 누르면 form 의 onsubmit 이 이 함수를 부른다
+	//   확인 → true → 전송,  취소 → false → 전송 안 함
+	function isConfirm(){
+		if(confirm("정말 삭제 하시겠습니까?")){
+			return true;
+		}
+		return false;
+	}
 
-        //전체선택 체크박스 기능 구현
-        function allSel(bool) {
-            var chks = document.getElementsByName("seq");//[chk,chk,chk..]
-            for (var i = 0; i < chks.length; i++) {
-                chks[i].checked = bool;//true:체크, false:체크해제
-            }
-        }
-    </script>
+	//전체선택 체크박스 기능 구현
+	// 머리줄 체크박스(name="all")를 누르면 그 체크 상태(true/false)를 받아
+	// 아래의 모든 일정 체크박스(name="seq")를 같은 상태로 맞춘다
+	function allSel(bool){
+		var chks=document.getElementsByName("seq");//[chk,chk,chk..]
+		for (var i = 0; i < chks.length; i++) {
+			chks[i].checked=bool;//true:체크, false:체크해제
+		}
+	}
+</script>
 </head>
-
 <body>
     <div layout:fragment="content">
+        <!-- ===== 하루 일정 목록 (GET /schedule/calboardlist?year&month&date) =====
+             Controller 가 넘긴 것: list(그날 일정, 시간순), deleteCalCommand(삭제 폼의 오류 표시용)
+             param.year 등 = 지금 주소의 파라미터를 그대로 꺼내 쓰는 Thymeleaf 기본 객체 -->
         <div id="container">
-            <form th:action="@{/schedule/calmuldel}" method="post" th:object="${deleteCalCommand}"
-                onsubmit="return isConfirm()">
-                <input type="hidden" name="year" th:value="${param.year}" />
-                <input type="hidden" name="month" th:value="${param.month}" />
-                <input type="hidden" name="date" th:value="${param.date}" />
+            <!-- 삭제 폼: POST /schedule/calmuldel
+                 th:object 가 있어야 아래 th:errors 로 seq 오류 메시지를 보여 줄 수 있다 -->
+            <form th:action="@{/schedule/calmuldel}"
+                  method="post"
+                  th:object="${deleteCalCommand}"
+                  onsubmit="return isConfirm()"
+            >
+                <!-- 삭제한 뒤(또는 오류 때) 같은 날 목록으로 돌아오려고 날짜를 같이 보낸다 -->
+                <input type="hidden" name="year" th:value="${param.year}"/>
+                <input type="hidden" name="month" th:value="${param.month}"/>
+                <input type="hidden" name="date" th:value="${param.date}"/>
                 <table class="table caption-top">
+                    <!-- 표 제목: 2026. 10. 15. -->
                     <caption>
                         <span th:text="${param.year}"></span>.
                         <span th:text="${param.month}"></span>.
                         <span th:text="${param.date}"></span>.
                     </caption>
                     <tr>
-                        <th><input class="form-check-input" type="checkbox" name="all" onclick="allSel(this.checked)" />
+                        <th><input class="form-check-input" type="checkbox" name="all" onclick="allSel(this.checked)"/>
                         <th>일정</th>
                         <th>제목</th>
                         <th>작성일</th>
                     </tr>
+                    <!-- 일정이 없으면 안내 한 줄, 있으면 일정마다 한 줄 (th:if / th:unless 는 정반대 조건) -->
                     <th:block th:if="${#lists.isEmpty(list)}">
                         <tr>
                             <td colspan="4">일정이 없습니다.</td>
                         </tr>
                     </th:block>
                     <th:block th:unless="${#lists.isEmpty(list)}">
+                        <!-- 체크박스 값 = 글번호 → 체크한 것들이 seq 배열로 전송된다 (DeleteCalCommand.seq)
+                             일정 칸: Util.toDates 로 "202610151430" → "2026.10.15 14:30"
+                             제목 클릭 → 상세 화면 (?seq=글번호)
+                             작성일: regdate 는 Date 라 #dates.format 으로 모양만 바꾼다 -->
                         <tr th:each="dto:${list}">
-                            <td><input class="form-check-input" type="checkbox" name="seq" th:value="${dto.seq}" />
-                            </td>
+                            <td><input class="form-check-input"
+                                       type="checkbox"
+                                       name="seq"
+                                       th:value="${dto.seq}"
+                                /> </td>
                             <td th:text="${@util.toDates(dto.mdate,'yyyy.MM.dd HH:mm')}"></td>
                             <td>
-                                <a th:href="@{/schedule/calboarddetail(seq=${dto.seq})}" th:text="${dto.title}"></a>
+                                <a th:href="@{/schedule/calboarddetail(seq=${dto.seq})}"
+                                   th:text="${dto.title}"></a>
                             </td>
                             <td th:text="${#dates.format(dto.regdate,'yyyy.MM.dd') }"></td>
                         </tr>
                     </th:block>
                     <tr>
                         <td colspan="4">
+                            <!-- submit 버튼 → onsubmit(확인창) → 전송 -->
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-trash3"></i>일정삭제</button>
+                            <!-- 같은 연·월의 달력으로 돌아가기 -->
                             <button type="button" class="btn btn-primary"
-                                th:onclick="|location.href='@{/schedule/calendar(year=${param.year},month=${param.month})}'|">
+                                th:onclick="|location.href='@{/schedule/calendar(year=${param.year},month=${param.month})}'|"
+                            >
                                 <i class="bi bi-calendar-week"></i>달력</button>
-                            <span class="errorField" th:if="${#fields.hasErrors('seq')}" th:errors="*{seq}"></span>
+                            <!-- 삭제 검사 오류: 하나도 체크 안 함(@NotEmpty) 또는 10개 넘게 체크(Controller 의 rejectValue) -->
+                            <span class="errorField"
+                                  th:if="${#fields.hasErrors('seq')}"
+                                  th:errors="*{seq}"
+                            ></span>
                         </td>
                     </tr>
                 </table>
@@ -76,5 +105,4 @@
         </div>
     </div>
 </body>
-
 </html>

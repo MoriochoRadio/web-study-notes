@@ -1,8 +1,8 @@
 # web_edu_project — 웹 개발 수업 실습 소스
 
-> 최신 상태: 2026-10-15(49일차) 기준. 01 회원·구매, 02 MVC1 게시판,
-> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트), 11 일정관리(캘린더) 게시판 프로젝트를 포함한다.
-> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day49)
+> 최신 상태: 2026-10-16(50일차) 기준. 01 회원·구매, 02 MVC1 게시판,
+> 03 Servlet 기초, 04 MVC2 전환, 05 EL·JSTL, 06 스프링 MVC·DB 설정, 07 MyBatis 게시판 CRUD 요청 연결, 08 답변형 게시판, 09 스프링 부트 게시판, 10 로그인 게시판(부트), 11 일정관리(캘린더) 게시판, 12 REST API 게시판(백엔드) + React 화면(프런트엔드) 프로젝트를 포함한다.
+> [소스 대조 기록](../teacher-sync-2026-09-18.md) · [최신 수업 노트](../index.html#class-day50)
 > 아래 날짜별 기록은 당시의 상태다. 현재 다중 삭제와 error.jsp는 추가되었다.
 > 04와 05의 차이는 [05 섹션](#05_hkboard_mvc2_jstl--el--jstl로-스크립틀릿-걷어내기)에,
 > 05에서 06으로 넘어가며 무엇이 사라졌는지는 [06 섹션](#06_spring_template--스프링-mvc-첫-프로젝트)에 정리했다.
@@ -31,6 +31,7 @@
 | [`09_hkboard_springboot`](09_hkboard_springboot/README.md) | **스프링 부트 게시판.** 07의 게시판을 Boot 4.1 · `@Mapper` 인터페이스 · Thymeleaf · Lombok으로 다시 만든다. XML 설정 없이 `application.properties`만, 내장 톰캣(9090). 수업 도구는 Antigravity(44일차) | web-65~68 |
 | [`10_login_board_springboot`](10_login_board_springboot/README.md) | **로그인 게시판(부트).** 선생님 완성본을 실행하며 따라감 — 회원가입·로그인(BCrypt), Command 객체 `@Validated`, 여러 파일 업로드·다운로드, resultMap `collection`, Thymeleaf 레이아웃, `WebMvcConfigurer` 인터셉터, `@ControllerAdvice`(45일차). 개선 과제 — 생성자 주입 통일 · `@Slf4j` · 업로드 경로 `@Value` · 작성자 본인 확인 · 수정할 때 첨부파일 삭제·추가(46일차) | web-69~77 |
 | [`11_schedule_springboot`](11_schedule_springboot/README.md) | **일정관리(캘린더) 게시판.** 새 부트 프로젝트. `Calendar`로 그 달 1일의 요일 · 마지막 날을 구해 Thymeleaf로 달력을 그리고 이전·다음 달 링크를 붙였다(47일차). 날짜 칸에서 일정 추가(Command · `@Validated` · 12자리 문자열 날짜 · `RedirectAttributes`), 과제로 그날의 일정 목록(48일차). 여러 개 삭제(`rejectValue` · `foreach IN`) · 상세(`ModelMapper`) · 수정 · 달력 칸 미리 보기(49일차) | web-78~84 |
+| [`12_backend_hkboard_restAPI`](12_backend_hkboard_restAPI/README.md) · [`12_frontend_hkboard_react`](12_frontend_hkboard_react/) | **REST API 게시판 + React 화면.** 같은 hkboard 게시판을 서버(Spring Boot 3.5.7, 8085 — `@RestController` · `@RequestBody` · `@PathVariable` · `ResponseEntity` · CORS)와 화면(Next.js 16, 8086 — `fetch`)으로 나눔(50일차) | web-85~87 |
 
 ## 개발 환경
 
@@ -198,7 +199,7 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 ## 앞으로
 
 > 이 목록은 01번 작성 당시(2026-09-14 무렵) 처음 적었고, 교육과정 전체 자료를 기준으로
-> 다시 맞췄다. **지금(2026-10-14, 48일차·11번 프로젝트)까지 5번의 대부분, 6 · 8 · 9번이 진행됐고, 7번(일정관리)은 달력 · 일정 CRUD · 달력 칸 미리 보기까지 왔다(로그인 연결만 남음). 10번(Security)은 10 프로젝트에 의존성만 들어왔다(46일차의 작성자 확인은 Security 없이 Controller · Service에서 직접).**
+> 다시 맞췄다. **지금(2026-10-16, 50일차·12번 프로젝트)까지 5번의 대부분, 6 · 7 · 8 · 9번이 진행됐다(7번 일정관리는 50일차에 선생님 최종본으로 마무리, 로그인 연결만 남음). 50일차에는 목록에 없던 REST API + React 화면(12)이 더해졌다. 10번(Security)은 10 프로젝트에 의존성만 들어왔다(46일차의 작성자 확인은 Security 없이 Controller · Service에서 직접).**
 
 1. ~~**JSP 문법** — Tag · 기본 객체~~ (28~30일차)
 2. ~~**MVC1** — 회원 관리 · 구매 목록~~ (30일차, 01~02 프로젝트)
@@ -209,10 +210,11 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 5. **Spring 답변형 게시판** — ~~로깅(SLF4J)~~, ~~AOP~~, ~~`@Transactional` 트랜잭션~~(39~42일차, 08 프로젝트),
    JUnit 단위테스트(43일차 시작 — 테스트 클래스 3개, 내용이 있는 것은 2개) · 로그인 인터셉터(등록은 아직 주석)
 6. **파일 업로드 · 다운로드** (45일차, 10 프로젝트 — 스프링 부트에서. 46일차에 수정할 때 첨부파일 삭제·추가)
-7. **일정관리(캘린더) 게시판** — 스프링 부트로 월별 달력·일정 CRUD (47일차 시작, 11 프로젝트 — 달력 · 일정 추가 · 목록(48일차) · 삭제 · 상세 · 수정 · 달력 미리 보기(49일차)) ← **여기까지 진행 중**
+7. **일정관리(캘린더) 게시판** — 스프링 부트로 월별 달력·일정 CRUD (47일차 시작, 11 프로젝트 — 달력 · 일정 추가 · 목록(48일차) · 삭제 · 상세 · 수정 · 달력 미리 보기(49일차) · 선생님 최종본(50일차))
 8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환 (44일차 시작, 09 · 10 프로젝트)
 9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수 (44일차 시작 — `th:each` · `th:text` · `@{…}` · `#dates`. 45일차 레이아웃 · `th:replace` 프래그먼트 · `th:field` · `th:errors`)
 10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`. 46일차 개선 과제로 작성자 본인 확인 · 로그 · 설정 분리)
+11. **REST API + React 화면** — 서버는 JSON만(`@RestController`), 화면은 Next.js, 둘 사이의 CORS (50일차, 12 프로젝트 — 원래 목록에 없던 단계) ← **여기까지 진행 중**
 
 ## 고친 것 · 남긴 것
 
@@ -661,3 +663,15 @@ Spring Initializr로 새 부트 프로젝트를 만들었다(스타터는 10과 
 - **확인함** — DB만 H2 메모리 DB로 바꾼 사본(설정 파일은 새로 씀, `SYSDATE()` → `CURRENT_TIMESTAMP`는 사본에서만)을 jar로 실행: 목록 시간순 · 값 없음/빈 값 500, 삭제 0개 · 11개 메시지 · 10개 성공, 상세(셀렉트 값) · 없는 번호 500, 수정(날짜 이동 · 빈칸 메시지 · 아이디는 바뀌지 않음), 달력 칸 3개 · 6글자 자르기 · 다른 달 제외.
 - **확인함(구멍)** — 미리 보기가 제목을 이스케이프하지 않아 제목 `<!--`로 다음 날 칸이 사라지고 `<b>`로 그 뒤가 굵게 바뀐다(헤드리스 Edge로 그려 확인). `toDates`는 9월 31일을 9월 30일로 바꿔 보여 준다(`LocalDateTime.parse` 직접 실행).
 - **확인하지 않음** — 실제 MariaDB와 Antigravity 실행, 고친 코드(`HtmlUtils.htmlEscape` · `ResolverStyle.STRICT`).
+
+## 12_backend_hkboard_restAPI · 12_frontend_hkboard_react — REST API 게시판 + React 화면
+
+[프로젝트 실행 안내와 구현 범위](12_backend_hkboard_restAPI/README.md) · [50일차](../index.html#class-day50) · [개념 카드 85~87](../index.html#web-85) · [개념서 44장](../index.html#book-be-44)
+
+### 2026-10-16 (50일차) — 서버는 JSON만, 화면은 React
+
+교안 「REST API 구현하기」와 선생님 레포 10:40 커밋 "12번예제 추가"를 따라, 같은 hkboard 게시판을 백엔드(Spring Boot 3.5.7 · 포트 8085)와 프런트엔드(Next.js 16 · React 19 · 포트 8086)로 나눴다. 백엔드의 `BoardController`(`/api/board/insert`처럼 행위가 주소에)와 `BoardController2`(`/api/boards` + GET · POST · PUT · DELETE)를 비교하고, `@RestController`가 Map · DTO를 JSON으로, `@RequestBody`가 본문 JSON을, `@PathVariable`이 주소 속 번호를 받으며 `ResponseEntity`로 200 · 201을 정한다. `WebConfigCors`가 `/api/**`에 8086 · 8087을 허락한다. 프런트는 `src/api/boardApi.js`의 `fetchWrapper`로 API 다섯 개를 모으고 목록 · 글쓰기 · 상세/수정 · 선택 삭제 화면을 만든다.
+
+- **확인함** — 백엔드 사본(DB만 H2, 설정 파일은 새로 씀)을 jar로 실행해 Node fetch로 모든 API · 상태 코드(200 · 201 · 400 · 415)와 CORS 사전 요청(8086 허락 · 3000 · PATCH 403)을, 프런트 사본을 `next dev -p 8086`으로 띄워 헤드리스 Edge로 목록 → 글쓰기 → 상세 → 수정 → 선택 삭제를 확인했다.
+- **확인함(구멍)** — 없는 글은 200 `{"dto":null}`이라 상세 화면이 "This page couldn't load"로 깨진다. 빈 JSON `{}`도 201로 빈 글이 저장된다.
+- **확인하지 않음** — 실제 MariaDB와 Antigravity 실행, 프런트 `next build`.
