@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-10-19 update:** A new course, "AI Agent Hands-on Intro, Part 1", started, so a third study page was added: [AI Agent notes](https://moriochoradio.github.io/web-study-notes/AI_Agent/). Day 1–2 Python (setup and venv, variables and operators, strings, lists, tuples, dicts, conditions, loops and comprehensions, functions and modules, files and exceptions) is written up as eight concept cards that compare each topic with Java, eleven lab cards (my notebook solution, a re-run, and what to fix for each slide exercise, plus a reference solution and a checklist of the teacher's extra exercises), and a 17-question shuffled quiz. The class notebooks are kept in [AI_Agent/python_agent/](AI_Agent/python_agent/); re-running them showed the effects of Python 3.15 on this machine (UTF-8 is the default file encoding, unlike 3.10–3.12 on Windows), one cell whose saved output predates an edit, and duplicate lottery numbers from `randint`. [Coding-test round 27](Back_end/coding-tests/2026-10-19/) (3 FAIL, no submitted code: remove the smallest number, a SQL NULL-replacement query, and a BFS shortest path) continues in the backend coding-test tab with Java and SQLite checks.
+
 **2026-10-16 update:** Added day 50 (Oct 16) — REST APIs: the same board split into a Spring Boot JSON API ([12_backend_hkboard_restAPI](Back_end/web_edu_project/12_backend_hkboard_restAPI/): `@RestController`, `@RequestBody`, `@PathVariable`, `ResponseEntity`, CORS) and a Next.js front end ([12_frontend_hkboard_react](Back_end/web_edu_project/12_frontend_hkboard_react/)) that calls it with `fetch`; the teacher's final schedule-board code (top three per day with `ROW_NUMBER() OVER (PARTITION BY …)`, a `@ControllerAdvice` error page); and [coding-test round 26](Back_end/coding-tests/2026-10-16/) (2 PASS, 2 FAIL). Four web concept cards, concept-book chapter 44, journey step 32, five exam questions and both big-picture tabs were updated. With an in-memory H2 copy, the API, the CORS preflight and the whole UI flow (list → write → detail → edit → delete) worked; a missing post returned 200 with `null`, which crashed the detail page. Nothing was run against the real MariaDB or in the class IDE.
 
 **2026-10-15 update:** Added day 49 (Oct 15) — the schedule board gained multi-delete (checkbox array, `@NotEmpty`, `rejectValue`, MyBatis `foreach` → `IN (…)`), a detail page filled through a `ModelMapper` bean, and a date helper bean called from Thymeleaf (`@util.toDates`); the class folder also has an update action and a three-item preview in each calendar cell. Three web concept cards, concept-book chapter 43, journey step 31, five exam questions and the big-picture tabs were updated. No coding test that day. Running a copy with an in-memory H2 database showed that the calendar preview prints titles unescaped (`th:utext`) — a title of `<!--` removed the next day's cell — and that `toDates` silently shows September 31 as September 30. Nothing was run against the real MariaDB or in the class IDE.
@@ -37,7 +39,8 @@ As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both th
 | Track | Covered material | Status |
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
-| Backend | Daily class notes through day 50 · Java concept cards · SQL 46 · web 88 (JDBC/JSP → Spring MVC → Spring Boot → REST API + React) · 12 practice problems · 70 coding-test notes · 231 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| Backend | Daily class notes through day 50 · Java concept cards · SQL 46 · web 88 (JDBC/JSP → Spring MVC → Spring Boot → REST API + React) · 12 practice problems · 73 coding-test notes · 231 exam-prep questions | 🔄 In progress (started 2026-08-03) |
+| AI Agent | "AI Agent Hands-on Intro, Part 1" — days 1–2 of 10 (Python basics): 8 concept cards · 11 lab cards · 17 quiz questions · class notebooks | 🔄 In progress (started 2026-10-19) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
@@ -92,6 +95,9 @@ Manual checks remain available, and the same checks now run automatically for `m
 │   ├── index.html        # Frontend study dashboard
 │   ├── 1.html/ 2-css/ 3.javascript/ 4.react/   # Original practice code
 │   └── slides/           # Lecture materials (PPT)
+├── AI_Agent/     # AI Agent track (Python → Pandas → FastAPI → LangChain → RAG → Agent)
+│   ├── index.html        # AI Agent study notes (concepts · labs · quiz)
+│   └── python_agent/     # Class notebooks (.ipynb) and exercises
 └── Back_end/     # Backend (Java) track
     ├── index.html            # Java backend study-note dashboard
     ├── java_edu_project/     # Java class exercises organized by date

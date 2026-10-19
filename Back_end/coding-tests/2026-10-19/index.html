@@ -1,0 +1,292 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>27회차 코딩테스트 · 2026-10-19</title><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style>:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;line-height:1.75;margin:0;background:#f4f6fa;color:#202939}main{max-width:880px;margin:auto;padding:32px 20px}a{color:#255ec7}h1{font-size:1.7rem}h2{margin-top:40px}h4{margin:18px 0 6px}pre{white-space:pre;overflow:auto;background:#162132;color:#eef3fb;padding:20px;border-radius:10px;line-height:1.6}article{background:white;padding:24px;margin:24px 0;border:1px solid #dce3ed;border-radius:12px}.note-head h3{margin:8px 0}.note-num{font-size:.85rem;color:#5a6d84}details summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #dce3ed;padding:6px 10px;text-align:left;vertical-align:top}.note-easy{margin:16px 0}.easy-label,.summary-label{font-weight:700;margin-right:8px}.ct-badge{display:inline-block;margin-right:8px}.ct-fail{color:#b42318}.ct-pass{color:#1a7f47}@media(prefers-color-scheme:dark){body{background:#111827;color:#e5eaf2}article{background:#192334;border-color:#344054}a{color:#91baff}.note-num{color:#b5c4d8}th,td{border-color:#344054}.ct-fail{color:#ff8a80}.ct-pass{color:#5fd39a}}:not(pre)>code{overflow-wrap:anywhere}</style><style>.ct-box,.ct-src,.self-check{background:rgba(127,127,127,.06);border:1px solid #dce3ed;border-radius:10px;padding:12px 16px;margin:14px 0}.ct-box p{white-space:pre-line;margin:0}.ct-box-title,.self-check-title{font-weight:700;margin-bottom:6px}.note-tags .tag{display:inline-block;font-size:.8rem;margin-right:6px;padding:1px 8px;border:1px solid #dce3ed;border-radius:999px}.practice-note{border-left:3px solid #255ec7;padding-left:12px}.code-head{font-size:.85rem;color:#5a6d84;margin-top:14px}.copy-btn{display:none}</style></head><body><main><nav><a href="../../../AI_Agent/index.html#ai-day01">10/19 수업(AI Agent 과정)</a> / <a href="../../index.html#ct-71">백엔드 코딩테스트</a> / <a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/README.md">Markdown 기록</a></nav><h1>27회차 코딩테스트</h1><p>2026-10-19 · 프로그래밍 1문제 · SQL 1문제 · JAVA 1문제 · <b>3 FAIL</b></p><p>세 문제 모두 원문 제출 코드 칸이 비어 있어 실패 원인을 단정하지 않았다. 아래 코드는 오답노트 원문의 정답 풀이이고, 로컬 검증은 프로그래머스 재채점 결과가 아니다.</p>
+
+<article class="note-card" id="ct-71">
+  <div class="note-head">
+    <span class="note-num">27회차</span>
+    <h3>제일 작은 수 제거하기</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">최솟값 한 번 훑기</span><span class="tag">새 배열 + 따로 세는 index</span><span class="tag">원래 순서 유지</span><span class="tag">빈 배열이면 [-1]</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>배열을 한 번 훑어 <b>가장 작은 값</b>을 찾고, 다시 한 번 훑으며 그 값만 건너뛰고 나머지를 <b>길이가 하나 작은 새 배열</b>에 차례로 담는다. 원소가 하나뿐이면 빼고 나면 비니 <code>[-1]</code>을 먼저 돌려준다. 정렬은 쓰지 않는다 — 원래 순서가 깨진다.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>줄 서 있는 사람 중 키가 제일 작은 한 명만 빼는 문제예요. 키 순서로 다시 줄 세우면(정렬) 안 되고, 한 번 둘러봐서 제일 작은 사람을 기억한 뒤, 그 사람만 빼고 나머지는 <b>원래 순서대로</b> 새 줄에 세우면 됩니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">27회차 · 2026.10.19</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12935" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>정수 배열 <code>arr</code>(길이 1 이상, <b>원소는 모두 다름</b>)에서 가장 작은 수를 제거한 배열을 반환하는 문제. 남는 것이 없으면 <code>[-1]</code>. <code>[4,3,2,1]</code> → <code>[4,3,2]</code>, <code>[10]</code> → <code>[-1]</code>.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/RemoveSmallestNumber.java">📄 정답 풀이 파일</a> · <a href="./">📁 27회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">오답노트 정답 풀이 (제출 코드 칸은 비어 있음 · 원문 결과 FAIL)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">class Solution {
+    public int[] solution(int[] arr) {
+        if (arr.length &lt;= 1) {                  // ← 빼고 나면 빈 배열 → [-1] 먼저
+            return new int[] {-1};
+        }
+
+        int min = arr[0];                       // ← 첫 원소를 임시 최솟값으로
+        for (int i = 1; i &lt; arr.length; i++) {
+            if (arr[i] &lt; min) {
+                min = arr[i];
+            }
+        }
+
+        int[] ans = new int[arr.length - 1];    // ← 하나 작은 새 배열 (자바 배열은 크기 고정)
+        int index = 0;                          // ← 새 배열에 채울 자리는 따로 센다
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (arr[i] == min) {
+                continue;                       // ← 최솟값만 건너뛰고
+            }
+            ans[index++] = arr[i];              // ← 나머지는 원래 순서대로
+        }
+        return ans;
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>원문 결과는 FAIL이고 제출 코드 칸은 비어 있다.</b> 위 코드는 원문의 정답 풀이(주석 포함)로, 실패 원인은 기록만으로 알 수 없어 단정하지 않았다.
+
+<b>풀이의 세 단계</b>
+1. <b>예외 먼저</b> — 길이가 1이면 계산할 것 없이 <code>{-1}</code>.
+2. <b>최솟값 찾기</b> — <code>arr[0]</code>에서 시작해 더 작은 값을 만나면 바꾼다(O(n), 한 번).
+3. <b>걸러 담기</b> — 길이 <code>n − 1</code> 배열을 만들고, 최솟값은 <code>continue</code>, 나머지는 <code>ans[index++]</code>. 원래 배열의 <code>i</code>와 새 배열의 <code>index</code>가 따로 움직이는 것이 핵심.
+
+<b>흔히 틀리는 곳</b>
+1. <b>정렬부터 하기</b> — <code>Arrays.sort</code> 후 맨 앞을 빼면 <code>[4,3,2,1]</code> → <code>[2, 3, 4]</code>. 예시 답 <code>[4, 3, 2]</code>와 순서가 달라진다(로컬에서 확인).
+2. <b>최솟값을 <code>0</code>에서 시작</b> — 원소가 모두 양수면 <code>min</code>이 0으로 남아 아무것도 건너뛰지 않고, 길이 2짜리 배열에 3개를 넣다가 <code>ArrayIndexOutOfBoundsException</code>(<code>[5,7,9]</code>로 확인). 시작값은 <code>arr[0]</code>이나 <code>Integer.MAX_VALUE</code>.
+3. <b>빈 배열을 그대로 돌려주기</b> — <code>[10]</code>이면 <code>new int[0]</code>이 아니라 <code>[-1]</code>.
+4. <b>"원소가 모두 다르다"를 놓치기</b> — 이 조건 덕분에 <code>== min</code>으로 건너뛰는 것이 정확히 하나다. 조건 밖 입력 <code>[1,1,2]</code>를 넣으면 두 개를 다 건너뛰어 <code>[2, 0]</code>(끝에 빈칸 0)이 나온다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>다른 방법(스트림)으로 구한 값과 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 [4,3,2,1] → [4, 3, 2] · [10] → [-1]                         → 통과
+무작위 5,000개 (길이 1~20, 서로 다른 -1000~1000)                          → 스트림으로 최솟값을 걸러 낸 값과 같음
+(틀린 방법) 정렬 후 맨 앞 빼기 [4,3,2,1]                                  → [2, 3, 4]  순서가 깨짐
+(틀린 방법) min = 0 으로 시작 [5,7,9]                                     → ArrayIndexOutOfBoundsException
+(조건 밖) 최솟값이 두 개 [1,1,2]                                          → [2, 0]</pre>
+      <div class="run-note">기댓값은 원문 풀이와 다른 코드예요 — <code>Arrays.stream(arr).min()</code>으로 최솟값을 구하고 <code>filter(v -&gt; v != min)</code>로 걸러, 비면 <code>[-1]</code>(시드 27 고정). <code>min = 0</code> 실험은 따로 만든 코드로 돌렸어요. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 정렬과 원래 순서</b>
+"가장 작은 것"이라는 말에 끌려 정렬하면 인덱스와 순서가 모두 바뀐다. 답에 원래 순서가 남아야 하면 정렬하지 말고 <b>골라 건너뛰기</b>. → <a href="../../index.html#ct-49">여러 기준으로 정렬하기</a>(정렬이 답일 때)
+
+<b>(2) 최솟값 패턴 — 첫 원소에서 시작</b>
+<code>int min = arr[0]; for (i = 1 …) if (arr[i] &lt; min) min = arr[i];</code> — 한 번 훑기(O(n)). 시작값을 임의의 숫자(0)로 두면 데이터에 따라 틀린다.
+
+<b>(3) 크기가 고정된 배열 — 새로 만들고 자리를 따로 센다</b>
+자바 배열은 늘이거나 줄일 수 없어 <code>new int[n - 1]</code>로 새로 만들고, 채울 위치 <code>index</code>를 별도로 관리한다. 크기를 미리 모르면 <code>ArrayList</code>에 담고 마지막에 배열로. → <a href="../../index.html#concept-java-array-collection">배열 vs 컬렉션</a> · <a href="../../index.html#oop-16">배열 선언 3가지</a>
+
+<b>(4) 예외 입력부터</b>
+"빈 배열이면 −1" 같은 조건은 본 계산 전에 <code>return</code>으로 먼저 처리하면 아래 코드가 단순해진다.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>[3, -5, 8, 0] 이면 답은?</summary>
+        <div class="sc-a"><code>[3, 8, 0]</code>. 최솟값은 −5이고, 나머지는 원래 순서 그대로예요. 음수가 있어도 <code>arr[0]</code>에서 시작하면 문제없어요.</div>
+      </details>
+      <details class="sc-q">
+        <summary>int min = 0 으로 시작하면 [5, 7, 9] 에서 왜 오류가 날까?</summary>
+        <div class="sc-a">5 · 7 · 9 모두 0보다 커서 <code>min</code>이 0으로 남고, 아무것도 건너뛰지 않아 길이 2인 <code>ans</code>에 3개를 넣다가 세 번째(<code>ans[2]</code>)에서 <code>ArrayIndexOutOfBoundsException</code>이 나요.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"하나를 빼고 나머지는 그대로"는 <b>찾기 → 걸러 담기</b> 두 번 훑기예요. 같은 날 시작한 파이썬으로는 <code>m = min(arr)</code> 뒤 <code>[x for x in arr if x != m] or [-1]</code> 한 줄(빈 리스트는 거짓이라 <code>or</code> 뒤로 넘어감)로 같은 답이 나와요(<code>[4,3,2,1]</code> → <code>[4, 3, 2]</code>, <code>[10]</code> → <code>[-1]</code> 확인) — <a href="../../../AI_Agent/index.html#py-06">🐍 리스트 컴프리헨션</a>. <code>min(arr)</code>을 컴프리헨션 안에 쓰면 원소마다 다시 계산하니 밖에서 한 번만.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 원문 제목은 "제일 작은 수 제거"이고 프로그래머스 제목은 "제일 작은 수 제거하기"(12935) — 문제 페이지에서 조건(원소가 모두 다름)과 예시를 확인했다.</li><li>정답 풀이(주석 포함)는 <code>RemoveSmallestNumber.java</code>로 옮겼다(클래스 이름만 바꿈). 실행 결과는 <code>CodingTest27Test.java</code>, <code>min = 0</code> 실험과 파이썬 한 줄은 저장소 밖에서 따로 실행했다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-72">
+  <div class="note-head">
+    <span class="note-num">27회차</span>
+    <h3>12세 이하인 여자 환자 목록 출력하기</h3>
+    <div class="note-tags"><span class="tag">SQL</span><span class="tag">WHERE + AND</span><span class="tag">NULL 대체 COALESCE · IFNULL · NVL</span><span class="tag">ORDER BY 두 기준</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span><code>WHERE AGE &lt;= 12 AND GEND_CD = 'W'</code>로 두 조건을 모두 만족하는 행만 남기고, 전화번호가 NULL이면 <code>COALESCE(TLNO, 'NONE')</code>으로 바꿔 보이며, <code>ORDER BY AGE DESC, PT_NAME ASC</code>로 나이 내림차순 · 같은 나이는 이름 오름차순.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>명단에서 "12살 이하이면서 여자"만 골라, 전화번호 칸이 비어 있으면 "NONE"이라고 적어 주고, 나이 많은 순으로 · 나이가 같으면 이름 가나다순으로 세우는 문제예요.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">SQL</span><span class="ct-badge ct-type">27회차 · 2026.10.19</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132201" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p><code>PATIENT</code>(PT_NO · PT_NAME · GEND_CD · AGE · TLNO — <b>TLNO만 NULL 가능</b>)에서 12세 이하 여자 환자의 이름 · 번호 · 성별 · 나이 · 전화번호를 조회. 전화번호가 없으면 <code>'NONE'</code>, 나이 내림차순 · 같으면 이름 오름차순.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/patient-girls-12-answer.sql">📄 정답 풀이 파일</a> · <a href="./">📁 27회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-sql">SQL</span>
+        <span class="code-file">오답노트 정답 풀이 (제출 코드 칸은 비어 있음 · 원문 결과 FAIL)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-sql">SELECT PT_NAME, PT_NO, GEND_CD, AGE,
+       COALESCE(TLNO, 'NONE') AS TLNO        -- ← NULL 이면 'NONE' (별칭으로 열 이름 유지)
+FROM PATIENT
+WHERE AGE &lt;= 12 AND GEND_CD = 'W'            -- ← 두 조건 모두 (12세 포함 → &lt;=)
+ORDER BY AGE DESC, PT_NAME ASC;              -- ← 나이 내림차순, 같으면 이름 오름차순</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>원문 결과는 FAIL이고 제출 코드 칸은 비어 있다.</b> 실패 원인은 단정하지 않았다. 문제의 요구 셋이 SQL의 세 자리에 하나씩 대응한다.
+
+<b>요구 → 자리</b>
+1. "12세 이하 <b>그리고</b> 여자" → <code>WHERE … AND …</code>
+2. "전화번호가 없으면 NONE" → <code>SELECT</code>의 <code>COALESCE(TLNO, 'NONE') AS TLNO</code>
+3. "나이 내림차순, 같으면 이름 오름차순" → <code>ORDER BY AGE DESC, PT_NAME ASC</code>
+
+<b>흔히 틀리는 곳</b> (검증용 행으로 확인)
+1. <b>NULL을 그대로 두기</b> — 전화번호 칸에 <code>NULL</code>이 찍혀 예시(<code>NONE</code>)와 다르다.
+2. <b><code>TLNO = NULL</code>로 비교</b> — NULL은 <code>=</code>로 같다고 나오지 않아 0행. 비교는 <code>IS NULL</code>.
+3. <b><code>AGE &lt; 12</code></b> — "이하"는 12를 포함한다. 12세가 빠진다.
+4. <b><code>ORDER BY AGE, PT_NAME DESC</code></b> — 방향은 기준마다 따로 붙는다. 앞 기준이 오름차순이 되어 순서가 뒤집힌다.
+5. <b><code>AND</code> 대신 <code>OR</code></b> — 12세 이하 남자와 모든 나이의 여자가 섞인다.
+6. <b>별칭을 빼기</b> — <code>AS TLNO</code>가 없으면 결과 열 이름이 <code>COALESCE(TLNO, 'NONE')</code>이 된다(채점이 열 이름까지 보는지는 확인하지 않음).</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>SQLite에 SQL 파일을 그대로 실행 (10개 항목) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>문제 예시 10행 → 한나|12|01032323117 · 안나|11|NONE · 바라|10|01079068799 · 뽀뽀|8|NONE   (예시 출력과 같음)
+검증용 3행 추가 (같은 12세 가람 · 13세 나래 · 12세 남자 다온)
+  정답 풀이      → 가람|12|NONE · 한나|12|… · 안나 · 바라 · 뽀뽀   (같은 나이는 이름 오름차순)
+  IFNULL · CASE WHEN TLNO IS NULL … → 같은 결과
+  NULL 그대로    → 가람|NULL · 한나|01032323117 · 안나|NULL · …
+  TLNO = NULL    → 0행        /  TLNO IS NULL → 6명
+  AGE &lt; 12       → 안나 · 바라 · 뽀뽀  (12세 둘이 빠짐)
+  ORDER BY AGE, PT_NAME DESC → 뽀뽀 · 바라 · 안나 · 한나 · 가람
+  OR 로 묶으면   → 11명</pre>
+      <div class="run-note"><code>verify-sql27.mjs</code>가 SQL 파일을 한 글자도 바꾸지 않고 Node 내장 SQLite(3.53)에 실행해요. 앞 10행은 프로그래머스 예시, 뒤 3행은 경계를 보려고 더한 행이에요. SQLite는 한글을 유니코드 순서로 비교하는데, 완성형 한글은 그 순서가 가나다순과 같아요. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 여러 조건은 AND로</b>
+모든 조건을 동시에 만족하는 행만. OR와 섞이면 AND가 먼저 묶이니 괄호나 <code>IN</code>으로 분명하게. → <a href="../../index.html#sql-05">🗄️ 05. WHERE</a> · <a href="../../index.html#ct-69">흉부외과 또는 일반외과</a>(IN과 AND)
+
+<b>(2) NULL 대체 함수 — DBMS마다 이름이 다르다</b>
+<code>NVL(열, 값)</code> Oracle · <code>IFNULL(열, 값)</code> MySQL/MariaDB · <code>COALESCE(값1, 값2, …)</code> SQL 표준(처음으로 NULL이 아닌 값). 어디서나 되는 것은 <code>COALESCE</code>. → <a href="../../index.html#concept-sql-null">SQL의 NULL</a> · <a href="../../index.html#sql-27">🗄️ 27. 내장 함수</a>
+
+<b>(3) 여러 기준 정렬</b>
+<code>ORDER BY 첫기준 방향, 둘째기준 방향</code> — 첫 기준이 같은 행끼리만 둘째 기준을 쓴다. 방향은 기준마다, 생략하면 <code>ASC</code>. → <a href="../../index.html#sql-15">🗄️ 15. ORDER BY</a></p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>COALESCE(NULL, NULL, '010', 'NONE') 의 결과는?</summary>
+        <div class="sc-a"><code>'010'</code>. 왼쪽부터 보며 <b>처음으로 NULL이 아닌 값</b>을 돌려줘요. 그래서 "휴대폰 → 집 전화 → 'NONE'"처럼 여러 후보를 차례로 쓸 수 있어요(IFNULL · NVL은 두 개만).</div>
+      </details>
+      <details class="sc-q">
+        <summary>WHERE TLNO = NULL 은 왜 0행일까?</summary>
+        <div class="sc-a">NULL은 "모르는 값"이라 <code>NULL = NULL</code>도 참이 아니라 UNKNOWN이에요. WHERE는 참인 행만 남기니 0행. NULL인지 볼 때는 <code>IS NULL</code> · <code>IS NOT NULL</code>.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>"없는 값은 OO로 표시"는 화면 · 리포트 쿼리의 단골이에요. 다만 바꾼 값(<code>'NONE'</code>)은 <b>보여 줄 때만</b> — 저장하는 데이터는 NULL로 두어야 "정말 모름"과 "NONE이라는 값"을 구분할 수 있어요. 오늘 시작한 파이썬에서는 같은 일을 <code>tlno if tlno is not None else "NONE"</code>(삼항)이나 Pandas의 <code>fillna("NONE")</code>으로 해요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 원문 제목 끝 공백은 뺐다. 문제 페이지에서 테이블 구조(TLNO만 NULL 가능)와 예시 10행 · 예시 출력을 확인했다.</li><li>정답 풀이는 <code>patient-girls-12-answer.sql</code>로 옮겼다. 실행 결과는 <code>verify-sql27.mjs</code>(10개 통과). 별칭이 없을 때 채점 결과는 확인하지 않았다.</li></ul></details>
+  </div>
+</article>
+<article class="note-card" id="ct-73">
+  <div class="note-head">
+    <span class="note-num">27회차</span>
+    <h3>게임 맵 최단거리</h3>
+    <div class="note-tags"><span class="tag">JAVA</span><span class="tag">BFS · 큐(Queue)</span><span class="tag">방향 벡터 dx · dy</span><span class="tag">맵에 거리 기록 = 방문 표시</span><span class="tag">도달 못 하면 -1</span></div>
+  </div>
+  <div class="note-body"><p class="note-summary"><span class="summary-label">한 줄 요약</span>출발 칸에서 <b>가까운 칸부터</b> 차례로 퍼져 나가는 너비 우선 탐색(BFS). 큐에서 칸을 하나 꺼내(<code>poll</code>) 상하좌우 네 칸을 보고, 맵 안이고 처음 가는 길(값 1)이면 <code>maps[nx][ny] = maps[x][y] + 1</code>로 거리를 적고 큐에 넣는다. 끝나고 도착 칸의 값이 답, 여전히 1이면 못 간 것이라 <code>-1</code>.</p><p class="note-easy"><span class="easy-label">쉽게 말하면</span>출발점에 물을 부으면 물이 한 칸씩 동시에 번져 나가죠. 칸마다 "물이 몇 번째에 도착했는지"를 적어 두면, 도착 칸에 처음 물이 닿은 숫자가 곧 가장 짧은 거리예요. 큐는 "다음에 물이 번질 칸 목록"입니다.</p>
+    <div class="ct-meta"><span class="ct-badge ct-fail">❌ FAIL</span><span class="ct-badge ct-type">JAVA</span><span class="ct-badge ct-type">27회차 · 2026.10.19</span></div>
+    <div class="ct-src">
+      <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1844" target="_blank" rel="noopener">🔗 프로그래머스에서 문제 보기</a>
+      <p>0(벽) · 1(길)로 된 n × m 맵(각 1~100, 둘 다 1인 경우는 없음)에서 왼쪽 위 (1, 1)에서 오른쪽 아래 (n, m)까지 동서남북 한 칸씩 움직일 때 <b>지나는 칸 수의 최솟값</b>(출발 · 도착 칸 포함)을 반환하는 문제. 도착할 수 없으면 -1. 예시 5 × 5 맵 → 11.</p>
+      <p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/GameMapShortestPath.java">📄 정답 풀이 파일</a> · <a href="./">📁 27회차 전체 기록</a></p>
+    </div>
+    <div class="note-code">
+      <div class="code-head">
+        <span class="code-lang lang-java">JAVA</span>
+        <span class="code-file">오답노트 정답 풀이 (제출 코드 칸은 비어 있음 · 원문 결과 FAIL · 주석 줄임)</span>
+        <button class="copy-btn" type="button">복사</button>
+      </div>
+      <pre><code class="language-java">import java.util.Queue;
+import java.util.LinkedList;
+
+class Solution {
+    public int solution(int[][] maps) {
+        int n = maps.length, m = maps[0].length;
+        int[] dx = {-1, 1, 0, 0};                  // ← 상 하 좌 우 (행 변화)
+        int[] dy = {0, 0, -1, 1};                  //              (열 변화)
+
+        Queue&lt;int[]&gt; queue = new LinkedList&lt;&gt;();   // ← 다음에 볼 칸 목록 (먼저 넣은 것부터)
+        queue.add(new int[]{0, 0});
+
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();          // ← 가장 먼저 들어온(가까운) 칸
+            int x = current[0], y = current[1];
+            for (int i = 0; i &lt; 4; i++) {
+                int nx = x + dx[i], ny = y + dy[i];
+                if (nx &lt; 0 || nx &gt;= n || ny &lt; 0 || ny &gt;= m) continue;    // ← 맵 밖 (먼저 검사!)
+                if (maps[nx][ny] == 0 || maps[nx][ny] &gt; 1) continue;    // ← 벽 · 이미 간 곳
+                maps[nx][ny] = maps[x][y] + 1;                          // ← 거리 기록 = 방문 표시
+                queue.add(new int[]{nx, ny});
+            }
+        }
+        int answer = maps[n - 1][m - 1];
+        return answer == 1 ? -1 : answer;          // ← 1 그대로면 한 번도 못 닿음
+    }
+}</code></pre>
+    </div>
+    <div class="ct-box">
+      <div class="ct-box-title">💡 정답 풀이</div>
+      <p><b>원문 결과는 FAIL이고 제출 코드 칸은 비어 있다.</b> 위 코드는 원문 정답 풀이에서 설명 주석만 줄인 것이다(전체는 정답 풀이 파일). 원문 해설은 바깥 <code>while</code>을 "여정의 엔진"(큐에서 다음 장소를 꺼냄), 안쪽 <code>for</code>를 "사방 정찰"(네 방향을 보고 갈 곳을 큐에 적음)이라고 부른다.
+
+<b>왜 BFS인가 — 그리고 왜 값이 덮이지 않나</b>
+큐는 먼저 넣은 칸을 먼저 꺼내므로(FIFO) 거리 2인 칸을 모두 본 뒤에 거리 3인 칸을 본다. 그래서 어떤 칸에 처음 적힌 숫자가 그 칸의 최단 거리이고, 이미 숫자가 적힌 칸(<code>&gt; 1</code>)은 다시 건드리지 않으니 나중에 더 먼 길로 온 큰 숫자가 덮어쓰지 못한다. 칸마다 한 번씩만 큐에 들어가 100 × 100이어도 1만 번이면 끝난다.
+
+<b>흔히 틀리는 곳</b>
+1. <b>DFS(재귀)로 끝까지 가 보기</b> — 처음 도착한 길이 가장 짧다는 보장이 없어 모든 길을 비교해야 하고, 길의 수는 맵이 커지면 폭발적으로 늘어난다. 최단 거리는 BFS.
+2. <b>범위 검사를 뒤에</b> — <code>maps[nx][ny]</code>를 먼저 읽으면 맵 밖에서 <code>ArrayIndexOutOfBoundsException</code>. 원문처럼 범위부터.
+3. <b>방문 표시를 꺼낼 때 하기</b> — 큐에 <b>넣을 때</b> 표시해야 같은 칸이 여러 번 들어가지 않는다(이 풀이는 거리를 적는 순간이 곧 표시).
+4. <b>"지나는 칸 수"는 출발 칸 포함</b> — 출발 칸이 이미 1이라 이웃은 2부터. 예시 답 11은 칸 수다.
+
+<b>로컬에서 본 두 가지 (답에는 영향 없음 · 조건 밖)</b>
+· 출발 칸은 값이 1이라 "처음 가는 길"로 보여, 이웃에서 한 번 <b>3으로 덮인다</b>(예시 1을 푼 뒤 출발 칸 = 3). 그 칸의 이웃은 이미 모두 적혀 있어 더 퍼지지 않는다.
+· 입력 배열에 직접 거리를 적으므로 <b>호출한 쪽의 맵이 바뀐다</b>. 원본이 필요하면 복사본이나 별도 <code>dist</code> 배열을 쓴다.
+· 도착 칸이 벽(0)인 맵은 문제에 나오지 않지만, 넣으면 <code>answer == 1</code>만 막아서 <b>0</b>이 나온다. <code>answer &lt;= 1 ? -1 : answer</code>로 쓰면 둘 다 막힌다.</p>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>큐를 쓰지 않는 다른 방법으로 구한 거리와 비교 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>공식 예제 → 11 · -1                                                     → 통과
+무작위 3,000개 (1~12 × 1~12, 벽 0~45%, 도착 가능 1,812개)               → 다른 방법으로 구한 거리와 같음
+한 줄짜리 맵 [[1,1,1,1,1]]                                              → 5   (n = 1 도 허용)
+최대 크기 100 × 100 (벽 없음)                                           → 199, 이 PC에서 0.1ms
+예시 1을 푼 뒤 맵                                                       → 도착 칸 11, 출발 칸 3
+(조건 밖) 도착 칸이 벽 [[1,1],[1,0]]                                     → 0</pre>
+      <div class="run-note">기댓값은 큐를 쓰지 않는 코드예요 — 모든 칸을 되풀이해 훑으며 "이웃 거리 + 1이 더 작으면 바꾸기"를 더 바뀌는 것이 없을 때까지 반복(Bellman-Ford 방식, 시드 27 고정). 100 × 100의 시간은 앞의 3,000번으로 JIT가 데워진 뒤 한 번 잰 값이에요. 로컬 검증이며 프로그래머스 재채점은 아닙니다.</div>
+    </details>
+    <div class="ct-box">
+      <div class="ct-box-title">📌 주요 개념 정리</div>
+      <p><b>(1) 큐(Queue) — 먼저 넣은 것이 먼저 나온다(FIFO)</b>
+<code>add</code>/<code>offer</code>로 뒤에 넣고 <code>poll</code>로 앞에서 꺼낸다. 좌표 두 개는 <code>int[]{x, y}</code>로 묶어 <code>Queue&lt;int[]&gt;</code>. 구현은 <code>LinkedList</code>나 <code>ArrayDeque</code>. → <a href="../../index.html#ct-64">기능개발</a>(큐) · <a href="../../index.html#util-02">ArrayList vs LinkedList</a>
+
+<b>(2) 방향 벡터 dx · dy</b>
+<code>dx = {-1, 1, 0, 0}</code>, <code>dy = {0, 0, -1, 1}</code>를 <code>for (i = 0; i &lt; 4; i++)</code>로 돌리면 네 방향 좌표가 <code>x + dx[i], y + dy[i]</code>. 대각선까지면 8방향 배열.
+
+<b>(3) 거리 기록과 방문 표시를 한 번에</b>
+별도 <code>visited</code> 없이 맵 자체에 <code>maps[x][y] + 1</code>을 적고, 1보다 큰 값은 "이미 간 곳"으로 본다. 코드는 짧지만 입력이 바뀐다는 점은 기억.
+
+<b>(4) DFS와 BFS</b>
+모든 경우를 세는 문제(<a href="../../index.html#ct-68">타겟 넘버</a>)는 DFS도 좋지만, "가장 가까운 · 가장 짧은"은 BFS. 둘 다 "방문한 곳은 다시 가지 않는다"가 공통 규칙.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요. 오답노트는 다시 떠올려 봐야 내 것이 됩니다.</p>
+      <details class="sc-q">
+        <summary>벽이 없는 3 × 4 맵이면 답은?</summary>
+        <div class="sc-a"><b>6</b>. 오른쪽으로 3칸 · 아래로 2칸 = 5번 움직이고, 출발 칸까지 세면 6칸이에요. 벽이 없으면 (n − 1) + (m − 1) + 1 = n + m − 1 (100 × 100이면 199).</div>
+      </details>
+      <details class="sc-q">
+        <summary>Queue 대신 Stack(나중에 넣은 것을 먼저)을 쓰면 무엇이 깨질까?</summary>
+        <div class="sc-a">가까운 칸부터 본다는 순서가 깨져 깊이 우선처럼 움직여요. 어떤 칸에 먼 길로 먼저 도착해 큰 숫자가 적히면, 그 뒤 더 짧은 길이 와도 <code>&gt; 1</code> 검사에 막혀 고쳐지지 않아 <b>최단이 아닌 값</b>이 답이 될 수 있어요(실행하지 않은 설명).</div>
+      </details>
+      <details class="sc-q">
+        <summary>도착 칸 값이 끝까지 1이면 왜 "못 갔다"는 뜻일까?</summary>
+        <div class="sc-a">도착 칸에 닿았다면 이웃 값 + 1이 적혀 <b>2 이상</b>이 됐을 거예요. 1 그대로라는 건 아무도 그 칸에 거리를 적지 않았다는 뜻이라 <code>-1</code>.</div>
+      </details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 이 유형을 다시 만나면</span>미로 · 지도 · "최소 몇 번 만에"는 BFS가 기본이에요. 실무에서도 지하철 최소 환승, 소셜 그래프의 "몇 다리 건너 아는 사이", 웹 크롤러의 깊이 제한이 같은 구조예요. 파이썬(이번 주 과정)으로는 <code>from collections import deque</code>의 <code>append</code> · <code>popleft</code>가 자바의 <code>add</code> · <code>poll</code>에 해당해요.</p>
+    <details><summary>정리 작업 메모</summary><ul><li>원문 결과는 FAIL, 제출 코드 칸은 비어 있다. 정답 풀이(주석 전체)는 <code>GameMapShortestPath.java</code>로 옮겼고, 카드의 코드는 설명 주석만 줄였다. 문제 페이지에서 크기 조건(n · m 1~100, 둘 다 1은 없음)을 확인했다 — 도착 칸이 벽인 경우는 문제에 명시되어 있지 않다.</li><li>실행 결과는 <code>CodingTest27Test.java</code>. 스스로 확인 2번(Stack으로 바꾸기)은 실행하지 않은 설명이다.</li></ul></details>
+  </div>
+</article>
+<footer><p><a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/RemoveSmallestNumber.java">제일 작은 수 제거하기</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/GameMapShortestPath.java">게임 맵 최단거리</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/CodingTest27Test.java">Java 검증</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/patient-girls-12-answer.sql">SQL 정답</a> · <a href="../../../view.html?f=Back_end/coding-tests/2026-10-19/verify-sql27.mjs">SQL 검증</a></p></footer></main></body></html>

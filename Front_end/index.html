@@ -1692,7 +1692,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <h1>웹 개발 학습 노트</h1>
         <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
         <div class="meta-row">
-          <span id="updated-badge">마지막 점검: 2026-10-16</span>
+          <span id="updated-badge">마지막 점검: 2026-10-19</span>
           <span>HTML 7개 단원</span>
           <span>CSS 12개 단원</span>
           <span>JavaScript 18개 단원</span>
@@ -1920,7 +1920,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <span class="bp-node-s">SQL · MariaDB(MySQL)</span>
       </div>
     </div>
-    <p class="bp-caption"><b>프런트엔드</b> = ① 칸(사용자 쪽), <b>백엔드</b> = ②·③ 칸(서버 쪽)입니다. 프런트엔드 과정에서 ①을 다 만들어 봤고, 지금 백엔드 과정에서 ②와 ③을 만들고 있어요. 둘을 이어 붙이면 <b>"풀스택"</b> 한 서비스가 됩니다 — 백엔드 50일차(12번 예제)에서 실제로 이어 붙였어요: ①의 React가 <code>fetch</code>로 ②의 스프링 REST API(JSON)를 부릅니다(<a href="../Back_end/index.html#web-87">백엔드 web-87</a>).</p>
+    <p class="bp-caption"><b>프런트엔드</b> = ① 칸(사용자 쪽), <b>백엔드</b> = ②·③ 칸(서버 쪽)입니다. 프런트엔드 과정에서 ①을 다 만들어 봤고, 백엔드 과정(8/3~)에서 ②와 ③을 만들어 왔어요. 둘을 이어 붙이면 <b>"풀스택"</b> 한 서비스가 됩니다 — 백엔드 50일차(12번 예제)에서 실제로 이어 붙였어요: ①의 React가 <code>fetch</code>로 ②의 스프링 REST API(JSON)를 부릅니다(<a href="../Back_end/index.html#web-87">백엔드 web-87</a>).</p>
 
     <h3 class="bp-h"><span class="bp-step">2</span>지금까지 어디를 왔나 — 과정 전체 타임라인</h3>
     <p class="bp-sub">순서에는 이유가 있습니다. <b>앞 단계가 뒤 단계의 재료</b>가 돼요. (프런트엔드 날짜는 강의자료 날짜 기준)</p>
@@ -1935,7 +1935,8 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">9/29 ~ 10/6</span><span class="bp-what">답변형 게시판 — 페이징 · 답글 · 트랜잭션 · AOP · 인터셉터 · 테스트</span><span class="bp-badge done">완료</span><span class="bp-why">"돌아가는" 게시판에서 "실무에서 쓸 만한" 게시판으로. 여러 쿼리는 한 묶음으로, 공통 기능(로그 · 로그인 확인)은 바깥으로, 확인은 코드로.</span></li>
       <li class="done"><span class="bp-when">10/7 ~ 10/12</span><span class="bp-what">스프링 부트 — 같은 게시판을 부트로, 그리고 회원 · 파일 · 권한</span><span class="bp-badge done">완료</span><span class="bp-why">XML 설정을 부트의 자동 설정에 맡기고, 회원가입 · 로그인(세션) · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판을 만든다. 프런트에서 쓰던 "로그인 · 업로드 화면" 뒤편의 서버 쪽 일이다.</span></li>
       <li class="done"><span class="bp-when">10/13 ~ 10/15</span><span class="bp-what">일정관리(캘린더) 게시판 — 새 기능 하나를 부트로 처음부터</span><span class="bp-badge done">완료</span><span class="bp-why">9일차에 콘솔로 찍던 달력이 웹 화면으로 돌아온다. 서버가 그 달 1일의 요일 · 마지막 날을 구하고, 화면(Thymeleaf)이 그만큼 칸을 찍는다 — 프런트에서 map으로 목록을 그리던 것과 같은 생각. 이어서 날짜 칸의 폼으로 일정을 저장하고(서버가 다시 검사한 뒤 그 달로 redirect), 날짜를 누르면 그날의 목록을 꺼낸다 — React에서 폼을 제출하고 목록을 다시 불러오던 흐름의 서버 쪽 모습. 49일차에는 고치기 · 지우기, 그리고 사용자 글자를 화면에 찍을 때의 이스케이프 — React가 기본으로 해 주던 일을 <code>th:utext</code>에서는 직접 챙겨야 한다(<code>dangerouslySetInnerHTML</code>과 같은 자리).</span></li>
-      <li class="now"><span class="bp-when">10/16 ~ 지금</span><span class="bp-what">REST API + React 프런트 — 백엔드 과정이 이 탭의 React로 돌아온다</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">스프링 서버는 JSON만 주고, 화면은 Next.js가 <code>fetch</code>로 불러 <code>useState</code>로 그린다 — 이 과정에서 외부 데이터를 부르던 그 자리에 이번엔 직접 만든 스프링 API가 선다. 포트가 다른 두 서버라 CORS를 처음 만난다.</span></li>
+      <li class="done"><span class="bp-when">10/16</span><span class="bp-what">REST API + React 프런트 — 백엔드 과정이 이 탭의 React로 돌아온다</span><span class="bp-badge done">백엔드 50일차</span><span class="bp-why">스프링 서버는 JSON만 주고, 화면은 Next.js가 <code>fetch</code>로 불러 <code>useState</code>로 그린다 — 이 과정에서 외부 데이터를 부르던 그 자리에 이번엔 직접 만든 스프링 API가 선다. 포트가 다른 두 서버라 CORS를 처음 만난다.</span></li>
+      <li class="now"><span class="bp-when">10/19 ~ 지금</span><span class="bp-what">AI Agent 과정 1부 — 파이썬 · Pandas · FastAPI · LangChain · RAG · Agent (새 페이지)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">새 과정은 <a href="../AI_Agent/">🤖 AI Agent 노트</a>에 따로 정리한다. 이 탭의 JavaScript와 닮은 곳이 많다 — 파이썬의 리스트 컴프리헨션은 <code>map</code> · <code>filter</code>, f-string은 템플릿 리터럴(<code>`${x}`</code>), 딕셔너리를 담은 리스트는 <code>fetch</code>로 받던 JSON 배열과 같은 모양이다.</span></li>
       <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">직접 짠 로그인 · 권한 확인을 Spring Security 필터 체인에 맡기고, 종합 프로젝트로 "요즘 방식" 스프링을 마무리.</span></li>
     </ol>
 
@@ -2188,7 +2189,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li>API 키는 서버 쪽(API Route·서버 컴포넌트)에만 — 브라우저 코드에 두면 누구나 볼 수 있다</li>
               <li>React(라이브러리)와 Next.js(프레임워크)의 경계</li>
             </ul></div>
-            <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>신규 React 프로젝트의 상당수가 Next.js로 시작합니다. 검색 노출(SEO)이 중요한 서비스, 첫 화면 속도가 중요한 서비스에 특히요. API Routes는 간단한 중계 서버로 쓰고, 본격적인 업무 로직은 보통 <b>별도 백엔드(스프링 등)</b>에 둡니다 — 지금 백엔드 과정에서 배우는 쪽이죠.</p></div>
+            <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>신규 React 프로젝트의 상당수가 Next.js로 시작합니다. 검색 노출(SEO)이 중요한 서비스, 첫 화면 속도가 중요한 서비스에 특히요. API Routes는 간단한 중계 서버로 쓰고, 본격적인 업무 로직은 보통 <b>별도 백엔드(스프링 등)</b>에 둡니다 — 백엔드 과정에서 배운 쪽이죠(10/19부터의 AI Agent 과정에서는 파이썬 FastAPI로도 만들어요).</p></div>
             <div class="bp-box"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
               <details><summary>CSR과 SSR의 차이와 장단점은?</summary><div class="bp-a">CSR은 빈 HTML과 JS를 받아 브라우저가 화면을 그려서 이후 화면 전환이 빠르지만 첫 화면이 늦고 SEO에 불리합니다. SSR은 서버가 완성된 HTML을 보내 첫 화면과 SEO에 유리하지만 요청마다 서버가 일을 해야 합니다.</div></details>
               <details><summary>서버 컴포넌트와 클라이언트 컴포넌트는 어떻게 나누나요?</summary><div class="bp-a">데이터를 가져와 보여 주기만 하는 부분은 서버 컴포넌트로, 클릭·입력·state가 필요한 부분은 <code>"use client"</code>를 붙인 클라이언트 컴포넌트로 만듭니다. 브라우저로 보내는 JS가 줄어 빨라집니다.</div></details>
@@ -2237,7 +2238,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li><b>Tailwind + 다크 모드</b>, <b>Recharts + WebSocket</b> — 첫 차트는 REST로, 이후 점은 WebSocket으로 이어 붙이는 실시간 차트</li>
             </ul></div>
             <div class="bp-box"><span class="bp-box-t">면접에서 이렇게 설명하세요</span><p>"무엇을 만들었다"보다 <b>"왜 그렇게 만들었다"</b>가 중요합니다. 예: "REST 요청용 API 키가 브라우저에 노출되지 않도록 Next.js API Route를 중계 서버로 뒀다(WebSocket은 브라우저가 직접 연결해야 해서 공개용 키를 따로 썼다)", "Context는 값이 바뀔 때마다 하위 전체가 렌더링돼서 셀렉터 구독이 되는 Zustand를 골랐다".</p></div>
-            <div class="bp-box"><span class="bp-box-t">백엔드와 이어 보기</span><p>지금은 데이터를 외부 API(Finnhub)에서 받고 관심 종목은 브라우저(localStorage)에만 남지만, 백엔드에서 만들고 있는 <b>회원가입 · 로그인(세션) · DB 저장</b>을 붙이면 "내 관심 종목을 내 스프링 서버 + DB에 저장해 어느 기기에서나 보기"로 확장할 수 있어요. 이때 화면은 <code>fetch</code>로 JSON을 주고받고, 서버는 <code>@RestController</code>로 응답하는 구조가 됩니다. 그게 곧 풀스택 포트폴리오입니다(→ <a href="../Back_end/#bigpicture-section">백엔드 큰 그림</a>).</p></div>
+            <div class="bp-box"><span class="bp-box-t">백엔드와 이어 보기</span><p>지금은 데이터를 외부 API(Finnhub)에서 받고 관심 종목은 브라우저(localStorage)에만 남지만, 백엔드에서 만든 <b>회원가입 · 로그인(세션) · DB 저장</b>을 붙이면 "내 관심 종목을 내 스프링 서버 + DB에 저장해 어느 기기에서나 보기"로 확장할 수 있어요. 이때 화면은 <code>fetch</code>로 JSON을 주고받고, 서버는 <code>@RestController</code>로 응답하는 구조가 됩니다. 그게 곧 풀스택 포트폴리오입니다(→ <a href="../Back_end/#bigpicture-section">백엔드 큰 그림</a>).</p></div>
           </div>
           <p class="bp-links">더 보기 → <a href="#react-capstone">졸업 과제 카드</a></p>
         </div>
@@ -2311,7 +2312,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h3 class="bp-h"><span class="bp-step">7</span>면접에서 "무엇을 배웠나요?"라고 물으면</h3>
     <p class="bp-sub">아래는 이 과정을 30초로 말하는 예시입니다. 그대로 외우기보다 <b>내 말로 바꿔서</b> 연습하세요.</p>
     <div class="bp-pitch">
-      <p>"HTML·CSS로 화면 구조와 배치를, JavaScript로 DOM 조작과 AJAX 통신을 익힌 뒤, React로 컴포넌트·state 기반 화면을 만들었습니다. 이후 Next.js의 App Router, API Routes, 서버 컴포넌트를 배우고, 졸업 과제로 <b>Zustand로 전역 상태를 관리하고 WebSocket으로 실시간 시세를 받는 주식 대시보드</b>를 만들었습니다. 이때 REST용 API 키를 숨기려고 API Route를 중계 서버로 두는 등 <b>보안과 성능을 고려한 구조</b>를 직접 결정했습니다. 지금은 자바·스프링 백엔드 과정에서 스프링 부트로 회원가입 · 로그인 · 파일 첨부 · 권한 검사를 갖춘 게시판을 만들며, 화면과 서버를 함께 다루는 풀스택으로 넓혀 가고 있습니다."</p>
+      <p>"HTML·CSS로 화면 구조와 배치를, JavaScript로 DOM 조작과 AJAX 통신을 익힌 뒤, React로 컴포넌트·state 기반 화면을 만들었습니다. 이후 Next.js의 App Router, API Routes, 서버 컴포넌트를 배우고, 졸업 과제로 <b>Zustand로 전역 상태를 관리하고 WebSocket으로 실시간 시세를 받는 주식 대시보드</b>를 만들었습니다. 이때 REST용 API 키를 숨기려고 API Route를 중계 서버로 두는 등 <b>보안과 성능을 고려한 구조</b>를 직접 결정했습니다. 이어서 자바·스프링 백엔드 과정에서 스프링 부트로 회원가입 · 로그인 · 파일 첨부 · 권한 검사를 갖춘 게시판을 만들고, 그 게시판을 REST API와 React 화면으로 나눠 직접 이어 붙였습니다. 지금은 AI Agent 과정에서 파이썬으로 데이터 처리와 LLM 에이전트를 배우고 있습니다."</p>
       <p class="bp-pitch-note">💡 백엔드 과정의 큰 그림은 <a href="../Back_end/#bigpicture-section">백엔드 학습 노트</a>의 🗺️ 큰 그림 탭에 있어요. 두 탭의 1번 지도는 같은 그림이고, 칠해진 칸만 다릅니다.</p>
     </div>
   </section>

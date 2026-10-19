@@ -214,7 +214,9 @@ userDto [userId=KKH, name=김경호, birthYear=1971, addr=전남, ...]
 8. **Spring Boot** — XML 설정 없이 `application.properties`로 전환 (44일차 시작, 09 · 10 프로젝트)
 9. **Thymeleaf** — JSP를 대신하는 템플릿 엔진, 프래그먼트·유틸리티 함수 (44일차 시작 — `th:each` · `th:text` · `@{…}` · `#dates`. 45일차 레이아웃 · `th:replace` 프래그먼트 · `th:field` · `th:errors`)
 10. **Spring Security + Spring Boot 회원관리·게시판 종합** (45일차에 의존성과 `PasswordEncoder`(BCrypt)만 — 필터 체인은 `permitAll()`. 46일차 개선 과제로 작성자 본인 확인 · 로그 · 설정 분리)
-11. **REST API + React 화면** — 서버는 JSON만(`@RestController`), 화면은 Next.js, 둘 사이의 CORS (50일차, 12 프로젝트 — 원래 목록에 없던 단계) ← **여기까지 진행 중**
+11. **REST API + React 화면** — 서버는 JSON만(`@RestController`), 화면은 Next.js, 둘 사이의 CORS (50일차, 12 프로젝트 — 원래 목록에 없던 단계) ← **여기까지**
+
+> 2026-10-19부터는 새 과정 「AI AGENT 실습 입문 과정 1부」(파이썬 → FastAPI → LangChain → Agent)가 진행 중이다. 이 목록의 남은 단계(Security · 종합)가 언제 이어질지는 아직 알 수 없다. 새 과정은 [`../../AI_Agent/`](../../AI_Agent/)에 정리한다.
 
 ## 고친 것 · 남긴 것
 

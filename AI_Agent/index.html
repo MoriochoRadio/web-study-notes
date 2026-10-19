@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agent 과정 학습 노트 | 취업아카데미</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="description" content="취업아카데미 AI AGENT 실습 입문 과정 1부 학습 노트 — 파이썬 기초부터 Pandas · FastAPI · LangChain · RAG · Agent까지 수업 진도, 개념 정리, 실습 풀이, 객관식 시험 대비">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>/* 저장된 테마를 CSS보다 먼저 적용해 깜빡임 방지. 저장값이 없으면 OS 설정을 따른다(버튼으로 고를 때만 저장) */
+try { document.documentElement.dataset.theme = localStorage.getItem("theme")
+  || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); }
+catch (e) { document.documentElement.dataset.theme = "light"; }</script>
+<style>
+  /* ==== 백엔드 · 프런트엔드 노트와 같은 종이 노트 테마 (파이썬 강조색은 초록) ==== */
+  :root{
+    --bg:#eeece5; --panel:#f8f6f1; --panel-2:#e6e3da;
+    --code-bg:#161a23; --code-head:#1f2430;
+    --border:#d8d3c6; --text:#33363d; --muted:#63666e;
+    --accent:#2f7a5b; --accent-2:#4056c0; --py:#3572a5; --warn:#b4541a;
+    --good:#1d8f52; --bad:#b42318;
+    --easy-bg:#fdf6dd; --easy-border:#eedfa8; --easy-label:#7d621a;
+    --shadow:0 1px 3px rgba(70,60,30,.07);
+  }
+  [data-theme="dark"]{
+    --bg:#21242b; --panel:#282c34; --panel-2:#30353e;
+    --code-bg:#1c1f25; --code-head:#2b2f38;
+    --border:#3a404b; --text:#d2d6dd; --muted:#99a0ac;
+    --accent:#7cc7a4; --accent-2:#93a6e0; --py:#8db8de; --warn:#e3a07a;
+    --good:#74bf8f; --bad:#ff8a80;
+    --easy-bg:rgba(213,189,119,.06); --easy-border:rgba(213,189,119,.20); --easy-label:#d5bd77;
+    --shadow:none;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard","Noto Sans KR",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  code{font-family:"JetBrains Mono","D2Coding",Consolas,monospace;font-size:.9em;background:var(--panel-2);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere;}
+  pre code{background:none;padding:0;overflow-wrap:normal;}
+
+  header.hero{padding:44px 20px 26px;border-bottom:3px double var(--border);}
+  .wrap{max-width:1180px;margin:0 auto;}
+  .eyebrow{display:inline-flex;gap:8px;font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:10px;}
+  h1{font-size:clamp(26px,4vw,36px);margin:0 0 12px;font-weight:800;letter-spacing:-.02em;}
+  .sub{color:var(--muted);font-size:15.5px;line-height:1.85;max-width:720px;margin:0 0 18px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-row span,.meta-row a{background:var(--panel);border:1px solid var(--border);padding:5px 12px;border-radius:999px;text-decoration:none;}
+  .meta-row a:hover{border-color:var(--accent);color:var(--accent);}
+  .theme-btn{cursor:pointer;font:inherit;color:inherit;background:var(--panel);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:13px;}
+
+  .layout-wrap{display:flex;align-items:flex-start;gap:26px;max-width:1180px;margin:22px auto 60px;padding:0 20px;}
+  nav.tabs{flex:0 0 228px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px;box-shadow:var(--shadow);}
+  #search-box{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font:inherit;font-size:13.5px;padding:8px 11px;margin-bottom:8px;}
+  .nav-item{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;cursor:pointer;
+    background:none;border:0;border-radius:9px;padding:8px 10px;font:inherit;font-size:14px;color:var(--text);}
+  .nav-item:hover{background:var(--panel-2);}
+  .nav-item.active{background:var(--accent);color:#fff;}
+  [data-theme="dark"] .nav-item.active{color:#13221b;}
+  .nav-count{font-size:12px;opacity:.75;}
+  .nav-group{font-size:11.5px;color:var(--muted);margin:10px 8px 4px;font-weight:700;letter-spacing:.04em;}
+  main{flex:1;min-width:0;}
+  section.cat.hidden{display:none;}
+  .cat-head h2{font-size:24px;margin:0 0 8px;}
+  .cat-desc{color:var(--muted);font-size:15px;margin:0 0 20px;max-width:780px;}
+  #search-result{font-size:13px;color:var(--muted);margin:0 0 12px;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:0 0 22px;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+  .stat-card .n{font-size:26px;font-weight:800;color:var(--accent);}
+  .stat-card .l{font-size:12.5px;color:var(--muted);}
+  .box{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin:0 0 18px;box-shadow:var(--shadow);}
+  .box h3{margin:0 0 8px;font-size:17px;}
+  .days{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+  .day{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13.5px;}
+  .day b{display:block;font-size:14px;}
+  .day.done{border-left-color:var(--good);}
+  .day.now{border-left-color:var(--accent);background:var(--easy-bg);}
+  .day .tag-s{font-size:11.5px;color:var(--muted);}
+  table.vs{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0;}
+  table.vs th,table.vs td{border:1px solid var(--border);padding:7px 10px;text-align:left;vertical-align:top;}
+  table.vs th{background:var(--panel-2);}
+  .table-wrap{overflow-x:auto;}
+
+  /* ---- 카드: 백엔드 노트와 같은 순서(한 줄 요약 → 쉽게 말하면 → 개념 → 코드 → 실행 결과 → 정리 → 스스로 확인 → 실무 → 파일 → 메모) ---- */
+  .note-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;margin:0 0 22px;box-shadow:var(--shadow);scroll-margin-top:14px;}
+  .note-head{padding:16px 20px 10px;border-bottom:1px solid var(--border);}
+  .note-num{font-size:12.5px;font-weight:700;color:var(--accent);}
+  .note-head h3{margin:4px 0 8px;font-size:18.5px;line-height:1.45;}
+  .note-tags .tag{display:inline-block;font-size:12px;margin:0 6px 4px 0;padding:1px 9px;border:1px solid var(--border);border-radius:999px;color:var(--muted);}
+  .note-body{padding:14px 20px 18px;}
+  .note-summary{margin:0 0 12px;}
+  .summary-label,.easy-label,.pn-label,.run-tag{font-weight:800;margin-right:8px;}
+  .note-easy{background:var(--easy-bg);border:1px solid var(--easy-border);border-radius:10px;padding:10px 14px;margin:0 0 14px;}
+  .easy-label{color:var(--easy-label);}
+  .concept-block{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin:12px 0;}
+  .concept-block h4{margin:0 0 4px;font-size:15.5px;}
+  .concept-block p{margin:0;}
+  .note-code{margin:14px 0;border-radius:10px;overflow:hidden;background:var(--code-bg);}
+  .code-head{display:flex;gap:10px;align-items:center;background:var(--code-head);color:#c9d1dc;font-size:12.5px;padding:6px 12px;}
+  .code-lang{font-weight:800;color:#9fd3b6;}
+  .code-file{flex:1;opacity:.85;}
+  .copy-btn{cursor:pointer;background:none;border:1px solid #4a5263;color:#c9d1dc;border-radius:6px;font-size:12px;padding:1px 8px;}
+  .note-code pre{margin:0;padding:14px 16px;overflow:auto;font-size:13.5px;line-height:1.6;color:#e6edf3;}
+  details.run-output{border:1px dashed var(--border);border-radius:10px;padding:8px 14px;margin:12px 0;}
+  details.run-output summary{cursor:pointer;}
+  .predict-hint{font-size:12px;color:var(--muted);margin-left:6px;}
+  details.run-output pre{background:var(--code-bg);color:#e6edf3;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;}
+  .run-note{font-size:14px;margin:6px 0 4px;}
+  .note-points{background:var(--panel-2);border-radius:10px;padding:10px 16px;margin:14px 0;}
+  .note-points-title{font-weight:800;margin-bottom:4px;}
+  .note-points ul{margin:0;padding-left:20px;}
+  .self-check{border:1px solid var(--border);border-radius:10px;padding:10px 16px;margin:14px 0;}
+  .self-check-title{font-weight:800;}
+  .self-check-hint{font-size:13px;color:var(--muted);margin:2px 0 6px;}
+  .sc-q{border-top:1px solid var(--border);padding:6px 0;}
+  .sc-q summary{cursor:pointer;font-weight:600;}
+  .sc-a{margin:6px 0 2px;padding-left:12px;border-left:3px solid var(--good);}
+  .practice-note{border-left:3px solid var(--accent-2);padding-left:12px;margin:14px 0;}
+  .pn-label{color:var(--accent-2);}
+  .note-files{font-size:13.5px;color:var(--muted);margin:12px 0;}
+  .note-files a{color:var(--accent-2);}
+  .note-body > details:not(.run-output){font-size:13px;color:var(--muted);margin-top:10px;}
+  .note-body > details:not(.run-output) summary{cursor:pointer;}
+  .warn-box{border:1px solid var(--warn);border-radius:10px;padding:8px 14px;margin:12px 0;}
+  .warn-box b{color:var(--warn);}
+
+  /* ---- 시험 ---- */
+  .exam-controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+  .btn{cursor:pointer;font:inherit;font-size:14px;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:999px;padding:6px 14px;}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  [data-theme="dark"] .btn.primary{color:#13221b;}
+  .exam-q{font-weight:700;margin:8px 0 12px;}
+  .exam-opt{display:block;width:100%;text-align:left;cursor:pointer;font:inherit;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin:0 0 8px;}
+  .exam-opt.right{border-color:var(--good);background:rgba(29,143,82,.10);}
+  .exam-opt.wrong{border-color:var(--bad);background:rgba(180,35,24,.08);}
+  .exam-feedback{margin:10px 0;}
+  .exam-feedback ol{padding-left:22px;margin:6px 0;}
+  .exam-score{font-size:13.5px;color:var(--muted);}
+
+  @media (max-width:900px){
+    .layout-wrap{flex-direction:column;gap:14px;}
+    nav.tabs{position:static;max-height:none;width:100%;flex:none;display:flex;flex-wrap:wrap;gap:4px;}
+    #search-box{flex:1 1 100%;}
+    .nav-item{width:auto;flex:0 0 auto;}
+    .nav-group{display:none;}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">🤖 취업아카데미 · AI AGENT 실습 입문 과정 1부</div>
+    <h1>AI Agent 과정 학습 노트</h1>
+    <p class="sub">파이썬 기초에서 시작해 데이터(Pandas) · 서버(FastAPI) · LLM(LangChain) · RAG · Agent까지 가는 10일 과정을 수업 날짜별로 정리합니다. 카드마다 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 코드 → 실행 결과 → 스스로 확인</b> 순서이고, 앞 과정에서 배운 <b>자바 · 스프링과 무엇이 같고 다른지</b>를 함께 적습니다.</p>
+    <div class="meta-row">
+      <span id="updated-badge">마지막 업데이트: 2026-10-19</span>
+      <span>📅 과정 Day 2 / 10</span>
+      <a href="../">← 학습 노트 첫 화면</a>
+      <a href="../Back_end/">☕ 백엔드(Java) 노트</a>
+      <a href="../Front_end/">🎨 프런트엔드 노트</a>
+      <button class="theme-btn" id="theme-btn" type="button">다크 모드</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout-wrap">
+  <nav class="tabs" aria-label="노트 분류">
+    <input id="search-box" type="search" placeholder="검색: 리스트, f-string…" aria-label="카드 검색">
+    <button class="nav-item active" data-target="overview" type="button"><span>🏠 개요</span></button>
+    <button class="nav-item" data-target="bigpicture" type="button"><span>🗺️ 큰 그림</span></button>
+    <div class="nav-group">수업</div>
+    <button class="nav-item" data-target="class" type="button"><span>📅 수업 진도</span><span class="nav-count" data-count="class"></span></button>
+    <button class="nav-item" data-target="python" type="button"><span>🐍 파이썬 개념</span><span class="nav-count" data-count="python"></span></button>
+    <button class="nav-item" data-target="lab" type="button"><span>🧪 실습 풀이</span><span class="nav-count" data-count="lab"></span></button>
+    <div class="nav-group">복습</div>
+    <button class="nav-item" data-target="exam" type="button"><span>✏️ 시험 대비</span><span class="nav-count" id="exam-count"></span></button>
+    <button class="nav-item" data-target="materials" type="button"><span>📎 강의자료 · 소스</span></button>
+  </nav>
+
+  <main>
+    <p id="search-result" hidden></p>
+    <section id="overview-section" class="cat">
+      <div class="cat-head"><h2>🏠 개요 — AI Agent 과정 1부 10일</h2></div>
+      <p class="cat-desc">학원 다음 과정 <b>「AI AGENT 실습 입문 과정 1부」</b>의 수업을 정리하는 페이지입니다. 매일 강의 6시간(개념 + 라이브 코딩)과 실습 2시간(예제 풀이)으로 진행되고, 이 노트는 그날의 <b>강의자료(pptx)</b> · <b>선생님 노트북</b> · <b>내가 풀고 실행한 노트북</b>을 근거로 씁니다.</p>
+      <div class="stats">
+        <div class="stat-card"><div class="n" data-stat="class"></div><div class="l">📅 수업 진도 카드</div></div>
+        <div class="stat-card"><div class="n" data-stat="python"></div><div class="l">🐍 파이썬 개념</div></div>
+        <div class="stat-card"><div class="n" data-stat="lab"></div><div class="l">🧪 실습 풀이</div></div>
+        <div class="stat-card"><div class="n" data-stat="exam"></div><div class="l">✏️ 시험 대비 문제</div></div>
+      </div>
+      <div class="box">
+        <h3>과정 10일 지도 — 지금 어디인가</h3>
+        <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">강의자료 목차 기준입니다. 첫날(10/19)에 Day 1과 Day 2를 함께 진행했어요(선생님 레포에도 같은 날 <code>Day01</code> · <code>Day02</code> 폴더가 올라옴).</p>
+        <div class="days">
+          <div class="day done"><b>Day 1 · 파이썬 시작하기</b>개발환경 · 변수 · 연산자 · 5가지 자료형<div class="tag-s">10/19 완료 → <a href="#ai-day01">수업 카드</a></div></div>
+          <div class="day done"><b>Day 2 · 조건 · 반복 · 함수</b>if · for/while · 컴프리헨션 · 함수 · 모듈 · 파일 · 예외<div class="tag-s">10/19 완료(종합 실습은 실습 폴더에 없음 → <a href="#lab-10">참고 풀이</a>)</div></div>
+          <div class="day now"><b>Day 3 · Pandas</b>CSV · JSON 읽기와 전처리<div class="tag-s">📍 다음</div></div>
+          <div class="day"><b>Day 4 · NumPy · 시각화</b>NumPy · Matplotlib · Seaborn<div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 5 · FastAPI</b>Path/Query · Pydantic · CRUD<div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 6 · LLM · Agent 개념</b><div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 7 · LangChain + OpenAI</b>.env · PromptTemplate · LCEL · @tool · Memory<div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 8 · RAG</b>청크 · 임베딩 · 벡터 저장소 · Retriever<div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 9 · 멀티툴 Agent</b>create_agent<div class="tag-s">예정</div></div>
+          <div class="day"><b>Day 10 · 대화 기억 Agent</b>체크포인터 · thread_id<div class="tag-s">예정</div></div>
+        </div>
+      </div>
+      <div class="box">
+        <h3>이렇게 공부하세요</h3>
+        <ol style="margin:0;padding-left:20px">
+          <li><b>📅 수업 진도</b>에서 그날 무엇을 했는지 먼저 보고, 링크를 따라 <b>🐍 파이썬 개념</b> 카드로 갑니다.</li>
+          <li><b>🧪 실습 풀이</b>는 교안의 실습 문제마다 <b>내가 쓴 코드</b>와 실행 결과, 그리고 다시 볼 점을 모았어요. 답을 보기 전에 문제를 다시 풀어 보세요.</li>
+          <li>개념 카드마다 <b>"자바에서는"</b> 칸이 있어요. 8~10월에 배운 자바 · 스프링과 비교하면 새 문법이 훨씬 빨리 들어옵니다.</li>
+          <li><b>✏️ 시험 대비</b>는 보기 순서가 매번 섞이고, 틀리면 보기마다 왜 틀렸는지가 펼쳐집니다.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="bigpicture-section" class="cat hidden">
+      <div class="cat-head"><h2>🗺️ 큰 그림 — 파이썬에서 Agent까지, 그리고 앞 과정과의 연결</h2></div>
+      <p class="cat-desc">새 과정이지만 처음부터가 아니에요. 자바로 익힌 <b>변수 · 조건 · 반복 · 함수 · 컬렉션 · 예외</b>는 그대로 쓰이고, 스프링으로 만든 <b>REST API</b>는 Day 5의 FastAPI와 거의 같은 생각입니다. 이 탭은 날짜별로 덧붙이지 않고 과정 전체를 보며 고쳐 씁니다.</p>
+      <div class="box">
+        <h3>1. 10일의 흐름 — 왜 이 순서인가</h3>
+        <div class="table-wrap"><table class="vs">
+          <thead><tr><th>단계</th><th>무엇을</th><th>왜 필요한가</th><th>앞 과정과 닮은 것</th></tr></thead>
+          <tbody>
+            <tr><td><b>Day 1~2</b> 파이썬 기초 ✅</td><td>자료형 · 조건 · 반복 · 함수 · 파일 · 예외</td><td>이후 모든 도구(Pandas · FastAPI · LangChain)가 파이썬 라이브러리라서</td><td>자바 1~19일차 전체를 이틀에 — 문법이 짧을 뿐 생각은 같다</td></tr>
+            <tr><td><b>Day 3~4</b> 데이터 📍</td><td>Pandas · NumPy · 시각화</td><td>LLM에 넣을 데이터를 읽고 다듬고 확인하려고</td><td>SQL의 SELECT · WHERE · GROUP BY를 표 객체(DataFrame)로</td></tr>
+            <tr><td><b>Day 5</b> 서버</td><td>FastAPI · Pydantic · CRUD</td><td>만든 기능을 다른 프로그램(화면 · 앱)이 부를 수 있게</td><td>스프링 <code>@RestController</code> · <code>@PathVariable</code> · DTO · <code>@Valid</code> (백엔드 50일차)</td></tr>
+            <tr><td><b>Day 6~7</b> LLM</td><td>Agent 개념 · LangChain · 프롬프트 · 도구</td><td>"말로 묻고 답하는" 기능을 코드에 붙이려고</td><td>외부 API 호출 — 단, 답이 매번 조금씩 다를 수 있다</td></tr>
+            <tr><td><b>Day 8</b> RAG</td><td>문서를 잘라 벡터로 저장하고 찾아 붙이기</td><td>LLM이 모르는 "우리 자료"로 답하게</td><td>검색(<code>LIKE</code>) → 의미 검색(임베딩)</td></tr>
+            <tr><td><b>Day 9~10</b> Agent</td><td>여러 도구를 고르는 Agent, 대화 기억</td><td>스스로 단계를 정해 일을 끝내는 프로그램</td><td>세션(대화 상태)을 <code>thread_id</code>로 — 로그인 세션과 비슷한 생각</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">Day 3 이후 칸은 강의자료 목차로 미리 적은 것이고, 수업을 마칠 때마다 실제 내용으로 고칩니다.</p>
+      </div>
+      <div class="box">
+        <h3>2. 자바 → 파이썬, 한 표로 (Day 1~2)</h3>
+        <div class="table-wrap"><table class="vs">
+          <thead><tr><th>하고 싶은 일</th><th>자바</th><th>파이썬</th><th>기억 요령</th></tr></thead>
+          <tbody>
+            <tr><td>변수 만들기</td><td><code>int n = 3;</code> (타입 먼저)</td><td><code>n = 3</code> (타입은 값이 정함)</td><td>세미콜론 · 타입 선언 없음 → <a href="#py-02">py-02</a></td></tr>
+            <tr><td>블록</td><td><code>{ … }</code></td><td><code>:</code> + 들여쓰기 4칸</td><td>들여쓰기가 곧 문법 → <a href="#py-05">py-05</a></td></tr>
+            <tr><td>나눗셈</td><td><code>7 / 2</code> → 3 (정수끼리)</td><td><code>7 / 2</code> → 3.5, 몫은 <code>7 // 2</code></td><td><code>/</code>는 늘 실수</td></tr>
+            <tr><td>논리 연산</td><td><code>&amp;&amp; || !</code></td><td><code>and or not</code></td><td>영어 단어로</td></tr>
+            <tr><td>문자열 붙이기</td><td><code>"점수 " + s + "점"</code> · <code>String.format</code></td><td><code>f"점수 {s}점"</code></td><td>f-string → <a href="#py-03">py-03</a></td></tr>
+            <tr><td>배열 · 목록</td><td><code>int[]</code> · <code>ArrayList</code></td><td><code>list</code> <code>[1, 2]</code> (크기 자유)</td><td>→ <a href="#py-04">py-04</a></td></tr>
+            <tr><td>키-값</td><td><code>HashMap</code></td><td><code>dict</code> <code>{"a": 1}</code></td><td>JSON과 모양이 같다</td></tr>
+            <tr><td>반복</td><td><code>for (int i = 1; i &lt; 10; i++)</code></td><td><code>for i in range(1, 10):</code></td><td>끝은 포함 안 함 → <a href="#py-06">py-06</a></td></tr>
+            <tr><td>삼항</td><td><code>a &gt;= 60 ? "합격" : "불합격"</code></td><td><code>"합격" if a &gt;= 60 else "불합격"</code></td><td>값이 먼저, 조건이 가운데</td></tr>
+            <tr><td>함수</td><td>클래스 안의 메서드</td><td><code>def f(x):</code> 파일 어디서나</td><td>→ <a href="#py-07">py-07</a></td></tr>
+            <tr><td>예외</td><td><code>try { } catch (E e) { } finally { }</code></td><td><code>try: … except E: … finally: …</code></td><td>→ <a href="#py-08">py-08</a></td></tr>
+            <tr><td>자원 닫기</td><td><code>try (… r = …) { }</code></td><td><code>with open(…) as f:</code></td><td>블록이 끝나면 자동으로 닫힘</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="box">
+        <h3>3. 계속 다시 나올 큰 생각</h3>
+        <ul style="margin:0;padding-left:20px">
+          <li><b>짧게 쓰는 대신 규칙을 정확히</b> — 파이썬은 타입 선언이 없어 실수가 실행할 때 드러나요. <code>type()</code>으로 확인하고, 들여쓰기 · 끝 미포함(<code>range</code> · 슬라이싱)을 몸에 익혀요.</li>
+          <li><b>"한 줄로"는 읽을 수 있을 때만</b> — 삼항 표현식 · 리스트 컴프리헨션은 편하지만, 조건이 길어지면 보통 for · if가 더 읽기 쉬워요.</li>
+          <li><b>환경을 프로젝트마다 나눈다</b> — 가상환경(venv)은 자바의 Maven 의존성처럼 프로젝트마다 라이브러리 버전을 따로 둡니다. Day 7부터 LangChain 같은 큰 라이브러리가 들어오면 더 중요해져요.</li>
+          <li><b>밖과 주고받는 것은 형식을 정한다</b> — 파일은 <code>encoding="utf-8"</code>, 서버(Day 5)는 JSON, LLM(Day 7)은 프롬프트 형식. 백엔드 과정의 "JSON 키 · 상태 코드 약속"과 같은 생각이에요.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="materials-section" class="cat hidden">
+      <div class="cat-head"><h2>📎 강의자료 · 소스</h2></div>
+      <p class="cat-desc">수업 자료와 내가 실행한 노트북의 위치입니다. 강의자료(pptx)는 선생님이 나눠 준 자료라 저장소에 올리지 않았어요.</p>
+      <div class="box">
+        <h3>내 실습 노트북 (저장소)</h3>
+        <ul style="margin:0;padding-left:20px">
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day01_실습.ipynb</a> — Day 1 실습 9칸(GitHub에서 출력까지 보임)</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day02_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day02_실습.ipynb</a> — Day 2 실습 8칸</li>
+          <li><a href="../view.html?f=AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5%EC%98%88%EC%A0%9C.md">day01_실습예제.md</a> — 실습 2시간용 추가 문제(Part 1~5, 11문제 · 아직 안 풂 → <a href="#lab-11">체크리스트</a>)</li>
+          <li><a href="../view.html?f=AI_Agent/python_agent/README.md">python_agent 폴더 안내</a></li>
+          <li><a href="../view.html?f=AI_Agent/sync-validation-2026-10-19.md">10/19 반영 · 검증 기록</a> — 무엇을 근거로 썼고, 무엇을 실행해 확인했고, 무엇을 확인하지 않았는지</li>
+          <li><a href="../Back_end/coding-tests/2026-10-19/">27회차 코딩테스트</a> — 같은 날 본 테스트(백엔드 코딩테스트 탭에 이어서 정리)</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>수업 자료</h3>
+        <ul style="margin:0;padding-left:20px">
+          <li>강의자료 <code>Day1_강의자료.pptx</code>(23쪽) · <code>Day2_강의자료.pptx</code>(19쪽) — 선생님 배포 자료(Day 1~10)</li>
+          <li>선생님 레포 <a href="https://github.com/kang99king3/back_end_edu_20260629/tree/main/python_agent_20261019" target="_blank" rel="noopener">python_agent_20261019</a> — <code>Day01</code> · <code>Day02</code> 노트북(교안 쪽 번호가 마크다운 제목으로 들어 있음)</li>
+          <li>개발환경: 파이썬 공식 설치(교안 권장 3.10~3.12) · VS Code + Python 확장 · 가상환경(venv) — <a href="#py-01">py-01</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="class-section" class="cat hidden">
+      <div class="cat-head"><h2>📅 수업 진도 — 날짜별로 실제로 한 것</h2></div>
+      <p class="cat-desc">그날 강의자료의 어디까지 나갔는지, 실습 폴더에 무엇이 남았는지를 적습니다. 개념은 🐍 파이썬 개념 카드로, 문제 풀이는 🧪 실습 풀이 카드로 이어집니다.</p>
+<article class="note-card" id="ai-day01">
+  <div class="note-head">
+    <span class="note-num">1일차 · Day 1~2</span>
+    <h3>2026-10-19 · 파이썬 시작하기 — 개발환경 · 변수 · 자료형, 그리고 조건 · 반복 · 함수 · 파일 · 예외까지</h3>
+    <div class="note-tags"><span class="tag">python 3.15</span><span class="tag">venv</span><span class="tag">str · list · tuple · dict</span><span class="tag">if · for · while</span><span class="tag">def · import</span><span class="tag">with open · try</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>새 과정 「AI AGENT 실습 입문 1부」 첫날. 파이썬을 설치하고 가상환경을 만든 뒤, Day 1(변수 · 연산자 · 5가지 자료형과 실전 메서드)과 Day 2(조건문 · 반복문 · 리스트 컴프리헨션 · 함수 · 모듈 · 파일 입출력 · 예외처리)를 하루에 진행했다. 교안의 실습 문제를 VS Code의 Jupyter 노트북(<code>day01_실습.ipynb</code> · <code>day02_실습.ipynb</code>)에서 직접 풀었다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>자바로 두 달 동안 배운 "값 담기 → 고르기 → 되풀이 → 묶어서 이름 붙이기 → 파일과 오류 다루기"를, 훨씬 짧은 문법으로 하루에 다시 훑은 날이에요. 생각은 같고 말투만 바뀌었어요 — 세미콜론과 중괄호 대신 콜론과 들여쓰기.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 개발환경 — 파이썬 · VS Code · 가상환경</h4>
+        <p>교안은 python.org 공식 설치(3.10~3.12 권장) + VS Code + Python 확장, 그리고 프로젝트마다 <code>python -m venv myenv</code> → <code>myenv\Scripts\activate</code>(Windows는 명령 프롬프트) → <code>pip install …</code> 순서예요. 이 PC에는 <b>파이썬 3.15.0</b>이 설치되어 있고 노트북도 3.15로 실행됐어요 — 권장 범위보다 새 버전이라, 3.15는 파일을 기본으로 UTF-8로 읽고 써요(<a href="#py-08">py-08</a>). → <a href="#py-01">🐍 01. 개발환경과 가상환경</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② Day 1 — 변수 · 연산자 · 자료형</h4>
+        <p>타입 선언 없이 <code>price = 12000</code>, 나눗셈은 <code>/</code>(실수) · <code>//</code>(몫) · <code>%</code>(나머지) · <code>**</code>(거듭제곱), 논리는 <code>and · or · not</code>. 자료형 다섯 — 숫자(<code>int · float</code>) · 문자열(인덱싱 · 슬라이싱 · <code>strip · split · join · replace</code> · f-string) · 리스트(<code>append · insert · extend · count · sort</code> · <code>enumerate</code>) · 튜플(바뀌지 않는 리스트) · 딕셔너리(키로 꺼내기), 그리고 딕셔너리를 담은 리스트. → <a href="#py-02">02</a> · <a href="#py-03">03</a> · <a href="#py-04">04</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>③ Day 2 — 조건 · 반복 · 함수 · 모듈 · 파일 · 예외</h4>
+        <p><code>if · elif · else</code>와 삼항 표현식(<code>"성인" if age &gt;= 18 else "미성년"</code>), 조건 체이닝(<code>80 &lt;= score &lt; 90</code>), <code>for … in range()</code> · <code>while</code> · <code>break/continue</code>, 리스트 컴프리헨션(<code>[n * n for n in nums if …]</code>), <code>def</code> · 기본값 매개변수 · 여러 값 반환, <code>import random · math · datetime</code>, <code>with open(…)</code> 쓰기 · 읽기, <code>try · except · finally</code>. → <a href="#py-05">05</a> · <a href="#py-06">06</a> · <a href="#py-07">07</a> · <a href="#py-08">08</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>④ 실습 — 교안 문제 9개를 노트북에서</h4>
+        <p>Day 1의 계산기 · 이메일 정리기 · 점수 분석 · 상품 목록, Day 2의 등급 판별기 · 구구단 · BMI · 로또 번호 · 점수 파일. 다시 실행해 보니 17칸 중 15칸이 저장된 출력과 같았고, 다른 두 칸은 무작위(로또)와 <b>고친 뒤 다시 실행하지 않은 칸</b>(구구단 while)이었어요. Day 2의 종합 실습(성적 처리기)은 실습 폴더에 없어 참고 풀이를 적었고(<a href="#lab-10">실습 10</a>), 선생님이 따로 준 <b>Day 1 실습예제(문제 11개)</b>도 아직 풀지 않아 체크리스트로 정리했어요(<a href="#lab-11">복습 과제</a>). → <a href="#lab-01">🧪 실습 풀이</a></p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — 등급 판별기 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">score = 72
+
+if score &gt;= 90:          # ← 콜론 + 들여쓰기 4칸이 블록
+    grade = 'A'
+elif score &gt;= 80:        # ← else if 가 아니라 elif
+    grade = 'B'
+elif score &gt;= 70:
+    grade = 'C'
+else:
+    grade = 'D'
+
+print(f"점수 {score} 점, 등급은 {grade}입니다")      # ← f-string 안에 변수
+result = "합격" if score &gt;= 60 else "불합격"       # ← 삼항 표현식
+print(result)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북을 이 PC의 파이썬 3.15.0으로 다시 실행 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>C
+점수 72 점, 등급은 C입니다
+합격
+
+다시 실행한 17칸: 15칸 같음
+  · 로또 번호 칸 — 무작위라 다름 (이번엔 [16, 33, 27, 21, 16, 36] — 16이 두 번)
+  · 구구단 while 칸 — 저장된 출력엔 "7 x 10 = 70"까지, 지금 코드로는 9줄 (고친 뒤 다시 실행 안 함)</pre>
+      <div class="run-note">노트북은 칸마다 <b>마지막으로 실행했을 때의 출력</b>을 저장해요. 코드를 고치고 다시 실행하지 않으면 출력과 코드가 어긋나니, 제출 · 공유 전에는 <b>"모두 다시 실행(Restart &amp; Run All)"</b>으로 맞춰 두세요. 교안 문제의 예시 문장은 <code>'점수 72점, …'</code>(붙여 씀)이라 f-string 안의 공백 하나도 출력에 그대로 나옵니다.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">1일차에 배운 것 — 핵심 정리</div>
+      <ul>
+        <li>프로젝트마다 가상환경(venv), 설치는 <code>pip</code>. 이 PC는 3.15라 교안(3.10~3.12)과 다른 점이 있을 수 있다.</li>
+        <li>타입 선언 없음 · <code>/</code>는 실수 · 논리는 <code>and/or/not</code> · 블록은 콜론 + 들여쓰기.</li>
+        <li>자료형 다섯: 숫자 · 문자열 · 리스트 · 튜플 · 딕셔너리. 인덱스는 0부터, 슬라이싱 끝은 미포함.</li>
+        <li>조건은 <code>elif</code> · 삼항, 반복은 <code>range</code> · 컴프리헨션, 재사용은 <code>def</code> · <code>import</code>.</li>
+        <li>파일은 <code>with open(…, encoding="utf-8")</code>, 오류는 <code>try · except · finally</code>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 Day 1 워밍업: x = 5, y = 2 일 때 print(x // y, x % y) 의 출력은?</summary><div class="sc-a"><code>2 1</code>이에요. <code>//</code>는 몫(2), <code>%</code>는 나머지(1)이고, <code>print</code>에 여러 값을 주면 공백으로 띄워 찍어요. 자바의 <code>5 / 2</code>(=2)가 파이썬에서는 <code>5 // 2</code>입니다.</div></details>
+      <details class="sc-q"><summary>교안 Day 2 워밍업: total = 0; for i in range(3): total += i 뒤 print(total) 은?</summary><div class="sc-a"><code>3</code>이에요. <code>range(3)</code>은 0, 1, 2(3은 포함하지 않음)라 0 + 1 + 2 = 3. 자바의 <code>for (int i = 0; i &lt; 3; i++)</code>와 같아요.</div></details>
+      <details class="sc-q"><summary>노트북에서 코드를 고친 뒤 실행하지 않고 저장하면 GitHub에서는 무엇이 보일까?</summary><div class="sc-a"><b>고친 코드와 옛 출력</b>이 함께 보여요. 노트북 파일(.ipynb)은 코드와 마지막 출력을 따로 저장하기 때문이에요. 오늘 구구단 while 칸이 그 예입니다.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>데이터 분석 · AI 개발은 노트북(Jupyter)으로 실험하고, 정리된 코드는 <code>.py</code> 파일(모듈)로 옮겨 서버나 배치에서 돌리는 경우가 많아요. 그래서 노트북은 "위에서 아래로 한 번에 다시 실행해도 같은 결과"가 나오게 두는 것이 기본 예절입니다.</p>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day01_실습.ipynb</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day02_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day02_실습.ipynb</a> ·
+      <a href="../view.html?f=AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5%EC%98%88%EC%A0%9C.md">day01_실습예제.md</a> ·
+      <a href="../view.html?f=AI_Agent/python_agent/README.md">폴더 안내</a>
+    </div>
+    <details><summary>정리 작업 메모</summary><ul><li>근거: 강의자료 <code>Day1_강의자료.pptx</code>(23쪽) · <code>Day2_강의자료.pptx</code>(19쪽), 선생님 레포 <code>python_agent_20261019</code>(10/19 10:56 ~ 15:01 커밋 5개 — Day01 노트북 · <code>test.py</code> · 실습예제 md, Day02 노트북 · <code>memo.txt</code>), 실습 폴더 <code>C:\Users\neo62\dev\workspace-boot\python_agent</code>(13:50 ~ 15:02).</li><li>실습 폴더의 두 노트북은 선생님 파일의 사본이 아니라 직접 푼 것이다(선생님 노트북은 쪽 번호 제목 칸 + 코드 칸, 실습 폴더는 코드 칸만, 풀이도 다름). <code>day01_실습예제.md</code>는 선생님의 <code>Day1_실습예제.md</code>와 끝 줄바꿈만 다르고, <code>memo.txt</code>는 선생님 파일과 같다.</li><li>확인함 — 노트북 코드 칸을 꺼내 저장소 밖에서 파이썬 3.15.0으로 다시 실행(17칸), UTF-8 모드를 끈 실행(<code>-X utf8=0</code>)과 비교. 확인하지 않음 — 파이썬 3.10~3.12 실제 설치본, VS Code 화면.</li></ul></details>
+  </div>
+</article>
+    </section>
+
+    <section id="python-section" class="cat hidden">
+      <div class="cat-head"><h2>🐍 파이썬 개념 — 자바와 나란히</h2></div>
+      <p class="cat-desc">강의자료의 개념을 주제별로 한 장씩 정리했어요. 카드마다 <b>☕ 자바에서는</b> 칸이 있어, 두 달 동안 쓴 자바 문법과 무엇이 같고 무엇이 다른지 바로 비교할 수 있습니다. 코드 출력은 이 PC의 파이썬 3.15.0으로 실행한 결과예요.</p>
+
+<article class="note-card" id="py-01">
+  <div class="note-head">
+    <span class="note-num">개념 01 · Day 1</span>
+    <h3>개발환경 — 파이썬 설치 · VS Code · 가상환경(venv) · pip</h3>
+    <div class="note-tags"><span class="tag">python --version</span><span class="tag">venv</span><span class="tag">pip</span><span class="tag">Jupyter</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>파이썬은 한 줄씩 바로 실행하는 인터프리터 언어다. 프로젝트마다 <b>가상환경</b>을 만들어 그 안에 라이브러리를 설치해야 프로젝트끼리 버전이 부딪히지 않는다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>가상환경은 프로젝트 전용 "공구함"이에요. A 프로젝트는 pandas 2.1, B 프로젝트는 pandas 1.5가 필요해도 공구함이 따로라 싸우지 않아요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 설치 확인과 첫 실행</h4>
+        <p>python.org 공식 설치(교안 권장 3.10~3.12) — Windows는 설치 화면에서 <b>"Add python.exe to PATH"</b>를 꼭 체크해야 터미널에서 <code>python</code>이 인식돼요. 터미널에 <code>python --version</code>이 버전을 찍으면 준비 끝. VS Code에 Python 확장을 깔면 <code>hello.py</code>의 실행 버튼(Run Python File)과 노트북(<code>.ipynb</code>) 칸 실행을 쓸 수 있어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 가상환경 — 만들기 · 켜기 · 설치 · 끄기</h4>
+        <p>Windows 교안은 VS Code 터미널을 <b>명령 프롬프트</b>로 바꿔서 진행해요(PowerShell은 실행 정책 때문에 <code>activate</code> 스크립트가 막힐 수 있음). 켜지면 프롬프트 앞에 <code>(myenv)</code>가 붙고, 그 상태에서 <code>pip install</code>한 패키지는 그 가상환경에만 들어가요. <code>pip list</code>로 목록 확인, <code>deactivate</code>로 종료.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p>자바는 <code>javac</code>로 컴파일한 <code>.class</code>를 JVM이 실행하고, 라이브러리는 프로젝트별 <b>Maven/Gradle</b>(<code>pom.xml</code>의 dependency)이 관리했죠. 파이썬은 컴파일 단계 없이 바로 실행하고, 라이브러리 격리는 <b>venv + pip</b>가 맡아요. 의존성 목록 파일은 보통 <code>requirements.txt</code>(<code>pip freeze &gt; requirements.txt</code>)예요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">CMD</span><span class="code-file">Windows 명령 프롬프트 — 교안 순서</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-bash">python --version
+python -m venv myenv
+myenv\Scripts\activate
+pip install pandas
+pip list
+deactivate</code></pre>
+    </div>
+    <div class="warn-box"><b>⚠ 이 PC는 파이썬 3.15.0</b> — 교안 권장(3.10~3.12)보다 새 버전이에요. 오늘 문법은 모두 똑같이 동작했지만, 3.15부터는 <b>파일을 기본으로 UTF-8로 읽고 쓰는</b> 점이 달라요(<a href="#py-08">py-08</a>). 뒤에서 설치할 라이브러리(pandas · LangChain 등)가 3.15용 배포본을 아직 내지 않았으면 설치가 실패할 수 있으니, 그때는 3.12를 따로 설치해 <code>py -3.12 -m venv myenv</code>로 가상환경을 만들면 됩니다.</div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>프로젝트마다 <code>python -m venv 이름</code> → 켜고(<code>Scripts\activate</code>) → <code>pip install</code>.</li>
+        <li>프롬프트 앞 <code>(myenv)</code>가 보여야 가상환경 안이다.</li>
+        <li>버전이 다르면 동작이 다를 수 있다 — 지금 쓰는 버전을 <code>python --version</code>으로 항상 확인.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>가상환경을 켜지 않고 pip install pandas 하면 어디에 설치될까?</summary><div class="sc-a">PATH에 잡힌 <b>시스템 파이썬 전체</b>에 설치돼요. 모든 프로젝트가 같은 pandas를 쓰게 되어, 버전이 다른 프로젝트가 생기면 충돌합니다.</div></details>
+      <details class="sc-q"><summary>python 이라고 쳤는데 "명령을 찾을 수 없다"고 나온다. 가장 먼저 의심할 것은?</summary><div class="sc-a">설치할 때 <b>Add python.exe to PATH</b>를 체크하지 않은 것. 다시 설치(Modify)해서 체크하거나, Windows의 <code>py</code> 런처(<code>py --version</code>)로 실행해 볼 수 있어요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>팀 프로젝트는 <code>requirements.txt</code>(또는 <code>pyproject.toml</code>)를 Git에 올리고, 받은 사람이 자기 가상환경에서 <code>pip install -r requirements.txt</code>로 똑같이 맞춰요. 가상환경 폴더 자체(<code>myenv/</code>)는 <code>.gitignore</code>에 넣고 올리지 않아요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-02">
+  <div class="note-head">
+    <span class="note-num">개념 02 · Day 1</span>
+    <h3>변수와 연산자 — 타입 선언 없음 · / 와 // · and · or · not</h3>
+    <div class="note-tags"><span class="tag">snake_case</span><span class="tag">/ // % **</span><span class="tag">== !=</span><span class="tag">and or not</span><span class="tag">type()</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>이름 = 값</code>이면 변수가 생기고 타입은 값이 정한다. 나눗셈 <code>/</code>는 언제나 실수, 몫은 <code>//</code>, 나머지는 <code>%</code>, 거듭제곱은 <code>**</code>. 비교 결과는 <code>True/False</code>, 논리는 영어 단어 <code>and · or · not</code>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>자바처럼 "이 상자엔 정수만" 하고 상자 모양을 먼저 정하지 않아요. 상자에 무엇을 넣느냐가 곧 타입이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 이름 규칙</h4>
+        <p>영문자 · 숫자 · <code>_</code>만, 숫자로 시작 불가, 대소문자 구분. 관례는 <b>snake_case</b>(<code>is_free_shipping</code>) — 자바의 camelCase(<code>isFreeShipping</code>)와 반대예요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 산술 · 비교 · 논리</h4>
+        <p><code>7 / 2</code> → <code>3.5</code>, <code>7 // 2</code> → <code>3</code>, <code>7 % 2</code> → <code>1</code>, <code>2 ** 10</code> → <code>1024</code>. 비교 <code>== != &gt; &lt; &gt;= &lt;=</code>는 <code>True/False</code>(첫 글자 대문자). <code>and</code>는 둘 다 참, <code>or</code>는 하나라도 참, <code>not</code>은 뒤집기.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p><code>int total = price * quantity;</code>처럼 타입 · 세미콜론이 필요했죠. 자바의 <code>7 / 2</code>는 정수끼리라 <b>3</b>이지만 파이썬은 <b>3.5</b> — 자바 습관대로 <code>/</code>를 쓰면 몫이 아니라 실수가 나와요. <code>&amp;&amp; || !</code>는 파이썬에서 <code>and or not</code>, <code>true</code>는 <code>True</code>, <code>null</code>은 <code>None</code>. <code>Math.pow(2, 10)</code>은 <code>2 ** 10</code>.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 계산기 + 조건식 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">price = 12000
+quantity = 5
+total = price * quantity                    # 60000
+
+is_free_shipping = total &gt;= 50000            # 비교 결과(True/False)를 그대로 저장
+is_vip = is_free_shipping or (quantity &gt;= 10) # 둘 중 하나만 참이어도 True
+
+print(is_free_shipping, is_vip)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>True True</pre>
+      <div class="run-note">60000 ≥ 50000이라 무료배송 True, <code>or</code>는 앞이 이미 True라 뒤(<code>quantity &gt;= 10</code>, False)를 보지 않고 True예요(자바의 <code>||</code>처럼 단락 평가).</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>타입 선언 없음 — <code>type(값)</code>으로 확인(<code>&lt;class 'int'&gt;</code>).</li>
+        <li><code>/</code> 실수 · <code>//</code> 몫 · <code>%</code> 나머지 · <code>**</code> 거듭제곱. int와 float을 섞으면 float.</li>
+        <li><code>True/False/None</code>은 첫 글자 대문자, 논리는 <code>and/or/not</code>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>a = 10, b = 3.5 일 때 print(type(a), type(b), a + b) 의 출력은?</summary><div class="sc-a"><code>&lt;class 'int'&gt; &lt;class 'float'&gt; 13.5</code>. 정수와 실수를 더하면 자동으로 실수가 됩니다(교안 12쪽).</div></details>
+      <details class="sc-q"><summary>자바 코드 int avg = sum / count; 를 파이썬으로 옮길 때 "정수 평균"을 원하면 무엇을 써야 할까?</summary><div class="sc-a"><code>avg = sum_ // count</code>(몫). <code>/</code>를 쓰면 실수가 나와요. 반올림 평균이 필요하면 <code>round(sum_ / count)</code>. 참고로 <code>sum</code>은 내장 함수 이름이라 변수 이름으로 쓰지 않는 게 좋아요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>파이썬은 타입을 안 써도 되지만, 함수에는 <b>타입 힌트</b>(<code>def total(price: int, qty: int) -&gt; int:</code>)를 붙이는 팀이 많아요. 실행에는 영향이 없지만 편집기 자동완성과 검사 도구가 실수를 잡아 줘요. 뒤에 배울 FastAPI는 이 타입 힌트로 요청 값을 검사합니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-03">
+  <div class="note-head">
+    <span class="note-num">개념 03 · Day 1</span>
+    <h3>숫자와 문자열 — 인덱싱 · 슬라이싱 · strip · split · join · replace · f-string</h3>
+    <div class="note-tags"><span class="tag">int · float</span><span class="tag">word[0] · word[-1]</span><span class="tag">word[0:3]</span><span class="tag">f"{x:,}" · f"{x:.2f}"</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>문자열은 글자마다 0부터 번호가 있고, 음수 번호는 뒤에서부터 센다. <code>[시작:끝]</code> 슬라이싱은 <b>끝을 포함하지 않는다</b>. 실무 단골 메서드 네 개(<code>strip · split · join · replace</code>)와 f-string 서식(<code>:,</code> · <code>:.2f</code>)이 핵심.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>"PYTHON"은 번호표 0~5가 붙은 글자 여섯 칸이에요. <code>[-1]</code>은 "뒤에서 첫 칸", <code>[0:3]</code>은 "0번부터 3번 앞까지".</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 인덱싱 · 슬라이싱 · len</h4>
+        <p><code>word = "PYTHON"</code> → <code>word[0]</code>은 <code>'P'</code>, <code>word[-1]</code>은 <code>'N'</code>, <code>word[0:3]</code>은 <code>'PYT'</code>, <code>len(word)</code>는 <code>6</code>. 문자열은 <b>바꿀 수 없어서</b>(immutable) <code>word[0] = 'J'</code>는 오류이고, 메서드는 모두 <b>새 문자열을 돌려줍니다</b> — 결과를 변수에 받아야 해요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 실전 메서드 넷 + f-string</h4>
+        <p><code>"  Hello  ".strip()</code> 앞뒤 공백 제거 · <code>"a,b,c".split(",")</code> → 리스트 · <code>"-".join([...])</code> 리스트를 이어 붙이기(구분자가 앞에 옴) · <code>.replace("cats", "dogs")</code>. f-string은 <code>f"{price:,}"</code> → <code>1,234,567</code>, <code>f"{pi:.2f}"</code> → <code>3.14</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p><code>word.charAt(0)</code> → <code>word[0]</code>, <code>word.substring(0, 3)</code> → <code>word[0:3]</code>(둘 다 끝 미포함), <code>word.length()</code> → <code>len(word)</code>, <code>trim()</code> → <code>strip()</code>, <code>String.join("-", list)</code> → <code>"-".join(list)</code>, <code>String.format("%,d", price)</code> → <code>f"{price:,}"</code>. 자바엔 음수 인덱스가 없어 <code>word.charAt(word.length() - 1)</code>로 썼던 것이 <code>word[-1]</code> 한 번이에요. 자바의 <code>split</code>은 정규식을 받지만 파이썬 <code>split</code>은 <b>글자 그대로</b> 나눠요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 이메일 정리기 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">raw = "  hong@example.com  "
+
+email = raw.strip()                 # 1번: 앞뒤 공백 제거 → 새 문자열
+print(email)
+
+arr = email.split("@")              # 2번: ['hong', 'example.com']
+user_id = arr[0]
+domain = arr[1]
+# user_id, domain = email.split("@")  ← 언패킹으로 한 줄도 가능
+
+print(f"아이디: {user_id} / 도메인: {domain}")       # 3번
+print(domain.replace("example", "school"))          # 도전</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>hong@example.com
+아이디: hong / 도메인: example.com
+school.com</pre>
+      <div class="run-note">2번 문제는 "두 변수에 나눠 담으세요"라 인덱스로 꺼내도 맞고, 교안 다음 쪽의 <b>다중 할당</b>(<code>user_id, domain = email.split("@")</code>)을 쓰면 한 줄이에요. 단, 이메일에 <code>@</code>가 없거나 두 개면 나뉜 개수가 2가 아니라 <code>ValueError</code>가 나요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>인덱스 0부터, 음수는 뒤에서부터, 슬라이싱 끝은 미포함.</li>
+        <li>문자열은 바뀌지 않는다 — 메서드 결과를 변수에 받는다.</li>
+        <li><code>split</code>은 리스트를, <code>join</code>은 문자열을 돌려준다(서로 반대).</li>
+        <li>f-string 서식: <code>:,</code> 천 단위, <code>:.2f</code> 소수 둘째 자리.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 워밍업: name = "Python" 일 때 print(name[1:4]) 는?</summary><div class="sc-a"><code>yth</code>. 1, 2, 3번 글자(y, t, h)이고 4번(o)은 포함하지 않아요.</div></details>
+      <details class="sc-q"><summary>text = "  hi  "; text.strip(); print(len(text)) 의 결과는 2일까?</summary><div class="sc-a">아니요, <b>6</b>이에요. <code>strip()</code>은 새 문자열을 돌려줄 뿐 <code>text</code>를 바꾸지 않아요. <code>text = text.strip()</code>으로 다시 담아야 2가 됩니다.</div></details>
+      <details class="sc-q"><summary>"-".join(["2024", "01", "01"]) 과 "2024-01-01".split("-") 의 결과 타입은 각각?</summary><div class="sc-a"><code>join</code>은 문자열 <code>'2024-01-01'</code>, <code>split</code>은 리스트 <code>['2024', '01', '01']</code>. 숫자 리스트는 <code>join</code>할 수 없어 <code>"-".join(str(n) for n in nums)</code>처럼 문자열로 바꿔야 해요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>데이터 정리(전처리)의 절반이 문자열 다듬기예요 — 공백 지우기 · 구분자로 쪼개기 · 표기 통일. Day 3의 Pandas도 같은 이름의 메서드를 열 전체에 한 번에 적용해요(<code>df["email"].str.strip()</code>).</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-04">
+  <div class="note-head">
+    <span class="note-num">개념 04 · Day 1</span>
+    <h3>리스트 · 튜플 · 딕셔너리 — 여러 값 담기, 그리고 "딕셔너리를 담은 리스트"</h3>
+    <div class="note-tags"><span class="tag">list [ ]</span><span class="tag">tuple ( )</span><span class="tag">dict { }</span><span class="tag">append · insert · extend · sort</span><span class="tag">enumerate</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>리스트는 순서 있고 바꿀 수 있는 목록, 튜플은 바꿀 수 없는 목록, 딕셔너리는 이름표(key)로 값을 꺼내는 짝 모음이다. 딕셔너리 여러 개를 리스트에 담으면 표(행 여러 개)가 된다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>리스트는 번호 붙은 서랍, 튜플은 봉인된 서랍, 딕셔너리는 이름표 붙은 서랍이에요. <code>[{…}, {…}]</code>는 엑셀 표 한 장 — 한 줄이 딕셔너리 하나예요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 리스트 실전 메서드</h4>
+        <p><code>append(x)</code> 맨 뒤 추가 · <code>insert(0, x)</code> 위치에 추가 · <code>extend([..])</code> 여러 개 추가 · <code>index(x)</code> 위치 · <code>count(x)</code> 개수 · <code>sort()</code> 오름차순 정렬. <code>append · insert · extend · sort</code>는 <b>리스트 자체를 바꾸고 <code>None</code>을 돌려줘요</b> — <code>nums = nums.sort()</code>는 리스트를 잃어버리는 실수예요. 원본을 두고 정렬본만 원하면 <code>sorted(nums)</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 다중 할당 · enumerate · 튜플 · 딕셔너리</h4>
+        <p><code>a, b = b, a</code>로 임시 변수 없이 맞바꾸기. <code>for i, x in enumerate(목록):</code>은 번호와 값을 함께 꺼내며 <b>번호는 0부터</b>(1부터 원하면 <code>enumerate(목록, 1)</code>). 튜플 <code>(35.2, 128.6)</code>은 수정하면 <code>TypeError</code> — 좌표처럼 바뀌면 안 되는 값에. 딕셔너리는 <code>info["name"]</code>으로 꺼내고 <code>info["age"] = 22</code>로 수정 · 추가. 없는 키를 꺼내면 <code>KeyError</code>, 안전하게는 <code>info.get("키", 기본값)</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p>리스트 ≈ <code>ArrayList</code>(<code>add · add(0, x) · addAll · indexOf · Collections.sort</code>), 딕셔너리 ≈ <code>HashMap</code>(<code>get · put</code>), 튜플 ≈ <code>List.of(…)</code>(수정 불가) 또는 <code>record</code>. 파이썬 리스트는 타입을 섞어 담을 수 있어요(<code>[1, "a", True]</code>). 그리고 <code>[{"name":…, "price":…}, …]</code>는 스프링에서 DTO 리스트를 JSON으로 내보낸 모양 그대로예요 — 50일차 REST API의 <code>[{"num":1, "title":…}]</code> 응답과 같은 구조.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 점수 분석 · 상품 목록 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">scores = [88, 92, 75, 92, 60]
+print(scores.count(92))                 # 92점 개수
+scores.sort()                           # 원본이 정렬된다(반환값 None)
+print(scores)
+for i, s in enumerate(scores):          # ← 번호가 0부터, 정렬된 순서로
+    print(f"{i}번째 학생:", f"{s}점")
+print(max(scores) - min(scores))
+
+products = [
+    {"name": "마우스", "price": 15000},
+    {"name": "키보드", "price": 45000},
+    {"name": "모니터", "price": 220000},
+]
+names = [item["name"] for item in products]          # 이름만 리스트로
+print(names)
+for i in products:
+    print(i["price"] &gt;= 20000)
+total_price = sum(item["price"] for item in products)  # 합계 한 줄
+print(total_price)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>2
+[60, 75, 88, 92, 92]
+0번째 학생: 60점
+1번째 학생: 75점
+2번째 학생: 88점
+3번째 학생: 92점
+4번째 학생: 92점
+32
+['마우스', '키보드', '모니터']
+False
+True
+True
+280000</pre>
+      <div class="run-note">교안 3번 문제의 예시는 <b>"1번째 학생: 88점"</b> — 원래 순서(88이 첫 학생)에 1부터 번호를 붙이는 것이에요. 내 풀이는 ① 2번에서 <code>sort()</code>로 원본이 바뀐 뒤 순회해 60점이 첫 줄이 되었고 ② <code>enumerate</code>가 0부터라 "0번째"가 나왔어요. 예시와 맞추려면 정렬 전 목록을 따로 두고 <code>enumerate(원본, 1)</code> — 아래 🧪 <a href="#lab-03">실습 03</a>에 고친 코드를 적었어요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>리스트 <code>[ ]</code> 수정 가능 · 튜플 <code>( )</code> 수정 불가 · 딕셔너리 <code>{키: 값}</code>.</li>
+        <li><code>sort()</code>는 원본을 바꾸고 None을 돌려준다 / <code>sorted()</code>는 새 리스트.</li>
+        <li><code>enumerate</code>는 0부터 — <code>enumerate(x, 1)</code>로 시작 번호 지정.</li>
+        <li>딕셔너리 리스트 = 표. <code>[d["name"] for d in 목록]</code>으로 열 하나 꺼내기.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 워밍업: fruits = ["a", "b", "c"]; print(fruits[-1]) 은?</summary><div class="sc-a"><code>c</code> — 마지막 요소예요. 문자열과 같은 인덱스 규칙입니다.</div></details>
+      <details class="sc-q"><summary>nums = [3, 1, 2]; result = nums.sort(); print(result) 의 출력은?</summary><div class="sc-a"><code>None</code>. <code>sort()</code>는 nums 자체를 <code>[1, 2, 3]</code>으로 바꾸고 아무것도 돌려주지 않아요. 정렬된 새 리스트가 필요하면 <code>result = sorted(nums)</code>.</div></details>
+      <details class="sc-q"><summary>교안 17쪽 코드에서 nums = [3,1,4,1,5] 에 insert(0, 9), extend([2, 6]) 뒤 nums.index(4) 는?</summary><div class="sc-a"><code>3</code>. 리스트가 <code>[9, 3, 1, 4, 1, 5, 2, 6]</code>이 되어 4는 3번 자리예요(맨 앞에 9가 끼어 한 칸 밀림). <code>count(1)</code>은 2.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>API가 돌려주는 JSON을 파이썬으로 받으면 바로 "딕셔너리를 담은 리스트"가 돼요. Day 3의 Pandas는 이 모양을 그대로 표(DataFrame)로 바꾸고(<code>pd.DataFrame(products)</code>), LLM 에이전트의 도구 호출 결과도 대개 이 구조로 주고받아요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-05">
+  <div class="note-head">
+    <span class="note-num">개념 05 · Day 2</span>
+    <h3>조건문 — if · elif · else, 삼항 표현식, 조건 체이닝</h3>
+    <div class="note-tags"><span class="tag">if / elif / else</span><span class="tag">A if 조건 else B</span><span class="tag">80 &lt;= score &lt; 90</span><span class="tag">들여쓰기 4칸</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>조건 뒤 콜론(<code>:</code>), 블록은 들여쓰기 4칸. 여러 조건은 위에서부터 차례로 검사해 <b>처음 참인 하나만</b> 실행한다. 값 하나를 고를 땐 삼항 <code>A if 조건 else B</code>, 범위는 <code>80 &lt;= score &lt; 90</code>처럼 이어 쓴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>중괄호 대신 "들여쓰기"가 블록이에요. 들여쓰기가 틀리면 모양만 틀린 게 아니라 <b>프로그램이 다르게 동작하거나 실행이 안 돼요</b>.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 순서가 중요한 elif</h4>
+        <p>점수 등급은 큰 기준부터 검사해요(<code>&gt;= 90</code> → <code>&gt;= 80</code> → <code>&gt;= 70</code>). 72점은 첫 두 조건이 거짓이고 <code>&gt;= 70</code>에서 멈춰 C. 순서를 거꾸로(<code>&gt;= 70</code>을 먼저) 쓰면 95점도 C가 돼요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 삼항 · 체이닝 · 논리 결합</h4>
+        <p><code>status = "성인" if age &gt;= 18 else "미성년"</code> — 순서가 "참일 때 값 → 조건 → 거짓일 때 값". 겹쳐 쓰면 <code>"저체중" if bmi &lt; 18.5 else ("과체중" if bmi &gt;= 25 else "정상")</code>. <code>80 &lt;= score &lt; 90</code>은 <code>80 &lt;= score and score &lt; 90</code>과 같아요. 조건 여러 개는 <code>or · and</code>로 묶어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p><code>else if</code> → <code>elif</code>, <code>if (조건) { … }</code>의 괄호 · 중괄호 → <code>if 조건:</code> + 들여쓰기. 자바 삼항 <code>age &gt;= 18 ? "성인" : "미성년"</code>은 <b>조건이 맨 앞</b>이지만 파이썬은 <b>조건이 가운데</b>예요. 자바에선 <code>80 &lt;= score &lt; 90</code>이 컴파일 오류(boolean과 int 비교)지만 파이썬은 수학 식처럼 동작해요. 자바의 <code>switch</code>는 파이썬 3.10+의 <code>match</code>문이 비슷한 역할을 해요(오늘 범위 밖).</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 5쪽 — 삼항 · 체이닝 · 논리 결합</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">age = 20
+status = "성인" if age &gt;= 18 else "미성년"
+print(status)
+
+score = 85
+if 80 &lt;= score &lt; 90:        # 80 이상 90 미만
+    print("B등급")
+
+is_weekend, is_holiday = True, False
+if is_weekend or is_holiday:
+    print("쉬는 날")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>성인
+B등급
+쉬는 날</pre>
+      <div class="run-note">등급 판별기(내 풀이)는 <a href="#ai-day01">수업 진도 카드</a>와 🧪 <a href="#lab-05">실습 05</a>에 있어요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>if 조건:</code> → 들여쓴 줄이 블록. <code>elif</code>는 위에서부터, 처음 참 하나만.</li>
+        <li>삼항: <code>참값 if 조건 else 거짓값</code>(조건이 가운데).</li>
+        <li>범위는 <code>a &lt;= x &lt; b</code>로 한 번에.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 워밍업: x = 10; if x &gt; 5: print("A") else: print("B") 의 출력은?</summary><div class="sc-a"><code>A</code>. 10 &gt; 5가 참이라 if 블록만 실행돼요.</div></details>
+      <details class="sc-q"><summary>score = 95 인데 if score &gt;= 70: … elif score &gt;= 90: … 순서로 쓰면 등급은?</summary><div class="sc-a"><b>C</b>(첫 조건의 등급). 95 ≥ 70이 먼저 참이라 거기서 끝나고 아래 <code>elif</code>는 보지 않아요. 범위 조건은 큰 기준부터 쓰거나 <code>70 &lt;= score &lt; 80</code>처럼 양쪽을 막아야 해요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>파이썬 코드 스타일 가이드(PEP 8)는 들여쓰기 <b>스페이스 4칸</b>을 표준으로 해요. 탭과 스페이스를 섞으면 <code>TabError</code>가 나니, VS Code에서 "Tab 키 = 스페이스 4칸" 설정을 그대로 두세요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-06">
+  <div class="note-head">
+    <span class="note-num">개념 06 · Day 2</span>
+    <h3>반복문 — for · range · while · break · continue, 그리고 리스트 컴프리헨션</h3>
+    <div class="note-tags"><span class="tag">for x in 목록</span><span class="tag">range(1, 10)</span><span class="tag">while</span><span class="tag">break · continue</span><span class="tag">[식 for x in 목록 if 조건]</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>파이썬 <code>for</code>는 언제나 "목록에서 하나씩 꺼내기"이고, 숫자를 세고 싶으면 <code>range(시작, 끝)</code>(끝 미포함)을 목록으로 쓴다. 조건이 참인 동안은 <code>while</code>. 리스트를 만드는 for는 <b>리스트 컴프리헨션</b> 한 줄로 줄인다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>[n * n for n in nums if n % 2 == 0]</code>는 "nums에서 n을 하나씩 꺼내, 짝수면, n*n을 담아라"를 그대로 적은 문장이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① range와 while</h4>
+        <p><code>range(3)</code> → 0, 1, 2 · <code>range(1, 10)</code> → 1~9 · <code>range(0, 10, 2)</code> → 0, 2, 4, 6, 8. <code>while 조건:</code>은 조건을 바꾸는 줄(<code>i += 1</code>)을 빠뜨리면 끝나지 않아요. 파이썬에는 <code>i++</code>가 없어요 — <code>i += 1</code>. <code>break</code>는 반복을 완전히 끝내고, <code>continue</code>는 이번 회차만 건너뛰어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 리스트 컴프리헨션</h4>
+        <p>빈 리스트 → for → <code>append</code> 세 줄이 <code>[식 for 변수 in 목록]</code> 한 줄. 뒤에 <code>if 조건</code>을 붙이면 거르기. 대괄호를 빼고 함수에 넘기면 <b>제너레이터 식</b>이라 리스트를 만들지 않고 바로 계산해요(<code>sum(item["price"] for item in products)</code>). 쓰지 않는 반복 변수는 관례로 <code>_</code>(<code>for _ in range(6)</code>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p><code>for (int i = 1; i &lt; 10; i++)</code> → <code>for i in range(1, 10):</code>, 향상된 for <code>for (String f : fruits)</code> → <code>for f in fruits:</code>. 리스트 컴프리헨션은 자바 스트림 <code>nums.stream().filter(n -&gt; n % 2 == 0).map(n -&gt; n * n).toList()</code>와 같은 일을 해요 — 순서만 "<b>map 식이 앞, filter가 뒤</b>"로 바뀐 셈이에요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — 구구단 출력기 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">dan = 7
+
+for i in range(1, 10):                  # 1번: 1~9 (10 미포함)
+    print(f"{dan} x {i} =", dan * i)
+
+print()
+i = 1                                   # 2번: while 로 같은 결과
+while (i &lt; 10):                         # 괄호는 없어도 된다: while i &lt; 10:
+    print(f"{dan} x {i} =", dan * i)
+    i = i + 1                           # 빠뜨리면 무한 반복
+
+arr = [dan * i for i in range(1, 10)]   # 도전: 결과만 담은 리스트
+print(arr)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 (지금 코드 기준) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>7 x 1 = 7
+7 x 2 = 14
+… (7 x 9 = 63 까지 9줄)
+
+7 x 1 = 7
+… (while 도 9줄)
+7 x 9 = 63
+[7, 14, 21, 28, 35, 42, 49, 56, 63]</pre>
+      <div class="run-note">노트북에 저장된 출력은 while 부분이 <b>"7 x 10 = 70"까지 10줄</b>이에요 — 10까지 도는 조건으로 실행한 뒤 코드를 고치고 칸을 다시 실행하지 않은 흔적이에요. 지금 코드는 9줄이 맞아요. <code>print(f"{dan} x {i} =", dan * i)</code>는 쉼표 때문에 <code>=</code> 뒤에 공백이 한 칸 들어가요 — <code>f"{dan} x {i} = {dan * i}"</code>로 써도 같은 결과.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>range(a, b)</code>는 a부터 b-1까지. <code>i++</code> 없음 → <code>i += 1</code>.</li>
+        <li><code>break</code> 반복 종료 · <code>continue</code> 이번만 건너뜀.</li>
+        <li><code>[식 for x in 목록 if 조건]</code> = map + filter 한 줄.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>[n for n in range(10) if n % 3 == 0] 의 결과는?</summary><div class="sc-a"><code>[0, 3, 6, 9]</code>. 0도 3으로 나눈 나머지가 0이라 들어가요.</div></details>
+      <details class="sc-q"><summary>for i in range(5): if i == 2: continue / if i == 4: break / print(i) — 찍히는 숫자는?</summary><div class="sc-a"><code>0 1 3</code>. 2는 건너뛰고(continue), 4에서 반복이 끝나(break) 4는 찍히지 않아요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>리스트 컴프리헨션은 파이썬 코드에서 가장 자주 보이는 문법이에요. 다만 조건이 둘 이상 겹치거나 한 줄이 길어지면 읽기 어려우니, 그때는 평범한 for문이 더 낫다는 것이 팀 리뷰의 단골 의견이에요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-07">
+  <div class="note-head">
+    <span class="note-num">개념 07 · Day 2</span>
+    <h3>함수와 모듈 — def · return · 기본값 · 여러 값 반환, import math · random · datetime</h3>
+    <div class="note-tags"><span class="tag">def</span><span class="tag">name="방문자"</span><span class="tag">return a, b</span><span class="tag">import random</span><span class="tag">random.sample</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>def 이름(매개변수):</code>로 만들고 <code>return</code>으로 돌려준다. 매개변수에 기본값을 주면 생략할 수 있고, <code>return a, b</code>는 튜플 하나를 돌려줘 <code>lo, hi = …</code>로 나눠 받는다. 모듈은 함수를 모아 둔 파이썬 파일 — <code>import</code>해서 <code>모듈.함수()</code>로 쓴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>함수는 이름 붙인 레시피, 모듈은 레시피 책이에요. 표준 모듈(<code>math · random · datetime</code>)은 파이썬에 처음부터 들어 있는 책이라 설치 없이 <code>import</code>만 하면 돼요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 함수 — 기본값 · 여러 값 반환</h4>
+        <p><code>def greet(name="방문자"): return f"{name}님 환영합니다"</code> → <code>greet()</code>는 "방문자님…", <code>greet("철수")</code>는 "철수님…". <code>def min_max(nums): return min(nums), max(nums)</code> → <code>lo, hi = min_max([3, 7, 1])</code>로 1, 7. <code>return</code>이 없으면 <code>None</code>을 돌려줘요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 표준 모듈</h4>
+        <p><code>math.sqrt(16)</code> → <code>4.0</code>, <code>random.randint(1, 10)</code> → 1~10(<b>양 끝 포함</b>), <code>datetime.date.today()</code> → 오늘 날짜. <code>from random import randint</code>처럼 함수만 가져오면 앞의 <code>random.</code>을 생략해요. 내가 만든 <code>test.py</code>도 같은 폴더에서 <code>import test</code>하면 모듈이에요(선생님 레포의 <code>test.py</code>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p>자바 메서드는 반드시 클래스 안에, 반환 타입과 함께(<code>public static double calcBmi(double w, double h)</code>) 써야 했지만 파이썬 함수는 파일 맨 바깥에 바로 써요. 기본값 매개변수는 자바에 없어 <b>오버로딩</b>(같은 이름, 매개변수 다른 메서드 두 개)으로 흉내 냈죠. 값 두 개 반환은 자바에선 배열 · 객체 · <code>record</code>로 감싸야 했어요. <code>import random</code>은 자바의 <code>import java.util.Random;</code>과 비슷하지만, 파이썬은 <b>파일 하나 = 모듈 하나</b>예요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — BMI 함수 · 로또 번호 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">def calc_bmi(weight, height):
+    return weight / (height * height)
+
+bmi = calc_bmi(70, 1.75)
+status = "저체중" if bmi &lt; 18.5 else ("과체중" if bmi &gt;= 25 else "정상")
+print(f"BMI: {bmi:.2f}, 결과: {status}")
+
+import random
+arr = [random.randint(1, 45) for _ in range(6)]   # 교안 도전 문제의 예시 그대로
+print(arr)
+print(sorted(random.sample(range(1, 46), 6)))     # ← 겹치지 않는 6개 (교안 밖 보충)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 — 로또는 실행마다 다름 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>BMI: 22.86, 결과: 정상
+[45, 25, 15, 34, 45, 20]      ← 45가 두 번
+[5, 25, 30, 33, 37, 43]       ← sample 은 항상 서로 다른 6개</pre>
+      <div class="run-note"><code>randint</code>를 여섯 번 부르면 <b>같은 번호가 나올 수 있어요</b>. 오늘 다시 실행할 때마다 겹친 목록이 나왔어요(16 두 번 · 5 두 번 · 45 두 번). 진짜 로또처럼 서로 다른 6개는 <code>random.sample(range(1, 46), 6)</code> — 상자에서 공을 꺼내고 다시 넣지 않는 방식이에요. 교안 문제는 <code>randint</code> 연습이 목적이라 풀이 자체는 맞아요. <code>calc_bmi(70, 1.75)</code>만 찍으면 <code>22.857142857142858</code>처럼 길게 나와 <code>:.2f</code>로 다듬었어요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>def f(a, b=기본값):</code> — 기본값 있는 매개변수는 뒤쪽에.</li>
+        <li><code>return x, y</code> → 튜플, <code>a, b = f()</code>로 나눠 받기. return 없으면 None.</li>
+        <li><code>randint(a, b)</code>는 양 끝 포함, 중복 가능 / <code>sample(범위, k)</code>는 중복 없음.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 워밍업: def square(n): return n * n; print(square(4)) 는?</summary><div class="sc-a"><code>16</code>.</div></details>
+      <details class="sc-q"><summary>def add(a, b): print(a + b) 로 만들고 x = add(1, 2) 하면 x 에는 무엇이 들어갈까?</summary><div class="sc-a"><code>None</code>. 화면에 3이 찍히긴 하지만 <code>return</code>이 없어 함수 결과는 None이에요. 값을 다른 곳에 쓰려면 <code>print</code>가 아니라 <code>return</code>.</div></details>
+      <details class="sc-q"><summary>def greet(name="방문자", msg): … 처럼 쓰면 어떻게 될까?</summary><div class="sc-a"><code>SyntaxError</code>. 기본값이 없는 매개변수는 기본값 있는 매개변수보다 앞에 와야 해요 → <code>def greet(msg, name="방문자"):</code>.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>AI 에이전트(과정 마지막 주제)는 LLM이 <b>파이썬 함수를 "도구"로 골라 호출</b>하는 구조예요. 함수 이름 · 매개변수 · 설명(docstring)을 잘 지어 두는 습관이 그대로 에이전트 품질로 이어져요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-08">
+  <div class="note-head">
+    <span class="note-num">개념 08 · Day 2</span>
+    <h3>파일 입출력과 예외처리 — with open · "w"/"r" · encoding · try · except · finally</h3>
+    <div class="note-tags"><span class="tag">with open</span><span class="tag">"w" · "r" · "a"</span><span class="tag">encoding="utf-8"</span><span class="tag">ValueError</span><span class="tag">finally</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>with open(파일, 모드) as f:</code> 블록이 끝나면 파일이 자동으로 닫힌다. <code>"w"</code>는 새로 만들거나 덮어쓰기, <code>"r"</code>은 읽기(없으면 오류), <code>"a"</code>는 뒤에 이어 쓰기. 한글이 들어가면 <b><code>encoding="utf-8"</code>을 꼭 적는다</b>. 오류는 <code>try</code>로 감싸 종류별 <code>except</code>로 받고, <code>finally</code>는 항상 실행된다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>with</code>는 "다 쓰면 문 닫고 나오기"를 자동으로 해 주는 장치예요. <code>encoding</code>은 "어떤 글자표로 적을지" — 쓸 때와 읽을 때 글자표가 다르면 한글이 깨지거나 오류가 나요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 파일 — 쓰기 · 읽기</h4>
+        <p><code>f.write("…")</code>는 줄바꿈을 붙이지 않아 한 줄씩 저장하려면 <code>f"{score}\n"</code>처럼 <code>\n</code>을 직접 넣어요. 읽기는 <code>f.read()</code>(전체 한 문자열), <code>for line in f:</code>(한 줄씩, 끝에 <code>\n</code> 포함 → <code>line.strip()</code>). 경로를 이름만 쓰면 <b>현재 작업 폴더</b>(노트북은 노트북이 있는 폴더) 기준이에요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② encoding — 이 PC(3.15)와 교안 권장(3.12)이 다른 곳</h4>
+        <p>교안 코드 <code>open("memo.txt", "w")</code>는 encoding이 없어요. 파이썬 3.15는 기본이 UTF-8이라 오늘은 문제없었지만, <b>3.12 이하 Windows는 기본이 cp949</b>예요. 직접 비교해 보니 같은 "오늘 수업 완료"가 3.15에선 20바이트(UTF-8), UTF-8 모드를 끈 실행(<code>-X utf8=0</code>, 3.12 이하 Windows와 같은 기본값)에선 14바이트(cp949)로 저장됐고, UTF-8 파일을 cp949로 읽으면 <code>UnicodeDecodeError</code>가 났어요. 내 점수 파일 풀이처럼 <code>encoding="utf-8"</code>을 쓰면 어느 버전 · 어느 PC에서도 같아요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 예외 — 종류별로 받기</h4>
+        <p><code>int("abc")</code> → <code>ValueError</code>, <code>10 / 0</code> → <code>ZeroDivisionError</code>, 없는 파일 <code>"r"</code> → <code>FileNotFoundError</code>, 없는 키 → <code>KeyError</code>. <code>except ValueError:</code>처럼 <b>종류를 적어</b> 받고, 메시지가 필요하면 <code>except ValueError as e:</code>. 그냥 <code>except:</code>는 모든 오류(오타로 난 오류까지)를 삼켜 원인을 숨기니 피하세요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바에서는</h4>
+        <p><code>with open(…) as f:</code> ≈ <b>try-with-resources</b> <code>try (BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) { … }</code> — 자원을 자동으로 닫는 같은 생각이에요. <code>try · except · finally</code> ≈ <code>try · catch · finally</code>, <code>except ValueError</code> ≈ <code>catch (NumberFormatException e)</code>(<code>Integer.parseInt("abc")</code>). 자바와 달리 파이썬엔 "반드시 잡아야 하는 예외(checked exception)"가 없어 <code>throws</code>도 없어요. 자바 18부터 기본 문자셋이 UTF-8이 된 것(JEP 400)과 파이썬 3.15의 UTF-8 기본값은 같은 흐름이에요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — 점수 파일 저장 + 예외처리 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">scores = [88, 92, 75]
+
+with open("scores.txt", "w", encoding="utf-8") as f:   # 1번: 한 줄씩 저장
+    for score in scores:
+        f.write(f"{score}\n")
+
+with open("scores.txt", "r", encoding="utf-8") as f:   # 2번: 다시 읽기
+    content = f.read()
+    print(content)
+
+try:                                                    # 3번 + 도전
+    num = int("구십")
+except ValueError:
+    print("숫자가 아닙니다")
+finally:
+    print("확인 완료")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>88
+92
+75
+
+숫자가 아닙니다
+확인 완료</pre>
+      <div class="run-note">75 아래의 빈 줄은 파일 끝의 <code>\n</code>과 <code>print</code>가 붙이는 줄바꿈이 겹친 것이에요(<code>print(content, end="")</code>나 <code>content.strip()</code>이면 사라져요). 이 칸이 만든 <code>scores.txt</code>는 세 줄(88 · 92 · 75)인데, Windows에서는 글자 모드가 <code>\n</code>을 <code>\r\n</code>으로 바꿔 저장해 실제 파일은 12바이트예요(읽을 때는 다시 <code>\n</code>으로 바뀌어 보여요). 앞 칸이 만든 <code>memo.txt</code>는 "오늘 수업 완료"(UTF-8, 20바이트)예요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>with open(경로, "w"/"r"/"a", encoding="utf-8") as f:</code> — 자동으로 닫힘.</li>
+        <li><code>write</code>는 줄바꿈을 붙이지 않는다 → <code>\n</code> 직접.</li>
+        <li>encoding을 생략하면 버전 · OS마다 결과가 다르다(3.15 UTF-8 / 3.12 이하 Windows cp949).</li>
+        <li><code>except 종류:</code>로 받기, <code>finally</code>는 오류와 상관없이 항상.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>try: x = 10 / 0 except ValueError: print("A") finally: print("B") 를 실행하면?</summary><div class="sc-a"><code>B</code>가 찍힌 뒤 <code>ZeroDivisionError</code>로 멈춰요. <code>except ValueError</code>는 다른 종류의 오류를 잡지 않지만, <code>finally</code>는 그래도 실행돼요.</div></details>
+      <details class="sc-q"><summary>memo.txt 가 이미 있는데 open("memo.txt", "w") 로 열면 원래 내용은?</summary><div class="sc-a"><b>지워져요</b>(덮어쓰기). 뒤에 덧붙이려면 <code>"a"</code>(append) 모드를 써요.</div></details>
+      <details class="sc-q"><summary>내 3.15 PC에서 encoding 없이 저장한 한글 파일을, 친구의 3.12 Windows PC에서 encoding 없이 읽으면?</summary><div class="sc-a">UTF-8로 저장된 파일을 cp949로 읽게 되어 <code>UnicodeDecodeError</code>가 나거나 글자가 깨져요. 쓰는 쪽 · 읽는 쪽 모두 <code>encoding="utf-8"</code>을 적으면 해결돼요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>RAG(과정 후반)는 문서 파일을 읽어 잘게 나누는 것에서 시작해요. 한글 문서를 다루는 팀은 <code>encoding="utf-8"</code>을 습관처럼 적고, Pandas도 <code>pd.read_csv("파일.csv", encoding="utf-8")</code>처럼 같은 인자를 받아요(엑셀에서 저장한 CSV는 <code>cp949</code>인 경우가 많아요).</p>
+  </div>
+</article>
+    </section>
+
+    <section id="lab-section" class="cat hidden">
+      <div class="cat-head"><h2>🧪 실습 풀이 — 교안 문제를 내가 어떻게 풀었나</h2></div>
+      <p class="cat-desc">강의자료의 [실습] 쪽마다 한 장씩. <b>문제 → 내 풀이(노트북 그대로) → 다시 실행한 결과 → 짚을 점</b> 순서예요. 문제와 다르게 나온 곳은 고친 코드를 함께 적었습니다. 실행은 저장소 밖에서 파이썬 3.15.0으로 했어요. 마지막 카드는 선생님이 따로 준 <b>Day 1 실습예제(복습 문제 11개)</b> 체크리스트예요.</p>
+
+<article class="note-card" id="lab-01">
+  <div class="note-head">
+    <span class="note-num">실습 01 · Day 1 · 교안 10쪽</span>
+    <h3>계산기 + 조건식 통합 — 비교 결과를 변수에 담고 or 로 묶기</h3>
+    <div class="note-tags"><span class="tag">&gt;=</span><span class="tag">or</span><span class="tag">bool 변수</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>price = 12000, quantity = 5</code>. ① 결제 금액이 50000 이상인지 비교해 <code>is_free_shipping</code>에 저장 ② 무료배송이거나 수량 10개 이상이면 True인 <code>is_vip</code>를 <code>or</code>로.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 칸 2</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">total = price * quantity
+is_free_shipping = total &gt;= 50000
+is_vip = is_free_shipping or (quantity &gt;= 10)
+print(is_free_shipping, is_vip)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>True True</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p><code>if</code> 없이 <b>비교식 자체가 값</b>(True/False)이라는 점이 핵심이에요. 괄호 <code>(quantity &gt;= 10)</code>은 없어도 같은 결과(비교가 <code>or</code>보다 먼저 계산)지만 읽기 쉽게 둔 좋은 습관이에요. 자바라면 <code>boolean isVip = isFreeShipping || quantity &gt;= 10;</code>.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <details class="sc-q"><summary>quantity = 3 이면 두 값은?</summary><div class="sc-a">total = 36000 → <code>False False</code>. 무료배송도 아니고 10개 미만이에요.</div></details>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-02">
+  <div class="note-head">
+    <span class="note-num">실습 02 · Day 1 · 교안 15쪽</span>
+    <h3>이메일 정리기 — strip · split("@") · f-string · replace</h3>
+    <div class="note-tags"><span class="tag">strip</span><span class="tag">split</span><span class="tag">언패킹</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>raw = "  hong@example.com  "</code>. ① 공백 제거 → <code>email</code> ② <code>split("@")</code>으로 <code>user_id, domain</code> ③ <code>'아이디: hong / 도메인: example.com'</code> 출력 · 도전: domain의 example → school.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 칸 5</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">email = raw.strip()
+print(email)
+arr = email.split("@")
+user_id = arr[0]
+domain = arr[1]
+print(f"아이디: {user_id} / 도메인: {domain}")
+print(domain.replace("example", "school"))</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>hong@example.com
+아이디: hong / 도메인: example.com
+school.com</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점 · 더 짧게</h4>
+      <p>2번은 <code>user_id, domain = email.split("@")</code> 한 줄(다중 할당 · 언패킹)로도 돼요 — 교안 17쪽의 <code>a, b = b, a</code>와 같은 문법. 메서드를 이어 붙이면 <code>user_id, domain = raw.strip().split("@")</code>까지 줄어요(실행 결과 <code>hong example.com</code>). 단 <code>@</code>가 정확히 하나가 아니면 <code>ValueError</code>이니, 진짜 입력을 다룰 땐 <a href="#py-08">try</a>로 감싸요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-03">
+  <div class="note-head">
+    <span class="note-num">실습 03 · Day 1 · 교안 18쪽</span>
+    <h3>점수 분석 — count · sort · enumerate · min/max</h3>
+    <div class="note-tags"><span class="tag">count</span><span class="tag">sort</span><span class="tag">enumerate(…, 1)</span><span class="tag">⚠ 3번 예시와 다름</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>scores = [88, 92, 75, 92, 60]</code>. ① 92점 개수 ② <code>sort()</code> 후 출력 ③ <code>enumerate()</code>로 <code>'1번째 학생: 88점'</code> 형태 ④ 도전: 최고점 − 최저점.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 칸 8 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">print(scores.count(92))
+scores.sort()
+print(scores)
+for i, s in enumerate(scores):
+    print(f"{i}번째 학생:", f"{s}점")
+print( max(scores) - min(scores) )</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>2
+[60, 75, 88, 92, 92]
+0번째 학생: 60점
+1번째 학생: 75점
+2번째 학생: 88점
+3번째 학생: 92점
+4번째 학생: 92점
+32</pre>
+      <div class="run-note">예시 <code>'1번째 학생: 88점'</code>과 두 군데가 달라요. ① <code>enumerate</code>는 <b>0부터</b> 세요. ② 2번의 <code>sort()</code>가 <b>원본을 바꿔서</b> 3번이 정렬된 순서(60점부터)로 돌았어요. 1·2·4번 답은 맞아요.</div>
+    </details>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">고친 풀이 — 예시와 같은 출력</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">scores = [88, 92, 75, 92, 60]
+original = scores.copy()                 # 정렬 전 순서를 따로 보관
+print(scores.count(92))
+scores.sort()
+print(scores)
+for i, s in enumerate(original, 1):      # 1부터 번호
+    print(f"{i}번째 학생: {s}점")
+hi, lo = max(scores), min(scores)
+print(f"최고 {hi}점, 최저 {lo}점, 차이 {hi - lo}점")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>2
+[60, 75, 88, 92, 92]
+1번째 학생: 88점
+2번째 학생: 92점
+3번째 학생: 75점
+4번째 학생: 92점
+5번째 학생: 60점
+최고 92점, 최저 60점, 차이 32점</pre>
+      <div class="run-note"><code>original = scores</code>(복사 없이 대입)로 하면 <b>같은 리스트를 가리키는 이름이 하나 더</b> 생길 뿐이라 정렬이 함께 반영돼요 — 자바에서 배열 변수를 대입했을 때와 같아요. 그래서 <code>.copy()</code>(또는 <code>scores[:]</code>). 정렬본만 필요하면 <code>print(sorted(scores))</code>로 원본을 건드리지 않는 방법도 있어요.</div>
+    </details>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <details class="sc-q"><summary>a = [3, 1, 2]; b = a; b.sort(); print(a) 는?</summary><div class="sc-a"><code>[1, 2, 3]</code>. <code>b = a</code>는 복사가 아니라 같은 리스트에 이름을 하나 더 붙인 것이에요.</div></details>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-04">
+  <div class="note-head">
+    <span class="note-num">실습 04 · Day 1 · 교안 22쪽</span>
+    <h3>종합 — 상품 목록 분석: 딕셔너리 리스트에서 이름 꺼내기 · 비교 · 합계</h3>
+    <div class="note-tags"><span class="tag">[d["name"] for d in …]</span><span class="tag">sum(…)</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>마우스 15000 · 키보드 45000 · 모니터 220000. ① 상품명만 리스트로 ② 가격이 20000 이상인지 각각 True/False ③ 합계.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day01_실습.ipynb — 칸 9</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">names = [item["name"] for item in products]      # 1번 — Day 2 문법을 미리
+print(names)
+for i in products:
+    print(i["price"] &gt;= 20000)
+total_price = 0                                    # 3번 — 누적 합
+for item in products:
+    total_price += item["price"]
+print(total_price)
+total_price = sum(item["price"] for item in products)   # 3번 — 한 줄
+print(total_price)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>['마우스', '키보드', '모니터']
+False
+True
+True
+280000
+280000</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>3번을 두 방법으로 풀어 같은 값(280000)을 확인한 점이 좋아요. 2번은 True/False만 찍혀 어느 상품인지 보이지 않으니 <code>print(p["name"], p["price"] &gt;= 20000)</code>(→ <code>마우스 False</code> …)가 읽기 쉬워요. 반복 변수 <code>i</code>는 보통 번호에 쓰는 이름이라, 상품 하나를 담을 땐 <code>p</code> · <code>item</code>처럼 뜻이 보이는 이름이 좋아요. 합계를 <code>f"{total:,}원"</code>으로 찍으면 <code>280,000원</code>.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-05">
+  <div class="note-head">
+    <span class="note-num">실습 05 · Day 2 · 교안 6쪽</span>
+    <h3>등급 판별기 — if · elif · else, f-string, 삼항</h3>
+    <div class="note-tags"><span class="tag">elif</span><span class="tag">삼항</span><span class="tag">✅ 문제대로 (공백 한 칸)</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>score = 72</code>. ① 90 A · 80 B · 70 C · 그 미만 D를 <code>grade</code>에 ② <code>'점수 72점, 등급은 C입니다'</code> ③ 도전: 60 이상 합격 / 미만 불합격을 삼항 한 줄로.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — 칸 2</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">if score &gt;= 90:
+    grade = 'A'
+elif score &gt;= 80:
+    grade = 'B'
+elif score &gt;= 70:
+    grade = 'C'
+else:
+    grade = 'D'
+print(grade)
+print(f"점수 {score} 점, 등급은 {grade}입니다")
+result = "합격" if score &gt;= 60 else "불합격"
+print (result)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>C
+점수 72 점, 등급은 C입니다
+합격</pre>
+      <div class="run-note">예시는 <code>72점</code>(붙여 씀)인데 f-string에 <code>{score} 점</code>으로 공백이 들어가 <code>72 점</code>이 나왔어요. f-string은 중괄호 밖 글자를 그대로 찍으니 <code>f"점수 {score}점, 등급은 {grade}입니다"</code>. <code>print (result)</code>의 함수 이름 뒤 공백은 동작엔 문제없지만 관례(PEP 8)는 붙여 써요.</div>
+    </details>
+  </div>
+</article>
+
+<article class="note-card" id="lab-06">
+  <div class="note-head">
+    <span class="note-num">실습 06 · Day 2 · 교안 9쪽</span>
+    <h3>구구단 출력기 — for · while · 리스트 컴프리헨션, 그리고 "저장된 출력"이 옛날 것</h3>
+    <div class="note-tags"><span class="tag">range(1, 10)</span><span class="tag">while</span><span class="tag">컴프리헨션</span><span class="tag">⚠ 출력 다시 실행 필요</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>dan = 7</code>. ① for + <code>range(1, 10)</code>으로 <code>'7 x 1 = 7'</code> 9줄 ② while로 같은 결과 ③ 도전: <code>[7, 14, …, 63]</code> 한 줄.</p>
+    <p>코드는 <a href="#py-06">🐍 개념 06</a> 카드에 그대로 있어요. <b>지금 코드는 세 문제 모두 맞아요</b>(for 9줄 · while 9줄 · <code>[7, 14, 21, 28, 35, 42, 49, 56, 63]</code>).</p>
+    <div class="warn-box"><b>⚠ 노트북에 저장된 출력은 코드와 다릅니다</b> — while 부분이 <code>7 x 10 = 70</code>까지 10줄로 저장돼 있어요. 10까지 도는 조건으로 실행한 뒤 코드를 고치고 그 칸을 다시 실행하지 않은 것으로 보여요. GitHub에서 노트북을 열면 이 옛 출력이 보이니, VS Code에서 칸을 한 번 더 실행(또는 "모두 다시 실행")하고 저장하면 맞춰져요. 저장소 사본은 수업 파일 그대로 두었어요.</div>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p><code>while(i&lt;10):</code>의 괄호와 <code>i=i+1</code>은 자바 습관이에요 — 파이썬다운 모양은 <code>while i &lt; 10:</code> · <code>i += 1</code>. 출력 형식은 <code>print(f"{dan} x {i} =", dan*i)</code>(쉼표가 공백 한 칸)도 맞지만 <code>f"{dan} x {i} = {dan * i}"</code> 하나로 쓰면 형식이 한눈에 보여요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-07">
+  <div class="note-head">
+    <span class="note-num">실습 07 · Day 2 · 교안 11쪽</span>
+    <h3>BMI 계산 함수 — def · return · 겹친 삼항 · :.2f</h3>
+    <div class="note-tags"><span class="tag">def calc_bmi</span><span class="tag">삼항 겹치기</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① <code>calc_bmi(weight, height)</code> = 몸무게 / (키 * 키) ② <code>calc_bmi(70, 1.75)</code> 출력 ③ 도전: 18.5 미만 저체중 · 25 이상 과체중 · 그 사이 정상을 삼항으로.</p>
+    <p>코드는 <a href="#py-07">🐍 개념 07</a> 카드에 있어요. 실행 결과 <code>22.857142857142858</code> → <code>BMI: 22.86, 결과: 정상</code>(저장된 출력과 같음).</p>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>함수 본문 들여쓰기가 <b>3칸</b>(<code>   return …</code>)이에요. 블록 안에서 칸 수만 일정하면 동작하지만 표준은 4칸이라, 나중에 이 함수에 4칸으로 줄을 추가하면 한 블록 안에 3칸과 4칸이 섞여 <code>IndentationError</code>가 나요. 삼항 두 개를 괄호로 묶은 것(<code>… else ("과체중" if … else "정상")</code>)은 읽기 좋은 선택이에요 — 조건이 셋 이상이면 <code>if · elif · else</code>로 쓰는 편이 더 읽기 쉬울 때가 많아요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-08">
+  <div class="note-head">
+    <span class="note-num">실습 08 · Day 2 · 교안 13쪽</span>
+    <h3>랜덤 번호 뽑기 — randint · append · 컴프리헨션, 번호가 겹치는 문제</h3>
+    <div class="note-tags"><span class="tag">import random</span><span class="tag">for _ in range(6)</span><span class="tag">✅ 문제대로 · 중복 주의</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① <code>random.randint(1, 45)</code> 하나 ② for + <code>append</code>로 6개 리스트 ③ 도전: 컴프리헨션 한 줄(<code>[random.randint(1, 45) for _ in range(6)]</code>).</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day02_실습.ipynb — 칸 6</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">print(random.randint(1, 45))
+arr=[]
+for _ in range(6):
+    arr.append(random.randint(1,45))
+print(arr)
+arr=[random.randint(1, 45) for _ in range(6)]
+print(arr)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>실행마다 다름 — 오늘 다시 실행한 한 번 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>31
+[37, 5, 27, 5, 45, 3]       ← 5가 두 번
+[45, 25, 15, 34, 45, 20]    ← 45가 두 번</pre>
+      <div class="run-note">문제가 시킨 대로 맞게 풀었지만, <code>randint</code>를 여섯 번 부르면 <b>같은 번호가 나올 수 있어요</b>(45개 중 6개를 뽑을 때 겹칠 확률은 약 30%). 진짜 로또처럼 서로 다른 번호는 <code>sorted(random.sample(range(1, 46), 6))</code> — <a href="#py-07">개념 07</a>. <code>range(1, 46)</code>인 이유는 끝이 미포함이라서예요(<code>randint(1, 45)</code>는 양 끝 포함 — 둘의 끝 규칙이 달라요).</div>
+    </details>
+  </div>
+</article>
+
+<article class="note-card" id="lab-09">
+  <div class="note-head">
+    <span class="note-num">실습 09 · Day 2 · 교안 16쪽</span>
+    <h3>점수 파일 저장 + 예외처리 — with open · \n · try · except ValueError · finally</h3>
+    <div class="note-tags"><span class="tag">encoding="utf-8"</span><span class="tag">ValueError</span><span class="tag">finally</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>scores = [88, 92, 75]</code>. ① <code>scores.txt</code>에 한 줄씩 저장 ② 다시 읽어 출력 ③ <code>int("구십")</code>이 실패하면 <code>'숫자가 아닙니다'</code> ④ 도전: finally로 <code>'확인 완료'</code>.</p>
+    <p>코드와 실행 결과는 <a href="#py-08">🐍 개념 08</a> 카드에 있어요(저장된 출력과 같음).</p>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>교안 예시(14쪽)에 없던 <b><code>encoding="utf-8"</code>을 직접 넣은 것</b>이 이 풀이의 가장 좋은 점이에요 — 파이썬 버전 · OS가 달라도 같은 파일이 만들어져요. 3번과 도전을 한 <code>try</code>에 묶은 것도 맞아요. 주석에 적은 "그냥 <code>except:</code>로 써도 됩니다"는 동작은 하지만, 오타로 난 <code>NameError</code>까지 "숫자가 아닙니다"로 바꿔 버리니 <code>except ValueError:</code>를 그대로 두는 편이 안전해요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-10">
+  <div class="note-head">
+    <span class="note-num">실습 10 · Day 2 · 교안 17쪽</span>
+    <h3>종합 — 성적 처리기: get_grade 함수 · for · 컴프리헨션 (실습 폴더에 없음 → 풀이 정리)</h3>
+    <div class="note-tags"><span class="tag">함수 + 반복</span><span class="tag">return</span><span class="tag">📝 아직 안 푼 문제</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>scores = [55, 82, 91, 67, 74]</code>. ① 점수를 받아 A/B/C/D를 돌려주는 <code>get_grade(score)</code> ② for로 <code>'55점 -&gt; D'</code>처럼 출력 ③ 도전: <code>[get_grade(s) for s in scores]</code>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>실습 05의 등급 판별(if 문)을 <b>함수 안에 넣고</b>, 실습 06의 반복으로 여러 점수에 돌리는 문제예요. 오늘 배운 것을 전부 한 번에 쓰는 마무리 문제라, 두 노트북 어디에도 풀이가 없어 아래에 참고 풀이를 적었어요 — 먼저 직접 풀어 본 뒤 비교해 보세요.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">참고 풀이 (정리하며 작성 · 실행 확인)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">def get_grade(score):
+    if score &gt;= 90:
+        return "A"
+    elif score &gt;= 80:
+        return "B"
+    elif score &gt;= 70:
+        return "C"
+    return "D"            # 위에서 return 하지 않은 나머지 전부
+
+scores = [55, 82, 91, 67, 74]
+for s in scores:
+    print(f"{s}점 -&gt; {get_grade(s)}")
+
+print([get_grade(s) for s in scores])</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>55점 -&gt; D
+82점 -&gt; B
+91점 -&gt; A
+67점 -&gt; D
+74점 -&gt; C
+['D', 'B', 'A', 'D', 'C']</pre>
+      <div class="run-note">실습 05와 달리 <code>grade = …</code>에 담지 않고 <b>바로 <code>return</code></b>해요. return을 만나면 함수가 그 자리에서 끝나므로 마지막 <code>else:</code>도 생략할 수 있어요(자바 메서드에서 조건마다 <code>return</code>하던 것과 같아요).</div>
+    </details>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <details class="sc-q"><summary>get_grade 안의 return 을 모두 print 로 바꾸면 ③의 리스트는 어떻게 될까?</summary><div class="sc-a">등급이 화면에 한 번씩 찍히고, 리스트는 <code>[None, None, None, None, None]</code>이 돼요. 함수가 아무것도 돌려주지 않기 때문이에요(<a href="#py-07">개념 07</a>).</div></details>
+    </div>
+  </div>
+</article>
+<article class="note-card" id="lab-11">
+  <div class="note-head">
+    <span class="note-num">복습 과제 · Day 1 실습예제(md)</span>
+    <h3>Day 1 실습예제 — 선생님이 준 복습 문제 11개 체크리스트 (아직 안 풂)</h3>
+    <div class="note-tags"><span class="tag">Part 1~5</span><span class="tag">기초 → 도전</span><span class="tag">📝 복습용</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">무엇</span>실습 폴더의 <code>day01_실습예제.md</code>(선생님 레포의 <code>Day1_실습예제.md</code>와 같은 내용)는 교안 실습과 <b>다른 문제 11개</b>예요. 두 노트북에는 이 문제들의 풀이가 없어, 문제마다 쓸 개념과 확인용 값만 적었어요. 정답 파일로 안내된 <code>day1_실습_정답.py</code>는 실습 폴더와 선생님 레포 어디에도 없어요.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>문제</th><th>쓸 것</th><th>확인용 값 · 함정</th></tr></thead>
+      <tbody>
+        <tr><td>1-1 자기소개 변수 (기초)</td><td>변수 3개 + f-string</td><td>숫자 변수도 f-string 안에서는 그대로 붙어요 → <a href="#py-03">py-03</a></td></tr>
+        <tr><td>1-2 원의 넓이 (기초)</td><td><code>radius * radius * 3.14</code></td><td>반지름 5 → <code>78.5</code></td></tr>
+        <tr><td>1-3 쇼핑몰 할인 (도전)</td><td><code>&gt;=</code> · <code>and</code></td><td>8000 × 4 = 32000 → <code>is_discount</code> True, 수량 4 ≥ 3 <b>그리고</b> 할인 → <code>is_special</code> True (교안 실습은 <code>or</code>, 여기는 <code>and</code>) → <a href="#lab-01">실습 01</a></td></tr>
+        <tr><td>2-1 문자열 정리기 (기초)</td><td><code>strip()</code> → <code>replace()</code> 이어 붙이기</td><td><code>나는 Python을 공부합니다</code></td></tr>
+        <tr><td>2-2 파일 이름 분리기 (기초)</td><td><code>split(".")</code> + 다중 할당</td><td><code>['report', 'pdf']</code>. 점이 둘인 <code>my.report.pdf</code>는 세 조각이 되니 <code>rsplit(".", 1)</code>(→ <code>['my.report', 'pdf']</code>)이 안전</td></tr>
+        <tr><td>2-3 가격표 (도전)</td><td><code>f"{price:,}"</code> · <code>f"{rating:.2f}"</code></td><td><code>1,590,000</code> · <code>4.68</code>(반올림)</td></tr>
+        <tr><td>3-1 할 일 목록 (기초)</td><td><code>insert(0, …)</code> · <code>extend([…])</code></td><td>4개 목록, 맨 앞이 "긴급 이메일 회신" → <a href="#py-04">py-04</a></td></tr>
+        <tr><td>3-2 순위표 (도전)</td><td><code>sort(reverse=True)</code> · <code>enumerate(…, 1)</code> · <code>count(95)</code></td><td><code>[95, 95, 88, 72, 60]</code> · "1위: 95점"부터 · 95점은 2명. 교안 실습 03처럼 <b>번호는 1부터</b> → <a href="#lab-03">실습 03</a></td></tr>
+        <tr><td>4-1 좌표 튜플 (기초)</td><td><code>point = (위도, 경도)</code></td><td><code>point[0] = 10</code> → <code>TypeError</code>가 나는 것이 정답</td></tr>
+        <tr><td>4-2 프로필 딕셔너리 (도전)</td><td><code>{"name": …, "major": …, "hobby": …}</code> · 키로 수정</td><td><code>profile["hobby"] = "…"</code> 뒤 f-string 안에서 <code>{profile['name']}</code> — 바깥이 큰따옴표면 안쪽 키는 작은따옴표</td></tr>
+        <tr><td>5 도서 목록 관리기 (종합)</td><td>컴프리헨션 · 비교 · <code>sum</code></td><td>제목 3개 · <code>books[0]["price"] &gt;= 15000</code>처럼 <b>for 없이</b> 하나씩(True · True · False) · 합계 <code>52000</code> → <a href="#lab-04">실습 04</a>와 같은 구조</td></tr>
+      </tbody>
+    </table></div>
+    <p class="practice-note"><span class="pn-label">📝 하는 법</span>노트북 아래에 칸을 추가해 문제 번호를 주석으로 적고 풀어 보세요. 다 풀면 "모두 다시 실행" 후 저장하면, 다음 정리 때 이 카드를 풀이 카드로 바꿉니다.</p>
+  </div>
+</article>
+    </section>
+
+    <section id="exam-section" class="cat hidden">
+      <div class="cat-head"><h2>✏️ 시험 대비 — 출력 예측 · 개념 확인</h2></div>
+      <p class="cat-desc">강의자료의 워밍업 퀴즈와 실습에서 실제로 헷갈린 곳으로 만든 4지선다예요. <b>문제 순서와 보기 순서는 매번 섞이고</b>, 답을 고르면 보기마다 왜 맞고 틀린지와 관련 카드 링크가 나와요. 코드 출력은 모두 파이썬 3.15.0으로 실행해 확인했습니다.</p>
+      <div class="exam-controls">
+        <button class="btn primary" type="button" data-exam="">전체 풀기</button>
+        <button class="btn" type="button" data-exam="day1">Day 1 · 변수 · 자료형</button>
+        <button class="btn" type="button" data-exam="day2">Day 2 · 조건 · 반복 · 함수 · 파일</button>
+      </div>
+      <div id="exam-box" class="box"><p class="exam-q">위 버튼을 누르면 시작합니다.</p></div>
+<script>
+const EXAM_BANK = [
+  { cat: "day1", q: "x = 5; y = 2 일 때 <code>print(x // y, x % y)</code> 의 출력은? (Day 1 워밍업 Q1)",
+    ch: ["2 1", "2.5 1", "2 0.5", "3 1"], a: 0,
+    ex: "<code>//</code>는 몫(2), <code>%</code>는 나머지(1). print에 값 두 개를 주면 공백으로 띄워 찍어요.",
+    why: ["정답 — 5 = 2 × 2 + 1.", "2.5는 <code>/</code>(실수 나눗셈)의 결과예요.", "나머지는 정수 1이에요. 0.5는 2.5에서 소수 부분만 떼어 낸 값.", "몫은 반올림이 아니라 내림이에요."],
+    link: ["#py-02", "🐍 개념 02 — 변수와 연산자"] },
+  { cat: "day1", q: "<code>name = \"Python\"</code> 일 때 <code>print(name[1:4])</code> 의 출력은? (Day 1 워밍업 Q3)",
+    ch: ["yth", "Pyth", "ytho", "Pyt"], a: 0,
+    ex: "인덱스 1·2·3번(y, t, h). 슬라이싱의 끝 번호 4는 포함하지 않아요.",
+    why: ["정답.", "0번(P)부터가 아니라 1번부터예요.", "끝 4번(o)은 포함하지 않아요.", "<code>name[0:3]</code>의 결과예요."],
+    link: ["#py-03", "🐍 개념 03 — 숫자와 문자열"] },
+  { cat: "day1", q: "자바의 <code>7 / 2</code>(int끼리)와 같은 결과(3)를 파이썬에서 얻는 식은?",
+    ch: ["7 // 2", "7 / 2", "7 % 2", "7 ** 2"], a: 0,
+    ex: "파이썬의 <code>/</code>는 정수끼리도 언제나 실수(3.5)를 돌려줘요. 몫은 <code>//</code>.",
+    why: ["정답 — 3.", "3.5가 나와요. 자바 습관으로 가장 많이 틀리는 곳.", "나머지 1이에요.", "거듭제곱 49예요."],
+    link: ["#py-02", "🐍 개념 02 — 변수와 연산자"] },
+  { cat: "day1", q: "<code>text = \"  hi  \"</code> 다음 줄에 <code>text.strip()</code> 만 쓰고, 그다음 <code>print(len(text))</code> 를 하면?",
+    ch: ["6", "2", "4", "오류"], a: 0,
+    ex: "문자열은 바뀌지 않아요. <code>strip()</code>은 새 문자열을 돌려줄 뿐이라 결과를 받지 않으면 text는 그대로 6글자.",
+    why: ["정답.", "<code>text = text.strip()</code>으로 다시 담았을 때의 값이에요.", "공백은 앞 2칸 + 뒤 2칸이라 지워지면 2, 안 지워지면 6이에요.", "메서드 결과를 버리는 것은 오류가 아니에요."],
+    link: ["#py-03", "🐍 개념 03 — 숫자와 문자열"] },
+  { cat: "day1", q: "<code>user_id, domain = \"hong@example.com\".split(\"@\")</code> 를 실행하면 domain 에 들어가는 값은?",
+    ch: ["'example.com'", "'@example.com'", "['hong', 'example.com']", "오류 — split 결과는 변수 하나에만 담을 수 있다"], a: 0,
+    ex: "split은 리스트 <code>['hong', 'example.com']</code>를 돌려주고, 왼쪽 변수 두 개에 순서대로 나눠 담겨요(다중 할당 · 언패킹).",
+    why: ["정답.", "구분자 @는 결과에 남지 않아요.", "리스트 전체는 변수 하나에 받을 때의 값이에요.", "개수가 맞으면(2개 = 2개) 나눠 담을 수 있어요. 개수가 다를 때만 ValueError."],
+    link: ["#lab-02", "🧪 실습 02 — 이메일 정리기"] },
+  { cat: "day1", q: "<code>nums = [3, 1, 2]</code> 에서 <code>result = nums.sort()</code> 후 <code>print(result)</code> 는?",
+    ch: ["None", "[1, 2, 3]", "[3, 1, 2]", "오류"], a: 0,
+    ex: "<code>sort()</code>는 nums 자체를 정렬하고 None을 돌려줘요. 정렬된 새 리스트가 필요하면 <code>sorted(nums)</code>.",
+    why: ["정답.", "<code>print(nums)</code> 또는 <code>sorted(nums)</code>의 값이에요.", "nums는 이미 정렬되어 바뀌었어요.", "None을 출력하는 것은 오류가 아니에요."],
+    link: ["#py-04", "🐍 개념 04 — 리스트 · 튜플 · 딕셔너리"] },
+  { cat: "day1", q: "<code>for i, s in enumerate([88, 92]): print(f\"{i}번째: {s}\")</code> 의 첫 줄은?",
+    ch: ["0번째: 88", "1번째: 88", "0번째: 92", "88번째: 0"], a: 0,
+    ex: "enumerate의 번호는 0부터예요. 1부터 원하면 <code>enumerate(목록, 1)</code>.",
+    why: ["정답 — 오늘 점수 분석 실습에서 \"0번째 학생\"이 나온 이유.", "<code>enumerate([88, 92], 1)</code>일 때예요.", "첫 줄은 첫 요소 88이에요.", "<code>i, s</code>는 (번호, 값) 순서예요."],
+    link: ["#lab-03", "🧪 실습 03 — 점수 분석"] },
+  { cat: "day1", q: "<code>a = [3, 1, 2]; b = a; b.sort(); print(a)</code> 의 출력은?",
+    ch: ["[1, 2, 3]", "[3, 1, 2]", "None", "오류"], a: 0,
+    ex: "<code>b = a</code>는 복사가 아니라 같은 리스트에 이름을 하나 더 붙인 것이에요. 원본을 지키려면 <code>a.copy()</code>.",
+    why: ["정답.", "<code>b = a.copy()</code>였다면 a는 그대로였어요.", "None은 <code>sort()</code>의 반환값이지 a가 아니에요.", "정상 실행돼요."],
+    link: ["#lab-03", "🧪 실습 03 — 점수 분석"] },
+  { cat: "day1", q: "값이 바뀌면 안 되는 좌표 <code>(35.2, 128.6)</code> 을 담기에 알맞은 자료형과, 수정하려 할 때 나는 일은?",
+    ch: ["튜플 — point[0] = 10 은 TypeError", "리스트 — point[0] = 10 은 TypeError", "튜플 — point[0] = 10 이 그대로 반영된다", "딕셔너리 — 소괄호로 만든다"], a: 0,
+    ex: "소괄호 튜플은 한 번 만들면 값을 바꿀 수 없어요(교안 19쪽).",
+    why: ["정답.", "리스트는 수정이 자유로워 오류가 나지 않아요.", "튜플은 수정이 막혀 있어요.", "딕셔너리는 중괄호 <code>{키: 값}</code>예요."],
+    link: ["#py-04", "🐍 개념 04 — 리스트 · 튜플 · 딕셔너리"] },
+  { cat: "day2", q: "<code>total = 0</code> 다음 <code>for i in range(3): total += i</code> 후 <code>print(total)</code> 은? (Day 2 워밍업 Q2)",
+    ch: ["3", "6", "0", "2"], a: 0,
+    ex: "<code>range(3)</code>은 0, 1, 2 — 0 + 1 + 2 = 3.",
+    why: ["정답.", "1 + 2 + 3이라고 생각하면 6이 나와요. range는 0부터, 3은 미포함.", "반복이 3번 돌아 더해져요.", "마지막 i 값이 2일 뿐, total은 합계예요."],
+    link: ["#py-06", "🐍 개념 06 — 반복문"] },
+  { cat: "day2", q: "자바 <code>age &gt;= 18 ? \"성인\" : \"미성년\"</code> 을 파이썬으로 옮긴 것은?",
+    ch: ["\"성인\" if age >= 18 else \"미성년\"", "age >= 18 ? \"성인\" : \"미성년\"", "if age >= 18 \"성인\" else \"미성년\"", "\"성인\" if age >= 18 : \"미성년\""], a: 0,
+    ex: "파이썬 삼항은 <b>참값 if 조건 else 거짓값</b> — 조건이 가운데예요.",
+    why: ["정답.", "파이썬에는 <code>? :</code> 연산자가 없어 SyntaxError.", "참값이 if 앞에 와야 해요.", "콜론이 아니라 else예요."],
+    link: ["#py-05", "🐍 개념 05 — 조건문"] },
+  { cat: "day2", q: "<code>score = 95</code> 인데 <code>if score &gt;= 70: g = \"C\"</code> / <code>elif score &gt;= 90: g = \"A\"</code> 순서로 쓰면 g 는?",
+    ch: ["C", "A", "C와 A 둘 다 실행되어 A", "오류"], a: 0,
+    ex: "elif는 위에서부터 검사해 처음 참인 하나만 실행해요. 범위 조건은 큰 기준부터.",
+    why: ["정답 — 95 ≥ 70이 먼저 참.", "조건 순서를 90 → 70으로 바꿨을 때예요.", "if · elif는 하나만 실행돼요. 따로 쓴 if 두 개라면 A가 되었을 거예요.", "문법 문제는 없어요."],
+    link: ["#py-05", "🐍 개념 05 — 조건문"] },
+  { cat: "day2", q: "<code>[n * n for n in [1, 2, 3, 4, 5] if n % 2 == 0]</code> 의 결과는?",
+    ch: ["[4, 16]", "[1, 9, 25]", "[2, 4]", "[1, 4, 9, 16, 25]"], a: 0,
+    ex: "짝수(2, 4)만 걸러서 제곱 → 4, 16.",
+    why: ["정답.", "홀수만 고른 경우예요(<code>n % 2 == 1</code>).", "제곱하기 전 값(<code>[n for n in … if …]</code>)이에요.", "if 조건이 없을 때예요."],
+    link: ["#py-06", "🐍 개념 06 — 반복문"] },
+  { cat: "day2", q: "<code>def add(a, b): print(a + b)</code> 로 만든 뒤 <code>x = add(1, 2)</code> 하면 x 에 들어가는 값은?",
+    ch: ["None", "3", "\"3\"", "오류"], a: 0,
+    ex: "화면에 3이 찍히지만 return이 없어 함수의 결과는 None이에요.",
+    why: ["정답.", "<code>return a + b</code>였을 때예요.", "print는 값을 문자열로 돌려주지 않아요.", "return이 없는 함수도 정상 실행돼요."],
+    link: ["#py-07", "🐍 개념 07 — 함수와 모듈"] },
+  { cat: "day2", q: "1~45 에서 <b>서로 다른</b> 번호 6개를 뽑는 코드는?",
+    ch: ["random.sample(range(1, 46), 6)", "[random.randint(1, 45) for _ in range(6)]", "random.sample(range(1, 45), 6)", "random.randint(1, 45, 6)"], a: 0,
+    ex: "sample은 꺼낸 공을 다시 넣지 않아 중복이 없어요. range는 끝 미포함이라 46.",
+    why: ["정답.", "randint를 여러 번 부르면 같은 번호가 나올 수 있어요(오늘 실행에서도 겹침).", "range(1, 45)는 1~44라 45가 빠져요.", "randint는 인자 두 개(a, b)만 받아요 — TypeError."],
+    link: ["#lab-08", "🧪 실습 08 — 랜덤 번호 뽑기"] },
+  { cat: "day2", q: "<code>try: x = 10 / 0</code> · <code>except ValueError: print(\"A\")</code> · <code>finally: print(\"B\")</code> 를 실행하면?",
+    ch: ["B 를 찍은 뒤 ZeroDivisionError 로 멈춘다", "A, B 를 찍는다", "B 만 찍고 정상 종료", "아무것도 찍지 않고 ZeroDivisionError"], a: 0,
+    ex: "except ValueError는 ZeroDivisionError를 잡지 못해요. finally는 그래도 실행되고, 잡히지 않은 오류는 그 뒤에 올라가요.",
+    why: ["정답.", "A는 ValueError일 때만 찍혀요.", "잡히지 않은 예외라 정상 종료가 아니에요.", "finally는 오류가 잡히지 않아도 실행돼요."],
+    link: ["#py-08", "🐍 개념 08 — 파일과 예외"] },
+  { cat: "day2", q: "한글을 파일에 쓰고 다른 PC(파이썬 3.12 Windows)에서도 같게 읽히려면 가장 알맞은 것은?",
+    ch: ["쓸 때와 읽을 때 모두 open(…, encoding=\"utf-8\")", "\"w\" 대신 \"a\" 모드로 쓴다", "with 대신 f = open(…) 을 쓴다", "아무것도 안 해도 모든 버전에서 UTF-8 이다"], a: 0,
+    ex: "encoding을 생략하면 기본값이 버전 · OS마다 달라요(3.15는 UTF-8, 3.12 이하 Windows는 cp949). 직접 적으면 어디서나 같아요.",
+    why: ["정답 — 점수 파일 실습의 내 풀이처럼.", "a는 이어 쓰기 모드일 뿐 인코딩과 무관해요.", "with는 자동으로 닫아 줄 뿐 인코딩과 무관하고, 오히려 닫기를 잊기 쉬워져요.", "3.15부터의 기본값이에요. 3.12 이하 Windows는 cp949라 UnicodeDecodeError가 날 수 있어요."],
+    link: ["#py-08", "🐍 개념 08 — 파일과 예외"] }
+];
+</script>
+    </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  // ---- 탭 ----
+  const sections = {};
+  document.querySelectorAll("section.cat").forEach(s => { sections[s.id.replace("-section", "")] = s; });
+  const buttons = document.querySelectorAll(".nav-item");
+  function showTab(key) {
+    Object.entries(sections).forEach(([k, el]) => el.classList.toggle("hidden", k !== key));
+    buttons.forEach(b => b.classList.toggle("active", b.dataset.target === key));
+  }
+  buttons.forEach(b => b.addEventListener("click", () => { searchBox.value = ""; runSearch(); showTab(b.dataset.target); window.scrollTo({ top: 0 }); }));
+
+  // ---- 숫자는 카드 수에서 계산한다(손으로 세지 않아 어긋날 일이 없다) ----
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const sec = sections[el.dataset.count];
+    el.textContent = sec ? sec.querySelectorAll("article.note-card").length : "";
+  });
+  document.querySelectorAll("[data-stat]").forEach(el => {
+    const key = el.dataset.stat;
+    el.textContent = key === "exam" ? EXAM_BANK.length : (sections[key] ? sections[key].querySelectorAll("article.note-card").length : "");
+  });
+
+  // ---- 주소의 #카드id 로 바로 가기 ----
+  function reveal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const sec = el.closest("section.cat");
+    if (sec) showTab(sec.id.replace("-section", ""));
+    requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+  }
+  if (location.hash) setTimeout(() => reveal(decodeURIComponent(location.hash.slice(1))), 0);
+  window.addEventListener("hashchange", () => reveal(decodeURIComponent(location.hash.slice(1))));
+
+  // ---- 검색: 모든 탭의 카드에서 글자로 찾기 ----
+  const searchBox = document.getElementById("search-box");
+  const result = document.getElementById("search-result");
+  function runSearch() {
+    const q = searchBox.value.trim().toLowerCase();
+    const cards = document.querySelectorAll("article.note-card");
+    if (!q) {
+      cards.forEach(c => c.hidden = false); result.hidden = true;
+      Object.values(sections).forEach(s => s.dataset.searching = "");
+      showTab(document.querySelector(".nav-item.active")?.dataset.target || "overview");
+      return;
+    }
+    let n = 0;
+    cards.forEach(c => { const hit = c.textContent.toLowerCase().includes(q); c.hidden = !hit; if (hit) n++; });
+    Object.entries(sections).forEach(([k, s]) => s.classList.toggle("hidden", !s.querySelector("article.note-card:not([hidden])")));
+    result.hidden = false;
+    result.textContent = `"${searchBox.value.trim()}" — 카드 ${n}장`;
+  }
+  searchBox.addEventListener("input", runSearch);
+
+  // ---- 테마: 버튼으로 고를 때만 저장 ----
+  const themeBtn = document.getElementById("theme-btn");
+  function applyTheme(t, save) {
+    document.documentElement.dataset.theme = t;
+    themeBtn.textContent = t === "dark" ? "라이트 모드" : "다크 모드";
+    if (save) { try { localStorage.setItem("theme", t); } catch (e) {} }
+  }
+  applyTheme(document.documentElement.dataset.theme || "light", false);
+  themeBtn.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true));
+
+  // ---- 코드 색칠 · 복사 ----
+  document.querySelectorAll("pre code").forEach(c => { try { hljs.highlightElement(c); } catch (e) {} });
+  document.querySelectorAll(".copy-btn").forEach(b => b.addEventListener("click", () => {
+    const code = b.closest(".note-code")?.querySelector("pre code");
+    if (!code) return;
+    navigator.clipboard?.writeText(code.innerText).then(() => { b.textContent = "복사됨"; setTimeout(() => b.textContent = "복사", 1200); });
+  }));
+
+  // ---- 시험: 보기 순서는 매번 섞는다 ----
+  const examBox = document.getElementById("exam-box");
+  document.getElementById("exam-count").textContent = EXAM_BANK.length;
+  let queue = [], cur = 0, right = 0;
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function start(cat) {
+    queue = shuffle(EXAM_BANK.filter(q => !cat || q.cat === cat).slice()); cur = 0; right = 0; render();
+  }
+  function render() {
+    if (cur >= queue.length) {
+      examBox.innerHTML = `<p class="exam-q">끝! ${queue.length}문제 중 ${right}문제를 맞혔어요.</p><button class="btn primary" type="button" id="exam-again">다시 풀기</button>`;
+      document.getElementById("exam-again").onclick = () => start();
+      return;
+    }
+    const q = queue[cur];
+    const order = shuffle(q.ch.map((_, i) => i));
+    examBox.innerHTML = `<p class="exam-score">${cur + 1} / ${queue.length} · 맞힌 문제 ${right}</p><p class="exam-q">${q.q}</p>`;
+    order.forEach((orig, di) => {
+      const b = document.createElement("button");
+      b.className = "exam-opt"; b.type = "button";
+      b.textContent = "①②③④"[di] + " " + q.ch[orig];
+      b.onclick = () => answer(q, order, orig);
+      examBox.appendChild(b);
+    });
+  }
+  function answer(q, order, picked) {
+    const opts = examBox.querySelectorAll(".exam-opt");
+    opts.forEach((b, di) => { b.disabled = true; if (order[di] === q.a) b.classList.add("right"); else if (order[di] === picked) b.classList.add("wrong"); });
+    const ok = picked === q.a; if (ok) right++;
+    const fb = document.createElement("div"); fb.className = "exam-feedback";
+    fb.innerHTML = `<p><b>${ok ? "✅ 정답" : "❌ 오답"}</b> — ${q.ex}</p>` +
+      (q.why ? `<details${ok ? "" : " open"}><summary>🔎 보기마다 왜?</summary><ol>${order.map(o => `<li>${q.why[o]}</li>`).join("")}</ol></details>` : "") +
+      (q.link ? `<p>📖 <a href="${q.link[0]}">${q.link[1]}</a></p>` : "");
+    const next = document.createElement("button"); next.className = "btn primary"; next.type = "button";
+    next.textContent = cur + 1 < queue.length ? "다음 문제 →" : "결과 보기";
+    next.onclick = () => { cur++; render(); };
+    examBox.append(fb, next);
+  }
+  document.querySelectorAll("[data-exam]").forEach(b => b.addEventListener("click", () => start(b.dataset.exam || null)));
+})();
+</script>
+</body>
+</html>
