@@ -39,6 +39,7 @@ TARGET_FILES = (
     Path("Back_end/coding-tests/2026-09-21/index.html"),
     Path("Back_end/coding-tests/2026-09-23/index.html"),
     Path("Back_end/coding-tests/2026-10-19/index.html"),
+    Path("Back_end/coding-tests/2026-10-20/index.html"),
 )
 
 # 끝 태그가 없는 요소. 스택에 쌓지 않는다.

@@ -1,5 +1,7 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
+**2026-10-20 갱신:** [AI Agent 노트](https://moriochoradio.github.io/web-study-notes/AI_Agent/)에 둘째 날(Day 3~4)을 반영했다 — **Pandas**(DataFrame · CSV/JSON · 필터 · 결측치 · 중복 · `apply`)와 **NumPy · Matplotlib · Seaborn**을 SQL · 자바와 나란히 비교한 개념 카드 7장(py-09~15), 실습 11개의 내 풀이 · 다시 실행한 결과 · 선생님 풀이와 다른 점(lab-12~22, 그래프는 다시 실행해 그린 그림 10장), 시험 13문제를 더했다. 다시 실행해 보니 예제 칸의 `KeyError`(앞 칸이 바꾼 `df`), 이름과 달리 상품이 든 `students.csv`, 필터 결과를 담지 않아 70점 미만이 남은 `result.csv`, NumPy 조건 오타(`> 2`), 제목 없이 저장된 그림(`savefig`를 `title`보다 먼저), `describe()` 13.70과 `np.std` 12.25의 차이(표본 · 모집단)가 보여 카드마다 적었다. 같은 날 [28회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-20/)(가운데 글자 · 조건에 맞는 회원수 PASS, 카펫 · 대장균 자식 수 FAIL)를 ct-74~77로 이어 붙이고 Java 검증(카펫은 조건 안의 모든 경우 156만 개) · SQLite 검증 13개를 남겼다.
+
 **2026-10-19 갱신:** 새 과정 **「AI AGENT 실습 입문 과정 1부」**가 시작되어 세 번째 학습 페이지 [🤖 AI Agent 노트](https://moriochoradio.github.io/web-study-notes/AI_Agent/)를 만들었다. 첫날(Day 1~2) 파이썬 — 개발환경 · venv, 변수 · 연산자, 문자열 · 리스트 · 튜플 · 딕셔너리, 조건 · 반복 · 컴프리헨션, 함수 · 모듈, 파일 · 예외 — 를 **자바와 나란히 비교**하는 개념 카드 8장, 교안 실습마다 내 노트북 풀이 · 다시 실행한 결과 · 짚을 점을 적은 실습 카드 11장(성적 처리기 참고 풀이 · 선생님 실습예제 11문제 체크리스트 포함), 보기가 섞이는 시험 17문제로 정리했다. 실습 노트북은 [`AI_Agent/python_agent/`](AI_Agent/python_agent/)에 그대로 두었다 — 이 PC가 파이썬 **3.15**(교안 권장 3.10~3.12)라 파일을 기본 UTF-8로 쓰는 차이, 고친 뒤 다시 실행하지 않아 출력이 옛것인 칸, `randint`로 뽑은 로또 번호가 겹치는 문제를 직접 실행해 확인했다. 같은 날 [27회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-19/)(제일 작은 수 제거하기 · 12세 이하인 여자 환자 목록 · 게임 맵 최단거리 BFS, 3 FAIL)는 백엔드 코딩테스트 탭(ct-71~73)에 이어 붙이고 Java 검증 · SQLite 검증을 남겼다. 두 대시보드의 큰 그림 타임라인에 새 과정을 연결했다.
 
 **2026-10-16 갱신:** [50일차(10/16)](https://moriochoradio.github.io/web-study-notes/Back_end/#class-day50) — 교안 「REST API 구현하기」와 선생님의 **12번 예제**: 같은 hkboard 게시판을 서버([`12_backend_hkboard_restAPI`](Back_end/web_edu_project/12_backend_hkboard_restAPI/) — `@RestController` · `@RequestBody` · `@PathVariable` · `ResponseEntity` · CORS)와 화면([`12_frontend_hkboard_react`](Back_end/web_edu_project/12_frontend_hkboard_react/) — Next.js가 `fetch`로 호출)으로 나눈 수업, 일정관리 선생님 최종본(`ROW_NUMBER() OVER(PARTITION BY 날짜)`로 날마다 3개 · `@ControllerAdvice`), [26회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-16/)(2 PASS · 2 FAIL)를 반영했다. 수업 진도 카드 1장, 웹 개념 4장, 코딩테스트 4장, 📘 개념서 44장, 학습 여정 32단계, 시험 문제 5개와 🗺️ 큰 그림 탭(새 단계 "웹 7", 프로젝트 12, 프런트엔드 탭 연결)을 고쳤다. DB만 H2로 바꾼 사본으로 API · CORS를 직접 부르고 화면(8086)을 헤드리스 Edge로 끝까지 눌러 보니, 없는 글에 API가 200 + `null`을 줘서 상세 화면이 깨졌다. 실제 MariaDB · Antigravity 실행은 하지 않았다. [검증 기록](Back_end/sync-validation-2026-10-16.md)
@@ -68,8 +70,8 @@ JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러�
 | 과정 | 반영 범위 | 상태 |
 | --- | --- | --- |
 | 프런트엔드 | HTML 7 · CSS 12 · JavaScript 18(AJAX까지) · React/Next.js 14단원 · StockDash 졸업 과제 | ✅ 완료 |
-| 백엔드 | 날짜별 수업 진도 50일차(카드 49장 — 17일차 소스 없음) · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 88항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis·답변형 게시판·트랜잭션·AOP·인터셉터·JUnit·Spring Boot·Thymeleaf·로그인·파일 업로드·권한 검증·일정관리 달력·일정 CRUD·REST API·CORS·React 프런트) · 코딩테스트 73문제 · 시험 대비 231문제 | 🔄 진행 중 (2026-08-03 시작) |
-| AI Agent | 「AI AGENT 실습 입문 과정 1부」 10일 중 Day 1~2(파이썬 기초) · 파이썬 개념 8 · 실습 풀이 11 · 시험 17문제 · 실습 노트북 | 🔄 진행 중 (2026-10-19 시작) |
+| 백엔드 | 날짜별 수업 진도 50일차(카드 49장 — 17일차 소스 없음) · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 88항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis·답변형 게시판·트랜잭션·AOP·인터셉터·JUnit·Spring Boot·Thymeleaf·로그인·파일 업로드·권한 검증·일정관리 달력·일정 CRUD·REST API·CORS·React 프런트) · 코딩테스트 77문제 · 시험 대비 231문제 | 🔄 진행 중 (2026-08-03 시작) |
+| AI Agent | 「AI AGENT 실습 입문 과정 1부」 10일 중 Day 1~4(파이썬 기초 · Pandas · NumPy · 시각화) · 개념 15 · 실습 풀이 22 · 시험 30문제 · 실습 노트북 | 🔄 진행 중 (2026-10-19 시작) |
 | 저장소 위생 | 의존성·Next.js 빌드 캐시·환경 변수·IDE 파일 제외 규칙 적용 | ✅ 점검 완료 |
 
 > **노트 작성 원칙:** 모든 학습 카드는 “한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리”의 순서로 구성합니다. 실행 가능한 원본 코드는 단원 폴더에 남기고, 대시보드는 개념과 코드 흐름을 빠르게 복습하는 용도로 사용합니다.
@@ -163,6 +165,7 @@ python3 scripts/verify_backend_inventory.py
 │   └── slides/           # 강의 자료(PPT)
 ├── AI_Agent/     # AI Agent 과정 (Python → Pandas → FastAPI → LangChain → RAG → Agent)
 │   ├── index.html        # AI Agent 학습 노트 (개념 · 실습 풀이 · 시험)
+│   ├── img/              # 노트북을 다시 실행해 그린 그래프(카드용)
 │   └── python_agent/     # 수업 실습 노트북(.ipynb)과 실습예제
 └── Back_end/     # 백엔드(Java) 과정
     ├── index.html            # Java 백엔드 학습 노트 대시보드

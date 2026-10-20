@@ -124,6 +124,10 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
   .note-files a{color:var(--accent-2);}
   .note-body > details:not(.run-output){font-size:13px;color:var(--muted);margin-top:10px;}
   .note-body > details:not(.run-output) summary{cursor:pointer;}
+  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0;}
+  .figs figure{margin:0;background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px;}
+  .figs img{display:block;width:100%;height:auto;}
+  .figs figcaption{font-size:12.5px;color:#4a4f57;margin-top:4px;line-height:1.45;}
   .warn-box{border:1px solid var(--warn);border-radius:10px;padding:8px 14px;margin:12px 0;}
   .warn-box b{color:var(--warn);}
 
@@ -141,7 +145,7 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
   .exam-score{font-size:13.5px;color:var(--muted);}
 
   @media (max-width:900px){
-    .layout-wrap{flex-direction:column;gap:14px;}
+    .layout-wrap{flex-direction:column;gap:14px;align-items:stretch;}
     nav.tabs{position:static;max-height:none;width:100%;flex:none;display:flex;flex-wrap:wrap;gap:4px;}
     #search-box{flex:1 1 100%;}
     .nav-item{width:auto;flex:0 0 auto;}
@@ -156,8 +160,8 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
     <h1>AI Agent 과정 학습 노트</h1>
     <p class="sub">파이썬 기초에서 시작해 데이터(Pandas) · 서버(FastAPI) · LLM(LangChain) · RAG · Agent까지 가는 10일 과정을 수업 날짜별로 정리합니다. 카드마다 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 코드 → 실행 결과 → 스스로 확인</b> 순서이고, 앞 과정에서 배운 <b>자바 · 스프링과 무엇이 같고 다른지</b>를 함께 적습니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-10-19</span>
-      <span>📅 과정 Day 2 / 10</span>
+      <span id="updated-badge">마지막 업데이트: 2026-10-20</span>
+      <span>📅 과정 Day 4 / 10</span>
       <a href="../">← 학습 노트 첫 화면</a>
       <a href="../Back_end/">☕ 백엔드(Java) 노트</a>
       <a href="../Front_end/">🎨 프런트엔드 노트</a>
@@ -168,12 +172,12 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
 
 <div class="layout-wrap">
   <nav class="tabs" aria-label="노트 분류">
-    <input id="search-box" type="search" placeholder="검색: 리스트, f-string…" aria-label="카드 검색">
+    <input id="search-box" type="search" placeholder="검색: 리스트, fillna, histplot…" aria-label="카드 검색">
     <button class="nav-item active" data-target="overview" type="button"><span>🏠 개요</span></button>
     <button class="nav-item" data-target="bigpicture" type="button"><span>🗺️ 큰 그림</span></button>
     <div class="nav-group">수업</div>
     <button class="nav-item" data-target="class" type="button"><span>📅 수업 진도</span><span class="nav-count" data-count="class"></span></button>
-    <button class="nav-item" data-target="python" type="button"><span>🐍 파이썬 개념</span><span class="nav-count" data-count="python"></span></button>
+    <button class="nav-item" data-target="python" type="button"><span>🐍 파이썬 · 데이터</span><span class="nav-count" data-count="python"></span></button>
     <button class="nav-item" data-target="lab" type="button"><span>🧪 실습 풀이</span><span class="nav-count" data-count="lab"></span></button>
     <div class="nav-group">복습</div>
     <button class="nav-item" data-target="exam" type="button"><span>✏️ 시험 대비</span><span class="nav-count" id="exam-count"></span></button>
@@ -193,13 +197,13 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
       </div>
       <div class="box">
         <h3>과정 10일 지도 — 지금 어디인가</h3>
-        <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">강의자료 목차 기준입니다. 첫날(10/19)에 Day 1과 Day 2를 함께 진행했어요(선생님 레포에도 같은 날 <code>Day01</code> · <code>Day02</code> 폴더가 올라옴).</p>
+        <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">강의자료 목차 기준입니다. 지금까지는 <b>하루에 교안 두 개씩</b> 나갔어요 — 10/19에 Day 1~2, 10/20에 Day 3~4(선생님 레포에도 같은 날 해당 폴더가 올라옴).</p>
         <div class="days">
           <div class="day done"><b>Day 1 · 파이썬 시작하기</b>개발환경 · 변수 · 연산자 · 5가지 자료형<div class="tag-s">10/19 완료 → <a href="#ai-day01">수업 카드</a></div></div>
-          <div class="day done"><b>Day 2 · 조건 · 반복 · 함수</b>if · for/while · 컴프리헨션 · 함수 · 모듈 · 파일 · 예외<div class="tag-s">10/19 완료(종합 실습은 실습 폴더에 없음 → <a href="#lab-10">참고 풀이</a>)</div></div>
-          <div class="day now"><b>Day 3 · Pandas</b>CSV · JSON 읽기와 전처리<div class="tag-s">📍 다음</div></div>
-          <div class="day"><b>Day 4 · NumPy · 시각화</b>NumPy · Matplotlib · Seaborn<div class="tag-s">예정</div></div>
-          <div class="day"><b>Day 5 · FastAPI</b>Path/Query · Pydantic · CRUD<div class="tag-s">예정</div></div>
+          <div class="day done"><b>Day 2 · 조건 · 반복 · 함수</b>if · for/while · 컴프리헨션 · 함수 · 모듈 · 파일 · 예외<div class="tag-s">10/19 완료(종합 실습은 10/20 아침 문제만 옮겨 둠 → <a href="#lab-10">참고 풀이</a>)</div></div>
+          <div class="day done"><b>Day 3 · Pandas</b>DataFrame · CSV/JSON · 필터링 · 결측치 · 중복 · apply<div class="tag-s">10/20 완료 → <a href="#ai-day02">수업 카드</a></div></div>
+          <div class="day done"><b>Day 4 · NumPy · 시각화</b>배열 연산 · Matplotlib · Seaborn · df.plot<div class="tag-s">10/20 완료(종합 실습은 실행 전 → <a href="#lab-22">풀이 카드</a>)</div></div>
+          <div class="day now"><b>Day 5 · FastAPI</b>Path/Query · Pydantic · CRUD<div class="tag-s">📍 다음</div></div>
           <div class="day"><b>Day 6 · LLM · Agent 개념</b><div class="tag-s">예정</div></div>
           <div class="day"><b>Day 7 · LangChain + OpenAI</b>.env · PromptTemplate · LCEL · @tool · Memory<div class="tag-s">예정</div></div>
           <div class="day"><b>Day 8 · RAG</b>청크 · 임베딩 · 벡터 저장소 · Retriever<div class="tag-s">예정</div></div>
@@ -212,7 +216,7 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
         <ol style="margin:0;padding-left:20px">
           <li><b>📅 수업 진도</b>에서 그날 무엇을 했는지 먼저 보고, 링크를 따라 <b>🐍 파이썬 개념</b> 카드로 갑니다.</li>
           <li><b>🧪 실습 풀이</b>는 교안의 실습 문제마다 <b>내가 쓴 코드</b>와 실행 결과, 그리고 다시 볼 점을 모았어요. 답을 보기 전에 문제를 다시 풀어 보세요.</li>
-          <li>개념 카드마다 <b>"자바에서는"</b> 칸이 있어요. 8~10월에 배운 자바 · 스프링과 비교하면 새 문법이 훨씬 빨리 들어옵니다.</li>
+          <li>개념 카드마다 <b>"자바에서는"</b>(Day 3부터는 <b>"SQL · 자바로는"</b>) 칸이 있어요. 8~10월에 배운 자바 · SQL · 스프링과 비교하면 새 문법이 훨씬 빨리 들어옵니다. 그래프는 노트북을 다시 실행해 만든 그림을 카드에 넣었어요.</li>
           <li><b>✏️ 시험 대비</b>는 보기 순서가 매번 섞이고, 틀리면 보기마다 왜 틀렸는지가 펼쳐집니다.</li>
         </ol>
       </div>
@@ -226,15 +230,15 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
         <div class="table-wrap"><table class="vs">
           <thead><tr><th>단계</th><th>무엇을</th><th>왜 필요한가</th><th>앞 과정과 닮은 것</th></tr></thead>
           <tbody>
-            <tr><td><b>Day 1~2</b> 파이썬 기초 ✅</td><td>자료형 · 조건 · 반복 · 함수 · 파일 · 예외</td><td>이후 모든 도구(Pandas · FastAPI · LangChain)가 파이썬 라이브러리라서</td><td>자바 1~19일차 전체를 이틀에 — 문법이 짧을 뿐 생각은 같다</td></tr>
-            <tr><td><b>Day 3~4</b> 데이터 📍</td><td>Pandas · NumPy · 시각화</td><td>LLM에 넣을 데이터를 읽고 다듬고 확인하려고</td><td>SQL의 SELECT · WHERE · GROUP BY를 표 객체(DataFrame)로</td></tr>
-            <tr><td><b>Day 5</b> 서버</td><td>FastAPI · Pydantic · CRUD</td><td>만든 기능을 다른 프로그램(화면 · 앱)이 부를 수 있게</td><td>스프링 <code>@RestController</code> · <code>@PathVariable</code> · DTO · <code>@Valid</code> (백엔드 50일차)</td></tr>
+            <tr><td><b>Day 1~2</b> 파이썬 기초 ✅ 10/19</td><td>자료형 · 조건 · 반복 · 함수 · 파일 · 예외</td><td>이후 모든 도구(Pandas · FastAPI · LangChain)가 파이썬 라이브러리라서</td><td>자바 1~19일차 전체를 이틀에 — 문법이 짧을 뿐 생각은 같다</td></tr>
+            <tr><td><b>Day 3~4</b> 데이터 ✅ 10/20</td><td>Pandas(DataFrame · CSV/JSON · 필터 · 결측치 · 중복 · apply) · NumPy 배열 · Matplotlib · Seaborn</td><td>LLM · RAG에 넣을 데이터를 읽고 다듬고, 그래프로 눈으로 확인하려고</td><td>SQL의 SELECT · WHERE · IS NULL · DISTINCT · CASE를 표 객체(DataFrame)의 메서드로 — 아래 4번 표</td></tr>
+            <tr><td><b>Day 5</b> 서버 📍</td><td>FastAPI · Pydantic · CRUD</td><td>만든 기능을 다른 프로그램(화면 · 앱)이 부를 수 있게</td><td>스프링 <code>@RestController</code> · <code>@PathVariable</code> · DTO · <code>@Valid</code> (백엔드 50일차)</td></tr>
             <tr><td><b>Day 6~7</b> LLM</td><td>Agent 개념 · LangChain · 프롬프트 · 도구</td><td>"말로 묻고 답하는" 기능을 코드에 붙이려고</td><td>외부 API 호출 — 단, 답이 매번 조금씩 다를 수 있다</td></tr>
             <tr><td><b>Day 8</b> RAG</td><td>문서를 잘라 벡터로 저장하고 찾아 붙이기</td><td>LLM이 모르는 "우리 자료"로 답하게</td><td>검색(<code>LIKE</code>) → 의미 검색(임베딩)</td></tr>
             <tr><td><b>Day 9~10</b> Agent</td><td>여러 도구를 고르는 Agent, 대화 기억</td><td>스스로 단계를 정해 일을 끝내는 프로그램</td><td>세션(대화 상태)을 <code>thread_id</code>로 — 로그인 세션과 비슷한 생각</td></tr>
           </tbody>
         </table></div>
-        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">Day 3 이후 칸은 강의자료 목차로 미리 적은 것이고, 수업을 마칠 때마다 실제 내용으로 고칩니다.</p>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">Day 5 이후 칸은 강의자료 목차로 미리 적은 것이고, 수업을 마칠 때마다 실제 내용으로 고칩니다.</p>
       </div>
       <div class="box">
         <h3>2. 자바 → 파이썬, 한 표로 (Day 1~2)</h3>
@@ -260,10 +264,33 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
         <h3>3. 계속 다시 나올 큰 생각</h3>
         <ul style="margin:0;padding-left:20px">
           <li><b>짧게 쓰는 대신 규칙을 정확히</b> — 파이썬은 타입 선언이 없어 실수가 실행할 때 드러나요. <code>type()</code>으로 확인하고, 들여쓰기 · 끝 미포함(<code>range</code> · 슬라이싱)을 몸에 익혀요.</li>
-          <li><b>"한 줄로"는 읽을 수 있을 때만</b> — 삼항 표현식 · 리스트 컴프리헨션은 편하지만, 조건이 길어지면 보통 for · if가 더 읽기 쉬워요.</li>
+          <li><b>"한 줄로"는 읽을 수 있을 때만</b> — 삼항 표현식 · 리스트 컴프리헨션 · <code>lambda</code>는 편하지만, 조건이 길어지면 보통 for · if · <code>def</code>가 더 읽기 쉬워요.</li>
+          <li><b>원본이 바뀌는가, 새것을 돌려주는가</b> — <code>strip()</code> · <code>sorted()</code> · <code>rename()</code> · <code>fillna()</code> · <code>drop()</code>은 <b>새것을 돌려줘서 다시 담아야</b> 하고, <code>list.sort()</code> · <code>append()</code> · <code>df["새열"] = …</code>는 그 자리에서 바뀌어요. Day 1(<a href="#lab-03">점수 분석</a>)과 Day 3(<a href="#py-12">정제</a>)에서 같은 실수가 다른 모양으로 나왔어요.</li>
+          <li><b>노트북은 위에서 아래로 다시 실행해 본다</b> — 칸을 고치고 다시 안 돌리면 출력이 옛것으로 남고(Day 2 구구단 · Day 3 종합), 앞 칸이 바꾼 변수 때문에 예제 칸이 <code>KeyError</code>가 나요(Day 3). 제출 · 공유 전에는 "모두 다시 실행".</li>
           <li><b>환경을 프로젝트마다 나눈다</b> — 가상환경(venv)은 자바의 Maven 의존성처럼 프로젝트마다 라이브러리 버전을 따로 둡니다. Day 7부터 LangChain 같은 큰 라이브러리가 들어오면 더 중요해져요.</li>
-          <li><b>밖과 주고받는 것은 형식을 정한다</b> — 파일은 <code>encoding="utf-8"</code>, 서버(Day 5)는 JSON, LLM(Day 7)은 프롬프트 형식. 백엔드 과정의 "JSON 키 · 상태 코드 약속"과 같은 생각이에요.</li>
+          <li><b>밖과 주고받는 것은 형식을 정한다</b> — 파일은 <code>encoding="utf-8"</code>(엑셀용 CSV는 <code>utf-8-sig</code>), JSON은 <code>force_ascii=False</code>, 서버(Day 5)는 JSON, LLM(Day 7)은 프롬프트 형식. 백엔드 과정의 "JSON 키 · 상태 코드 약속"과 같은 생각이에요.</li>
+          <li><b>같은 이름, 다른 계산</b> — 표준편차가 Pandas <code>describe()</code>는 13.70, <code>np.std</code>는 12.25(<a href="#py-13">py-13</a>). 숫자를 남에게 보여 줄 땐 어떤 정의로 계산했는지까지 확인해요.</li>
         </ul>
+      </div>
+      <div class="box">
+        <h3>4. SQL · 자바 → Pandas · NumPy, 한 표로 (Day 3~4)</h3>
+        <div class="table-wrap"><table class="vs">
+          <thead><tr><th>하고 싶은 일</th><th>SQL · 자바</th><th>Pandas · NumPy</th><th>기억 요령</th></tr></thead>
+          <tbody>
+            <tr><td>표 만들기</td><td><code>CREATE TABLE</code> + <code>INSERT</code></td><td><code>pd.DataFrame({"열": [값, …]})</code></td><td>딕셔너리의 키 = 열 이름 → <a href="#py-09">py-09</a></td></tr>
+            <tr><td>열 고르기</td><td><code>SELECT name, score</code></td><td><code>df[["name", "score"]]</code> (하나면 <code>df["score"]</code> = Series)</td><td>대괄호 두 겹이면 표 → <a href="#py-11">py-11</a></td></tr>
+            <tr><td>행 거르기</td><td><code>WHERE score &gt;= 80 AND …</code></td><td><code>df[(df["score"] &gt;= 80) &amp; (…)]</code></td><td><code>and</code> 대신 <code>&amp;</code>, 조건마다 괄호</td></tr>
+            <tr><td>앞 몇 줄 · 행 수</td><td><code>LIMIT 5</code> · <code>COUNT(*)</code></td><td><code>df.head()</code> · <code>df.shape[0]</code> · <code>len(df)</code></td><td><code>shape</code> = (행, 열)</td></tr>
+            <tr><td>NULL 찾기 · 바꾸기</td><td><code>IS NULL</code> · <code>COALESCE(score, 0)</code></td><td><code>df.isna()</code> · <code>df.fillna(0)</code> · <code>df.dropna()</code></td><td>Pandas의 NULL은 <code>NaN</code> → <a href="#py-12">py-12</a></td></tr>
+            <tr><td>중복 없애기</td><td><code>SELECT DISTINCT …</code></td><td><code>df.drop_duplicates(subset=[…], keep=…)</code></td><td>기본은 "모든 열이 같은 행"</td></tr>
+            <tr><td>열 이름 · 지우기</td><td><code>AS 이름</code> · <code>ALTER TABLE … DROP COLUMN</code></td><td><code>df.rename(columns={…})</code> · <code>df.drop(columns=[…])</code></td><td>새 표를 돌려줌 — 다시 담기</td></tr>
+            <tr><td>조건으로 새 값</td><td><code>CASE WHEN score &gt;= 90 THEN 'A' ELSE 'B' END</code></td><td><code>df["score"].apply(lambda x: "A" if x &gt;= 90 else "B")</code></td><td>행마다 함수 한 번</td></tr>
+            <tr><td>요약 통계</td><td><code>COUNT · AVG · MIN · MAX</code></td><td><code>df.describe()</code> · <code>arr.mean()</code></td><td>숫자 열만 → <a href="#py-13">py-13</a></td></tr>
+            <tr><td>배열 계산</td><td><code>for</code>로 하나씩 <code>sum += a[i]</code></td><td><code>arr + 5</code> · <code>arr[arr &gt;= 80]</code> · <code>arr.sum()</code></td><td>반복문 없이 통째로(벡터 연산)</td></tr>
+            <tr><td>파일로 내보내기</td><td><code>SELECT … INTO OUTFILE</code> · 자바 <code>FileWriter</code></td><td><code>df.to_csv(…, index=False)</code> · <code>to_json(…, force_ascii=False)</code></td><td>→ <a href="#py-10">py-10</a></td></tr>
+            <tr><td>그래프</td><td>(프런트 과정의 차트 라이브러리)</td><td><code>plt.plot</code> · <code>sns.histplot</code> · <code>df.plot(kind="bar")</code></td><td>→ <a href="#py-14">py-14</a> · <a href="#py-15">py-15</a></td></tr>
+          </tbody>
+        </table></div>
       </div>
     </section>
 
@@ -274,18 +301,21 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
         <h3>내 실습 노트북 (저장소)</h3>
         <ul style="margin:0;padding-left:20px">
           <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day01_실습.ipynb</a> — Day 1 실습 9칸(GitHub에서 출력까지 보임)</li>
-          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day02_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day02_실습.ipynb</a> — Day 2 실습 8칸</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day02_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day02_실습.ipynb</a> — Day 2 실습 9칸(10/20 아침 종합 실습 문제 칸 추가, 풀이는 아직)</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day03_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day03_실습.ipynb</a> — Day 3 Pandas 12칸</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day04_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day04_실습.ipynb</a> — Day 4 NumPy · 시각화 12칸(그래프가 출력으로 저장돼 있음)</li>
+          <li>노트북이 만든 데이터 파일 — <code>items.csv</code> · <code>items.json</code> · <code>students.csv</code> · <code>students.json</code> · <code>result.csv</code>(<a href="#lab-13">왜 students 파일에 상품이 들었나</a>)</li>
           <li><a href="../view.html?f=AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5%EC%98%88%EC%A0%9C.md">day01_실습예제.md</a> — 실습 2시간용 추가 문제(Part 1~5, 11문제 · 아직 안 풂 → <a href="#lab-11">체크리스트</a>)</li>
           <li><a href="../view.html?f=AI_Agent/python_agent/README.md">python_agent 폴더 안내</a></li>
-          <li><a href="../view.html?f=AI_Agent/sync-validation-2026-10-19.md">10/19 반영 · 검증 기록</a> — 무엇을 근거로 썼고, 무엇을 실행해 확인했고, 무엇을 확인하지 않았는지</li>
-          <li><a href="../Back_end/coding-tests/2026-10-19/">27회차 코딩테스트</a> — 같은 날 본 테스트(백엔드 코딩테스트 탭에 이어서 정리)</li>
+          <li><a href="../view.html?f=AI_Agent/sync-validation-2026-10-19.md">10/19 반영 · 검증 기록</a> · <a href="../view.html?f=AI_Agent/sync-validation-2026-10-20.md">10/20 반영 · 검증 기록</a> — 무엇을 근거로 썼고, 무엇을 실행해 확인했고, 무엇을 확인하지 않았는지</li>
+          <li><a href="../Back_end/coding-tests/2026-10-19/">27회차</a> · <a href="../Back_end/coding-tests/2026-10-20/">28회차 코딩테스트</a> — 같은 날 본 테스트(백엔드 코딩테스트 탭에 이어서 정리)</li>
         </ul>
       </div>
       <div class="box">
         <h3>수업 자료</h3>
         <ul style="margin:0;padding-left:20px">
-          <li>강의자료 <code>Day1_강의자료.pptx</code>(23쪽) · <code>Day2_강의자료.pptx</code>(19쪽) — 선생님 배포 자료(Day 1~10)</li>
-          <li>선생님 레포 <a href="https://github.com/kang99king3/back_end_edu_20260629/tree/main/python_agent_20261019" target="_blank" rel="noopener">python_agent_20261019</a> — <code>Day01</code> · <code>Day02</code> 노트북(교안 쪽 번호가 마크다운 제목으로 들어 있음)</li>
+          <li>강의자료 <code>Day1_강의자료.pptx</code>(23쪽) · <code>Day2</code>(19쪽) · <code>Day3</code>(18쪽) · <code>Day4</code>(17쪽) — 선생님 배포 자료(Day 1~10)</li>
+          <li>선생님 레포 <a href="https://github.com/kang99king3/back_end_edu_20260629/tree/main/python_agent_20261019" target="_blank" rel="noopener">python_agent_20261019</a> — <code>Day01</code> ~ <code>Day04</code> 노트북(교안 쪽 번호가 마크다운 제목으로 들어 있음). 10/20에 Day 2 종합 실습 풀이, Day 3 · 4 노트북과 그래프 그림(<code>check_13a.png</code> 등)이 올라왔어요. 선생님 노트북은 파이썬 3.14.6으로 실행됨</li>
           <li>개발환경: 파이썬 공식 설치(교안 권장 3.10~3.12) · VS Code + Python 확장 · 가상환경(venv) — <a href="#py-01">py-01</a></li>
         </ul>
       </div>
@@ -376,11 +406,95 @@ print(result)</code></pre>
     <details><summary>정리 작업 메모</summary><ul><li>근거: 강의자료 <code>Day1_강의자료.pptx</code>(23쪽) · <code>Day2_강의자료.pptx</code>(19쪽), 선생님 레포 <code>python_agent_20261019</code>(10/19 10:56 ~ 15:01 커밋 5개 — Day01 노트북 · <code>test.py</code> · 실습예제 md, Day02 노트북 · <code>memo.txt</code>), 실습 폴더 <code>C:\Users\neo62\dev\workspace-boot\python_agent</code>(13:50 ~ 15:02).</li><li>실습 폴더의 두 노트북은 선생님 파일의 사본이 아니라 직접 푼 것이다(선생님 노트북은 쪽 번호 제목 칸 + 코드 칸, 실습 폴더는 코드 칸만, 풀이도 다름). <code>day01_실습예제.md</code>는 선생님의 <code>Day1_실습예제.md</code>와 끝 줄바꿈만 다르고, <code>memo.txt</code>는 선생님 파일과 같다.</li><li>확인함 — 노트북 코드 칸을 꺼내 저장소 밖에서 파이썬 3.15.0으로 다시 실행(17칸), UTF-8 모드를 끈 실행(<code>-X utf8=0</code>)과 비교. 확인하지 않음 — 파이썬 3.10~3.12 실제 설치본, VS Code 화면.</li></ul></details>
   </div>
 </article>
+<article class="note-card" id="ai-day02">
+  <div class="note-head">
+    <span class="note-num">2일차 · Day 3~4</span>
+    <h3>2026-10-20 · Pandas로 표 다루기, 그리고 NumPy · Matplotlib · Seaborn으로 그려 보기</h3>
+    <div class="note-tags"><span class="tag">pandas 3.0</span><span class="tag">DataFrame</span><span class="tag">to_csv · read_json</span><span class="tag">필터 · isna · fillna · drop_duplicates</span><span class="tag">apply(lambda)</span><span class="tag">NumPy 배열</span><span class="tag">plot · histplot · boxplot</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>어제처럼 하루에 교안 두 개. Day 3은 <b>Pandas</b>로 표(DataFrame)를 만들고 CSV · JSON으로 저장 · 읽기, 열 고르기와 조건 필터링, 결측치 · 중복 처리, <code>rename · drop · apply</code>까지. Day 4는 <b>NumPy</b> 배열 연산과 <b>Matplotlib · Seaborn</b> 그래프(선 · 막대 · 산점도 · 히스토그램 · 박스플롯), DataFrame에서 바로 그리는 <code>df.plot()</code>. 노트북 두 개(<code>day03_실습.ipynb</code> · <code>day04_실습.ipynb</code>)에 실습 10개를 풀었다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>어제 배운 "딕셔너리를 담은 리스트"가 오늘은 <b>엑셀 표 한 장(DataFrame)</b>이 됐어요. SQL로 하던 SELECT · WHERE · IS NULL · DISTINCT를 파이썬 코드로 하고, 그 결과를 그래프로 그려 눈으로 확인하는 날이었어요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① Day 3 — Pandas: 만들고 · 저장하고 · 고르고 · 다듬기</h4>
+        <p><code>pd.DataFrame(딕셔너리)</code>와 <code>shape · columns · index</code>(→ <a href="#py-09">py-09</a>), <code>to_csv(index=False)</code> · <code>read_csv</code> · <code>to_json</code> · <code>read_json</code>(→ <a href="#py-10">py-10</a>), <code>head · info · describe</code>와 <code>df[df["score"] &gt;= 80]</code> · <code>loc · iloc</code>(→ <a href="#py-11">py-11</a>), <code>isna · fillna · dropna · duplicated · drop_duplicates</code>와 <code>rename · drop · apply</code>(→ <a href="#py-12">py-12</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>② Day 4 — NumPy와 그래프</h4>
+        <p><code>np.array</code>는 반복문 없이 통째로 계산(<code>arr * 2</code> · <code>arr[arr &gt; 2]</code> · <code>mean · max · sum</code>, → <a href="#py-13">py-13</a>). Matplotlib은 <code>plot · bar · scatter</code>에 제목 · 축 이름 · 범례, Windows 한글은 <code>plt.rc("font", family="Malgun Gothic")</code>(→ <a href="#py-14">py-14</a>). Seaborn은 <code>histplot · boxplot · scatterplot · barplot</code>, DataFrame은 <code>df.plot(kind="bar")</code> · 원그래프(→ <a href="#py-15">py-15</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 노트북을 다시 실행해 보니 — 짚을 곳 다섯</h4>
+        <p>① Day 3 예제 칸(교안 11쪽)이 <code>KeyError: 'score'</code> — 바로 앞 칸이 <code>df</code>를 상품 표로 바꿔 놓아서(<a href="#lab-14">실습 14</a>). ② <code>students.csv</code>에 학생이 아니라 <b>상품</b>이 저장됨 — 같은 이유(<a href="#lab-13">실습 13</a>). ③ Day 3 종합의 저장된 출력이 코드와 다름(고친 뒤 다시 실행 안 함, <a href="#lab-17">실습 17</a>). ④ Day 4 NumPy 2번이 <code>scores &gt; 2</code>라 80점 미만도 다 나옴(<a href="#lab-18">실습 18</a>). ⑤ Day 4 종합 칸은 아직 실행 전(<a href="#lab-22">실습 22</a>, 여기서 다시 실행한 결과를 실음).</p>
+      </div>
+      <div class="concept-block">
+        <h4>④ 어제 것 — Day 2 종합 실습</h4>
+        <p>10/20 09:36에 <code>day02_실습.ipynb</code>에 종합 실습(성적 처리기) <b>문제 칸만</b> 추가됐고 풀이는 비어 있어요. 선생님이 10/20 10:16에 올린 Day 2 노트북의 풀이는 어제 적은 <a href="#lab-10">참고 풀이</a>와 같은 구조(if · elif로 등급, f-string 출력, 컴프리헨션)라 그 카드에 비교를 더했어요. 구구단 while 칸의 옛 출력(<code>7 x 10 = 70</code>)도 그대로예요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 결측치와 중복 처리 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">data = {
+    "name": ["철수", "영희", "영희", "민수"],
+    "score": [88, 95, 95, None],        # ← None 이 들어가면 열 전체가 실수(88.0)가 된다
+}
+df = pd.DataFrame(data)
+
+print(df.isna().sum())                  # ← 열마다 결측치 개수
+print(df.fillna(0))                     # ← 새 표를 돌려줄 뿐, df 는 그대로
+print(df.drop_duplicates())             # ← 모든 열이 같은 행(2번 영희)만 지움</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>python 3.15.0 · pandas 3.0.6 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>name     0
+score    1
+dtype: int64
+
+  name  score
+0   철수   88.0
+1   영희   95.0
+2   영희   95.0
+3   민수    0.0
+
+  name  score
+0   철수   88.0
+1   영희   95.0
+3   민수    NaN        ← fillna 결과를 담지 않아 NaN 이 그대로</pre>
+      <div class="run-note">세 번째 출력에 <code>NaN</code>이 다시 보이는 이유는 <code>fillna(0)</code>이 <b>새 표를 돌려줄 뿐 <code>df</code>를 바꾸지 않기</b> 때문이에요. 문제는 각 단계를 따로 출력하라는 것이라 풀이는 맞고, 이어서 쓰려면 선생님 풀이처럼 <code>df = df.fillna(0)</code>로 다시 담아요(<a href="#py-12">py-12</a>). 두 노트북을 다시 실행해 보니 <code>print</code> 출력은 저장된 것과 같았고, 다른 곳은 위 ③의 칸들뿐이에요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">2일차에 배운 것 — 핵심 정리</div>
+      <ul>
+        <li>DataFrame = 열 이름이 붙은 표. 열 하나는 Series. <code>shape</code>는 (행, 열).</li>
+        <li>저장은 <code>to_csv(…, index=False)</code>, JSON 한글은 <code>force_ascii=False</code>.</li>
+        <li>거르기는 <code>df[조건]</code>, 여러 조건은 <code>&amp;</code> · <code>|</code>와 괄호.</li>
+        <li><code>fillna · drop_duplicates · rename · drop</code>은 새 표 — 다시 담는다.</li>
+        <li>NumPy는 통째 계산, 그래프는 <code>plt.title · xlabel · legend</code>로 읽히게, 한글은 폰트 설정.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 Day 3 워밍업: nums = [10, 20, 30, 40, 50]; print(nums[1:4]) 는?</summary><div class="sc-a"><code>[20, 30, 40]</code>. 1 · 2 · 3번이고 4번은 포함하지 않아요. Pandas의 <code>iloc[1:4]</code>도 같은 규칙이에요(<code>loc</code>은 끝을 포함 — <a href="#py-11">py-11</a>).</div></details>
+      <details class="sc-q"><summary>교안 Day 4 워밍업: score 가 [80, 95, 70] 인 df 에 df[df["score"] &gt;= 80] 을 찍으면 몇 행?</summary><div class="sc-a"><b>2행</b>(0번 80, 1번 95). 인덱스 번호는 원래 것(0, 1)이 그대로 남아요.</div></details>
+      <details class="sc-q"><summary>교안 Day 4 워밍업 Q3: 위 df 에 apply(lambda x: "A" if x &gt;= 90 else "B") 로 grade 를 만들고 df["grade"][1] 을 찍으면?</summary><div class="sc-a"><code>A</code>. 1번 행의 점수가 95라서요. <code>df["grade"][1]</code>은 "grade 열에서 인덱스 1"이에요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>LLM · RAG 프로젝트의 절반은 데이터 준비예요 — CSV · JSON을 읽어 빈 값과 중복을 정리하고, 분포를 그래프로 확인한 뒤에야 모델에 넣어요. 오늘 쓴 <code>head → info → describe → 그래프</code> 순서가 새 데이터를 받았을 때의 기본 점검 순서입니다.</p>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day03_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day03_실습.ipynb</a> ·
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day04_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day04_실습.ipynb</a> ·
+      <a href="../view.html?f=AI_Agent/python_agent/result.csv">result.csv</a> ·
+      <a href="../view.html?f=AI_Agent/python_agent/README.md">폴더 안내</a>
+    </div>
+    <details><summary>정리 작업 메모</summary><ul><li>근거: 강의자료 <code>Day3_강의자료.pptx</code>(18쪽) · <code>Day4_강의자료.pptx</code>(17쪽), 실습 폴더(10/20 09:36 ~ 14:56 — <code>day02</code> 수정 · <code>day03</code> · <code>day04</code> 노트북, csv · json 5개), 선생님 레포 10/20 커밋 9개(10:16 ~ 14:51 — Day02 노트북 · <code>scores.txt</code>, Day03 노트북 · <code>items.csv/json</code> · <code>result.csv</code>, Day04 노트북 · 그림 7장).</li><li>실습 폴더 노트북은 직접 푼 것이다(선생님 노트북과 같은 칸은 교안 예제를 옮긴 칸뿐). 선생님 노트북은 파이썬 3.14.6, 실습 폴더는 3.15.0으로 실행됐다.</li><li>확인함 — 두 노트북을 저장소 밖 사본에서 위에서부터 차례로 다시 실행(그래프는 Agg로 파일 저장, 15장), 저장된 출력과 대조, 다시 만든 csv · json을 실습 폴더 파일과 비교. 확인하지 않음 — VS Code 화면의 그래프 표시, 교안 권장 3.10~3.12 + pandas 2.x에서의 출력(<code>dtype='str'</code> 등은 pandas 3.0의 모양).</li></ul></details>
+  </div>
+</article>
     </section>
 
     <section id="python-section" class="cat hidden">
-      <div class="cat-head"><h2>🐍 파이썬 개념 — 자바와 나란히</h2></div>
-      <p class="cat-desc">강의자료의 개념을 주제별로 한 장씩 정리했어요. 카드마다 <b>☕ 자바에서는</b> 칸이 있어, 두 달 동안 쓴 자바 문법과 무엇이 같고 무엇이 다른지 바로 비교할 수 있습니다. 코드 출력은 이 PC의 파이썬 3.15.0으로 실행한 결과예요.</p>
+      <div class="cat-head"><h2>🐍 파이썬 · 데이터 개념 — 자바 · SQL과 나란히</h2></div>
+      <p class="cat-desc">강의자료의 개념을 주제별로 한 장씩 정리했어요. <b>01~08</b>은 파이썬 문법(Day 1~2)이라 <b>☕ 자바에서는</b> 칸을, <b>09~15</b>는 Pandas · NumPy · 시각화(Day 3~4)라 <b>🗄️ SQL · 자바로는</b> 칸을 두어 두 달 동안 쓴 것과 바로 비교할 수 있게 했어요. 코드 출력은 이 PC의 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4 · Matplotlib 3.11.2 · Seaborn 0.13.2)으로 실행한 결과예요.</p>
 
 <article class="note-card" id="py-01">
   <div class="note-head">
@@ -906,11 +1020,493 @@ finally:
     <p class="practice-note"><span class="pn-label">💼 실무에서는</span>RAG(과정 후반)는 문서 파일을 읽어 잘게 나누는 것에서 시작해요. 한글 문서를 다루는 팀은 <code>encoding="utf-8"</code>을 습관처럼 적고, Pandas도 <code>pd.read_csv("파일.csv", encoding="utf-8")</code>처럼 같은 인자를 받아요(엑셀에서 저장한 CSV는 <code>cp949</code>인 경우가 많아요).</p>
   </div>
 </article>
+<article class="note-card" id="py-09">
+  <div class="note-head">
+    <span class="note-num">개념 09 · Day 3</span>
+    <h3>Pandas 시작 — Series와 DataFrame, shape · columns · index</h3>
+    <div class="note-tags"><span class="tag">import pandas as pd</span><span class="tag">pd.Series</span><span class="tag">pd.DataFrame</span><span class="tag">shape</span><span class="tag">pandas 3 dtype='str'</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Pandas는 표(행 · 열) 데이터를 다루는 라이브러리. 번호표(인덱스)가 붙은 1차원 목록이 <b>Series</b>, Series 여러 개를 열로 모은 2차원 표가 <b>DataFrame</b>. 딕셔너리로 만들면 <b>키가 열 이름, 값 리스트가 그 열의 값</b>이 된다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>엑셀 시트 한 장을 파이썬 변수 하나에 담은 거예요. 시트의 한 열(점수 열)만 떼어 내면 Series, 시트 전체가 DataFrame이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 만들기와 기본 속성</h4>
+        <p><code>pd.DataFrame({"name": [...], "score": [...]})</code> — 리스트 길이가 같아야 해요. <code>df.shape</code>는 (행 수, 열 수) 튜플이라 행 수는 <code>df.shape[0]</code>(또는 <code>len(df)</code>), <code>df.columns</code>는 열 이름, <code>df.index</code>는 행 번호(기본 0부터 — <code>RangeIndex</code>). 설치는 <code>pip install pandas</code>, 쓸 때는 관례대로 <code>import pandas as pd</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 이 PC는 pandas 3.0 — 출력 모양이 교안과 조금 다르다</h4>
+        <p>교안은 <code>Index(['name', 'score'])</code>라고 적었지만 실행하면 <code>Index(['name', 'score'], dtype='str')</code>가 나와요. pandas 3.0부터 글자 열이 전용 문자열 자료형(<code>str</code>)이 됐기 때문이에요(2.x에서는 <code>object</code>). <code>type(df["score"])</code>도 <code>pandas.Series</code>로 짧게 보여요. 선생님 노트북(파이썬 3.14)도 같은 모양이라 같은 pandas 3 계열로 보입니다.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL · 자바로는</h4>
+        <p>DataFrame ≈ <b>테이블 한 개(SELECT 결과)</b>, 열 이름 ≈ 컬럼, 인덱스 ≈ 행 번호(기본키처럼 쓸 수도 있음). 자바로는 <code>List&lt;Map&lt;String, Object&gt;&gt;</code>나 DTO 리스트 — MyBatis가 돌려주던 <code>List&lt;BoardDto&gt;</code>가 한 표예요. 다른 점은 Pandas는 <b>열 단위</b>로 저장해서 "점수 열 전체의 평균"을 반복문 없이 바로 구한다는 것.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 5 · 6쪽 — Series와 DataFrame</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">import pandas as pd
+
+s = pd.Series([10, 20, 30])
+print(s)
+
+data = {"name": ["철수", "영희", "민수"], "score": [88, 95, 72]}
+df = pd.DataFrame(data)
+print(df)
+print(df.shape, df.shape[0])
+print(df.columns)
+print(df.index)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>pandas 3.0.6 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>0    10
+1    20
+2    30
+dtype: int64
+  name  score
+0   철수     88
+1   영희     95
+2   민수     72
+(3, 2) 3
+Index(['name', 'score'], dtype='str')
+RangeIndex(start=0, stop=3, step=1)</pre>
+      <div class="run-note">Series의 왼쪽 0 · 1 · 2가 인덱스, 오른쪽이 값이에요. 마지막 줄 <code>dtype: int64</code>는 값의 자료형(64비트 정수, 자바 <code>long</code>)이에요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>Series = 1차원(인덱스 + 값), DataFrame = 2차원 표(열 = Series).</li>
+        <li>딕셔너리의 키 → 열 이름, 리스트 → 열의 값. 길이가 같아야 한다.</li>
+        <li><code>shape</code> = (행, 열), <code>columns</code> = 열 이름, <code>index</code> = 행 번호.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>열이 item · price 두 개이고 상품이 3개인 df 의 df.shape 와 f"총 상품 수: {df.shape[0]}개" 는?</summary><div class="sc-a"><code>(3, 2)</code>와 <code>총 상품 수: 3개</code>. 튜플의 0번이 행 수예요(교안 7쪽 도전 문제).</div></details>
+      <details class="sc-q"><summary>{"a": [1, 2], "b": [1, 2, 3]} 로 DataFrame 을 만들면?</summary><div class="sc-a">열마다 길이가 달라 <code>ValueError</code>(All arrays must be of the same length)가 나요. 표는 직사각형이어야 해요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>DB에서 꺼낸 결과, API가 준 JSON, 엑셀 파일을 모두 DataFrame으로 바꿔 같은 방법으로 다뤄요. LangChain의 문서 로더도 CSV를 행마다 문서로 바꿀 때 Pandas를 많이 씁니다.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-10">
+  <div class="note-head">
+    <span class="note-num">개념 10 · Day 3</span>
+    <h3>CSV · JSON 읽고 쓰기 — to_csv(index=False), force_ascii=False, utf-8-sig</h3>
+    <div class="note-tags"><span class="tag">to_csv · read_csv</span><span class="tag">to_json · read_json</span><span class="tag">index=False</span><span class="tag">force_ascii=False</span><span class="tag">orient="records"</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>df.to_csv("파일.csv", index=False)</code>로 저장하고 <code>pd.read_csv("파일.csv")</code>로 읽는다. JSON은 <code>to_json</code> · <code>read_json</code>. <code>index=False</code>를 빼면 행 번호가 열로 같이 저장되고, JSON은 <code>force_ascii=False</code>를 빼면 한글이 <code>연…</code>로 저장된다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>CSV는 "쉼표로 칸을 나눈 메모장 표", JSON은 "중괄호로 이름표를 붙인 데이터"예요. 둘 다 사람이 메모장으로 열어 읽을 수 있어서 프로그램끼리 주고받기 좋아요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① index=False — 왜 빼먹으면 안 되나</h4>
+        <p>그냥 <code>to_csv</code>하면 맨 앞에 이름 없는 행 번호 열이 생기고, 다시 읽으면 <code>Unnamed: 0</code>이라는 쓸모없는 열이 붙어요(아래 실행 결과). 교안 8쪽 Tip 그대로예요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② JSON의 한글과 모양</h4>
+        <p><code>to_json</code>은 기본으로 한글을 <code>연필</code>처럼 바꿔 저장해요(파이썬이 읽으면 다시 한글이 되지만 사람이 보기 어렵다). <code>force_ascii=False</code>면 한글 그대로. 기본 모양(<code>orient="columns"</code>)은 <code>{"item": {"0": "연필", …}}</code>처럼 열 → 행 번호 → 값이고, <code>orient="records"</code>면 <code>[{"item": "연필", "price": 500}, …]</code> — 어제 배운 "딕셔너리를 담은 리스트"이자 REST API가 주고받는 모양이에요. 실습 폴더의 <code>students.json</code>(옵션 없음)과 <code>items.json</code>(<code>force_ascii=False</code>)이 바로 이 차이예요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 엑셀에서 열 CSV는 utf-8-sig</h4>
+        <p>Pandas의 CSV는 UTF-8로 저장되는데, Windows 엑셀은 BOM(파일 맨 앞 표시 3바이트) 없는 UTF-8 CSV의 한글을 깨뜨려 여는 경우가 많아요. 내 Day 3 종합 풀이처럼 <code>encoding="utf-8-sig"</code>로 저장하면 BOM이 붙어 엑셀에서도 한글이 보여요(실습 폴더 <code>result.csv</code>의 첫 3바이트 <code>EF BB BF</code> 확인). 파이썬끼리만 주고받으면 그냥 UTF-8이면 돼요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL · 자바로는</h4>
+        <p>CSV 저장은 MariaDB의 <code>SELECT … INTO OUTFILE</code> · HeidiSQL "결과 내보내기", 읽기는 <code>LOAD DATA INFILE</code>과 같은 일. JSON은 스프링의 Jackson이 DTO ↔ JSON을 바꿔 주던 일이에요 — <code>orient="records"</code>가 <code>List&lt;Dto&gt;</code>를 JSON으로 만든 모양과 같아요(백엔드 50일차 REST API).</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">index=False 를 뺐을 때 · JSON 옵션 비교</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = pd.DataFrame({"item": ["연필", "지우개"], "price": [500, 300]})
+
+df.to_csv("items_idx.csv")                         # ← index=False 를 뺌
+print(open("items_idx.csv", encoding="utf-8").read())
+print(pd.read_csv("items_idx.csv"))
+
+print(df.to_json())                                 # ← 파일 이름을 안 주면 글자로 돌려줌
+print(df.to_json(force_ascii=False))
+print(df.to_json(orient="records", force_ascii=False))</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>pandas 3.0.6 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>,item,price
+0,연필,500
+1,지우개,300
+
+   Unnamed: 0 item  price
+0           0   연필    500
+1           1  지우개    300
+{"item":{"0":"연필","1":"지우개"},"price":{"0":500,"1":300}}
+{"item":{"0":"연필","1":"지우개"},"price":{"0":500,"1":300}}
+[{"item":"연필","price":500},{"item":"지우개","price":300}]</pre>
+      <div class="run-note">파일로 저장해 열어 본 내용과 같아요(실행은 파일 저장 → 다시 읽기로 했어요). 파일 경로를 이름만 쓰면 노트북이 있는 폴더에 생겨요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>CSV: <code>to_csv(…, index=False)</code> ↔ <code>read_csv</code>.</li>
+        <li>JSON: 한글은 <code>force_ascii=False</code>, 목록 모양은 <code>orient="records"</code>.</li>
+        <li>엑셀용 CSV는 <code>encoding="utf-8-sig"</code>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>read_csv 했더니 Unnamed: 0 열이 생겼다. 원인과 고치는 두 방법은?</summary><div class="sc-a">저장할 때 <code>index=False</code>를 빼서 행 번호가 열로 들어간 거예요. 저장을 <code>to_csv(…, index=False)</code>로 다시 하거나, 읽을 때 <code>pd.read_csv(…, index_col=0)</code>으로 그 열을 인덱스로 돌려요.</div></details>
+      <details class="sc-q"><summary>students.json 을 열었더니 "마우스" 가 보인다. 데이터가 깨진 걸까?</summary><div class="sc-a">아니요. 한글을 유니코드 이스케이프로 적은 것뿐이라 <code>pd.read_json</code>으로 읽으면 "마우스"로 돌아와요. 사람이 읽기 좋게 하려면 <code>force_ascii=False</code>.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>RAG에서 문서 목록 · 메타데이터를 CSV/JSON으로 주고받고, FastAPI(Day 5)는 응답을 JSON으로 내보내요. 사람이 열어 볼 파일은 <b>한글이 그대로 보이게</b>(<code>force_ascii=False</code>, 엑셀은 <code>utf-8-sig</code>) 저장하는 습관이 협업 사고를 줄여요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-11">
+  <div class="note-head">
+    <span class="note-num">개념 11 · Day 3</span>
+    <h3>탐색과 필터링 — head · info · describe, df["열"], df[조건], loc · iloc</h3>
+    <div class="note-tags"><span class="tag">head · tail</span><span class="tag">info · describe</span><span class="tag">df[["a", "b"]]</span><span class="tag">df[df["score"] &gt;= 80]</span><span class="tag">&amp; · |</span><span class="tag">loc · iloc</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>새 데이터는 <code>head()</code> → <code>info()</code> → <code>describe()</code> 순서로 훑는다. 열 하나는 <code>df["score"]</code>(Series), 여러 개는 <code>df[["name", "score"]]</code>(표). 대괄호 안에 조건식 <code>df["score"] &gt;= 80</code>을 넣으면 참인 행만 남는다. 위치로는 <code>iloc</code>, 이름(인덱스 · 열 이름)으로는 <code>loc</code>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>df["score"] &gt;= 80</code>은 행마다 True/False 도장을 찍은 목록이에요. 그 도장 목록을 다시 <code>df[ ]</code>에 넣으면 True 도장 찍힌 행만 골라 줘요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 처음 보는 데이터 훑기</h4>
+        <p><code>head(n)</code> · <code>tail(n)</code> 앞뒤 n줄(기본 5), <code>info()</code> 열마다 자료형 · 비어 있지 않은 개수(결측치 확인), <code>describe()</code> 숫자 열의 개수 · 평균 · 표준편차 · 최소 · 사분위 · 최대. <code>describe</code>의 <code>std</code>는 표본 표준편차예요(<a href="#py-13">py-13</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 조건 여러 개 — and 가 아니라 &amp;</h4>
+        <p><code>df[(df["score"] &gt;= 70) &amp; (df["score"] &lt; 90)]</code> — 행마다 비교하는 조건은 <code>&amp;</code>(그리고) · <code>|</code>(또는) · <code>~</code>(아님)을 쓰고 <b>조건마다 괄호</b>를 쳐요. 파이썬 <code>and</code>를 쓰면 "True/False 목록 전체가 참이냐"를 물어 <code>ValueError</code>가 나요(로컬 확인).</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ loc 과 iloc</h4>
+        <p><code>df.iloc[0]</code> 0번째 행(위치), <code>df.loc[0, "name"]</code> 인덱스가 0인 행의 name. 기본 인덱스(0, 1, 2…)에서는 둘이 같아 보이지만 슬라이싱 끝이 달라요 — <code>loc[0:1]</code>은 <b>1을 포함</b>(2행), <code>iloc[0:1]</code>은 파이썬처럼 <b>미포함</b>(1행). 필터링 뒤처럼 인덱스가 0, 1, 3으로 듬성해지면 차이가 더 커져요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL · 자바로는</h4>
+        <p><code>df[["name", "score"]]</code> = <code>SELECT name, score</code>, <code>df[df["score"] &gt;= 80]</code> = <code>WHERE score &gt;= 80</code>, <code>&amp;</code> · <code>|</code> = <code>AND</code> · <code>OR</code>, <code>head(5)</code> = <code>LIMIT 5</code>, <code>describe()</code> ≈ <code>COUNT · AVG · MIN · MAX</code>를 한 번에. 자바라면 <code>list.stream().filter(s -&gt; s.getScore() &gt;= 80)</code>. <code>tolist()</code>는 Series를 파이썬 리스트로 — 자바의 <code>.toList()</code>와 같은 역할이에요(<code>to_list()</code>도 같은 함수).</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">필터링 · loc/iloc 비교</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = pd.DataFrame({"name": ["철수", "영희", "민수", "지현"], "score": [88, 95, 60, 72]})
+
+print(df[df["score"] &gt;= 80])
+print(df[(df["score"] &gt;= 70) &amp; (df["score"] &lt; 90)])     # ← 괄호 + &amp;
+print(df.loc[1, "name"], df.iloc[1]["name"])
+print(df.loc[0:1, "name"].tolist(), df.iloc[0:1]["name"].tolist())
+df.info()</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>pandas 3.0.6 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>  name  score
+0   철수     88
+1   영희     95
+  name  score
+0   철수     88
+3   지현     72
+영희 영희
+['철수', '영희'] ['철수']
+&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 4 entries, 0 to 3
+Data columns (total 2 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   name    4 non-null      str
+ 1   score   4 non-null      int64
+dtypes: int64(1), str(1)
+memory usage: 196.0 bytes</pre>
+      <div class="run-note">거른 결과의 인덱스(0, 3)가 원래 번호 그대로인 점을 보세요. <code>info()</code>는 직접 출력하고 <code>None</code>을 돌려주니 <code>print(df.info())</code>로 감싸면 끝에 <code>None</code>이 한 줄 더 찍혀요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>훑기: <code>head → info → describe</code>.</li>
+        <li><code>df["a"]</code> Series, <code>df[["a", "b"]]</code> DataFrame.</li>
+        <li>여러 조건은 <code>&amp;</code> · <code>|</code> + 조건마다 괄호.</li>
+        <li><code>loc</code> 이름 · 끝 포함, <code>iloc</code> 위치 · 끝 미포함.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>df[df["score"] &gt;= 70 and df["score"] &lt; 90] 은 어떻게 될까?</summary><div class="sc-a"><code>ValueError</code>(The truth value of a Series is ambiguous)예요. <code>and</code>는 값 하나의 참/거짓만 다뤄요. <code>(…) &amp; (…)</code>로 바꿔야 해요.</div></details>
+      <details class="sc-q"><summary>type(df["score"]) 와 type(df[["score"]]) 는 각각?</summary><div class="sc-a"><code>pandas.Series</code>와 <code>pandas.DataFrame</code>. 열 이름을 리스트로 주면 열이 하나여도 표예요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>분석 코드 리뷰에서 가장 많이 보는 실수가 <code>and</code>/<code>&amp;</code> 혼동과 괄호 누락이에요. 조건이 길어지면 <code>mask = (df.score &gt;= 70) &amp; (df.score &lt; 90)</code>처럼 이름을 붙여 두고 <code>df[mask]</code>로 쓰면 읽기 쉬워요. <code>df.query("score &gt;= 70 and score &lt; 90")</code>처럼 SQL과 비슷한 문법도 있어요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-12">
+  <div class="note-head">
+    <span class="note-num">개념 12 · Day 3</span>
+    <h3>데이터 정제 — isna · fillna · dropna · drop_duplicates, rename · drop · apply(lambda)</h3>
+    <div class="note-tags"><span class="tag">NaN</span><span class="tag">fillna(0)</span><span class="tag">drop_duplicates(subset, keep)</span><span class="tag">rename · drop</span><span class="tag">apply(lambda)</span><span class="tag">다시 담기</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>빈 값(<code>NaN</code>)은 <code>isna()</code>로 찾고 <code>fillna(값)</code>으로 채우거나 <code>dropna()</code>로 지운다. 중복 행은 <code>drop_duplicates()</code> — 기본은 <b>모든 열이 같은</b> 행만, 특정 열 기준이면 <code>subset=[…]</code>. 열 이름 바꾸기 <code>rename</code>, 지우기 <code>drop</code>, 조건으로 새 열은 <code>apply(lambda x: …)</code>. 이 메서드들은 <b>새 표를 돌려주므로 다시 담아야</b> 한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span><code>df.fillna(0)</code>은 "0으로 채운 복사본을 보여 줘"예요. 원본은 그대로라 <code>df = df.fillna(0)</code>처럼 받아 둬야 다음 줄에서도 채워진 표를 써요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 결측치</h4>
+        <p><code>None</code>을 넣으면 Pandas는 <code>NaN</code>(Not a Number)으로 바꾸고, 숫자 열은 실수(<code>float64</code>)가 돼요 — 그래서 88이 <code>88.0</code>으로 보여요. <code>df.isna().sum()</code> 열마다 빈 칸 수, <code>fillna(0)</code> 채우기, <code>dropna()</code> 빈 칸이 있는 행 지우기. 무엇으로 채울지(0? 평균?)는 데이터의 뜻에 따라 정해요 — 시험을 안 본 학생을 0점으로 채우면 평균이 내려가요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 중복 — 무엇이 "같은 행"인가</h4>
+        <p>Day 3 종합에서 영희가 <code>0.0</code>과 <code>95.0</code> 두 번 나오는데 <code>drop_duplicates()</code>는 지우지 않아요 — 점수가 달라 같은 행이 아니니까요. 이름 기준이면 <code>drop_duplicates(subset=["name"], keep="last")</code>(마지막 것을 남김, 기본은 <code>"first"</code>). 이 풀이는 내 노트북과 선생님 노트북에 똑같이 들어 있어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ apply와 lambda — 그리고 NaN의 함정</h4>
+        <p><code>df["score"].apply(lambda x: "A" if x &gt;= 90 else "B")</code>는 점수 하나하나를 <code>x</code>로 받아 결과를 모은 새 열이에요. <code>lambda</code>는 이름 없는 한 줄 함수(자바의 람다 <code>x -&gt; …</code>). 주의: 점수가 <code>NaN</code>이면 <code>NaN &gt;= 90</code>이 거짓이라 <b>"B"</b>가 나와요(<code>[95, None]</code> → <code>['A', 'B']</code>, 로컬 확인). 결측치를 먼저 처리하고 apply 하세요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL · 자바로는</h4>
+        <p><code>isna()</code> = <code>IS NULL</code>, <code>fillna(0)</code> = <code>COALESCE(score, 0)</code> · <code>IFNULL</code>, <code>dropna()</code> = <code>WHERE score IS NOT NULL</code>, <code>drop_duplicates()</code> = <code>SELECT DISTINCT *</code>, <code>rename</code> = <code>AS</code>, <code>drop(columns=…)</code> = 그 열을 SELECT에서 빼기, <code>apply(lambda …)</code> = <code>CASE WHEN score &gt;= 90 THEN 'A' ELSE 'B' END</code>. "새것을 돌려준다"는 자바 <code>String</code> 메서드(<code>trim()</code>이 원본을 안 바꿈)와 같은 성질이에요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 17쪽 데이터로 — 채우고 · 중복 · 이름 바꾸기 · 등급</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = pd.DataFrame({"name": ["철수", "영희", "영희", "민수", "지현"],
+                   "score": [88, None, 95, 60, 72]})
+df = df.fillna(0)                                          # ← 다시 담기
+print(df.drop_duplicates().shape)                          # ← 모든 열 기준: 지울 것 없음
+print(df.drop_duplicates(subset=["name"], keep="last"))    # ← 이름 기준, 뒤의 영희를 남김
+
+df2 = df.rename(columns={"name": "이름"})
+print(df.columns.tolist(), df2.columns.tolist())           # ← 원본은 그대로
+
+df["grade"] = df["score"].apply(lambda x: "A" if x &gt;= 90 else "B")
+print(df)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>pandas 3.0.6 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>(5, 2)
+  name  score
+0   철수   88.0
+2   영희   95.0
+3   민수   60.0
+4   지현   72.0
+['name', 'score'] ['이름', 'score']
+  name  score grade
+0   철수   88.0     B
+1   영희    0.0     B
+2   영희   95.0     A
+3   민수   60.0     B
+4   지현   72.0     B</pre>
+      <div class="run-note"><code>df["grade"] = …</code>처럼 <b>열에 대입</b>하는 것은 원본을 바로 바꿔요. 반대로 <code>rename</code> · <code>drop</code> · <code>fillna</code> · <code>drop_duplicates</code>는 새 표예요. 내 Day 3 노트북의 교안 예제 칸(15쪽)에서도 <code>rename</code> · <code>drop</code> 결과를 받지 않아 아무 변화가 없었어요(<a href="#lab-16">실습 16</a>).</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>None</code> → <code>NaN</code>, 숫자 열은 실수가 된다.</li>
+        <li><code>fillna · dropna · drop_duplicates · rename · drop</code>은 새 표 → <code>df = …</code>.</li>
+        <li>중복 기준은 <code>subset</code>, 남길 쪽은 <code>keep="first"/"last"</code>.</li>
+        <li><code>apply</code> 전에 결측치부터 — <code>NaN &gt;= 90</code>은 거짓.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>df.fillna(0) 다음 줄에서 df.isna().sum() 을 찍으면 결측치가 0일까?</summary><div class="sc-a">아니요, 그대로예요. <code>fillna</code>는 새 표를 돌려줄 뿐이에요. <code>df = df.fillna(0)</code>로 다시 담아야 0이 돼요.</div></details>
+      <details class="sc-q"><summary>점수가 NaN 인 민수에게 apply(lambda x: "A" if x &gt;= 90 else "B") 를 하면?</summary><div class="sc-a"><b>"B"</b>예요. NaN과의 비교는 항상 거짓이라 else로 가요. 내 Day 3 노트북(교안 15쪽 예제 칸)에서도 민수가 B를 받았어요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>"빈 값을 무엇으로 채웠는지 · 중복을 무엇 기준으로 지웠는지"는 분석 결과를 바꾸는 결정이라 보고서에 적어 둬요. 선생님이 노트북에 남긴 "점수가 달라서 영희 중복으로 인식 안 됨, 그래도 제거하고 싶으면 subset" 같은 주석이 바로 그 기록이에요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-13">
+  <div class="note-head">
+    <span class="note-num">개념 13 · Day 4</span>
+    <h3>NumPy — 배열 통째로 계산하기, 조건 필터링, 그리고 표준편차 두 가지</h3>
+    <div class="note-tags"><span class="tag">np.array</span><span class="tag">arr * 2 · arr + 5</span><span class="tag">arr[arr &gt;= 80]</span><span class="tag">mean · max · sum</span><span class="tag">np.std ddof</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>np.array([…])</code>는 숫자 계산용 배열. 연산을 <b>원소 하나하나에 한꺼번에</b> 적용한다(<code>arr + 5</code>, <code>arr * 2</code>). 비교식 <code>arr &gt;= 80</code>은 True/False 배열이 되고, 그걸 대괄호에 넣으면 조건에 맞는 값만 남는다. Pandas의 열도 속은 NumPy 배열(<code>df["score"].values</code>).</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>파이썬 리스트에 <code>* 2</code>를 하면 목록이 두 번 이어 붙고, NumPy 배열에 <code>* 2</code>를 하면 숫자마다 두 배가 돼요. "목록"이 아니라 "숫자 묶음"이라서요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 벡터 연산과 불리언 인덱싱</h4>
+        <p><code>[88, 92] * 2</code> → <code>[88, 92, 88, 92]</code>(리스트 반복), <code>np.array([88, 92]) * 2</code> → <code>[176 184]</code>. <code>scores[scores &gt;= 80]</code>은 Pandas의 <code>df[df["score"] &gt;= 80]</code>과 같은 생각이에요. 배열에는 한 가지 자료형만 들어가요(정수와 실수를 섞으면 실수로).</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 표준편차 — describe 는 13.70, np.std 는 12.25</h4>
+        <p>Day 4 종합 실습에서 같은 점수 [88, 95, 60, 72, 81]의 표준편차가 두 값으로 나와요. Pandas <code>describe()</code> · <code>Series.std()</code>는 <b>표본 표준편차</b>(n − 1로 나눔, <code>ddof=1</code>)가 기본, NumPy <code>np.std</code>는 <b>모집단 표준편차</b>(n으로 나눔, <code>ddof=0</code>)가 기본이에요. <code>np.std(a, ddof=1)</code>이면 13.70으로 같아져요(로컬 확인). 둘 다 틀린 게 아니라 정의가 달라요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 자바로는</h4>
+        <p>자바 <code>int[]</code>에 5를 더하려면 <code>for (int i = 0; i &lt; a.length; i++) a[i] += 5;</code>, 80점 이상만 모으려면 반복문 + <code>ArrayList</code>, 평균은 <code>Arrays.stream(a).average()</code>. NumPy는 이 반복문을 C로 짠 내부 코드가 대신 돌려서 짧고 빨라요 — 자바 스트림의 <code>map</code> · <code>filter</code> · <code>sum</code>을 연산자 하나로 쓰는 느낌이에요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 6쪽 실습 + 표준편차 비교</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">import numpy as np
+scores = np.array([88, 92, 75, 60, 95])
+
+print(scores + 5)                 # ← 모든 값에 5점
+print(scores &gt;= 80)               # ← True/False 배열
+print(scores[scores &gt;= 80])       # ← 80점 이상만
+print(scores.mean(), scores.max(), scores.min(), scores.sum())
+print([88, 92] * 2, np.array([88, 92]) * 2)
+
+a = np.array([88, 95, 60, 72, 81])           # ← Day 4 종합 실습의 점수
+print(round(np.std(a), 2), round(np.std(a, ddof=1), 2))</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>NumPy 2.5.4 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[ 93  97  80  65 100]
+[ True  True False False  True]
+[88 92 95]
+82.0 95 60 410
+[88, 92, 88, 92] [176 184]
+12.25 13.7</pre>
+      <div class="run-note">평균은 실수(<code>82.0</code>), 최댓값 · 합은 정수로 나와요. 배열을 찍을 때 쉼표가 없는 것이 리스트와 구별하는 표시예요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>배열 연산은 원소마다 한꺼번에 — 반복문이 필요 없다.</li>
+        <li><code>arr[조건]</code>으로 거르기(불리언 인덱싱).</li>
+        <li>표준편차: Pandas 기본 n − 1, NumPy 기본 n — <code>ddof</code>로 맞춘다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>scores = np.array([88, 92, 75, 60, 95]) 에서 scores[scores &gt; 2] 는?</summary><div class="sc-a">다섯 개 전부 <code>[88 92 75 60 95]</code>예요. 모두 2보다 크니까요. 내 Day 4 노트북 2번 문제가 이렇게 되어 있었어요 — 80 이상이면 <code>scores &gt;= 80</code>(<a href="#lab-18">실습 18</a>).</div></details>
+      <details class="sc-q"><summary>점수 다섯 개의 describe() std 가 13.70 인데 np.std 로 12.25 가 나왔다. 어느 쪽이 틀렸나?</summary><div class="sc-a">둘 다 맞아요. 나누는 수가 n − 1(표본)과 n(모집단)으로 달라서예요. 같게 하려면 <code>np.std(a, ddof=1)</code> 또는 <code>pd.Series(a).std(ddof=0)</code>.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>Pandas · Matplotlib · scikit-learn이 모두 NumPy 배열 위에서 돌아가고, 임베딩(Day 8 RAG)도 결국 숫자 배열이에요. 문장 두 개가 얼마나 비슷한지 재는 코사인 유사도가 <code>np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))</code> 한 줄이에요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-14">
+  <div class="note-head">
+    <span class="note-num">개념 14 · Day 4</span>
+    <h3>Matplotlib — plot · bar · scatter, 제목 · 축 · 범례, 한글 폰트, show와 savefig</h3>
+    <div class="note-tags"><span class="tag">import matplotlib.pyplot as plt</span><span class="tag">plot · bar · scatter</span><span class="tag">title · xlabel · legend</span><span class="tag">Malgun Gothic</span><span class="tag">savefig 순서</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>plt.plot(x, y)</code> 선, <code>plt.bar</code> 막대, <code>plt.scatter</code> 점. <code>color · marker · label</code>로 꾸미고 <code>title · xlabel · ylabel · legend</code>로 읽히게 한 뒤 <code>plt.show()</code>. Windows에서 한글이 네모로 깨지면 <code>plt.rc("font", family="Malgun Gothic")</code>, 마이너스 기호는 <code>plt.rc("axes", unicode_minus=False)</code>.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>Matplotlib은 "빈 도화지에 차례로 그려 나가는" 도구예요. 선을 긋고 → 제목을 쓰고 → 축 이름을 붙이고 → 마지막에 <code>show()</code>로 액자에 걸어요. 순서가 중요해요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 그리고 → 꾸미고 → 보여 주기 (또는 저장)</h4>
+        <p><code>label="판매량"</code>을 줘야 <code>legend()</code>에 이름이 나와요. <code>marker</code>는 <code>"o"</code>(원) · <code>"s"</code>(네모) · <code>"^"</code>(삼각형). 파일로 남길 땐 <code>plt.savefig("이름.png")</code>를 <b>꾸미기를 모두 끝낸 뒤, show 전에</b> 해요 — 내 Day 4 Seaborn 풀이는 <code>savefig</code>를 <code>title</code>보다 먼저 불러 저장된 그림에 제목이 없어요(<a href="#lab-20">실습 20</a>). <code>show()</code> 뒤에 savefig하면 빈 그림이 저장되는 일도 흔해요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 노트북에서 보이는 &lt;BarContainer …&gt;</h4>
+        <p>칸의 마지막 줄이 <code>plt.bar(…)</code>이면 그림 위에 <code>&lt;BarContainer object of 3 artists&gt;</code> 같은 글자가 같이 찍혀요 — 노트북이 "마지막 식의 값"을 보여 주기 때문이에요(내 Day 4 노트북 그대로). 끝에 <code>plt.show()</code>를 두거나 줄 끝에 <code>;</code>를 붙이면 사라져요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ 앞 과정으로는</h4>
+        <p>프런트엔드 과정에서 화면에 그래프를 그릴 땐 브라우저용 차트 라이브러리(StockDash의 시세 차트)를 썼죠. Matplotlib은 <b>분석하는 사람이 보려고</b> 그리는 도구라, 결과는 이미지(PNG)예요. 웹 화면에 넣으려면 그림 파일로 저장하거나, 데이터는 JSON으로 내보내 화면 쪽 차트가 그리게 해요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 그래프 꾸미기 (교안 9쪽 + 한글 폰트)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">import matplotlib.pyplot as plt
+plt.rc("font", family="Malgun Gothic")     # ← Windows 한글 폰트
+plt.rc("axes", unicode_minus=False)        # ← 음수 기호 깨짐 방지
+
+days = ["월", "화", "수", "목", "금"]
+sales = [12, 25, 18, 30, 22]
+plt.plot(days, sales, color="green", marker="o", label="판매량")
+plt.title("주간 판매량")
+plt.xlabel("요일")
+plt.ylabel("판매량")
+plt.legend()                               # ← label 이 있어야 이름이 나온다
+plt.show()</code></pre>
+    </div>
+    <div class="figs">
+      <figure><img src="img/day04-line-styled.png" alt="주간 판매량 선 그래프 — 월 12, 화 25, 수 18, 목 30, 금 22, 초록 원 표시와 범례" loading="lazy"><figcaption>위 코드를 다시 실행해 만든 그림 — 제목 · 축 이름 · 범례의 한글이 정상으로 보여요.</figcaption></figure>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>plot</code> 추이 · <code>bar</code> 비교 · <code>scatter</code> 관계.</li>
+        <li>꾸미기: <code>color · marker · label</code> → <code>title · xlabel · ylabel · legend</code>.</li>
+        <li>한글: <code>plt.rc("font", family="Malgun Gothic")</code> (Mac은 AppleGothic).</li>
+        <li><code>savefig</code>는 꾸미기 다 한 뒤, <code>show</code> 전에.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>plt.legend() 를 불렀는데 범례에 아무것도 없다. 무엇을 빠뜨렸을까?</summary><div class="sc-a">그래프를 그릴 때 <code>label="…"</code>을 주지 않았어요. 범례는 label이 붙은 선만 보여 줘요.</div></details>
+      <details class="sc-q"><summary>"주간 판매량" 제목이 □□□□□ 로 나온다. 원인은?</summary><div class="sc-a">기본 폰트(DejaVu Sans)에 한글이 없어서예요. <code>plt.rc("font", family="Malgun Gothic")</code>으로 한글 폰트를 지정해요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>그래프는 "한눈에 무엇을 보라는지"가 생명이라 제목 · 축 단위 · 범례를 빠뜨리지 않는 것이 기본이에요. 보고서용은 <code>savefig("…png", dpi=150, bbox_inches="tight")</code>처럼 해상도와 여백을 정해 저장해요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-15">
+  <div class="note-head">
+    <span class="note-num">개념 15 · Day 4</span>
+    <h3>Seaborn과 df.plot — histplot · boxplot · scatterplot · barplot, 막대 · 원그래프</h3>
+    <div class="note-tags"><span class="tag">import seaborn as sns</span><span class="tag">histplot · boxplot</span><span class="tag">scatterplot · barplot</span><span class="tag">df.plot(kind="bar")</span><span class="tag">kind="pie" · autopct</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>Seaborn은 Matplotlib 위에서 <b>통계 그래프</b>를 한 줄로 — 분포는 <code>histplot</code>(히스토그램) · <code>boxplot</code>(상자), 두 값의 관계는 <code>scatterplot</code>, 항목별 값은 <code>barplot(x=…, y=…, data=df)</code>. Pandas DataFrame은 <code>df.plot(x=…, y=…, kind="bar")</code>로 바로 그린다. 꾸미기(<code>plt.title</code> 등)와 한글 폰트는 Matplotlib 것을 그대로 쓴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>히스토그램은 "점수대별로 몇 명인지 쌓은 막대", 박스플롯은 "가운데 절반이 어디 몰려 있고 끝이 어디인지 보여 주는 상자"예요. 평균 하나로는 안 보이는 <b>퍼진 모양</b>을 보여 줘요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 분포 — histplot 과 boxplot</h4>
+        <p><code>sns.histplot(scores)</code>는 값을 구간으로 나눠 개수를 세요(구간 수는 자동). <code>sns.boxplot(y=scores)</code>의 상자는 25% ~ 75%(가운데 절반), 가운데 선은 중앙값, 수염 바깥 점은 이상치예요. 선생님 노트북은 2번을 <code>boxenplot</code>(상자를 여러 겹으로 나눈 변형)으로 그렸어요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② barplot 은 "평균" 막대</h4>
+        <p><code>sns.barplot(x="name", y="score", data=df)</code>는 x 값마다 y의 <b>평균</b>을 그리고, 같은 이름이 여러 행이면 신뢰구간(검은 선)도 그려요. 학생마다 한 행이면 점수 그대로의 막대예요. 개수를 세는 막대는 <code>countplot</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ df.plot — DataFrame에서 바로</h4>
+        <p><code>df.plot(x="상품", y="판매량", kind="bar")</code> 막대, <code>df["판매량"].plot(kind="pie", labels=df["상품"], autopct="%.1f%%")</code> 원그래프(조각 이름 · 비율). 원그래프는 y축 이름(판매량)이 옆에 붙어 <code>plt.ylabel("")</code>로 지우곤 해요. <code>kind</code>는 <code>"line"</code>(기본) · <code>"bar"</code> · <code>"barh"</code> · <code>"hist"</code> · <code>"box"</code> · <code>"pie"</code> · <code>"scatter"</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL · 자바로는</h4>
+        <p>히스토그램은 <code>SELECT FLOOR(score/10)*10 AS 구간, COUNT(*) … GROUP BY 구간</code>을 막대로 그린 것, barplot은 <code>SELECT name, AVG(score) … GROUP BY name</code>을 그린 것이에요. 그래프 함수가 GROUP BY + 집계를 대신 해 준다고 생각하면 무엇을 그리는지 헷갈리지 않아요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — Seaborn 실습 (내 풀이 중 1 · 2번)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">import seaborn as sns
+scores = [55, 68, 72, 80, 85, 90, 95, 60, 77, 83]
+
+sns.histplot(scores)
+plt.title("성적 히스토그램")
+plt.show()
+
+sns.boxplot(y=scores)
+plt.title("성적 박스플롯")
+plt.show()</code></pre>
+    </div>
+    <div class="figs">
+      <figure><img src="img/day04-sns-hist.png" alt="성적 히스토그램 — 55점부터 95점까지 구간별 학생 수 막대" loading="lazy"><figcaption>histplot — 점수 10개를 구간별로 센 막대</figcaption></figure>
+      <figure><img src="img/day04-sns-box.png" alt="성적 박스플롯 — 가운데 절반이 약 69점에서 85점 사이인 상자" loading="lazy"><figcaption>boxplot — 상자가 가운데 절반, 선이 중앙값</figcaption></figure>
+      <figure><img src="img/day04-df-pie.png" alt="상품별 판매 비율 원그래프 — 헤드셋 40.0%, 마우스 30.0%, 키보드 20.0%, 모니터 10.0%" loading="lazy"><figcaption>df.plot(kind="pie") — <code>autopct</code>로 비율 표시</figcaption></figure>
+    </div>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>분포 <code>histplot · boxplot</code>, 관계 <code>scatterplot</code>, 항목별 평균 <code>barplot</code>.</li>
+        <li><code>data=df</code>와 열 이름 문자열로 x · y를 준다.</li>
+        <li>DataFrame은 <code>df.plot(kind=…)</code>, 꾸미기는 <code>plt.…</code> 그대로.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>판매량 45 · 30 · 15 · 60 을 원그래프로 그리면 헤드셋(60)은 몇 %?</summary><div class="sc-a">60 ÷ 150 = <b>40.0%</b>. 위 그림의 <code>autopct="%.1f%%"</code>가 소수 첫째 자리까지 보여 준 값이에요(<code>%%</code>는 % 글자 자체).</div></details>
+      <details class="sc-q"><summary>한 학생이 두 번 시험을 봐서 df 에 두 행이 있다. sns.barplot 의 그 학생 막대 높이는?</summary><div class="sc-a">두 점수의 <b>평균</b>이에요. barplot은 기본으로 평균을 그리고 퍼짐을 검은 선(신뢰구간)으로 보여 줘요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>데이터를 받으면 숫자 요약(describe)과 함께 히스토그램 · 박스플롯을 먼저 봐요. 평균이 같아도 분포가 전혀 다를 수 있고, 이상치(잘못 입력된 값)는 그림에서 가장 빨리 보여요.</p>
+  </div>
+</article>
     </section>
 
     <section id="lab-section" class="cat hidden">
       <div class="cat-head"><h2>🧪 실습 풀이 — 교안 문제를 내가 어떻게 풀었나</h2></div>
-      <p class="cat-desc">강의자료의 [실습] 쪽마다 한 장씩. <b>문제 → 내 풀이(노트북 그대로) → 다시 실행한 결과 → 짚을 점</b> 순서예요. 문제와 다르게 나온 곳은 고친 코드를 함께 적었습니다. 실행은 저장소 밖에서 파이썬 3.15.0으로 했어요. 마지막 카드는 선생님이 따로 준 <b>Day 1 실습예제(복습 문제 11개)</b> 체크리스트예요.</p>
+      <p class="cat-desc">강의자료의 [실습] 쪽마다 한 장씩. <b>문제 → 내 풀이(노트북 그대로) → 다시 실행한 결과 → 짚을 점</b> 순서예요. 문제와 다르게 나온 곳은 고친 코드를 함께 적었습니다. 실행은 저장소 밖에서 파이썬 3.15.0으로 했어요. 11번은 선생님이 따로 준 <b>Day 1 실습예제(복습 문제 11개)</b> 체크리스트, <b>12~17은 Day 3(Pandas), 18~22는 Day 4(NumPy · 시각화)</b>예요. Day 4 그래프는 노트북을 다시 실행해 만든 그림이고, 선생님 노트북(10/20 push)과 다른 점도 함께 적었어요.</p>
 
 <article class="note-card" id="lab-01">
   <div class="note-head">
@@ -1183,12 +1779,12 @@ print(arr)</code></pre>
 <article class="note-card" id="lab-10">
   <div class="note-head">
     <span class="note-num">실습 10 · Day 2 · 교안 17쪽</span>
-    <h3>종합 — 성적 처리기: get_grade 함수 · for · 컴프리헨션 (실습 폴더에 없음 → 풀이 정리)</h3>
+    <h3>종합 — 성적 처리기: get_grade 함수 · for · 컴프리헨션 (문제 칸만 있음 → 참고 풀이 · 선생님 풀이 비교)</h3>
     <div class="note-tags"><span class="tag">함수 + 반복</span><span class="tag">return</span><span class="tag">📝 아직 안 푼 문제</span></div>
   </div>
   <div class="note-body">
     <p class="note-summary"><span class="summary-label">문제</span><code>scores = [55, 82, 91, 67, 74]</code>. ① 점수를 받아 A/B/C/D를 돌려주는 <code>get_grade(score)</code> ② for로 <code>'55점 -&gt; D'</code>처럼 출력 ③ 도전: <code>[get_grade(s) for s in scores]</code>.</p>
-    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>실습 05의 등급 판별(if 문)을 <b>함수 안에 넣고</b>, 실습 06의 반복으로 여러 점수에 돌리는 문제예요. 오늘 배운 것을 전부 한 번에 쓰는 마무리 문제라, 두 노트북 어디에도 풀이가 없어 아래에 참고 풀이를 적었어요 — 먼저 직접 풀어 본 뒤 비교해 보세요.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>실습 05의 등급 판별(if 문)을 <b>함수 안에 넣고</b>, 실습 06의 반복으로 여러 점수에 돌리는 문제예요. 오늘 배운 것을 전부 한 번에 쓰는 마무리 문제예요. 10/20 아침(09:36) <code>day02_실습.ipynb</code> 맨 아래에 이 문제 칸이 추가됐지만 <b>주석(문제)만 있고 풀이는 비어 있어서</b>, 아래 참고 풀이와 선생님 풀이를 함께 적었어요 — 먼저 직접 풀어 본 뒤 비교해 보세요.</p>
     <div class="note-code">
       <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">참고 풀이 (정리하며 작성 · 실행 확인)</span><button class="copy-btn" type="button">복사</button></div>
       <pre><code class="language-python">def get_grade(score):
@@ -1216,6 +1812,10 @@ print([get_grade(s) for s in scores])</code></pre>
 ['D', 'B', 'A', 'D', 'C']</pre>
       <div class="run-note">실습 05와 달리 <code>grade = …</code>에 담지 않고 <b>바로 <code>return</code></b>해요. return을 만나면 함수가 그 자리에서 끝나므로 마지막 <code>else:</code>도 생략할 수 있어요(자바 메서드에서 조건마다 <code>return</code>하던 것과 같아요).</div>
     </details>
+    <div class="concept-block">
+      <h4>선생님 풀이(10/20 10:16 push)와 비교</h4>
+      <p>선생님 노트북의 풀이는 같은 구조예요 — <code>if · elif · elif · else</code>에서 바로 <code>return "A"</code> … <code>else: return "D"</code>, <code>for num in scores: print(f"{num}점 -&gt; {get_grade(num)}")</code>, <code>grades = [get_grade(n) for n in scores]</code>. 저장된 출력도 위 실행 결과와 한 글자까지 같아요. 다른 점은 마지막 <code>else:</code>를 썼다는 것 하나 — 둘 다 맞고, <code>else</code>가 있으면 "나머지 전부"라는 뜻이 눈에 더 잘 보여요.</p>
+    </div>
     <div class="self-check">
       <div class="self-check-title">🤔 스스로 확인</div>
       <details class="sc-q"><summary>get_grade 안의 return 을 모두 print 로 바꾸면 ③의 리스트는 어떻게 될까?</summary><div class="sc-a">등급이 화면에 한 번씩 찍히고, 리스트는 <code>[None, None, None, None, None]</code>이 돼요. 함수가 아무것도 돌려주지 않기 때문이에요(<a href="#py-07">개념 07</a>).</div></details>
@@ -1249,15 +1849,421 @@ print([get_grade(s) for s in scores])</code></pre>
     <p class="practice-note"><span class="pn-label">📝 하는 법</span>노트북 아래에 칸을 추가해 문제 번호를 주석으로 적고 풀어 보세요. 다 풀면 "모두 다시 실행" 후 저장하면, 다음 정리 때 이 카드를 풀이 카드로 바꿉니다.</p>
   </div>
 </article>
+<article class="note-card" id="lab-12">
+  <div class="note-head">
+    <span class="note-num">실습 12 · Day 3 · 교안 7쪽</span>
+    <h3>나만의 DataFrame 만들기 — 딕셔너리 → 표, shape · columns, shape[0]</h3>
+    <div class="note-tags"><span class="tag">pd.DataFrame</span><span class="tag">shape[0]</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① 상품명(item) 마우스 · 키보드 · 모니터, 가격(price) 15000 · 45000 · 220000을 딕셔너리 → DataFrame ② <code>df.shape</code> · <code>df.columns</code> 출력 ③ 도전: <code>df.shape[0]</code>으로 <code>'총 상품 수: 3개'</code>.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 칸 3</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">data = {
+    "item": ["마우스", "키보드", "모니터"],
+    "price": [15000, 45000, 220000]
+}
+df = pd.DataFrame(data)
+print(df.shape)
+print(df.columns)
+print(f"총 상품 수: {df.shape[0]}개")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>(3, 2)
+Index(['item', 'price'], dtype='str')
+총 상품 수: 3개</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>선생님 풀이와 같은 답이에요. 이 칸이 <code>df</code>를 <b>상품 표</b>로 바꿔 두기 때문에, 바로 다음 칸(교안 8쪽 예제)과 그다음 예제 칸이 영향을 받아요 — <a href="#lab-13">실습 13</a> · <a href="#lab-14">실습 14</a>. <code>dtype='str'</code>은 pandas 3의 모양이에요(<a href="#py-09">py-09</a>).</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-13">
+  <div class="note-head">
+    <span class="note-num">실습 13 · Day 3 · 교안 9쪽</span>
+    <h3>CSV 읽고 쓰기 — items.csv · items.json, 그리고 students 파일에 상품이 들어간 이유</h3>
+    <div class="note-tags"><span class="tag">to_csv(index=False)</span><span class="tag">force_ascii=False</span><span class="tag">노트북 실행 순서</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>연필 500 · 지우개 300 표를 ① <code>items.csv</code>로 저장(<code>index=False</code>) ② <code>read_csv</code>로 다시 읽어 출력 ③ 도전: <code>items.json</code>으로도 저장 · 읽기.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 칸 5 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df.to_csv("items.csv", index=False)
+df_csv = pd.read_csv("items.csv")
+print("[CSV 불러오기]")
+print(df_csv)
+
+# force_ascii=False 옵션을 넣으면 한글이 유니코드(한...)로 변환되지 않고 깔끔하게 저장됩니다.
+df.to_json("items.json", force_ascii=False)
+df_json = pd.read_json("items.json")
+print("\n[JSON 불러오기]")
+print(df_json)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력 · 다시 만든 파일 모두 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[CSV 불러오기]
+  item  price
+0   연필    500
+1  지우개    300
+
+[JSON 불러오기]
+  item  price
+0   연필    500
+1  지우개    300
+
+items.json → {"item":{"0":"연필","1":"지우개"},"price":{"0":500,"1":300}}</pre>
+    </details>
+    <div class="warn-box"><b>⚠ students.csv · students.json 에 학생이 아니라 상품이 들어 있어요</b> — 바로 앞 칸(교안 8쪽 예제 <code>df.to_csv("students.csv", …)</code>)을 실행할 때 <code>df</code>가 학생 표가 아니라 <a href="#lab-12">실습 12</a>의 <b>상품 표</b>였기 때문이에요. 교안의 예제는 학생 표를 전제로 쓴 코드라, 노트북에서는 그 시점의 변수가 무엇인지가 결과를 정해요. <code>students.json</code>은 <code>force_ascii</code> 없이 저장돼 한글이 <code>마우스</code>로 보여요 — <code>items.json</code>과 비교하면 옵션의 차이가 바로 보입니다(<a href="#py-10">py-10</a>).</div>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이</h4>
+      <p>문제는 모두 맞아요. 주석으로 <code>force_ascii=False</code>의 이유를 적어 둔 것이 좋아요. 선생님은 <code>to_json("items.json", force_ascii=False, indent=4)</code>처럼 <code>indent</code>로 줄바꿈 · 들여쓰기까지 넣어 사람이 읽기 쉽게 저장했어요(읽어 들인 결과는 같음).</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-14">
+  <div class="note-head">
+    <span class="note-num">실습 14 · Day 3 · 교안 12쪽</span>
+    <h3>데이터 탐색과 필터링 — describe · df[조건] · to_list, 그리고 예제 칸의 KeyError</h3>
+    <div class="note-tags"><span class="tag">describe</span><span class="tag">df[df['score'] &gt;= 80]</span><span class="tag">to_list</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>철수 88 · 영희 95 · 민수 60 · 지현 72. ① <code>describe()</code>로 score 통계 ② score 80 이상만 ③ 도전: name 열을 리스트로(<code>.tolist()</code>).</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 칸 7 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">print(df.describe())
+print(df[df['score'] &gt;= 80])
+print(type(df['score']))
+print(df["name"].to_list())
+print(type(df["name"].to_list()))</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>           score
+count   4.000000
+mean   78.750000
+std    15.777093
+min    60.000000
+25%    69.000000
+50%    80.000000
+75%    89.750000
+max    95.000000
+
+  name  score
+0   철수     88
+1   영희     95
+&lt;class 'pandas.Series'&gt;
+
+['철수', '영희', '민수', '지현']
+&lt;class 'list'&gt;</pre>
+      <div class="run-note"><code>describe()</code>는 숫자 열(score)만 요약해요. 25% · 75%는 사분위수(값 사이를 비율로 나눈 값)라 69 · 89.75처럼 데이터에 없는 수가 나올 수 있어요. <code>type</code>을 함께 찍어 Series와 list를 비교한 것이 좋은 습관이에요.</div>
+    </details>
+    <div class="warn-box"><b>⚠ 바로 앞 칸(교안 11쪽 예제)은 <code>KeyError: 'score'</code></b> — 예제 다섯 줄은 학생 표(name · score)를 전제로 쓴 코드인데, 그 칸을 실행한 시점의 <code>df</code>는 <a href="#lab-13">실습 13</a>의 연필 · 지우개 표(item · price)였어요. 다시 실행해도 같은 오류가 나요. 예제를 돌려 보려면 그 칸 맨 위에 학생 표를 만드는 줄을 넣으면 돼요. 오류가 없더라도 그 칸은 맨 마지막 줄(<code>df.iloc[0]</code>)의 값만 화면에 보여 줘요 — 노트북은 칸마다 마지막 식만 표시하니 나머지는 <code>print()</code>로 감싸야 보여요.</div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-15">
+  <div class="note-head">
+    <span class="note-num">실습 15 · Day 3 · 교안 14쪽</span>
+    <h3>결측치와 중복 처리 — isna().sum() · fillna(0) · drop_duplicates()</h3>
+    <div class="note-tags"><span class="tag">isna().sum()</span><span class="tag">fillna(0)</span><span class="tag">drop_duplicates</span><span class="tag">✅ 문제대로 · 다시 담기 주의</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>철수 88 · 영희 95 · 영희 95 · 민수 None. ① <code>isna().sum()</code> ② <code>fillna(0)</code> 결과 출력 ③ 도전: <code>drop_duplicates()</code>.</p>
+    <p>코드와 실행 결과는 <a href="#ai-day02">수업 진도 카드</a>에 있어요(저장된 출력과 같음).</p>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이</h4>
+      <p>문제가 "결과를 출력"이라 <code>print(df.fillna(0))</code>로 충분하고 답도 맞아요. 다만 세 번째 출력에 민수가 <code>NaN</code>으로 다시 나와요 — <code>fillna</code>가 새 표를 돌려줄 뿐이라서요. 선생님은 <code>df = df.fillna(0)  # 원본에 다시 대입해야 반영됨</code>, <code>df = df.drop_duplicates()</code>로 단계마다 다시 담아 마지막 표가 <code>철수 88.0 · 영희 95.0 · 민수 0.0</code>이 됐어요. 전처리는 앞 단계 결과 위에 다음 단계를 쌓는 것이라 <b>다시 담는 습관</b>이 중요해요(<a href="#py-12">py-12</a>).</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-16">
+  <div class="note-head">
+    <span class="note-num">실습 16 · Day 3 · 교안 16쪽</span>
+    <h3>컬럼 정리하기 — rename · apply(lambda) · drop</h3>
+    <div class="note-tags"><span class="tag">rename(columns=)</span><span class="tag">apply + 삼항</span><span class="tag">drop(columns=)</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>철수 88 · 영희 95. ① <code>rename()</code>으로 name → 이름 ② <code>apply()</code> + 삼항으로 90 이상 A, 아니면 B인 grade 열 ③ 도전: <code>drop()</code>으로 score 열 삭제.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 칸 11 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = df.rename(columns={"name": "이름"})           # ← 다시 담기
+df["grade"] = df["score"].apply(
+    lambda x: "A" if x &gt;= 90 else "B"
+)
+df = df.drop(columns=["score"])                      # ← 다시 담기
+print(df, "\n")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>   이름  score grade
+0  철수     88     B
+1  영희     95     A
+
+   이름 grade
+0  철수     B
+1  영희     A</pre>
+      <div class="run-note">이번에는 <code>rename</code> · <code>drop</code>을 모두 <code>df = …</code>로 받아 결과가 반영됐어요. 선생님 풀이도 같고, 선생님은 "한 번만 쓰고 말 함수라 lambda로 정의"한다며 같은 일을 하는 <code>def get_grade(x)</code>를 나란히 적어 두었어요.</div>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점 — 바로 앞 예제 칸(교안 15쪽)</h4>
+      <p>예제 칸에서는 <code>df.rename(…)</code> · <code>df.drop(…)</code>을 <b>받지 않아</b> 표가 그대로였고, 그 시점 표에는 점수가 <code>NaN</code>인 민수가 있어 <code>apply</code> 결과가 <b>B</b>였어요(<code>NaN &gt;= 90</code>은 거짓). 같은 노트북 안에서 "받으면 바뀌고, 안 받으면 그대로"를 둘 다 보여 주는 좋은 비교 자료예요(<a href="#py-12">py-12</a>).</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-17">
+  <div class="note-head">
+    <span class="note-num">실습 17 · Day 3 · 교안 17쪽</span>
+    <h3>종합 — 데이터 전처리 파이프라인: fillna → 중복 → 필터 → grade → result.csv</h3>
+    <div class="note-tags"><span class="tag">파이프라인</span><span class="tag">subset · keep</span><span class="tag">utf-8-sig</span><span class="tag">⚠ 저장된 출력이 옛것</span><span class="tag">⚠ 필터 결과를 안 담음</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>철수 88 · 영희 None · 영희 95 · 민수 60 · 지현 72. ① DataFrame + <code>fillna(0)</code> ② <code>drop_duplicates()</code> ③ score 70 이상만 ④ 도전: <code>apply</code>로 grade 추가 후 <code>to_csv('result.csv', index=False)</code>.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day03_실습.ipynb — 칸 12 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = pd.DataFrame(data)
+df = df.fillna(0)
+df = df.drop_duplicates()                                  # ← 점수가 달라 영희 둘 다 남음
+df = df.drop_duplicates(subset=['name'], keep='last')      # ← 이름 기준으로 한 번 더
+print(df)
+
+print(df[df["score"] &gt;= 70], "\n")                         # ← 출력만 하고 담지 않음
+
+df["grade"] = df["score"].apply(lambda x: "A" if x &gt;= 90 else "B")
+df.to_csv("result.csv", index=False, encoding="utf-8-sig")
+print("[최종 DataFrame]")
+print(df)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>다시 실행 — 저장된 출력과 다름 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>  name  score            ← subset 중복 제거 뒤
+0   철수   88.0
+2   영희   95.0
+3   민수   60.0
+4   지현   72.0
+  name  score            ← 70 이상 (출력만)
+0   철수   88.0
+2   영희   95.0
+4   지현   72.0
+
+[최종 DataFrame]
+  name  score grade
+0   철수   88.0     B
+2   영희   95.0     A
+3   민수   60.0     B        ← 70 미만인데 남아 있음
+4   지현   72.0     B</pre>
+      <div class="run-note">노트북에 저장된 출력은 <b>subset 줄이 없던 때</b>의 것이에요(최종 표가 영희 0.0까지 5행). 실습 폴더의 <code>result.csv</code>는 지금 코드와 같은 4행이라, 코드를 고친 뒤 다른 방법으로 실행하고 출력은 저장하지 않은 것으로 보여요 — 다시 실행해 저장하면 맞춰져요.</div>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이와 비교</h4>
+      <p>① <b>3번 필터를 <code>df = df[…]</code>로 담지 않아</b> 최종 파일에 70점 미만인 민수가 남았어요. "파이프라인"은 앞 단계 결과를 이어받는 것이라 선생님처럼 <code>df = df[df['score'] &gt;= 70]</code>으로 받아야 최종 3행(철수 · 영희 · 지현)이 돼요. ② 선생님은 도전의 등급 기준을 <b>80</b>으로 잡아 철수가 A예요(<code>철수 A · 영희 A · 지현 B</code>) — 문제에 기준이 없으니 둘 다 가능하고, 앞 문제와 같은 90을 쓴 것도 자연스러워요. ③ <code>encoding="utf-8-sig"</code>로 엑셀에서도 한글이 보이게 저장한 것은 내 풀이에만 있는 좋은 점이에요(파일 첫 3바이트가 BOM <code>EF BB BF</code>). ④ <code>subset</code> · <code>keep='last'</code>로 이름 중복까지 지운 것은 선생님 풀이와 같아요.</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <details class="sc-q"><summary>3번을 df = df[df["score"] &gt;= 70] 으로 바꾸고, 기준 90 그대로면 result.csv 는?</summary><div class="sc-a"><code>철수 88.0 B · 영희 95.0 A · 지현 72.0 B</code> 세 줄이에요. 민수(60)가 빠져요.</div></details>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-18">
+  <div class="note-head">
+    <span class="note-num">실습 18 · Day 4 · 교안 6쪽</span>
+    <h3>NumPy 배열 다루기 — mean · max · min, 80점 이상 필터, 모두 +5</h3>
+    <div class="note-tags"><span class="tag">np.array</span><span class="tag">불리언 인덱싱</span><span class="tag">arr + 5</span><span class="tag">⚠ 2번 조건 오타</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span><code>scores = np.array([88, 92, 75, 60, 95])</code>. ① 평균 · 최댓값 · 최솟값 ② 80점 이상만 ③ 도전: 모두 5점 더한 새 배열.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 칸 3 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">print(scores.mean())
+print(scores.max())
+print(scores.min())
+print(scores[scores &gt; 2])        # ← 80 이 아니라 2
+newarr = scores + 5
+print(newarr)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장된 출력과 같음 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>82.0
+95
+60
+[88 92 75 60 95]       ← 다섯 개 전부 (모두 2보다 큼)
+[ 93  97  80  65 100]</pre>
+      <div class="run-note">바로 위 교안 예제(<code>arr[arr &gt; 2]</code>)를 옮기며 숫자를 안 바꾼 것으로 보여요. <code>scores[scores &gt;= 80]</code>이면 <code>[88 92 95]</code> — 선생님 풀이와 같은 답이에요. 1번 · 도전은 맞아요.</div>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>출력이 원래 배열과 똑같을 때는 "필터가 아무것도 안 거른 것 아닌가?"를 의심해 보세요. 결과 개수(<code>len(…)</code>)를 함께 찍으면 바로 보여요. "이상"은 <code>&gt;=</code>, "초과"는 <code>&gt;</code>(<a href="#py-13">py-13</a>).</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-19">
+  <div class="note-head">
+    <span class="note-num">실습 19 · Day 4 · 교안 10쪽</span>
+    <h3>기본 그래프 그리기 — 월별 방문자 라인 그래프, 제목 · 축 이름 · orange · marker="s"</h3>
+    <div class="note-tags"><span class="tag">plt.plot</span><span class="tag">title · xlabel · ylabel</span><span class="tag">color · marker</span><span class="tag">⚠ 제목이 빈 문자열</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>1월~5월 방문자 120 · 150 · 90 · 200 · 170. ① 라인 그래프 ② <code>title · xlabel · ylabel</code> ③ 도전: <code>color="orange", marker="s"</code>.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 칸 8 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">plt.plot(months, visitors,
+    color="orange", marker="s",
+    label="방문")
+plt.title("")                    # ← 제목이 비어 있음
+plt.xlabel("달")
+plt.ylabel("방문자")
+plt.legend()
+plt.show()</code></pre>
+    </div>
+    <div class="figs">
+      <figure><img src="img/day04-visitors-line.png" alt="월별 방문자 라인 그래프 — 주황 네모 표시, 1월 120에서 4월 200까지, 제목 없음" loading="lazy"><figcaption>다시 실행한 그림 — 주황 선 · 네모 표시 · 범례는 있지만 제목 자리가 비어 있어요.</figcaption></figure>
+    </div>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>1번 · 도전은 맞아요. 2번은 <code>title()</code>을 불렀지만 <b>빈 문자열</b>이라 제목이 안 보여요 — <code>plt.title("월별 방문자 수")</code>처럼 내용을 넣어야 해요. 선생님은 <code>'방문자현황'</code> · <code>'월'</code> · <code>'방문자수'</code>를 넣었고, marker 종류(<code>s, ^, v, &lt;, &gt;, o</code>)를 주석으로 남겼어요. 선이 하나뿐이면 범례(<code>label</code> · <code>legend</code>)는 없어도 되지만 있으면 나쁘지 않아요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-20">
+  <div class="note-head">
+    <span class="note-num">실습 20 · Day 4 · 교안 13쪽</span>
+    <h3>Seaborn으로 시각화하기 — histplot · boxplot · scatterplot, 그리고 제목 없이 저장된 그림</h3>
+    <div class="note-tags"><span class="tag">sns.histplot</span><span class="tag">sns.boxplot</span><span class="tag">sns.scatterplot</span><span class="tag">⚠ savefig 순서</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>점수 10개 <code>[55, 68, 72, 80, 85, 90, 95, 60, 77, 83]</code>. ① 히스토그램 ② 박스플롯 ③ 도전: 공부 시간 <code>hours</code>를 만들어 산점도.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 칸 10 (내 풀이, 도전 부분)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">sns.histplot(scores)
+plt.savefig('check_13a.png')      # ← 제목을 붙이기 전에 저장
+plt.title("성적 히스토그램")
+plt.show()
+# … boxplot …
+hours = [2, 3, 4, 5, 6, 7, 8, 3, 5, 6]
+sns.scatterplot(x=hours, y=scores)
+plt.title("공부 시간과 성적의 관계")
+plt.xlabel("공부 시간(시간)")
+plt.ylabel("성적")
+plt.show()</code></pre>
+    </div>
+    <div class="figs">
+      <figure><img src="img/day04-sns-scatter.png" alt="공부 시간과 성적의 관계 산점도 — 시간이 늘수록 성적이 오르는 점 10개" loading="lazy"><figcaption>도전 — 공부 시간이 길수록 점수가 높은 모양 — hours를 직접 정한 값이라 실제 관계를 뜻하지는 않아요</figcaption></figure>
+      <figure><img src="img/day04-savefig-before-title.png" alt="제목이 없는 히스토그램 — savefig를 title보다 먼저 호출해 저장된 파일" loading="lazy"><figcaption><code>check_13a.png</code> — <code>savefig</code>를 <code>title</code>보다 먼저 불러 <b>제목 없이</b> 저장됨</figcaption></figure>
+    </div>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이</h4>
+      <p>세 그래프 모두 맞게 그려졌고 제목 · 축 이름까지 넣었어요. 다만 <code>plt.savefig('check_13a.png')</code>가 <code>plt.title(…)</code>보다 앞이라 <b>파일에는 제목이 없어요</b>(다시 실행해 만든 파일로 확인). 저장은 꾸미기를 다 한 뒤에(<a href="#py-14">py-14</a>). 이 파일 이름은 선생님 노트북의 것과 같아요 — 선생님은 그래프마다 <code>savefig('check_13a.png')</code> → <code>plt.close()</code>로 <b>그림 파일로 저장해 확인</b>하는 방식을 썼고(그래서 레포에 <code>check_13a~c.png</code>가 올라옴), 2번은 <code>boxenplot</code>으로 그렸어요. 이 칸은 실행 번호가 비어 있어(<code>None</code>) 저장된 그림이 마지막 실행과 같은지는 확인할 수 없었어요. 실습 폴더에는 <code>check_13a.png</code>가 없어요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-21">
+  <div class="note-head">
+    <span class="note-num">실습 21 · Day 4 · 교안 15쪽</span>
+    <h3>Pandas 데이터로 그래프 그리기 — df.plot(kind="bar"), 원그래프 autopct</h3>
+    <div class="note-tags"><span class="tag">df.plot</span><span class="tag">kind="pie"</span><span class="tag">autopct</span><span class="tag">⚠ 코드가 두 번 들어감</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>마우스 45 · 키보드 30 · 모니터 15 · 헤드셋 60. ① <code>df.plot(x="상품", y="판매량", kind="bar")</code> ② 제목 '상품별 판매량' ③ 도전: <code>kind="pie"</code>.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 칸 11 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df.plot(x="상품", y="판매량", kind="bar")
+plt.title("상품별 판매량")
+plt.show()
+
+df["판매량"].plot(kind="pie", labels=df["상품"], autopct="%.1f%%")
+plt.title("상품별 판매 비율")
+plt.ylabel("")          # ← 원그래프 옆의 '판매량' 글자 지우기
+plt.show()</code></pre>
+    </div>
+    <div class="figs">
+      <figure><img src="img/day04-df-bar.png" alt="상품별 판매량 막대그래프 — 마우스 45, 키보드 30, 모니터 15, 헤드셋 60, 상품 이름이 세로로 누움" loading="lazy"><figcaption>막대 — 상품 이름이 세로로 누워 있어요(<code>rot</code>로 조절)</figcaption></figure>
+      <figure><img src="img/day04-df-pie.png" alt="상품별 판매 비율 원그래프 — 헤드셋 40.0%, 마우스 30.0%, 키보드 20.0%, 모니터 10.0%" loading="lazy"><figcaption>원그래프 — <code>labels</code>로 이름, <code>autopct</code>로 비율</figcaption></figure>
+    </div>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이</h4>
+      <p>문제는 모두 맞고, 도전에 <code>labels</code> · <code>autopct</code> · <code>ylabel("")</code>까지 넣어 원그래프를 읽기 좋게 만들었어요. 다만 이 칸에는 <b>같은 코드가 두 번</b> 붙어 있어 그래프가 4장 나와요(붙여 넣기 중복). 선생님은 막대에 <code>legend=False, rot=50</code>(범례 없애고 이름을 50도 기울이기)를 주고 <code>savefig</code> → <code>close</code>로 저장했어요. 막대 하나짜리 그래프의 범례 "판매량"은 제목과 겹치는 정보라 <code>legend=False</code>가 깔끔해요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-22">
+  <div class="note-head">
+    <span class="note-num">실습 22 · Day 4 · 교안 16쪽</span>
+    <h3>종합 — 분석과 시각화: describe · .values · np.std · barplot · 80점 이상만 다시 그리기</h3>
+    <div class="note-tags"><span class="tag">describe</span><span class="tag">.values → NumPy</span><span class="tag">np.std</span><span class="tag">sns.barplot</span><span class="tag">⚠ 아직 실행 전</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>철수 88 · 영희 95 · 민수 60 · 지현 72 · 수진 81. ① DataFrame + <code>describe()</code> ② <code>.values</code>로 NumPy 배열 → 평균 · 표준편차(<code>np.std</code>) ③ <code>sns.barplot(x="name", y="score", data=df)</code> ④ 도전: 80점 이상만 다시 그리기.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day04_실습.ipynb — 칸 12 (내 풀이, 줄임)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">df = pd.DataFrame(data)
+print(df.describe())
+
+score_arr = df["score"].values          # ← Numpy 배열로 변환
+mean_val = np.mean(score_arr)
+std_val = np.std(score_arr)
+print(f"평균: {mean_val:.2f}")
+print(f"표준편차: {std_val:.2f}")
+
+sns.barplot(x="name", y="score", data=df)
+plt.title("학생별 성적"); plt.show()
+
+df_over_80 = df[df["score"] &gt;= 80]
+sns.barplot(x="name", y="score", data=df_over_80)
+plt.title("80점 이상 학생 성적"); plt.show()</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 출력 없음 → 여기서 다시 실행 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[1번 문제: describe 통계]
+           score
+count   5.000000
+mean   79.200000
+std    13.700365       ← 표본 표준편차 (n − 1)
+min    60.000000
+25%    72.000000
+50%    81.000000
+75%    88.000000
+max    95.000000
+
+[2번 문제: Numpy 계산]
+평균: 79.20
+표준편차: 12.25       ← 모집단 표준편차 (n)</pre>
+      <div class="run-note">이 칸은 실행 번호도 출력도 없어요 — 풀이를 쓰고 아직 실행하지 않은 상태로 저장된 것으로 보여요. 저장소 밖에서 다시 실행해 위 출력과 아래 그림을 얻었어요.</div>
+    </details>
+    <div class="figs">
+      <figure><img src="img/day04-final-bar.png" alt="학생별 성적 막대그래프 — 철수 88, 영희 95, 민수 60, 지현 72, 수진 81" loading="lazy"><figcaption>3번 — 학생 5명</figcaption></figure>
+      <figure><img src="img/day04-final-bar80.png" alt="80점 이상 학생 성적 막대그래프 — 철수 88, 영희 95, 수진 81" loading="lazy"><figcaption>도전 — 80점 이상 3명(필터 결과를 새 변수에)</figcaption></figure>
+    </div>
+    <div class="concept-block">
+      <h4>짚을 점 · 선생님 풀이</h4>
+      <p>풀이는 모두 맞아요. 눈여겨볼 곳은 <b>표준편차가 두 개</b>라는 점 — <code>describe()</code>는 13.70, <code>np.std</code>는 12.25. 선생님 노트북 출력(<code>79.2 12.253978945632314</code>)도 같은 값이에요. Pandas는 표본(n − 1), NumPy는 모집단(n)이 기본이라서예요(<a href="#py-13">py-13</a>). 도전에서 필터 결과를 <code>df_over_80</code>이라는 <b>새 이름</b>에 담아 원본 <code>df</code>를 지킨 것도 좋아요(선생님은 <code>df2 = df2[…]</code>로 덮어씀 — 이후에 원본이 필요 없으면 그것도 괜찮아요).</p>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <details class="sc-q"><summary>2번에서 describe 와 같은 13.70 을 NumPy 로 얻으려면?</summary><div class="sc-a"><code>np.std(score_arr, ddof=1)</code>. 반대로 Pandas에서 12.25를 얻으려면 <code>df["score"].std(ddof=0)</code>.</div></details>
+    </div>
+  </div>
+</article>
     </section>
 
     <section id="exam-section" class="cat hidden">
       <div class="cat-head"><h2>✏️ 시험 대비 — 출력 예측 · 개념 확인</h2></div>
-      <p class="cat-desc">강의자료의 워밍업 퀴즈와 실습에서 실제로 헷갈린 곳으로 만든 4지선다예요. <b>문제 순서와 보기 순서는 매번 섞이고</b>, 답을 고르면 보기마다 왜 맞고 틀린지와 관련 카드 링크가 나와요. 코드 출력은 모두 파이썬 3.15.0으로 실행해 확인했습니다.</p>
+      <p class="cat-desc">강의자료의 워밍업 퀴즈와 실습에서 실제로 헷갈린 곳으로 만든 4지선다예요(Day 1~4). <b>문제 순서와 보기 순서는 매번 섞이고</b>, 답을 고르면 보기마다 왜 맞고 틀린지와 관련 카드 링크가 나와요. 코드 출력은 모두 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4)으로 실행해 확인했습니다.</p>
       <div class="exam-controls">
         <button class="btn primary" type="button" data-exam="">전체 풀기</button>
         <button class="btn" type="button" data-exam="day1">Day 1 · 변수 · 자료형</button>
         <button class="btn" type="button" data-exam="day2">Day 2 · 조건 · 반복 · 함수 · 파일</button>
+        <button class="btn" type="button" data-exam="day3">Day 3 · Pandas</button>
+        <button class="btn" type="button" data-exam="day4">Day 4 · NumPy · 시각화</button>
       </div>
       <div id="exam-box" class="box"><p class="exam-q">위 버튼을 누르면 시작합니다.</p></div>
 <script>
@@ -1346,7 +2352,72 @@ const EXAM_BANK = [
     ch: ["쓸 때와 읽을 때 모두 open(…, encoding=\"utf-8\")", "\"w\" 대신 \"a\" 모드로 쓴다", "with 대신 f = open(…) 을 쓴다", "아무것도 안 해도 모든 버전에서 UTF-8 이다"], a: 0,
     ex: "encoding을 생략하면 기본값이 버전 · OS마다 달라요(3.15는 UTF-8, 3.12 이하 Windows는 cp949). 직접 적으면 어디서나 같아요.",
     why: ["정답 — 점수 파일 실습의 내 풀이처럼.", "a는 이어 쓰기 모드일 뿐 인코딩과 무관해요.", "with는 자동으로 닫아 줄 뿐 인코딩과 무관하고, 오히려 닫기를 잊기 쉬워져요.", "3.15부터의 기본값이에요. 3.12 이하 Windows는 cp949라 UnicodeDecodeError가 날 수 있어요."],
-    link: ["#py-08", "🐍 개념 08 — 파일과 예외"] }
+    link: ["#py-08", "🐍 개념 08 — 파일과 예외"] },
+  { cat: "day3", q: "<code>df = pd.DataFrame({\"name\": [\"철수\", \"영희\", \"민수\"], \"score\": [88, 95, 72]})</code> 의 <code>df.shape</code> 는?",
+    ch: ["(3, 2)", "(2, 3)", "6", "(3,)"], a: 0,
+    ex: "shape 는 (행 수, 열 수). 학생 3명이 행, name · score 두 열이에요.",
+    why: ["정답.", "순서가 (행, 열)이라 반대예요.", "칸 수(size)는 6이지만 shape 는 튜플이에요.", "1차원 Series 의 모양이에요."],
+    link: ["#py-09", "🐍 09. Series와 DataFrame"] },
+  { cat: "day3", q: "<code>df.to_csv(\"a.csv\")</code> 로 저장한 뒤 <code>pd.read_csv(\"a.csv\")</code> 로 읽었더니 생긴 열은?",
+    ch: ["Unnamed: 0", "index", "id", "아무 열도 더 생기지 않는다"], a: 0,
+    ex: "index=False 를 빼면 행 번호가 이름 없는 열로 저장되고, 다시 읽을 때 Unnamed: 0 이 돼요.",
+    why: ["정답 — 실행해 확인.", "이름이 index 로 붙지는 않아요.", "id 라는 이름은 쓰이지 않아요.", "index=False 일 때의 결과예요."],
+    link: ["#py-10", "🐍 10. CSV · JSON 읽고 쓰기"] },
+  { cat: "day3", q: "JSON 파일에 한글이 <code>\\uc5f0\\ud544</code> 처럼 저장됐다. 한글 그대로 저장하는 옵션은?",
+    ch: ["force_ascii=False", "encoding=\"utf-8-sig\"", "index=False", "orient=\"records\""], a: 0,
+    ex: "to_json 은 기본으로 한글을 유니코드 이스케이프로 써요. force_ascii=False 면 그대로.",
+    why: ["정답.", "엑셀용 CSV 에 BOM 을 붙이는 옵션이에요.", "CSV 의 행 번호 저장 여부예요.", "JSON 의 모양(리스트)을 바꾸는 옵션이지 글자와는 무관해요."],
+    link: ["#py-10", "🐍 10. CSV · JSON 읽고 쓰기"] },
+  { cat: "day3", q: "점수 70 이상 90 미만인 행만 고르는 코드로 맞는 것은?",
+    ch: ["df[(df[\"score\"] >= 70) & (df[\"score\"] < 90)]", "df[df[\"score\"] >= 70 and df[\"score\"] < 90]", "df[df[\"score\"] >= 70 & df[\"score\"] < 90]", "df.where(70 <= score < 90)"], a: 0,
+    ex: "행마다 비교하는 조건은 & · | 를 쓰고, 조건마다 괄호를 쳐요.",
+    why: ["정답.", "and 는 Series 전체의 참/거짓을 물어 ValueError 가 나요.", "괄호가 없으면 & 가 먼저 계산돼 엉뚱한 식이 돼요.", "score 라는 변수는 없고, where 는 쓰임이 달라요."],
+    link: ["#py-11", "🐍 11. 탐색과 필터링"] },
+  { cat: "day3", q: "기본 인덱스(0, 1, 2, 3)인 df 에서 <code>df.loc[0:1]</code> 과 <code>df.iloc[0:1]</code> 은 각각 몇 행?",
+    ch: ["2행 · 1행", "1행 · 1행", "2행 · 2행", "1행 · 2행"], a: 0,
+    ex: "loc 은 이름(인덱스) 기준이라 끝 1 을 포함, iloc 은 위치 기준이라 파이썬 슬라이싱처럼 끝 미포함.",
+    why: ["정답 — 실행해 확인.", "loc 은 끝을 포함해요.", "iloc 은 끝을 포함하지 않아요.", "반대로 기억한 경우예요."],
+    link: ["#py-11", "🐍 11. 탐색과 필터링"] },
+  { cat: "day3", q: "<code>df.fillna(0)</code> 을 실행한 다음 줄에서 <code>df.isna().sum()</code> 을 찍으면?",
+    ch: ["원래 결측치 개수 그대로", "모두 0", "오류", "결측치가 있던 행이 지워져 있다"], a: 0,
+    ex: "fillna 는 채운 새 표를 돌려줄 뿐 df 를 바꾸지 않아요. df = df.fillna(0) 으로 다시 담아야 해요.",
+    why: ["정답.", "df = df.fillna(0) 으로 담았을 때예요.", "정상 실행돼요.", "그건 dropna() 이고, 그것도 다시 담아야 반영돼요."],
+    link: ["#py-12", "🐍 12. 데이터 정제"] },
+  { cat: "day3", q: "이름이 영희인 행이 점수 0.0 과 95.0 으로 두 번 있다. <code>df.drop_duplicates()</code> 의 결과는?",
+    ch: ["두 행 모두 남는다", "뒤의 영희만 남는다", "앞의 영희만 남는다", "두 행 모두 지워진다"], a: 0,
+    ex: "기본은 모든 열이 같은 행만 중복으로 봐요. 이름 기준이면 subset=[\"name\"], 뒤를 남기려면 keep=\"last\".",
+    why: ["정답 — Day 3 종합 실습 그대로.", "subset=[\"name\"], keep=\"last\" 일 때예요.", "subset=[\"name\"] (keep 기본 first) 일 때예요.", "keep=False 를 줘야 중복을 모두 지워요."],
+    link: ["#lab-17", "🧪 17. 종합 전처리"] },
+  { cat: "day3", q: "점수가 NaN 인 행에 <code>apply(lambda x: \"A\" if x >= 90 else \"B\")</code> 를 하면?",
+    ch: ["\"B\"", "\"A\"", "NaN", "TypeError"], a: 0,
+    ex: "NaN 과의 비교는 항상 거짓이라 else 쪽으로 가요. 결측치를 먼저 처리하고 apply 해요.",
+    why: ["정답 — 실행해 확인.", "NaN >= 90 은 참이 아니에요.", "lambda 가 문자열을 돌려주므로 NaN 이 그대로 나오지 않아요.", "float 인 NaN 과의 비교는 오류 없이 False 예요."],
+    link: ["#py-12", "🐍 12. 데이터 정제"] },
+  { cat: "day4", q: "<code>scores = np.array([88, 92, 75, 60, 95])</code> 에서 <code>scores[scores > 2]</code> 의 결과는?",
+    ch: ["[88 92 75 60 95]", "[88 92 95]", "[75 60]", "[True True True True True]"], a: 0,
+    ex: "모두 2 보다 커서 전부 남아요. 80점 이상이면 scores[scores >= 80].",
+    why: ["정답 — 내 Day 4 노트북 2번의 출력.", "scores >= 80 일 때예요.", "80 미만만 고른 경우예요.", "scores > 2 자체(불리언 배열)의 값이에요."],
+    link: ["#lab-18", "🧪 18. NumPy 배열 다루기"] },
+  { cat: "day4", q: "<code>[88, 92] * 2</code> 와 <code>np.array([88, 92]) * 2</code> 의 결과를 차례로 고르면?",
+    ch: ["[88, 92, 88, 92] 와 [176 184]", "둘 다 [176, 184]", "둘 다 [88, 92, 88, 92]", "[176, 184] 와 [88 92 88 92]"], a: 0,
+    ex: "리스트의 * 는 반복, NumPy 배열의 * 는 원소마다 곱셈이에요.",
+    why: ["정답.", "리스트는 곱셈이 아니라 이어 붙이기예요.", "배열은 원소마다 계산해요.", "반대로 기억한 경우예요."],
+    link: ["#py-13", "🐍 13. NumPy"] },
+  { cat: "day4", q: "점수 [88, 95, 60, 72, 81] 의 표준편차가 <code>describe()</code> 는 13.70, <code>np.std</code> 는 12.25 다. 이유는?",
+    ch: ["Pandas 는 n−1(표본), NumPy 는 n(모집단)으로 나누는 것이 기본이라서", "NumPy 가 소수점을 버려서", "describe 가 결측치를 0으로 채워서", "np.std 가 중앙값을 기준으로 계산해서"], a: 0,
+    ex: "ddof 의 기본값이 달라요. np.std(a, ddof=1) 이면 13.70 으로 같아져요.",
+    why: ["정답 — 실행해 확인.", "버림이 아니라 정의(나누는 수)가 달라요.", "결측치는 없어요.", "표준편차는 평균을 기준으로 해요."],
+    link: ["#py-13", "🐍 13. NumPy"] },
+  { cat: "day4", q: "히스토그램을 그리고 <code>plt.savefig(\"a.png\")</code> → <code>plt.title(\"성적\")</code> → <code>plt.show()</code> 순서로 썼다. a.png 는?",
+    ch: ["제목 없는 그림", "제목이 있는 그림", "빈 그림", "저장되지 않는다"], a: 0,
+    ex: "savefig 는 부른 그 순간의 그림을 저장해요. 꾸미기를 다 한 뒤, show 전에 저장해야 해요.",
+    why: ["정답 — Day 4 Seaborn 실습의 check_13a.png 가 이랬어요.", "제목은 저장한 뒤에 붙었어요.", "show 뒤에 savefig 하면 빈 그림이 되기 쉬워요.", "정상 저장돼요."],
+    link: ["#lab-20", "🧪 20. Seaborn 실습"] },
+  { cat: "day4", q: "Windows 에서 그래프 제목의 한글이 □□□ 로 나온다. 고치는 코드는?",
+    ch: ["plt.rc(\"font\", family=\"Malgun Gothic\")", "plt.rc(\"axes\", unicode_minus=False)", "plt.title(\"성적\", encoding=\"utf-8\")", "import seaborn as sns"], a: 0,
+    ex: "기본 폰트에 한글이 없어서예요. 한글 폰트(맑은 고딕, Mac 은 AppleGothic)를 지정해요.",
+    why: ["정답.", "음수 기호(-) 깨짐을 막는 설정이에요. 함께 쓰긴 해요.", "title 에 encoding 옵션은 없어요. 문제는 글꼴이에요.", "Seaborn 을 불러도 폰트는 그대로예요."],
+    link: ["#py-14", "🐍 14. Matplotlib"] }
 ];
 </script>
     </section>
