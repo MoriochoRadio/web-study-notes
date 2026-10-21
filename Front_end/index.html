@@ -1692,7 +1692,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <h1>웹 개발 학습 노트</h1>
         <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
         <div class="meta-row">
-          <span id="updated-badge">마지막 점검: 2026-10-20</span>
+          <span id="updated-badge">마지막 점검: 2026-10-21</span>
           <span>HTML 7개 단원</span>
           <span>CSS 12개 단원</span>
           <span>JavaScript 18개 단원</span>
@@ -2189,7 +2189,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
               <li>API 키는 서버 쪽(API Route·서버 컴포넌트)에만 — 브라우저 코드에 두면 누구나 볼 수 있다</li>
               <li>React(라이브러리)와 Next.js(프레임워크)의 경계</li>
             </ul></div>
-            <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>신규 React 프로젝트의 상당수가 Next.js로 시작합니다. 검색 노출(SEO)이 중요한 서비스, 첫 화면 속도가 중요한 서비스에 특히요. API Routes는 간단한 중계 서버로 쓰고, 본격적인 업무 로직은 보통 <b>별도 백엔드(스프링 등)</b>에 둡니다 — 백엔드 과정에서 배운 쪽이죠(10/19부터의 AI Agent 과정에서는 파이썬 FastAPI로도 만들어요).</p></div>
+            <div class="bp-box"><span class="bp-box-t">실무에서는</span><p>신규 React 프로젝트의 상당수가 Next.js로 시작합니다. 검색 노출(SEO)이 중요한 서비스, 첫 화면 속도가 중요한 서비스에 특히요. API Routes는 간단한 중계 서버로 쓰고, 본격적인 업무 로직은 보통 <b>별도 백엔드(스프링 등)</b>에 둡니다 — 백엔드 과정에서 배운 쪽이죠(10/21 AI Agent 과정에서는 파이썬 FastAPI로도 만들었어요).</p></div>
             <div class="bp-box"><span class="bp-box-t">면접에서는</span><div class="bp-qa">
               <details><summary>CSR과 SSR의 차이와 장단점은?</summary><div class="bp-a">CSR은 빈 HTML과 JS를 받아 브라우저가 화면을 그려서 이후 화면 전환이 빠르지만 첫 화면이 늦고 SEO에 불리합니다. SSR은 서버가 완성된 HTML을 보내 첫 화면과 SEO에 유리하지만 요청마다 서버가 일을 해야 합니다.</div></details>
               <details><summary>서버 컴포넌트와 클라이언트 컴포넌트는 어떻게 나누나요?</summary><div class="bp-a">데이터를 가져와 보여 주기만 하는 부분은 서버 컴포넌트로, 클릭·입력·state가 필요한 부분은 <code>"use client"</code>를 붙인 클라이언트 컴포넌트로 만듭니다. 브라우저로 보내는 JS가 줄어 빨라집니다.</div></details>
