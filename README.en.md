@@ -1,5 +1,7 @@
 # Web Development Study Log (Job Academy)
 
+**2026-10-22 update:** Added day 4 of the AI Agent course to the [AI Agent notes](https://moriochoradio.github.io/web-study-notes/AI_Agent/): a Day 5 follow-up that connects the FastAPI CRUD to MariaDB with SQLAlchemy ([db_main.py](AI_Agent/python_agent/day05/db_main.py), built from the teacher's development brief) and Days 6–7 on **LangChain** (LLM and agent concepts, `.env` with `ChatOpenAI`, `prompt | llm | parser`, `@tool`, `MessagesPlaceholder` memory): six concept cards, seven lab cards (including a checklist for the unsolved exercise sheet), ten quiz questions and a LangChain-to-earlier-courses table. `db_main.py` was checked with 15 requests against a copy pointed at SQLite; LLM calls were not re-run (cost and the user's key), while the parts that do not need a model (tools, prompt variable checks, chains, history growing 2 → 4, a `NameError` from an import placed two cells later) were run with a fake chat model. The class `.env` (API key) was neither opened nor committed, the four DB password occurrences in `db_main.py` are replaced with `YOUR_DB_PASSWORD`, and a root `.gitignore` now blocks `.env` and `__pycache__`.
+
 **2026-10-21 update:** Added day 3 of the AI Agent course (Day 5, **FastAPI**) to the [AI Agent notes](https://moriochoradio.github.io/web-study-notes/AI_Agent/): five concept cards (running a server with `uvicorn` and `/docs`, path parameters, query parameters, Pydantic request bodies, `HTTPException` and CRUD) compared with the Spring REST API from backend day 50, plus a Spring → FastAPI table, five lab cards and ten quiz questions. Running the class file [day05/main.py](AI_Agent/python_agent/day05/main.py) under uvicorn and sending 29 requests showed that `GET /products/{product_id}` is registered three times, so only the first handler answers (a missing product returns 200 and a PUT is not visible); the card explains the fix. The file viewer (`view.html`) now highlights `.py` files. There was no coding test that day.
 
 **2026-10-20 update:** Added day 2 of the AI Agent course (Days 3–4) to the [AI Agent notes](https://moriochoradio.github.io/web-study-notes/AI_Agent/): seven concept cards on pandas (DataFrame, CSV/JSON, filtering, missing values, duplicates, `apply`), NumPy, Matplotlib and Seaborn, each compared with SQL or Java; eleven lab cards with my notebook code, a re-run, and how the teacher's solution differs (charts are re-rendered images); and 13 more quiz questions. Re-running the notebooks surfaced an example cell that raises `KeyError` because an earlier cell replaced `df`, a `students.csv` that actually holds products, a filter whose result was never assigned, a NumPy condition typo (`> 2`), a figure saved before its title was added, and the gap between `describe()`'s standard deviation (13.70, sample) and `np.std` (12.25, population). [Coding-test round 28](Back_end/coding-tests/2026-10-20/) (2 PASS, 2 FAIL) continues as ct-74–77 with Java checks (every valid carpet, 1.56 million cases) and 13 SQLite checks.
@@ -44,7 +46,7 @@ As of the QA pass on 2026-10-02, the frontend curriculum is reflected in both th
 | --- | --- | --- |
 | Frontend | HTML 7 · CSS 12 · JavaScript 18 (through AJAX) · React/Next.js 14 units · StockDash graduation project | ✅ Complete |
 | Backend | Daily class notes through day 50 · Java concept cards · SQL 46 · web 88 (JDBC/JSP → Spring MVC → Spring Boot → REST API + React) · 12 practice problems · 77 coding-test notes · 231 exam-prep questions | 🔄 In progress (started 2026-08-03) |
-| AI Agent | "AI Agent Hands-on Intro, Part 1" — days 1–5 of 10 (Python basics, pandas, NumPy, plotting, FastAPI): 20 concept cards · 27 lab cards · 40 quiz questions · class notebooks and server code | 🔄 In progress (started 2026-10-19) |
+| AI Agent | "AI Agent Hands-on Intro, Part 1" — days 1–7 of 10 (Python basics, pandas, NumPy, plotting, FastAPI, database access, LangChain): 26 concept cards · 34 lab cards · 50 quiz questions · class notebooks and server code | 🔄 In progress (started 2026-10-19) |
 | Repository hygiene | Rules exclude dependencies, Next.js build caches, environment files, and IDE files | ✅ Reviewed |
 
 > **Study-note principle:** Every learning card follows “one-line summary → in plain words → concept → annotated code → key takeaways.” Runnable source remains in its lesson folder, while the dashboard is for quickly reviewing concepts and code flow.
@@ -93,6 +95,7 @@ Manual checks remain available, and the same checks now run automatically for `m
 ```text
 .
 ├── index.html    # Study-track hub; legacy hash links remain compatible with Front_end/
+├── .gitignore    # Keeps .env (API keys) and __pycache__ out of the repository
 ├── .nojekyll     # Serves static files on GitHub Pages without Jekyll processing
 ├── .github/workflows/verify-study-notes.yml  # Read-only automated verification
 ├── Front_end/    # Frontend track (HTML · CSS · JS · React/Next.js)

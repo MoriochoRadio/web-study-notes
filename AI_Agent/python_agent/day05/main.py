@@ -146,7 +146,7 @@ products_db = {1: {"name": "노트북", "price": 1200000, "in_stock": True}}
 # [1번 문제] GET "/products/{product_id}" : products_db에 해당 id가 없으면
 # HTTPException(404, "상품을 찾을 수 없습니다.")를 발생시키고, 있으면 그 상품을 반환하세요.
 @app.get("/products/{product_id}")
-def products(product_id: int):
+def products3(product_id: int):
     if product_id not in products_db:
         raise HTTPException(status_code=404, detail="상품을 찾을 수 없습니다.")
     return products_db[product_id]
@@ -171,6 +171,14 @@ def delete_product(product_id: int):
         raise HTTPException(status_code=404, detail="상품을 찾을 수 없습니다.")
     del products_db[product_id]
     return {"message": "삭제 완료"}
+
+
+
+# 요청/응답을 처리하는 Controller 구현
+# DB연결 -> Database:Table 연동 -> 실제 요청했을때 반영되도록 구현
+# 상품관리하는 시스템: id, name, 수량, 가격 ...
+# 👉 MariaDB(SQLAlchemy) 연동 완성 코드는 'db_main.py' 파일에 구현되어 있습니다.
+
 
 
 

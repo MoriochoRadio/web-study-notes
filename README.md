@@ -1,5 +1,7 @@
 # 웹 개발 학습 기록 (취업아카데미)
 
+**2026-10-22 갱신:** [AI Agent 노트](https://moriochoradio.github.io/web-study-notes/AI_Agent/)에 넷째 날을 반영했다 — 오전 Day 5 보충(FastAPI + MariaDB, SQLAlchemy ORM · `Depends(get_db)` · 요청 · 응답 스키마 분리, 선생님 개발 요청서대로 만든 [`db_main.py`](AI_Agent/python_agent/day05/db_main.py))과 오후 Day 6~7 **LangChain**(LLM · Agent 개념, `.env` + `ChatOpenAI`, `prompt | llm | parser`, `@tool`, `MessagesPlaceholder` 기억). 개념 카드 6장(py-21~26) · 실습 7장(lab-28~34, 실습예제 md 체크리스트 포함) · 시험 10문제 · "LangChain 부품 → 앞 과정" 대응표를 더했다. `db_main.py`는 접속 주소만 SQLite로 바꾼 사본으로 CRUD 15개 요청을 확인했고, LLM 호출은 요금 · 키 때문에 다시 실행하지 않고 LLM 없이 확인되는 부분(도구 · 프롬프트 변수 검사 · 체인 · history 2 → 4 · 13쪽 예제 칸의 `NameError`)을 가짜 모델로 실행했다. **비밀값**: 실습 폴더의 `.env`(API 키)는 열지도 올리지도 않았고, `db_main.py`의 DB 비밀번호 네 곳은 `YOUR_DB_PASSWORD`로 가렸으며, 루트 `.gitignore`로 `.env` · `__pycache__`를 막았다.
+
 **2026-10-21 갱신:** [AI Agent 노트](https://moriochoradio.github.io/web-study-notes/AI_Agent/)에 셋째 날(Day 5 **FastAPI**)을 반영했다 — 서버 띄우기(`uvicorn` · `/docs`) · 경로 파라미터 · 쿼리 파라미터 · Pydantic 요청 본문 · `HTTPException`과 CRUD를 백엔드 50일차 스프링 REST API와 나란히 비교한 개념 카드 5장(py-16~20)과 "스프링 → FastAPI" 대응표, 실습 5개(lab-23~27), 시험 10문제. 실습 파일 [`day05/main.py`](AI_Agent/python_agent/day05/main.py)를 저장소 밖에서 uvicorn으로 띄워 요청 29개를 보내 보니 `GET /products/{product_id}`가 세 번 등록돼 **먼저 등록된 함수만 응답**(없는 상품도 200, PUT 결과가 안 보임)하는 것을 찾아 고치는 법과 함께 적었다. 선생님 파일의 오타 경로(`/courses/pupular`)도 같은 방법으로 확인했다. 원본 파일 뷰어(`view.html`)가 `.py`를 색칠하도록 고쳤다. 이날 코딩테스트 오답노트는 없다.
 
 **2026-10-20 갱신:** [AI Agent 노트](https://moriochoradio.github.io/web-study-notes/AI_Agent/)에 둘째 날(Day 3~4)을 반영했다 — **Pandas**(DataFrame · CSV/JSON · 필터 · 결측치 · 중복 · `apply`)와 **NumPy · Matplotlib · Seaborn**을 SQL · 자바와 나란히 비교한 개념 카드 7장(py-09~15), 실습 11개의 내 풀이 · 다시 실행한 결과 · 선생님 풀이와 다른 점(lab-12~22, 그래프는 다시 실행해 그린 그림 10장), 시험 13문제를 더했다. 다시 실행해 보니 예제 칸의 `KeyError`(앞 칸이 바꾼 `df`), 이름과 달리 상품이 든 `students.csv`, 필터 결과를 담지 않아 70점 미만이 남은 `result.csv`, NumPy 조건 오타(`> 2`), 제목 없이 저장된 그림(`savefig`를 `title`보다 먼저), `describe()` 13.70과 `np.std` 12.25의 차이(표본 · 모집단)가 보여 카드마다 적었다. 같은 날 [28회차 코딩테스트](https://moriochoradio.github.io/web-study-notes/Back_end/coding-tests/2026-10-20/)(가운데 글자 · 조건에 맞는 회원수 PASS, 카펫 · 대장균 자식 수 FAIL)를 ct-74~77로 이어 붙이고 Java 검증(카펫은 조건 안의 모든 경우 156만 개) · SQLite 검증 13개를 남겼다.
@@ -73,7 +75,7 @@ JDK 21 · Eclipse · Tomcat 10.1 · MariaDB · Node 설치, 프로젝트 불러�
 | --- | --- | --- |
 | 프런트엔드 | HTML 7 · CSS 12 · JavaScript 18(AJAX까지) · React/Next.js 14단원 · StockDash 졸업 과제 | ✅ 완료 |
 | 백엔드 | 날짜별 수업 진도 50일차(카드 49장 — 17일차 소스 없음) · 개념 카드 · 실습과제 12문제 · SQL 46항목 · 웹 개발 88항목(JSP·Servlet·MVC2·EL/JSTL·Spring·MyBatis·답변형 게시판·트랜잭션·AOP·인터셉터·JUnit·Spring Boot·Thymeleaf·로그인·파일 업로드·권한 검증·일정관리 달력·일정 CRUD·REST API·CORS·React 프런트) · 코딩테스트 77문제 · 시험 대비 231문제 | 🔄 진행 중 (2026-08-03 시작) |
-| AI Agent | 「AI AGENT 실습 입문 과정 1부」 10일 중 Day 1~5(파이썬 기초 · Pandas · NumPy · 시각화 · FastAPI) · 개념 20 · 실습 풀이 27 · 시험 40문제 · 실습 노트북 · 서버 코드 | 🔄 진행 중 (2026-10-19 시작) |
+| AI Agent | 「AI AGENT 실습 입문 과정 1부」 10일 중 Day 1~7(파이썬 기초 · Pandas · NumPy · 시각화 · FastAPI · DB 연동 · LangChain) · 개념 26 · 실습 풀이 34 · 시험 50문제 · 실습 노트북 · 서버 코드 | 🔄 진행 중 (2026-10-19 시작) |
 | 저장소 위생 | 의존성·Next.js 빌드 캐시·환경 변수·IDE 파일 제외 규칙 적용 | ✅ 점검 완료 |
 
 > **노트 작성 원칙:** 모든 학습 카드는 “한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리”의 순서로 구성합니다. 실행 가능한 원본 코드는 단원 폴더에 남기고, 대시보드는 개념과 코드 흐름을 빠르게 복습하는 용도로 사용합니다.
@@ -159,6 +161,7 @@ python3 scripts/verify_backend_inventory.py
 ```text
 .
 ├── index.html    # 학습 과정 선택 허브, 기존 해시 링크는 Front_end/로 호환
+├── .gitignore    # .env(API 키) · __pycache__ 를 올리지 않음
 ├── .nojekyll     # GitHub Pages에서 정적 파일을 가공 없이 제공
 ├── .github/workflows/verify-study-notes.yml  # 읽기 전용 자동 검증
 ├── Front_end/    # 프런트엔드 과정 (HTML · CSS · JS · React/Next.js)
