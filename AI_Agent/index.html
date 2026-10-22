@@ -3840,7 +3840,17 @@ const EXAM_BANK = [
     if (sec) showTab(sec.id.replace("-section", ""));
     requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
   }
-  if (location.hash) setTimeout(() => reveal(decodeURIComponent(location.hash.slice(1))), 0);
+  if (location.hash) {
+    const target = () => decodeURIComponent(location.hash.slice(1));
+    setTimeout(() => reveal(target()), 0);
+    // 글꼴 · 코드 색칠 · 그림이 늦게 적용돼 높이가 바뀌면 한 번 더 맞춘다 (그사이 직접 스크롤했으면 그대로 둔다)
+    let moved = false;
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(ev => window.addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+    const again = () => { if (!moved && location.hash) reveal(target()); };
+    window.addEventListener("load", again, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(again);
+    setTimeout(again, 1500);
+  }
   window.addEventListener("hashchange", () => reveal(decodeURIComponent(location.hash.slice(1))));
 
   // ---- 검색: 모든 탭의 카드에서 글자로 찾기 ----
