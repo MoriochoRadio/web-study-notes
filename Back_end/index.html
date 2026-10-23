@@ -390,9 +390,12 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   #next-section,#materials-section{--c:var(--next);}
   section.cat .cat-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
   .dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--c,var(--next));}
+  /* 형광펜은 굵은 밑줄로 줄마다 칠한다 — .cat-head(flex) 안의 제목은 블록이 되어, 배경으로 칠하면 두 줄 이상일 때
+     마지막 줄 전체 폭이 통째로 칠해졌다. 제목은 색 점 옆에 남고, 좁으면 '모두 펼치기'만 다음 줄로 내려간다. */
   section.cat h2{
-    font-size:23px;margin:0;padding:0 5px;display:inline;
-    background:linear-gradient(transparent 58%, color-mix(in srgb, var(--c, var(--accent)) 26%, transparent) 58%, color-mix(in srgb, var(--c, var(--accent)) 26%, transparent) 94%, transparent 94%);
+    font-size:23px;margin:0;padding:0 5px;flex:1 1 300px;min-width:0;
+    text-decoration:underline;text-decoration-skip-ink:none;text-decoration-thickness:.46em;text-underline-offset:-.3em;
+    text-decoration-color:color-mix(in srgb, var(--c, var(--accent)) 26%, transparent);
   }
   section.cat .cat-desc{color:var(--muted);font-size:14.5px;line-height:1.8;margin:6px 0 18px;}
   .expand-all{
