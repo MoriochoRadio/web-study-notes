@@ -1698,6 +1698,60 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .nav-sub-item.on{background:var(--panel-2);color:var(--accent);font-weight:700;}
   body:not(.card-filtering) .sub-off{display:none;}
   body.card-filtering .sub-bar,body.card-filtering .sub-title{display:none;}
+
+  /* ---- 🩺 역량 진단 (학원 LMS 퀴즈 오답) ---- */
+  #diagnosis-section{--c:#c2410c;}
+  .diag-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:0 0 16px;}
+  .diag-card{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:inherit;text-decoration:none;min-width:0;}
+  a.diag-card:hover{border-color:var(--c);}
+  .diag-card .t{font-size:13px;font-weight:700;color:var(--muted);}
+  .diag-card .s{font-size:24px;font-weight:800;line-height:1.2;}
+  .diag-card .s small{font-size:13px;color:var(--muted);font-weight:600;}
+  .diag-card .w{font-size:12.5px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere;}
+  .diag-bar{display:inline-block;width:100%;min-width:56px;height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden;vertical-align:middle;}
+  .diag-bar i{display:block;height:100%;background:#1d8f52;}
+  .diag-bar.mid i{background:#d97706;}
+  .diag-bar.low i{background:#dc2626;}
+  .diag-scroll{overflow-x:auto;margin:8px 0;}
+  .diag-units{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .diag-units th,.diag-units td{border-bottom:1px solid var(--border);padding:7px 8px;text-align:left;vertical-align:top;}
+  .diag-units th{font-size:12.5px;color:var(--muted);font-weight:700;}
+  .diag-units td:nth-child(2){white-space:nowrap;}
+  .diag-units .diag-barcol{width:22%;min-width:70px;vertical-align:middle;}
+  .diag-second td:first-child{white-space:nowrap;font-weight:700;}
+  .diag-peek summary{cursor:pointer;color:var(--muted);font-size:12.5px;}
+  .diag-top,.diag-list{margin:0;padding-left:20px;line-height:1.75;}
+  .diag-top li,.diag-list li{margin:4px 0;}
+  .diag-hint{font-size:13px;color:var(--muted);margin:8px 0;}
+  .diag-src{font-size:12.5px;color:var(--muted);margin:14px 0 0;}
+  .diag-subject h3 small{font-size:12px;color:var(--muted);font-weight:600;}
+  details.diag-q{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:8px 0;scroll-margin-top:80px;}
+  details.diag-q[open]{border-color:var(--c);}
+  details.diag-q>summary{cursor:pointer;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;}
+  .dq-n{font-weight:800;color:var(--c);min-width:34px;}
+  .dq-gist{flex:1 1 240px;min-width:0;line-height:1.6;}
+  .dq-tags{display:flex;flex-wrap:wrap;gap:4px;}
+  .dq-tag{font-size:11.5px;border:1px solid var(--border);border-radius:99px;padding:1px 8px;color:var(--muted);white-space:nowrap;}
+  .dq-tag.neg{border-color:#7c3aed;color:#7c3aed;}
+  .dq-tag.code{border-color:#2b6cd4;color:#2b6cd4;}
+  .dq-tag.none{border-color:#dc2626;color:#dc2626;}
+  .dq-tag.part{border-color:#d97706;color:#b45309;}
+  .dq-tag.twice{border-color:#dc2626;background:#dc2626;color:#fff;}
+  [data-theme="dark"] .dq-tag.neg{color:#c4b5fd;border-color:#8b5cf6;}
+  [data-theme="dark"] .dq-tag.code{color:#93c5fd;border-color:#3b82f6;}
+  [data-theme="dark"] .dq-tag.none{color:#fca5a5;}
+  [data-theme="dark"] .dq-tag.part{color:#fcd34d;}
+  .dq-body{padding:4px 14px 12px;border-top:1px dashed var(--border);line-height:1.75;overflow-wrap:anywhere;}
+  .dq-ans{background:var(--panel-2);border-radius:8px;padding:8px 10px;}
+  .dq-mine{color:#dc2626;font-weight:800;margin-right:4px;}
+  .dq-right{color:#1d8f52;font-weight:800;margin-right:4px;}
+  [data-theme="dark"] .dq-mine{color:#fca5a5;}
+  [data-theme="dark"] .dq-right{color:#86efac;}
+  .dq-tip{font-size:13.5px;}
+  .dq-cards{font-size:13px;color:var(--muted);}
+  .diag-badge{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;border:1px solid #c2410c;color:#c2410c;border-radius:99px;padding:1px 8px;text-decoration:none;white-space:nowrap;}
+  [data-theme="dark"] .diag-badge{color:#fdba74;border-color:#fb923c;}
+  .diag-star-all{appearance:none;cursor:pointer;font:inherit;font-size:13.5px;font-weight:700;background:var(--panel);border:1px solid var(--c);color:inherit;border-radius:10px;padding:8px 14px;}
 </style>
 </head>
 <body>
@@ -1711,7 +1765,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
         <h1>웹 개발 학습 노트</h1>
         <p class="sub">내가 실습한 코드를 바탕으로 <b>한 줄 요약 → 쉽게 말하면(비유) → 개념 설명 → 주석 달린 코드 → 핵심 정리</b> 순서로 다시 공부하는 복습 노트입니다. 처음에는 카드가 요약만 보이게 접혀 있어요 — 훑어보다가 궁금한 단원만 펼쳐서 깊이 읽으면 됩니다.</p>
         <div class="meta-row">
-          <span id="updated-badge">마지막 점검: 2026-10-22</span>
+          <span id="updated-badge">마지막 점검: 2026-10-23</span>
           <span>HTML 7개 단원</span>
           <span>CSS 12개 단원</span>
           <span>JavaScript 18개 단원</span>
@@ -1752,6 +1806,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="journey" type="button">학습 여정</button>
       <button data-target="concepts" type="button">기초 개념 사전</button>
       <button data-target="exam" type="button">시험 대비</button>
+      <button data-target="diagnosis" type="button">역량 진단</button>
       <button data-target="next" type="button">학습 확장</button>
       <button data-target="materials" type="button">강의자료</button>
     </div>
@@ -1955,7 +2010,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">10/7 ~ 10/12</span><span class="bp-what">스프링 부트 — 같은 게시판을 부트로, 그리고 회원 · 파일 · 권한</span><span class="bp-badge done">완료</span><span class="bp-why">XML 설정을 부트의 자동 설정에 맡기고, 회원가입 · 로그인(세션) · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판을 만든다. 프런트에서 쓰던 "로그인 · 업로드 화면" 뒤편의 서버 쪽 일이다.</span></li>
       <li class="done"><span class="bp-when">10/13 ~ 10/15</span><span class="bp-what">일정관리(캘린더) 게시판 — 새 기능 하나를 부트로 처음부터</span><span class="bp-badge done">완료</span><span class="bp-why">9일차에 콘솔로 찍던 달력이 웹 화면으로 돌아온다. 서버가 그 달 1일의 요일 · 마지막 날을 구하고, 화면(Thymeleaf)이 그만큼 칸을 찍는다 — 프런트에서 map으로 목록을 그리던 것과 같은 생각. 이어서 날짜 칸의 폼으로 일정을 저장하고(서버가 다시 검사한 뒤 그 달로 redirect), 날짜를 누르면 그날의 목록을 꺼낸다 — React에서 폼을 제출하고 목록을 다시 불러오던 흐름의 서버 쪽 모습. 49일차에는 고치기 · 지우기, 그리고 사용자 글자를 화면에 찍을 때의 이스케이프 — React가 기본으로 해 주던 일을 <code>th:utext</code>에서는 직접 챙겨야 한다(<code>dangerouslySetInnerHTML</code>과 같은 자리).</span></li>
       <li class="done"><span class="bp-when">10/16</span><span class="bp-what">REST API + React 프런트 — 백엔드 과정이 이 탭의 React로 돌아온다</span><span class="bp-badge done">백엔드 50일차</span><span class="bp-why">스프링 서버는 JSON만 주고, 화면은 Next.js가 <code>fetch</code>로 불러 <code>useState</code>로 그린다 — 이 과정에서 외부 데이터를 부르던 그 자리에 이번엔 직접 만든 스프링 API가 선다. 포트가 다른 두 서버라 CORS를 처음 만난다.</span></li>
-      <li class="now"><span class="bp-when">10/19 ~ 지금</span><span class="bp-what">AI Agent 과정 1부 — 파이썬 · Pandas · FastAPI · LangChain · RAG · Agent (새 페이지)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">새 과정은 <a href="../AI_Agent/">🤖 AI Agent 노트</a>에 따로 정리한다. 이 탭의 JavaScript와 닮은 곳이 많다 — 파이썬의 리스트 컴프리헨션은 <code>map</code> · <code>filter</code>, f-string은 템플릿 리터럴(<code>`${x}`</code>), 딕셔너리를 담은 리스트는 <code>fetch</code>로 받던 JSON 배열과 같은 모양이다. 10/20에는 그 목록을 표(Pandas DataFrame)로 다루고 그래프(Matplotlib · Seaborn)로 그렸다 — 브라우저 차트 대신 분석용 그림. 10/21~22에는 FastAPI 서버와 LangChain으로 LLM을 불렀다 — 화면에서 <code>fetch</code>로 부를 "AI API"의 서버 쪽이고, 키를 브라우저가 아닌 서버의 <code>.env</code>에 두는 이유는 StockDash에서 API 키를 API Route 뒤에 숨긴 것과 같다.</span></li>
+      <li class="now"><span class="bp-when">10/19 ~ 지금</span><span class="bp-what">AI Agent 과정 1부 — 파이썬 · Pandas · FastAPI · LangChain · RAG · Agent (새 페이지)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">새 과정은 <a href="../AI_Agent/">🤖 AI Agent 노트</a>에 따로 정리한다. 이 탭의 JavaScript와 닮은 곳이 많다 — 파이썬의 리스트 컴프리헨션은 <code>map</code> · <code>filter</code>, f-string은 템플릿 리터럴(<code>`${x}`</code>), 딕셔너리를 담은 리스트는 <code>fetch</code>로 받던 JSON 배열과 같은 모양이다. 10/20에는 그 목록을 표(Pandas DataFrame)로 다루고 그래프(Matplotlib · Seaborn)로 그렸다 — 브라우저 차트 대신 분석용 그림. 10/21~22에는 FastAPI 서버와 LangChain으로 LLM을 불렀다 — 화면에서 <code>fetch</code>로 부를 "AI API"의 서버 쪽이고, 키를 브라우저가 아닌 서버의 <code>.env</code>에 두는 이유는 StockDash에서 API 키를 API Route 뒤에 숨긴 것과 같다. 10/23의 RAG(문서를 찾아 붙여 답하기)는 검색창 → 관련 자료 → 답변을 서버에서 "뜻"으로 하는 것이라, 화면 쪽에서는 결국 같은 <code>fetch</code> 한 번이다.</span></li>
       <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">직접 짠 로그인 · 권한 확인을 Spring Security 필터 체인에 맡기고, 종합 프로젝트로 "요즘 방식" 스프링을 마무리.</span></li>
     </ol>
 
@@ -18183,6 +18238,224 @@ let results = STOCKS
     </div>
   </section>
 
+  <section id="diagnosis-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>역량 진단 — 학원 LMS 프런트엔드 퀴즈로 본 약한 곳</h2></div>
+    <p class="cat-desc">학원 LMS <b>역량 진단 평가</b> 중 프런트엔드(LMS 과목명 "CSR프로그래밍", 50문항 · 4지선다)의 오답 노트예요. 성적표에 남은 <b>1차 응시(34 / 50)</b>와 붙여 준 <b>다시 풀기(13 / 50)</b>를 함께 봤어요. 다시 풀기에서는 1차에 맞힌 문항도 많이 틀려서 단원 점수는 1차 기준으로 보고, <b>두 번 다 틀린 13문항</b>을 가장 먼저 볼 곳으로 잡았어요. 문항 원문은 옮기지 않고 요지만 적었습니다. 자바 · SQL · 웹(스프링)은 <a href="../Back_end/#diagnosis-section">백엔드 노트의 역량 진단 탭</a>에 있어요.</p>
+    <div class="diag-cards">
+      <div class="diag-card"><span class="t">🌐 1차 응시(성적표)</span><span class="s">34<small> / 50</small></span><span class="diag-bar mid"><i style="width:68%"></i></span><span class="w">가장 약한 단원: DOM · 이벤트</span></div>
+      <div class="diag-card"><span class="t">🔁 다시 풀기(LMS 화면)</span><span class="s">13<small> / 50</small></span><span class="diag-bar low"><i style="width:26%"></i></span><span class="w">1차에 맞힌 24문항도 틀림 — 아래 표</span></div>
+      <div class="diag-card"><span class="t">🎯 두 번 다 틀림</span><span class="s">13<small> 문항</small></span><span class="w"><a href="#diag-csr-1">Q1</a> <a href="#diag-csr-6">Q6</a> <a href="#diag-csr-10">Q10</a> <a href="#diag-csr-11">Q11</a> <a href="#diag-csr-13">Q13</a> <a href="#diag-csr-15">Q15</a> <a href="#diag-csr-23">Q23</a> <a href="#diag-csr-27">Q27</a> <a href="#diag-csr-29">Q29</a> <a href="#diag-csr-33">Q33</a> <a href="#diag-csr-38">Q38</a> <a href="#diag-csr-39">Q39</a> <a href="#diag-csr-42">Q42</a></span></div>
+      <a class="diag-card" href="../Back_end/#diagnosis-section"><span class="t">☕ 🗄️ 🖥️ 다른 세 과목 →</span><span class="s">34 · 35 · 35</span><span class="w">자바 · SQL · 웹 — 백엔드 노트에서</span></a>
+    </div>
+    <div class="box">
+      <h3>📌 먼저 볼 곳 — 두 번 다 틀린 곳</h3>
+      <ol class="diag-top">
+        <li><b>DOM · 이벤트</b> — <code>querySelector</code> 단수형(<a href="#diag-csr-11">Q11</a>), <code>preventDefault</code>(<a href="#diag-csr-13">Q13</a>, 노트에 없던 개념 · 성적표 보완 의견의 "이벤트 버블링"과 같은 곳).</li>
+        <li><b>React 기초</b> — 리렌더링하는 상태 <code>useState</code>(<a href="#diag-csr-27">Q27</a>), <code>onClick={handleClick}</code>(<a href="#diag-csr-29">Q29</a>), <code>key</code>의 이유(<a href="#diag-csr-33">Q33</a>).</li>
+        <li><b>전역 상태 · 코드 분할</b> — Context API(<a href="#diag-csr-39">Q39</a>), Zustand의 <code>set</code>(<a href="#diag-csr-42">Q42</a>), <code>lazy</code> + <code>Suspense</code>(<a href="#diag-csr-38">Q38</a>).</li>
+        <li><b>JS 기본 메서드</b> — <code>push</code>(<a href="#diag-csr-15">Q15</a>), <code>getFullYear</code>(<a href="#diag-csr-23">Q23</a>), 화살표 함수와 <code>new</code>(<a href="#diag-csr-10">Q10</a>).</li>
+        <li><b>HTML · CSS 기본</b> — 시맨틱이 아닌 <code>&lt;div&gt;</code>(<a href="#diag-csr-1">Q1</a>), <code>absolute</code>와 <code>fixed</code>(<a href="#diag-csr-6">Q6</a>).</li>
+      </ol>
+      <p class="diag-hint">"올바르지 않은 것" 형 3문항 중 2개(Q1 · Q10)를 틀렸고, 둘 다 <b>맞는 설명을 골랐어요</b> — 백엔드 세 과목에서도 같은 습관이 보였어요.</p>
+    </div>
+    <div class="box diag-subject" id="diag-csr">
+      <h3>🌐 단원별 — 1차 34 / 50 (68%)</h3>
+      <div class="diag-scroll"><table class="diag-units"><thead><tr><th>단원</th><th>맞힘</th><th class="diag-barcol"></th><th>틀린 문항</th><th>다시 풀기</th></tr></thead><tbody>
+<tr><td>DOM · 이벤트</td><td>1 / 3</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:33%"></i></span></td><td><a href="#diag-csr-11">Q11</a> <a href="#diag-csr-13">Q13</a></td><td>1 / 3</td></tr>
+<tr><td>JS 기본 문법(변수 · 함수 · 구조분해 · 스프레드)</td><td>2 / 4</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-csr-9">Q9</a> <a href="#diag-csr-10">Q10</a></td><td>1 / 4</td></tr>
+<tr><td>전역 상태(Context · Zustand)</td><td>2 / 4</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-csr-39">Q39</a> <a href="#diag-csr-42">Q42</a></td><td>0 / 4</td></tr>
+<tr><td>배열 메서드</td><td>1 / 2</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-csr-15">Q15</a></td><td>0 / 2</td></tr>
+<tr><td>CSS</td><td>3 / 5</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:60%"></i></span></td><td><a href="#diag-csr-6">Q6</a> <a href="#diag-csr-7">Q7</a></td><td>2 / 5</td></tr>
+<tr><td>React 기초(JSX · props · state · 이벤트 · key)</td><td>5 / 8</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:63%"></i></span></td><td><a href="#diag-csr-27">Q27</a> <a href="#diag-csr-29">Q29</a> <a href="#diag-csr-33">Q33</a></td><td>3 / 8</td></tr>
+<tr><td>HTML</td><td>2 / 3</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:67%"></i></span></td><td><a href="#diag-csr-1">Q1</a></td><td>1 / 3</td></tr>
+<tr><td>저장소 · JSON · Date</td><td>2 / 3</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:67%"></i></span></td><td><a href="#diag-csr-23">Q23</a></td><td>2 / 3</td></tr>
+<tr><td>React 훅 · 최적화</td><td>5 / 7</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:71%"></i></span></td><td><a href="#diag-csr-37">Q37</a> <a href="#diag-csr-38">Q38</a></td><td>2 / 7</td></tr>
+<tr><td>Next.js · 실전(라우팅 · API Route · 환경변수 · 차트 · 소켓)</td><td>8 / 8</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td><td>0 / 8</td></tr>
+<tr><td>비동기 · 통신</td><td>3 / 3</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td><td>1 / 3</td></tr>
+</tbody></table></div>
+      <p class="diag-hint">단원은 1차 기준 약한 순서. 아래 문항은 1차에서 틀린 16개 — <b>요지만 보고 답을 먼저 떠올린 뒤</b> 펼치세요. "내 답"은 다시 풀기 화면에서 고른 보기예요.</p>
+<details class="diag-q" id="diag-csr-1" data-cards="html-01">
+  <summary><span class="dq-n">Q1</span><span class="dq-gist">시맨틱 태그가 <b>아닌</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>&lt;nav&gt;</code><br><span class="dq-right">정답</span> <code>&lt;div&gt;</code></p>
+    <p><code>&lt;div&gt;</code>는 의미 없는 범용 상자예요. <code>&lt;header&gt;</code> · <code>&lt;nav&gt;</code> · <code>&lt;article&gt;</code>은 "머리글 · 메뉴 · 글 한 편"이라는 뜻을 가진 시맨틱 태그. 고른 <code>&lt;nav&gt;</code>는 시맨틱이에요.</p>
+    <p class="dq-tip">💡 태그 이름만 보고 "무슨 역할인지" 말할 수 있으면 시맨틱.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#html-01">html-01 HTML 기본 사용법</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-6" data-cards="css-08">
+  <summary><span class="dq-n">Q6</span><span class="dq-gist">흐름에서 빠지고 <b>가장 가까운 위치 지정 조상</b> 기준으로 배치하는 position</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>fixed</code><br><span class="dq-right">정답</span> <code>absolute</code></p>
+    <p><code>fixed</code>는 기준이 <b>화면(뷰포트)</b>이라 스크롤해도 그 자리에 있어요. 조상(<code>position: relative</code> 등) 기준은 <code>absolute</code>.</p>
+    <p class="dq-tip">💡 relative = 제자리 기준, absolute = 조상 기준, fixed = 화면 기준, sticky = 스크롤하다 붙음.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#css-08">css-08 Position 속성 &amp;amp; 메뉴 만들기</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-7" data-cards="css-09">
+  <summary><span class="dq-n">Q7</span><span class="dq-gist">Flexbox에서 <b>주축</b> 방향 정렬 속성</span><span class="dq-tags"><span class="dq-tag">1차만 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> (1차 답 기록 없음 · 다시 풀기에서는 맞힘)<br><span class="dq-right">정답</span> <code>justify-content</code></p>
+    <p>주축(기본 가로) = <code>justify-content</code>, 교차축(세로) = <code>align-items</code>.</p>
+    <p class="dq-tip">💡 justify = 줄 맞춤(가로), align = 높이 맞춤(세로).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#css-09">css-09 Flexbox 레이아웃 실습</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-9" data-cards="concept-js-scope js-03">
+  <summary><span class="dq-n">Q9</span><span class="dq-gist">재할당이 불가능한 상수 선언 키워드</span><span class="dq-tags"><span class="dq-tag">1차만 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> (1차 답 기록 없음 · 다시 풀기에서는 맞힘)<br><span class="dq-right">정답</span> <code>const</code></p>
+    <p><code>const</code>는 다시 대입 불가(단, 객체 · 배열 <b>내용</b>은 바꿀 수 있음), <code>let</code>은 재대입 가능, <code>var</code>는 옛 방식.</p>
+    <p class="dq-tip">💡 기본은 const, 바뀌는 값만 let.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-js-scope">concept-js-scope 변수와 스코프</a> · <a href="#js-03">js-03 변수와 타입</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-10" data-cards="concept-js-arrow-function js-06">
+  <summary><span class="dq-n">Q10</span><span class="dq-gist">화살표 함수 설명 중 <b>올바르지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 자기만의 <code>this</code>를 갖지 않는다<br><span class="dq-right">정답</span> <code>new</code>로 생성자 함수처럼 쓸 수 있다</p>
+    <p>화살표 함수는 생성자가 될 수 없어 <code>new</code>를 붙이면 TypeError예요. 고른 보기(this 없음)는 화살표 함수의 대표 특징이에요.</p>
+    <p class="dq-tip">💡 "올바르지 않은 것" — 고른 보기를 읽고 "이건 맞는 말인데?"면 다시 보기.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-js-arrow-function">concept-js-arrow-function 함수 선언 vs 화살표 함수</a> · <a href="#js-06">js-06 함수·객체·클로저·ES6</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-11" data-cards="js-04">
+  <summary><span class="dq-n">Q11</span><span class="dq-gist">CSS 선택자로 <b>첫 번째 요소 하나만</b> 돌려주는 메서드</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>querySelectorAll()</code><br><span class="dq-right">정답</span> <code>document.querySelector()</code></p>
+    <p><code>querySelectorAll</code>은 맞는 요소 <b>전부</b>(NodeList), 단수형 <code>querySelector</code>가 첫 하나예요(<a href="#js-04">js-04</a>).</p>
+    <p class="dq-tip">💡 All = 전부, 없으면 하나.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#js-04">js-04 DOM 탐색 메서드</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-13">
+  <summary><span class="dq-n">Q13</span><span class="dq-gist">폼 제출 · 링크 클릭의 <b>기본 동작</b>(새로고침 · 이동)을 막는 메서드</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag none">📕 노트에 없던 개념</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>e.stopImmediatePropagation()</code><br><span class="dq-right">정답</span> <code>e.preventDefault()</code></p>
+    <p>이벤트에는 막을 것이 두 가지예요 — <b>브라우저의 기본 동작</b>(<code>preventDefault</code>)과 <b>부모로 퍼지는 것</b>(버블링, <code>stopPropagation</code>). 고른 보기는 버블링과 같은 요소의 다른 핸들러까지 멈추는 것이라 새로고침은 그대로 일어나요. 노트에는 <code>preventDefault</code> 설명이 없어요(LMS 성적표의 "이벤트 버블링 · 캡처링" 보완 의견과 같은 곳).</p>
+    <p class="dq-tip">💡 Default = 브라우저 기본 동작, Propagation = 전파(버블링).</p>
+    <p class="dq-cards">노트에 카드가 없어 위 설명이 전부예요.</p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-15" data-cards="js-08">
+  <summary><span class="dq-n">Q15</span><span class="dq-gist">배열 끝에 추가하고 <b>새 길이</b>를 돌려주는 메서드</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>pop()</code><br><span class="dq-right">정답</span> <code>push()</code></p>
+    <p><code>push</code> = 끝에 넣기(길이 반환), <code>pop</code> = 끝에서 꺼내기(꺼낸 값 반환), <code>unshift</code> · <code>shift</code>는 앞쪽.</p>
+    <p class="dq-tip">💡 스택: push로 쌓고 pop으로 뺀다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#js-08">js-08 Array 배열</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-23" data-cards="js-11">
+  <summary><span class="dq-n">Q23</span><span class="dq-gist">Date에서 연도 <b>4자리</b>를 얻는 메서드</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>getYear4()</code><br><span class="dq-right">정답</span> <code>getFullYear()</code></p>
+    <p>옛 <code>getYear()</code>는 1900을 뺀 값(2026 → 126)이라 쓰지 않아요. 월은 <code>getMonth()</code>가 0부터라 +1 — 자바 <code>Calendar</code>와 같은 함정(<a href="../Back_end/#web-78">web-78</a>).</p>
+    <p class="dq-tip">💡 Full = 네 자리 전부.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#js-11">js-11 Date 객체</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-27" data-cards="concept-state-usestate react-03">
+  <summary><span class="dq-n">Q27</span><span class="dq-gist">값이 바뀌면 리렌더링을 일으키는 상태 Hook</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>useMemo</code><br><span class="dq-right">정답</span> <code>useState</code></p>
+    <p><code>useState</code>의 setter를 부르면 컴포넌트를 다시 그려요. <code>useMemo</code>는 계산 결과를 기억해 두는 최적화용이에요.</p>
+    <p class="dq-tip">💡 화면을 바꾸는 값 = state.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-state-usestate">concept-state-usestate state와 useState란?</a> · <a href="#react-03">react-03 state와 이벤트</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-29" data-cards="concept-infinite-loop-handler react-03">
+  <summary><span class="dq-n">Q29</span><span class="dq-gist">버튼 클릭 이벤트를 JSX에 다는 올바른 방법</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>on-click="handleClick()"</code><br><span class="dq-right">정답</span> <code>onClick={handleClick}</code></p>
+    <p>JSX는 카멜 표기 <code>onClick</code>에 <b>함수 자체</b>를 넘겨요. <code>{handleClick()}</code>처럼 괄호를 붙이면 렌더링 순간 실행돼요(<a href="#concept-infinite-loop-handler">무한 루프 카드</a>).</p>
+    <p class="dq-tip">💡 넘길 땐 이름만, 인자가 필요하면 <code>() =&gt; handleClick(id)</code>.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-infinite-loop-handler">concept-infinite-loop-handler 이벤트 핸들러 "즉시 실행" 무한 루프</a> · <a href="#react-03">react-03 state와 이벤트</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-33" data-cards="concept-key">
+  <summary><span class="dq-n">Q33</span><span class="dq-gist"><code>map()</code>으로 목록을 그릴 때 <code>key</code>가 필요한 이유</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> HTML 태그에 ID를 자동으로 붙이려고<br><span class="dq-right">정답</span> 어떤 항목이 바뀌었는지 식별해 리렌더링을 효율적으로 하려고</p>
+    <p>React는 이전 · 다음 목록을 비교할 때 key로 "같은 항목"을 찾아요. key는 DOM의 id로 나가지 않아요. 인덱스를 key로 쓰면 순서가 바뀔 때 엉뚱한 항목을 재사용해요.</p>
+    <p class="dq-tip">💡 key = React만 보는 이름표.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-key">concept-key key와 리스트 렌더링</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-37" data-cards="concept-react-memo">
+  <summary><span class="dq-n">Q37</span><span class="dq-gist">props가 같으면 부모가 다시 그려져도 자식 리렌더링을 건너뛰게 하는 HOC</span><span class="dq-tags"><span class="dq-tag">1차만 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> (1차 답 기록 없음 · 다시 풀기에서는 맞힘)<br><span class="dq-right">정답</span> <code>React.memo</code></p>
+    <p><code>React.memo(Child)</code>는 props를 얕게 비교해 같으면 이전 결과를 재사용해요. 함수 props는 <code>useCallback</code>으로 같은 참조를 유지해야 효과가 있어요.</p>
+    <p class="dq-tip">💡 memo = 컴포넌트 단위 기억, useMemo = 값, useCallback = 함수.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-react-memo">concept-react-memo React.memo란?</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-38" data-cards="concept-lazy-suspense react-06">
+  <summary><span class="dq-n">Q38</span><span class="dq-gist">초기 로딩을 줄이려고 컴포넌트를 나눠 불러오는(코드 분할) 조합</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>useState</code> + <code>useEffect</code><br><span class="dq-right">정답</span> <code>React.lazy</code> + <code>&lt;Suspense&gt;</code></p>
+    <p><code>lazy(() =&gt; import("./Chart"))</code>로 필요할 때 내려받고, 오는 동안 <code>&lt;Suspense fallback={…}&gt;</code>가 대신 보여 줘요.</p>
+    <p class="dq-tip">💡 lazy = 늦게 불러오기, Suspense = 기다리는 동안 보여 줄 것.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-lazy-suspense">concept-lazy-suspense React.lazy + Suspense란?</a> · <a href="#react-06">react-06 React.memo·useCallback 비교 + lazy/…</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-39" data-cards="concept-context-api react-07">
+  <summary><span class="dq-n">Q39</span><span class="dq-gist">Props Drilling을 해결하는 React <b>내장</b> 기능</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> Custom Hook<br><span class="dq-right">정답</span> Context API</p>
+    <p>커스텀 훅은 로직을 재사용할 뿐 데이터를 깊은 자식에게 전달하지 않아요. <code>createContext</code> → <code>Provider</code> → <code>useContext</code>가 중간 컴포넌트를 건너뛰어요.</p>
+    <p class="dq-tip">💡 "내장" + "전달" = Context.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-context-api">concept-context-api Context API란?</a> · <a href="#react-07">react-07 Context API</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-csr-42" data-cards="concept-zustand react-09">
+  <summary><span class="dq-n">Q42</span><span class="dq-gist">Zustand에서 스토어를 만들 때 상태를 바꾸는 콜백 함수</span><span class="dq-tags"><span class="dq-tag twice">두 번 다 틀림</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>setState</code><br><span class="dq-right">정답</span> <code>set</code></p>
+    <p><code>create((set, get) =&gt; ({ count: 0, inc: () =&gt; set(s =&gt; ({ count: s.count + 1 })) }))</code> — 콜백 첫 인자 이름이 <code>set</code>이에요. <code>useStore.setState</code>도 있지만 스토어 <b>밖</b>에서 쓰는 API예요.</p>
+    <p class="dq-tip">💡 create((set, get) =&gt; …) 모양을 통째로 기억.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#concept-zustand">concept-zustand Zustand란?</a> · <a href="#react-09">react-09 Zustand</a></p>
+  </div>
+</details>
+      <p><button type="button" class="diag-star-all" id="diag-star-all">⭐ 오답과 이어진 카드 모두 헷갈림 표시</button></p>
+    </div>
+    <div class="box">
+      <h3>다시 풀기에서만 틀린 24문항 (1차에서는 맞힘)</h3>
+      <p class="diag-hint">1차에 맞혔으니 아는 내용일 가능성이 커요. 정답을 가리고 요지만 보며 답을 떠올려 확인해 보세요.</p>
+      <div class="diag-scroll"><table class="diag-units diag-second">
+        <thead><tr><th>Q</th><th>요지</th><th>정답</th><th>카드</th></tr></thead>
+        <tbody>
+<tr id="diag-csr-3" data-cards="html-01"><td>Q3</td><td>대체 텍스트 속성</td><td><details class="diag-peek"><summary>보기</summary><code>alt</code></details></td><td>📕 노트에 없음 · <a href="#html-01">html-01 HTML 기본 사용법</a></td></tr>
+<tr id="diag-csr-4" data-cards="css-02"><td>Q4</td><td>우선순위가 가장 높은 선택자</td><td><details class="diag-peek"><summary>보기</summary>아이디 <code>#header</code></details></td><td><a href="#css-02">css-02 Selector(선택자) 표현식</a></td></tr>
+<tr id="diag-csr-5" data-cards="css-07"><td>Q5</td><td>padding · border를 width에 포함</td><td><details class="diag-peek"><summary>보기</summary><code>box-sizing: border-box</code></details></td><td><a href="#css-07">css-07 박스 모델(Box Model)</a></td></tr>
+<tr id="diag-csr-14" data-cards="concept-js-array-methods js-10"><td>Q14</td><td>콜백 반환값으로 새 배열</td><td><details class="diag-peek"><summary>보기</summary><code>map()</code></details></td><td><a href="#concept-js-array-methods">concept-js-array-methods 배열 메서드 3형제</a> · <a href="#js-10">js-10 Array 반복문 4종 비교</a></td></tr>
+<tr id="diag-csr-16" data-cards="concept-js-destructuring"><td>Q16</td><td><code>const { name, age } = user; name</code></td><td><details class="diag-peek"><summary>보기</summary><code>"Kim"</code></details></td><td><a href="#concept-js-destructuring">concept-js-destructuring 구조분해 할당(Destructuring)</a></td></tr>
+<tr id="diag-csr-17" data-cards="concept-js-spread-rest"><td>Q17</td><td><code>[1, 2]</code>에 3을 더한 새 배열</td><td><details class="diag-peek"><summary>보기</summary><code>[...[1, 2], 3]</code></details></td><td><a href="#concept-js-spread-rest">concept-js-spread-rest 스프레드 연산자(...)와 나머지 매개변수</a></td></tr>
+<tr id="diag-csr-21" data-cards="react-10"><td>Q21</td><td>fetch 응답을 JSON으로</td><td><details class="diag-peek"><summary>보기</summary><code>response.json()</code></details></td><td><a href="#react-10">react-10 Next.js API Routes</a></td></tr>
+<tr id="diag-csr-22" data-cards="js-18"><td>Q22</td><td>AJAX의 핵심 장점</td><td><details class="diag-peek"><summary>보기</summary>새로고침 없이 필요한 데이터만 받아 일부 갱신</details></td><td><a href="#js-18">js-18 AJAX(XMLHttpRequest) 통신</a></td></tr>
+<tr id="diag-csr-24" data-cards="react-01"><td>Q24</td><td>변경만 비교해 DOM을 최소로 고치는 기술</td><td><details class="diag-peek"><summary>보기</summary>Virtual DOM</details></td><td><a href="#react-01">react-01 React 시작하기</a></td></tr>
+<tr id="diag-csr-25" data-cards="concept-jsx"><td>Q25</td><td>JSX 규칙 중 <b>올바르지 않은</b> 것</td><td><details class="diag-peek"><summary>보기</summary><code>&lt;img&gt;</code> · <code>&lt;input&gt;</code>은 닫지 않아도 된다(틀림 — 반드시 <code>/&gt;</code>)</details></td><td><a href="#concept-jsx">concept-jsx JSX란?</a></td></tr>
+<tr id="diag-csr-30" data-cards="concept-useeffect"><td>Q30</td><td><code>useEffect(fn, [])</code>의 실행 시점</td><td><details class="diag-peek"><summary>보기</summary>마운트 때 1회</details></td><td><a href="#concept-useeffect">concept-useeffect useEffect란?</a></td></tr>
+<tr id="diag-csr-31" data-cards="concept-useeffect"><td>Q31</td><td>useEffect 클린업 함수의 역할</td><td><details class="diag-peek"><summary>보기</summary>타이머 해제 · 소켓 종료 등 정리</details></td><td><a href="#concept-useeffect">concept-useeffect useEffect란?</a></td></tr>
+<tr id="diag-csr-35" data-cards="react-05"><td>Q35</td><td>타이핑마다 API 호출을 막는 훅</td><td><details class="diag-peek"><summary>보기</summary><code>useDebounce</code></details></td><td><a href="#react-05">react-05 커스텀 훅 4종</a></td></tr>
+<tr id="diag-csr-36" data-cards="concept-usememo-usecallback"><td>Q36</td><td>비싼 계산 결과를 기억하는 훅</td><td><details class="diag-peek"><summary>보기</summary><code>useMemo</code></details></td><td><a href="#concept-usememo-usecallback">concept-usememo-usecallback useMemo·useCallback이란?</a></td></tr>
+<tr id="diag-csr-40" data-cards="concept-context-api"><td>Q40</td><td>Context 값을 공급하는 컴포넌트</td><td><details class="diag-peek"><summary>보기</summary><code>&lt;Context.Provider&gt;</code></details></td><td><a href="#concept-context-api">concept-context-api Context API란?</a></td></tr>
+<tr id="diag-csr-41" data-cards="concept-zustand"><td>Q41</td><td>보일러플레이트가 적은 경량 전역 상태 라이브러리</td><td><details class="diag-peek"><summary>보기</summary>Zustand</details></td><td><a href="#concept-zustand">concept-zustand Zustand란?</a></td></tr>
+<tr id="diag-csr-43" data-cards="concept-file-routing"><td>Q43</td><td>App Router에서 <code>/about</code> 화면 파일</td><td><details class="diag-peek"><summary>보기</summary><code>app/about/page.js</code></details></td><td><a href="#concept-file-routing">concept-file-routing 파일 기반 라우팅이란?</a></td></tr>
+<tr id="diag-csr-44" data-cards="concept-file-routing react-08"><td>Q44</td><td><code>/stock/AAPL</code> 같은 가변 경로 폴더</td><td><details class="diag-peek"><summary>보기</summary><code>app/stock/[symbol]/page.js</code></details></td><td><a href="#concept-file-routing">concept-file-routing 파일 기반 라우팅이란?</a> · <a href="#react-08">react-08 Next.js App Router</a></td></tr>
+<tr id="diag-csr-45" data-cards="concept-api-routes"><td>Q45</td><td>API 엔드포인트 역할 파일</td><td><details class="diag-peek"><summary>보기</summary><code>route.js</code></details></td><td><a href="#concept-api-routes">concept-api-routes API Routes란?</a></td></tr>
+<tr id="diag-csr-46" data-cards="concept-api-routes"><td>Q46</td><td>API 키를 숨기는 프록시 구조</td><td><details class="diag-peek"><summary>보기</summary>Client → Next.js API Route → 외부 API</details></td><td><a href="#concept-api-routes">concept-api-routes API Routes란?</a></td></tr>
+<tr id="diag-csr-47" data-cards="concept-qna-websocket-env"><td>Q47</td><td>서버에서만 읽히는 환경변수</td><td><details class="diag-peek"><summary>보기</summary><code>.env.local</code>에 <code>NEXT_PUBLIC_</code> 없이</details></td><td><a href="#concept-qna-websocket-env">concept-qna-websocket-env WebSocket·환경변수 Q&amp;amp;A</a></td></tr>
+<tr id="diag-csr-48" data-cards="react-14"><td>Q48</td><td>부모 크기에 맞춰 차트를 늘이는 Recharts 컴포넌트</td><td><details class="diag-peek"><summary>보기</summary><code>&lt;ResponsiveContainer&gt;</code></details></td><td><a href="#react-14">react-14 Recharts + WebSocket</a></td></tr>
+<tr id="diag-csr-49" data-cards="concept-websocket react-14"><td>Q49</td><td>소켓으로 받은 시세를 화면에 즉시 반영</td><td><details class="diag-peek"><summary>보기</summary><code>useState</code> 또는 Zustand 스토어</details></td><td><a href="#concept-websocket">concept-websocket WebSocket이란?</a> · <a href="#react-14">react-14 Recharts + WebSocket</a></td></tr>
+<tr id="diag-csr-50" data-cards="react-12"><td>Q50</td><td>지연 · 오류 때의 UX</td><td><details class="diag-peek"><summary>보기</summary>로딩 스피너 · 에러 문구를 조건부 렌더링</details></td><td><a href="#react-12">react-12 서버 컴포넌트 + Suspense</a></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <p class="diag-src">근거: LMS 역량 진단 평가 결과 화면(다시 풀기 — 문항 · 내 선택 · 정답)과 학원 성적 분석표(1차 응시 — 과목 점수 · 오답 번호). 점수 외의 개인 정보(반 평균 · 팀 배정 · 강사 의견)는 옮기지 않았어요.</p>
+  </section>
+
   <section id="next-section" class="cat">
     <div class="cat-head"><span class="dot next"></span><h2>학습 확장 주제</h2></div>
     <p class="cat-desc">강의자료 목차 기준의 React &amp; Next.js 커리큘럼을 모두 완료했습니다. 이후 새 수업·심화 실습·개인 프로젝트 주제를 이곳에서 이어 관리합니다.</p>
@@ -18277,6 +18550,7 @@ const sections = {
   journey: document.getElementById("journey-section"),
   concepts: document.getElementById("concepts-section"),
   exam: document.getElementById("exam-section"),
+  diagnosis: document.getElementById("diagnosis-section"),
   next: document.getElementById("next-section"),
   materials: document.getElementById("materials-section"),
 };
@@ -20561,6 +20835,59 @@ document.querySelectorAll(".note-code").forEach(box => {
     const secKey = card.closest("section.cat")?.id.replace("-section", "");
     if (bySec[secKey]) select(secKey, card.dataset.grp, true);
   };
+})();
+
+// ---- 🩺 역량 진단: 오답과 이어진 카드에 표시 · ⭐ 한 번에 표시 · #diag-… 바로 가기 ----
+(() => {
+  const sec = document.getElementById("diagnosis-section");
+  if (!sec) return;
+  const byCard = new Map();
+  sec.querySelectorAll("[data-cards][id^='diag-']").forEach(q => q.dataset.cards.split(" ").forEach(id => {
+    if (!byCard.has(id)) byCard.set(id, []);
+    byCard.get(id).push(q);
+  }));
+  byCard.forEach((qs, id) => {
+    const tags = document.getElementById(id)?.querySelector(".note-tags");
+    if (!tags) return;
+    const a = document.createElement("a");
+    a.className = "diag-badge";
+    a.href = "#" + qs[0].id;
+    a.textContent = "🩺 진단 오답 " + qs.map(q => "Q" + q.id.split("-").pop()).join(" · ");
+    a.title = "학원 역량 진단에서 이 카드의 내용을 틀렸어요";
+    tags.appendChild(a);
+  });
+  function openDiag(id) {
+    const el = document.getElementById(id);
+    if (!el || !el.closest("#diagnosis-section")) return false;
+    showTab("diagnosis");
+    if (el.tagName === "DETAILS") el.open = true;
+    el.scrollIntoView({ block: "start" });
+    return true;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#diag"]');
+    if (!a) return;
+    const id = a.getAttribute("href").slice(1);
+    if (openDiag(id)) { e.preventDefault(); history.replaceState(null, "", "#" + id); }
+  });
+  const fromHash = () => { if (location.hash.startsWith("#diag")) openDiag(decodeURIComponent(location.hash.slice(1))); };
+  if (location.hash.startsWith("#diag")) setTimeout(fromHash, 0);
+  window.addEventListener("hashchange", fromHash);
+  const btn = document.getElementById("diag-star-all");
+  btn?.addEventListener("click", () => {
+    let n = 0;
+    byCard.forEach((qs, id) => {
+      const card = document.getElementById(id);
+      if (!card || starSet.has(id)) return;
+      starSet.add(id); n++;
+      card.classList.add("is-starred");
+      const s = card.querySelector(".star-btn");
+      if (s) { s.textContent = "⭐"; s.classList.add("starred"); s.setAttribute("aria-pressed", "true"); }
+    });
+    saveStarSet(starSet);
+    window.refreshReviewHub?.();
+    btn.textContent = n ? "⭐ 카드 " + n + "장을 헷갈리는 카드로 표시했어요" : "⭐ 이미 모두 표시돼 있어요";
+  });
 })();
 </script>
 <script>

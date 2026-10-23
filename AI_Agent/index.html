@@ -182,8 +182,8 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
     <h1>AI Agent 과정 학습 노트</h1>
     <p class="sub">파이썬 기초에서 시작해 데이터(Pandas) · 서버(FastAPI) · LLM(LangChain) · RAG · Agent까지 가는 10일 과정을 수업 날짜별로 정리합니다. 카드마다 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 코드 → 실행 결과 → 스스로 확인</b> 순서이고, 앞 과정에서 배운 <b>자바 · 스프링과 무엇이 같고 다른지</b>를 함께 적습니다.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-10-22</span>
-      <span>📅 과정 Day 7 / 10</span>
+      <span id="updated-badge">마지막 업데이트: 2026-10-23</span>
+      <span>📅 과정 Day 8 / 10</span>
       <a href="../">← 학습 노트 첫 화면</a>
       <a href="../Back_end/">☕ 백엔드(Java) 노트</a>
       <a href="../Front_end/">🎨 프런트엔드 노트</a>
@@ -219,7 +219,7 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
       </div>
       <div class="box">
         <h3>과정 10일 지도 — 지금 어디인가</h3>
-        <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">강의자료 목차 기준입니다. 처음 이틀은 <b>하루에 교안 두 개씩</b>(10/19 Day 1~2, 10/20 Day 3~4), 10/21은 Day 5 하나, 10/22는 오전에 Day 5 보충(DB 연동) · 오후에 Day 6~7 합본 교안(LangChain)을 나갔어요(선생님 레포에도 같은 날 해당 폴더가 올라옴).</p>
+        <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">강의자료 목차 기준입니다. 처음 이틀은 <b>하루에 교안 두 개씩</b>(10/19 Day 1~2, 10/20 Day 3~4), 10/21은 Day 5 하나, 10/22는 오전에 Day 5 보충(DB 연동) · 오후에 Day 6~7 합본 교안(LangChain), 10/23은 Day 8(RAG)을 나갔어요(선생님 레포에도 같은 날 해당 폴더가 올라옴).</p>
         <div class="days">
           <div class="day done"><b>Day 1 · 파이썬 시작하기</b>개발환경 · 변수 · 연산자 · 5가지 자료형<div class="tag-s">10/19 완료 → <a href="#ai-day01">수업 카드</a></div></div>
           <div class="day done"><b>Day 2 · 조건 · 반복 · 함수</b>if · for/while · 컴프리헨션 · 함수 · 모듈 · 파일 · 예외<div class="tag-s">10/19 완료(종합 실습은 10/20 아침 문제만 옮겨 둠 → <a href="#lab-10">참고 풀이</a>)</div></div>
@@ -228,8 +228,8 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
           <div class="day done"><b>Day 5 · FastAPI</b>Path/Query · Pydantic · HTTPException · CRUD<div class="tag-s">10/21 완료 → <a href="#ai-day03">수업 카드</a></div></div>
           <div class="day done"><b>Day 6 · LLM · Agent 개념</b>토큰 예측 · 한계 다섯 · Chain vs Agent<div class="tag-s">10/22 완료 → <a href="#py-22">개념 카드</a></div></div>
           <div class="day done"><b>Day 7 · LangChain + OpenAI</b>.env · PromptTemplate · LCEL · @tool · Memory<div class="tag-s">10/22 완료(Day 6~7 합본 교안) → <a href="#ai-day04">수업 카드</a></div></div>
-          <div class="day now"><b>Day 8 · RAG</b>청크 · 임베딩 · 벡터 저장소 · Retriever<div class="tag-s">📍 다음(교안 예고: 검색 기반 Q&amp;A)</div></div>
-          <div class="day"><b>Day 9 · 멀티툴 Agent</b>create_agent<div class="tag-s">예정</div></div>
+          <div class="day done"><b>Day 8 · RAG</b>청크 · 임베딩 · 벡터 저장소 · Retriever · RAG 체인<div class="tag-s">10/23 완료 → <a href="#ai-day05">수업 카드</a></div></div>
+          <div class="day now"><b>Day 9 · 멀티툴 Agent</b>create_agent — Tool · Chain · Retrieval을 묶어 스스로 고르기<div class="tag-s">📍 다음(교안 예고: 미니 AI Agent)</div></div>
           <div class="day"><b>Day 10 · 대화 기억 Agent</b>체크포인터 · thread_id<div class="tag-s">예정</div></div>
         </div>
       </div>
@@ -256,11 +256,11 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
             <tr><td><b>Day 3~4</b> 데이터 ✅ 10/20</td><td>Pandas(DataFrame · CSV/JSON · 필터 · 결측치 · 중복 · apply) · NumPy 배열 · Matplotlib · Seaborn</td><td>LLM · RAG에 넣을 데이터를 읽고 다듬고, 그래프로 눈으로 확인하려고</td><td>SQL의 SELECT · WHERE · IS NULL · DISTINCT · CASE를 표 객체(DataFrame)의 메서드로 — 아래 4번 표</td></tr>
             <tr><td><b>Day 5</b> 서버 ✅ 10/21</td><td>FastAPI(<code>@app.get</code> · uvicorn · <code>/docs</code>) · 경로 · 쿼리 파라미터 · Pydantic 본문 · <code>HTTPException</code> · CRUD</td><td>만든 기능을 다른 프로그램(화면 · 앱 · 다음 주의 Agent)이 HTTP로 부를 수 있게 — 아래 5번 표</td><td>스프링 <code>@RestController</code> · <code>@PathVariable</code> · DTO · <code>@Valid</code> (백엔드 50일차)</td></tr>
             <tr><td><b>Day 6~7</b> LLM ✅ 10/22</td><td>LLM · Agent 개념, <code>.env</code> + <code>ChatOpenAI</code>, <code>prompt | llm | parser</code>, <code>@tool</code>, <code>MessagesPlaceholder</code> 기억 (+ Day 5 보충: FastAPI ↔ MariaDB)</td><td>"말로 묻고 답하는" 기능을 코드에 붙이고, 계산은 도구 · 맥락은 기억으로 메우려고</td><td>외부 API 호출(답이 매번 다를 수 있음) · 세션(대화 기록) · 비밀값은 설정 파일 밖으로 — 아래 6번 표</td></tr>
-            <tr><td><b>Day 8</b> RAG 📍</td><td>문서를 잘라 벡터로 저장하고 찾아 붙이기</td><td>LLM이 모르는 "우리 자료"로 답하게</td><td>검색(<code>LIKE</code>) → 의미 검색(임베딩)</td></tr>
-            <tr><td><b>Day 9~10</b> Agent</td><td>여러 도구를 고르는 Agent, 대화 기억</td><td>스스로 단계를 정해 일을 끝내는 프로그램</td><td>세션(대화 상태)을 <code>thread_id</code>로 — 로그인 세션과 비슷한 생각</td></tr>
+            <tr><td><b>Day 8</b> RAG ✅ 10/23</td><td>청크(<code>chunk_size</code> · <code>overlap</code>) → 임베딩 → <code>InMemoryVectorStore</code> → <code>as_retriever</code> → <code>{"context": retriever | format_docs, "question": RunnablePassthrough()}</code> 체인</td><td>LLM이 모르는 "우리 자료"(규정 · FAQ)로, 지어내지 않고 답하게 — 아래 7번 표</td><td>글자 검색(<code>LIKE</code>) → 의미 검색(임베딩), 페이징 → 청크, 캐시 무효화 → 저장소 다시 만들기</td></tr>
+            <tr><td><b>Day 9~10</b> Agent 📍</td><td>여러 도구를 고르는 Agent, 대화 기억</td><td>스스로 단계를 정해 일을 끝내는 프로그램</td><td>세션(대화 상태)을 <code>thread_id</code>로 — 로그인 세션과 비슷한 생각</td></tr>
           </tbody>
         </table></div>
-        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">Day 8 이후 칸은 강의자료 목차로 미리 적은 것이고, 수업을 마칠 때마다 실제 내용으로 고칩니다.</p>
+        <p style="font-size:13px;color:var(--muted);margin:6px 0 0">Day 9 이후 칸은 강의자료 목차로 미리 적은 것이고, 수업을 마칠 때마다 실제 내용으로 고칩니다.</p>
       </div>
       <div class="box">
         <h3>2. 자바 → 파이썬, 한 표로 (Day 1~2)</h3>
@@ -350,6 +350,21 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
           </tbody>
         </table></div>
       </div>
+      <div class="box">
+        <h3>7. RAG 부품 → 앞 과정에서 비슷했던 것 (Day 8)</h3>
+        <div class="table-wrap"><table class="vs">
+          <thead><tr><th>부품</th><th>하는 일</th><th>앞 과정에서 비슷했던 것</th><th>기억 요령</th></tr></thead>
+          <tbody>
+            <tr><td>청크(<code>chunk_size</code> · <code>overlap</code>)</td><td>긴 문서를 검색하기 좋은 조각으로</td><td>게시판 페이징(한 페이지 N개, 시작 번호 계산)</td><td>나아가는 폭 = size − overlap → <a href="#py-27">py-27</a></td></tr>
+            <tr><td>임베딩</td><td>글 → 의미 벡터(1536개 숫자)</td><td>(없음) — <code>LIKE</code>는 글자, 임베딩은 뜻</td><td>저장 · 검색에 같은 모델 → <a href="#py-28">py-28</a></td></tr>
+            <tr><td>벡터 저장소 · <code>similarity_search</code></td><td>가까운 k개 찾기</td><td><code>ORDER BY 유사도 DESC LIMIT k</code> · 인덱스</td><td>관련 없어도 k개 → <a href="#lab-37">실습 37</a></td></tr>
+            <tr><td><code>as_retriever()</code></td><td>검색을 체인 부품(Runnable)으로</td><td>Service 계층 — Controller가 부르는 조회 메서드</td><td><code>.invoke(문자열)</code> → <a href="#py-29">py-29</a></td></tr>
+            <tr><td><code>format_docs</code> · <code>RunnablePassthrough</code></td><td>문서 목록 → 문자열, 질문은 그대로</td><td>Model에 목록과 요청값을 함께 담아 뷰로</td><td>딕셔너리 키 = 프롬프트 변수 이름</td></tr>
+            <tr><td>"문서에 없으면 모른다고"</td><td>환각 줄이기</td><td>없는 자원엔 404 — 지어내지 않기</td><td>지시는 경향, 근거 표시 · 점수 기준과 함께 → <a href="#py-30">py-30</a></td></tr>
+            <tr><td>저장소 다시 만들기</td><td>원본이 바뀌면 조각 · 벡터도 다시</td><td>캐시 무효화</td><td>자동으로 따라 바뀌지 않는다</td></tr>
+          </tbody>
+        </table></div>
+      </div>
     </section>
 
     <section id="materials-section" class="cat hidden">
@@ -365,6 +380,7 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
           <li><a href="../view.html?f=AI_Agent/python_agent/day05/main.py">day05/main.py</a> — Day 5 FastAPI 실습 5개를 한 파일에(<code>uvicorn main:app --reload</code>로 실행, <a href="#lab-27">GET 경로 충돌 주의</a>)</li>
           <li><a href="../view.html?f=AI_Agent/python_agent/day05/db_main.py">day05/db_main.py</a> — FastAPI + MariaDB(SQLAlchemy) 상품 CRUD, 선생님 개발 요청서대로(<a href="#lab-28">실습 28</a>, DB 비밀번호는 가림)</li>
           <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day06/day0607_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day06/day0607_실습.ipynb</a> — Day 6~7 LangChain 12칸 · <a href="../view.html?f=AI_Agent/python_agent/day06/day0607_%EC%8B%A4%EC%8A%B5%EC%98%88%EC%A0%9C.md">실습예제 md</a>(아직 안 풂 → <a href="#lab-34">체크리스트</a>). <code>.env</code>(API 키)는 올리지 않음</li>
+          <li><a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day08/day08_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day08/day08_실습.ipynb</a> — Day 8 RAG 10칸(마지막 칸은 출력 없음 → <a href="#lab-39">확장판</a>) · <a href="../view.html?f=AI_Agent/python_agent/day08/lecture_policy.txt">lecture_policy.txt</a>(칸 9가 만든 규정 문서)</li>
           <li>노트북이 만든 데이터 파일 — <code>items.csv</code> · <code>items.json</code> · <code>students.csv</code> · <code>students.json</code> · <code>result.csv</code>(<a href="#lab-13">왜 students 파일에 상품이 들었나</a>)</li>
           <li><a href="../view.html?f=AI_Agent/python_agent/day01_%EC%8B%A4%EC%8A%B5%EC%98%88%EC%A0%9C.md">day01_실습예제.md</a> — 실습 2시간용 추가 문제(Part 1~5, 11문제 · 아직 안 풂 → <a href="#lab-11">체크리스트</a>)</li>
           <li><a href="../view.html?f=AI_Agent/python_agent/README.md">python_agent 폴더 안내</a></li>
@@ -702,11 +718,87 @@ print(response.choices[0].message.content)</code></pre>
     <details><summary>정리 작업 메모</summary><ul><li>근거: 강의자료 <code>Day6-Day7_강의자료.pptx</code>(18쪽) · <code>Day6_강의자료_개념추가.pptx</code>(본문 10쪽 추출), 실습 폴더(10/22 09:34 ~ 15:21 — <code>day05/db_main.py</code> · <code>main.py</code> 주석 추가, <code>day06/</code> 노트북 · 실습예제 md, <code>.env</code>), 선생님 레포 10/22 커밋 5개(09:36 "db연동 추가" — <code>db_main.py</code> · <code>dev_prompt.md</code>, 11:40 ~ 15:19 Day06 노트북 · 실습예제 md).</li><li><code>.env</code>는 열지 않았다. 노트북 · 선생님 노트북에서 키 모양 문자열(<code>sk-…</code>)을 찾아 0개임을 확인했다. <code>db_main.py</code>와 선생님 파일의 DB 계정 정보는 가린 상태로만 비교했고, 저장소 사본은 접속 주소 · 주석의 비밀번호를 <code>YOUR_DB_PASSWORD</code>로 바꿨다.</li><li>확인함 — <code>db_main.py</code> 사본(접속 주소만 SQLite)을 uvicorn으로 띄워 요청 15개, LangChain 부분은 가짜 모델로 오프라인 실행. 확인하지 않음 — 실제 MariaDB 연결, 실제 OpenAI 호출(요금 · 키 사용), 15쪽 Memory 실습 · 실습예제 md 풀이.</li></ul></details>
   </div>
 </article>
+
+<article class="note-card" id="ai-day05">
+  <div class="note-head">
+    <span class="note-num">5일차 · Day 8</span>
+    <h3>2026-10-23 · 검색 기반 Q&amp;A(RAG) — 문서를 잘라(청크) 벡터로 저장하고, 질문과 가까운 조각을 찾아 LLM에 붙여 주기</h3>
+    <div class="note-tags"><span class="tag">chunk_size · overlap</span><span class="tag">OpenAIEmbeddings</span><span class="tag">InMemoryVectorStore</span><span class="tag">as_retriever</span><span class="tag">RunnablePassthrough</span><span class="tag">환각 막는 프롬프트</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>LLM은 학습 뒤의 정보나 <b>우리 서비스만의 문서</b>(FAQ · 규정)를 모른다. 문서를 통째로 넣으면 길고 비싸니, <b>문서 → 청크 → 임베딩 → 검색 → 프롬프트에 삽입 → 답변</b> 다섯 단계로 질문과 관련된 조각만 찾아 붙인다. 교안 Day 8의 실습 4개(청크 · 벡터 저장소 · Retriever · RAG 체인)를 노트북 <code>day08_실습.ipynb</code>에 풀었고, 규정 문서 전체로 만든 확장판(칸 9)도 있다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오픈북 시험이에요. 두꺼운 책(문서)을 통째로 외우게 하는 대신, 쪽지(청크)로 잘라 색인을 붙여 두고(임베딩 · 벡터 저장소), 문제가 나오면 관련 쪽지 두 장만 찾아 보며(Retriever) 답하게(LLM) 해요. "쪽지에 없으면 모른다고 써라"가 커닝 방지 규칙이고요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 청크 — 왜, 어떻게 자르나</h4>
+        <p>문서가 길면 질문과 관련된 부분을 정확히 찾기 어려워 작게 나눠요. <code>overlap</code>은 경계에서 문장이 끊겨도 앞 조각의 끝을 다음 조각이 다시 갖게 하는 장치예요. 교안은 글자 수로 자르는 <code>split_text</code>를 직접 만들고, 내 확장판은 문단 → 줄 → 띄어쓰기 순으로 자르는 <code>RecursiveCharacterTextSplitter</code>를 썼어요. → <a href="#py-27">py-27</a></p>
+      </div>
+      <div class="concept-block">
+        <h4>② 임베딩 · 벡터 저장소 · Retriever · RAG 체인</h4>
+        <p>임베딩은 글의 <b>의미를 담은 숫자 목록</b>(<code>text-embedding-3-small</code>은 1536개)이고, 뜻이 비슷하면 가까워요. <code>InMemoryVectorStore</code>가 조각마다 벡터를 저장해 두고 질문도 벡터로 바꿔 가까운 k개를 돌려줘요(<a href="#py-28">py-28</a>). <code>as_retriever()</code>로 감싸면 <code>|</code>로 체인에 끼울 수 있고, <code>{"context": retriever | format_docs, "question": RunnablePassthrough()}</code>가 검색 결과와 원래 질문을 함께 프롬프트로 넘겨요(<a href="#py-29">py-29</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 확인해 보니 — 짚을 곳</h4>
+        <p>① 관련 없는 질문("오늘 날씨 어때?")에도 Retriever는 <b>항상 k개를 돌려줘요</b>. 노트북에서도 날씨 질문에 환불 · 수강 기간 문서가 나왔어요. 그래서 "문서에 없으면 모른다고 답하라"는 프롬프트가 꼭 필요하고, 실제로 답은 "모릅니다."였어요(<a href="#lab-37">실습 37</a> · <a href="#lab-38">38</a>). ② 고정 길이 자르기는 단어 가운데("수료증 / 을 수강하면")에서 끊겨요(<a href="#lab-35">실습 35</a>). ③ 이 PC의 <code>InMemoryVectorStore</code>에서는 점수 기준 검색(<code>similarity_score_threshold</code>)이 <code>NotImplementedError</code>로 실패해요(<a href="#py-30">py-30</a>). ④ 17쪽 종합 실습(<code>answer()</code> 함수)은 아직 안 풀었어요 → <a href="#lab-39">참고 풀이</a>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>④ 어제 실습의 선생님 답안이 올라옴</h4>
+        <p>선생님 레포에 10/22 16:10 "실습예제 답안 추가"로 15쪽 Memory 실습과 17쪽 종합 실습 풀이가 올라왔어요. 내 풀이와 비교해 <a href="#lab-32">실습 32</a> · <a href="#lab-33">33</a> 카드에 더했어요. 17쪽은 선생님도 두 번째 계산을 도구로 시켜, 어제 적어 둔 확장 아이디어와 같은 방향이에요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day08_실습.ipynb 칸 6 — RAG 체인 (내 노트북 그대로)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">def format_docs(docs):
+    return "\n".join(d.page_content for d in docs)      # Document 목록 → 문자열 하나
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "문서를 참고해 답하세요. 모르면 모른다고 답하세요.\n\n문서:\n{context}"),
+    ("human", "{question}"),
+])
+
+rag_chain = (
+    {"context": retriever | format_docs,          # 질문으로 검색 → 문자열로
+     "question": RunnablePassthrough()}            # 질문은 그대로
+    | prompt | llm | StrOutputParser()
+)
+answer = rag_chain.invoke("환불 규정이 어떻게 되나요?")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 (LLM · 임베딩은 다시 실행하지 않음) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>환불 정책에 따르면, 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.</pre>
+      <div class="run-note">임베딩 · LLM 호출은 사용자 API 키로 요금이 나가서 <b>다시 실행하지 않았어요</b>. 대신 키 없이 확인되는 부분(청크 나누기 · 벡터 저장소의 k · Retriever 모양 · 체인이 LLM에 보내는 프롬프트 · 딕셔너리를 넣었을 때의 오류)은 저장소 밖에서, 글자 2개씩 세는 <b>장난감 임베딩</b>과 받은 프롬프트를 그대로 돌려주는 가짜 LLM으로 실행했어요. 장난감 임베딩의 유사도는 OpenAI 임베딩과 다르니 "몇 개가 돌아오는지 · 어떤 모양인지"만 믿을 수 있어요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">5일차에 배운 것 — 핵심 정리</div>
+      <ul>
+        <li>RAG = 검색(Retrieval)으로 찾은 문서를 프롬프트에 붙여(Augmented) 답을 만든다(Generation).</li>
+        <li>청크: <code>chunk_size</code>는 조각 길이, <code>overlap</code>은 겹치는 길이 — <code>chunk_size &gt; overlap</code>이어야 앞으로 나아간다.</li>
+        <li>임베딩 = 의미를 담은 벡터, 벡터 저장소 = 벡터를 저장하고 가까운 k개를 찾는 곳.</li>
+        <li><code>as_retriever(search_kwargs={"k": 2})</code> → <code>|</code>로 체인에 끼우는 검색기, <code>RunnablePassthrough()</code> = 입력을 그대로.</li>
+        <li>Retriever는 관련 없어도 k개를 준다 → "문서에 없으면 모른다고" 지시 · 청크 크기와 k 조정 · 문서가 바뀌면 저장소를 다시 만든다.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>교안 워밍업: chain 끝의 <code>StrOutputParser()</code>는 무슨 일을 할까?</summary><div class="sc-a">LLM 응답 객체(<code>AIMessage</code>)에서 <b>글자(content)만</b> 꺼내요. 없으면 결과가 <code>AIMessage</code>라 문자열 메서드를 바로 못 써요(<a href="#py-24">py-24</a>).</div></details>
+      <details class="sc-q"><summary>FAQ 문서를 고쳤는데 챗봇이 옛 내용을 답한다. 왜일까?</summary><div class="sc-a">벡터 저장소는 만들 때의 조각 · 벡터를 갖고 있을 뿐 원본을 따라 바뀌지 않아요. 문서가 바뀌면 <b>저장소를 다시 만들어야</b> 해요(교안 16쪽 "동기화 문제").</div></details>
+      <details class="sc-q"><summary>"오늘 날씨 어때?"를 물으면 Retriever는 빈 목록을 돌려줄까?</summary><div class="sc-a">아니요. 가장 가까운 순서로 <b>k개를 무조건</b> 돌려줘요. 관련 없다고 판단하는 건 프롬프트 지시(모르면 모른다고)나 점수 기준으로 따로 해야 해요(<a href="#lab-37">실습 37</a>).</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>사내 문서 챗봇 · 고객센터 FAQ 봇 · 상품 설명 검색이 거의 다 이 구조예요. 실무에서는 메모리 대신 Chroma · FAISS · Pinecone · pgvector 같은 벡터 DB에 영구 저장하고, 문서가 바뀌면 그 문서의 조각만 다시 넣는 파이프라인을 따로 둬요. 답변에 "어느 문서에서 찾았는지"를 함께 보여 주면 사용자가 검증할 수 있어 신뢰가 올라가요.</p>
+    <div class="note-files">실습 파일:
+      <a href="https://github.com/MoriochoRadio/web-study-notes/blob/main/AI_Agent/python_agent/day08/day08_%EC%8B%A4%EC%8A%B5.ipynb" target="_blank" rel="noopener">day08/day08_실습.ipynb</a> ·
+      <a href="../view.html?f=AI_Agent/python_agent/day08/lecture_policy.txt">day08/lecture_policy.txt</a> ·
+      <a href="../view.html?f=AI_Agent/sync-validation-2026-10-23.md">10/23 검증 기록</a>
+    </div>
+    <details><summary>정리 작업 메모</summary><ul><li>근거: 강의자료 <code>Day8_강의자료.pptx</code>(18쪽), 실습 폴더 <code>day08/</code>(10/23 14:40 노트북 · 14:45 <code>lecture_policy.txt</code>), 선생님 레포 10/22 16:10 "실습예제 답안 추가"(Day06 15 · 17쪽 풀이) · 10/23 10:56 "08추가"(Day08 노트북 — 5 · 6쪽 청크 실습까지).</li><li>노트북 · 선생님 노트북의 키 모양 문자열(<code>sk-…</code>) 0개, <code>.env</code>는 열지 않음.</li><li>확인함 — 청크 나누기(두 설정 · 겹침 · 시작 위치), <code>RecursiveCharacterTextSplitter</code>로 규정 문서 나누기, 벡터 저장소의 k · Document 모양 · Retriever 종류, 체인이 LLM에 보내는 프롬프트, 딕셔너리 입력 오류, 점수 기준 검색 오류. 확인하지 않음 — 실제 OpenAI 임베딩 · LLM 호출(요금 · 키), 1536차원(노트북 출력 그대로).</li></ul></details>
+  </div>
+</article>
     </section>
 
     <section id="python-section" class="cat hidden">
       <div class="cat-head"><h2>🐍 파이썬 · 데이터 개념 — 자바 · SQL과 나란히</h2></div>
-      <p class="cat-desc">강의자료의 개념을 주제별로 한 장씩 정리했어요. <b>01~08</b>은 파이썬 문법(Day 1~2)이라 <b>☕ 자바에서는</b> 칸을, <b>09~15</b>는 Pandas · NumPy · 시각화(Day 3~4)라 <b>🗄️ SQL · 자바로는</b> 칸을, <b>16~21</b>은 FastAPI(Day 5 · DB 연동)라 <b>☕ 스프링으로는</b> 칸을, <b>22~26</b>은 LLM · LangChain(Day 6~7)이라 <b>☕ 앞 과정으로는</b> 칸을 두어 두 달 동안 쓴 것과 바로 비교할 수 있게 했어요. 코드 출력은 이 PC의 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4 · Matplotlib 3.11.2 · Seaborn 0.13.2 · FastAPI 0.156.4 · SQLAlchemy 2.1.6 · langchain-core 1.6.13 · langchain-openai 1.7.2)으로 실행한 결과예요. LLM을 부르는 코드는 요금 · 키 때문에 다시 실행하지 않고 노트북에 저장된 답을 실었으며, LLM 없이 확인할 수 있는 부분은 가짜 모델로 실행했어요.</p>
+      <p class="cat-desc">강의자료의 개념을 주제별로 한 장씩 정리했어요. <b>01~08</b>은 파이썬 문법(Day 1~2)이라 <b>☕ 자바에서는</b> 칸을, <b>09~15</b>는 Pandas · NumPy · 시각화(Day 3~4)라 <b>🗄️ SQL · 자바로는</b> 칸을, <b>16~21</b>은 FastAPI(Day 5 · DB 연동)라 <b>☕ 스프링으로는</b> 칸을, <b>22~26</b>은 LLM · LangChain(Day 6~7), <b>27~30</b>은 RAG(Day 8)라 <b>☕ 앞 과정으로는</b> · <b>🗄️ SQL로는</b> 칸을 두어 두 달 동안 쓴 것과 바로 비교할 수 있게 했어요. 코드 출력은 이 PC의 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4 · Matplotlib 3.11.2 · Seaborn 0.13.2 · FastAPI 0.156.4 · SQLAlchemy 2.1.6 · langchain-core 1.6.13 · langchain-openai 1.7.2)으로 실행한 결과예요. LLM을 부르는 코드는 요금 · 키 때문에 다시 실행하지 않고 노트북에 저장된 답을 실었으며, LLM 없이 확인할 수 있는 부분은 가짜 모델로 실행했어요.</p>
 
 <article class="note-card" id="py-01">
   <div class="note-head">
@@ -2455,11 +2547,314 @@ response_2 = chain.invoke({"history": history, "input": "방금 계산한 값에
     <p class="practice-note"><span class="pn-label">💼 실무에서는</span>대화 기록은 사용자별로 DB · Redis에 저장하고, 개인정보가 담길 수 있어 보관 기간과 삭제 정책을 정해요. 긴 대화는 요약 기억 + 최근 몇 턴 원문을 섞어 비용과 맥락을 함께 지켜요.</p>
   </div>
 </article>
+
+<article class="note-card" id="py-27">
+  <div class="note-head">
+    <span class="note-num">개념 27 · Day 8</span>
+    <h3>청크(Chunk) — 긴 문서를 조각으로, overlap으로 경계를 잇고, 문단 단위로 자르면 덜 끊긴다</h3>
+    <div class="note-tags"><span class="tag">chunk_size · overlap</span><span class="tag">start = end - overlap</span><span class="tag">RecursiveCharacterTextSplitter</span><span class="tag">separators</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>RAG의 첫 단계는 문서를 검색하기 좋은 크기로 자르는 것이다. 교안의 <code>split_text</code>는 <code>chunk_size</code>글자씩 자르되 다음 조각을 <code>end - overlap</code>에서 시작해 경계 글자를 겹치게 한다. 고정 길이는 단어 가운데서도 끊기므로, 실무에서는 문단 → 줄 → 띄어쓰기 순으로 자르는 <code>RecursiveCharacterTextSplitter</code>를 많이 쓴다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>긴 두루마리를 쪽지로 자르는데, 쪽지 끝 몇 글자를 다음 쪽지 앞에도 다시 적어 두는 거예요. 그래야 "7일 / 이내에는"처럼 경계에서 끊긴 문장도 어느 한 쪽지에는 이어서 남아요. 가위질을 글자 수가 아니라 문단 사이에서 하면 쪽지 하나가 한 주제를 온전히 담고요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 시작 위치가 어떻게 움직이나</h4>
+        <p>143자 글을 <code>chunk_size=50, overlap=10</code>으로 자르면 시작이 0 → 40 → 80 → 120, 조각 4개(50 · 50 · 50 · 23자)예요. 한 번에 <b>50 − 10 = 40자</b>씩 나아가요. <code>overlap=0, chunk_size=80</code>이면 0 → 80, 조각 2개(80 · 63자)예요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 왜 <code>chunk_size &lt;= overlap</code>을 막나</h4>
+        <p>나아가는 폭이 <code>chunk_size − overlap</code>이라, 둘이 같으면 0칸(같은 자리 반복), overlap이 더 크면 뒤로 가요. 그래서 함수 첫 줄에서 <code>ValueError</code>로 막아요 — 검사를 빼고 10 · 10으로 세 번 돌리면 start가 0 → 0 → 0(로컬 확인).</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 문단 단위 자르기 — RecursiveCharacterTextSplitter</h4>
+        <p><code>separators=["\n\n", "\n", " ", ""]</code> 순서로 <b>큰 경계부터</b> 잘라 보고, 그래도 <code>chunk_size</code>를 넘으면 다음 경계로 내려가요. 내 칸 9의 규정 문서(640자)를 150 · 30으로 자르니 6조각이고 그중 4개가 "제N장"으로 시작했어요 — 장(章)마다 한 조각. 같은 글을 <code>split_text(150, 30)</code>으로 자르면 첫 조각이 "…기간 만료 7일 전까지 1회"에서 끊겨요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 앞 과정으로는</h4>
+        <p>게시판 페이징(<a href="../Back_end/#web-57">백엔드 web-57</a>)이 "한 페이지 10개씩, 시작 번호 = (페이지−1)×10"이었다면, 청크는 "한 조각 50자씩, 다음 시작 = 끝 − overlap"이에요. 자바로 쓰면 <code>text.substring(start, Math.min(start + size, text.length()))</code>를 반복하는 것과 같아요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 5쪽 split_text (노트북 칸 0) + 칸 9의 문단 단위 분할</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">def split_text(text, chunk_size=50, overlap=10):
+    if chunk_size &lt;= overlap:                      # 나아갈 폭이 0 이하 → 무한 반복
+        raise ValueError("chunk_size는 overlap보다 커야 합니다.")
+    chunks = []
+    start = 0
+    while start &lt; len(text):
+        end = start + chunk_size
+        chunks.append(text[start:end])            # 끝을 넘어도 슬라이스는 안전
+        if end &gt;= len(text):
+            break
+        start = end - overlap                     # 경계 10글자를 다음 조각에 다시
+    return chunks
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=150, chunk_overlap=30,
+    separators=["\n\n", "\n", " ", ""],           # 문단 → 줄 → 띄어쓰기 → 글자
+)
+chunks = splitter.split_text(raw_document)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장소 밖에서 다시 실행 (API 호출 없음) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>split_text(143자, 50, 10) → 4개 [50, 50, 50, 23], 시작 위치 [0, 40, 80, 120]
+  겹친 10글자: '강의 시작 후 7일' · ' 강의 비율에 따라' · '을 수강하면 수료증'
+split_text(143자, 80, 0)  → 2개 [80, 63]
+split_text(…, 10, 10)     → ValueError: chunk_size는 overlap보다 커야 합니다.
+RecursiveCharacterTextSplitter(150, 30) · lecture_policy.txt(640자)
+  → 6개 [28, 148, 78, 141, 105, 130], '제N장'으로 시작 4개
+split_text(640자, 150, 30) → 6개, 첫 조각 끝 '…지되며, 기간 만료 7일 전까지 1회'</pre>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>나아가는 폭 = <code>chunk_size − overlap</code> → 그래서 <code>chunk_size &gt; overlap</code>.</li>
+        <li>overlap은 경계에서 끊긴 문맥을 다음 조각에 다시 담는 장치(대신 저장 · 검색 양이 조금 는다).</li>
+        <li>고정 길이는 단어 · 문장 가운데서 끊긴다 → 문단 · 줄 경계부터 자르는 분할기.</li>
+        <li>조각이 너무 크면 관련 없는 내용이 섞이고, 너무 작으면 문맥이 끊긴다 — 여러 크기로 실험(<a href="#py-30">py-30</a>).</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>200자 글을 chunk_size=60, overlap=20으로 자르면 조각은 몇 개?</summary><div class="sc-a">시작이 0 · 40 · 80 · 120 · 160 → <b>5개</b>(마지막 조각은 160~199, 40자). 160에서 끝(220)이 200을 넘으니 거기서 멈춰요.</div></details>
+      <details class="sc-q"><summary>overlap을 크게 할수록 항상 좋을까?</summary><div class="sc-a">아니요. 같은 글이 여러 조각에 반복돼 저장 · 임베딩 비용이 늘고, 검색 결과 k개가 거의 같은 내용으로 채워질 수 있어요. 보통 chunk_size의 10~20% 정도에서 시작해 실험해요.</div></details>
+      <details class="sc-q"><summary>RecursiveCharacterTextSplitter가 "\n\n"으로 자른 조각이 여전히 chunk_size보다 길면?</summary><div class="sc-a">다음 구분자("\n" → " " → "")로 내려가 그 조각만 더 잘게 잘라요. 그래서 이름이 "Recursive"(재귀)예요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>PDF · 웹 문서는 먼저 제목 · 표 · 목록 구조를 살려 텍스트로 바꾼 뒤 자르고, 조각마다 출처(파일명 · 쪽 · 장 제목)를 <code>metadata</code>로 붙여 둬요. 그래야 답변에 "규정 제2장 기준"처럼 근거를 보여 줄 수 있어요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-28">
+  <div class="note-head">
+    <span class="note-num">개념 28 · Day 8</span>
+    <h3>임베딩과 벡터 저장소 — 글을 의미 숫자로 바꿔 저장하고, 질문과 가까운 k개를 찾는다</h3>
+    <div class="note-tags"><span class="tag">OpenAIEmbeddings</span><span class="tag">embed_query → 1536</span><span class="tag">InMemoryVectorStore.from_texts</span><span class="tag">similarity_search(q, k)</span><span class="tag">Document.page_content</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>임베딩 모델(<code>text-embedding-3-small</code>)은 글 하나를 숫자 1536개로 바꾸고, 뜻이 비슷한 글일수록 그 숫자 목록(벡터)이 가깝다. <code>InMemoryVectorStore.from_texts(docs, embedding=…)</code>는 조각마다 벡터를 만들어 메모리에 저장하고, <code>similarity_search(질문, k)</code>는 질문도 벡터로 바꿔 가까운 순서로 <code>Document</code> k개를 돌려준다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>도서관 책마다 "주제 좌표"를 찍어 지도에 꽂아 두는 거예요. "환불 받고 싶어요"라는 질문도 좌표로 바꾸면, 지도에서 가장 가까운 책 두 권을 집어 올 수 있어요. 글자가 똑같지 않아도 뜻이 가까우면 가까이 있어요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 결과는 Document 목록</h4>
+        <p>노트북 출력처럼 <code>[Document(id='7b32…', metadata={}, page_content='강의 시작 후 7일 …'), …]</code> — 글은 <code>.page_content</code>에, 출처 같은 부가 정보는 <code>.metadata</code>에 있어요. 그래서 꺼낼 때 <code>for doc in result: print(doc.page_content)</code>.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② k는 "최대" 개수, 그리고 관련 없어도 채운다</h4>
+        <p>문서 3개에 <code>k=5</code>를 주면 3개만 와요. 반대로 문서와 상관없는 질문에도 가까운 순서로 <b>k개를 채워</b> 돌려줘요 — 저장소는 "얼마나 가까운지"만 계산하지 "관련 있는지"는 판단하지 않아요. 점수를 보려면 <code>similarity_search_with_score</code>(<a href="#py-30">py-30</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 가깝다 = 코사인 유사도</h4>
+        <p><code>InMemoryVectorStore</code>는 두 벡터가 가리키는 <b>방향이 얼마나 같은지</b>(코사인 유사도, 1에 가까울수록 비슷)로 순위를 매겨요. 메모리에만 있어서 프로그램이 끝나면 사라지고, 실무에서는 Chroma · FAISS · Pinecone 같은 벡터 DB에 영구 저장해요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>🗄️ SQL로는</h4>
+        <p><code>WHERE content LIKE '%환불%'</code>은 <b>글자</b>가 들어 있어야 찾아요 — "돈 돌려받고 싶어요"로는 못 찾죠. 임베딩 검색은 <b>뜻</b>으로 찾아요. 그리고 <code>ORDER BY 유사도 DESC LIMIT k</code>처럼 항상 위에서 k개를 잘라 오는 것과 같아서, 조건(<code>WHERE 유사도 &gt; 0.5</code>)을 따로 걸지 않으면 관련 없어도 k개가 와요. 벡터 인덱스는 <a href="../Back_end/#sql-36">B-Tree 인덱스</a>처럼 "빨리 찾기 위한 별도 구조"예요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day08_실습.ipynb 칸 2 · 4 — 교안 7 · 9쪽 (내 노트북)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">from langchain_openai import OpenAIEmbeddings
+from langchain_core.vectorstores import InMemoryVectorStore
+
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+vector = embeddings.embed_query("안녕하세요")
+print(len(vector))                              # 1536
+
+docs = [
+    "환불 정책: 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.",
+    "수강 기간: 강의는 결제일로부터 180일간 수강할 수 있습니다.",
+    "수료증 발급: 전체 강의의 80% 이상을 수강하면 신청할 수 있습니다.",
+]
+vectorstore = InMemoryVectorStore.from_texts(docs, embedding=embeddings)
+for k in (2, 1, 3):
+    for doc in vectorstore.similarity_search("환불 받고 싶어요", k=k):
+        print(k, doc.page_content)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 + 장난감 임베딩으로 확인한 것 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>1536
+k=2 → 환불 정책 … / 수료증 발급 …
+k=1 → 환불 정책 …
+k=3 → 환불 정책 … / 수료증 발급 … / 수강 기간 …
+--- 키 없이 장난감 임베딩(글자 2개 묶음 개수)으로 다시 실행
+k=5 (문서 3개)            → 3개
+"오늘 날씨 어때?" k=2      → 2개 (유사도 0.0인 문서로도 채움)
+결과 모양                 → Document, id 있음, metadata {}</pre>
+      <div class="run-note">위 세 줄(1536 · k별 결과)은 노트북에 저장된 실제 OpenAI 임베딩 결과예요. 아래는 키 없이 확인하려고 만든 장난감 임베딩이라 "어떤 문서가 1등인지"는 실제와 다를 수 있고, <b>개수 · 모양 · 관련 없어도 k개</b>라는 동작만 확인한 거예요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>임베딩 = 의미 벡터, 비슷한 뜻 = 가까운 벡터(코사인 유사도).</li>
+        <li><code>from_texts(docs, embedding=…)</code>로 저장, <code>similarity_search(q, k)</code>로 가까운 k개.</li>
+        <li>결과는 <code>Document</code> — 글은 <code>.page_content</code>, 부가 정보는 <code>.metadata</code>.</li>
+        <li>k는 최대 개수, 관련 없어도 채운다 → 판단은 프롬프트 · 점수로.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>질문을 임베딩할 때 문서와 다른 임베딩 모델을 써도 될까?</summary><div class="sc-a">안 돼요. 모델마다 좌표계(차원 · 의미 배치)가 달라 거리 비교가 의미 없어져요. 저장할 때와 검색할 때 <b>같은 모델</b>을 써야 해요.</div></details>
+      <details class="sc-q"><summary><code>print(result)</code>가 긴 Document 목록으로 나온다. 글만 보려면?</summary><div class="sc-a"><code>for doc in result: print(doc.page_content)</code> — 내 노트북 칸 3의 주석("page_content 속성에 내용이 저장되어 있음")이 바로 이것이에요.</div></details>
+      <details class="sc-q"><summary>InMemoryVectorStore로 만든 챗봇을 껐다 켜면 문서가 남아 있을까?</summary><div class="sc-a">아니요. 메모리에만 있어 다시 임베딩해야 해요(그때마다 요금). 그래서 실무는 디스크 · 서버에 저장하는 벡터 DB를 써요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>임베딩은 문서를 넣을 때 한 번 계산해 저장하고, 질문할 때는 질문 하나만 임베딩해요. 문서 수천 개를 임베딩하면 요금 · 시간이 들어서, 바뀐 문서만 다시 넣는 "증분 색인"이 중요해요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-29">
+  <div class="note-head">
+    <span class="note-num">개념 29 · Day 8</span>
+    <h3>Retriever와 RAG 체인 — as_retriever()로 체인 부품이 되고, 딕셔너리 한 칸은 검색 · 한 칸은 질문 그대로</h3>
+    <div class="note-tags"><span class="tag">as_retriever(search_kwargs={"k": 2})</span><span class="tag">retriever.invoke</span><span class="tag">format_docs</span><span class="tag">RunnablePassthrough</span><span class="tag">{context}</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span><code>vectorstore.as_retriever()</code>는 검색 기능을 LangChain의 <b>실행 가능한 조각(Runnable)</b>으로 감싸 <code>.invoke(질문)</code> · <code>|</code> 연결을 쓸 수 있게 한다. RAG 체인의 첫 칸 <code>{"context": retriever | format_docs, "question": RunnablePassthrough()}</code>은 같은 질문 하나를 두 갈래로 보내 — 한쪽은 검색해 문자열로, 한쪽은 그대로 — 프롬프트의 <code>{context}</code> · <code>{question}</code>을 채운다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>질문 쪽지를 복사해 두 사람에게 줘요. 한 사람(Retriever)은 도서관에서 관련 쪽지를 찾아 한 장으로 붙여 오고, 다른 사람(Passthrough)은 질문을 그대로 들고 와요. 둘이 가져온 걸 시험지 양식(prompt)에 채워 넣으면 LLM이 답해요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 딕셔너리가 왜 체인 부품이 되나</h4>
+        <p><code>|</code> 앞의 딕셔너리는 LangChain이 <b>"값마다 같은 입력을 넣어 동시에 실행하는 조각"</b>(RunnableParallel)으로 바꿔요. 입력이 <code>"환불 규정이 어떻게 되나요?"</code>면 context 칸은 검색 → <code>format_docs</code>, question 칸은 그 문자열 그대로. 결과 <code>{"context": "…", "question": "…"}</code>가 다음 칸인 프롬프트의 변수 이름과 맞아야 해요(<a href="#py-24">py-24</a>).</p>
+      </div>
+      <div class="concept-block">
+        <h4>② format_docs가 필요한 이유</h4>
+        <p>Retriever는 <code>Document</code> 목록을 돌려주는데 프롬프트 칸에는 <b>글자</b>가 들어가야 해요. <code>"\n".join(d.page_content for d in docs)</code>로 한 문자열로 붙여요. 빼면 <code>[Document(id=…, metadata={}, page_content=…)]</code>라는 객체 표현이 통째로 프롬프트에 들어가요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 입력은 문자열 하나</h4>
+        <p>이 체인은 <code>rag_chain.invoke("질문")</code>처럼 <b>문자열</b>을 받아요. 앞 시간 습관대로 <code>invoke({"question": "…"})</code>를 넣으면 Retriever가 딕셔너리를 검색어로 받아 <code>TypeError: expected string or bytes-like object, got 'dict'</code>(로컬 확인). 딕셔너리로 받고 싶으면 <code>itemgetter("question") | retriever</code>처럼 꺼내 줘야 해요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 앞 과정으로는</h4>
+        <p>스프링 Controller가 요청 하나를 받아 Service에서 데이터를 찾아오고(검색), 원래 요청값과 함께 Model에 담아 뷰 템플릿(<code>${context}</code>)에 넘기던 흐름과 같아요. <code>RunnablePassthrough</code>는 "받은 파라미터를 그대로 모델에 다시 넣기", <code>format_docs</code>는 리스트를 화면용 문자열로 바꾸는 헬퍼예요.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">교안 10 · 11쪽 (내 노트북 칸 5 · 6)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+for d in retriever.invoke("환불 규정이 궁금해요"):     # similarity_search 와 같은 결과
+    print(d.page_content)
+
+def format_docs(docs):
+    return "\n".join(d.page_content for d in docs)
+
+rag_chain = (
+    {"context": retriever | format_docs,
+     "question": RunnablePassthrough()}
+    | prompt | llm | StrOutputParser()
+)
+rag_chain.invoke("환불 규정이 어떻게 되나요?")          # ← 문자열 하나</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>LLM 자리에 "받은 메시지를 그대로 돌려주는" 가짜를 넣어 본 프롬프트 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[system] 문서를 참고해 답하세요. 문서에 없으면 모른다고 답하세요.
+
+문서:
+환불 정책: 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.
+수료증 발급: 전체 강의의 80% 이상을 수강하면 신청할 수 있습니다.
+[human] 환불 규정이 어떻게 되나요?
+
+type(retriever)                        → VectorStoreRetriever
+rag_chain.invoke({"question": "환불 규정"}) → TypeError: expected string or bytes-like object, got 'dict'</pre>
+      <div class="run-note">검색 결과 2개는 장난감 임베딩 기준이라 실제 OpenAI 임베딩과 다를 수 있어요(노트북의 실제 결과도 환불 · 수료증 두 문서였어요). 확인한 건 <b>LLM이 받는 글의 모양</b> — system 칸에 검색된 문서가 붙고, human 칸에 원래 질문이 들어가요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li><code>as_retriever(search_kwargs={"k": n})</code> → <code>.invoke(질문)</code> · <code>|</code> 연결이 되는 검색기.</li>
+        <li>체인 첫 칸의 딕셔너리 = 같은 입력을 여러 갈래로(RunnableParallel), 키 이름 = 프롬프트 변수 이름.</li>
+        <li><code>format_docs</code>: Document 목록 → 문자열, <code>RunnablePassthrough()</code>: 입력 그대로.</li>
+        <li>이 체인은 문자열을 받는다 — 딕셔너리를 넣으면 검색 단계에서 <code>TypeError</code>.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>프롬프트의 변수를 <code>{docs}</code>로 바꾸고 체인은 <code>"context": …</code> 그대로 두면?</summary><div class="sc-a">프롬프트가 <code>docs</code>를 찾는데 들어온 건 <code>context</code> · <code>question</code>이라 <b>변수 누락 오류</b>(KeyError)가 나요. 딕셔너리 키와 틀의 <code>{변수}</code>가 같아야 해요.</div></details>
+      <details class="sc-q"><summary><code>RunnablePassthrough()</code> 대신 <code>"question": lambda x: x</code>를 써도 될까?</summary><div class="sc-a">네, 체인 안의 함수는 자동으로 Runnable이 되니 같은 일을 해요. <code>RunnablePassthrough</code>는 그 뜻을 이름으로 드러낸 표준 부품이에요.</div></details>
+      <details class="sc-q"><summary>검색 결과를 답변과 함께 사용자에게 보여 주고 싶다면?</summary><div class="sc-a">검색한 Document를 따로 받아 두거나(먼저 <code>retriever.invoke</code> 후 체인에 문자열로 전달), 체인 결과에 context를 함께 담아 반환해요. 근거를 보여 주면 환각을 사용자가 알아챌 수 있어요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>검색 단계(어떤 문서가 왔나)와 생성 단계(답이 문서에 근거했나)를 나눠 로그로 남겨요. 답이 틀렸을 때 "검색이 못 찾았는지 · LLM이 잘못 썼는지"를 가려야 고칠 곳이 보이기 때문이에요.</p>
+  </div>
+</article>
+
+<article class="note-card" id="py-30">
+  <div class="note-head">
+    <span class="note-num">개념 30 · Day 8</span>
+    <h3>RAG를 다듬기 — 청크 크기 · k · "모르면 모른다" 프롬프트, 점수로 거르기, 문서가 바뀌면 다시 넣기</h3>
+    <div class="note-tags"><span class="tag">환각(할루시네이션)</span><span class="tag">similarity_search_with_score</span><span class="tag">NotImplementedError</span><span class="tag">동기화</span><span class="tag">tiktoken_enabled=False</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">한 줄 요약</span>RAG의 실패는 두 가지다 — <b>검색이 엉뚱한 조각을 가져오거나</b>, <b>LLM이 조각에 없는 말을 지어내거나</b>. 앞은 청크 크기 · k · 점수 기준으로, 뒤는 "문서에 없으면 모른다고 답하라"는 지시와 <code>temperature=0</code>으로 줄인다. 원본이 바뀌어도 벡터 저장소는 그대로이니 다시 넣어야 한다.</p>
+    <p class="note-easy"><span class="easy-label">쉽게 말하면</span>오픈북 시험에서 틀리는 길은 둘이에요 — 엉뚱한 쪽을 펼쳤거나, 맞는 쪽을 펴 놓고 지어 썼거나. 쪽을 잘 고르는 법(조각 크기 · 몇 장 볼지)과 "책에 없으면 모른다고 써라"는 규칙이 각각의 처방이에요.</p>
+    <div class="note-concept">
+      <div class="concept-block">
+        <h4>① 조절 손잡이 셋 (교안 14쪽)</h4>
+        <p><b>청크 크기</b> — 크면 관련 없는 내용이 섞이고 작으면 문맥이 끊겨요. <b>k</b> — 크면 더 많이 참고하지만 비용(프롬프트 길이)과 잡음이 늘어요. <b>프롬프트</b> — "문서에 없으면 모른다고"를 꼭 넣어요. 내 노트북 칸 8에서 날씨 질문은 관련 없는 문서 2개가 붙었는데도 답이 "모릅니다."였어요 — 지시가 효과를 낸 장면이에요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>② 점수로 거르기 — 이 PC에서는 직접 걸러야</h4>
+        <p><code>as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.5})</code>는 기준 점수 아래를 버리는 검색기인데, 이 PC의 <code>langchain-core 1.6.13</code> <code>InMemoryVectorStore</code>에서는 <b><code>NotImplementedError</code></b>가 나요(점수를 0~1로 바꾸는 함수가 없음 — 로컬 확인). 대신 <code>similarity_search_with_score</code>로 <code>(문서, 점수)</code>를 받아 직접 거르면 돼요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>③ 자주 겪는 문제 (교안 14 · 16쪽)</h4>
+        <p><b>동기화</b> — 원본을 고쳐도 저장소는 자동으로 안 바뀌어요. <b>네트워크</b> — 학교 · 회사 망에서 토크나이저 파일 내려받기가 막히면 <code>OpenAIEmbeddings(…, tiktoken_enabled=False)</code>로 우회(이 PC 설치본에도 이 옵션이 있고 기본값은 <code>True</code>). <b>영구 저장</b> — 메모리 저장소는 끄면 사라져요.</p>
+      </div>
+      <div class="concept-block">
+        <h4>☕ 앞 과정으로는</h4>
+        <p>동기화 문제는 <b>캐시 무효화</b>와 같아요 — DB를 고치면 캐시도 비워야 하듯, 문서를 고치면 그 문서의 조각을 다시 임베딩해 넣어야 해요. 점수 기준은 SQL에서 <code>ORDER BY … LIMIT k</code>에 <code>WHERE score &gt;= 0.5</code>를 더하는 것이고요. "모르면 모른다"는 서버에서 없는 자원에 404를 돌려주던 원칙(<a href="#py-20">py-20</a>)과 닮았어요 — 없는 걸 그럴듯하게 만들어 내지 않기.</p>
+      </div>
+    </div>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">점수로 직접 거르는 검색 (정리하며 작성 · 장난감 임베딩으로 실행 확인)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">def search_relevant(vectorstore, question, k=2, min_score=0.5):
+    pairs = vectorstore.similarity_search_with_score(question, k=k)   # [(Document, 점수), …]
+    return [doc for doc, score in pairs if score &gt;= min_score]       # 기준 미만은 버림
+
+docs = search_relevant(vectorstore, "오늘 날씨 어때?")
+if not docs:
+    print("제공된 안내 규정에서는 해당 내용을 확인할 수 없습니다.")    # LLM을 부르지도 않음
+
+# 이 PC(langchain-core 1.6.13)에서는 아래가 NotImplementedError
+# vectorstore.as_retriever(search_type="similarity_score_threshold",
+#                          search_kwargs={"score_threshold": 0.5})</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>저장소 밖에서 장난감 임베딩으로 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>similarity_search_with_score("환불 받고 싶어요", k=2) → [(환불 정책…, 0.154), (수료증 발급…, 0.0)]
+similarity_search_with_score("오늘 날씨 어때?", k=2)  → [(수료증 발급…, 0.0), (수강 기간…, 0.0)]
+as_retriever(search_type="similarity_score_threshold", …).invoke(…) → NotImplementedError
+  (InMemoryVectorStore._select_relevance_score_fn 이 구현되지 않음)
+OpenAIEmbeddings 의 tiktoken_enabled 기본값 → True</pre>
+      <div class="run-note">점수 값은 장난감 임베딩 기준이라 실제 OpenAI 임베딩 점수와 크기가 달라요. 실제로 쓸 때는 여러 질문으로 점수 분포를 보고 기준을 정해야 해요. 확인한 건 "관련 없는 질문도 k개가 오고, 점수로는 구별할 수 있다"는 동작이에요.</div>
+    </details>
+    <div class="note-points">
+      <div class="note-points-title">핵심 정리</div>
+      <ul>
+        <li>실패는 검색 실패 · 생성 실패(환각) 두 갈래 — 고칠 손잡이가 다르다.</li>
+        <li>청크 크기 · k는 실험으로 정하고, 프롬프트에 "문서에 없으면 모른다"를 넣는다.</li>
+        <li>점수 기준: <code>similarity_search_with_score</code>로 직접 거르기(이 PC의 InMemory 저장소는 threshold 검색 미지원).</li>
+        <li>문서가 바뀌면 저장소를 다시 만든다 — 캐시 무효화와 같은 문제.</li>
+      </ul>
+    </div>
+    <div class="self-check">
+      <div class="self-check-title">🤔 스스로 확인</div>
+      <p class="self-check-hint">답을 펼치기 전에 <b>머릿속으로 먼저 대답</b>해 보세요.</p>
+      <details class="sc-q"><summary>답이 틀렸다. 검색 탓인지 LLM 탓인지 어떻게 가를까?</summary><div class="sc-a">먼저 <code>retriever.invoke(질문)</code>만 실행해 <b>맞는 조각이 왔는지</b> 봐요. 안 왔으면 검색(청크 · k · 임베딩) 문제, 왔는데 답이 틀렸으면 생성(프롬프트 · 모델) 문제예요.</div></details>
+      <details class="sc-q"><summary>k를 10으로 올리면 "모른다"가 줄어들까?</summary><div class="sc-a">관련 문서가 11등쯤에 있었다면 찾을 수 있지만, 대부분은 관련 없는 조각이 더 붙어 프롬프트가 길어지고(비용) 오히려 엉뚱한 근거로 답할 위험이 커져요.</div></details>
+      <details class="sc-q"><summary><code>temperature=0</code>이면 환각이 없어질까?</summary><div class="sc-a">아니요. 답이 일관돼질 뿐 지어낸 내용도 일관되게 지어낼 수 있어요. 근거 지시(문서에 없으면 모른다)와 근거 표시가 함께 필요해요.</div></details>
+    </div>
+    <p class="practice-note"><span class="pn-label">💼 실무에서는</span>RAG 품질은 "질문 · 정답 근거 문서" 짝을 수십 개 만들어 두고, 청크 크기 · k · 프롬프트를 바꿀 때마다 검색 적중률과 답 정확도를 다시 재는 방식으로 관리해요. 한두 질문으로 "잘 되네"라고 판단하지 않아요.</p>
+  </div>
+</article>
     </section>
 
     <section id="lab-section" class="cat hidden">
       <div class="cat-head"><h2>🧪 실습 풀이 — 교안 문제를 내가 어떻게 풀었나</h2></div>
-      <p class="cat-desc">강의자료의 [실습] 쪽마다 한 장씩. <b>문제 → 내 풀이(노트북 그대로) → 다시 실행한 결과 → 짚을 점</b> 순서예요. 문제와 다르게 나온 곳은 고친 코드를 함께 적었습니다. 실행은 저장소 밖에서 파이썬 3.15.0으로 했어요. 11번은 선생님이 따로 준 <b>Day 1 실습예제(복습 문제 11개)</b> 체크리스트, <b>12~17은 Day 3(Pandas), 18~22는 Day 4(NumPy · 시각화), 23~27은 Day 5(FastAPI), 28은 Day 5 보충(DB 연동), 29~34는 Day 6~7(LangChain)</b>예요. Day 5는 내 <code>main.py</code>를 저장소 밖에서 uvicorn으로 띄워 요청을 보낸 결과예요. Day 4 그래프는 노트북을 다시 실행해 만든 그림이고, 선생님 노트북(10/20 push)과 다른 점도 함께 적었어요.</p>
+      <p class="cat-desc">강의자료의 [실습] 쪽마다 한 장씩. <b>문제 → 내 풀이(노트북 그대로) → 다시 실행한 결과 → 짚을 점</b> 순서예요. 문제와 다르게 나온 곳은 고친 코드를 함께 적었습니다. 실행은 저장소 밖에서 파이썬 3.15.0으로 했어요. 11번은 선생님이 따로 준 <b>Day 1 실습예제(복습 문제 11개)</b> 체크리스트, <b>12~17은 Day 3(Pandas), 18~22는 Day 4(NumPy · 시각화), 23~27은 Day 5(FastAPI), 28은 Day 5 보충(DB 연동), 29~34는 Day 6~7(LangChain), 35~39는 Day 8(RAG)</b>예요. LLM · 임베딩 호출은 요금 · 키 때문에 다시 실행하지 않고 노트북에 저장된 결과를 실었어요. Day 5는 내 <code>main.py</code>를 저장소 밖에서 uvicorn으로 띄워 요청을 보낸 결과예요. Day 4 그래프는 노트북을 다시 실행해 만든 그림이고, 선생님 노트북(10/20 push)과 다른 점도 함께 적었어요.</p>
 
 <article class="note-card" id="lab-01">
   <div class="note-head">
@@ -3484,7 +3879,7 @@ print(count_letters.invoke({'word': '안녕하세요'}))</code></pre>
 <article class="note-card" id="lab-32">
   <div class="note-head">
     <span class="note-num">실습 32 · Day 7 · 교안 15쪽 (+ 13쪽 예제)</span>
-    <h3>Memory를 가진 대화형 체인 — "내 이름은 하윤이야" (실습은 비어 있고, 예제 칸은 NameError)</h3>
+    <h3>Memory를 가진 대화형 체인 — "내 이름은 하윤이야" (실습은 비어 있고, 예제 칸은 NameError · 선생님 풀이 추가)</h3>
     <div class="note-tags"><span class="tag">MessagesPlaceholder</span><span class="tag">history.append</span><span class="tag">⚠ import 순서</span><span class="tag">📝 참고 풀이</span></div>
   </div>
   <div class="note-body">
@@ -3519,6 +3914,10 @@ print(a2)</code></pre>
 len(history): 1턴 뒤 2 → 2턴 뒤 4</pre>
       <div class="run-note">가짜 모델은 정해 둔 답만 돌려주므로 "답에 이름이 들어가는지"는 실제 LLM으로만 확인할 수 있어요. 여기서 확인한 건 <b>두 번째 호출에 "하윤"이 담긴 앞 대화가 함께 실려 간다</b>는 구조예요.</div>
     </details>
+    <div class="concept-block">
+      <h4>선생님 풀이와 비교 (10/22 16:10 "실습예제 답안 추가")</h4>
+      <p>선생님 풀이도 위 참고 풀이와 같은 구조예요 — <code>('system','너는 친절한 상담원이야')</code> · <code>MessagesPlaceholder(variable_name="history")</code> · <code>('human','{question}')</code> 틀, <code>chain1 = promptTemplate | llm | parser</code>, 1턴 뒤 <code>HumanMessage</code> · <code>AIMessage</code>를 append하고 같은 history로 "내 이름이 뭐라고 했지?"를 호출해요. 다른 점은 <b>그 칸 맨 위에서 <code>HumanMessage</code> · <code>AIMessage</code>를 import</b>한다는 것 — 내 노트북 13쪽 예제 칸의 <code>NameError</code>가 바로 이 한 줄 차이예요. 선생님 노트북에는 이 칸의 출력이 저장돼 있지 않아요.</p>
+    </div>
   </div>
 </article>
 
@@ -3526,14 +3925,16 @@ len(history): 1턴 뒤 2 → 2턴 뒤 4</pre>
   <div class="note-head">
     <span class="note-num">실습 33 · Day 7 · 교안 17쪽</span>
     <h3>종합 — Memory를 가진 수학 선생님 챗봇: 계산은 Tool, 설명과 기억은 Chain</h3>
-    <div class="note-tags"><span class="tag">Tool + Memory</span><span class="tag">calculate.invoke</span><span class="tag">history 2턴</span><span class="tag">✅ 문제대로</span></div>
+    <div class="note-tags"><span class="tag">Tool + Memory</span><span class="tag">calculate.invoke</span><span class="tag">history 2턴</span><span class="tag">✅ 문제대로</span><span class="tag">선생님 풀이 비교</span></div>
   </div>
   <div class="note-body">
     <p class="note-summary"><span class="summary-label">문제</span>① "친절한 수학 선생님" system 페르소나 + <code>MessagesPlaceholder("history")</code> ② <code>calculate.invoke({"expression": "3*4+2"})</code>로 먼저 계산하고 결과를 질문에 넣어 체인 호출 ③ 도전: 같은 history로 "방금 계산한 값에 10을 더하면?" — 앞 결과를 기억하는지.</p>
     <p>코드와 저장된 출력은 <a href="#py-26">🐍 개념 26</a> 카드에 있어요.</p>
     <div class="concept-block">
       <h4>짚을 점</h4>
-      <p>세 문제 모두 문제대로이고, 칸 맨 위에서 필요한 것을 모두 import해 <b>이 칸 하나만 실행해도</b> 돌아가게 만든 점(단, <code>calculate</code>는 위 칸에서 정의)이 좋아요. 두 번째 답이 "14"에서 시작하는 것으로 기억이 확인돼요. 계산을 LLM에 맡기지 않고 도구로 한 뒤 결과만 설명시키는 이 구조가 Day 9 Agent의 "LLM이 도구를 골라 부르기"로 이어지는 바로 앞 단계예요(<a href="#py-22">py-22</a>). 선생님 노트북에는 이 종합 실습 풀이가 아직 없어요. 확장 아이디어: 두 번째 계산도 <code>calculate.invoke({"expression": f"{calc_result}+10"})</code>로 도구가 하게 하면 LLM이 계산을 틀릴 여지가 사라져요.</p>
+      <p>세 문제 모두 문제대로이고, 칸 맨 위에서 필요한 것을 모두 import해 <b>이 칸 하나만 실행해도</b> 돌아가게 만든 점(단, <code>calculate</code>는 위 칸에서 정의)이 좋아요. 두 번째 답이 "14"에서 시작하는 것으로 기억이 확인돼요. 계산을 LLM에 맡기지 않고 도구로 한 뒤 결과만 설명시키는 이 구조가 Day 9 Agent의 "LLM이 도구를 골라 부르기"로 이어지는 바로 앞 단계예요(<a href="#py-22">py-22</a>). 확장 아이디어: 두 번째 계산도 <code>calculate.invoke({"expression": f"{calc_result}+10"})</code>로 도구가 하게 하면 LLM이 계산을 틀릴 여지가 사라져요.</p>
+      <h4>선생님 풀이와 비교 (10/22 16:10 "실습예제 답안 추가")</h4>
+      <p>선생님 풀이는 위 확장 아이디어대로예요 — 1턴은 <code>calculate.invoke({'expression': "3*4+2"})</code>로 14를 먼저 얻어 "<b>3*4+2의 계산결과는 14야.</b> 곱셈을 덧셈보다 먼저 해야 하는 이유와 함께 설명해줘"처럼 결과를 질문에 넣고, 2턴도 <code>calculate.invoke({'expression': f"{calcu_result1} + 10"})</code>로 24를 계산한 뒤 "맞게 계산했는지 확인해줘"라고 물어요. 저장된 답은 1턴 "연산의 우선순위 … 최종 결과는 14", 2턴 "이전에 계산한 결과는 14 … 14 + 10 = 24". 선생님이 칸 끝에 남긴 정리가 핵심이에요 — <b>Tool은 정확한 계산, Memory는 페르소나와 대화 문맥</b>, 이 조합을 Agent가 스스로 하게 되는 것이 Day 9예요.</p>
     </div>
   </div>
 </article>
@@ -3559,11 +3960,179 @@ len(history): 1턴 뒤 2 → 2턴 뒤 4</pre>
     <p class="practice-note"><span class="pn-label">📝 하는 법</span>md 안내대로 <code>.py</code> 파일 하나에 Part별로 이어 쓰거나, 노트북 아래에 칸을 추가해요. LLM 답은 매번 달라지니 "정답 문장"이 아니라 <b>구조가 동작하는지</b>(변수 · history 길이 · 도구 결과)를 확인하는 문제예요. md 안내의 설치 명령에는 <code>langchain</code> 패키지도 있지만 이 PC에는 <code>langchain-core</code> · <code>langchain-openai</code>만 설치돼 있고, 오늘 쓴 기능은 그 둘로 충분했어요.</p>
   </div>
 </article>
+
+<article class="note-card" id="lab-35">
+  <div class="note-head">
+    <span class="note-num">실습 35 · Day 8 · 교안 6쪽</span>
+    <h3>문서 청크 나누기 — 50 · 10이면 4조각, 80 · 0이면 2조각 (그리고 "수료증 / 을"에서 끊기는 이유)</h3>
+    <div class="note-tags"><span class="tag">split_text</span><span class="tag">enumerate(…, 1)</span><span class="tag">overlap 확인</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① <code>split_text(long_text, chunk_size=50, overlap=10)</code>로 나누고 청크 개수 ② 청크를 하나씩 출력해 앞뒤가 어떻게 겹치는지 ③ 도전: <code>chunk_size=80, overlap=0</code>으로 다시 나눠 개수 · 내용 비교.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day08_실습.ipynb 칸 1 (내 풀이, 줄임)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">chunks = split_text(long_text, chunk_size=50, overlap=10)
+print(f"[1번 문제] 생성된 청크 개수: {len(chunks)}개\n")
+for i, chunk in enumerate(chunks, 1):
+    print(f"--- [청크 {i}] (길이: {len(chunk)}자) ---")
+    print(chunk)
+
+chunks_no_overlap = split_text(long_text, chunk_size=80, overlap=0)
+print(f"[도전 문제] 생성된 청크 개수: {len(chunks_no_overlap)}개\n")</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 (다시 실행해도 같음) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[1번 문제] 생성된 청크 개수: 4개
+--- [청크 1] (길이: 50자) ---  우리 온라인 강의 서비스는 결제일로부터 180일간 수강할 수 있습니다. 강의 시작 후 7일
+--- [청크 2] (길이: 50자) ---  강의 시작 후 7일 이내에는 전액 환불이 가능하며, 7일이 지나면 수강한 강의 비율에 따라
+--- [청크 3] (길이: 50자) ---   강의 비율에 따라 부분 환불이 진행됩니다. 전체 강의의 80퍼센트 이상을 수강하면 수료증
+--- [청크 4] (길이: 23자) ---  을 수강하면 수료증을 신청할 수 있습니다.
+[도전 문제] 생성된 청크 개수: 2개 (80자 · 63자)</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>세 문제 모두 문제대로이고, 청크마다 번호와 길이를 함께 찍어 <b>겹친 10글자</b>("강의 시작 후 7일" 등)가 눈에 잘 보이게 한 점이 좋아요. 출력에서 보이듯 고정 길이는 <b>단어 · 문장 가운데서 끊겨요</b> — 청크 3은 공백으로 시작하고, 청크 4는 "을 수강하면"으로 시작해요. overlap=0인 도전 문제에서는 "수강한 / 강의 비율"이 두 조각으로 갈라져 어느 조각에도 문장이 온전히 없어요. 그래서 overlap을 두거나 문단 단위로 자르는 거예요(<a href="#py-27">py-27</a>).</p>
+      <h4>선생님 풀이와 비교</h4>
+      <p>선생님 노트북은 기본값을 그대로 쓰는 <code>split_text(long_text)</code>와 위치 인자 <code>split_text(long_text, 80, 0)</code>으로 같은 결과(4개 · 2개)를 냈어요. 내 풀이처럼 <code>chunk_size=80, overlap=0</code>으로 이름을 붙이면 숫자가 무엇인지 읽는 사람이 바로 알아요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-36">
+  <div class="note-head">
+    <span class="note-num">실습 36 · Day 8 · 교안 9쪽</span>
+    <h3>임베딩 + 벡터 저장소 — "환불 받고 싶어요"로 k=1 · 2 · 3 검색</h3>
+    <div class="note-tags"><span class="tag">OpenAIEmbeddings</span><span class="tag">from_texts</span><span class="tag">similarity_search</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① <code>OpenAIEmbeddings()</code>와 <code>InMemoryVectorStore.from_texts</code>로 문서 3개 저장 ② <code>similarity_search("환불 받고 싶어요", k=2)</code> 결과 출력 ③ 도전: k를 1과 3으로 바꿔 개수 비교.</p>
+    <p>코드는 <a href="#py-28">🐍 개념 28</a> 카드에 있어요(칸 4 그대로).</p>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 (임베딩은 다시 실행하지 않음) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>[2번 문제] 검색 결과 (k=2, 개수: 2개):
+- 환불 정책: 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.
+- 수료증 발급: 전체 강의의 80% 이상을 수강하면 신청할 수 있습니다.
+[도전 문제] k=1 → 환불 정책 1개 / k=3 → 환불 정책 · 수료증 발급 · 수강 기간 3개</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>문제대로예요. 결과를 보면 2등이 "수료증 발급"인데 환불과는 관련이 없어요 — <b>k=2를 주면 관련 문서가 하나뿐이어도 두 개를 채워요</b>. k=3이면 문서 전부가 오니, 문서가 적을 때 k를 크게 잡으면 검색의 의미가 없어져요. 문서가 3개인데 k=5를 주면 에러 없이 3개만 와요(로컬 확인). 칸 3에서는 <code>print(result)</code>로 <code>Document</code> 객체 모양을 먼저 보고 <code>page_content</code>를 꺼낸다는 걸 주석으로 남겼는데, 처음 보는 결과를 이렇게 확인하는 습관이 좋아요.</p>
+      <h4>선생님 풀이와 비교</h4>
+      <p>선생님 레포의 Day08 노트북(10/23 10:56)은 교안 6쪽 청크 실습까지 있어요. 이 실습부터는 아직 올라오지 않았어요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-37">
+  <div class="note-head">
+    <span class="note-num">실습 37 · Day 8 · 교안 12쪽</span>
+    <h3>Retriever 활용 — 수료증 질문, 그리고 "오늘 날씨 어때?"에도 문서 2개가 온다</h3>
+    <div class="note-tags"><span class="tag">as_retriever</span><span class="tag">retriever.invoke</span><span class="tag">관련 없어도 k개</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① <code>vectorstore.as_retriever(search_kwargs={"k": 2})</code> ② <code>retriever.invoke("수료증은 언제 받을 수 있나요?")</code> 결과를 하나씩 출력 ③ 도전: 전혀 관련 없는 질문으로 호출해, 그래도 문서가 검색되는지 · 관련 있어 보이는지.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">day08_실습.ipynb 칸 7 (내 풀이)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+
+docs = retriever.invoke("수료증은 언제 받을 수 있나요?")
+for d in docs:
+    print("-", d.page_content)
+
+docs_weather = retriever.invoke("오늘 날씨 어때?")
+for d in docs_weather:
+    print("-", d.page_content)</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>=== [2번 문제: 수료증 질문] ===
+- 수료증 발급: 전체 강의의 80% 이상을 수강하면 신청할 수 있습니다.
+- 수강 기간: 강의는 결제일로부터 180일간 수강할 수 있습니다.
+=== [도전 문제: 날씨 질문] ===
+- 환불 정책: 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.
+- 수강 기간: 강의는 결제일로부터 180일간 수강할 수 있습니다.</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점 — 도전 문제의 답</h4>
+      <p>"그래도 문서가 검색되는지?" → <b>네, 항상 k개</b>가 와요. "관련 있어 보이는지?" → 아니요, 날씨와 무관한 환불 · 수강 기간 문서예요. Retriever는 "가장 가까운 순서"만 알지 "관련 있음"의 기준이 없어요. 이 결과를 그대로 LLM에 붙이면 엉뚱한 근거로 답할 수 있어서, 다음 실습의 <b>"문서에 없으면 모른다고"</b> 지시나 점수 기준 거르기(<a href="#py-30">py-30</a>)가 필요해요. 노트북에 이 관찰을 한 줄 주석으로 남겨 두면 나중에 다시 볼 때 좋아요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-38">
+  <div class="note-head">
+    <span class="note-num">실습 38 · Day 8 · 교안 15쪽</span>
+    <h3>검색 기반 답변 생성 — 환불 질문은 문서대로, 날씨 질문은 "모릅니다."</h3>
+    <div class="note-tags"><span class="tag">format_docs</span><span class="tag">RunnablePassthrough</span><span class="tag">rag_chain.invoke(문자열)</span><span class="tag">환각 방지 지시</span><span class="tag">✅ 문제대로</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>① 문서들을 한 문자열로 합치는 <code>format_docs(docs)</code> ② system "문서를 참고해 답하세요. 문서에 없으면 모른다고 답하세요.\n\n문서:\n{context}" · human "{question}" 프롬프트로 <code>rag_chain</code> 완성 ③ 도전: 환불 질문과 문서에 없는 질문을 각각 실행해 비교.</p>
+    <p>체인 코드는 <a href="#ai-day05">수업 카드</a> · <a href="#py-29">🐍 개념 29</a>와 같아요(칸 8은 import · <code>llm</code> 생성까지 한 칸에 모았어요).</p>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>노트북에 저장된 출력 (LLM은 다시 실행하지 않음) <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>=== [1] 문서에 있는 질문: 환불 규정 ===
+강의 시작 후 7일 이내에는 전액 환불이 가능합니다.
+=== [2] 문서에 없는 질문: 날씨 ===
+모릅니다.</pre>
+    </details>
+    <div class="concept-block">
+      <h4>짚을 점</h4>
+      <p>문제대로예요. 날씨 질문에도 Retriever는 관련 없는 문서 2개를 붙였을 텐데(<a href="#lab-37">실습 37</a>) LLM이 "모릅니다."라고 답했어요 — <b>프롬프트 지시가 환각을 막은 장면</b>이에요. 다만 지시는 "보장"이 아니라 "경향"이라, 실무에서는 근거 문서를 답과 함께 보여 주거나 점수 기준으로 아예 LLM을 부르지 않는 길도 같이 써요(<a href="#py-30">py-30</a>). <code>temperature=0</code>을 준 것도 같은 질문에 같은 답이 나오게 해 확인하기 좋아요.</p>
+      <h4>LLM에게 실제로 가는 글</h4>
+      <p>LLM 자리에 받은 메시지를 그대로 돌려주는 가짜를 넣어 보면, system 칸 "문서:" 아래에 검색된 두 문장이 붙고 human 칸에 원래 질문이 들어가요(<a href="#py-29">py-29</a> 실행 결과). <code>rag_chain.invoke({"question": …})</code>처럼 딕셔너리를 넣으면 검색 단계에서 <code>TypeError</code>가 나니 문자열 하나를 넣어요.</p>
+    </div>
+  </div>
+</article>
+
+<article class="note-card" id="lab-39">
+  <div class="note-head">
+    <span class="note-num">실습 39 · Day 8 · 교안 17쪽 + 노트북 칸 9</span>
+    <h3>종합 — 미니 사내 문서 Q&amp;A 봇: answer(question) (17쪽은 아직 안 풂 → 참고 풀이, 칸 9는 규정 문서 확장판)</h3>
+    <div class="note-tags"><span class="tag">qa_chain</span><span class="tag">def answer(question)</span><span class="tag">RecursiveCharacterTextSplitter</span><span class="tag">📝 참고 풀이</span></div>
+  </div>
+  <div class="note-body">
+    <p class="note-summary"><span class="summary-label">문제</span>문서 4개(환불 · 수강 기간 · 수료증 · Q&amp;A 게시판 48시간)로 ① vectorstore → <code>as_retriever(k=2)</code> → rag_chain 방식대로 <code>qa_chain</code> ② <code>answer(question)</code> 함수 ③ 도전: "수강 기간이 얼마나 되나요?"(문서에 있음)와 "환불 담당자 전화번호가 뭔가요?"(없음)를 비교.</p>
+    <div class="note-code">
+      <div class="code-head"><span class="code-lang">PYTHON</span><span class="code-file">17쪽 참고 풀이 (정리하며 작성 · 장난감 임베딩 + 가짜 LLM으로 연결 확인)</span><button class="copy-btn" type="button">복사</button></div>
+      <pre><code class="language-python">docs = [
+    "환불 정책: 강의 시작 후 7일 이내에는 전액 환불이 가능합니다.",
+    "수강 기간: 강의는 결제일로부터 180일간 수강할 수 있습니다.",
+    "수료증 발급: 전체 강의의 80% 이상을 수강하면 신청할 수 있습니다.",
+    "질문 답변: 강의 내용 질문은 Q&amp;A 게시판에서 48시간 이내 답변드립니다.",
+]
+vectorstore = InMemoryVectorStore.from_texts(docs, embedding=embeddings)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+
+qa_chain = (
+    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    | prompt | llm | StrOutputParser()         # prompt 에 "문서에 없으면 모른다고"
+)
+
+def answer(question):
+    return qa_chain.invoke(question)          # 문자열 하나를 넣는다
+
+for q in ["수강 기간이 얼마나 되나요?", "환불 담당자 전화번호가 뭔가요?"]:
+    print(q, "→", answer(q))</code></pre>
+    </div>
+    <details class="run-output">
+      <summary><span class="run-tag">실행 결과</span>키 없이 확인 — LLM에 붙는 문서(context)만 <span class="predict-hint">먼저 예측 → 펼쳐서 확인</span></summary>
+      <pre>수강 기간이 얼마나 되나요?      → context: 수강 기간 … 180일간 … / 수료증 발급 …
+환불 담당자 전화번호가 뭔가요?  → context: 환불 정책 … / 질문 답변: … 48시간 …</pre>
+      <div class="run-note">장난감 임베딩이라 실제 검색 순위는 다를 수 있어요. 눈여겨볼 곳은 두 번째 질문 — "환불"이라는 글자 때문에 환불 정책 문서가 붙지만 <b>전화번호는 어느 문서에도 없어요</b>. 프롬프트 지시가 있으면 "문서에서 확인할 수 없다"가 기대 답이고, 지시가 없으면 그럴듯한 번호를 지어낼 위험이 있어요. 실제 답은 내 키로 실행해 확인해 보세요.</div>
+    </details>
+    <div class="concept-block">
+      <h4>노트북 칸 9 — 규정 문서 전체로 만든 확장판</h4>
+      <p>칸 9는 17쪽 문제와 다른, 규정 문서 한 편(<code>lecture_policy.txt</code>, 4개 장 640자)으로 STEP 1~7을 밟는 확장판이에요. 파일로 쓰고 다시 읽기 → <code>RecursiveCharacterTextSplitter(150, 30)</code>로 나누기 → 임베딩 · 저장 · k=2 검색기 → "제공된 안내 규정에서는 해당 내용을 확인할 수 없습니다."라고 답하게 하는 상담원 프롬프트 → 수료증 · 환불(5일 경과) · 삼겹살 질문 세 개. 노트북에는 실행 번호와 출력이 없지만, 이 칸이 만드는 <code>lecture_policy.txt</code>가 14:45에 생겨 있어 저장(14:40) 뒤에 실행한 것으로 보여요. 키 없이 나누기까지 다시 실행하니 6조각, 장마다 한 조각으로 잘렸어요(<a href="#py-27">py-27</a>).</p>
+      <h4>짚을 점</h4>
+      <p>테스트 2 "결제하고 5일 지났는데 전액 환불받을 수 있나요?"는 좋은 질문이에요 — 규정은 "7일 이내 <b>그리고</b> 3강 미만"이라, 문서대로라면 "3강 미만으로 들었다면 전액, 아니면 부분 환불"이 맞는 답이에요. 두 조건은 청크 3에 함께 있고 부분 환불 기준은 청크 4에 있어서(로컬에서 나눠 확인), k=2 검색이 3 · 4번을 함께 가져와야 완전한 답이 나와요. 실행해 본 뒤 답이 "7일 이내라 가능"처럼 조건 하나만 말한다면, 검색 결과를 먼저 찍어 보고 k나 청크 크기를 바꿔 보는 실험 거리가 돼요.</p>
+    </div>
+  </div>
+</article>
     </section>
 
     <section id="exam-section" class="cat hidden">
       <div class="cat-head"><h2>✏️ 시험 대비 — 출력 예측 · 개념 확인</h2></div>
-      <p class="cat-desc">강의자료의 워밍업 퀴즈와 실습에서 실제로 헷갈린 곳으로 만든 4지선다예요(Day 1~7). <b>문제 순서와 보기 순서는 매번 섞이고</b>, 답을 고르면 보기마다 왜 맞고 틀린지와 관련 카드 링크가 나와요. 코드 출력은 모두 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4 · FastAPI 0.156.4 · langchain-core 1.6.13 — LLM 대신 가짜 모델)으로 실행해 확인했습니다.</p>
+      <p class="cat-desc">강의자료의 워밍업 퀴즈와 실습에서 실제로 헷갈린 곳으로 만든 4지선다예요(Day 1~8). <b>문제 순서와 보기 순서는 매번 섞이고</b>, 답을 고르면 보기마다 왜 맞고 틀린지와 관련 카드 링크가 나와요. 코드 출력은 모두 파이썬 3.15.0(pandas 3.0.6 · NumPy 2.5.4 · FastAPI 0.156.4 · langchain-core 1.6.13 — LLM 대신 가짜 모델)으로 실행해 확인했습니다.</p>
       <div class="exam-controls">
         <button class="btn primary" type="button" data-exam="">전체 풀기</button>
         <button class="btn" type="button" data-exam="day1">Day 1 · 변수 · 자료형</button>
@@ -3572,6 +4141,7 @@ len(history): 1턴 뒤 2 → 2턴 뒤 4</pre>
         <button class="btn" type="button" data-exam="day4">Day 4 · NumPy · 시각화</button>
         <button class="btn" type="button" data-exam="day5">Day 5 · FastAPI</button>
         <button class="btn" type="button" data-exam="day6">Day 6~7 · LangChain</button>
+        <button class="btn" type="button" data-exam="day8">Day 8 · RAG</button>
       </div>
       <div id="exam-box" class="box"><p class="exam-q">위 버튼을 누르면 시작합니다.</p></div>
 <script>
@@ -3825,7 +4395,57 @@ const EXAM_BANK = [
     ch: ["4","2","1","자동으로 쌓이므로 0 (직접 append 안 함)"], a: 0,
     ex: "한 턴에 2개씩 — 2 → 4. 기록은 자동으로 쌓이지 않아 직접 append 해요.",
     why: ["정답 — 가짜 모델로 확인.","1턴 뒤 길이예요.","질문만 셀 때예요.","LangChain 이 대신 쌓아 주지 않아요(교안 15쪽)."],
-    link: ["#py-26", "🐍 26. Memory"] }
+    link: ["#py-26", "🐍 26. Memory"] },
+  { cat: "day8", q: "143자 글을 <code>split_text(text, chunk_size=50, overlap=10)</code> 으로 나누면 청크는 몇 개?",
+    ch: ["4개","3개","5개","2개"], a: 0,
+    ex: "한 번에 50 − 10 = 40자씩 나아가 시작이 0 · 40 · 80 · 120 → 4개(마지막은 23자).",
+    why: ["정답 — 노트북 출력과 다시 실행 모두 4개.","143 ÷ 50 을 올림한 값 — overlap 을 빼먹었어요.","40자씩이면 160 에서 시작하는 조각은 없어요(120 조각이 끝까지 감).","overlap 0 · chunk_size 80 일 때 개수예요."],
+    link: ["#py-27", "🐍 27. 청크"] },
+  { cat: "day8", q: "<code>split_text</code> 가 <code>chunk_size &lt;= overlap</code> 이면 <code>ValueError</code> 를 내는 이유는?",
+    ch: ["다음 시작 위치(end − overlap)가 앞으로 나아가지 못해 끝없이 반복되므로","청크가 너무 많아져 메모리가 부족하므로","임베딩 모델이 짧은 글을 받지 못하므로","overlap 이 크면 글자가 깨지므로"], a: 0,
+    ex: "나아가는 폭 = chunk_size − overlap. 0 이면 제자리, 음수면 뒤로 가요.",
+    why: ["정답 — 검사 없이 10 · 10 이면 start 가 0 → 0 → 0.","개수 문제가 아니라 진행이 멈추는 문제예요.","임베딩과 무관한, 자르는 단계의 검사예요.","글자가 깨지지는 않아요."],
+    link: ["#py-27", "🐍 27. 청크"] },
+  { cat: "day8", q: "청크에 <code>overlap</code> 을 두는 주된 목적은?",
+    ch: ["경계에서 끊긴 문장 · 문맥을 다음 조각에도 남기려고","임베딩 요금을 줄이려고","검색 결과 k 를 늘리려고","청크 개수를 줄이려고"], a: 0,
+    ex: "\"7일 / 이내에는\"처럼 잘린 문장이 어느 한 조각에는 이어서 남게 해요.",
+    why: ["정답(교안 5쪽).","겹치는 만큼 오히려 조금 늘어요.","k 는 검색 설정이에요.","overlap 이 있으면 개수는 같거나 늘어요."],
+    link: ["#py-27", "🐍 27. 청크"] },
+  { cat: "day8", q: "임베딩(embedding)에 대한 설명으로 맞는 것은?",
+    ch: ["글의 의미를 담은 숫자 목록(벡터)이고, 뜻이 비슷하면 가깝다","글자를 압축해 저장 공간을 줄이는 방법이다","글에서 키워드만 뽑아 LIKE 검색을 빠르게 한다","LLM 이 답을 만들 때 쓰는 프롬프트 형식이다"], a: 0,
+    ex: "text-embedding-3-small 은 글 하나를 숫자 1536개로 바꿔요. 같은 글자가 없어도 뜻이 비슷하면 가까워요.",
+    why: ["정답(교안 7쪽).","압축이 아니라 의미 좌표예요.","글자 일치(LIKE)와 다른 의미 검색이에요.","프롬프트가 아니라 검색에 쓰는 표현이에요."],
+    link: ["#py-28", "🐍 28. 임베딩 · 벡터 저장소"] },
+  { cat: "day8", q: "문서 3개가 든 벡터 저장소에서 <code>similarity_search(\"환불\", k=5)</code> 를 하면?",
+    ch: ["오류 없이 3개가 온다","ValueError — k 가 문서 수보다 크다","5개 — 빈 Document 2개로 채운다","0개 — k 가 너무 크면 검색하지 않는다"], a: 0,
+    ex: "k 는 최대 개수라 있는 만큼만 돌려줘요(로컬 확인).",
+    why: ["정답.","오류는 나지 않아요.","빈 문서로 채우지 않아요.","검색은 정상으로 해요."],
+    link: ["#py-28", "🐍 28. 임베딩 · 벡터 저장소"] },
+  { cat: "day8", q: "<code>retriever = vectorstore.as_retriever(search_kwargs={\"k\": 2})</code> 에 \"오늘 날씨 어때?\" 처럼 문서와 무관한 질문을 넣으면?",
+    ch: ["그래도 가장 가까운 문서 2개를 돌려준다","빈 목록을 돌려준다","\"관련 문서 없음\" 이라는 Document 하나를 돌려준다","예외가 난다"], a: 0,
+    ex: "Retriever 는 가까운 순서만 알고 관련 여부 기준이 없어요 — 노트북에서도 환불 · 수강 기간 문서가 왔어요.",
+    why: ["정답(실습 37 도전 문제).","점수 기준을 따로 걸지 않으면 비우지 않아요.","그런 문서를 만들어 주지 않아요.","정상으로 실행돼요."],
+    link: ["#lab-37", "🧪 37. Retriever 활용"] },
+  { cat: "day8", q: "<code>{\"context\": retriever | format_docs, \"question\": RunnablePassthrough()}</code> 에서 <code>RunnablePassthrough()</code> 의 역할은?",
+    ch: ["체인에 들어온 질문 문자열을 가공 없이 question 칸에 넘긴다","검색된 문서를 문자열로 합친다","LLM 응답에서 글자만 꺼낸다","이전 대화 기록을 넣는다"], a: 0,
+    ex: "같은 입력이 두 갈래로 — context 는 검색 후 문자열, question 은 그대로.",
+    why: ["정답(교안 11쪽).","그건 format_docs 예요.","그건 StrOutputParser 예요.","그건 MessagesPlaceholder 예요."],
+    link: ["#py-29", "🐍 29. Retriever와 RAG 체인"] },
+  { cat: "day8", q: "위 RAG 체인을 <code>rag_chain.invoke({\"question\": \"환불 규정\"})</code> 로 부르면?",
+    ch: ["검색 단계에서 TypeError — 이 체인은 문자열 하나를 받는다","정상 — question 키를 자동으로 꺼낸다","KeyError: context","LLM 이 딕셔너리를 그대로 읽고 답한다"], a: 0,
+    ex: "retriever 가 딕셔너리를 검색어로 받아 \"expected string … got 'dict'\"(로컬 확인). 딕셔너리로 받으려면 itemgetter(\"question\") | retriever.",
+    why: ["정답.","자동으로 꺼내 주지 않아요.","context 는 딕셔너리 단계에서 만들어져요 — 그 전에 실패해요.","LLM 까지 가지 못해요."],
+    link: ["#py-29", "🐍 29. Retriever와 RAG 체인"] },
+  { cat: "day8", q: "RAG 답변의 환각(지어내기)을 줄이려고 교안이 강조한 방법은?",
+    ch: ["프롬프트에 \"문서에 없으면 모른다고 답하라\" 를 넣는다","k 를 최대한 크게 한다","temperature 를 1 이상으로 올린다","청크를 한 글자 단위로 자른다"], a: 0,
+    ex: "실습 38 에서 날씨 질문의 답이 \"모릅니다.\" 였던 이유예요.",
+    why: ["정답(교안 14 · 16쪽).","관련 없는 조각이 늘어 오히려 위험해요.","답이 더 제멋대로가 돼요.","문맥이 사라져 검색이 나빠져요."],
+    link: ["#py-30", "🐍 30. RAG 다듬기"] },
+  { cat: "day8", q: "FAQ 원본 문서를 수정했는데 챗봇이 옛 내용으로 답한다. 가장 알맞은 조치는?",
+    ch: ["바뀐 문서로 벡터 저장소를 다시 만든다(다시 임베딩)","temperature 를 0 으로 바꾼다","k 를 1 로 줄인다","프롬프트에서 {context} 를 지운다"], a: 0,
+    ex: "벡터 저장소는 원본을 따라 자동으로 바뀌지 않아요 — 캐시 무효화와 같은 문제(교안 16쪽 동기화).",
+    why: ["정답.","답의 일관성 문제가 아니에요.","옛 조각이 1등이면 그대로예요.","근거가 사라져 더 나빠져요."],
+    link: ["#py-30", "🐍 30. RAG 다듬기"] }
 ];
 </script>
     </section>
@@ -3962,8 +4582,8 @@ const EXAM_BANK = [
 // 검색 · 필터 중(body.card-filtering)에는 묶음을 무시하고, 다른 묶음의 카드로 가는 링크는 그 묶음으로 바꿔 연다.
 (() => {
   const SUBGROUPS = {
-    python: { starts: [["py-01", "파이썬 기초", "Day 1~2"], ["py-09", "Pandas · NumPy", "Day 3~4"], ["py-14", "시각화", "Day 4"], ["py-16", "FastAPI · DB", "Day 5"], ["py-22", "LLM · LangChain", "Day 6~7"]] },
-    lab: { starts: [["lab-01", "파이썬 기초", "Day 1~2"], ["lab-12", "Pandas · NumPy", "Day 3~4"], ["lab-19", "시각화", "Day 4"], ["lab-23", "FastAPI · DB", "Day 5"], ["lab-29", "LLM · LangChain", "Day 6~7"]] },
+    python: { starts: [["py-01", "파이썬 기초", "Day 1~2"], ["py-09", "Pandas · NumPy", "Day 3~4"], ["py-14", "시각화", "Day 4"], ["py-16", "FastAPI · DB", "Day 5"], ["py-22", "LLM · LangChain", "Day 6~7"], ["py-27", "RAG", "Day 8"]] },
+    lab: { starts: [["lab-01", "파이썬 기초", "Day 1~2"], ["lab-12", "Pandas · NumPy", "Day 3~4"], ["lab-19", "시각화", "Day 4"], ["lab-23", "FastAPI · DB", "Day 5"], ["lab-29", "LLM · LangChain", "Day 6~7"], ["lab-35", "RAG", "Day 8"]] },
   };
   const SIDE_NAV = true;
   const TITLE_CLASS = "sub-title";

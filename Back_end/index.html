@@ -1358,6 +1358,60 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
   .nav-sub-item.on{background:var(--panel-2);color:var(--accent);font-weight:700;}
   body:not(.card-filtering) .sub-off{display:none;}
   body.card-filtering .sub-bar,body.card-filtering .sub-title{display:none;}
+
+  /* ---- 🩺 역량 진단 (학원 LMS 퀴즈 오답) ---- */
+  #diagnosis-section{--c:#c2410c;}
+  .diag-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:0 0 16px;}
+  .diag-card{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:inherit;text-decoration:none;min-width:0;}
+  a.diag-card:hover{border-color:var(--c);}
+  .diag-card .t{font-size:13px;font-weight:700;color:var(--muted);}
+  .diag-card .s{font-size:24px;font-weight:800;line-height:1.2;}
+  .diag-card .s small{font-size:13px;color:var(--muted);font-weight:600;}
+  .diag-card .w{font-size:12.5px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere;}
+  .diag-bar{display:inline-block;width:100%;min-width:56px;height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden;vertical-align:middle;}
+  .diag-bar i{display:block;height:100%;background:#1d8f52;}
+  .diag-bar.mid i{background:#d97706;}
+  .diag-bar.low i{background:#dc2626;}
+  .diag-scroll{overflow-x:auto;margin:8px 0;}
+  .diag-units{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .diag-units th,.diag-units td{border-bottom:1px solid var(--border);padding:7px 8px;text-align:left;vertical-align:top;}
+  .diag-units th{font-size:12.5px;color:var(--muted);font-weight:700;}
+  .diag-units td:nth-child(2){white-space:nowrap;}
+  .diag-units .diag-barcol{width:22%;min-width:70px;vertical-align:middle;}
+  .diag-second td:first-child{white-space:nowrap;font-weight:700;}
+  .diag-peek summary{cursor:pointer;color:var(--muted);font-size:12.5px;}
+  .diag-top,.diag-list{margin:0;padding-left:20px;line-height:1.75;}
+  .diag-top li,.diag-list li{margin:4px 0;}
+  .diag-hint{font-size:13px;color:var(--muted);margin:8px 0;}
+  .diag-src{font-size:12.5px;color:var(--muted);margin:14px 0 0;}
+  .diag-subject h3 small{font-size:12px;color:var(--muted);font-weight:600;}
+  details.diag-q{border:1px solid var(--border);border-radius:10px;background:var(--panel);margin:8px 0;scroll-margin-top:80px;}
+  details.diag-q[open]{border-color:var(--c);}
+  details.diag-q>summary{cursor:pointer;padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;}
+  .dq-n{font-weight:800;color:var(--c);min-width:34px;}
+  .dq-gist{flex:1 1 240px;min-width:0;line-height:1.6;}
+  .dq-tags{display:flex;flex-wrap:wrap;gap:4px;}
+  .dq-tag{font-size:11.5px;border:1px solid var(--border);border-radius:99px;padding:1px 8px;color:var(--muted);white-space:nowrap;}
+  .dq-tag.neg{border-color:#7c3aed;color:#7c3aed;}
+  .dq-tag.code{border-color:#2b6cd4;color:#2b6cd4;}
+  .dq-tag.none{border-color:#dc2626;color:#dc2626;}
+  .dq-tag.part{border-color:#d97706;color:#b45309;}
+  .dq-tag.twice{border-color:#dc2626;background:#dc2626;color:#fff;}
+  [data-theme="dark"] .dq-tag.neg{color:#c4b5fd;border-color:#8b5cf6;}
+  [data-theme="dark"] .dq-tag.code{color:#93c5fd;border-color:#3b82f6;}
+  [data-theme="dark"] .dq-tag.none{color:#fca5a5;}
+  [data-theme="dark"] .dq-tag.part{color:#fcd34d;}
+  .dq-body{padding:4px 14px 12px;border-top:1px dashed var(--border);line-height:1.75;overflow-wrap:anywhere;}
+  .dq-ans{background:var(--panel-2);border-radius:8px;padding:8px 10px;}
+  .dq-mine{color:#dc2626;font-weight:800;margin-right:4px;}
+  .dq-right{color:#1d8f52;font-weight:800;margin-right:4px;}
+  [data-theme="dark"] .dq-mine{color:#fca5a5;}
+  [data-theme="dark"] .dq-right{color:#86efac;}
+  .dq-tip{font-size:13.5px;}
+  .dq-cards{font-size:13px;color:var(--muted);}
+  .diag-badge{display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;border:1px solid #c2410c;color:#c2410c;border-radius:99px;padding:1px 8px;text-decoration:none;white-space:nowrap;}
+  [data-theme="dark"] .diag-badge{color:#fdba74;border-color:#fb923c;}
+  .diag-star-all{appearance:none;cursor:pointer;font:inherit;font-size:13.5px;font-weight:700;background:var(--panel);border:1px solid var(--c);color:inherit;border-radius:10px;padding:8px 14px;}
 </style>
 </head>
 <body>
@@ -1368,7 +1422,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
     <h1>Java · SQL · 웹 백엔드 학습 노트</h1>
     <p class="sub">자바 · SQL · 웹(JSP·Servlet·Spring) 수업을 <b>한 줄 요약 → 쉽게 말하면 → 개념 → 주석 달린 코드 → 핵심 정리</b> 순서로 정리한 노트입니다. <b>복습하러 왔다면 왼쪽 맨 위 🔁 복습 탭</b>에서 바로 시작하세요. 처음이거나 흐름이 헷갈린다면 <b>🗺️ 큰 그림 탭</b>으로 지도를 보고, <b>📘 개념서 탭</b>에서 1장부터 차례대로 공부하세요.</p>
     <div class="meta-row">
-      <span id="updated-badge">마지막 업데이트: 2026-10-22</span>
+      <span id="updated-badge">마지막 업데이트: 2026-10-23</span>
       <span>📅 수업 50일차</span>
       <span>🗂️ 노트 카드 358장</span>
       <span>✏️ 시험 대비 231문제</span>
@@ -1412,6 +1466,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <button data-target="journey" class="nav-item"><span class="nav-label">🧭 학습 여정</span></button>
       <button data-target="concepts" class="nav-item"><span class="nav-label">📖 개념 사전</span><span class="nav-count">32</span></button>
       <button data-target="exam" class="nav-item"><span class="nav-label">✏️ 시험 대비</span></button>
+      <button data-target="diagnosis" class="nav-item"><span class="nav-label">🩺 역량 진단</span><span class="nav-count">46</span></button>
     </div>
     <div class="nav-group">
       <button data-target="materials" class="nav-item"><span class="nav-label">📎 강의자료</span></button>
@@ -1598,7 +1653,7 @@ document.documentElement.dataset.theme = localStorage.getItem("theme")
       <li class="done"><span class="bp-when">10/7 ~ 10/12</span><span class="bp-what">스프링 부트 — 같은 게시판을 부트로, 그리고 회원 · 파일 · 권한</span><span class="bp-badge done">완료</span><span class="bp-why">XML로 직접 세우던 부품을 부트의 자동 설정에 맡기고(09), 그 위에 회원가입 · 입력 검사 · 파일 첨부 · 권한 검사를 갖춘 회원제 게시판을 키운다(10). 기능만큼 중요한 것은 "서버는 브라우저에서 온 값을 그대로 믿지 않는다"는 습관.</span></li>
       <li class="done"><span class="bp-when">10/13 ~ 10/15</span><span class="bp-what">일정관리(캘린더) 게시판 — 새 기능 하나를 부트로 처음부터</span><span class="bp-badge done">완료</span><span class="bp-why">9일차에 콘솔로 찍던 달력이 웹 화면으로 돌아온다. 서버가 달력에 필요한 두 숫자(1일의 요일 · 마지막 날)를 구하고 화면이 그만큼 칸을 찍은 뒤(47), 날짜 칸에서 일정을 넣고 그날의 목록을 꺼내고(48), 여러 개 삭제 · 상세 · 수정과 칸마다 일정 미리 보기까지 채운다(49) — 넣을 때와 꺼낼 때 같은 날짜 규칙을 써야 맞물리고, 화면에 찍는 사용자 글자는 이스케이프해야 한다. 남은 것은 "누구의 일정인가"(로그인).</span></li>
       <li class="done"><span class="bp-when">10/16</span><span class="bp-what">REST API + React 프런트 — 같은 게시판을 서버(JSON)와 화면으로 나누기</span><span class="bp-badge done">50일차</span><span class="bp-why">서버는 화면 없이 데이터(JSON)만 주고받고, 화면은 프런트 과정의 React(Next.js)가 맡는다. 자원은 주소 · 행위는 메서드 · 결과는 상태 코드라는 REST 약속, 포트가 다른 두 서버를 잇는 CORS가 새로 나온다 — 프런트엔드 과정과 백엔드 과정이 처음으로 한 서비스로 이어지는 단계.</span></li>
-      <li class="now"><span class="bp-when">10/19 ~ 지금</span><span class="bp-what">AI Agent 과정 1부 — 파이썬부터 Pandas · FastAPI · LangChain · RAG · Agent까지 (새 페이지)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">새 과정은 <a href="../AI_Agent/">🤖 AI Agent 노트</a>에 따로 정리한다. 하루에 교안 두 개씩 — 10/19 파이썬 문법(자바로 배운 변수 · 조건 · 반복 · 함수 · 예외를 더 짧게), 10/20 Pandas · NumPy · 시각화(SQL로 하던 SELECT · WHERE · IS NULL · DISTINCT를 표 객체의 메서드로). 10/21에는 FastAPI로 12번 예제의 REST API를 파이썬으로 다시 만들었다 — 주소 · 메서드 · JSON · 상태 코드 약속은 그대로이고, <code>@PathVariable</code> · <code>@RequestParam</code> · <code>@RequestBody</code> 자리를 타입 힌트와 Pydantic이 맡으며, 12번에서 고칠 곳으로 남긴 "없는 자원은 404"를 직접 돌려준다. 10/22에는 그 API를 SQLAlchemy로 MariaDB에 잇고(스프링의 JPA · 세션 주입과 같은 자리), LangChain으로 실제 LLM을 불러 프롬프트 틀 · 체인 · 도구 · 대화 기억을 만들었다 — API 키는 <code>.env</code>로, 이 과정 내내 DB 비밀번호를 가려 온 것과 같은 원칙. 코딩테스트는 같은 탭에 회차를 이어 정리한다.</span></li>
+      <li class="now"><span class="bp-when">10/19 ~ 지금</span><span class="bp-what">AI Agent 과정 1부 — 파이썬부터 Pandas · FastAPI · LangChain · RAG · Agent까지 (새 페이지)</span><span class="bp-badge now">📍 지금 여기</span><span class="bp-why">새 과정은 <a href="../AI_Agent/">🤖 AI Agent 노트</a>에 따로 정리한다. 하루에 교안 두 개씩 — 10/19 파이썬 문법(자바로 배운 변수 · 조건 · 반복 · 함수 · 예외를 더 짧게), 10/20 Pandas · NumPy · 시각화(SQL로 하던 SELECT · WHERE · IS NULL · DISTINCT를 표 객체의 메서드로). 10/21에는 FastAPI로 12번 예제의 REST API를 파이썬으로 다시 만들었다 — 주소 · 메서드 · JSON · 상태 코드 약속은 그대로이고, <code>@PathVariable</code> · <code>@RequestParam</code> · <code>@RequestBody</code> 자리를 타입 힌트와 Pydantic이 맡으며, 12번에서 고칠 곳으로 남긴 "없는 자원은 404"를 직접 돌려준다. 10/22에는 그 API를 SQLAlchemy로 MariaDB에 잇고(스프링의 JPA · 세션 주입과 같은 자리), LangChain으로 실제 LLM을 불러 프롬프트 틀 · 체인 · 도구 · 대화 기억을 만들었다 — API 키는 <code>.env</code>로, 이 과정 내내 DB 비밀번호를 가려 온 것과 같은 원칙. 10/23에는 RAG — 문서를 조각(청크)으로 나눠 임베딩으로 저장하고 질문과 뜻이 가까운 조각을 찾아 LLM에 붙였다. SQL의 <code>LIKE</code>(글자 검색)가 의미 검색이 되고, <code>ORDER BY … LIMIT k</code>처럼 관련 없어도 k개가 온다는 점까지 같다. 코딩테스트는 같은 탭에 회차를 이어 정리한다.</span></li>
       <li><span class="bp-when">예정</span><span class="bp-what">Spring Security 켜기 · 권한 · 종합 프로젝트</span><span class="bp-badge next">예정</span><span class="bp-why">지금은 인터셉터와 직접 짠 코드로 하는 로그인 · 권한 확인을 Spring Security 필터 체인에 맡기고, 종합 프로젝트로 "요즘 방식" 스프링을 마무리.</span></li>
     </ol>
 
@@ -47596,6 +47651,511 @@ public class Exceptionhandle {
     </div>
   </section>
 
+  <section id="diagnosis-section" class="cat">
+    <div class="cat-head"><span class="dot"></span><h2>🩺 역량 진단 — 학원 LMS 퀴즈로 본 약한 곳</h2></div>
+    <p class="cat-desc">학원 LMS의 <b>역량 진단 평가</b>(과목당 50문항 · 4지선다)에서 틀린 문항을 단원별로 모으고, 문항마다 <b>내 답 → 정답 · 왜 · 기억법 · 다시 볼 카드</b>를 적었어요. 문항 원문은 학원 자료라 옮기지 않고 <b>요지만 내 말로</b> 적었습니다. 이 탭은 자바 · SQL · 웹(스프링) 세 과목이고, 프런트엔드는 <a href="../Front_end/#diagnosis-section">프런트엔드 노트의 역량 진단 탭</a>에 있어요. 오답과 이어진 카드에는 제목 아래 <span class="diag-badge">🩺 진단 오답</span> 표시가 붙어요.</p>
+    <div class="diag-cards">
+      <a class="diag-card" href="#diag-java"><span class="t">☕ 자바</span><span class="s">34<small> / 50</small></span><span class="diag-bar mid"><i style="width:68%"></i></span><span class="w">가장 약한 단원: 스레드 · 네트워크 (2/6)</span></a>
+      <a class="diag-card" href="#diag-sql"><span class="t">🗄️ SQL</span><span class="s">35<small> / 50</small></span><span class="diag-bar mid"><i style="width:70%"></i></span><span class="w">가장 약한 단원: 인덱스 · 스토리지 엔진 (3/8)</span></a>
+      <a class="diag-card" href="#diag-web"><span class="t">🖥️ 웹 · 스프링</span><span class="s">35<small> / 50</small></span><span class="diag-bar mid"><i style="width:70%"></i></span><span class="w">가장 약한 단원: 스프링 핵심(DI · 빈 · AOP · 트랜잭션) (2/5)</span></a>
+      <a class="diag-card" href="../Front_end/#diagnosis-section"><span class="t">🌐 프런트엔드 →</span><span class="s">34<small> / 50</small></span><span class="diag-bar mid"><i style="width:68%"></i></span><span class="w">프런트엔드 노트의 역량 진단 탭에서 (다시 풀기 13 / 50)</span></a>
+    </div>
+    <div class="box">
+      <h3>📌 먼저 볼 곳 — 약점 TOP 5</h3>
+      <ol class="diag-top">
+        <li><b>SQL 인덱스 · 스토리지 엔진 — 8문항 중 5개 틀림</b>(<a href="#diag-sql-15">Q15</a> <a href="#diag-sql-20">20</a> <a href="#diag-sql-24">24</a> <a href="#diag-sql-25">25</a> <a href="#diag-sql-28">28</a>). 클러스터형은 테이블당 하나 · PK 순 저장, 복합 인덱스는 왼쪽부터, 인덱스는 고치지 않고 지우고 다시. → <a href="#sql-36">sql-36</a> · <a href="#sql-40">sql-40</a> · <a href="#sql-43">sql-43</a></li>
+        <li><b>자바 "코드 결과" 문항 — 24문항 중 12개 틀림</b>(개념 문장 문항은 26개 중 4개). 고른 오답이 모두 <b>"코드가 막힘 없이 끝까지 실행된다"</b>는 쪽이었어요 — 컴파일러가 막는 규칙(인터페이스 상수 · 제네릭 타입 · 람다의 지역 변수)과 흐름이 끊기는 규칙(<code>&amp;&amp;</code> 단축 · <code>throw</code> · <code>finally</code>의 return · <code>accept()</code> 블로킹 · 잠금 없는 <code>wait()</code>). 코드 문제는 <b>"어디서 멈추거나 막히나?"부터</b> 찾기. 단원으로는 <b>스레드 · 네트워크가 6문항 중 4개</b>(<a href="#diag-java-41">Q41</a> <a href="#diag-java-43">43</a> <a href="#diag-java-44">44</a> <a href="#diag-java-46">46</a>)로 가장 약해요 → <a href="#util-11">util-11</a> · <a href="#net-06">net-06</a> · <a href="#net-07">net-07</a></li>
+        <li><b>REST · HTTP — 8문항 중 4개 틀림</b>(<a href="#diag-web-41">Q41</a> <a href="#diag-web-43">43</a> <a href="#diag-web-45">45</a> <a href="#diag-web-46">46</a>) — 50일차에 배운 바로 그 내용(명사 URI · <code>ResponseEntity</code> · 4xx/5xx · 출처 3요소). → <a href="#web-85">web-85</a> · <a href="#web-86">web-86</a></li>
+        <li><b>스프링 AOP · 트랜잭션 — 5문항 중 3개 틀림</b>(<a href="#diag-web-18">Q18</a> <a href="#diag-web-19">19</a> <a href="#diag-web-20">20</a>) — JoinPoint와 Pointcut, <code>@Around</code>, "체크 예외는 커밋". → <a href="#web-59">web-59</a> · <a href="#web-60">web-60</a></li>
+        <li><b>"옳지 않은 것 고르기" 형 — 세 과목에서 틀린 46문항 중 14개</b>, 그리고 그 14개 모두 <b>맞는 설명을 골랐어요</b>. 내용을 몰랐다기보다 "옳은 것"을 찾듯 읽은 경우가 섞여 있어요 → 문제의 "않은 · 틀린 · 아닌"에 밑줄, 보기마다 O/X 표시 후 X가 하나인지 확인.</li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>🔍 틀리는 방식 — 문제 형태별</h3>
+      <div class="diag-scroll"><table class="diag-units">
+        <thead><tr><th>과목</th><th>"옳지 않은 것" 형에서 틀림</th><th>나머지 문항에서 틀림</th></tr></thead>
+        <tbody>
+<tr><td>☕ 자바</td><td>3 / 12 (25%)</td><td>13 / 38 (34%)</td></tr>
+<tr><td>🗄️ SQL</td><td>3 / 7 (43%)</td><td>12 / 43 (28%)</td></tr>
+<tr><td>🖥️ 웹 · 스프링</td><td>8 / 18 (44%)</td><td>7 / 32 (22%)</td></tr>
+        </tbody>
+      </table></div>
+      <ul class="diag-list">
+        <li><b>자바 코드 결과 문항</b> 12 / 24 틀림(50%) vs 개념 문장 문항 4 / 26(15%) — 코드 문제가 세 배 넘게 약해요.</li>
+        <li><b>노트에 있었는데 틀림 40개</b> · 노트에 일부만 4개 · <b>노트에 없던 개념 2개</b>(트리거 OLD/NEW · 커서). 대부분은 배운 적 있는 내용이라 <b>새로 공부하기보다 그 카드를 다시 보는 것</b>이 빠른 길이에요. <a href="#sql-14">sql-14</a>(NOT IN과 NULL) · <a href="#oop-22">oop-22</a>(인터페이스 상수) · <a href="#class-day18">18일차</a>(<code>synchronized</code> 없는 <code>wait</code>) · <a href="#ct-77">ct-77</a>(LEFT JOIN과 COUNT)은 카드에 문제와 같은 내용이 그대로 있었어요.</li>
+        <li><b>같은 개념을 두 번 틀림</b> — CTE 컬럼 목록(<a href="#diag-sql-3">Q3</a> · <a href="#diag-sql-19">Q19</a>), AOP(<a href="#diag-web-18">Q18</a> · <a href="#diag-web-19">Q19</a>), wait/notify(<a href="#diag-java-41">Q41</a> · <a href="#diag-java-43">Q43</a>).</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>이렇게 쓰세요</h3>
+      <ol class="diag-list">
+        <li>문항 요지만 보고 <b>답을 먼저 떠올린 뒤</b> 펼쳐요(펼친 답이 아니라 떠올리는 순간이 기억을 만들어요).</li>
+        <li>아래 버튼으로 오답과 이어진 카드를 한 번에 <b>⭐ 헷갈리는 카드</b>로 표시하면, 왼쪽 메뉴 아래 "⭐ 헷갈리는 것만"과 🔁 복습 탭의 "⭐ 표시한 것"으로 반복할 수 있어요(이 브라우저에만 저장).</li>
+        <li>며칠 뒤 LMS에서 <b>다시 풀기</b>로 점수가 오르는지 확인해요.</li>
+      </ol>
+      <p><button type="button" class="diag-star-all" id="diag-star-all">⭐ 오답과 이어진 카드 모두 헷갈림 표시</button></p>
+    </div>
+      <div class="box diag-subject" id="diag-java">
+        <h3>☕ 자바 — 34 / 50 (68%) <small>LMS 과목명 "자바프로그래밍"</small></h3>
+        <div class="diag-scroll"><table class="diag-units"><thead><tr><th>단원</th><th>맞힘</th><th class="diag-barcol"></th><th>틀린 문항</th></tr></thead><tbody>
+<tr><td>스레드 · 네트워크</td><td>2 / 6</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:33%"></i></span></td><td><a href="#diag-java-41">Q41</a> <a href="#diag-java-43">Q43</a> <a href="#diag-java-44">Q44</a> <a href="#diag-java-46">Q46</a></td></tr>
+<tr><td>예외 처리</td><td>1 / 3</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:33%"></i></span></td><td><a href="#diag-java-32">Q32</a> <a href="#diag-java-33">Q33</a></td></tr>
+<tr><td>제네릭 · 컬렉션</td><td>3 / 6</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-java-35">Q35</a> <a href="#diag-java-36">Q36</a> <a href="#diag-java-37">Q37</a></td></tr>
+<tr><td>람다 · 스트림</td><td>3 / 5</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:60%"></i></span></td><td><a href="#diag-java-16">Q16</a> <a href="#diag-java-38">Q38</a></td></tr>
+<tr><td>추상 클래스 · 인터페이스 · 내부 클래스</td><td>3 / 4</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:75%"></i></span></td><td><a href="#diag-java-30">Q30</a></td></tr>
+<tr><td>상속 · 다형성 · 오버로딩/오버라이딩</td><td>8 / 10</td><td class="diag-barcol"><span class="diag-bar"><i style="width:80%"></i></span></td><td><a href="#diag-java-6">Q6</a> <a href="#diag-java-29">Q29</a></td></tr>
+<tr><td>클래스 · 생성자 · static · 접근 제어</td><td>5 / 6</td><td class="diag-barcol"><span class="diag-bar"><i style="width:83%"></i></span></td><td><a href="#diag-java-49">Q49</a></td></tr>
+<tr><td>언어 특징 · 기본형 · 연산자 · 제어문</td><td>6 / 7</td><td class="diag-barcol"><span class="diag-bar"><i style="width:86%"></i></span></td><td><a href="#diag-java-19">Q19</a></td></tr>
+<tr><td>문자열 · 배열</td><td>3 / 3</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td></tr>
+</tbody></table></div>
+        <p class="diag-hint">단원은 약한 순서. 아래 문항은 <b>요지만 보고 답을 먼저 떠올린 뒤</b> 펼치세요.</p>
+<details class="diag-q" id="diag-java-6" data-cards="oop-04 oop-18">
+  <summary><span class="dq-n">Q6</span><span class="dq-gist">상속 설명 중 <b>틀린</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 자바는 다중 상속을 지원하지 않는다<br><span class="dq-right">정답</span> 자식은 부모의 <code>private</code> 멤버에 직접 접근할 수 있다</p>
+    <p><code>private</code>은 <b>그 클래스 안에서만</b> 보여요. 자식 객체 안에 부모 필드가 있긴 하지만 직접 이름으로 못 쓰고, getter나 <code>protected</code>로 열어 줘야 해요. 고른 보기(다중 상속 미지원)는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 "틀린 것" 문제 — 보기마다 O/X를 먼저 표시하고 X가 하나인지 확인.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#oop-04">oop-04 접근 제한자 4가지</a> · <a href="#oop-18">oop-18 OOP 3대 개념과 상속 · 메모리 4대 특징</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-16" data-cards="util-07">
+  <summary><span class="dq-n">Q16</span><span class="dq-gist">람다식 설명 중 <b>틀린</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 메서드를 하나의 식으로 표현한 익명 함수다<br><span class="dq-right">정답</span> 추상 메서드가 2개 이상인 인터페이스를 구현할 때 쓴다</p>
+    <p>람다는 <b>추상 메서드가 딱 하나인</b> 함수형 인터페이스(<code>Runnable</code> · <code>Comparator</code> …)에만 쓸 수 있어요 — 둘이면 어느 메서드의 몸통인지 정할 수 없으니까요. 고른 보기는 람다의 정의 그 자체예요.</p>
+    <p class="dq-tip">💡 람다 = 메서드 하나짜리 인터페이스의 몸통. <code>@FunctionalInterface</code>가 그 규칙을 검사해 줘요.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-07">util-07 람다식(Lambda)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-19" data-cards="basic-07">
+  <summary><span class="dq-n">Q19</span><span class="dq-gist"><code>a=5, b=10</code>에서 <code>(a++ &gt; 5) &amp;&amp; (++b &gt; 10)</code> 뒤 <code>a, b</code></span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 6, 11<br><span class="dq-right">정답</span> 6, 10</p>
+    <p>후위 <code>a++</code>는 <b>비교에 5를 쓰고 나서</b> 6이 돼요 → <code>5 &gt; 5</code>는 false. <code>&amp;&amp;</code>는 왼쪽이 false면 오른쪽을 <b>아예 실행하지 않아서</b>(단축 평가) <code>++b</code>가 안 돌아 b는 10 그대로예요.</p>
+    <p class="dq-tip">💡 <code>&amp;&amp;</code> · <code>||</code> 오른쪽에 <code>++</code>가 있으면 "실행이나 됐나?"부터 따지기.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#basic-07">basic-07 연산자 총정리 (관계 · 단축 · 증감 · 논리 · 삼항)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-29" data-cards="oop-20 concept-java-err-cce">
+  <summary><span class="dq-n">Q29</span><span class="dq-gist"><code>Parent p = new Parent()</code>일 때 <code>p instanceof Child</code>로 나누는 코드의 출력</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> Play A<br><span class="dq-right">정답</span> B</p>
+    <p>실제 객체가 <code>Parent</code>라 <code>Child</code>가 아니에요 → <code>instanceof</code>는 false, else로 가서 B만 찍어요. 검사 없이 <code>(Child) p</code>로 바꾸면 <code>ClassCastException</code> — 그걸 막으려고 쓰는 게 <code>instanceof</code>예요.</p>
+    <p class="dq-tip">💡 참조 변수의 타입이 아니라 <code>new</code>로 만든 <b>실제 객체</b>를 본다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#oop-20">oop-20 this와 super, 참조타입 형 변환</a> · <a href="#concept-java-err-cce">concept-java-err-cce ClassCastException</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-30" data-cards="oop-22 oop-10">
+  <summary><span class="dq-n">Q30</span><span class="dq-gist">인터페이스의 <code>int SPEED = 100;</code>에 구현 클래스가 <code>SPEED = 200;</code>을 하면</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 정상 컴파일, 200 출력<br><span class="dq-right">정답</span> 인터페이스 변수는 <code>public static final</code> 상수라 컴파일 에러</p>
+    <p>인터페이스에 쓴 필드는 적지 않아도 <b>자동으로 <code>public static final</code></b>이에요(<a href="#oop-22">oop-22</a> 규칙 ①). final에 다시 대입하니 컴파일 단계에서 막혀요.</p>
+    <p class="dq-tip">💡 인터페이스 = 상수 + 추상 메서드(+ default · static). 필드는 무조건 상수.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#oop-22">oop-22 인터페이스(Interface)와 추상 클래스의 차이</a> · <a href="#oop-10">oop-10 final · 상수와 Wrapper 클래스</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-32" data-cards="util-05">
+  <summary><span class="dq-n">Q32</span><span class="dq-gist"><code>try { return 1; } finally { return 2; }</code>의 반환값</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag part">📙 노트에 일부만</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 1 2<br><span class="dq-right">정답</span> 2</p>
+    <p>메서드는 값을 <b>하나만</b> 돌려줘요. <code>try</code>의 <code>return 1</code>이 나가려는 순간 <code>finally</code>가 반드시 실행되고, 거기의 <code>return 2</code>가 앞의 값을 <b>덮어써요</b>. 그래서 실무에서는 finally 안에 return을 쓰지 않아요(예외까지 삼켜 버림).</p>
+    <p class="dq-tip">💡 finally는 "무조건 실행" — 그 안의 return은 앞의 return · 예외를 덮는다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-05">util-05 예외 처리</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-33" data-cards="util-06 util-05">
+  <summary><span class="dq-n">Q33</span><span class="dq-gist"><code>check(15); check(20);</code> — 15에서 사용자 예외를 던질 때 출력</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 미성년자 통과<br><span class="dq-right">정답</span> 미성년자</p>
+    <p><code>try</code> 블록 안에서 예외가 나면 <b>그 아래 문장은 건너뛰고</b> 바로 <code>catch</code>로 가요. <code>check(20)</code>은 실행되지 않아요.</p>
+    <p class="dq-tip">💡 예외 = 그 자리에서 try 블록 탈출. "다음 줄도 실행되나?"를 꼭 확인.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-06">util-06 예외 계층과 사용자 정의 예외 (throw · throws)</a> · <a href="#util-05">util-05 예외 처리</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-35" data-cards="oop-24">
+  <summary><span class="dq-n">Q35</span><span class="dq-gist"><code>GBox&lt;String&gt;</code>에 <code>box.set(100)</code>을 하면</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> "100" 문자열로 자동 변환<br><span class="dq-right">정답</span> 컴파일 시점에 타입 불일치 에러</p>
+    <p>제네릭은 <b>컴파일할 때</b> 타입을 검사해요 — <code>set(String)</code>에 <code>int</code>를 넣으니 컴파일러가 막아요. 자동 문자열 변환은 없고, 타입 소거(erasure)는 컴파일이 끝난 뒤의 이야기라 이 오류를 피하게 해 주지 않아요.</p>
+    <p class="dq-tip">💡 제네릭의 존재 이유 = 잘못된 타입을 <b>실행 전에</b> 잡기.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#oop-24">oop-24 제네릭(Generic)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-36" data-cards="util-03">
+  <summary><span class="dq-n">Q36</span><span class="dq-gist"><code>equals</code>는 항상 true · <code>hashCode</code>는 항상 1인 클래스 객체 2개를 <code>HashSet</code>에 넣은 뒤 크기</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 2<br><span class="dq-right">정답</span> 1</p>
+    <p><code>HashSet</code>은 <code>hashCode</code>로 칸을 찾고 <code>equals</code>로 같은지 봐요. 둘 다 "같다"고 답하니 두 번째 객체는 중복으로 보고 넣지 않아요.</p>
+    <p class="dq-tip">💡 Set · Map의 "같다" = <code>hashCode</code> 같고 <code>equals</code> true. 좌표가 달라도 상관없다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-03">util-03 Set 계열</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-37" data-cards="util-04 oop-14 concept-java-equals">
+  <summary><span class="dq-n">Q37</span><span class="dq-gist"><code>HashMap</code>에 키 <code>"A"</code>, <code>new String("A")</code>, <code>"B"</code>를 넣은 뒤 <code>size()</code>와 <code>get("A")</code></span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 3 2<br><span class="dq-right">정답</span> 2 2</p>
+    <p>HashMap은 키를 <code>==</code>(주소)가 아니라 <b><code>equals</code> · <code>hashCode</code>(내용)</b>로 비교해요. <code>new String("A")</code>는 <code>"A"</code>와 같은 키라 값만 "2"로 덮어써요 → 키는 A · B 두 개.</p>
+    <p class="dq-tip">💡 주소 비교(<code>==</code>)는 String pool 문제에서만, 컬렉션은 늘 <code>equals</code>.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-04">util-04 Map 계열</a> · <a href="#oop-14">oop-14 String 비교</a> · <a href="#concept-java-equals">concept-java-equals == vs equals()</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-38" data-cards="util-07 oop-23">
+  <summary><span class="dq-n">Q38</span><span class="dq-gist">람다가 지역 변수 <code>num</code>을 쓰고, 그 뒤에 <code>num = 20</code>으로 바꾸면</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 20 정상 출력<br><span class="dq-right">정답</span> 람다가 쓰는 지역 변수는 사실상 final이어야 해서 컴파일 에러</p>
+    <p>람다 · 익명 클래스가 쓰는 지역 변수는 <b>값이 한 번도 안 바뀌어야</b> 해요(effectively final). 람다는 만들 때의 값을 복사해 가지고 있어서, 뒤에서 바꾸면 어느 값인지 헷갈리니 컴파일러가 막아요.</p>
+    <p class="dq-tip">💡 람다 안에서 쓰는 지역 변수 = 상수처럼. 바꿔야 하면 배열 · 필드 · AtomicInteger.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-07">util-07 람다식(Lambda)</a> · <a href="#oop-23">oop-23 중첩 클래스(Nested Class)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-41" data-cards="util-11 class-day18">
+  <summary><span class="dq-n">Q41</span><span class="dq-gist">생산자-소비자에서 <code>wait()</code> 앞 조건 검사로 가장 안전한 것</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>if (cakeCount &gt;= 1) wait();</code><br><span class="dq-right">정답</span> <code>while (cakeCount &gt;= 1) wait();</code></p>
+    <p>깨어난 순간에 조건이 다시 바뀌어 있을 수 있어요 — 다른 생산자가 먼저 채웠거나, 이유 없이 깨어나기(spurious wakeup)도 해요. <code>if</code>는 한 번만 보고 지나가지만 <code>while</code>은 <b>깨어날 때마다 다시 확인</b>해요.</p>
+    <p class="dq-tip">💡 <code>wait()</code>는 언제나 <code>while</code> 안에서.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#util-11">util-11 스레드(Thread)</a> · <a href="#class-day18">class-day18 스레드 생성 2가지 · 동기화(synchronized) · …</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-43" data-cards="class-day18 util-11">
+  <summary><span class="dq-n">Q43</span><span class="dq-gist"><code>synchronized</code> 없이 <code>obj.wait()</code>를 부르고 <code>catch (Exception e)</code>로 받으면</span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 무한 대기<br><span class="dq-right">정답</span> <code>IllegalMonitorStateException</code> → "Exception" 출력</p>
+    <p><code>wait()</code> · <code>notify()</code>는 그 객체의 잠금(모니터)을 쥔 스레드만 부를 수 있어요. 잠금 없이 부르면 기다리기도 전에 예외가 나요 — <a href="#class-day18">18일차 카드</a>의 "synchronized를 지우면?" 질문과 같은 내용이에요.</p>
+    <p class="dq-tip">💡 <code>wait</code> · <code>notify</code>는 <code>synchronized</code> 안에서만.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#class-day18">class-day18 스레드 생성 2가지 · 동기화(synchronized) · …</a> · <a href="#util-11">util-11 스레드(Thread)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-44" data-cards="net-07 net-01">
+  <summary><span class="dq-n">Q44</span><span class="dq-gist">자바 UDP 통신 설명 중 <b>틀린</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> TCP와 달리 접속을 기다리는 <code>ServerSocket</code>이 필요 없다<br><span class="dq-right">정답</span> 받은 패킷을 내부 <code>InputStream</code>으로 손실 없이 읽는다</p>
+    <p>UDP는 스트림이 아니라 <b>패킷 단위</b>예요 — <code>DatagramSocket.receive(packet)</code>로 <code>DatagramPacket</code>의 <code>byte[]</code> 버퍼에 받고, 손실 · 순서 보장도 없어요. 고른 보기는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 TCP = 스트림 · 연결 · 보장, UDP = 패킷 · 비연결 · 보장 없음.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#net-07">net-07 UDP 소켓 프로그래밍</a> · <a href="#net-01">net-01 네트워크와 프로토콜</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-46" data-cards="net-06">
+  <summary><span class="dq-n">Q46</span><span class="dq-gist">접속한 클라이언트가 없을 때 <code>print("A "); server.accept(); print("B ");</code></span><span class="dq-tags"><span class="dq-tag code">코드 결과</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> A B가 바로 찍히고 종료<br><span class="dq-right">정답</span> A만 찍고 접속이 올 때까지 멈춰 기다림(블로킹)</p>
+    <p><code>accept()</code>는 클라이언트가 접속할 때까지 <b>그 줄에서 멈춰</b> 있어요(블로킹). 그래서 채팅 서버는 접속마다 스레드를 따로 만들었죠(<a href="#net-08">net-08</a>).</p>
+    <p class="dq-tip">💡 <code>accept()</code> · <code>readLine()</code> · <code>receive()</code> — 기다리는 메서드.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#net-06">net-06 TCP/IP 소켓 프로그래밍</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-java-49" data-cards="oop-04">
+  <summary><span class="dq-n">Q49</span><span class="dq-gist">접근 제어자를 범위가 <b>좁은 것부터</b> 나열</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> (보기 글이 잘려 정확히 알 수 없음)<br><span class="dq-right">정답</span> <code>private</code> → <code>default</code> → <code>protected</code> → <code>public</code></p>
+    <p>같은 클래스(private) → 같은 패키지(default) → 같은 패키지 + 상속(protected) → 어디서나(public). LMS 화면을 옮긴 글에서는 <code>&lt;</code> 기호가 잘려 보기가 깨졌어요.</p>
+    <p class="dq-tip">💡 "클래스 → 패키지 → 상속 → 전부" 순서로 넓어진다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#oop-04">oop-04 접근 제한자 4가지</a></p>
+  </div>
+</details>
+      </div>
+      <div class="box diag-subject" id="diag-sql">
+        <h3>🗄️ SQL — 35 / 50 (70%) <small>LMS 과목명 "데이터베이스"</small></h3>
+        <div class="diag-scroll"><table class="diag-units"><thead><tr><th>단원</th><th>맞힘</th><th class="diag-barcol"></th><th>틀린 문항</th></tr></thead><tbody>
+<tr><td>인덱스 · 스토리지 엔진</td><td>3 / 8</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:38%"></i></span></td><td><a href="#diag-sql-15">Q15</a> <a href="#diag-sql-20">Q20</a> <a href="#diag-sql-24">Q24</a> <a href="#diag-sql-25">Q25</a> <a href="#diag-sql-28">Q28</a></td></tr>
+<tr><td>저장 프로그램(프로시저 · 함수 · 트리거 · 커서)</td><td>3 / 6</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-sql-29">Q29</a> <a href="#diag-sql-33">Q33</a> <a href="#diag-sql-44">Q44</a></td></tr>
+<tr><td>서브쿼리 · CTE</td><td>4 / 7</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:57%"></i></span></td><td><a href="#diag-sql-3">Q3</a> <a href="#diag-sql-17">Q17</a> <a href="#diag-sql-19">Q19</a></td></tr>
+<tr><td>JOIN · 집합 연산</td><td>3 / 5</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:60%"></i></span></td><td><a href="#diag-sql-2">Q2</a> <a href="#diag-sql-45">Q45</a></td></tr>
+<tr><td>조회 · 조건 · 정렬 · 함수</td><td>7 / 8</td><td class="diag-barcol"><span class="diag-bar"><i style="width:88%"></i></span></td><td><a href="#diag-sql-10">Q10</a></td></tr>
+<tr><td>DML · DDL · 트랜잭션</td><td>8 / 9</td><td class="diag-barcol"><span class="diag-bar"><i style="width:89%"></i></span></td><td><a href="#diag-sql-50">Q50</a></td></tr>
+<tr><td>제약조건 · 무결성 · 뷰</td><td>4 / 4</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td></tr>
+<tr><td>집계 · 그룹</td><td>3 / 3</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td></tr>
+</tbody></table></div>
+        <p class="diag-hint">단원은 약한 순서. 아래 문항은 <b>요지만 보고 답을 먼저 떠올린 뒤</b> 펼치세요.</p>
+<details class="diag-q" id="diag-sql-2" data-cards="sql-32 sql-33">
+  <summary><span class="dq-n">Q2</span><span class="dq-gist">사원과 그 관리자 이름을 함께 보는 셀프 조인</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>FROM emp e JOIN emp m ON e.empno = m.mgr</code><br><span class="dq-right">정답</span> <code>FROM emp e LEFT JOIN emp m ON e.mgr = m.empno</code></p>
+    <p>"e의 관리자 = m"이면 <b>e.mgr(내 관리자 번호) = m.empno(그 사람 번호)</b>예요. 고른 식은 방향이 반대라 e가 관리자, m이 부하가 되어 "사원명" 칸에 관리자 이름이 나와요. 관리자가 없는 사장(mgr NULL)까지 보이려면 LEFT JOIN.</p>
+    <p class="dq-tip">💡 셀프 조인은 별칭에 역할 이름을 붙여 읽기 — "e.mgr가 가리키는 사람이 m".</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-32">sql-32 JOIN 심화</a> · <a href="#sql-33">sql-33 OUTER JOIN</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-3" data-cards="sql-26">
+  <summary><span class="dq-n">Q3</span><span class="dq-gist">지역별 최대 키의 평균을 구하는 CTE에 대한 <b>옳은</b> 설명</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 안쪽 <code>AS maxheight</code> 별칭이 없어도 밖에서 <code>maxheight</code>로 부를 수 있다<br><span class="dq-right">정답</span> CTE 이름 뒤 컬럼 목록을 생략해도 안쪽 SELECT의 컬럼 이름이 그대로 쓰인다</p>
+    <p>별칭이 없으면 그 컬럼 이름은 <code>MAX(height)</code> 자체라 <code>maxheight</code>로는 못 불러요. 반대로 CTE 이름 뒤의 <code>(addr, maxheight)</code> 목록은 <b>생략 가능</b> — 안쪽 이름을 그대로 써요(<a href="#sql-26">sql-26</a>에 그대로 있음).</p>
+    <p class="dq-tip">💡 CTE 컬럼 이름 = 목록이 있으면 목록, 없으면 안쪽 SELECT의 이름(별칭).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-26">sql-26 CTE (WITH)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-10" data-cards="sql-27 concept-sql-null">
+  <summary><span class="dq-n">Q10</span><span class="dq-gist">전화번호가 NULL이면 '연락처 없음'으로 보이기</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>NULLIF(mobile1, '연락처 없음')</code><br><span class="dq-right">정답</span> <code>IFNULL(mobile1, '연락처 없음')</code></p>
+    <p><code>IFNULL(a, b)</code> = a가 NULL이면 b. <code>NULLIF(a, b)</code>는 반대로 <b>a와 b가 같으면 NULL</b>을 돌려주는 함수예요. 이름이 비슷해 헷갈리기 쉬워요.</p>
+    <p class="dq-tip">💡 IF-NULL = "NULL이면 바꿔", NULL-IF = "같으면 NULL로".</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-27">sql-27 내장 함수</a> · <a href="#concept-sql-null">concept-sql-null SQL의 NULL</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-15" data-cards="sql-36">
+  <summary><span class="dq-n">Q15</span><span class="dq-gist">InnoDB 특징 중 <b>옳지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 트랜잭션을 지원하고 ACID를 보장한다<br><span class="dq-right">정답</span> 데이터는 항상 삽입 순서대로 쌓이는 힙(Heap) 구조다</p>
+    <p>InnoDB 테이블은 <b>기본 키 순서로 정렬된 클러스터형 인덱스 그 자체</b>예요 — 삽입 순서 힙이 아니에요. 고른 보기(ACID)는 InnoDB의 대표 특징이에요.</p>
+    <p class="dq-tip">💡 InnoDB = PK 순 정렬 저장(클러스터형) · 행 잠금 · 외래 키 · 트랜잭션.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-36">sql-36 인덱스</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-17" data-cards="sql-14 concept-sql-null">
+  <summary><span class="dq-n">Q17</span><span class="dq-gist"><code>NOT IN (…)</code> 목록에 NULL이 하나라도 있으면</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> NULL이 0이나 빈 문자열로 바뀌어 계산된다<br><span class="dq-right">정답</span> 비교가 UNKNOWN이 되어 결과가 0행</p>
+    <p><code>x NOT IN (1, NULL)</code> = <code>x &lt;&gt; 1 AND x &lt;&gt; NULL</code>인데 <code>x &lt;&gt; NULL</code>은 참도 거짓도 아닌 UNKNOWN이라 전체가 참이 될 수 없어요. <b><a href="#sql-14">sql-14</a> 카드 제목이 바로 이 함정</b>이에요.</p>
+    <p class="dq-tip">💡 NOT IN 서브쿼리엔 <code>WHERE col IS NOT NULL</code>을 붙이거나 <code>NOT EXISTS</code>.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-14">sql-14 NULL 함정</a> · <a href="#concept-sql-null">concept-sql-null SQL의 NULL</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-19" data-cards="sql-26">
+  <summary><span class="dq-n">Q19</span><span class="dq-gist">CTE 설명 중 <b>틀린</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 콤마로 한 WITH 아래 여러 CTE를 선언할 수 있다<br><span class="dq-right">정답</span> 안쪽에 별칭이 있어도 CTE 이름 옆에 컬럼명을 무조건 다시 적어야 한다</p>
+    <p>3번과 같은 내용 — 컬럼 목록은 선택이에요. 고른 보기(콤마로 여러 개)는 맞는 설명이고, 뒤 CTE가 앞 CTE를 참조하는 것도 가능해요.</p>
+    <p class="dq-tip">💡 같은 개념이 다른 문항(3 · 19)에서 두 번 나왔고 둘 다 틀렸다 → 최우선 복습.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-26">sql-26 CTE (WITH)</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-20" data-cards="sql-36">
+  <summary><span class="dq-n">Q20</span><span class="dq-gist">InnoDB 클러스터형 인덱스에 대한 <b>옳은</b> 설명</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 한 테이블에 여러 개 만들 수 있다<br><span class="dq-right">정답</span> PRIMARY KEY를 만들면 그 컬럼으로 자동 구성된다</p>
+    <p>클러스터형은 <b>데이터 자체의 정렬 순서</b>라 테이블당 하나뿐이에요. 여러 개 만들 수 있는 건 보조 인덱스.</p>
+    <p class="dq-tip">💡 클러스터형 = 책 본문의 쪽 순서(하나), 보조 = 뒤의 찾아보기(여럿).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-36">sql-36 인덱스</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-24" data-cards="sql-40">
+  <summary><span class="dq-n">Q24</span><span class="dq-gist"><code>SHOW INDEX</code> 결과의 <code>Seq_in_index</code> 뜻</span><span class="dq-tags"><span class="dq-tag part">📙 노트에 일부만</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 그 인덱스로 최근 검색된 횟수<br><span class="dq-right">정답</span> 복합 인덱스 안에서 그 컬럼의 순서(1, 2, 3…)</p>
+    <p><a href="#sql-40">sql-40</a> 실행 결과 표에 이 열이 나오는데 뜻은 적혀 있지 않아요. 복합 인덱스 <code>(name, birthYear)</code>면 name이 1, birthYear가 2 — 바로 아래 25번 왼쪽 접두사 규칙의 그 "순서"예요.</p>
+    <p class="dq-tip">💡 Seq = sequence(순서). Cardinality = 서로 다른 값 개수.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-40">sql-40 인덱스 만들고 지우기</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-25" data-cards="sql-40 sql-43">
+  <summary><span class="dq-n">Q25</span><span class="dq-gist"><code>(deptno, job, sal)</code> 복합 인덱스로 레인지 스캔을 <b>못</b> 하는 조건</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>WHERE deptno = 20</code><br><span class="dq-right">정답</span> <code>WHERE job = 'MANAGER' AND sal &gt;= 3000</code></p>
+    <p>복합 인덱스는 <b>맨 왼쪽 컬럼부터</b> 채워야 써요(왼쪽 접두사 규칙). deptno 없이 job · sal만 걸면 인덱스의 정렬 기준 첫 칸이 비어 못 써요. deptno만 쓰는 건 가능해요.</p>
+    <p class="dq-tip">💡 전화번호부(성 → 이름)에서 이름만으로는 못 찾는다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-40">sql-40 인덱스 만들고 지우기</a> · <a href="#sql-43">sql-43 인덱스를 만들어도 안 쓰이는 세 가지 경우</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-28" data-cards="sql-40">
+  <summary><span class="dq-n">Q28</span><span class="dq-gist">이미 만든 보조 인덱스의 컬럼 · 순서를 바꾸는 방법</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>ALTER INDEX … MODIFY</code><br><span class="dq-right">정답</span> 기존 인덱스를 DROP한 뒤 새로 CREATE</p>
+    <p>MariaDB · MySQL에는 인덱스 구성을 고치는 <code>ALTER INDEX … MODIFY</code>가 없어요. <code>DROP INDEX</code>(또는 <code>ALTER TABLE … DROP INDEX</code>) 후 <code>CREATE INDEX</code>로 다시 만들어요.</p>
+    <p class="dq-tip">💡 인덱스는 "수정"이 아니라 "지우고 다시".</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-40">sql-40 인덱스 만들고 지우기</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-29" data-cards="sql-44">
+  <summary><span class="dq-n">Q29</span><span class="dq-gist">프로시저 본문의 <code>;</code> 때문에 해석이 끊기지 않게 문장 끝 기호를 바꾸는 명령</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> TERMINATOR<br><span class="dq-right">정답</span> DELIMITER</p>
+    <p><code>DELIMITER $$</code>로 바꾸고 <code>END $$</code> 뒤 <code>DELIMITER ;</code>로 되돌려요(<a href="#sql-44">sql-44</a> 코드 그대로).</p>
+    <p class="dq-tip">💡 delimiter = 구분자.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-44">sql-44 스토어드 프로시저</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-33">
+  <summary><span class="dq-n">Q33</span><span class="dq-gist">트리거 안에서 UPDATE <b>이전</b> 값을 담은 가상 테이블</span><span class="dq-tags"><span class="dq-tag none">📕 노트에 없던 개념</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> TEMP<br><span class="dq-right">정답</span> OLD (바뀐 뒤 값은 NEW)</p>
+    <p>트리거는 노트에 카드가 없어요. INSERT는 <code>NEW</code>만, DELETE는 <code>OLD</code>만, UPDATE는 둘 다 있어요 — <code>OLD.price</code>(고치기 전) · <code>NEW.price</code>(고친 뒤). 감사(이력) 테이블에 "누가 무엇을 무엇으로 바꿨는지" 남길 때 써요.</p>
+    <p class="dq-tip">💡 OLD = 지우거나 바꾸기 전, NEW = 넣거나 바꾼 뒤.</p>
+    <p class="dq-cards">노트에 카드가 없어 위 설명이 전부예요.</p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-44" data-cards="sql-45">
+  <summary><span class="dq-n">Q44</span><span class="dq-gist">프로시저에서 SELECT 결과를 한 행씩 읽으며 반복하는 객체</span><span class="dq-tags"><span class="dq-tag none">📕 노트에 없던 개념</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 시퀀스<br><span class="dq-right">정답</span> 커서(Cursor)</p>
+    <p>커서도 노트에서는 <a href="#sql-45">sql-45</a> 실무 칸에 "커서 반복은 느리다" 한 줄로만 나와요. <code>DECLARE cur CURSOR FOR SELECT …</code> → <code>OPEN</code> → <code>FETCH cur INTO 변수</code>를 반복 → <code>CLOSE</code>. 시퀀스는 번호를 하나씩 발급하는 객체(MariaDB에도 있음)예요.</p>
+    <p class="dq-tip">💡 커서 = 결과 집합 위의 "읽는 위치 표시", 자바의 Iterator · ResultSet.next()와 같은 생각.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-45">sql-45 프로시저 제어문</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-45" data-cards="ct-77 sql-33 sql-17">
+  <summary><span class="dq-n">Q45</span><span class="dq-gist">사원이 없는 부서도 0명으로 보이는 부서별 사원 수</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>LEFT JOIN … COUNT(*)</code><br><span class="dq-right">정답</span> <code>LEFT JOIN … COUNT(e.empno) … GROUP BY d.deptno, d.dname</code></p>
+    <p>LEFT JOIN은 사원 없는 부서에도 <b>NULL로 채운 행 1개</b>를 만들어요. <code>COUNT(*)</code>는 그 행을 세서 1, <code>COUNT(e.empno)</code>는 NULL을 빼고 세서 0이에요. 28회차 코딩테스트 <a href="#ct-77">ct-77</a>(대장균 자식 수)과 정확히 같은 함정이에요.</p>
+    <p class="dq-tip">💡 LEFT JOIN 뒤에는 COUNT(*)가 아니라 COUNT(오른쪽 테이블의 열).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#ct-77">ct-77 대장균들의 자식의 수 구하기</a> · <a href="#sql-33">sql-33 OUTER JOIN</a> · <a href="#sql-17">sql-17 집계 함수</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-sql-50" data-cards="sql-21">
+  <summary><span class="dq-n">Q50</span><span class="dq-gist">사원 데이터를 고치고 지우는 DML 설명 중 <b>옳지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>DELETE FROM emp WHERE deptno = 20;</code>은 20번 부서만 지운다<br><span class="dq-right">정답</span> 조건 삭제에 <code>REMOVE FROM emp WHERE …</code>를 쓴다</p>
+    <p><code>REMOVE</code>라는 SQL 문은 없어요 — 행 삭제는 <code>DELETE</code>. 고른 보기는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 DML은 SELECT · INSERT · UPDATE · DELETE 넷뿐.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#sql-21">sql-21 UPDATE · DELETE</a></p>
+  </div>
+</details>
+      </div>
+      <div class="box diag-subject" id="diag-web">
+        <h3>🖥️ 웹 · 스프링 — 35 / 50 (70%) <small>LMS 과목명 "SSR프로그래밍"</small></h3>
+        <div class="diag-scroll"><table class="diag-units"><thead><tr><th>단원</th><th>맞힘</th><th class="diag-barcol"></th><th>틀린 문항</th></tr></thead><tbody>
+<tr><td>스프링 핵심(DI · 빈 · AOP · 트랜잭션)</td><td>2 / 5</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:40%"></i></span></td><td><a href="#diag-web-18">Q18</a> <a href="#diag-web-19">Q19</a> <a href="#diag-web-20">Q20</a></td></tr>
+<tr><td>REST · CORS · SPA</td><td>4 / 8</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-web-41">Q41</a> <a href="#diag-web-43">Q43</a> <a href="#diag-web-45">Q45</a> <a href="#diag-web-46">Q46</a></td></tr>
+<tr><td>스프링 MVC(매핑 · 커맨드 · 인터셉터 · 예외)</td><td>3 / 6</td><td class="diag-barcol"><span class="diag-bar low"><i style="width:50%"></i></span></td><td><a href="#diag-web-23">Q23</a> <a href="#diag-web-25">Q25</a> <a href="#diag-web-39">Q39</a></td></tr>
+<tr><td>JDBC · 커넥션 풀</td><td>2 / 3</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:67%"></i></span></td><td><a href="#diag-web-2">Q2</a></td></tr>
+<tr><td>MVC · EL · JSTL · 검증</td><td>3 / 4</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:75%"></i></span></td><td><a href="#diag-web-14">Q14</a></td></tr>
+<tr><td>스프링 부트 · Thymeleaf · 보안 · 테스트</td><td>7 / 9</td><td class="diag-barcol"><span class="diag-bar mid"><i style="width:78%"></i></span></td><td><a href="#diag-web-32">Q32</a> <a href="#diag-web-34">Q34</a></td></tr>
+<tr><td>서블릿 · JSP · 필터 · 스코프</td><td>6 / 7</td><td class="diag-barcol"><span class="diag-bar"><i style="width:86%"></i></span></td><td><a href="#diag-web-10">Q10</a></td></tr>
+<tr><td>MyBatis · 게시판</td><td>5 / 5</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td></tr>
+<tr><td>HTTP · 웹 기초</td><td>3 / 3</td><td class="diag-barcol"><span class="diag-bar"><i style="width:100%"></i></span></td><td>—</td></tr>
+</tbody></table></div>
+        <p class="diag-hint">단원은 약한 순서. 아래 문항은 <b>요지만 보고 답을 먼저 떠올린 뒤</b> 펼치세요.</p>
+<details class="diag-q" id="diag-web-2" data-cards="web-07 web-05">
+  <summary><span class="dq-n">Q2</span><span class="dq-gist">JDBC 자원 해제와 예외 처리에 대한 <b>옳은</b> 설명</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 만든 순서대로 Connection → Statement → ResultSet 순으로 닫는다<br><span class="dq-right">정답</span> <code>finally</code>에서 만든 <b>역순</b>(ResultSet → PreparedStatement → Connection)으로 닫는다</p>
+    <p>나중에 만든 것이 먼저 만든 것에 기대고 있어서(ResultSet은 Statement에, Statement는 Connection에) <b>안쪽부터</b> 닫아요. 예외가 나도 닫히도록 finally, 요즘은 try-with-resources가 역순으로 알아서 닫아요.</p>
+    <p class="dq-tip">💡 자원 해제 = 쌓은 접시를 위에서부터.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-07">web-07 자원 반납</a> · <a href="#web-05">web-05 JDBC 6단계</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-10" data-cards="web-21">
+  <summary><span class="dq-n">Q10</span><span class="dq-gist">4대 스코프 설명 중 <b>적절하지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> PageContext: 한 JSP 페이지 동안만 유효한 가장 좁은 영역<br><span class="dq-right">정답</span> application: 브라우저를 닫으면 사라지는 세션의 하위 영역</p>
+    <p>application(ServletContext)은 <b>웹 애플리케이션 전체가 공유</b>하고 서버가 내려갈 때까지 살아요 — 세션보다 넓어요. 고른 보기는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 page &lt; request &lt; session &lt; application (좁은 → 넓은).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-21">web-21 네 가지 scope</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-14" data-cards="web-34">
+  <summary><span class="dq-n">Q14</span><span class="dq-gist">JSTL Core 태그 설명 중 <b>옳지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>&lt;c:if test="${empty list}"&gt;</code>는 null이거나 비었을 때 참<br><span class="dq-right">정답</span> <code>varStatus</code>의 <code>${status.count}</code>는 0부터 시작한다</p>
+    <p><code>${st.index}</code>는 0부터, <code>${st.count}</code>는 <b>1부터</b>예요 — <a href="#web-34">web-34</a>에 그대로 적혀 있어요. 고른 보기(<code>empty</code>)는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 index = 위치(0~), count = 몇 번째(1~).</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-34">web-34 &amp;lt;c:forEach&amp;gt;</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-18" data-cards="web-60">
+  <summary><span class="dq-n">Q18</span><span class="dq-gist">AOP 용어 연결 중 <b>올바르지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> Advice: 부가 기능 그 자체를 담은 구현 코드<br><span class="dq-right">정답</span> Pointcut: 어드바이스를 적용할 수 있는 모든 위치의 총칭</p>
+    <p>"적용할 수 있는 모든 위치"는 <b>JoinPoint</b>예요. Pointcut은 그중에서 <b>실제로 적용할 곳을 고르는 조건식</b>(<code>execution(* com..dao.*.*(..))</code>)이에요.</p>
+    <p class="dq-tip">💡 JoinPoint = 후보 전부, Pointcut = 고르는 필터, Advice = 끼울 코드, Aspect = Pointcut + Advice.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-60">web-60 AOP</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-19" data-cards="web-60">
+  <summary><span class="dq-n">Q19</span><span class="dq-gist">타깃 메서드 실행 전후를 모두 감싸고 실행 여부까지 정할 수 있는 어드바이스</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>@Before</code><br><span class="dq-right">정답</span> <code>@Around</code></p>
+    <p><code>@Around</code>는 <code>ProceedingJoinPoint.proceed()</code>를 <b>직접 부르는</b> 어드바이스라, 부르기 전 · 후에 코드를 넣고, 인자를 바꾸거나 아예 안 부를 수도 있어요. <code>@Before</code>는 앞에서 한 번 실행될 뿐이에요.</p>
+    <p class="dq-tip">💡 Around = proceed()를 내 손으로 — 가장 강력하고 가장 조심해야 하는 것.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-60">web-60 AOP</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-20" data-cards="web-59 web-77">
+  <summary><span class="dq-n">Q20</span><span class="dq-gist"><code>@Transactional</code> 설명 중 <b>옳지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 기본 롤백 대상은 언체크 예외(RuntimeException · Error)다<br><span class="dq-right">정답</span> 체크 예외(<code>Exception</code> · <code>IOException</code>)가 나면 기본으로 롤백한다</p>
+    <p>스프링 기본은 <b>RuntimeException · Error만 롤백</b>, 체크 예외는 커밋이에요. 체크 예외도 롤백하려면 <code>@Transactional(rollbackFor = Exception.class)</code>. 고른 보기가 바로 그 맞는 규칙이에요.</p>
+    <p class="dq-tip">💡 "체크 예외는 커밋" — rollbackFor를 쓴 수업 코드(<a href="#web-77">web-77</a>)가 증거.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-59">web-59 트랜잭션</a> · <a href="#web-77">web-77 첨부파일 수정</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-23" data-cards="web-68 web-47">
+  <summary><span class="dq-n">Q23</span><span class="dq-gist">매핑 어노테이션 설명 중 <b>올바르지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>@RequestMapping(method = GET)</code>과 <code>@GetMapping</code>은 같은 기능<br><span class="dq-right">정답</span> 클래스에 <code>@RequestMapping</code>을 붙이면 공통 접두사를 지정할 수 없다</p>
+    <p>클래스에 <code>@RequestMapping("/thboard")</code>를 붙이면 그 아래 메서드 주소 <b>앞에 공통으로 붙어요</b> — 부트 게시판 코드(<a href="#web-68">web-68</a>)가 그렇게 돼 있어요.</p>
+    <p class="dq-tip">💡 클래스 매핑 = 폴더, 메서드 매핑 = 파일.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-68">web-68 Lombok과 부트의 Controller</a> · <a href="#web-47">web-47 요청 하나에 메서드 하나</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-25" data-cards="web-62 web-30">
+  <summary><span class="dq-n">Q25</span><span class="dq-gist">HandlerInterceptor 설명 중 <b>거리가 먼</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>preHandle()</code>이 false면 컨트롤러를 실행하지 않고 끝낸다<br><span class="dq-right">정답</span> 인터셉터는 정적 파일을 처리하는 웹 서버(Apache · Nginx)의 모듈이다</p>
+    <p>인터셉터는 <b>스프링 MVC 안</b>(DispatcherServlet ↔ 컨트롤러 사이)에서 돌아요. 서블릿 컨테이너 단계의 필터(<a href="#web-30">web-30</a>)보다도 안쪽이고, 웹 서버 모듈과는 관계없어요. 고른 보기는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 필터(서블릿) → DispatcherServlet → 인터셉터(스프링) → 컨트롤러.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-62">web-62 인터셉터</a> · <a href="#web-30">web-30 인코딩 Filter와 요청 흐름</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-32" data-cards="web-65">
+  <summary><span class="dq-n">Q32</span><span class="dq-gist"><code>@SpringBootApplication</code>이 포함하는 핵심 어노테이션 3개</span><span class="dq-tags"><span class="dq-tag part">📙 노트에 일부만</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>@Controller</code>, <code>@Service</code>, <code>@Repository</code><br><span class="dq-right">정답</span> <code>@SpringBootConfiguration</code>, <code>@EnableAutoConfiguration</code>, <code>@ComponentScan</code></p>
+    <p>설정 클래스(=<code>@Configuration</code>) + 자동 설정 켜기 + 이 패키지 아래 컴포넌트 찾기. 그래서 시작 클래스가 <b>최상위 패키지</b>에 있어야 아래 <code>@Controller</code> 등이 스캔돼요. 고른 셋은 스캔 <b>되는</b> 쪽이에요.</p>
+    <p class="dq-tip">💡 "설정 · 자동 설정 · 스캔" 세 단어.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-65">web-65 스프링 부트 프로젝트</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-34" data-cards="web-67">
+  <summary><span class="dq-n">Q34</span><span class="dq-gist">Thymeleaf 설명 중 <b>적절하지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag part">📙 노트에 일부만</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 서버를 띄우지 않고 브라우저로 HTML을 열어 디자인을 미리 볼 수 있다<br><span class="dq-right">정답</span> 컴파일 때 JSP로 바뀌어 스크립틀릿으로 실행된다</p>
+    <p>Thymeleaf는 JSP와 무관한 <b>자체 템플릿 엔진</b>이라 서버가 HTML을 읽어 <code>th:*</code> 속성을 채워요. 고른 보기는 맞는 설명(내추럴 템플릿) — <code>th:</code> 속성은 브라우저가 모르는 속성이라 그냥 무시하고 원래 글자를 보여 줘요. 이 "내추럴 템플릿" 성질은 노트에 없었어요.</p>
+    <p class="dq-tip">💡 JSP = 서블릿으로 변환, Thymeleaf = HTML 그대로 + 속성 치환.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-67">web-67 Thymeleaf</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-39" data-cards="web-73">
+  <summary><span class="dq-n">Q39</span><span class="dq-gist">예외를 전역에서 한곳에 모아 처리하는 어노테이션 조합</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>@Configuration</code> + <code>@Bean</code><br><span class="dq-right">정답</span> <code>@ControllerAdvice</code>(또는 <code>@RestControllerAdvice</code>) + <code>@ExceptionHandler</code></p>
+    <p><a href="#web-73">web-73</a>에서 모든 예외를 error 화면으로 모은 바로 그 조합이에요. 고른 조합은 빈을 등록하는 설정용이에요.</p>
+    <p class="dq-tip">💡 Advice = 모든 컨트롤러에 "조언"을 끼운다 → 예외 · 공통 모델.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-73">web-73 Thymeleaf 레이아웃과 부트의 인터셉터·예외 처리</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-41" data-cards="web-85">
+  <summary><span class="dq-n">Q41</span><span class="dq-gist">REST 원칙에 맞는 URI · 메서드 설계</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>/api/getBoards</code>, <code>/api/deleteBoard/5</code>처럼 동사를 넣는다<br><span class="dq-right">정답</span> 자원은 명사 복수형 <code>/api/boards</code>, 행위는 GET · POST · PUT · DELETE로</p>
+    <p>REST는 <b>주소 = 자원, 메서드 = 행위</b>로 나눠요 — <code>DELETE /api/boards/5</code>. <a href="#web-85">web-85</a>의 "창구 이름에 행동을 넣지 않아요" 비유 그대로예요.</p>
+    <p class="dq-tip">💡 URI에 동사가 보이면 REST가 아니다.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-85">web-85 REST API</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-43" data-cards="web-85">
+  <summary><span class="dq-n">Q43</span><span class="dq-gist">상태 코드 · 헤더 · 본문을 직접 정해 돌려주는 스프링 클래스</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> <code>HttpServlet</code><br><span class="dq-right">정답</span> <code>ResponseEntity</code></p>
+    <p><code>ResponseEntity.status(201).body(dto)</code> · <code>ResponseEntity.notFound().build()</code>처럼 응답 전체를 만들어요. 50일차 REST 코드에서 쓴 클래스예요.</p>
+    <p class="dq-tip">💡 Response + Entity(본문 덩어리) = 응답 통째로.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-85">web-85 REST API</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-45" data-cards="web-85 web-46">
+  <summary><span class="dq-n">Q45</span><span class="dq-gist">HTTP 상태 코드 연결 중 <b>올바르지 않은</b> 것</span><span class="dq-tags"><span class="dq-tag neg">옳지 않은 것 고르기</span><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 201 Created: 새 자원이 만들어졌다<br><span class="dq-right">정답</span> 500 Internal Server Error: 클라이언트가 필수 값을 빠뜨렸다</p>
+    <p>500은 <b>서버 쪽</b> 오류예요. 클라이언트가 잘못 보낸 요청은 <b>400</b>(Bad Request), 검증 실패는 400 · 422. 고른 보기(201)는 맞는 설명이에요.</p>
+    <p class="dq-tip">💡 4xx = 네(클라이언트) 잘못, 5xx = 내(서버) 잘못.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-85">web-85 REST API</a> · <a href="#web-46">web-46 오류를 단계별로 좁히기</a></p>
+  </div>
+</details>
+<details class="diag-q" id="diag-web-46" data-cards="web-86">
+  <summary><span class="dq-n">Q46</span><span class="dq-gist">동일 출처 정책에서 "출처"를 정하는 3요소</span><span class="dq-tags"><span class="dq-tag have">📗 노트에 있었음</span></span></summary>
+  <div class="dq-body">
+    <p class="dq-ans"><span class="dq-mine">내 답</span> 서블릿 버전 · 톰캣 포트 · JDK 버전<br><span class="dq-right">정답</span> 프로토콜(스킴) · 호스트 · 포트</p>
+    <p><a href="#web-86">web-86</a> 카드 제목 그대로 — <code>http://localhost:8086</code>과 <code>http://localhost:8085</code>는 포트가 달라 다른 출처예요.</p>
+    <p class="dq-tip">💡 주소의 앞부분 <code>스킴://호스트:포트</code>가 같아야 같은 출처.</p>
+    <p class="dq-cards">다시 볼 카드: <a href="#web-86">web-86 CORS</a></p>
+  </div>
+</details>
+      </div>
+    <p class="diag-src">근거: LMS 역량 진단 평가 결과 화면(문항 · 내 선택 · 정답)과 학원 성적 분석표의 과목별 오답 번호 — 세 과목 모두 두 자료의 오답 번호가 같아요. 점수 외의 개인 정보(반 평균 · 팀 배정 · 강사 의견)는 옮기지 않았어요.</p>
+  </section>
+
   <section id="materials-section" class="cat">
     <div class="cat-head"><span class="dot"></span><h2>강의자료</h2></div>
     <p class="cat-desc">수업에서 사용한 원본 슬라이드와 실습 프로젝트입니다.</p>
@@ -47668,6 +48228,7 @@ const sections = {
   journey: document.getElementById("journey-section"),
   concepts: document.getElementById("concepts-section"),
   exam: document.getElementById("exam-section"),
+  diagnosis: document.getElementById("diagnosis-section"),
   materials: document.getElementById("materials-section"),
 };
 const buttons = document.querySelectorAll("nav.tabs button[data-target]");
@@ -50879,6 +51440,59 @@ document.querySelectorAll(".note-code").forEach(box => {
     const secKey = card.closest("section.cat")?.id.replace("-section", "");
     if (bySec[secKey]) select(secKey, card.dataset.grp, true);
   };
+})();
+
+// ---- 🩺 역량 진단: 오답과 이어진 카드에 표시 · ⭐ 한 번에 표시 · #diag-… 바로 가기 ----
+(() => {
+  const sec = document.getElementById("diagnosis-section");
+  if (!sec) return;
+  const byCard = new Map();
+  sec.querySelectorAll("[data-cards][id^='diag-']").forEach(q => q.dataset.cards.split(" ").forEach(id => {
+    if (!byCard.has(id)) byCard.set(id, []);
+    byCard.get(id).push(q);
+  }));
+  byCard.forEach((qs, id) => {
+    const tags = document.getElementById(id)?.querySelector(".note-tags");
+    if (!tags) return;
+    const a = document.createElement("a");
+    a.className = "diag-badge";
+    a.href = "#" + qs[0].id;
+    a.textContent = "🩺 진단 오답 " + qs.map(q => "Q" + q.id.split("-").pop()).join(" · ");
+    a.title = "학원 역량 진단에서 이 카드의 내용을 틀렸어요";
+    tags.appendChild(a);
+  });
+  function openDiag(id) {
+    const el = document.getElementById(id);
+    if (!el || !el.closest("#diagnosis-section")) return false;
+    showTab("diagnosis");
+    if (el.tagName === "DETAILS") el.open = true;
+    el.scrollIntoView({ block: "start" });
+    return true;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#diag"]');
+    if (!a) return;
+    const id = a.getAttribute("href").slice(1);
+    if (openDiag(id)) { e.preventDefault(); history.replaceState(null, "", "#" + id); }
+  });
+  const fromHash = () => { if (location.hash.startsWith("#diag")) openDiag(decodeURIComponent(location.hash.slice(1))); };
+  if (location.hash.startsWith("#diag")) setTimeout(fromHash, 0);
+  window.addEventListener("hashchange", fromHash);
+  const btn = document.getElementById("diag-star-all");
+  btn?.addEventListener("click", () => {
+    let n = 0;
+    byCard.forEach((qs, id) => {
+      const card = document.getElementById(id);
+      if (!card || starSet.has(id)) return;
+      starSet.add(id); n++;
+      card.classList.add("is-starred");
+      const s = card.querySelector(".star-btn");
+      if (s) { s.textContent = "⭐"; s.classList.add("starred"); s.setAttribute("aria-pressed", "true"); }
+    });
+    saveStarSet(starSet);
+    window.refreshReviewHub?.();
+    btn.textContent = n ? "⭐ 카드 " + n + "장을 헷갈리는 카드로 표시했어요" : "⭐ 이미 모두 표시돼 있어요";
+  });
 })();
 </script>
 <script>
