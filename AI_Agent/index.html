@@ -151,6 +151,28 @@ catch (e) { document.documentElement.dataset.theme = "light"; }</script>
     .nav-item{width:auto;flex:0 0 auto;}
     .nav-group{display:none;}
   }
+  /* ---- 큰 탭 안의 하위 분류 (칩 · 왼쪽 메뉴 · 묶음 제목) ---- */
+  .sub-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 16px;}
+  .sub-bar-label{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.04em;margin-right:2px;}
+  .sub-chip{display:inline-flex;align-items:center;gap:6px;appearance:none;background:var(--panel);border:1px solid var(--border);border-radius:999px;
+    padding:6px 12px;font:inherit;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;}
+  .sub-chip .n,.nav-sub-item .n{font-size:11.5px;font-weight:700;color:var(--muted);}
+  .sub-chip:hover{border-color:var(--accent);}
+  .sub-chip.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .sub-chip.on .n{color:inherit;opacity:.8;}
+  [data-theme="dark"] .sub-chip.on{color:var(--bg);}
+  .sub-title .n{color:var(--accent);}
+  .nav-sub{display:none;flex-direction:column;gap:1px;margin:2px 0 6px 16px;padding-left:8px;border-left:2px solid var(--border);}
+  .nav-item.active + .nav-sub{display:flex;}
+  .nav-sub-item{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;appearance:none;background:none;border:0;border-radius:7px;
+    text-align:left;font:inherit;font-size:13px;color:var(--muted);padding:5px 8px;cursor:pointer;}
+  .nav-sub-item:hover{background:var(--panel-2);color:var(--text);}
+  .nav-sub-item.on{background:var(--panel-2);color:var(--accent);font-weight:700;}
+  body:not(.card-filtering) .sub-off{display:none;}
+  body.card-filtering .sub-bar,body.card-filtering .sub-title{display:none;}
+  .sub-title{margin:26px 0 12px;padding-top:16px;border-top:1px dashed var(--border);font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.03em;}
+  .sub-bar + .sub-title{margin-top:0;padding-top:0;border-top:0;}
+  @media (max-width:900px){ nav.tabs .nav-sub{display:none !important;} }
 </style>
 </head>
 <body>
@@ -3838,6 +3860,7 @@ const EXAM_BANK = [
     if (!el) return;
     const sec = el.closest("section.cat");
     if (sec) showTab(sec.id.replace("-section", ""));
+    window.subgroupReveal?.(el);
     requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
   }
   if (location.hash) {
@@ -3859,6 +3882,7 @@ const EXAM_BANK = [
   function runSearch() {
     const q = searchBox.value.trim().toLowerCase();
     const cards = document.querySelectorAll("article.note-card");
+    document.body.classList.toggle("card-filtering", !!q);
     if (!q) {
       cards.forEach(c => c.hidden = false); result.hidden = true;
       Object.values(sections).forEach(s => s.dataset.searching = "");
@@ -3930,6 +3954,144 @@ const EXAM_BANK = [
     examBox.append(fb, next);
   }
   document.querySelectorAll("[data-exam]").forEach(b => b.addEventListener("click", () => start(b.dataset.exam || null)));
+})();
+
+// ---- 큰 탭 안의 하위 분류: 탭 맨 위 칩(과 왼쪽 메뉴)에서 고르면 그 묶음의 카드만 보인다 ----
+// starts: 이 카드부터 다음 시작 카드 앞까지가 한 묶음 — 새 카드를 뒤에 붙이면 마지막 묶음에 저절로 들어간다.
+// titles: 이미 있는 묶음 제목(.concept-group-title)을 그대로 쓴다. by: 카드마다 묶음을 계산한다(섞여 있어 구분선은 없다).
+// 검색 · 필터 중(body.card-filtering)에는 묶음을 무시하고, 다른 묶음의 카드로 가는 링크는 그 묶음으로 바꿔 연다.
+(() => {
+  const SUBGROUPS = {
+    python: { starts: [["py-01", "파이썬 기초", "Day 1~2"], ["py-09", "Pandas · NumPy", "Day 3~4"], ["py-14", "시각화", "Day 4"], ["py-16", "FastAPI · DB", "Day 5"], ["py-22", "LLM · LangChain", "Day 6~7"]] },
+    lab: { starts: [["lab-01", "파이썬 기초", "Day 1~2"], ["lab-12", "Pandas · NumPy", "Day 3~4"], ["lab-19", "시각화", "Day 4"], ["lab-23", "FastAPI · DB", "Day 5"], ["lab-29", "LLM · LangChain", "Day 6~7"]] },
+  };
+  const SIDE_NAV = true;
+  const TITLE_CLASS = "sub-title";
+  const KEY = "subgroup:v1";
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  const bySec = {};
+
+  function select(secKey, grp, save) {
+    const s = bySec[secKey];
+    if (!s.groups.some(g => g.key === grp)) grp = "";
+    s.groups.forEach(g => {
+      const off = !!grp && g.key !== grp;
+      g.cards.forEach(c => c.classList.toggle("sub-off", off));
+      if (g.title) g.title.classList.toggle("sub-off", off);
+    });
+    s.sec.querySelectorAll('.toc a[href^="#"]').forEach(a => {
+      const c = document.getElementById(a.getAttribute("href").slice(1));
+      a.classList.toggle("sub-off", !!grp && !!c && c.dataset.grp !== grp);
+    });
+    s.buttons.forEach(b => {
+      const on = b.dataset.grp === grp;
+      b.classList.toggle("on", on); // "active"는 기존 코드가 nav.tabs button.active로 현재 탭을 찾으므로 쓰지 않는다
+      b.setAttribute("aria-pressed", String(on));
+    });
+    if (save) {
+      saved[secKey] = grp;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    }
+  }
+  function makeBtn(cls, grp, label, n) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = cls;
+    b.dataset.grp = grp;
+    const t = document.createElement("span");
+    t.textContent = label;
+    const c = document.createElement("span");
+    c.className = "n";
+    c.textContent = n;
+    b.append(t, c);
+    return b;
+  }
+
+  Object.entries(SUBGROUPS).forEach(([secKey, conf]) => {
+    const sec = document.getElementById(secKey + "-section");
+    if (!sec) return;
+    const list = sec.querySelector(".notes-list") || sec;
+    const cards = [...list.querySelectorAll(":scope > article.note-card")];
+    const groups = [];
+    if (conf.titles) {
+      [...list.children].forEach(el => {
+        if (el.matches(".concept-group-title")) {
+          const key = el.querySelector(".n")?.textContent.trim() || String(groups.length);
+          const label = conf.titles[groups.length] || el.textContent.replace(/^\s*\S+\s*·\s*/, "").split(" — ")[0].trim();
+          groups.push({ key, label, title: el, cards: [] });
+        } else if (groups.length && el.matches("article.note-card")) {
+          groups[groups.length - 1].cards.push(el);
+        }
+      });
+    } else if (conf.starts) {
+      const starts = new Map(conf.starts.map(([id, label, note]) => [id, { key: id, label, note, cards: [] }]));
+      starts.forEach((g, id) => { if (!cards.some(c => c.id === id)) console.warn("하위 분류 시작 카드 없음:", id); });
+      cards.forEach(c => {
+        if (starts.has(c.id)) groups.push(starts.get(c.id));
+        if (groups.length) groups[groups.length - 1].cards.push(c);
+      });
+      groups.forEach(g => {
+        const h = document.createElement("h3");
+        h.className = TITLE_CLASS;
+        const n = document.createElement("span");
+        n.className = "n";
+        n.textContent = g.label;
+        h.append(n, " · " + (g.note ? g.note + " · " : "") + g.cards.length + "장");
+        g.cards[0].before(h);
+        g.title = h;
+      });
+    } else {
+      const map = new Map(conf.groups.map(([key, label]) => [key, { key, label, cards: [] }]));
+      cards.forEach(c => map.get(conf.by(c))?.cards.push(c));
+      groups.push(...[...map.values()].filter(g => g.cards.length));
+    }
+    if (groups.length < 2) return;
+    groups.forEach(g => {
+      g.cards.forEach(c => { c.dataset.grp = g.key; });
+      if (g.title) g.title.dataset.grp = g.key;
+    });
+    const s = bySec[secKey] = { sec, groups, buttons: [] };
+
+    const bar = document.createElement("div");
+    bar.className = "sub-bar";
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", "하위 분류");
+    const barLabel = document.createElement("span");
+    barLabel.className = "sub-bar-label";
+    barLabel.textContent = "분류";
+    bar.append(barLabel);
+    [["", "전체", cards.length], ...groups.map(g => [g.key, g.label, g.cards.length])].forEach(([grp, label, n]) => {
+      const b = makeBtn("sub-chip", grp, label, n);
+      b.addEventListener("click", () => select(secKey, grp, true));
+      bar.append(b);
+      s.buttons.push(b);
+    });
+    (sec.querySelector(".toc") || groups[0].title || groups[0].cards[0]).before(bar);
+
+    // 왼쪽 메뉴: 큰 분류를 고르면 그 아래에 하위 분류가 펼쳐진다 (900px 이하에서는 탭 맨 위 칩만 쓴다)
+    const navBtn = SIDE_NAV && document.querySelector(`nav.tabs button[data-target="${secKey}"]`);
+    if (navBtn) {
+      const box = document.createElement("div");
+      box.className = "nav-sub";
+      [["", "전체", cards.length], ...groups.map(g => [g.key, g.label, g.cards.length])].forEach(([grp, label, n]) => {
+        const b = makeBtn("nav-sub-item", grp, label, n);
+        b.addEventListener("click", () => { navBtn.click(); select(secKey, grp, true); });
+        box.append(b);
+        s.buttons.push(b);
+      });
+      navBtn.after(box);
+    }
+    select(secKey, saved[secKey] || "", false);
+  });
+
+  // 카드 바로 가기 · 카드 사이 링크: 지금 고른 묶음 밖의 카드면 그 카드의 묶음으로 바꾼다
+  window.subgroupReveal = el => {
+    const card = el?.closest?.("article.note-card");
+    if (!card || !card.classList.contains("sub-off")) return;
+    const secKey = card.closest("section.cat")?.id.replace("-section", "");
+    if (bySec[secKey]) select(secKey, card.dataset.grp, true);
+  };
 })();
 </script>
 </body>
