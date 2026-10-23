@@ -2,7 +2,7 @@
 
 [AI Agent 노트](index.html) · [day08 노트북](python_agent/day08/) · [백엔드 역량 진단](../Back_end/index.html#diagnosis-section) · [프런트엔드 역량 진단](../Front_end/index.html#diagnosis-section) · [전날 기록](sync-validation-2026-10-22.md)
 
-이날 수업은 교안 Day 8(검색 기반 Q&A · RAG) 하나였다. 함께 학원 LMS 역량 진단 평가 4과목의 결과를 받아 오답 노트를 만들었다. 이날 코딩테스트 오답노트는 다운로드 폴더에 없다.
+이날 수업은 교안 Day 8(검색 기반 Q&A · RAG) 하나였다. 함께 학원 LMS 역량 진단 평가 4과목의 결과를 받아 오답 노트를 만들었다. 이날 29회차 코딩테스트 오답노트는 수업 뒤(16:23)에 받아 백엔드 코딩테스트 탭 ct-78~81과 [`Back_end/coding-tests/2026-10-23/`](../Back_end/coding-tests/2026-10-23/)에 따로 반영했다(검증은 그 폴더의 README).
 
 ## 비밀값 · 개인 정보 처리
 
