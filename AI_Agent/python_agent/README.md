@@ -1,6 +1,6 @@
-# python_agent — AI Agent 과정 실습 파일 (Day 1~8)
+# python_agent — AI Agent 과정 실습 파일 (Day 1~9)
 
-「AI AGENT 실습 입문 과정 1부」의 실습 폴더(`workspace-boot/python_agent`)를 그대로 옮긴 사본이다. 처음 이틀은 하루에 교안 두 개씩 진행했다 — 2026-10-19에 Day 1(변수 · 연산자 · 자료형)과 Day 2(조건 · 반복 · 함수 · 모듈 · 파일 · 예외), 2026-10-20에 Day 3(Pandas)과 Day 4(NumPy · Matplotlib · Seaborn), 2026-10-21에 Day 5(FastAPI) 하나, 2026-10-22에 Day 5 보충(DB 연동)과 Day 6~7 합본(LangChain), 2026-10-23에 Day 8(RAG). Day 1~4는 VS Code의 Jupyter 노트북, Day 5는 서버 코드라 `day05/main.py` 파일 하나에 교안 실습을 직접 풀었다.
+「AI AGENT 실습 입문 과정 1부」의 실습 폴더(`workspace-boot/python_agent`)를 그대로 옮긴 사본이다. 처음 이틀은 하루에 교안 두 개씩 진행했다 — 2026-10-19에 Day 1(변수 · 연산자 · 자료형)과 Day 2(조건 · 반복 · 함수 · 모듈 · 파일 · 예외), 2026-10-20에 Day 3(Pandas)과 Day 4(NumPy · Matplotlib · Seaborn), 2026-10-21에 Day 5(FastAPI) 하나, 2026-10-22에 Day 5 보충(DB 연동)과 Day 6~7 합본(LangChain), 2026-10-23에 Day 8(RAG), 2026-10-26에 Day 9(멀티툴 Agent). Day 1~4는 VS Code의 Jupyter 노트북, Day 5는 서버 코드라 `day05/main.py` 파일 하나에 교안 실습을 직접 풀었다.
 [수업 진도 카드](../index.html#ai-day01) · [파이썬 · 데이터 개념 카드](../index.html#py-01) · [실습 풀이 카드](../index.html#lab-01)
 
 ## 파일
@@ -17,13 +17,14 @@
 | `day06/day0607_실습예제.md` | 선생님 `Day06_07_실습예제.md`(끝 줄바꿈만 다름) — 5개 Part 13문제, **아직 풀지 않음** — [체크리스트](../index.html#lab-34) |
 | `day08/day08_실습.ipynb` | Day 8 RAG 10칸 — `split_text` 청크 나누기, `OpenAIEmbeddings` · `InMemoryVectorStore` · `similarity_search`, `as_retriever`, RAG 체인 두 번(관련 없는 질문에 "모릅니다."), 마지막 칸은 규정 문서 전체로 만든 확장판(`RecursiveCharacterTextSplitter`, **출력 없음**) — [실습 35~39](../index.html#lab-35) |
 | `day08/lecture_policy.txt` | 위 마지막 칸이 만든 규정 문서(4개 장, 640자) |
+| `day09/day09_실습.ipynb` | Day 9 멀티툴 Agent 8칸 — `get_weather` · `calculate`(`ast`) 도구, `create_agent`, 도구 두 개 중 선택, `search_notice`(retriever를 도구로), 세 도구 `ask_agent` · 사용한 도구 확인 — [수업 카드](../index.html#ai-day06) · [실습 41~45](../index.html#lab-41) |
 | `day01_실습예제.md` | 선생님이 준 Day 1 실습 2시간용 추가 문제 11개(Part 1~5). **아직 풀지 않음** — [체크리스트 카드](../index.html#lab-11) |
 | `memo.txt` · `scores.txt` | Day 2 파일 입출력 칸이 만든 결과 파일 |
 | `items.csv` · `items.json` | Day 3 CSV 실습 결과(연필 · 지우개). JSON은 `force_ascii=False`라 한글 그대로 |
 | `students.csv` · `students.json` | Day 3 교안 8쪽 예제 칸의 결과 — 이름과 달리 **상품 표**(마우스 · 키보드 · 모니터)가 들어 있다. 그 칸을 실행할 때 `df`가 바로 앞 실습의 상품 표였기 때문이다. JSON은 옵션 없이 저장돼 한글이 `마…`로 보인다 |
 | `result.csv` | Day 3 종합 실습 결과(`utf-8-sig` — 첫 3바이트가 BOM이라 엑셀에서도 한글이 보인다) |
 
-노트북은 GitHub에서 열면 코드와 저장된 출력이 함께 보인다. 직접 실행하려면 VS Code + Python 확장(Jupyter 포함)에서 열고 커널로 파이썬을 고른다. Day 3 · 4는 `pip install pandas numpy matplotlib seaborn`, Day 5는 `pip install fastapi uvicorn`(DB 연동은 `sqlalchemy pymysql` + MariaDB), Day 6~7은 `pip install langchain-openai python-dotenv`와 OpenAI API 키, Day 8은 여기에 `langchain-text-splitters`(마지막 칸)가 더 필요하다. Day 5 서버는 `day05` 폴더에서 `uvicorn main:app --reload`(안 되면 `python -m uvicorn main:app --reload`)로 띄우고 `http://127.0.0.1:8000/docs`에서 시험한다. 실습 폴더의 `__pycache__`는 실행할 때 생기는 파일이라 옮기지 않았다. **API 키가 든 `.env`는 열지도, 옮기지도 않았다** — 저장소 루트 `.gitignore`가 `.env`를 막는다. Day 6~7 노트북을 직접 돌리려면 이 폴더(또는 상위 폴더)에 자기 `.env`(`OPENAI_API_KEY=…`)를 만든다. 파일을 만드는 칸은 노트북이 있는 폴더의 csv · json · txt를 덮어쓴다.
+노트북은 GitHub에서 열면 코드와 저장된 출력이 함께 보인다. 직접 실행하려면 VS Code + Python 확장(Jupyter 포함)에서 열고 커널로 파이썬을 고른다. Day 3 · 4는 `pip install pandas numpy matplotlib seaborn`, Day 5는 `pip install fastapi uvicorn`(DB 연동은 `sqlalchemy pymysql` + MariaDB), Day 6~7은 `pip install langchain-openai python-dotenv`와 OpenAI API 키, Day 8은 여기에 `langchain-text-splitters`(마지막 칸), Day 9는 `create_agent`가 들어 있는 `langchain` 패키지가 더 필요하다. Day 5 서버는 `day05` 폴더에서 `uvicorn main:app --reload`(안 되면 `python -m uvicorn main:app --reload`)로 띄우고 `http://127.0.0.1:8000/docs`에서 시험한다. 실습 폴더의 `__pycache__`는 실행할 때 생기는 파일이라 옮기지 않았다. **API 키가 든 `.env`는 열지도, 옮기지도 않았다** — 저장소 루트 `.gitignore`가 `.env`를 막는다. Day 6~7 노트북을 직접 돌리려면 이 폴더(또는 상위 폴더)에 자기 `.env`(`OPENAI_API_KEY=…`)를 만든다. 파일을 만드는 칸은 노트북이 있는 폴더의 csv · json · txt를 덮어쓴다.
 
 ## 실행 환경과 다시 실행한 결과
 
@@ -38,6 +39,7 @@
   - Day 5 보충: `db_main.py`는 접속 주소만 SQLite로 바꾼 저장소 밖 사본을 uvicorn으로 띄워 요청 15개를 보냈다 — 201 등록, 음수 가격 · 101자 이름 422, 목록 최신순, 없는 상품 404, 수정 · 삭제 정상(실제 MariaDB에는 연결하지 않음).
   - Day 6~7: LLM을 부르는 칸은 **다시 실행하지 않았다**(사용자 키 · 요금, 답이 매번 다름) — 노트북의 답은 그때 받은 그대로다. LLM 없이 확인되는 부분(도구 `.name`/`.description`/결과, 프롬프트 변수 검사, 체인 연결, history 2 → 4)은 가짜 모델(`FakeListChatModel`)로 실행했다. 13쪽 예제 칸은 `HumanMessage`를 import 전에 써서 위에서부터 실행하면 `NameError`([실습 32](../index.html#lab-32)), 1번 실습 칸은 저장된 출력이 지금 코드와 다르다([실습 29](../index.html#lab-29)). `calculate` 도구의 `eval`은 수식이 아닌 코드도 실행한다([개념 25](../index.html#py-25)).
   - Day 8: 임베딩 · LLM 칸은 다시 실행하지 않았다. 청크 칸은 다시 실행해 4개(50 · 50 · 50 · 23자, 시작 0 · 40 · 80 · 120)와 2개(80 · 63자)로 저장된 출력과 같았다. 키 없이 글자 2-gram을 세는 장난감 임베딩과 받은 프롬프트를 돌려주는 가짜 LLM으로 확인한 것 — `k`가 문서 수보다 크면 있는 만큼, 관련 없는 질문에도 k개, 체인에 딕셔너리를 넣으면 `TypeError`, 이 PC의 `InMemoryVectorStore`에서 `similarity_score_threshold` 검색은 `NotImplementedError`. 마지막 칸의 분할기는 규정 문서를 6조각(장마다 한 조각)으로 나눴다 — [개념 27~30](../index.html#py-27).
+  - Day 9: 임베딩 · LLM 칸은 다시 실행하지 않았다. 도구 두 개(`get_weather` · `calculate`)는 노트북 코드를 그대로 실행해 저장된 출력과 같았고, `calculate`에 14가지 입력을 넣어 `**` · `%` · `//` · 한글 식은 "계산할 수 없는 수식입니다.", 문자열 `'a' + 'b'`는 `ab`로 계산됨을 확인했다. `langchain 1.4.7` · `langgraph 1.2.17`로 정해 둔 답만 하는 **가짜 모델**을 `create_agent`에 달아 메시지 4개(도구를 쓴 질문) · 2개(인사) · 도구 둘 동시 호출 5개 · 도구 두 번 연달아 6개, 없는 도구 이름 → 오류 `ToolMessage`, 도구가 던진 예외로 `invoke`가 끝남, `recursion_limit` 초과 → `GraphRecursionError`, `"messages"`에 딕셔너리 하나를 넣어도 통과함을 확인했다. 노트북 칸 4가 `llm`을 `temperature` 없이 다시 만들어 이후 칸의 답은 실행마다 조금씩 달라진다([실습 45](../index.html#lab-45)). — [개념 31~34](../index.html#py-31).
   - 그 밖의 `print` 출력은 다시 실행한 것과 같았다. 그래프는 같은 종류 · 같은 데이터로 그려지는 것만 눈으로 확인했고 픽셀 단위로 대조하지는 않았다. 페이지의 그래프 그림(`../img/day04-*.png`)은 다시 실행해 만든 것이다.
 
 ## 인코딩 — 3.15와 3.12 이하 Windows의 차이
@@ -52,7 +54,9 @@ Day 2 파일 칸(`open("memo.txt", "w")`)은 교안처럼 `encoding`을 적지 �
   - 10/21 커밋 5개 — `Day05/main.py`(+ 파이썬 3.14의 `__pycache__`). 종합 CRUD를 `/products17/…` 경로로 나눠 충돌을 피했고, 고정 경로를 `/courses/pupular`로 오타 내 `/courses/popular`는 422가 난다
   - 10/22 커밋 5개 — `Day05/db_main.py` · `dev_prompt.md`(AI에게 코드를 요청하는 형식의 개발 요청서), `Day06/day0607_실습.ipynb` · `Day06_07_실습예제.md`. 요청서와 코드에 DB 계정 정보가 적혀 있어 이 저장소에는 옮기지 않았다. 같은 날 16:10 "실습예제 답안 추가"로 15쪽 Memory · 17쪽 종합 풀이가 Day06 노트북에 더해졌다([실습 32](../index.html#lab-32) · [33](../index.html#lab-33))
   - 10/23 10:56 "08추가" — `Day08/day08_실습.ipynb`(교안 5 · 6쪽 청크 실습까지)
+  - 10/23 15:01~16:29 커밋 4개 — Day08 노트북에 7~17쪽 풀이와 실제 파일 문서 칸, `testdocs.txt`(수강생 평가 데이터라 **다른 사람의 이름 · 점수가 들어 있어 옮기지 않았다**), `Day8_실습예제.md`(도서관 Q&A 봇). 10/26에 확인해 [실습 36~39](../index.html#lab-36)에 비교를 더했다
+  - 10/26 10:28~15:20 커밋 5개 — `Day09/day09_실습.ipynb`(6 · 9 · 12 · 15쪽 풀이, 17쪽은 안내 주석뿐) · `Day9_실습예제.md`(환율 · 도서관 생활 비서)
 - 이 폴더의 노트북은 선생님 노트북의 사본이 아니라 **직접 푼 것**이다(선생님 노트북은 쪽 번호 제목 칸 + 코드 칸, 이 폴더는 코드 칸만. 같은 칸은 교안 예제를 옮긴 칸뿐). Day 4 Seaborn 칸의 `savefig('check_13a.png')`는 선생님 노트북과 같은 파일 이름이다.
 - 선생님 풀이와 다른 점은 실습 카드마다 적었다 — 예: Day 3 종합의 등급 기준(선생님 80 · 내 풀이 90), 필터 결과를 다시 담는지, 표준편차(`describe` 13.70 · `np.std` 12.25는 둘 다 같은 값).
 - `day01_실습예제.md`는 선생님의 `Day1_실습예제.md`와 끝 줄바꿈만 다르고, `memo.txt`는 같은 내용이다. 실습예제가 정답 파일로 안내하는 `day1_실습_정답.py`는 실습 폴더와 선생님 레포 어디에도 없다.
-- 강의자료(`Day1~5_강의자료.pptx` · `Day6-Day7_강의자료.pptx` · `Day6_강의자료_개념추가.pptx` · `Day8_강의자료.pptx`)는 배포 자료라 올리지 않았다. Day 2 종합 실습(성적 처리기)은 문제 칸만 있어 [실습 10](../index.html#lab-10)에 참고 풀이와 선생님 풀이(10/20)를 적었다.
+- 강의자료(`Day1~5_강의자료.pptx` · `Day6-Day7_강의자료.pptx` · `Day6_강의자료_개념추가.pptx` · `Day8_강의자료.pptx` · `Day9_강의자료.pptx`)는 배포 자료라 올리지 않았다. Day 2 종합 실습(성적 처리기)은 문제 칸만 있어 [실습 10](../index.html#lab-10)에 참고 풀이와 선생님 풀이(10/20)를 적었다.
